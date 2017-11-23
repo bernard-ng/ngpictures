@@ -7,6 +7,62 @@
  * PS: I'm a french speaker so if my english is broken , just understand...
  * @author Bernard ng;
  */
+
+//bar de progression pour la galerie
+var progressBar = {
+    countImg : 0,
+    loadedImg: 0,
+    
+    init : function(){
+        var that = this;
+        that.countImg = $('a img.galery-item').length;
+
+        //on cree la bare de progression
+        var $progressBarContainer = $('<div/>').attr('id','progress-bar-container');
+        var $progressBar = $('<div/>').attr('id','progress-bar');
+        $progressBarContainer.append($progressBar).appendTo('#menu');
+
+        //le fake container histoir de compter mm les image charger du cache.
+        var $fakeContainer = $('<div/>').attr('id','fakeImgContainer');
+        $fakeContainer.appendTo($('body'));
+        
+        //on parcours le element en le ajoutant au fake
+        $('a img.galery-item').each(function(){
+            $img =  $('<img/>').attr('src', $(this).attr('src'));
+            $img.on('load error', function(){
+                    that.loadedImg++;
+                    that.update();
+                });
+
+            $fakeContainer.append($img);
+        });
+
+    },
+
+    update : function(){
+        $('#progress-bar').stop().animate({
+            'width' : (progressBar.loadedImg / progressBar.countImg) * 100 + '%' 
+        }, 300, 'linear', function(){
+            if (progressBar.loadedImg == progressBar.countImg) {
+                setTimeout(function(){
+                    $('#progress-bar-container').stop().animate({
+                        'opacity' : 0
+                    }, 500, 'linear', function(){
+                        $('#progress-bar-container').remove();
+                        $('#fakeImgContainer').remove();
+                    })
+                }, 500)
+            }
+        });
+    }
+};
+
+if ($('#galery') != undefined) {
+    progressBar.init();
+}
+
+
+
 $(document).ready(function(){
 
     //shim pour le scrollY
@@ -154,61 +210,57 @@ $(document).ready(function(){
                 }
             })
         }
-    })()
+    })();
 
-    
-
-});
-
-//bar de progression pour la galerie
-var progressBar = {
-    countImg : 0,
-    loadedImg: 0,
-    
-    init : function(){
-        var that = this;
-        that.countImg = $('a img.galery-item').length;
-
-        //on cree la bare de progression
-        var $progressBarContainer = $('<div/>').attr('id','progress-bar-container');
-        var $progressBar = $('<div/>').attr('id','progress-bar');
-        $progressBarContainer.append($progressBar).appendTo('#menu');
-
-        //le fake container histoir de compter mm les image charger du cache.
-        var $fakeContainer = $('<div/>').attr('id','fakeImgContainer');
-        $fakeContainer.appendTo($('body'));
-        
-        //on parcours le element en le ajoutant au fake
-        $('a img.galery-item').each(function(){
-            $img =  $('<img/>').attr('src', $(this).attr('src'));
-            $img.on('load error', function(){
-                    that.loadedImg++;
-                    that.update();
-                });
-
-            $fakeContainer.append($img);
-        });
-
-    },
-
-    update : function(){
-        $('#progress-bar').stop().animate({
-            'width' : (progressBar.loadedImg / progressBar.countImg) * 100 + '%' 
-        }, 300, 'linear', function(){
-            if (progressBar.loadedImg == progressBar.countImg) {
-                setTimeout(function(){
-                    $('#progress-bar-container').stop().animate({
-                        'opacity' : 0
-                    }, 500, 'linear', function(){
-                        $('#progress-bar-container').remove();
-                        $('#fakeImgContainer').remove();
-                    })
-                }, 500)
+    (function(){
+        class Tooltip {
+            
+            static bind(selector) {
+                document.querySelectorAll(selector).forEach(element => new Tooltip(element))
             }
-        });
-    }
-};
 
-if ($('#galery') != undefined) {
-    progressBar.init();
-}
+            constructor(element) {
+                this.element = element;
+                this.title = element.getAttribute('title')
+                this.tooltip = null;
+                this.element.addEventListener('mouseover', this.mouseOver.bind(this))
+                this.element.addEventListener('mouseout', this.mouseOut.bind(this))
+            }
+
+            mouseOver() {
+               let tooltip = this.create();
+               let width = this.tooltip.offsetWidth
+               let height = this.tooltip.offsetHeight
+               let left = this.element.offsetWidth / 2 - width / 2 + this.element.getBoundingClientRect().left + document.documentElement.scrollLeft
+               let top = this.element.getBoundingClientRect().top - height -15 + document.documentElement.scrollTop
+               tooltip.style.left = left + "px"
+               tooltip.style.top = top + "px"
+               tooltip.classList.add('visible')
+                
+            }
+
+            mouseOut() {
+                if (this.tooltip !== null) {
+                    this.tooltip.classList.remove('visible');
+                    this.tooltip.addEventListener('transitionend', function(){
+                        document.body.removeChild(this.tooltip)
+                        this.tooltip = null
+                    })
+                }
+            }
+            create() {
+                if (this.tooltip === null) {
+                    let tooltip = document.createElement('div')
+                    tooltip.innerHTML = this.title
+                    tooltip.classList.add('tooltip')
+                    document.body.appendChild(tooltip)
+                    this.tooltip = tooltip
+                    return tooltip
+                }
+                return this.tooltip
+            }
+        }
+
+        Tooltip.bind('a[title]')
+    })();
+});

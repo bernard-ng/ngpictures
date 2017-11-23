@@ -10,41 +10,6 @@ body {
 a {
 	cursor: pointer !important;
 	color: $color-active;
-
-	&[title] {
-		position: relative;
-
-		&:after {
-			opacity: 0;
-			pointer-events: none;
-			transition: all .18s ease-out .18s;
-			bottom: 100%;
-			left: 50%;
-			position: absolute;
-			z-index: 10;
-			transform: translate(-50%, 10px);
-			transform-origin: top;
-
-			background: rgba(17, 17, 17, 0.9);
-			border-radius: 4px;
-			color: #fff;
-			content: attr(title);
-			font-size: 12px;
-			padding: .5em 1em;
-			white-space: nowrap;
-			margin-bottom: 11px;
-		}
-
-		&:hover:after{
-			opacity: 1;
-			pointer-events: auto;
-			transform: translate(-50%, 0);
-		}
-
-		&:hover:before{
-			@extend a[title]:hover:after
-		}
-	}
 }
 
 ::-webkit-scrollbar {
