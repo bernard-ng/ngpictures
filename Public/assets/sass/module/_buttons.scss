@@ -43,13 +43,6 @@
 	color: #fff;
 	border: 2px solid  $color-3;
 	border-radius: 3px;
-	background: $color-3;
+	background: $color-3 !important;
 	transition: $transition;
-
-	&:hover{
-		@extend .ng-btn;
-		color: $color-3;
-		background: transparent;
-		
-	}
 }

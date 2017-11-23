@@ -4,7 +4,7 @@
 <div class="user-profil card col l8 m8 s12">
 	<div class="row col l12 m12 s12">
 		<div class="col l3 m3 s3" style="overflow: hidden;">
-			<img src="/Pictures/users/avatar/10.jpg" width="120" height="120" style="border-radius: 100%;">
+			<img src="/uploads/avatars/13.jpg" width="120" height="120" style="border-radius: 100%;">
 		</div>
 		<div class="col l9 m9 s9">
 			<div class="col l4 s4 m4">

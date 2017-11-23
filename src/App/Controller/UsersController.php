@@ -199,17 +199,23 @@ class UsersController extends NgpicController
         $remember = intval($post->get('remember'));
         $user  = $this->users->findAlternative(['name','email'], $name);
         
-        if($user && $this->isConfirmed($user)) {
-            if (password_verify($password, $user->password)) {
-                $this->connect($user);
-                if ($remember) {
-                    $this->remember($user->id);
+        if($user) {
+           if ($this->isConfirmed($user)) {
+                if (password_verify($password, $user->password)) {
+                    $this->connect($user);
+                    if ($remember) {
+                        $this->remember($user->id);
+                    }
+                    $this->session->setFlash('success', $this->msg['login_success']);
+                    Ngpic::redirect('/account');
+                } else {
+                    $this->session->setFlash('danger', $this->msg['bad_identifier']);
                 }
-                $this->session->setFlash('success', $this->msg['login_success']);
-                Ngpic::redirect('/home');
             } else {
-                $this->session->setFlash('danger', $this->msg['bad_identifier']);
+                $this->session->setFlash('warning', $this->msg['user_not_confirmed']);
             }
+        } else {
+            $this->session->setFlash('danger', $this->msg['bad_identifier']);
         }
     }
 
@@ -282,6 +288,12 @@ class UsersController extends NgpicController
 
     public function account()
     {
-        $this->viewRender('users/account');
+        $user  = $this->session->read('Auth');
+        $verse = $this->callController('verses')->index();
+        $this->viewRender('users/account',
+            compact(
+                "verse","user"
+            )
+        );
     }
 }

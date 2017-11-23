@@ -82,7 +82,7 @@
                 </p>
             </section>
             <aside class="aside-imgs hide-on-med-and-down">
-                <div class="previous-imgs row" id="previousImgs">
+                <!-- <div class="previous-imgs row" id="previousImgs">
                     <span class="col l4 s4 m4">
                         <img src="/Pictures/ngarticles/2.jpg" alt="preso" title="preso">
                     </span>
@@ -101,11 +101,11 @@
                     <span class="col l4 s4 m4">
                         <img src="/Pictures/ngarticles/47.jpg" alt="preso" title="preso">
                     </span>
-                </div>
+                </div> -->
             </aside>
         </div>
         <div class="col m6 no-padding">
-            <aside class="aside-imgs">
+           <!--  <aside class="aside-imgs">
                  <div class="main-img" id="mainImg">
                     <img src="/imgs/banner-2.jpg" alt="Ngpictures bannière" title="ngpictures">
                 </div>
@@ -120,7 +120,7 @@
                         <img src="/Pictures/ngarticles/63.jpg" alt="preso" title="preso">
                     </span>
                 </div>
-            </aside>
+            </aside> -->
         </div>
     </div>
 </section>
