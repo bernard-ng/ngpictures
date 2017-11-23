@@ -1,0 +1,13 @@
+@import "../theme/variables.scss";
+.tooltip{
+
+    position: absolute;
+    background: #000000;
+    padding: 3px 7px;
+    border-radius: 3px;
+    color: #fff;
+    text-align: center;
+    z-index: 9999;
+}
+
+

@@ -1,0 +1,74 @@
+.flash{
+    position: fixed;
+    top: 90px ; right: 15px;
+    border-radius: 3px;
+
+    color: #fff;
+    z-index: 9999;
+    width: 450px;
+    min-height: 60px; max-height: auto;
+    line-height: 60px;
+    box-shadow: 1px 1px 1px #000000;
+    text-align: left;
+    background: #263238;
+    cursor: pointer;
+
+    font: {
+        family: sans-serif;
+        weight: 200;
+        size: small;
+    }
+
+    &-content{
+        position: relative;
+        width: 100%;
+        min-height: 60px; max-height: auto;
+
+
+        &-icon{
+            position: absolute;
+            top:0 ; left: 0;
+            padding: 15px;
+            font-size: 1.5em;
+            line-height: 100%;
+            width: 45px; height: 100%;
+            border-right: 1px solid #ccc;
+    
+    
+            &-danger {
+                @extend .flash-content-icon; 
+                color: #f44336 !important;
+            }
+            &-success {
+                @extend .flash-content-icon; 
+                color: #43a047 !important;
+            }
+            &-warning {
+                @extend .flash-content-icon; 
+                color: #ffeb3b !important;
+            }
+            &-info {
+                @extend .flash-content-icon; 
+                color: #03a9f4 !important;
+            }
+        }
+        &-message {
+            position: absolute;
+            top: 0; left: 45px;
+            margin-left: 15px;
+            line-height: 1.5em !important;
+            padding-top: 15px;
+            padding-bottom: 10px;
+            padding-right: 10px;
+    
+        }
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .flash {
+        width: 100%;
+        min-height: 60px; max-height: auto;
+        top: 50px; left: 0; right: 0;
+    }
+}

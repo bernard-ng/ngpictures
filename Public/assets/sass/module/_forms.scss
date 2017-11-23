@@ -1,0 +1,124 @@
+@import "../theme/_variables.scss";
+$form-font-color: #ffffff;
+$form-transition: all linear 0.5s;
+
+.login-bg{
+    background-image: url('/imgs/banner.jpeg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    transition: $form-transition;
+    position: relative;
+}
+    
+.sign-bg{
+    @extend .login-bg;
+}
+
+.loginBox{
+    max-width: 500px;
+    min-width: 300px;
+    min-height: 300px;
+    transition: $form-transition;
+}
+
+.signUpBox{
+    @extend .loginBox;
+}
+
+#loginBox{
+    display: block;
+    position: relative;
+    background: transparent;
+    border: 3px outset $color-4;
+    color: $form-font-color;
+    & a.forgot {
+        color: $color-active;
+        font: {
+            family : robot-title;
+            size: normal;
+            weight: 300;
+        }
+        text-transform: capitalize;
+        float: right !important;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+    & input,label{
+        font-family: helvetica , serif;
+        color: $form-font-color !important;
+    }
+}
+
+#signUpBox{
+    @extend #loginBox;
+}
+
+.ng-logo{
+    text-align: center;
+    margin-bottom: 20px !important;
+    display: block;
+    height: 55px;
+    max-width: 100%;
+    & a {
+        font-size: 3.25em;
+        color:#000 !important;
+        cursor: pointer;
+        transition: $form-transition;
+        animation: font-change 60s linear infinite;
+    }
+}
+
+#connect{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    line-height: normal;
+    display: block;
+    text-transform: capitalize;
+    font: {
+        weight: 600;
+        family: helvetica , serif;
+    }
+    background: $color-3 ;
+    color: $form-font-color;
+    cursor: pointer !important;
+    transition: $form-transition;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+#sign{
+    @extend #connect;
+}
+
+#cookieOptions{
+    margin: 10px auto 10px auto;
+    & a {
+        color: $color-active;
+    }
+}
+
+
+.default-form{
+    textarea{
+        font-family: inherit;
+        width: 100%;
+        min-height:100px; 
+        padding: 10px;
+        margin-top:10px;
+        transition-duration: .3s;
+        color: #54555A;
+        border: 2px solid $color;
+        border-radius: 3px;
+        outline: 0;
+        background: #FBFBFB;
+    }
+
+    input{
+        @extend textarea ;
+        height: 50px;
+    }
+}

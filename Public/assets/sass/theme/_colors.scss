@@ -1,0 +1,37 @@
+@import "_variables.scss";
+
+.primary{
+    background: $color !important;
+    &-a{ background: $color-2 !important; }
+    &-b{ background: $color-3 !important }
+    &-c{ background: $color-4  !important;}
+    &-d{ background: $color-5 !important;}
+}
+
+.red{
+    background: #c62828 !important;
+    &-2{
+        background: #e53935 !important;
+    }
+}
+
+.blue{
+    background: #0d47a1 !important;
+    &-2{
+        background: #1976d2 !important;
+    }
+}
+
+.teal{
+    background: #00695c !important;
+    &-2{
+        background: #00796b;
+    }
+}
+
+.orange{
+    background: #e65100 !important;
+    &-2{
+        background: #ef6c00 !important;
+    }
+}

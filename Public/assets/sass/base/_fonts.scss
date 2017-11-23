@@ -1,0 +1,52 @@
+@font-face{
+	font-family: DaysLater;
+	src: url("../fonts/28 Days Later.ttf")  format('truetype');
+}
+
+@font-face{
+	font-family: motionpic;
+	src: url('../fonts/motionpic.ttf')  format('truetype');
+}
+
+@font-face{
+	font-family: mrsmonster;
+	src: url("../fonts/mrsmonster.ttf")  format('truetype');
+}
+
+@font-face{
+	font-family: robot-title;
+	font-size: inherit;
+	src: url("../fonts/RobotoSlab-Regular.ttf")  format('truetype');
+}
+
+@font-face{
+	font-family: endore403;
+	src: url("../fonts/encode403.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: kode;
+	src: url("../fonts/kode.ttf") format('truetype');
+}
+
+@font-face {
+	font-family: Social;
+	src: url("../fonts/Social.otf") format('Opentype');
+}
+
+.social-font{
+	font-family: Social !important;
+	position:relative;
+	top:1px;
+	display:inline-block;
+	font-style:normal;
+	font-weight:400;
+	line-height:1;
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+
+	&.facebook:before{ content:"f";}
+	&.instagram:before{ content:"i";}
+	&.whatsapp:before{ content:"w";}
+	&.youtube:before{ content:"y";}
+}

@@ -1,0 +1,55 @@
+.feed-btn{
+	width: 100%;
+	min-height: 30px;
+	font: {
+		size: small;
+		height: 30px;
+	}
+	text: {
+		align: center;
+		transform: uppercase;
+	}
+	background: $color-active ;
+	padding: 10px;
+	color: #fff;
+	cursor: pointer !important;
+	transition: $transition;
+}
+
+.loading-btn{
+	@extend .feed-btn;
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+.action-btn{
+    @extend .feed-btn;
+	background: $color-active !important;
+}
+
+.loader{
+	width: 40px;
+	height: 40px;
+	display: inline-block;
+	background: rgba(0,0,0,0.5);
+	border-radius: 100%;
+	line-height: auto; 
+}
+
+.ng-btn{
+	display: block;
+	padding: 7px 15px;
+	text-align: center;
+	color: #fff;
+	border: 2px solid  $color-3;
+	border-radius: 3px;
+	background: $color-3;
+	transition: $transition;
+
+	&:hover{
+		@extend .ng-btn;
+		color: $color-3;
+		background: transparent;
+		
+	}
+}
