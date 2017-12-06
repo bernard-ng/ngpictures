@@ -1,5 +1,4 @@
-ldocl 
- <?php
+<?php
 require("../../vendor/autoload.php");
 use Intervention\Image\ImageManager;
 use Core\Generic\Session;

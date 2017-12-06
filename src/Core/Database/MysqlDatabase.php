@@ -1,5 +1,5 @@
 <?php
-namespace Core\Database;
+namespace Ng\Core\Database;
 
 use \PDO;
 use Core\Exception\{queryException,prepareException};
@@ -54,7 +54,7 @@ class MysqlDatabase extends Database
     }
 
 
-    public function query($statement, $class_name = null, $one = false, $rowcount = false)
+    public function query($statement, $class_name = true, $one = false, $rowcount = false)
     {
         try {
             $req = $this->getPDO()->query($statement);
@@ -68,7 +68,7 @@ class MysqlDatabase extends Database
                 return $req;
             }
 
-            if ($class_name === null) {
+            if ($class_name === true) {
                 $req->setFetchMode(PDO::FETCH_OBJ);
             } else {
                 $req->setFetchMode(PDO::FETCH_CLASS,$class_name);
@@ -86,7 +86,7 @@ class MysqlDatabase extends Database
         }
     }
 
-    public function prepare($statement,$data, $class_name = null, $one = false, $rowcount = false)
+    public function prepare($statement,$data, $class_name = true, $one = false, $rowcount = false)
     {
         try {
             $req = $this->getPDO()->prepare($statement);
@@ -100,7 +100,7 @@ class MysqlDatabase extends Database
                 return $req;
             }
 
-            if ($class_name === null) {
+            if ($class_name === true) {
                 $req->setFetchMode(PDO::FETCH_OBJ);
             } else {
                 $req->setFetchMode(PDO::FETCH_CLASS,$class_name);

@@ -1,7 +1,12 @@
 <?php
-namespace Core\Generic;
+namespace Ng\Core\Generic;
 
-class Session
+
+use Ng\Interfaces\SessionInterface;
+
+
+
+class Session implements SessionInterface
 {
     private static $instance;
 
@@ -12,6 +17,7 @@ class Session
         }
     }
 
+
     public static function getInstance()
     {
         if (self::$instance === null) {
@@ -20,14 +26,22 @@ class Session
         return self::$instance;
     }
 
-    public function setFlash($type,$message)
+
+    public function setFlash(string $type, string $message)
     {
         return $_SESSION['flash'][$type] = $message;
     }
 
+
     public function hasFlashes()
     {
         return isset($_SESSION['flash']);
+    }
+
+
+    public  function hasKey(string $name)
+    {
+        return isset($_SESSION[$name]);
     }
 
     public function getFlashes()
@@ -37,22 +51,26 @@ class Session
         return $flashes;
     }
 
-    public function getValue($key,$value)
+
+    public function getValue(string $key, string $value)
     {
         return $_SESSION[$key]->$value ?? null;
     }
 
-    public function write($key,$value)
+
+    public function write(string $key, $value)
     {
         $_SESSION[$key] = $value;
     }
 
-    public function read($key)
+
+    public function read(string $key)
     {
         return $_SESSION[$key] ?? null;
     }
 
-    public function delete($key)
+
+    public function delete(string $key)
     {
         unset($_SESSION[$key]);
     }

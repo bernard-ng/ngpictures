@@ -1,6 +1,6 @@
 <section class="row container">
     <div class="section-title page-title">Admin - Actualités</div>
-    <?php include(APP."/Views/includes/left-aside.php"); ?>
+    <?php include(APP."/Views/includes/right-aside.php"); ?>
 
     <main class="col s12 m8 l8">
         <div id="articlesContainer">
@@ -8,15 +8,15 @@
                 <article class="card" id="<?= $article->id ?>">
                     <header class="ng-news-card-header">
                         <span class="ng-news-card-image-profil">
-                            <img src="/uploads/avatars/<?= $article->user_id ?>.jpg" alt="Profil Image" title="<?= $article->username ?>">
+                            <img src="<?= $article->userAvatarUrl ?>" alt="Profile <?= $article->username ?>" title="<?= $article->username ?>">
                         </span>
                         <p class="ng-news-card-header-title">
-                            <a href="/account/" title="voir le profil"><?= $article->username ?></a>
+                            <a href="<?= $article->userAccountUrl ?>" title="voir le profil"><?= $article->username ?></a>
                         </p>
-                        <a id="picBtn" class="ng-news-card-header-icon" href="/galery/" title="voir la galery">
+                        <a id="picBtn" class="ng-news-card-header-icon" href="<?= $article->userGalleryUrl ?>" title="voir la galery">
                             <i class="icon icon icon-picture"></i>
                         </a>
-                        <a id="saveBtn" class="ng-news-card-header-icon" href="/download/" title="télécharger la photo">
+                        <a id="saveBtn" class="ng-news-card-header-icon" href="<?= $article->downloadUrl ?>" title="télécharger la photo">
                             <i class="icon icon icon-save"></i>
                         </a>
                     </header>
@@ -25,10 +25,11 @@
                         <section class="ng-news-card-title">
                             <h2><?= $article->title ?></h2>
                         </section>
-                        <content>
-                            <p><?= $article->text ?></p>
+                        <main>
+                            <p><?= $article->snipet ?></p>
+                            <br>
                             <a href="<?= $article->url ?>" class="ng-news-card-seemore right">Voir plus</a>
-                        </content>
+                        </main>
                         <section id="articleInfo">
                             <div class="ng-news-card-stat">
                                 <i class="icon icon-time"></i>&nbsp;
@@ -39,15 +40,13 @@
                             <div class="ng-news-card-stat">
                                 <i class="icon icon-thumbs-up"></i>&nbsp;
                                 <small>
-                                    <a id="showLikes" href="/likes/"><?= $article->likes ?></a>
+                                    <a id="showLikes" href="<?= $article->showLikesUrl ?>"><?= $article->likes ?></a>
                                 </small>
-                                <a href="<?= $article->likeUrl ?>" id="showMentions" title="Voir toutes les mentions">
-                                    <i class="right icon icon-menu-down"></i>
-                                </a>
                             </div>
                         </section>
                     </Section>
                 </article>
+
             <?php else: ?>
                  <div class="card">
                     <div class="no-publication">
@@ -56,6 +55,7 @@
                     </div>
                 </div>
             <?php endif; ?>
+
         </div>
         <div class="card-panel">
             <div class="section-title mb-20 mt-20 ml-10">
@@ -77,7 +77,7 @@
                             <td><b><?= $a->id ?></b></td>
                             <td><a href="<?= $a->url ?>"><?= $a->title ?></a></td>
                             <td>
-                                <form method="POST" action="/adm/delete" style="display: inline-block !important;">
+                                <form method="POST" action="<?= ADMIN."/delete" ?>" style="display: inline-block !important;">
                                     <input type="hidden" name="id" value="<?= $a->id?>" >
                                     <input type="hidden" name="type" value="1" >
                                     <button type="submit" class="btn btn-small waves-effect waves-light red">
@@ -92,7 +92,7 @@
                         <td><b>0</b></td>
                         <td>Aucun article</td>
                         <td>
-                            <form method="POST" action="/adm/delete" style="display: inline-block !important;">
+                            <form method="POST" action="<?= ADMIN."/delete" ?>" style="display: inline-block !important;">
                                 <input type="hidden" name="id" value="0" >
                                 <input type="hidden" name="type" value="1" >
                                 <button type="submit" class="btn btn-small waves-effect waves-light red">
@@ -106,5 +106,5 @@
             </table>
         </div>  
     </main>
-    <?php include(APP."/Views/includes/right-aside.php"); ?>
+    <?php include(APP."/Views/includes/left-aside.php"); ?>
 </section>

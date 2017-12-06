@@ -1,4 +1,4 @@
-<section class="card horizontal verse-panel" id="godfirstContainer">
+<section class="card horizontal verse-panel primary-c" id="godfirstContainer" style="color:#fff;">
     <div class="card-stacked">
         <main class="ng-contain">
         	<span class="badge new"><?= $verse->id ?></span>

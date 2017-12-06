@@ -1187,7 +1187,7 @@ nav ul a span.badge {
 .row {
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .row:after {
@@ -1989,8 +1989,8 @@ nav {
   color: #fff;
   background-color:rgba(66, 68, 71, 1);
   width: 100%;
-  height: 46px;
-  line-height: 46px;
+  height: 64px;
+  line-height: 64px;
   margin-bottom: 10px;
 }
 
@@ -1999,7 +1999,7 @@ nav.nav-extended {
 }
 
 nav.nav-extended .nav-wrapper {
-  min-height: 46px;
+  min-height: 64px;
   height: auto;
 }
 
@@ -2017,8 +2017,8 @@ nav [class^="mdi-"], nav [class*="mdi-"],
 nav i.material-icons {
   display: block;
   font-size: 24px;
-  height: 46px;
-  line-height: 46px;
+  height: 64px;
+  line-height: 64px;
 }
 
 nav .nav-wrapper {
@@ -2036,20 +2036,20 @@ nav .button-collapse {
   float: left;
   position: relative;
   z-index: 1;
-  height: 46px;
+  height: 64px;
   margin: 0 18px;
 }
 
 nav .button-collapse i {
-  height: 46px;
-  line-height: 46px;
+  height: 64px;
+  line-height: 64px;
 }
 
 nav .brand-logo {
   position: absolute;
   color: #fff;
   display: inline-block;
-  font-size: 2.1rem;
+  font-size: 2.9rem;
   padding: 0;
 }
 
@@ -2466,7 +2466,7 @@ small {
   transition: box-shadow .25s;
   transition: box-shadow .25s, -webkit-box-shadow .25s;
   padding: 15px;
-  margin: 0.5rem 0 1rem 0;
+  margin: 0.5rem 0 0.5rem 0;
   border-radius: 2px;
   background-color: #fff;
 }
@@ -5115,7 +5115,7 @@ input[type=range]:focus::-ms-fill-upper {
   height: -moz-calc(100%);
   padding-bottom: 60px;
   background-color: #fff;
-  z-index: 999;
+  z-index: 99999 !important;
   overflow-y: auto;
   will-change: transform;
   -webkit-backface-visibility: hidden;

@@ -1,4 +1,4 @@
-@keyframes verse-alert {
+@-webkit-keyframes verse-alert {
 	
 		0%{ word-spacing: 1px;  }
 		25%{ word-spacing: 2px; }
@@ -8,46 +8,40 @@
 	
 	}
 	
-	@keyframes font-change {
-		0%{ font-family: textbox-demi; opacity: 1;}
-		3%{ font-family: textbox-demi; opacity: 0.8; letter-spacing: 5px;font-size: 3.25em;}
-		6%{ font-family: textbox-demi; opacity: 0.1; letter-spacing: 1px;font-size: 3.22em;}
-		9%{  font-family: buglife; opacity: 0; display: none;}
-		10%{ font-family: buglife; opacity: 1; display: block;}
-		13%{ font-family: buglife; opacity: 0.8; letter-spacing: 5px;font-size: 3.25em;}
-		16%{ font-family: buglife; opacity: 0.1; letter-spacing: 1px;font-size: 3.22em;}
-		19%{ font-family: momotaro; opacity: 0; display: none;}
-		20%{ font-family: momotaro; opacity: 1; display: block;}
-		23%{ font-family: momotaro; opacity: 0.8; letter-spacing: 5px;font-size: 3.25em;}
-		26%{ font-family: momotaro; opacity: 0.1; letter-spacing: 1px;font-size: 3.22em;}
-		29%{ font-family: DaysLater; opacity: 0;}
-		30%{ font-family: DaysLater; opacity: 1; display: block;}
-		33%{ font-family: DaysLater; opacity: 0.8; letter-spacing: 5px;font-size: 3.25em;}
-		36%{ font-family: DaysLater; opacity: 0.1; letter-spacing: 3px;font-size: 3.22em;}
-		39%{ font-family: Endore; opacity: 0; display: none;}
-		40%{ font-family: Endore; opacity: 1; display: block;}
-		43%{ font-family: Endore; opacity: 0.8; letter-spacing: 5px;font-size: 3.25em;}
-		46%{ font-family: Endore; opacity: 0.1; letter-spacing: 1px;font-size: 3.22em;}
-		49%{ font-family: cowboy; opacity: 0;}
-		50%{ font-family: cowboy; opacity: 1; display: block;}
-		53%{ font-family: cowboy; opacity: 0.8; letter-spacing: 5px;font-size: 3.25em;}
-		56%{ font-family: cowboy; opacity: 0.1; letter-spacing: 1px;font-size: 3.22em;}
-		59%{ font-family: mrsmonsteracad; opacity: 0; display: none;}
-		60%{ font-family: mrsmonsteracad; opacity: 1; display: block;}
-		63%{ font-family: mrsmonsteracad; opacity: 0.8; letter-spacing: 5px;font-size: 3.25em;}
-		66%{ font-family: mrsmonsteracad; opacity: 0.1; letter-spacing: 1px;font-size: 3.22em;}
-		69%{ font-family: verse; opacity: 0; display: none;}
-		70%{ font-family: verse; opacity: 1; display: block;}
-		73%{ font-family: verse; opacity: 0.8; letter-spacing: 5px;font-size: 3.25em;}
-		76%{ font-family: verse; opacity: 0.1; letter-spacing: 1px;font-size: 3.22em;}
-		79%{ font-family: mrsmonster; opacity: 0; display: none;}
-		80%{ font-family: mrsmonster; opacity: 1; display: block;}
-		83%{ font-family: mrsmonster; opacity: 0.8; letter-spacing: 5px;font-size: 3.25em;}
-		86%{ font-family: mrsmonster; opacity: 0.1; letter-spacing: 1px;font-size: 3.22em;}
-		89%{ font-family: actiontime; opacity: 0;}
-		90%{ font-family: actiontime; opacity: 1; display: block;}
-		93%{ font-family: actiontime; opacity: 0.8; letter-spacing: 5px;font-size: 3.25em;}
-		96%{ font-family: actiontime; opacity: 0.1; letter-spacing: 1px;font-size: 3.22em;}
-		99%{ font-family: textbox-demi; opacity: 0; display: none;}
-		100%{ font-family: textbox-demi; opacity: 1;display: block;}
+	@keyframes verse-alert {
+	
+		0%{ word-spacing: 1px;  }
+		25%{ word-spacing: 2px; }
+		50%{ word-spacing: 5px; }
+		75%{ word-spacing: 2px; }
+		100%{ word-spacing: 1px; }
+	
+	}
+
+	@-webkit-keyframes active-cover {
+		0% {
+			background-position: 0 -70px;
+		}
+
+		50% {
+			background-position: -1000px -70px;
+		}
+
+		100% {
+			background-position: 0 -70px;
+		}
+	}
+
+	@keyframes active-cover {
+		0% {
+			background-position: 0 -70px;
+		}
+
+		50% {
+			background-position: -1150px -70px;
+		}
+
+		100% {
+			background-position: 0 -70px;
+		}
 	}

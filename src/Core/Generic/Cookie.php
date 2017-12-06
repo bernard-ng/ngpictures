@@ -1,12 +1,14 @@
 <?php
-namespace Core\Generic;
+namespace Ng\Core\Generic;
+
+use Ng\Interfaces\CookieInterface;
 use \DateTime;
 
-class Cookie
+class Cookie implements CookieInterface
 {
-    static private $instance;
+    private static $instance;
 
-    static public function getInstance()
+    public static  function getInstance()
     {
         if (self::$instance === null) {
             self::$instance = new self();
@@ -14,48 +16,30 @@ class Cookie
         return self::$instance;
     }
 
-    private function setExpire($time)
-    {
-        //$time = (!isset($time))? "D-15" : $time;
-        //$parts = explode("-",$time);
-        //$period = $parts[0];
-        //$duration = intval($parts[1]);
-        $expire = time() * 60 * 24 * 15 ;
 
-        /*switch ($period) {
-            case "D" or 'd':
-                $expire = time() * 60 * 24 * $duration;
-                break;
-            case "Y" or 'y':
-                $expire = time() * 60 * 24 * 360 * $duration;
-                break;
-            case "W" or 'w':
-                $expire = time() * 60 * 24 * 7 * $duration;
-                break;
-            default:
-                $expire = time() * 60 * 24 * 15;
-        }*/
-        return $expire;
+    public function getValue(string $key, string $value)
+    {
+
     }
 
-    public  function hasKey($name)
+    public  function hasKey(string $name)
     {
         return isset($_COOKIE[$name]);
     }
 
-    public function write($name,$value,$time)
+    public function write(string $name, string $value)
     {
-       setcookie($name,$value,$this->setExpire($time));
+       setcookie($name, serialize($value), time() * 60 * 24 * 5);
     }
 
-    public function read($name)
+    public function read(string $name)
     {
-        return isset($_COOKIE[$name])? $_COOKIE[$name] : null;
+        return unserialize($_COOKIE[$name]) ?? null;
     }
 
-    public function delete($name)
+    public function delete(string $name)
     {
-        setcookie($name,null,-1);
+        setcookie($name, null, -1);
     }
 
 }

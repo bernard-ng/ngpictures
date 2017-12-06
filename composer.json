@@ -23,8 +23,9 @@
     },
     "autoload" : {
         "psr-4" : { 
-            "Ngpic\\" : "src/App/",
-            "Core\\" : "src/Core/" 
+            "Ngpictures\\" : "src/App/",
+            "Ng\\Core\\" : "src/Core/",
+            "Ng\\Interfaces\\" : "src/Interfaces/" 
         }
     }
 }

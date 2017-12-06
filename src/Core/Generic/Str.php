@@ -1,5 +1,7 @@
 <?php
-namespace Core\Generic;
+namespace Ng\Core\Generic;
+
+use Ngpictures\Models\UsersModel;
 
 class Str
 {
@@ -35,14 +37,6 @@ class Str
         return $formated;
     }
 
-
-    public static function toUrl(string $string): string
-    {
-        $url = trim($string,'_');
-        $formated = preg_replace("#_#","-", $url);
-        return $formated;
-    }
-
     
     public static function truncateText(string $text, int $maxChar = 155): string
     {
@@ -57,12 +51,27 @@ class Str
     }
 
 
+    public static function slugify(string $text): string
+    {
+        $text = preg_replace('#[^\pL\d]+#u', '-', $text);
+        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+        $text = preg_replace('#[^-\w]+#', '', $text);
+        $text = trim($text, '-');
+        $text = preg_replace('#-+#', '-', $text);
+        $text = strtolower($text);
+        if (empty($text)) {
+            return 'n-a';
+        }
+        return $text;
+    }
+
+
     public static function hashPassword(string $password): string
     {
         return password_hash($password, PASSWORD_BCRYPT);
     }
 
-    public static function escape($unescapestring)
+    public static function escape($unescapestring): string
     {
         return htmlspecialchars($unescapestring);
     }
@@ -76,5 +85,95 @@ class Str
         $snipet = preg_replace('#<blocquote>|</blocquote>#', '', $snipet);
         $snipet = preg_replace('#<em>|</em>#', '', $snipet);
         return $snipet;
+    }
+
+
+    public static function checkUserUrl(string $url, string $name): string
+    {
+        $name = self::slugify($name);
+        if ($name == $url) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public static function userMention(UsersModel $users, $text): string
+    {
+        return preg_replace_callback(
+            "#@([A-Za-z0-9_]+)#", 
+            function ($matches) use ($users) {
+                $user = $users->findWith('name', $matches[1]);
+
+                if ($user) { return "<a href='{$user->accountUrl}' title='Voir le profil'>{$matches[0]}</a>"; }
+                return $matches[0];
+            }, 
+            $text
+        );
+    }
+
+
+    public static function relativeTime(string $time): string
+    {
+
+        setlocale(LC_TIME,'fr');
+        $time = self::escape(strtotime($time)); 
+        $time = time() - $time ;
+        
+        switch ($time) {
+            case $time >= 3600 && $time <= 86400 :
+                $ago = intval($time / 3600);  
+                $relative_time = "il y a {$ago} ". ($ago > 1)? "heures" : "heure";
+                break;
+
+            case $time >= 60 && $time < 3600 :
+                $ago = intval(($time % 3600) / 60);
+                $relative_time = "il y a {$ago} ". ($ago > 1)? "minutes" : "minute";
+                break;
+
+            case $time > 86400 &&  $time <= 604800 :
+                $ago = intval($time / 86400 );
+                $relative_time = "il y a {$ago} ". ($ago > 1)? "jours" : "jour";
+                break;
+
+            case $time > 604800 :
+                $days = substr(strftime('%d', $time), 0,3); 
+                $date = (date("Y") == strftime("Y",$time))? ucfirst(strftime('%B' , $time)) : ucfirst(strftime('%B' , $time));
+
+                $relative_time = "{$jour} {$date}";
+
+            default:
+                $ago = intval($time % 60);
+                $relative_time = "il y a {$ago} ". ($ago > 1)? "secondes" : "seconde"; 
+                break;
+        }
+        return $relative_time;
+    }
+
+
+    public static function truncateNumber(int $number): string
+    {
+        $number = intval(self::escape($number));
+
+        switch ($number) {
+            case $number >= 0 && $number < 1000 :
+                return (string) $number;
+                break;
+
+            case $number >= 1000 && $number < 100000 :
+                $number = round (($number / 1000), 1);
+                return "{$number}K";
+                break;
+
+            case $number >= 100000 :
+                $number = round(($number / 100000), 1);
+                return "{$number}M";
+                break;
+            
+            default:
+                return $number;
+                break;
+        }
     }
 }

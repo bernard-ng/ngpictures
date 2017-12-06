@@ -2,17 +2,19 @@
 	width: 100%;
 	min-height: 30px;
 	font: {
-		size: small;
 		height: 30px;
+		font-family: openSans
 	}
 	text: {
 		align: center;
-		transform: uppercase;
+		-webkit-transform: capitalize;
+		        transform: capitalize;
 	}
 	background: $color-active ;
 	padding: 10px;
 	color: #fff;
 	cursor: pointer !important;
+	-webkit-transition: $transition;
 	transition: $transition;
 }
 
@@ -23,7 +25,7 @@
 }
 
 .action-btn{
-    @extend .feed-btn;
+    @extend .ng-btn;
 	background: $color-active !important;
 }
 
@@ -44,5 +46,20 @@
 	border: 2px solid  $color-3;
 	border-radius: 3px;
 	background: $color-3 !important;
+	-webkit-transition: $transition;
 	transition: $transition;
+}
+
+.link-btn{
+    border-radius: 3px;
+    border: 1px solid #fff;
+    display: inline;
+    line-height: auto;
+    background: transparent !important;
+    padding: 10px;
+    margin-right: 5px;
+    color: #fff !important;
+}
+.link-btn:hover{
+    background: $color-4 !important;
 }

@@ -1,4 +1,4 @@
-//card de publication
+/*card de publication*/
 @import "../theme/_variables.scss";
 .ng-article-background{
     background-attachment: fixed;
@@ -34,6 +34,7 @@
         overflow: hidden;
         position: relative;
         margin-bottom: 10px !important;
+        -webkit-transition: $transition;
         transition: $transition;
 
         &-header {
@@ -62,7 +63,8 @@
                 flex-grow: 1;
                 font-weight: 600;
                 padding: 0.35rem;
-                text-decoration-line: none !important;      
+                -webkit-text-decoration-line: none !important;
+                        text-decoration-line: none !important;      
             }
         }
 
@@ -74,7 +76,7 @@
 
             & h1{
                 text-transform: capitalize;
-                font-family: robot-title,sans-serif ;
+                font-family: robot-title, openSans, sans-serif ;
                 font-weight: 300 !important;
                 font-size: 1.5em;
                 margin-bottom: 24px;
@@ -84,7 +86,7 @@
 
             & h2{
                 text-transform: capitalize;
-                font-family: robot-title,sans-serif ;
+                font-family: robot-title, openSans, sans-serif ;
                 font-weight: 600 !important;
                 font-size: 1.5em;
                 margin-bottom: 10px;
@@ -117,7 +119,8 @@
             -ms-flex-pack: center;
             justify-content: center;
             padding: 0.35rem;
-            text-decoration-line: none !important;
+            -webkit-text-decoration-line: none !important;
+                    text-decoration-line: none !important;
             color: #ccc;
         }
 
@@ -154,6 +157,7 @@
         &-image-article img{
             width: 100%;
             height: auto;
+            -webkit-transition: $transition;
             transition: $transition;
             margin:0 !important;
             padding:0 !important;
@@ -162,7 +166,7 @@
         &-content {
             padding: 1rem;
             text-align: left;
-            font-family: sans-serif !important;
+            font-family: openSans, sans-serif !important;
 
             & small{
                 margin-top: 15px;
@@ -173,13 +177,13 @@
         }
 
         &-seemore{
-            font-size: small;
             margin-top: 5px;
-            color: gray;
-            font-family: robot-title;
+            display: block;
+            color: $color-active;
+            font-family: openSans, sans-serif;
             font-weight: 200;
             &:hover{
-                color: $color;
+                color: $color-active;
             }
         }
 
@@ -215,6 +219,7 @@
                 cursor: pointer;
                 color: rgba(0,0,0,0.5);
                 font-weight: 600;
+                -webkit-transition: $transition;
                 transition: $transition;
 
                 &:not(:last-child){
@@ -225,6 +230,7 @@
 
         &-stat{
             text-decoration: none !important;
+            font-family:openSans, sans-serif !important;
             & time{
                 font: {
                     size: small;
@@ -242,7 +248,7 @@
     padding: 10px 0 10px 0;
     border-top: 1px solid #dbdbdb;
     margin-top: 5px;
-    font-family: endore403, sans-serif  ;
+    font-family: openSans, sans-serif  ;
 
     & .icon{
         color: #ccc !important;
@@ -250,11 +256,7 @@
 }
 
 .ng-article{
-
-    border: 1px solid #ccc;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    padding:20px 0 5px 0;
+    padding: 20px 0 0 0;
 
     &-img{
         padding: 0;
@@ -262,6 +264,7 @@
         overflow: hidden;
 
         & img{
+            -webkit-transition: $transition ;
             transition: $transition ;
             width: 100%;
             height: auto;
@@ -271,29 +274,37 @@
 
 #singleOptions-mobile{
     margin:0;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
 
 }
 
-//verse card
+/*verse card*/
 .ng-heading{
-    font-family: robot-title, Helvetica,sans-serif !important;
+    font-family: robot-title, openSans, sans-serif !important;
 }
 .ng-contain{
     padding: 1rem;
     text-align: left;
-    font-family: sans-serif !important;
+    font-family: openSans, sans-serif !important;
 }
 
 .verse{
-    font-family: robot-title, Helvetica, sans-serif !important;
+    font-family: robot-title, openSans, sans-serif !important;
     word-spacing: 1px;
     font-weight: 600;
-    animation: verse-alert linear 1s infinite;
+    -webkit-animation: verse-alert linear 1s infinite;
+            animation: verse-alert linear 1s infinite;
 
     &-panel{
+        -webkit-transition: $transition;
         transition: $transition;
     }
 
@@ -318,14 +329,14 @@
 
     &-title{
         font: {
-            family: robot-title, Helvetica,sans-serif !important;
+            family: robot-title, openSans,sans-serif !important;
             size: 18px;
         };
         display: inline;
     }
 }
 
-//panel imgs home
+/*panel imgs home*/
 .description{
     padding:1px;
     width: 100%;
@@ -333,7 +344,7 @@
 
     & p{
         padding: 10px;
-        font-family: endore403,sans-serif;
+        font-family: openSans,sans-serif;
         text-align: justify;
         line-height: 1.5em;
         display: block;
@@ -361,7 +372,7 @@
     overflow: hidden;
 }
 
-//options card
+/*options card*/
 
 .ng-more-options{
     text-align: center;
@@ -374,18 +385,19 @@
 }
 
 
-//no publication yet
+/*no publication yet*/
 
 .no-publication{
     border: 5px double #fff;
     text: {
-        transform:  capitalize;
+        -webkit-transform:  capitalize;
+                transform:  capitalize;
         align: center
     }
     height: 500px;
-    line-height: 500px;
+    line-height: 850px;
     overflow: hidden;
-    background-image: url('/imgs/default.JPG');
+    background-image: url('/imgs/ngpic.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -395,7 +407,7 @@
         font: {
             size: 16px;
             weight: 600;
-            family: sans-serif;
+            family: openSans, sans-serif;
         }
         position: relative;
         z-index: 2 !important;
@@ -406,23 +418,23 @@
 @media only screen and (max-width: 700px) {
     .no-publication {
        height: 300px;
-       line-height: 300px;
+       line-height: 450px;
     }
 }
 
-//jumbotron
+/*jumbotron*/
 .jumbotron {
-    padding: 30px 15px 30px 15px;
+    padding: 40px 15px 15px 15px;
     margin-bottom: 15px;
-    background-image: url('/imgs/banner.jpeg');
+    background-image: url('/imgs/site-banner.jpeg');
     background-size: cover;
     background-attachment: fixed;
-    background-position: right center;
+    background-position: 1000px center;
     position: relative;
 
     z-index: 900;
     border-bottom: 5px solid rgb(204,204,204);
-    min-height: 250px;
+    min-height: 50px;
     max-height: auto;
     width: 100%;
 
@@ -434,6 +446,7 @@
         padding: 10px;
         position: relative;
         text-shadow: 1px 1px 1px black;
+        line-height: 1.7em;
         font: {
             family: mrsmonster;
             size: 2.95em;
@@ -450,7 +463,7 @@
         position: relative;
         text-shadow: 0px 1px 1px black;
         font: {
-            family: sans-serif !important;
+            family: openSans, sans-serif !important;
             weight: normal;
             size: normal;
         } 
@@ -459,7 +472,7 @@
 
   @media only screen and (max-width: 700px) {
     .jumbotron{
-        min-height: 150px;
+        min-height: 50px;
         &-title {
             margin-top: 10px !important;
             font: {
@@ -470,13 +483,13 @@
     }
   }
   
-// comment-card
+/* comment-card*/
 
 .comments-card {
    
 }
 
-//statistic-card
+/*statistic-card*/
 .statistic{
     width: 100%;
     overflow-x: scroll;

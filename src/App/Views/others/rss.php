@@ -5,6 +5,7 @@
 		<description>Ceci est notre le flux rss de notre site</description>
 		<lastBuildDate><?= date(DATE_RSS, strtotime($last)) ?></lastBuildDate>
 		<link>http://ngpictures.dev</link>
+
 		<?php foreach($articles as $article) : ?>
 			<item>
 				<title><?= $article->title ?></title>
@@ -17,5 +18,6 @@
 				</image>
 			</item>
 		<?php endforeach; ?>
+		
 	</channel>
 </rss>

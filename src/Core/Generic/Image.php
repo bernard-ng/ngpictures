@@ -1,8 +1,13 @@
 <?php
-namespace Core\Generic;
+namespace Ng\Core\Generic;
 
 use Intervention\Image\ImageManager;
-use Core\Generic\{Session,Str};
+
+use Ng\Core\Generic\{
+    Session, Str, Flash
+};
+
+use Ngpictures\Ngpic;
 
 Abstract class Image 
 {
@@ -48,7 +53,7 @@ Abstract class Image
 
     public static function upload(Collection $file, string $path, string $name, string $format)
     {
-        $session = Session::getInstance();
+        $flash = new Flash(Session::getInstance());
 
         if (!empty($file->get('thumb.tmp_name'))) {
             $valid_ext = self::extension($file->get('thumb.name'), $file->get('thumb.type'));
@@ -75,15 +80,15 @@ Abstract class Image
                         
                     return true;    
                 } else {
-                    $session->setFlash('danger', self::$msg['bigger_than_max']);
+                    $flash->set('danger', self::$msg['bigger_than_max']);
                     return false;
                 }
             } else {
-                $session->setFlash('danger', self::$msg['not_image']);
+                $flash->set('danger', self::$msg['not_image']);
                 return false;
             }
         } else {
-            $session->setFlash('danger', self::$msg['error_upload']);
+            $flash->set('danger', self::$msg['error_upload']);
             return false;
         }
     }

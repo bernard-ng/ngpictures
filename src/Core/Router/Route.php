@@ -1,7 +1,8 @@
 <?php
+namespace Ng\Core\Router;
 
-namespace Core\Router;
-use \Ngpic;
+
+use Ngpictures\Ngpic;
 
 class Route
 {
@@ -54,7 +55,7 @@ class Route
 			
 			return call_user_func_array([$controller, $action], $this->matches);
 		}
-		return call_user_func_array($this->controller,$this->matches);
+		return call_user_func_array($this->controller, $this->matches);
 	}
 
 	public function getUrl(array $params): string 

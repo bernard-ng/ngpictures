@@ -1,26 +1,23 @@
 <?php
+namespace Ngpictures;
 
-use Core\Database\MysqlDatabase;
-use Core\Config\Config;
-use \Core\Generic\{Session,cookie,collection,str,Validator};
 
-/**
- * Class Ngpic
- * FR - c'est la class generique de l'application
- * EN - this is the generic class of the application
- * @package Ngpic
- * @author Bernard ng
- */
+use Ng\Core\Database\MysqlDatabase;
+
+use Ng\Core\Config\Config;
+
+use Ng\Core\Generic\{
+    Session, cookie, collection,
+    str, Validator, Flash
+};
+
+
+
 class Ngpic {
 
 	private static  $db_instance,
                     $instance;
     
-    public static $pageName = "Ngpictures";
-
-
-    
-    //factoring
 
     public static function getInstance(): Ngpic
     {
@@ -31,9 +28,27 @@ class Ngpic {
 	}
 
 
+    /***************************************************************************
+    *
+    *                                  FACTORING
+    *
+    ****************************************************************************/
+
+
+    /**
+     * initalise ou recupere la connexion a la base de donnee
+     *
+     *
+     * on recupere la configuration dans un fichier se situant la racine
+     * on failt a l'appel a Config qui va mettre la configuration dans la 
+     * variable setting sous form d'objet.
+     * et on passe a Mysqldatabase la config et lui initialise un PDO
+     *
+     * @return MysqlDatabase
+     **/
     public function getDb(): MysqlDatabase
     {
-		$setting = Config::getInstance(ROOT."\Config\DatabaseConfig.php");
+		$setting = Config::getInstance(ROOT."\config\DatabaseConfig.php");
 
 		if (!isset(self::$db_instance)) {
 			self::$db_instance = new MysqlDatabase(
@@ -51,71 +66,48 @@ class Ngpic {
  
     public function getModel(string $class_name)
     {
-        $class_name = "\\Ngpic\\Model\\".ucfirst($class_name)."Model";
+        $class_name = "\\Ngpictures\\Models\\".ucfirst($class_name)."Model";
         return new $class_name($this->getDb());
     }
 
 
     public function getController(string $name)
     {
-        $controller = "\\Ngpic\\Controller\\".ucfirst($name)."Controller";
+        $controller = "\\Ngpictures\\Controllers\\".ucfirst($name)."Controller";
         return new $controller();
     }
 
 
-    public function getValidator(): Validator
-    {
-        return new Validator($this->getDb(), $_POST);
-    }
+    public function getFlash(): Flash { return new Flash($this->getSession()); }
 
-    public function getSession(): Session
-    {
-        return Session::getInstance();
-    }
+    public function getValidator(): Validator { return new Validator($this->getDb(), $_POST); }
 
-    public function getCookie(): Cookie
-    {
-        return Cookie::getInstance();
-    }
+    public function getSession(): Session { return Session::getInstance(); }
 
-    public function getStr(): str
-    {
-        return new Str();
-    }
+    public function getCookie(): Cookie { return Cookie::getInstance(); }
 
-    // general application methods...
+    public function getStr(): str { return new Str(); }
+    
+
+
+    /***************************************************************************
+    *
+    *                           GENERAL APPLICATION METHODS
+    *
+    ****************************************************************************/
 
 
     public static function hasDebug()
     {
-        $settings = Config::getInstance(ROOT."/Config/EnvConfig.php");
+        $settings = Config::getInstance(ROOT."/config/EnvConfig.php");
         return $settings->get('debug');
     }
 
 
     public static function hasCache(): bool
     {
-        $settings = Config::getInstance(ROOT."/Config/EnvConfig.php");
+        $settings = Config::getInstance(ROOT."/config/EnvConfig.php");
         return $settings->get('cache');
-    }
-
-
-    public static function getPageName(): string
-    {
-        return self::$pageName;
-    }
-
-    public static function getTitle(): string
-    {
-        $title = explode('|', self::getPageName());
-        return trim($title[0]);
-    }
-
-
-    public static function setPageName(string $name): string
-    {
-        self::$pageName = $name;
-        return self::getPageName();
     }
 
 
@@ -124,8 +116,10 @@ class Ngpic {
        if ($url === true) {
            if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
                 header("location:{$_SERVER['HTTP_REFERER']}");
+                exit();
            } else {
                header('location:/home');
+               exit();
            }
        } else {
             is_null($url)? header('location:/home') : header("location:{$url}");

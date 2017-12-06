@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Database;
+namespace Ng\Core\Database;
 
 /**
  * class Database 

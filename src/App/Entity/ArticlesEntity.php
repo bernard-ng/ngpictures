@@ -1,88 +1,88 @@
 <?php
-namespace Ngpic\Entity;
-use Core\Entity\Entity;
-use Core\Generic\Str;
-use \Ngpic;
+namespace Ngpictures\Entity;
 
 
-/**
- * Class ArticlesEntity
- * @package Ngpic\Entity
- */
+use Ng\Core\Entity\Entity;
+
+use Ng\Core\Generic\Str;
+
+use Ngpictures\Ngpic;
+
+
 class ArticlesEntity extends Entity
 {
-    public  $id,
-            $title,
-            $content,
-            $user_id,
-            $date_created,
-            $thumb,
-            $slug;
-
+    
     public function __construct()
     {
         $this->like = Ngpic::getInstance()->getModel('likes');
-        $this->dislike = Ngpic::getInstance()->getModel('dislikes');
         $this->users = Ngpic::getInstance()->getModel('users');
     }
 
-    
+
     public function getUrl(): string
     {
-        $url = "/articles/{$this->slug}-{$this->id}";
-        $this->url = $url;
+        $this->url = "/articles/{$this->slug}-{$this->id}";
         return $this->url;
     }
+
 
     public function getLikeUrl(): string
     {
-        $url = "/likes/{$this->slug}-{$this->id}-1-1";
-        $this->url = $url;
+        $this->url = "/likes/{$this->slug}-{$this->id}-1";
         return $this->url;
     }
 
+
+    public function getCommentUrl(): string
+    {
+        $this->commentUrl = "/comments/{$this->slug}-{$this->id}-1";
+        return $this->commentUrl;
+    }
+
+
+    public function getdownloadUrl(): string
+    {
+        $this->downloadUrl = "/download/1/{$this->thumb}";
+        return $this->downloadUrl;
+    }
+
+
     public function getThumbUrl(): string
     {
-        $thumbUrl = "/uploads/articles/{$this->thumb}";
-        $this->thumbUrl = $thumbUrl;
+        $this->thumbUrl = "/uploads/articles/{$this->thumb}";
         return $this->thumbUrl;
     }
+
 
     public function getSI(): string
     {
         return "{$this->slug}-{$this->id}";
     }
 
+
     public function getLikes(): string
     {
         return $this->like->getLikeSentence($this->id,1);
     }
 
-    public function getDislikes(): string
-    {
-        return $this->dislike->getDislikeSentence($this->id,1);
-    }
 
-    public function getDislikeUrl(): string
-    {
-        $url = "/dislikes/{$this->slug}-{$this->id}-1-2";
-        $this->url = $url;
-        return $this->url;
-    }
-
-    public function getML()
+    public function getIsLike()
     {
         return $this->like->isMentionnedLike($this->id,1);
     }
 
-    public function getMD(){
-        return $this->dislike->isMentionnedDislike($this->id,1);
-    }
 
-    public function getText(): string
+    public function getSnipet(): string
     {
-        return $this->text = Str::getSnipet(Str::truncateText($this->content,300));
+        $content = Str::userMention($this->users, $this->content);
+        $this->text = Str::getSnipet(Str::truncateText($content, 300));
+        
+        return $this->text;
     }
 
 
+    public function getFullText(): string
+    {
+        return Str::userMention($this->users, $this->content);
+    }
 }

@@ -1,6 +1,7 @@
 <main role="main" class="container row">
     <div class="section-title page-title">Admin - Blog</div>
-    <?php include(APP."/Views/includes/left-aside.php"); ?>
+    <?php include(APP."/Views/includes/right-aside.php"); ?>
+
     <section class="col s12 m8">
         <div class="card-panel no-padding">
             <div id="articlesContainer">
@@ -10,12 +11,10 @@
                             <i id="category" class="icon icon-pencil"></i>
                             <h2><?= $article->title ?></h2>
                         </section>
-                        <content>
-                            <p>
-                                <?= $article->text ?>
-                                <br><a href="<?= $article->url ?>">Voir plus</a>
-                            </p>
-                        </content>
+                        <main>
+                            <?= $article->snipet ?>
+                            <br><a href="<?= $article->url ?>">Voir plus</a>
+                        </main>
                         <footer id="articleInfo">
                             <div class="ng-news-card-stat">
                                 <i class="icon icon-time"></i>&nbsp;
@@ -37,7 +36,7 @@
         <div class="card-panel">
             <div class="section-title mb-20 mt-20 ml-10">
                 Les Articles
-                <a href="/adm/blog/add" class="right">
+                <a href="<?= ADMIN."/blog/add" ?>" class="right">
                     <button class="btn">
                         <i class="icon icon-plus" style="font-size: smaller !important;"></i>
                     </button>
@@ -58,7 +57,7 @@
                         <td><b><?= $a->id ?></b></td>
                         <td><a href="<?= $a->url ?>"><?= $a->title ?></a></td>
                         <td>
-                            <form method="POST" action="/adm/delete" style="display: inline-block !important;">
+                            <form method="POST" action="<?= ADMIN."/delete" ?>" style="display: inline-block !important;">
                                 <input type="hidden" name="id" value="<?= $a->id?>" >
                                 <input type="hidden" name="type" value="3" >
                                 <button type="submit" class="btn waves-effect waves-light red">
@@ -66,7 +65,7 @@
                                 </button>
                             </form>
                            
-                            <a href="/adm/blog/edit/<?= $a->id ?>">
+                            <a href="<?= ADMIN."/blog/edit/{$a->id}" ?>">
                                  <button class="btn waves-effect waves-light">
                                     <i class="icon icon-edit" style="font-size: smaller !important;"></i>
                                 </button>
@@ -78,8 +77,6 @@
             </table>
         </div>
 
-        
-
     </section>
-    <?php include(APP."/Views/includes/right-aside.php"); ?>
+    <?php include(APP."/Views/includes/left-aside.php"); ?>
 </main>

@@ -4,14 +4,14 @@
         
         <form method="POST" action="<?php echo $article->commentUrl; ?>"> 
             <div class="default-form">
-                <textarea placeholder="Votre commentaire..." name="comment" ></textarea>
+                <textarea placeholder="Votre commentaire..." name="comment" id="comment"></textarea>
             </div>
             <button type="submit" class="ng-btn"> Envoyer</button>
         </form>
         
         <div class="mt-30">
             <span class="section-title"><i class="social social-chat"></i> Les commentaires </span>
-            <span class="badge new"><?= $nb_comment ?></span>
+            <span class="badge new"><?= count($comments) ?></span>
         </div>
         
         <ul class="collection" id="commentContainer">
@@ -24,7 +24,7 @@
                                     <?= $c->username; ?>
                             </a>
                         </span>
-                        <p><?= $c->comment ?></p>
+                        <?= $c->comment ?>
                         <p><time  class="secondary-content-b" data-time="<?= strtotime($c->date_created) ?>"><?= $c->time ?></time></p>   
                     
                         <?php if ($session->read('auth') && $session->getValue('auth','id') == $c->user_id): ?>
@@ -70,13 +70,13 @@
                 <?php endforeach; ?>
             <?php else : ?>
                 <li class="collection-item avatar">
-                    <img src="/imgs/default.JPG" alt="" class="circle">
+                    <img src="/imgs/ngpic-2.png" alt="" class="circle">
                     <span class="title"><b>Ngpictures</b></span>
                     <p>aucun commentaire, soyez la première personne à réagir</p>
                 </li>
             <?php endif; ?>
         </ul>
-        <?php if ($nb_comment > 3) : ?>
+        <?php if (count($comments) > 3) : ?>
             <div class="feed-btn waves-effect waves-light hoverable" id="comments" data-type="3">Voir tout</div>
         <?php endif; ?>
     </div>

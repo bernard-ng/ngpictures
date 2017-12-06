@@ -1,11 +1,8 @@
 <?php
-namespace Core\Entity;
-use \Ngpic;
+namespace Ng\Core\Entity;
 
-/**
- * Class Entity
- * @package Core\Entity
- */
+
+
 class Entity
 {
     
@@ -30,6 +27,24 @@ class Entity
 	{
 		return $this->users->find($this->user_id)->name;
 	}
+
+
+    public function getUserAccountUrl(): string
+    {
+        return $this->users->find($this->user_id)->accountUrl;
+    }
+
+
+    public function getUserAvatarUrl(): string
+    {
+        return "/uploads/avatars/{$this->user_id}.jpg";
+    }
+
+
+    public function getUserGalleryUrl(): string 
+    {
+        return $this->users->find($this->user_id)->galleryUrl;
+    }
 
     
 

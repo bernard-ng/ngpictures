@@ -1,5 +1,5 @@
 <?php
-namespace Core\Generic;
+namespace Ng\Core\Generic;
 
 
 class Ajax

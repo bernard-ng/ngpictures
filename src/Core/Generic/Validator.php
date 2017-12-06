@@ -1,7 +1,9 @@
 <?php
-namespace Core\Generic;
-use Core\Database\MysqlDatabase;
-use \Ngpic;
+namespace Ng\Core\Generic;
+
+
+use Ng\Core\Database\MysqlDatabase;
+
 
 class Validator
 {

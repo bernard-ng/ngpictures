@@ -1,15 +1,11 @@
 <?php
+namespace Ngpictures\Entity;
 
 
-namespace Ngpic\Entity;
+
+use Ng\Core\Entity\Entity;
 
 
-use Core\Entity\Entity;
-
-/**
- * Class OnlineEntity
- * @package Ngpic\Entity
- */
 class OnlineEntity extends Entity
 {
 

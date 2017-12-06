@@ -1,23 +1,31 @@
 <?php
-use Core\Router\Router;
+use Ng\Core\Router\Router;
+use Ngpictures\Ngpic;
 
 
 define("ROOT", dirname(__DIR__));
 define("WEBROOT", dirname(__FILE__));
 define("CORE", ROOT."/src/Core");
 define("APP", ROOT."/src/App");
-define('UPLOAD', ROOT."/Public/uploads");
-
-require ROOT."/vendor/autoload.php";
-require APP."/Ngpic.php";
-
-if (isset($_GET['url']) && !empty($_GET['url'])) {
-
-    $router = new Router($_GET['url']);
+define("UPLOAD", WEBROOT."/uploads");
+define("ADMIN", "/adm");
 
 
+require(ROOT."/vendor/autoload.php");
 
-    /* front end routes */
+
+if (isset($_GET["url"]) && !empty($_GET["url"])) {
+
+    $router = new Router($_GET["url"]);
+
+
+
+    /***************************************************************************
+    *
+    *                           FRONT-END ROUTES
+    *
+    ****************************************************************************/
+
     $router->get("/", "home", "acceuil");
     $router->get("/home/", "home", "accueil");
 
@@ -28,15 +36,15 @@ if (isset($_GET['url']) && !empty($_GET['url'])) {
     $router->get("/sign/", "users#sign", "sign");
     $router->post("/sign/", "users#sign", "sign");
     $router->get("/confirm/:id/:token", "users#confirm", "confirmation");
-    $router->get("/account/", "users#account", "account");
+    $router->get("/account/:user-:id", "users#account", "account");
     $router->get("/users/", "users", "users");
     $router->get("/account/edit/:user-:id", "users#edit", "edit account");
     $router->get("/users/posts/:user-:id", "users#posts", "users posts");
 
 
     //articles and blog pages
-    $router->get("/blog/","ngarticles", "blog");
-    $router->get('/blog/:slug-:id',"ngarticles#show", "blog articles");
+    $router->get("/blog/","blog", "blog");
+    $router->get("/blog/:slug-:id","blog#show", "blog articles");
 
 
     $router->get("/articles/","articles#index","articles");
@@ -46,14 +54,14 @@ if (isset($_GET['url']) && !empty($_GET['url'])) {
 
 
     //gallery pages
-    $router->get("/galery/","galery","galery");
-    $router->get("/galery/:id","galery#show","galery show");
+    $router->get("/gallery/","gallery","gallery");
+    $router->get("/gallery/:id","gallery#show","gallery show");
 
 
     //features
-    $router->get("/likes/:slug-:id-:t-:m","likes","likes");
-    $router->get("/dislikes/:slug-:id-:t-:m","likes","dislikes");
+    $router->get("/likes/:slug-:id-:t","likes","likes");
     $router->get("/following/:name-:id","following#follow","following");
+    $router->get("/download/:type/:name", "download", "download system");
 
     $router->post("/comments/:slug-:id-:t","comments","comment");
     $router->post("/comments/edit/:id", "comments#edit", "edit comment");
@@ -64,34 +72,48 @@ if (isset($_GET['url']) && !empty($_GET['url'])) {
     $router->get("/rss/", "rss-flux", "rss flux");
 
 
-    /* back end routes */
-    $router->get("/adm/",'admin',"administration");
+    /***************************************************************************
+    *
+    *                           BACK-END ROUTES
+    *
+    ****************************************************************************/
+
+
+
+    $router->get(ADMIN,"admin","administration");
 
     //articles and blog pages
-    $router->get("/adm/blog/","admin#blog", "blog");
-    $router->get('/adm/blog/edit/:id',"admin#edit", "blog articles edition");
-    $router->get('/adm/blog/add/',"admin#add", "blog articles redaction");
-    $router->post('/adm/blog/edit/:id',"admin#edit", "blog articles edition");
-    $router->post('/adm/blog/add/',"admin#add", "blog articles redaction");
-    $router->post('/adm/delete/',"admin#delete",'blog articles deletion');
+    $router->get(ADMIN."/blog/","admin#blog", "blog");
+    $router->get(ADMIN."/blog/edit/:id","admin#edit", "blog articles edition");
+    $router->get(ADMIN."/blog/add/","admin#add", "blog articles redaction");
+    $router->post(ADMIN."/blog/edit/:id","admin#edit", "blog articles edition");
+    $router->post(ADMIN."/blog/add/","admin#add", "blog articles redaction");
+    $router->post(ADMIN."/delete/","admin#delete","blog articles deletion");
 
-    $router->get("/adm/articles/","admin#articles","articles");
+    $router->get(ADMIN."/articles/","admin#articles","articles");
 
     //gallery pages
-    $router->get('/adm/gallery','gallery#admIndex','gallery adm');
-    $router->post('/adm/gallery/delete','gallery#delete','gallery deletion');
-    $router->get("/adm/nggallery/","nggallery#admIndex","nggallery");
-    $router->get("/adm/nggallery/add/:id","nggallery#add","nggallery add");
-    $router->post("/adm/nggallery/add/","nggallery#add","nggallery add");
-    $router->get("/adm/nggallery/edit/:id","ngallery#edit","nggallery edit");
-    $router->get('/adm/nggallery/edit/','ngallery#edit','ngallery');
-    $router->post('/adm/nggallery/delete/','nggallery#delete','nggallery deletion');
+    $router->get(ADMIN."/gallery","adminy#gallery","gallery adm");
+    $router->post(ADMIN."/gallery/delete","gallery#delete","gallery deletion");
+    $router->get(ADMIN."/nggallery/","nggallery#admIndex","nggallery");
+    $router->get(ADMIN."/nggallery/add/:id","nggallery#add","nggallery add");
+    $router->post(ADMIN."/nggallery/add/","nggallery#add","nggallery add");
+    $router->get(ADMIN."/nggallery/edit/:id","ngallery#edit","nggallery edit");
+    $router->get(ADMIN."/nggallery/edit/","ngallery#edit","ngallery");
+    $router->post(ADMIN."/nggallery/delete/","nggallery#delete","nggallery deletion");
 
 
     //users pages
-    $router->get('/adm/users/','users#all','all users');
-    $router->get('/adm/users/edit/:id','users#admEdit','users edition');
-    $router->post('/adm/users/delete/','users#delete','users deletion');
+    $router->get(ADMIN."/users/","users#all","all users");
+    $router->get(ADMIN."/users/edit/:id","users#admEdit","users edition");
+    $router->post(ADMIN."/users/delete/","users#delete","users deletion");
+
+
+    /***************************************************************************
+    *
+    *                           GENERAL ROUTES
+    *
+    ****************************************************************************/
 
 
     //error pages
@@ -100,7 +122,7 @@ if (isset($_GET['url']) && !empty($_GET['url'])) {
     $router->get("/error-403","error#e403","forbidden");
 
 
-    $router->run();
+    $router->run(Ngpic::getInstance());
 
 } else {
     Ngpic::redirect();

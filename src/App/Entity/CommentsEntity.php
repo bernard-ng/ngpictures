@@ -1,13 +1,12 @@
 <?php
-namespace Ngpic\Entity;
+namespace Ngpictures\Entity;
 
-use \Ngpic;
-use Core\Entity\Entity;
 
-/**
- * Class CommentsEntity
- * @package Ngpic\Entity
- */
+use Ngpictures\Ngpic;
+
+use Ng\Core\Entity\Entity;
+
+
 class CommentsEntity extends Entity
 {
 	public function __construct()

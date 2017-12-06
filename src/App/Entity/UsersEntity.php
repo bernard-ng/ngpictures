@@ -1,17 +1,32 @@
 <?php
-namespace Ngpic\Entity;
+namespace Ngpictures\Entity;
 
 
-use Core\Entity\Entity;
+use Ng\Core\Entity\Entity;
 
-/**
- * Class UsersEntity
- * @package Ngpic\Entity
- */
+use Ng\Core\Generic\Str;
+
+
+
 class UsersEntity extends Entity
 {
 	public function getAccountUrl()
 	{
-		return "/account/{$this->name}-{$this->id}";
+		$this->accountUrl = "/account/".Str::slugify($this->name)."-{$this->id}";
+		return $this->accountUrl;
+	}
+
+
+	public function getAvatarUrl()
+	{
+		$this->avatarUrl = "/uploads/avatars/{$this->id}.jpg";
+		return $this->avatarUrl;
+	}
+
+
+	public function getGalleryUrl()
+	{
+		$this->galleryUrl = "/gallery/".Str::slugify($this->name)."-{$this->id}";
+		return $this->galleryUrl;
 	}
 }
