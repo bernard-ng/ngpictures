@@ -26,16 +26,24 @@ class ArticlesEntity extends Entity
     }
 
 
+    public function getCategoryUrl(): string
+    {
+        $categories = Str::Slugify($this->category);
+        $this->categoryUrl = "/categories/{$categories}";
+        return $this->categoryUrl;
+    }
+
+
     public function getLikeUrl(): string
     {
-        $this->url = "/likes/{$this->slug}-{$this->id}-1";
+        $this->url = "/likes/1/{$this->slug}-{$this->id}";
         return $this->url;
     }
 
 
     public function getCommentUrl(): string
     {
-        $this->commentUrl = "/comments/{$this->slug}-{$this->id}-1";
+        $this->commentUrl = "/comments/1/{$this->slug}-{$this->id}";
         return $this->commentUrl;
     }
 

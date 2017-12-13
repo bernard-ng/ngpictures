@@ -10,16 +10,19 @@
                 </span>
             </div>
             <div class="collapsible-body">
-                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
+                <div>
+                    Rétrouver nos articles dans les catégories suivantes
+                </div>
                 <br>
                  <ul>
-                    <?php foreach ($articles as $a): ?>
+                    <?php foreach ($categories as $c): ?>
                        <span>
-                           <i class="icon icon-link"></i>
-                           <a href="<?= $a->url ?>" title="<?= $a->title ?>"><?= $a->title ?></a><br>
+                           <i class="icon icon-chevron-right"></i>&nbsp;<a href="<?= $c->url ?>" title="<?= $c->title ?>"><?= $c->title ?></a>
                        </span>
+                       <br>
                     <?php endforeach; ?>
+                    <br>
+                    <i class="icon icon-chevron-right"></i> <a href="/categories">voir tout</a>
                 </ul>
             </div>
         </li>
@@ -54,9 +57,7 @@
 
             <div class="collapsible-body">
                 <span>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exe
+                   Parcourez nos archives et rétrouver des anciens articles et photos
                 </span><br>
                 <ul>
                     <br><i class="icon icon-calendar"></i>&nbsp;<a href="/archives/decembre/2017">Décembre</a>

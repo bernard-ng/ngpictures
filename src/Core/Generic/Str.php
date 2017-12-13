@@ -176,4 +176,18 @@ class Str
                 break;
         }
     }
+
+
+    public static function generateMeta(array $data = []) {
+        $array_meta = [];
+        $array_data = [];
+
+        foreach ($data as $k => $v) {
+            $array_meta[] = "{$k} ='$v' ";
+        }
+
+        $meta = implode(' ',$array_meta);
+        
+        echo "<meta {$meta} >";
+    }
 }

@@ -12,6 +12,7 @@ class ArticlesController extends NgpicController
     {
         parent::__construct();
         $this->loadModel('articles');
+        $this->loadModel('categories');
     }
 
     
@@ -19,12 +20,15 @@ class ArticlesController extends NgpicController
 
     public function index()
     {
-        $articles = $this->articles->orderBy('date_created','DESC');
+        $articles = $this->articles->lastOnline();
         $verse = $this->callController('verses')->index();
+        $categories = $this->categories->orderBy('title', 'ASC', 0, 5);
 
         Page::setName('Actualités | Ngpictures');
+        Page::setMeta(['property' => 'og:url', 'content' => '//larytech.com/articles']);
+        
         $this->setLayout("articles/default");
-        $this->viewRender("articles/index", compact('articles','verse'));
+        $this->viewRender("articles/index", compact('articles', 'verse', 'categories'));
     }
 
 

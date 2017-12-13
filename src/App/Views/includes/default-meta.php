@@ -1,15 +1,16 @@
 <!--=========================== META =========================== -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width initial-scale=1 maximum-scale=1 minimum-scale=1">
-<meta name="publisher" content="TSHABU NGANDU Bernard">
-<meta name="keywords" lang="fr" content="Ngpictures, larytech, Bernard ng, ngandu, wdp, wonderful design photography, wonderful design">
-<meta name="reply-to" content="ngpictures@larytech.com">
-<meta name="category" content="galerie,photo,photographie,art,resaux social,design">
-<meta name="robots" content="index, follow">
-<meta name="description" content="Bienvenue sur Ngpictures,nous sommes la galerie sociale d'art photographique">
-<meta name="abstrac" content="Bienvenu sur Ngpictures,nous sommes une galerie d'art photographique">
-<meta name="revist-after" content="15 day">
-<meta name="author" content="TSHABU NGANDU Bernard">
-<meta name="identifier-url" content="http://larytech.com">
-<meta name="turbolinks-cache-control" content="no-cache">
-
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width initial-scale=1 maximum-scale=1 minimum-scale=1" />
+<meta content="IE=11.0000" http-equiv="X-UA-Compatible">
+<meta http-equiv="content-language" content="fr">
+<meta name="language" content="fr">
+<meta name="copyright" content="//larytech.com">
+<meta name="author" content="Bernard Ngandu">
+<meta name="identifier-url" content="//larytech.com" />
+<meta name="keywords" lang="fr" content="ngpictures, larytech, wdp, wonderful design, ngpics" />
+<meta name="description" content="Bienvenue sur Ngpictures, partagez vos photos, profiter de nos services shooting et decouvrez notre gallerie wonderful DP" />
+<meta property="og:title" content="<?= Ngpictures\Util\Page::getTitle() ?>" />
+<meta property="og:sitename" content="larytech.com" />
+<meta property="og:language" content="fr">
+<?= Ngpictures\Util\Page::getMeta(); ?>
+<meta name="turbolinks-cache-control" content="no-cache" />

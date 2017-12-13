@@ -164,9 +164,24 @@ class Model
 
     public function last()
     {
-        return $this->query(
-            "SELECT * FROM {$this->table} ORDER BY date_created DESC LiMIT 1",
+        return $this->query("
+            SELECT {$this->table}.*, categories.title as category 
+            FROM {$this->table} 
+            LEFT JOIN categories ON category_id = categories.id
+            WHERE online = 1 ORDER BY date_created DESC LIMIT 0,1",
             null, true, true
+        );
+    }
+
+
+    public function lastOnline()
+    {
+        return $this->query("
+            SELECT {$this->table}.*, categories.title as category 
+            FROM {$this->table} 
+            LEFT JOIN categories ON category_id = categories.id
+            WHERE online = 1 ORDER BY date_created DESC ",
+            null, true, false
         );
     }
 
@@ -185,5 +200,21 @@ class Model
             );
         }
         return $this->query("SELECT * FROM {$this->table} ORDER BY {$field} {$order} LIMIT {$from},{$to}");
+    }
+
+
+    public function addOnline(int $id)
+    {
+        return $this->query(
+            "UPDATE {$this->table} SET online = 1 WHERE id = ? ",[$id]
+        );
+    }
+
+
+    public function removeOnline(int $id)
+    {
+        return $this->query(
+            "UPDATE {$this->table} SET online = 0 WHERE id = ?",[$id]
+        );
     }
 }

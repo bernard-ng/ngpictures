@@ -1,5 +1,4 @@
 <section class="row container">
-    <!-- ==================== PAGE ASIDE ===================================== -->
     <?php include(APP."/Views/includes/left-aside.php"); ?>
 
     <main class="col s12 l6 xl6 m9" role="main">
@@ -7,7 +6,6 @@
             <div id="articlesContainer">
                 <?php if (!empty($articles)) : ?>
                 <?php foreach($articles as $a): ?>
-                    <!-- CARD -->
                     <article class="card" id="<?= $a->id ?>">
                         <header class="card-image">
                             <div class="ng-article-img">
@@ -52,7 +50,6 @@
                             </a>
                         </footer>
                     </article>
-                    <!-- /CARD END -->
                 <?php endforeach ; ?>
                 <div id="feedMore" class="feed-btn waves-effect waves-teal waves-ripple hoverable"> charger la suite</div>
 

@@ -3,6 +3,7 @@ namespace Ng\Core\Database;
 
 use \PDO;
 use Core\Exception\{queryException,prepareException};
+use Ngpictures\Ngpic;
 
 
 /**
@@ -46,6 +47,7 @@ class MysqlDatabase extends Database
                if (Ngpic::hasDebug()) {
                     die("{$e->getMessage()}</br>{$e->getLine()}");
                } else {
+                    die("{$e->getMessage()}</br>{$e->getLine()}");
                     Ngpic::redirect("/error-500");
                }
            }

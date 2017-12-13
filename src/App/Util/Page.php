@@ -2,7 +2,7 @@
 namespace Ngpictures\Util;
 
 
-use Ng\Core\Generic\Collection;
+use Ng\Core\Generic\{Collection,Str};
 
 
 
@@ -58,6 +58,8 @@ class Page {
 		"apropos" => "icon-info-sign"
 	];
 
+	private static $meta = [];
+
 
 	public static $pageName = "Ngpictures";
 
@@ -96,6 +98,19 @@ class Page {
 	{
 		$icons = new Collection(self::$icons);
 		return $icons->get(strtolower(self::getTitle()));
+	}
+
+
+	public static function setMeta(array $data = [])
+	{
+		self::$meta[] = $data;
+	}
+
+	public static function getMeta()
+	{
+		foreach (self::$meta as $meta) {
+			Str::generateMeta($meta);
+		}
 	}
 }
 

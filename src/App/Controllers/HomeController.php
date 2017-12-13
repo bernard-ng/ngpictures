@@ -15,6 +15,7 @@ class HomeController extends NgpicController
         parent::__construct();
         $this->loadModel('blog');
         $this->loadModel('articles');
+        $this->loadModel('categories');
     }
 
     public function index()
@@ -22,9 +23,11 @@ class HomeController extends NgpicController
         $article = $this->blog->last();
         $blog = $this->blog->orderBy('date_created', 'DESC', 0,5);
         $articles = $this->articles->orderBy('date_created', 'DESC', 0,3);
+        $categories = $this->categories->orderBy('title','ASC',0,5);
         $verse = $this->callController('verses')->index();
 
         Page::setName('Accueil | Ngpictures');
-        $this->viewRender("home/index", compact('article','articles','blog','verse'));
+        Page::setMeta(['property' => 'og:url', 'content' => '//larytech.com/home']);
+        $this->viewRender("home/index", compact('article','articles','blog','verse','categories'));
     }
 }

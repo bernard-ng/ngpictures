@@ -41,7 +41,11 @@
 
                     <main class="ng-news-card-content">
                         <section class="ng-news-card-title">
-                            <h2><?= $a->title ?></h2>
+                            <?php if ($a->category_id !== null): ?>
+                                <a href="<?= $a->categoryUrl ?>"><i class="icon icon-tags"></i></a>
+                            <?php endif; ?>
+                            
+                            <h2><?= $a->title ?>&nbsp;<small><?= $a->category ?></small></h2>
                         </section>
                         <section>
                             <p><?= $a->snipet ?></p>

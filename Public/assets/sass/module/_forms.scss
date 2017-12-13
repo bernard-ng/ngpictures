@@ -3,13 +3,16 @@ $form-font-color: #ffffff;
 $form-transition: all linear 0.5s;
 
 .login-bg{
-    background-image: url('/imgs/banner.jpeg');
+    background-image: url('/imgs/site-banner.jpeg');
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
+    -webkit-transition: $form-transition;
     transition: $form-transition;
     position: relative;
+    -webkit-animation: actie-cover linear 20s infinite;
+            animation: actve-cover linear 20s infinite;
 }
     
 .sign-bg{
@@ -17,9 +20,10 @@ $form-transition: all linear 0.5s;
 }
 
 .loginBox{
-    max-width: 500px;
-    min-width: 300px;
-    min-height: 300px;
+    max-width: 600px;
+    min-width: 400px;
+    min-height: 400px;
+    -webkit-transition: $form-transition;
     transition: $form-transition;
 }
 
@@ -29,26 +33,39 @@ $form-transition: all linear 0.5s;
 
 #loginBox{
     display: block;
-    position: relative;
-    background: transparent;
-    border: 3px outset $color-4;
+    background-color: $color-4;
+    border: 3px solid $color-5;
+    border-radius: 3px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translateX(-50%) translateY(50%);
+
+
+
     color: $form-font-color;
     & a.forgot {
-        color: $color-active;
-        font: {
-            family : robot-title;
-            size: normal;
-            weight: 300;
-        }
-        text-transform: capitalize;
+        color: #cecece;
         float: right !important;
         &:hover{
             text-decoration: underline;
         }
     }
-    & input,label{
-        font-family: helvetica , serif;
+    & label {
+        color: #cecece;
+    }
+
+    & input{
+        font-family: openSans , sans-serif;
         color: $form-font-color !important;
+        background: $color-5;
+        border: none;
+        border-radius: 3px;
+        display: inline-block;
+        box-shadow: inset 0px 1px 1px #000;
+        padding-left: 5px;
     }
 }
 
@@ -66,8 +83,10 @@ $form-transition: all linear 0.5s;
         font-size: 3.25em;
         color:#000 !important;
         cursor: pointer;
+        -webkit-transition: $form-transition;
         transition: $form-transition;
-        animation: font-change 60s linear infinite;
+        -webkit-animation: font-change 60s linear infinite;
+                animation: font-change 60s linear infinite;
     }
 }
 
@@ -85,6 +104,7 @@ $form-transition: all linear 0.5s;
     background: $color-3 ;
     color: $form-font-color;
     cursor: pointer !important;
+    -webkit-transition: $form-transition;
     transition: $form-transition;
     margin-bottom: 10px;
     padding: 5px;
@@ -109,7 +129,8 @@ $form-transition: all linear 0.5s;
         min-height:100px; 
         padding: 10px;
         margin-top:10px;
-        transition-duration: .3s;
+        -webkit-transition-duration: .3s;
+                transition-duration: .3s;
         color: #54555A;
         border: 2px solid $color;
         border-radius: 3px;

@@ -4,10 +4,7 @@ namespace Ngpictures\Controllers;
 use Ngpictures\Ngpic;
 use Ngpictures\Util\Page;
 
-use Ng\Core\Generic\{
-    Collection,
-    Image
-};
+use Ng\Core\Generic\{Collection,Image};
 
 use Ngpictures\Controllers\NgpicController;
 
@@ -21,7 +18,7 @@ class AdminController extends NgpicController
     private $upload_ngpic = '/uploads/ngpictures/';
     private $upload_ngpic_thumb = '/uploads/ngpictures/thumbs/';
 
-    private function getType(int $id): string
+    private function getType(int $id)
     {
         $type = new Collection($this->types);
         return $type->get($id);
@@ -32,7 +29,7 @@ class AdminController extends NgpicController
         parent::__construct();
         $this->callController('users')->isAdmin();
         $this->verse = $this->callController('verses')->index();
-
+        Page::setMeta(['name' => 'robots','content' => 'noindex']);
 
         $this->loadModel(
             [
@@ -55,14 +52,12 @@ class AdminController extends NgpicController
 
         $articles = $this->articles->lastest();
         $blog = $this->blog->lastest();
-        $users = $this->users->orderBy('id', 'DESC', 0, 10);
-        $verse = $this->verse;
+        $users = $this->users->all();
         //$bugs = $this->bugs->lastest();
         //$ideas = $this->ideas->lastest();
         //$gallery = $this->gallery->lastest();
         //$ngGallery = $this->ngGallery->lastest();
 
-        $nb_article = count($this->blog);
         $nb_users = count($this->users);
 
         Page::setName('administration | Ngpictures');
@@ -70,8 +65,7 @@ class AdminController extends NgpicController
         $this->setLayout('admin/default');
         $this->viewRender('admin/index',
             compact(
-                'articles','blog','nb_article','nb_users',
-                'verse'
+                'articles','blog','nb_users'
             )
         );
     }
@@ -139,7 +133,7 @@ class AdminController extends NgpicController
     
                 $this->blog->update($id, compact('title', 'content', 'slug'));
                 $this->flash->set("success", $this->msg['admin_modified_success']);
-                Ngpic::redirect("/adm");
+                Ngpic::redirect(true);
             }
         }
         Page::setName('administration - blog - edittion | Ngpictures');
@@ -185,15 +179,47 @@ class AdminController extends NgpicController
             }
         }
 
-        Page::setName('administration - blog - publication| Ngpictures');
+        Page::setName('administration - publication| Ngpictures');
 
         $this->setLayout('admin/default');
         $this->viewRender('admin/blog/add', compact('post'));
     }
 
 
+    public function confirm($t, $id) 
+    {
+        $model = $this->loadModel($this->getType($t));
+        $publication = $model->find(intval($id));
 
-     /*********************************************************************************************************
+        if ($publication && !$publication->online) {
+            $model->addOnline($id);
+            $this->flash->set('success', $this->msg['admin_confirm_success']);
+            Ngpic::redirect(true);
+        } else {
+            $this->flash->set('danger', $this->msg['indefined_error']);
+            Ngpic::redirect(true);
+        }
+    }
+
+
+    public function remove($t, $id)
+    {
+        $model = $this->loadModel($this->getType($t));
+        $publication = $model->find(intval($id));
+
+        if ($publication && $publication->online) {
+            $model->removeOnline($id);
+            $this->flash->set('success', $this->msg['admin_remove_success']);
+            Ngpic::redirect(true);
+        } else {
+            $this->flash->set('danger', $this->msg['indefined_error']);
+            Ngpic::redirect(true);
+        }
+    }
+
+
+
+    /*********************************************************************************************************
     *  
     *                                     Website administration. - articles
     *
@@ -213,6 +239,88 @@ class AdminController extends NgpicController
                 "articles", "article", "verse"
             )
         );
+    }
+
+
+
+
+    /*********************************************************************************************************
+    *  
+    *                                     Website administration. -gallerie
+    *
+    **********************************************************************************************************/
+   
+    public function gallery()
+    {
+        $photos = $this->gallery->all();
+        $ngPhotos = $this->ngGallery->all();
+
+        page::setName('administration - gallery');
+
+        $this->setLayout("admin/default", compact('photos','ngGallery'));
+        $this->viewRender("Admin/gallery/index");
+    }
+
+
+
+    public function addGallery()
+    {
+        $post = new Collection($_POST);
+        $file = new Collection($_FILES);
+
+        if (!empty($_FILES)) {
+            if (!empty($post->get('$description')) && !empty($post->get('tags')) && !empty($post->get('name'))) {
+                $name = $this->str::escape($post->get('name'));
+                $description = $post->get('description');
+                $tags = $this->str::escape($post->get('tags'));
+            } else {
+                $name = null;
+                $description = null;
+                $tags = null;
+            }
+            
+            if (!empty($file->get('thumb'))) {
+                $this->ngGallery->create(compact('name','description','tags'));
+                $last_id = $this->ngGallery->lastInsertId();
+
+                $isUploaded = Image::upload($file, 'ngpictures', "ngpictures-{$name}-{$last_id}", 'ratio');
+
+                if ($isUploaded) {
+                    $this->ngGallery->setThumb($last_id, "ngpictures-{$name}-{$last_id}.jpg");
+                    $this->flash->set('success', $this->msg['admin_post_success']);
+                    Ngpic::redirect(true);
+
+                } else {
+                    $this->delete(['id' => $last_id, 'type' => 4]);
+                }
+            } else {
+                $this->flash->set('danger', $this->msg['admin_picture_required']);
+                Ngpic::redirect(true);
+            }
+        }
+        
+        page::setName('administration - add - gallery');
+        $this->setLayout("admin/default", compact('post'));
+        $this->viewRender("Admin/gallery/add");
+    }
+
+
+    public function editGallery()
+    {
+        $photos = $this->gallery->all();
+        $ngPhotos = $this->ngGallery->all();
+
+        page::setName('administration - gallery');
+
+        $this->setLayout("admin/default", compact('photos','ngGallery'));
+        $this->viewRender("Admin/gallery/edit");
+    }
+
+
+
+    public function deleteGallery()
+    {
+
     }
        
 }

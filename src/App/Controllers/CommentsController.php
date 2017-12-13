@@ -3,7 +3,7 @@ namespace Ngpictures\Controllers;
 
 
 
-use Ng\Core\Generic\{Session,Collection,Flash};
+use Ng\Core\Generic\{Collection};
 
 use Ngpictures\Util\Page;
 
@@ -31,7 +31,7 @@ class CommentsController extends NgpicController
     }
 
 
-    public function index(string $slug, $id,  $t)
+    public function index($t, $slug, $id)
     {
         if ($this->session->getValue('auth','id') !== null) {
 
@@ -49,20 +49,20 @@ class CommentsController extends NgpicController
                             'comment' => $text
                         ]
                     );
-                    Flash::getInstance()->set('success', $this->msg['comment_success']);
+                    $this->flash->set('success', $this->msg['comment_success']);
                     Ngpic::redirect(true);
                 } else {
-                    Flash::getInstance()->set('danger', $this->msg['comment_required']);
+                    $this->flash->set('danger', $this->msg['comment_required']);
                     Ngpic::redirect(true);
                 }
 
             } else {
-                Flash::getInstance()->set('warning', $this->msg['not_found']);
+                $this->flash->set('warning', $this->msg['not_found']);
                 Ngpic::redirect(true);
             }
 
         } else {
-            Flash::getInstance()->set("warning", $this->msg['must_login']);
+            $this->flash->set("warning", $this->msg['must_login']);
             Ngpic::redirect(true);
         }
     }
@@ -76,16 +76,16 @@ class CommentsController extends NgpicController
         if ($comment) {
             if ($comment->user_id == $this->user_id && $poster = $this->user_id) {
                 $comments->delete($id);
-                Flash::getInstance()->set('success', $this->msg['delete_success']);
+                $this->flash->set('success', $this->msg['delete_success']);
                 Ngpic::redirect(true);
 
             } else {
-                Flash::getInstance()->set('danger', $this->msg['notallowed_delete_comment']);
+                $this->flash->set('danger', $this->msg['notallowed_delete_comment']);
                 Ngpic::redirect(true);
             }
 
         } else {
-            Flash::getInstance()->set('warning', $this->msg['comment_not_found']);
+            $this->flash->set('warning', $this->msg['comment_not_found']);
             Ngpic::redirect(true);
         }
     }
@@ -100,16 +100,16 @@ class CommentsController extends NgpicController
             if ($comment->user_id == $this->user_id) {
                 $text = $this->str::escape($post->get('comment_edit'));
                 $comments->update($comment->id, ['comment' => $text]);
-                Flash::getInstance()->set('success', $this->msg['edit_success']);
+                $this->flash->set('success', $this->msg['edit_success']);
                 Ngpic::redirect(true);
 
             } else {
-                Flash::getInstance()->set('danger', $this->msg['notallowed_edit_comment']);
+                $this->flash->set('danger', $this->msg['notallowed_edit_comment']);
                 Ngpic::redirect(true);
             }
 
         } else {
-            Flash::getInstance()->set('warning', $this->msg['comment_not_found']);
+            $this->flash->set('warning', $this->msg['comment_not_found']);
             Ngpic::redirect(true);
         }
     }

@@ -59,11 +59,11 @@ if (isset($_GET["url"]) && !empty($_GET["url"])) {
 
 
     //features
-    $router->get("/likes/:slug-:id-:t","likes","likes");
+    $router->get("/likes/:t/:slug-:id","likes","likes");
     $router->get("/following/:name-:id","following#follow","following");
     $router->get("/download/:type/:name", "download", "download system");
 
-    $router->post("/comments/:slug-:id-:t","comments","comment");
+    $router->post("/comments/:t/:slug-:id","comments","comment");
     $router->post("/comments/edit/:id", "comments#edit", "edit comment");
     $router->get("/comments/delete/:id", "comments#delete", "delete comment");
 
@@ -88,19 +88,21 @@ if (isset($_GET["url"]) && !empty($_GET["url"])) {
     $router->get(ADMIN."/blog/add/","admin#add", "blog articles redaction");
     $router->post(ADMIN."/blog/edit/:id","admin#edit", "blog articles edition");
     $router->post(ADMIN."/blog/add/","admin#add", "blog articles redaction");
+    $router->get(ADMIN."/confirm/:t/:id","admin#confirm","post add online");
+    $router->get(ADMIN."/remove/:t/:id","admin#remove","post remove online");
     $router->post(ADMIN."/delete/","admin#delete","blog articles deletion");
+
 
     $router->get(ADMIN."/articles/","admin#articles","articles");
 
     //gallery pages
-    $router->get(ADMIN."/gallery","adminy#gallery","gallery adm");
-    $router->post(ADMIN."/gallery/delete","gallery#delete","gallery deletion");
-    $router->get(ADMIN."/nggallery/","nggallery#admIndex","nggallery");
-    $router->get(ADMIN."/nggallery/add/:id","nggallery#add","nggallery add");
-    $router->post(ADMIN."/nggallery/add/","nggallery#add","nggallery add");
-    $router->get(ADMIN."/nggallery/edit/:id","ngallery#edit","nggallery edit");
-    $router->get(ADMIN."/nggallery/edit/","ngallery#edit","ngallery");
-    $router->post(ADMIN."/nggallery/delete/","nggallery#delete","nggallery deletion");
+
+    $router->get(ADMIN."/nggallery/","admin#gallery","nggallery");
+    $router->get(ADMIN."/nggallery/add/","admin#addGallery","nggallery add");
+    $router->post(ADMIN."/nggallery/add/","admin#addGallery","nggallery add");
+    $router->get(ADMIN."/nggallery/edit/:id","admin#editGallery","nggallery edit");
+    $router->get(ADMIN."/nggallery/edit/","admin#editGallery","ngallery");
+    $router->post(ADMIN."/nggallery/delete","admin#deleteGallery","nggallery deletion");
 
 
     //users pages

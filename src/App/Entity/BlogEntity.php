@@ -26,6 +26,14 @@ class BlogEntity extends Entity
     }
 
 
+    public function getCategoryUrl(): string
+    {
+        $categories = Str::Slugify($this->category);
+        $this->categoryUrl = "/categories/{$categories}";
+        return $this->categoryUrl;
+    }
+
+
     public function getThumbUrl(): string
     {
         $this->thumbUrl = "/uploads/blog/{$this->thumb}";
@@ -42,14 +50,14 @@ class BlogEntity extends Entity
 
     public function getLikeUrl(): string
     {
-        $this->likeurl = "/likes/{$this->slug}-{$this->id}-3";
+        $this->likeurl = "/likes/3/{$this->slug}-{$this->id}";
         return $this->likeurl;
     }
 
 
     public function getCommentUrl(): string
     {
-        $this->commentUrl = "/comments/{$this->slug}-{$this->id}-3";
+        $this->commentUrl = "/comments/3/{$this->slug}-{$this->id}";
         return $this->commentUrl;
     }
 

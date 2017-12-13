@@ -10,6 +10,7 @@
     </head>
     </head>
     <body>
+        <?php include(APP."/Views/includes/mobile-menu.php"); ?>
         <div class="jumbotron">
             <?php include(APP."/Views/includes/menu.php"); ?>
             <div class="container row">

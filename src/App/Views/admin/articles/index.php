@@ -48,7 +48,7 @@
                 </article>
 
             <?php else: ?>
-                 <div class="card">
+                <div class="card">
                     <div class="no-publication">
                         <div class="ng-cover"></div>
                         <p><i class="icon icon-picture"></i> &nbsp;aucune publication pour l'instant</p>
@@ -68,6 +68,7 @@
                         <th>id</th>
                         <th>title</th>
                         <th>action</th>
+                        <th>date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,7 +85,21 @@
                                         <i class="icon icon-remove" style="font-size: smaller !important;"></i>
                                     </button>
                                 </form>
+                                <?php if ($a->online): ?>
+                                    <a href="<?= ADMIN."/remove/1/{$a->id}" ?>" title="retirer">
+                                        <button class="btn btn-small blue-2 waves-effect waves-light">
+                                            <i class="icon icon-cloud-download" style="font-size: smaller !important;"></i>
+                                        </button>
+                                    </a>
+                                <?php else: ?>
+                                    <a href="<?= ADMIN."/confirm/1/{$a->id}" ?>" title="confirmer">
+                                        <button class="btn btn-small blue-2 waves-effect waves-light">
+                                            <i class="icon icon-cloud-upload" style="font-size: smaller !important;"></i>
+                                        </button>
+                                    </a>
+                                <?php endif; ?>
                             </td>
+                            <td><time><?= $a->time ?></time></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else : ?>
@@ -92,13 +107,9 @@
                         <td><b>0</b></td>
                         <td>Aucun article</td>
                         <td>
-                            <form method="POST" action="<?= ADMIN."/delete" ?>" style="display: inline-block !important;">
-                                <input type="hidden" name="id" value="0" >
-                                <input type="hidden" name="type" value="1" >
-                                <button type="submit" class="btn btn-small waves-effect waves-light red">
-                                    <i class="icon icon-remove" style="font-size: smaller !important;"></i>
-                                </button>
-                            </form>
+                            <button type="submit" class="btn btn-small waves-effect waves-light disabled">
+                                <i class="icon icon-remove" style="font-size: smaller !important;"></i>
+                            </button>
                         </td>
                     </tr>
                 <?php endif; ?>

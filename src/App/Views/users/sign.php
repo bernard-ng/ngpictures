@@ -1,5 +1,4 @@
 <div class="jumbotron">
-    <span class="ng-cover"></span>
     <div class="container row">
         <span class="jumbotron-title"><i class="icon icon-user"></i> Inscription</span>
         <span class="jumbotron-content">

@@ -11,20 +11,15 @@
     </head>
     </head>
     <body>
+        <?php include(APP."/Views/includes/adm-mobile-menu.php"); ?>
         <div class="jumbotron">
             <?php include(APP."/Views/includes/admin-menu.php"); ?>
             <div class="container row">
-                <span class="ng-cover"></span>
                 <span class="jumbotron-title">
-                    <i class="icon icon-lock"></i> admin
+                    <i class="icon icon-lock"></i> <?php echo Page::getTitle() ?>
                 </span>
                 <span class="jumbotron-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    Mon administration :)
                 </span>
             </div>
         </div>
@@ -41,43 +36,15 @@
             Morris.Bar({
               element: 'stat',
               data: [
-                {x: '2011 Q1', y: 3, z: 2, a: 3},
-                {x: '2011 Q2', y: 2, z: null, a: 1},
-                {x: '2011 Q3', y: 0, z: 2, a: 4},
-                {x: '2011 Q4', y: 2, z: 4, a: 3}
+                {x: 'janvier', y: 3, z: 2, a: 3},
+                {x: 'fevrier', y: 2, z: 1, a: 5},
+                {x: 'mars', y: 1, z: 2, a: 4},
+                {x: 'avril', y: 2, z: 4, a: 3}
               ],
               xkey: 'x',
               ykeys: ['y', 'z', 'a'],
-              labels: ['Y', 'Z', 'A']
-            }).on('click', function(i, row){
-              console.log(i, row);
+              labels: ['articles', 'blog', 'photos']
             });
-
-            
-        /* data stolen from http://howmanyleft.co.uk/vehicle/jaguar_'e'_type */
-        var day_data = [
-          {"period": "2012-10-01", "licensed": 3407},
-          {"period": "2012-09-30", "sorned": 0},
-          {"period": "2012-09-29", "sorned": 618},
-          {"period": "2012-09-20", "licensed": 3246, "sorned": 661},
-          {"period": "2012-09-19", "licensed": 3257, "sorned": null},
-          {"period": "2012-09-18", "licensed": 3248, "other": 1000},
-          {"period": "2012-09-17", "sorned": 0},
-          {"period": "2012-09-16", "sorned": 0},
-          {"period": "2012-09-15", "licensed": 3201, "sorned": 656},
-          {"period": "2012-09-10", "licensed": 3215}
-        ];
-        Morris.Line({
-          element: 'stat2',
-          data: day_data,
-          xkey: 'period',
-          ykeys: ['licensed', 'sorned', 'other'],
-          labels: ['Licensed', 'SORN', 'Other'],
-          /* custom label formatting with `xLabelFormat` */
-          xLabelFormat: function(d) { return (d.getMonth()+1)+'/'+d.getDate()+'/'+d.getFullYear(); },
-          /* setting `xLabels` is recommended when using xLabelFormat */
-          xLabels: 'day'
-        });
     </script>
     
     </body>

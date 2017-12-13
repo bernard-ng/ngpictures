@@ -9,5 +9,5 @@ use Ng\Core\Models\Model;
 class NgGalleryModel extends Model
 {
 
-    protected $table = "ng_galery";
+    protected $table = "ng_gallery";
 }

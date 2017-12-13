@@ -25,7 +25,7 @@ class LikesController extends NgpicController
         return $model->get($t);
     }
 
-    public function index($slug, $id, $t)
+    public function index($t, $slug, $id)
     {
         if ($this->session->getValue('auth','id') !== null) {
 
@@ -43,10 +43,10 @@ class LikesController extends NgpicController
                 }
             } else {
                 Ngpic::redirect(true);
-                Flash::getInstance()->set("danger","Une erreur se produite veuillez réessayer");    
+                $this->flash->set("danger",$this->msg['undefined_error']);    
             }  
         } else {
-            Flash::getInstance()->set("warning","connecter vous ou crée un compte pour effectuer cette action");
+            $this->flash->set("warning", $this->msg['user_must_login']);
             Ngpic::redirect(true);
         }
     }

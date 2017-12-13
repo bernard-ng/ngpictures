@@ -31,6 +31,8 @@ class NgpicController extends Controller
         'admin_modified_success' => "La publication a bien été modifier",
         'admin_post_success' => "La publication a bien été effectuée",
         'admin_picture_required' => "Ajouter une photo de couverture",
+        'admin_confirm_success' => "Publication en ligne",
+        'admin_remove_success' =>"Publication hors ligne",
 
         //comment controller messages
         'comment_post_notFound' => "Cette publication n'éxiste pas ou plus",
@@ -46,7 +48,7 @@ class NgpicController extends Controller
         'user_notFound' => "l'utilisateur n'a pas été trouvé",
 
         //users controller messages
-        "user_must_login" => "Connectez-vous pour effectuer cet action",
+        "user_must_login" => "Connectez-vous pour effectuer cette action",
         "user_not_confirmed" => "Votre compte n'a pas encore été confirmé",
         "user_registration_succes" => "Un email de confirmation de compte vous a été envoyé",
         "user_email_notFound" => "Aucun compte ne correspond à cet email",

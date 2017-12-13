@@ -60,7 +60,6 @@
        <div id="articlesContainer">
             <!-- CARD -->
             <?php if (!empty($article)) : ?>
-
                 <article class="card" id="<?=$article->id ?>">
                     <header class="card-image">
                         <div class="ng-article-img">
@@ -70,7 +69,12 @@
                     <section class="ng-news-card-content">
                         <section class="ng-news-card-title">
                             <i id="category" class="icon icon-pencil"></i>
-                            <h2><?=$article->title ?></h2>
+
+                            <?php if ($article->category_id !== null): ?>
+                                <a href="<?= $article->categoryUrl ?>"><i class="icon icon-tags"></i></a>
+                            <?php endif; ?>
+                            
+                            <h2><?= $article->title ?>&nbsp;<small><?= $article->category ?></small></h2>
                         </section>
                         <main>
                             <p>

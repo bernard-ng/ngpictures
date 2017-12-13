@@ -56,11 +56,10 @@ Abstract class Image
         $flash = new Flash(Session::getInstance());
 
         if (!empty($file->get('thumb.tmp_name'))) {
-            $valid_ext = self::extension($file->get('thumb.name'), $file->get('thumb.type'));
             $size = ($file->get('thumb.size'));
             $path = self::$path[$path];
 
-            if ($valid_ext) {
+            if (self::extension($file->get('thumb.name'), $file->get('thumb.type'))) {
                 if ($size <= self::$size_max) {
                     $manager = new ImageManager();
                     $image = $manager->make($file->get('thumb.tmp_name'));
