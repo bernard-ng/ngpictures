@@ -3,7 +3,7 @@
 
     <main class="col s12 l6 xl6 m9" role="main">
         <div class="no-padding">
-            <div id="articlesContainer">
+            <div id="dataContainer">
                 <?php if (!empty($articles)) : ?>
                 <?php foreach($articles as $a): ?>
                     <article class="card" id="<?= $a->id ?>">
@@ -14,8 +14,11 @@
                         </header>
                         <section class="ng-news-card-content">
                             <section class="ng-news-card-title">
-                                <i id="category" class="icon icon-pencil"></i>
-                                <h2><?= $a->title ?></h2>
+                                <?php if ($a->category_id !== null): ?>
+                                    <a href="<?= $a->categoryUrl ?>"><i class="icon icon-tags"></i></a>
+                                <?php endif; ?>
+                                
+                                <h2><?= $a->title ?>&nbsp;<small><?= $a->category ?></small></h2>
                             </section>
                             <main>
                                 <p>
@@ -51,8 +54,6 @@
                         </footer>
                     </article>
                 <?php endforeach ; ?>
-                <div id="feedMore" class="feed-btn waves-effect waves-teal waves-ripple hoverable"> charger la suite</div>
-
                 <?php else : ?>
                     <div class="card">
                         <div class="no-publication">
@@ -61,7 +62,8 @@
                         </div>
                     </div>
                 <?php endif; ?>
-            </div>    
+            </div>
+            <div id="feedMore" class="feed-btn" data-ajax="blog"><i class="icon icon-refresh rotate"></i> chargement</div>    
         </div>
     </main>
     <section class="col s12 hide-on-med-and-up" id="singleOptions-mobile">

@@ -25,25 +25,29 @@ class Entity
 
     public function getUsername(): string
 	{
-		return $this->users->find($this->user_id)->name;
+		//return $this->users->find($this->user_id)->name;
+        return "username";
 	}
 
 
     public function getUserAccountUrl(): string
     {
-        return $this->users->find($this->user_id)->accountUrl;
+        //return $this->users->find($this->user_id)->accountUrl;
+        return "account";
     }
 
 
     public function getUserAvatarUrl(): string
     {
-        return "/uploads/avatars/{$this->user_id}.jpg";
+        //return "/uploads/avatars/{$this->avatar}";
+        return "/uploads/avatars/default.jpg";
     }
 
 
     public function getUserGalleryUrl(): string 
     {
-        return $this->users->find($this->user_id)->galleryUrl;
+        //return $this->users->find($this->user_id)->galleryUrl;
+        return "gallery";
     }
 
     

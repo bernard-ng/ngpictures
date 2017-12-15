@@ -1,30 +1,7 @@
-/*$('document').ready(function(){
-
-
-     (function(){
-        var links = $('a');
-        links.click(function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            var $this = $(this);
-            $.ajax({
-                url : $this.attr('href'),
-                beforeSend : function(){
-                    $('#pageContent').html('chargement...');
-                }
-            })
-            .done(
-                function(data){
-                    $data = $(data);
-                    $('body').html("");
-                    $('body').html($data);
-                }
-            )
-        })
-    })()
+$('document').ready(function(){
 
     //System de like en Ajax
-    (function(){
+    /*(function(){
         var options = $('#articleOptions');
         if (options != undefined) {
             options.each(options,function(){
@@ -50,21 +27,65 @@
                 })
             })
         }
-    })()
-
+    })()*/
 
     //Ajoute du nouveau contenu avec Ajax
     (function(){
-        var feedMore = document.querySelector('#feedMore');
-        if (feedMore != undefined) {
-            feedMore.addEventListener('click', function(e){
-                e.preventDefault();
-                e.stopPropagation();
-                $(this).html(' ');
-                $(this).html('<div class="progress"><div class="indeterminate"></div></div>');
+        var action = 'inactive';
+        var feedMore = $("#feedMore");
+        var container = $('#dataContainer')
+
+        function loadData(lastId){
+            $.post({
+                url: "/ajax/"+ feedMore.attr('data-ajax'),
+                data: {lastId: lastId}
             })
-        } 
+            .then(
+                function(data) {
+                    if (data == '') {
+                        feedMore.html('aucun contenu à charger');
+                        action = 'active';
+                    } else {
+                        feedMore.html('<i class="icon icon-refresh rotate"></i> chargement...');
+                        action = 'inactive';
+                    }
+                    container.append(data);
+                }, function() {
+                    feedMore.html('impossible de charger la suite');
+                }
+            );
+        }
+
+        $(window).scroll(function(){
+            if ($(window).scrollTop() + $(window).height() > container.height() && action == 'inactive') {
+                action = 'active';
+                setTimeout(function(){
+                    loadData($("#dataContainer article").last().attr('id'));
+                },3000);
+            }
+        })
     })();
 
+
+    (function(){
+        verse = $('#versesContainer')
+        verse.each(function(){
+            if (verse != undefined) {
+                function loadData() {
+                    $.ajax({url: "/ajax/verset"})
+                    .then(
+                        function(data) {
+                            verse.html(''); verse.html(data);
+                        }, function () {
+                            verse.html('<div class="card-stacked mb-20 ml-20 mg-20 mg-20"><p>impossible de charger les versets</p></div>');
+                        }
+                    );
+                }
+            setInterval(function(){
+                loadData();
+            },6000)
+            }
+        })
+    })()
+
 })
- */

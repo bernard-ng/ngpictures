@@ -8,6 +8,7 @@ class ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648
 {
     public static $files = array (
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        'c65d09b6820da036953a371c8c73a9b1' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/polyfills.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -28,6 +29,10 @@ class ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
+        ),
+        'F' => 
+        array (
+            'Facebook\\' => 9,
         ),
     );
 
@@ -55,6 +60,10 @@ class ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
+        'Facebook\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook',
         ),
     );
 

@@ -20,7 +20,7 @@ class BlogController extends NgpicController
 
     public function index()
     {
-        $articles = $this->blog->lastOnline();
+        $articles = $this->blog->latest();
         $verse = $this->callController("verses")->index();
         $categories = $this->categories->orderBy('title','ASC', 0, 5);
         

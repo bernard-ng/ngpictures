@@ -111,6 +111,20 @@ if (isset($_GET["url"]) && !empty($_GET["url"])) {
     $router->post(ADMIN."/users/delete/","users#delete","users deletion");
 
 
+
+     /***************************************************************************
+    *
+    *                           AJAX ROUTES
+    *
+    ****************************************************************************/
+
+    $router->post("/ajax/articles", "ajax#articles", "ajax load articles");
+    $router->post("/ajax/blog", "ajax#blog", "ajax load blog");
+    $router->get("/ajax/verset", "ajax#verset", "ajax load verses");
+
+
+
+
     /***************************************************************************
     *
     *                           GENERAL ROUTES

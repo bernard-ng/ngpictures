@@ -1,4 +1,4 @@
-<div class="col l3 m3 hide-on-small-and-down">
+<div class="col s12 hide-on-med-and-up">
     <ul class="collapsible" data-collapsible="expandable">
         <li>
             <div class="collapsible-header active">
@@ -14,7 +14,8 @@
                  <ul>
                     <?php foreach ($categories as $c): ?>
                        <span>
-                           <i class="icon icon-chevron-right"></i>&nbsp;<a href="<?= $c->url ?>" title="<?= $c->title ?>"><?= $c->title ?></a>
+                           <i class="icon icon-chevron-right"></i>
+                           <a href="<?= $c->url ?>" title="<?= $c->title ?>"><?= $c->title ?></a>
                        </span>
                        <br>
                     <?php endforeach; ?>
@@ -65,6 +66,4 @@
             </div>
         </li>
     </ul>
-    <?php include(APP."/Views/includes/verset.php"); ?>
 </div>
-

@@ -2,7 +2,7 @@
     <?php include(APP."/Views/includes/left-aside.php"); ?>
 
     <div class="col s12 m9 l6 xl6">
-        <div id="articlesContainer">
+        <div id="dataContainer">
             <?php if (!empty($articles)) : ?>
             <?php foreach ($articles as $a) : ?>
 
@@ -84,8 +84,6 @@
                 </article>
                
             <?php endforeach; ?>
-            <div id="feedMore" class="ng-btn-feed-more"> charger la suite</div>
-
             <?php else : ?>
                 <div class="card">
                     <div class="no-publication">
@@ -95,6 +93,7 @@
                 </div>
             <?php endif; ?>
         </div>
+        <div id="feedMore" class="feed-btn" data-ajax="articles">charger la suite</div>
     </div>
 
     <?php include(APP."/Views/includes/menu-aside.php"); ?>

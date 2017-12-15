@@ -103,8 +103,9 @@
 }
 
 </style>
-
-<section class="card container row col l6 m12 s12">
+<?php include(APP."/Views/includes/left-aside.php"); ?>
+<div class="col l9 s12 m12">
+	<section class="card row col l12 m12 s12">
 	<img class="profile-header__img" alt="<?= $user->name; ?>"  src="/uploads/avatars/13.jpg">
 	<div class="profile-header__content row">
 		<div class="row col lg6 m12">
@@ -114,7 +115,10 @@
 		<h2 class="profile-header__subtitle"><?= $user->email ?></h2>
 		<div class="profile-header__links">
 			<a class="profile-header__link" href="/account/edit/">
-			<i class="icon icon-edit"></i>&nbsp;Editer le profil
+				<i class="icon icon-edit"></i>&nbsp;Editer le profil
+			</a>
+			<a class="profile-header__link" href="/logout/">
+				<i class="icon icon-edit"></i>&nbsp;deconnexion
 			</a>
 		</div>
 		</div>
@@ -136,5 +140,5 @@
 		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.		
 	</div>
 </section>
-<?php include(APP."/Views/includes/left-aside.php"); ?>
 
+</div>

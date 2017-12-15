@@ -1,14 +1,13 @@
 <?php
 namespace Ngpictures\Controllers;
 
-
 use Ng\Core\Generic\Collection;
-
 use Ngpictures\Entity\UsersEntity;
-
 use Ngpictures\Ngpic;
-
 use Ngpictures\Util\Page;
+use Facebook\Facebook;
+
+
 
 class UsersController extends NgpicController
 {
@@ -18,7 +17,6 @@ class UsersController extends NgpicController
         parent::__construct();
         $this->loadModel('users');
     }
-
 
 
     /***************************************************************************
@@ -54,12 +52,13 @@ class UsersController extends NgpicController
             $this->connect($user);
             $this->login();
         } else {
+            var_dump($user);die();
             $this->flash->set('danger', $this->msg['user_confirmation_failed']);
             $this->login();
         }
     }
 
-    public function reset(int $id, $token)
+    public function reset($id, $token)
     {
         $user = $this->users->find($id);
 
@@ -75,14 +74,14 @@ class UsersController extends NgpicController
 
                         $this->flash->set('success', $this->msg['user_reset_password_success']);
                         $this->connect($user);
-                        Ngpic::redirect('/account/{$user->name}-{$user->id}');
+                        Ngpic::redirect($user->accountUrl);
                     } else {
                         $this->flash->set('danger', $this->msg['user_password_notMatch']);
                     }
                 }
             } else {
                 $this->flash->set('danger', $this->msg['indefined_error']);
-                Ngpic::redirect('/forgot');
+                Ngpic::redirect(true);
             }
         } else {
             Ngpic::redirect();
@@ -136,7 +135,7 @@ class UsersController extends NgpicController
                 $validator->isUnique("email", $this->users, $this->msg['user_usermail_tokken']);
             }
             $validator->isMatch("password","password_confirm", $this->msg['user_password_notMatch']);
-            $validator->isValidCaptcha('captcha', $this->session);
+            //$validator->isValidCaptcha('captcha', $this->session);
 
             if ($validator->isValid()) {
                 $this->register($_POST['name'], $_POST['email'], $_POST['password']);
@@ -144,6 +143,7 @@ class UsersController extends NgpicController
                 $this->flash->set('success', $this->msg['user_registration_success']);
                 Ngpic::redirect("/login");
             } else {
+                $this->flash->set('danger', "une erreur");
                 (Ngpic::hasDebug())? var_dump($validator->getErrors()) : $errors = $validator->getErrors();
             }
         }
@@ -302,6 +302,20 @@ class UsersController extends NgpicController
 
 
     
+    /***************************************************************************
+    *
+    *                          FACEBOOK GRAPH API 2.11
+    *
+    ****************************************************************************/
+
+    /*public function facebookConnect(){
+        $fb = new Facebook(
+            'app_id' => '1951395041776982',
+            'app_secret' => '55d44750aa7ebaeed280e44c3ae1a1e7',
+            'default_graph_version' => 'v2.11',
+        );
+    }*/
+
 
     /***************************************************************************
     *

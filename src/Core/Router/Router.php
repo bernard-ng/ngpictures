@@ -46,6 +46,7 @@ class Router
 			if ($Ngpic::hasDebug()) {
 				throw new RouterException("undefinied Request method");
 			} else {
+				return false;
 				$Ngpic::redirect('/error-500');
 			}
 		}
@@ -56,6 +57,7 @@ class Router
 				return true;
 			}
 		}
+		return false;
 		($Ngpic::hasDebug())? var_dump($route) : $Ngpic::redirect("/e404");
 	}
 

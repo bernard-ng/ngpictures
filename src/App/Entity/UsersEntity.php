@@ -19,7 +19,7 @@ class UsersEntity extends Entity
 
 	public function getAvatarUrl()
 	{
-		$this->avatarUrl = "/uploads/avatars/{$this->id}.jpg";
+		$this->avatarUrl = "/uploads/avatars/{$this->avatar}";
 		return $this->avatarUrl;
 	}
 

@@ -156,9 +156,15 @@ class Model
         );
     }
 
-    public function lastest(int $from = 0, int $to = 4)
+    public function latest(int $from = 0, int $to = 4)
     {
-        return $this->query("SELECT * FROM {$this->table} ORDER BY date_created DESC LIMIT {$from},{$to}");
+        return $this->query("
+            SELECT {$this->table}.*, categories.title as category 
+            FROM {$this->table} 
+            LEFT JOIN categories ON category_id = categories.id
+            WHERE online = 1 ORDER BY id DESC LIMIT {$from},{$to}",
+            null, true, false 
+        );
     }
 
 

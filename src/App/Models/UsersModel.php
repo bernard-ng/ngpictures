@@ -17,8 +17,8 @@ class UsersModel extends Model
     public function add(string $name, string $email, string $password, string $token)
     {
         return $this->query(
-            "INSERT INTO {$this->table}(name, email, password, reset_token) VALUES (?,?,?,?)",
-            [$name, $email, $password, $token]
+            "INSERT INTO {$this->table}(name, email, password, confirmation_token, avatar) VALUES (?,?,?,?,?)",
+            [$name, $email, $password, $token, "default.jpg"]
         );
     }
 

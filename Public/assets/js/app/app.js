@@ -148,7 +148,11 @@ $(document).ready(function(){
     (function(){
         var $flash = $('#flash');
         if ($flash.length > 0) {
-            $flash.fadeIn(600).delay(3000).fadeOut();
+            $flash.click(function(){
+                $(document).removeChild($flash);
+            })
+            $flash.fadeIn(600).delay(5000).fadeOut();
+            $(document).removeChild($flash);
         }
     })();
 
