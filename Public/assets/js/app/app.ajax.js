@@ -1,33 +1,43 @@
 $('document').ready(function(){
 
     //System de like en Ajax
-    /*(function(){
-        var options = $('#articleOptions');
-        if (options != undefined) {
-            options.each(options,function(){
-                var likeBtn = $(this).find('#likeBtn');
-                var dislikeBtn = $(this).find('#dislikeBtn');
+    (function(){
+        var articles = document.querySelectorAll('article');
+        if (articles != undefined) {
+            $(articles).each(
+                function(){
+                    var $that = $(this)
+                    var $likeBtn = $that.find('#likeBtn');
 
-                if (dislikeBtn != undefined) {
-                    dislikeBtn.click(function(e){
+                    $likeBtn.on('click live', function(e){
                         $this = $(this)
-                        e.preventDefault()
-                        e.stopPropagation()
-                        $this.siblings('.active').removeClass('active')
-                        $this.toggleClass('active')
+                        e.preventDefault(); e.stopPropagation();
+                        $this.toggleClass('active');
+                        $that.find('#showLikes').html('...');
+
+                        $.ajax({
+                            url: $likeBtn.attr('href')
+                        }).then(
+                            function(data) {
+                                $that.find('#showLikes').html(data);
+                            }, function (xhr) {
+                                $(document).append(
+                                    '<div class="flash" id="flash">\
+                                        <div class="flash-content" >\
+                                            <i class="icon icon-close flash-close-icon"></i>\
+                                            <span class="flash-content-icon-'+data.type+'"><i class="icon icon-info-sign"></i></span>\
+                                            <span class="flash-content-message">'+data.message+'</span>\
+                                        </div>\
+                                    </div>'
+                                );
+                            }
+                        );
                     })
                 }
-                
-                likeBtn.click(function(e){
-                    $this = $(this)
-                    e.preventDefault();
-                    e.stopPropagation();
-                    $this.siblings('.active').removeClass('active');
-                    $this.toggleClass('active');
-                })
-            })
+            )
         }
-    })()*/
+    })();
+
 
     //Ajoute du nouveau contenu avec Ajax
     (function(){

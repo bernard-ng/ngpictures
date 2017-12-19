@@ -42,13 +42,13 @@
                             </footer>
                         </section>
                         <footer class="ng-news-card-footer" id="articleOptions">
-                            <a id="likeBtn" class="ng-news-card-footer-item <?= $a->isLike ?>" href="<?= $a->likeUrl ?>" title="aimer la publication">
+                            <a id="likeBtn" class="ng-news-card-footer-item <?= $a->isLike ?>" href="<?= $a->likeUrl ?>">
                                 <i class="icon icon-thumbs-up"></i>&nbsp;J'aime
                             </a>
-                            <a id="commentBtn" class="ng-news-card-footer-item" href="<?= $a->commentUrl ?>" title="commenter la publication">
+                            <a id="commentBtn" class="ng-news-card-footer-item" href="<?= $a->commentUrl ?>">
                                 <i class="icon icon-comment" ></i>&nbsp;Commenter
                             </a>
-                            <a id="shareBtn" class="ng-news-card-footer-item" href="/share/" title="partager la publication">
+                            <a id="shareBtn" class="ng-news-card-footer-item" href="/share/">
                                 <i class="icon icon-share"></i>&nbsp;partager
                             </a>
                         </footer>

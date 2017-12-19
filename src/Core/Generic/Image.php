@@ -20,9 +20,18 @@ Abstract class Image
 
     private static $path = [
         'blog' => UPLOAD.'/blog',
+        'blog-thumbs' => UPLOAD.'/blog/thumbs',
+
         'articles' => UPLOAD.'/articles',
+        'articles-thumbs' => UPLOAD.'/articles/thumbs',
+
         'ngpictures' => UPLOAD.'/ngpictures',
+        'ng-thumbs-small' => UPLOAD.'/ngpictures/thumbs/small',
+        'ng-thumbs-med' => UPLOAD.'/ngpictures/thumbs/med',
+
         'pictures' => UPLOAD.'/pictures',
+        'pic-thumbs' => UPLOAD.'/pictures/thumbs',
+
         'avatars' => UPLOAD.'/avatars'
     ];
 
@@ -40,10 +49,10 @@ Abstract class Image
     {
         $ext = explode('.', $file);
         $ext = strtolower(end($ext));
-        $expected_type = "image/{$ext}";
+        $expected_type = ['image/jpg','image/jpeg','image/png','image/gif'];
         $extensions = self::$extensions;
 
-        if (in_array($ext, $extensions) && $expected_type === strtolower($type) ) {
+        if (in_array($ext, $extensions) && in_array($type, $expected_type)) {
             return true;
         } else {
             return false;

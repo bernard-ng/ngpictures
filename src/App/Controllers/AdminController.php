@@ -50,13 +50,13 @@ class AdminController extends NgpicController
     {
         $msg = new Collection($this->msg);
 
-        $articles = $this->articles->lastest();
-        $blog = $this->blog->lastest();
+        $articles = $this->articles->latest();
+        $blog = $this->blog->latest();
         $users = $this->users->all();
-        //$bugs = $this->bugs->lastest();
-        //$ideas = $this->ideas->lastest();
-        //$gallery = $this->gallery->lastest();
-        //$ngGallery = $this->ngGallery->lastest();
+        //$bugs = $this->bugs->latest();
+        //$ideas = $this->ideas->latest();
+        //$gallery = $this->gallery->latest();
+        //$ngGallery = $this->ngGallery->latest();
 
         $nb_users = count($this->users);
 
@@ -252,13 +252,12 @@ class AdminController extends NgpicController
    
     public function gallery()
     {
-        $photos = $this->gallery->all();
-        $ngPhotos = $this->ngGallery->all();
+        $photos = $this->ngGallery->all();
+        $photo = $this->ngGallery->latest(0,2);
 
         page::setName('administration - gallery');
-
-        $this->setLayout("admin/default", compact('photos','ngGallery'));
-        $this->viewRender("Admin/gallery/index");
+        $this->setLayout("admin/default");
+        $this->viewRender("Admin/gallery/index",compact('photos','photo'));
     }
 
 
@@ -269,15 +268,9 @@ class AdminController extends NgpicController
         $file = new Collection($_FILES);
 
         if (!empty($_FILES)) {
-            if (!empty($post->get('$description')) && !empty($post->get('tags')) && !empty($post->get('name'))) {
-                $name = $this->str::escape($post->get('name'));
-                $description = $post->get('description');
-                $tags = $this->str::escape($post->get('tags'));
-            } else {
-                $name = null;
-                $description = null;
-                $tags = null;
-            }
+            $name = $this->str::escape($post->get('name')) ?? null;
+            $description = $post->get('description') ?? null;
+            $tags = $this->str::escape($post->get('tags')) ?? null;
             
             if (!empty($file->get('thumb'))) {
                 $this->ngGallery->create(compact('name','description','tags'));
@@ -286,6 +279,9 @@ class AdminController extends NgpicController
                 $isUploaded = Image::upload($file, 'ngpictures', "ngpictures-{$name}-{$last_id}", 'ratio');
 
                 if ($isUploaded) {
+                    Image::upload($file, 'ng-thumbs-small', "ngpictures-{$name}-{$last_id}", 'small');
+                    Image::upload($file, 'ng-thumbs-med', "ngpictures-{$name}-{$last_id}", 'medium');
+
                     $this->ngGallery->setThumb($last_id, "ngpictures-{$name}-{$last_id}.jpg");
                     $this->flash->set('success', $this->msg['admin_post_success']);
                     Ngpic::redirect(true);
@@ -300,8 +296,8 @@ class AdminController extends NgpicController
         }
         
         page::setName('administration - add - gallery');
-        $this->setLayout("admin/default", compact('post'));
-        $this->viewRender("Admin/gallery/add");
+        $this->setLayout("admin/default");
+        $this->viewRender("Admin/gallery/add", compact('post'));
     }
 
 

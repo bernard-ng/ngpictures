@@ -72,6 +72,11 @@ if (isset($_GET["url"]) && !empty($_GET["url"])) {
     $router->get("/rss/", "rss-flux", "rss flux");
 
 
+
+    //facebook routes
+    $router->get("/facebook/connect/", "facebook#connect", "facebook connect");
+
+
     /***************************************************************************
     *
     *                           BACK-END ROUTES
@@ -97,12 +102,12 @@ if (isset($_GET["url"]) && !empty($_GET["url"])) {
 
     //gallery pages
 
-    $router->get(ADMIN."/nggallery/","admin#gallery","nggallery");
-    $router->get(ADMIN."/nggallery/add/","admin#addGallery","nggallery add");
-    $router->post(ADMIN."/nggallery/add/","admin#addGallery","nggallery add");
-    $router->get(ADMIN."/nggallery/edit/:id","admin#editGallery","nggallery edit");
-    $router->get(ADMIN."/nggallery/edit/","admin#editGallery","ngallery");
-    $router->post(ADMIN."/nggallery/delete","admin#deleteGallery","nggallery deletion");
+    $router->get(ADMIN."/gallery/","admin#gallery","nggallery");
+    $router->get(ADMIN."/gallery/add/","admin#addGallery","nggallery add");
+    $router->post(ADMIN."/gallery/add/","admin#addGallery","nggallery add");
+    $router->get(ADMIN."/gallery/edit/:id","admin#editGallery","nggallery edit");
+    $router->get(ADMIN."/gallery/edit/","admin#editGallery","ngallery");
+    $router->post(ADMIN."/gallery/delete","admin#deleteGallery","nggallery deletion");
 
 
     //users pages
@@ -138,7 +143,7 @@ if (isset($_GET["url"]) && !empty($_GET["url"])) {
     $router->get("/error-403","error#e403","forbidden");
 
 
-    $router->run(Ngpic::getInstance());
+    $router->run();
 
 } else {
     Ngpic::redirect();

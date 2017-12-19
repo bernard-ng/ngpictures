@@ -95,7 +95,7 @@ $(document).ready(function(){
 
     // timer relatif
     (function(){
-       if (document.querySelector('time[data-time') !== undefined) {
+       if (document.querySelectorAll('time[data-time') !== undefined) {
             if (NodeList.prototype.forEach === undefined) {
                 NodeList.prototype.forEach = function (callback) {
                     [].forEach.call(this, callback)
@@ -151,8 +151,7 @@ $(document).ready(function(){
             $flash.click(function(){
                 $(document).removeChild($flash);
             })
-            $flash.fadeIn(600).delay(5000).fadeOut();
-            $(document).removeChild($flash);
+            $flash.fadeIn(600).delay(5000).slideUp();
         }
     })();
 

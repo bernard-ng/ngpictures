@@ -1,8 +1,7 @@
 <section class="row container">
-    <div class="section-title page-title">Admin - Actualités</div>
-    <?php include(APP."/Views/includes/right-aside.php"); ?>
+    <?php include(APP."/Views/includes/left-aside.php"); ?>
 
-    <main class="col s12 m8 l8">
+    <main class="col s12 m12 l9">
         <div id="articlesContainer">
             <?php if (!empty($article)): ?>
                 <article class="card" id="<?= $article->id ?>">
@@ -13,7 +12,7 @@
                         <p class="ng-news-card-header-title">
                             <a href="<?= $article->userAccountUrl ?>" title="voir le profil"><?= $article->username ?></a>
                         </p>
-                        <a id="picBtn" class="ng-news-card-header-icon" href="<?= $article->userGalleryUrl ?>" title="voir la galery">
+                        <a id="picBtn" class="ng-news-card-header-icon" href="<?= $article->userGalleryUrl ?>" title="voir la gallery">
                             <i class="icon icon icon-picture"></i>
                         </a>
                         <a id="saveBtn" class="ng-news-card-header-icon" href="<?= $article->downloadUrl ?>" title="télécharger la photo">
@@ -117,5 +116,4 @@
             </table>
         </div>  
     </main>
-    <?php include(APP."/Views/includes/left-aside.php"); ?>
 </section>

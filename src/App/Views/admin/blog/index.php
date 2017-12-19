@@ -1,8 +1,6 @@
-<main role="main" class="container row">
-    <div class="section-title page-title">Admin - Blog</div>
-    <?php include(APP."/Views/includes/right-aside.php"); ?>
-
-    <section class="col l8 m12 s12">
+<main class="container row">
+    <?php include(APP."/Views/includes/left-aside.php"); ?>
+    <section class="col l9 m12 s12">
         <div class="card-panel no-padding">
             <div id="articlesContainer">
                 <?php if (!empty($article)): ?>
@@ -114,5 +112,4 @@
         </div>
 
     </section>
-    <?php include(APP."/Views/includes/left-aside.php"); ?>
 </main>

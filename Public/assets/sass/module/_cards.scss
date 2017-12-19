@@ -422,14 +422,15 @@
     }
 }
 
-/*jumbotron*/
+
 .jumbotron {
     padding: 40px 15px 15px 15px;
-    margin-bottom: 15px;
     background-image: url('/imgs/site-banner.jpeg');
+    background-color: $color-4;
     background-size: cover;
     background-attachment: fixed;
-    background-position: 1000px center;
+    background-repeat: no-repeat;
+    background-position: center;
     position: relative;
 
     z-index: 900;

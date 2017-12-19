@@ -22,9 +22,7 @@ class Config{
 
     public static function getInstance(string $file): Config
     {
-        if(is_null(self::$instance)) {
-            self::$instance = new self($file);
-        }
+        self::$instance = new self($file);
         return self::$instance;
     }
 

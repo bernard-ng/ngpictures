@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 15 Décembre 2017 à 22:20
+-- Généré le :  Mar 19 Décembre 2017 à 06:20
 -- Version du serveur :  5.7.14
 -- Version de PHP :  7.0.10
 
@@ -234,7 +234,6 @@ INSERT INTO `blog` (`id`, `title`, `content`, `user_id`, `date_created`, `thumb`
 (65, 'Donec egestas. Duis ac arcu.', 'Lorem ipsum dolor', 3, '2018-08-18 09:00:13', 'Ngpictures.jpg', 'sit amet, consectetuer adipiscing elit.', 1, 1),
 (66, 'arcu. Sed et libero. Proin', 'Lorem ipsum dolor', 2, '2018-07-19 19:14:36', 'Ngpictures.jpg', 'Aliquam fringilla cursus purus. Nullam', 10, 1),
 (67, 'Quisque varius. Nam porttitor scelerisque', 'Lorem ipsum dolor sit', 3, '2017-01-04 10:22:39', 'Ngpictures.jpg', 'odio tristique pharetra. Quisque ac', 4, 1),
-(68, 'erat semper rutrum. Fusce dolor', 'Lorem ipsum', 5, '2018-11-24 13:54:55', 'Ngpictures.jpg', 'diam. Duis mi enim, condimentum', 3, 1),
 (69, 'auctor vitae, aliquet nec, imperdiet', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 5, '2017-06-09 18:55:59', 'Ngpictures.jpg', 'Donec est mauris, rhoncus id,', 10, 1),
 (70, 'diam. Duis mi enim, condimentum', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 1, '2018-03-09 04:44:17', 'Ngpictures.jpg', 'molestie pharetra nibh. Aliquam ornare,', 6, 1),
 (71, 'eu arcu. Morbi sit amet', 'Lorem', 2, '2018-10-14 22:36:15', 'Ngpictures.jpg', 'ac nulla. In tincidunt congue', 7, 1),
@@ -312,6 +311,13 @@ CREATE TABLE `comments` (
   `date_created` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `comments`
+--
+
+INSERT INTO `comments` (`id`, `user_id`, `articles`, `galery`, `blog`, `nggalery`, `comment`, `date_created`) VALUES
+(1, 5, NULL, NULL, 64, NULL, '&lt;p&gt;cool&lt;/p&gt;', '2017-12-19 08:04:34');
+
 -- --------------------------------------------------------
 
 --
@@ -328,6 +334,19 @@ CREATE TABLE `following` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `gallery`
+--
+
+CREATE TABLE `gallery` (
+  `id` bigint(255) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `thumb` varchar(1000) NOT NULL,
+  `description` mediumtext NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `likes`
 --
 
@@ -339,6 +358,33 @@ CREATE TABLE `likes` (
   `blog_id` int(10) UNSIGNED DEFAULT NULL,
   `ngphoto_id` int(10) UNSIGNED DEFAULT NULL,
   `date_created` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `likes`
+--
+
+INSERT INTO `likes` (`id`, `user_id`, `article_id`, `photo_id`, `blog_id`, `ngphoto_id`, `date_created`) VALUES
+(47, 5, NULL, NULL, 98, NULL, '2017-12-16 22:23:22'),
+(55, 5, NULL, NULL, 100, NULL, '2017-12-16 22:26:55'),
+(3, 5, 98, NULL, NULL, NULL, '2017-12-16 00:18:22'),
+(5, 5, NULL, NULL, 87, NULL, '2017-12-16 20:14:11'),
+(51, 5, NULL, NULL, 99, NULL, '2017-12-16 22:25:29'),
+(15, 5, NULL, NULL, 97, NULL, '2017-12-16 20:33:32'),
+(56, 5, NULL, NULL, 96, NULL, '2017-12-16 22:27:28'),
+(58, 5, 100, NULL, NULL, NULL, '2017-12-16 22:28:18');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ng_gallery`
+--
+
+CREATE TABLE `ng_gallery` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT '1',
+  `thumb` varchar(1000) NOT NULL,
+  `description` longtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -956,9 +1002,21 @@ ALTER TABLE `following`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `gallery`
+--
+ALTER TABLE `gallery`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `likes`
 --
 ALTER TABLE `likes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `ng_gallery`
+--
+ALTER TABLE `ng_gallery`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -987,17 +1045,27 @@ ALTER TABLE `verses`
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `following`
 --
 ALTER TABLE `following`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT pour la table `gallery`
+--
+ALTER TABLE `gallery`
+  MODIFY `id` bigint(255) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT pour la table `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id` bigint(255) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(255) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+--
+-- AUTO_INCREMENT pour la table `ng_gallery`
+--
+ALTER TABLE `ng_gallery`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `online`
 --

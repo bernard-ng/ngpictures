@@ -1,86 +1,109 @@
-<?php include(APP."/Views/includes/default-slider.php"); ?>
-        
-        <section class="row container">
-            <!-- ==================== PAGE ASIDE ==================== -->
-            <?php include(APP."/Views/includes/left-aside.php"); ?>
-
-            <!-- ==================== PAGE CONTAIN  ============================ -->
-            <main class="col s12 m7">
-                <!-- ==================== NG-NEWS-CARDS (BEGIN) ==================== -->
-                    <div id="articlesContainer">
-                        <?php foreach ($articles as $a) : ?>
-
-                            <!-- CARD -->
-                            <article class="card" id="<?= $a->id ?>">
-                                <!-- CARD HEADER -->
-                                <header class="ng-news-card-header">
-                                    <span class="ng-news-card-image-profil">
-                                        <img src="../Pictures/users/avatar/thumb/640-640/<?= $a->user_id ?>.jpg" alt="Profil Image" title="<?= $a->username ?>">
-                                    </span>
-                                    <p class="ng-news-card-header-title"><a href="/account/" title="voir le profil"><?= $a->username ?></a></p>
-                                    <a id="picBtn" class="ng-news-card-header-icon" href="/galery/" title="voir la galery"><i class="icon icon icon-picture"></i></a>
-                                    <a id="saveBtn" class="ng-news-card-header-icon" href="/download/" title="télécharger la photo"><i class="icon icon icon-save"></i></a>
-                                </header>
-                                <!-- /CARD HEADER END -->
-
-                                <!-- CARD BODY -->
-                                <div class="card-image">
-                                    <span class="ng-news-card-image-article">
-                                        <a href="<?= $a->url ?>">
-                                            <img src="<?= $a->thumbUrl ?>" alt="Article Image" title="<?= $a->title ?>">
-                                        </a>
-                                    </span>
-                                </div>
-                                <main class="ng-news-card-content">
-                                    <section class="ng-news-card-title">
-                                        <h2><?= $a->title ?></h2>
-                                    </section>
-                                    <content>
-                                        <p><?= $a->text ?></p>
-                                        <a href="<?= $a->url ?>" class="ng-news-card-seemore right">Voir plus</a>
-                                    </content>
-                                    <section id="articleInfo">
-                                        <div class="ng-news-card-stat">
-                                            <i class="icon icon-time"></i>&nbsp;
-                                            <time id="date_created" data-time="<?= strtotime($a->date_created) ?>"><?= $a->date_created ?></time>
-                                        </div>
-                                        <div class="ng-news-card-stat">
-                                            <i class="icon icon-thumbs-up"></i>&nbsp;
-                                            <small>
-                                                <a id="showLikes" href="/likes/"><?= $a->likes ?></a>
-                                            </small>
-                                            <a href="<?= $a->likeUrl ?>" id="showMentions" title="Voir toutes les mentions"><i class="right icon icon-menu-down"></i></a>
-                                        </div>
-                                    </section>
-                                </main>
-                                <footer class="ng-news-card-footer" id="articleOptions">
-                                    <a id="likeBtn" class="ng-news-card-footer-item <?= $a->ML ?>" href="<?= $a->likeUrl ?>" title="aimer la publication">
-                                        <i class="icon icon-thumbs-up"></i>&nbsp;J'aime
-                                    </a>
-                                    <a id="commentBtn" class="ng-news-card-footer-item" href="/comments/" title="commenter la publication">
-                                        <i class="icon icon-comment" ></i>&nbsp;Commenter
-                                    </a>
-                                    <a id="shareBtn" class="ng-news-card-footer-item" href="/share/" title="partager la publication">
-                                        <i class="icon icon-share"></i>&nbsp;partager
-                                    </a>
-                                </footer>
-                            </article>
-                            <!-- /CARD END -->
-
-                        <?php endforeach; ?>
+<main class="container row">
+    <?php include(APP."/Views/includes/left-aside.php"); ?>
+    <section class="col l9 m12 s12">
+        <div class="card-panel no-padding">
+            <div id="articlesContainer">
+                <?php if (!empty($photo)): ?>
+                    <?php foreach ($photo as $photo): ?>
+                        <article class="card col l6" id="<?= $photo->id ?>">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img src="/uploads/ngpictures/thumbs/med/<?= $photo->thumb ?>" class="activator" alt="<?= $photo->name ?>" title="<?= $photo->name ?>">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator"><?= $photo->name ?> <i class="icon icon-chevron-up right"></i></span>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title">poster name<i class="icon icon-chevron-down right"></i></span>
+                                <?= $photo->description ?>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="card">
+                        <div class="no-publication">
+                            <div class="ng-cover"></div>
+                            <p><i class="icon icon-picture"></i> &nbsp;aucune publication pour l'instant</p>
+                        </div>
                     </div>
-                    <!-- ==================== /NG-NEWS-CARDS (END) ==================== -->
+                <?php endif; ?>
+            </div>
+        </div>
 
-                <div id="feedMore" class="ng-btn-feed-more"> charger la suite</div>
-            </main>
+        <div class="card-panel col l12">
+            <div class="section-title mb-20 mt-20 ml-10">
+                Les Photos
+                <a href="<?= ADMIN."/gallery/add" ?>" class="right">
+                    <button class="btn">
+                        <i class="icon icon-plus" style="font-size: smaller !important;"></i>
+                    </button>
+                </a>
+            </div>
 
-            <!-- ==================== PAGE ASIDE ==================== -->
-            <aside class="hide-on-small-and-down col s12 m2">
-                <div class="collection">
-                    <a href="#!" class="collection-item">Alvin</a>
-                    <a href="#!" class="collection-item ">Alvin</a>
-                    <a href="#!" class="collection-item">Alvin</a>
-                    <a href="#!" class="collection-item">Alvin</a>
-                </div>
-            </aside>
-        </section>
+            <table class="card responsive-table bordered striped">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>thumb</th>
+                        <th>action</th>
+                        <th>name</th>
+                        <th>date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php if(!empty($photos)): ?>
+                    <?php foreach ($photos as $p) : ?>
+                        <tr>
+                            <td><b><?= $p->id ?></b></td>
+                            <td>
+                                <a href="<?= $p->url ?>">
+                                    <img src="/uploads/ngpictures/thumbs/small/<?= $p->thumb ?>" width="60" height="60">
+                                </a>
+                            </td>
+                            <td>
+                                <form method="POST" action="<?= ADMIN."/delete" ?>" style="display: inline-block !important;">
+                                    <input type="hidden" name="id" value="<?= $p->id?>" >
+                                    <input type="hidden" name="type" value="4" >
+                                    <button type="submit" class="btn waves-effect waves-light red">
+                                        <i class="icon icon-remove" style="font-size: smaller !important;"></i>
+                                    </button>
+                                </form>
+                               
+                                <a href="<?= ADMIN."/blog/edit/{$p->id}" ?>">
+                                     <button class="btn waves-effect waves-light">
+                                        <i class="icon icon-edit" style="font-size: smaller !important;"></i>
+                                    </button>
+                                </a>
+                                <?php if ($p->online): ?>
+                                    <a href="<?= ADMIN."/remove/4/{$p->id}" ?>" title="retirer">
+                                        <button class="btn btn-small blue-2 waves-effect waves-light">
+                                            <i class="icon icon-cloud-download" style="font-size: smaller !important;"></i>
+                                        </button>
+                                    </a>
+                                <?php else: ?>
+                                    <a href="<?= ADMIN."/confirm/4/{$p->id}" ?>" title="confirmer">
+                                        <button class="btn btn-small blue-2 waves-effect waves-light">
+                                            <i class="icon icon-cloud-upload" style="font-size: smaller !important;"></i>
+                                        </button>
+                                    </a>
+                                <?php endif; ?>
+                            </td>
+                            <td><?= $p->name ?></td>
+                            <td><time><?= $p->time ?></time></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td><b>0</b></td>
+                        <td>Aucun article pour l'instant</td>
+                        <td>
+                            <button type="submit" class="btn btn-small waves-effect waves-light disabled">
+                                <i class="icon icon-remove" style="font-size: smaller !important;"></i>
+                            </button>
+                        </td>
+                    </tr>
+                <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>

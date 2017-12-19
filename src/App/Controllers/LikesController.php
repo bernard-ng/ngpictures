@@ -9,13 +9,12 @@ use Ngpictures\Ngpic;
 
 class LikesController extends NgpicController
 {
-
     private $types = [ 1 => 'articles','gallery','blog','ngGallery'];
     private $user_id = null;
 
     public function __construct(){
         parent::__construct();
-        $this->callController('users')->restrict();
+        //$this->callController('users')->restrict();
         $this->user_id = intval($this->session->getValue('auth','id'));
     }
 
@@ -35,19 +34,22 @@ class LikesController extends NgpicController
             if ($post && $post->slug === $slug) { 
                 if ($like->isLiked($post->id, $t, $this->user_id)) {
                     $like->remove($post->id, $t, $this->user_id);
-
-                    Ngpic::redirect(true);
+                    echo ($this->isAjax()) ? $post->likes : Ngpic::redirect(true);
                 } else {
                     $like->add($post->id, $t, $this->user_id);
-                    Ngpic::redirect(true);
+                    echo ($this->isAjax()) ? $post->likes : Ngpic::redirect(true);
                 }
             } else {
-                Ngpic::redirect(true);
-                $this->flash->set("danger",$this->msg['undefined_error']);    
+                $this->flash->set("danger", $this->msg['indefined_error']);
+                //($this->isAjax()) ? header('HTTP/1.1 500 Internal Server Error') : Ngpic::redirect(true);
             }  
         } else {
-            $this->flash->set("warning", $this->msg['user_must_login']);
-            Ngpic::redirect(true);
+            if ($this->isAjax()) {
+                header('HTTP/1.1 500 Internal Server Error');
+                echo json_encode($this->flash->set("warning", $this->msg['user_must_login']));  
+            } else {    
+                Ngpic::redirect(true);
+            }
         }
     }
 

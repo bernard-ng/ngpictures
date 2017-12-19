@@ -40,14 +40,14 @@ class Router
 	}
 
 
-	public function run(Ngpic $Ngpic): bool
+	public function run(): bool
 	{
 		if (!isset($_SERVER['REQUEST_METHOD'])) {
-			if ($Ngpic::hasDebug()) {
+			if (Ngpic::hasDebug()) {
 				throw new RouterException("undefinied Request method");
 			} else {
+				Ngpic::redirect('/error-500');
 				return false;
-				$Ngpic::redirect('/error-500');
 			}
 		}
 
@@ -57,8 +57,8 @@ class Router
 				return true;
 			}
 		}
+		(Ngpic::hasDebug())? var_dump($route) : Ngpic::redirect("/e404");
 		return false;
-		($Ngpic::hasDebug())? var_dump($route) : $Ngpic::redirect("/e404");
 	}
 
 

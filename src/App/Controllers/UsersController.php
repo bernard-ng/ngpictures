@@ -5,7 +5,6 @@ use Ng\Core\Generic\Collection;
 use Ngpictures\Entity\UsersEntity;
 use Ngpictures\Ngpic;
 use Ngpictures\Util\Page;
-use Facebook\Facebook;
 
 
 
@@ -17,7 +16,6 @@ class UsersController extends NgpicController
         parent::__construct();
         $this->loadModel('users');
     }
-
 
     /***************************************************************************
     *

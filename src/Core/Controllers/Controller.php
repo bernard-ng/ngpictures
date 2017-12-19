@@ -18,5 +18,14 @@ class Controller
         if ($layout === true) {
             require ("{$this->viewPath}layout/{$this->layout}.php");
         }
+    }
+
+
+    public function isAjax() 
+    {
+        return (
+            isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'
+        ) ? true : false ;
     }   
 }

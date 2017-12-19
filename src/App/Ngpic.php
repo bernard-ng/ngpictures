@@ -52,12 +52,10 @@ class Ngpic {
 
 		if (!isset(self::$db_instance)) {
 			self::$db_instance = new MysqlDatabase(
-
 				$setting->get("db_name"),
                 $setting->get("db_host"),
 				$setting->get("db_user"),
 				$setting->get("db_pass")
-
 			);
 		}
 		return self::$db_instance;
@@ -114,17 +112,16 @@ class Ngpic {
     public static function redirect($url = null)
     {
        if ($url === true) {
-           if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
+            if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
                 header("location:{$_SERVER['HTTP_REFERER']}");
                 exit();
-           } else {
+            } else {
                header('location:/home');
                exit();
-           }
-       } else {
+            }
+        } else {
             is_null($url)? header('location:/home') : header("location:{$url}");
             exit();
-       }
-        
+        }
     }
 }

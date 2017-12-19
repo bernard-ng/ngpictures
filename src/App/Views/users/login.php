@@ -27,7 +27,7 @@
 
             <div class="col s12" id="connectOptions">
                 <button type="submit" class="btn action-btn waves-effect waves-light" id="connect">Connexion</button>
-                <button class="btn waves-effect waves-light feed-btn blue" id="connect">se connecter avec Facebook</button>
+                <a class="btn waves-effect waves-light feed-btn blue" href="facebook/connect/" id="connect">se connecter avec Facebook</a>
                 <a href="/forgot" class="forgot">Mot de passe oublié</a>
             </div>
         </div>
