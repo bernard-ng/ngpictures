@@ -2,14 +2,29 @@
 namespace Ng\Core\Generic;
 
 
-class Collection implements \IteratorAggregate,\ArrayAccess
-{ 
+use \ArrayAccess;
+use ArrayIterator;
+use \IteratorAggregate;
+
+class Collection implements IteratorAggregate, ArrayAccess
+{
+
+    /**
+     * les tableau a transform en objet
+     * @var array
+     */
     private $items;
 
+
+    /**
+     * Collection constructor.
+     * @param array $items
+     */
     public function __construct(array $items)
     {
         $this->items = $items;
     }
+
 
     /**
      * permet de recupere la clef d'un tableau.
@@ -24,11 +39,12 @@ class Collection implements \IteratorAggregate,\ArrayAccess
     }
 
 
-    public function getWhenSet($key)
-    {
-        return $this->getValue([$key], $this->items) ?? null;
-    }
-
+    /**
+     * renvoi une valeur d'un tableau
+     * @param array $indexes
+     * @param $value
+     * @return null
+     */
     private function getValue(array $indexes, $value)
     {
         $key = array_shift($indexes);
@@ -41,6 +57,7 @@ class Collection implements \IteratorAggregate,\ArrayAccess
             return $this->getValue($indexes, $value[$key]);
         }
     }
+
 
     /**
      * permet de definir une clef dans un tableau
@@ -63,13 +80,6 @@ class Collection implements \IteratorAggregate,\ArrayAccess
     public function has($key)
     {
         return array_key_exists($key, $this->items);
-    }
-
-    public function notEmpty($key)
-    {
-        if ($this->has($key)) {
-           !empty($key)? true : false;
-        }
     }
 
 
@@ -106,39 +116,9 @@ class Collection implements \IteratorAggregate,\ArrayAccess
     }
     
 
-    public function join($glue) 
-    {
-        return implode($glue, $this->items);
-    }
-
-    public function max($key = false)
-    {
-        if ($key) {
-            return $this->extract($key)->max();
-        } else {
-            return max($this->items);
-        }
-        
-    }
-
-
-
-
-    public function offsetExists($offset)
-    {
-        return $this->has($offset);
-    }
-
-    public function offsetGet($offset)
-    {
-        return $this->get($offset);
-    }
-
-    public function offsetSet($offset,$value)
-    {
-        return $this->set($offset,$value);
-    }
-
+    public function offsetExists($offset) { return $this->has($offset); }
+    public function offsetGet($offset) { return $this->get($offset); }
+    public function offsetSet($offset,$value) { $this->set($offset, $value); }
     public function offsetUnset($offset)
     {
         if ($this->has($offset)) {
@@ -146,8 +126,5 @@ class Collection implements \IteratorAggregate,\ArrayAccess
         }
     }
 
-    public function getIterator()
-    {
-        return new ArrayIterator($this->items);
-    }
+    public function getIterator() { return new ArrayIterator($this->items); }
 }

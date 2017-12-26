@@ -4,7 +4,7 @@ namespace Ngpictures\Entity;
 
 use Ng\Core\Entity\Entity;
 
-use Ng\Core\Generic\Str;
+use Ng\Core\Generic\{Str,Session};
 
 
 
@@ -14,6 +14,14 @@ class UsersEntity extends Entity
 	{
 		$this->accountUrl = "/account/".Str::slugify($this->name)."-{$this->id}";
 		return $this->accountUrl;
+	}
+
+
+	public function getEditUrl()
+	{
+		$session = Session::getInstance();
+		$this->editUrl = "/account/edit/".Str::slugify($this->name)."-{$this->id}/".$session->read('token');
+		return $this->editUrl;
 	}
 
 

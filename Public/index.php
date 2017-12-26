@@ -14,137 +14,101 @@ define("ADMIN", "/adm");
 require(ROOT."/vendor/autoload.php");
 
 
-if (isset($_GET["url"]) && !empty($_GET["url"])) {
-
-    $router = new Router($_GET["url"]);
+$router = new Router($_GET["url"] ?? $_SERVER['REQUEST_URI'] ?? "/home");
 
 
+/***************************************************************************
+ *                           FRONT-END ROUTES
+ ****************************************************************************/
+$router->get("/", "home", "home");
+$router->get("/home/", "home", "home");
 
-    /***************************************************************************
-    *
-    *                           FRONT-END ROUTES
-    *
-    ****************************************************************************/
-
-    $router->get("/", "home", "acceuil");
-    $router->get("/home/", "home", "accueil");
-
-    //user pages
-    $router->get("/login/", "users#login", "login");
-    $router->post("/login/", "users#login", "login");
-    $router->get("/logout/", "users#logout", "logout");
-    $router->get("/sign/", "users#sign", "sign");
-    $router->post("/sign/", "users#sign", "sign");
-    $router->get("/confirm/:id/:token", "users#confirm", "confirmation");
-    $router->get("/account/:user-:id", "users#account", "account");
-    $router->get("/users/", "users", "users");
-    $router->get("/account/edit/:user-:id", "users#edit", "edit account");
-    $router->get("/users/posts/:user-:id", "users#posts", "users posts");
+//user pages
+$router->get("/login/", "users#login", "users.login");
+$router->post("/login/", "users#login", "users.login");
+$router->get("/logout/", "users#logout", "users.logout");
+$router->get("/sign/", "users#sign", "users.sign");
+$router->post("/sign/", "users#sign", "users.sign");
+$router->get("/confirm/:id/:token", "users#confirm", "users.confirmation");
+$router->get("/account/:user-:id", "users#account", "users.account");
+$router->get("/users/", "users", "users");
+$router->get("/account/edit/:user-:id/:token", "users#edit", "users.editAccount");
+$router->post("/account/edit/:user-:id/:token", "users#edit", "users.editAccount");
 
 
-    //articles and blog pages
-    $router->get("/blog/","blog", "blog");
-    $router->get("/blog/:slug-:id","blog#show", "blog articles");
+//articles and blog pages
+$router->get("/blog/","blog", "blog.index");
+$router->get("/blog/:slug-:id","blog#show", "blog.show");
+$router->get("/articles/","articles#index","articles.index");
+$router->get("/articles/post/","articles#post","articles.add");
+$router->get("/articles/edit/:slug-:id/","articles#edit","articles.edit");
+$router->get("/articles/:slug-:id","articles#show","articles.show");
+$router->get("/categories/", "categories", "categories.index");
+$router->get("/categories/:name-:id", "categories#show", "categories.show");
 
 
-    $router->get("/articles/","articles#index","articles");
-    $router->get("/articles/post/","articles#post","article add");
-    $router->get("/articles/edit/:slug-:id/","articles#edit","article edit");
-    $router->get("/articles/:slug-:id","articles#show","article show");
+//gallery pages
+$router->get("/gallery/","gallery","gallery.index");
+$router->get("/gallery/:id","gallery#show","gallery.show");
 
 
-    //gallery pages
-    $router->get("/gallery/","gallery","gallery");
-    $router->get("/gallery/:id","gallery#show","gallery show");
-
-
-    //features
-    $router->get("/likes/:t/:slug-:id","likes","likes");
-    $router->get("/following/:name-:id","following#follow","following");
-    $router->get("/download/:type/:name", "download", "download system");
-
-    $router->post("/comments/:t/:slug-:id","comments","comment");
-    $router->post("/comments/edit/:id", "comments#edit", "edit comment");
-    $router->get("/comments/delete/:id", "comments#delete", "delete comment");
-
-
-    $router->get("/chat/","chat","general chat");
-    $router->get("/rss/", "rss-flux", "rss flux");
+//features
+$router->get("/likes/:t/:slug-:id","likes","likes");
+$router->get("/following/:name-:id","following#follow","following");
+$router->get("/download/:type/:name", "download", "download");
+$router->post("/comments/:t/:slug-:id","comments","comments.show");
+$router->post("/comments/edit/:id", "comments#edit", "comments.edit");
+$router->get("/comments/delete/:id", "comments#delete", "comments.delete");
+$router->get("/rss/", "rss", "rss.index");
 
 
 
-    //facebook routes
-    $router->get("/facebook/connect/", "facebook#connect", "facebook connect");
+//facebook routes
+$router->get("/facebook/connect/", "facebook#connect", "facebook.connect");
 
 
-    /***************************************************************************
-    *
-    *                           BACK-END ROUTES
-    *
-    ****************************************************************************/
+/***************************************************************************
+ *                           BACK-END ROUTES
+ ****************************************************************************/
+$router->get(ADMIN,"admin","admin.index");
+
+//articles and blog pages
+$router->get(ADMIN."/blog/","admin#blog", "admin.blog");
+$router->get(ADMIN."/blog/edit/:id","admin#edit", "admin.blog-edit");
+$router->get(ADMIN."/blog/add/","admin#add", "admin.blog-add");
+$router->post(ADMIN."/blog/edit/:id","admin#edit", "admin.blog-edit");
+$router->post(ADMIN."/blog/add/","admin#add", "admin.blog-add");
+$router->get(ADMIN."/confirm/:t/:id","admin#confirm","admin.confirm");
+$router->post(ADMIN."/delete/","admin#delete","admin.delete");
+$router->get(ADMIN."/articles/","admin#articles","admin.articles");
+
+//gallery pages
+$router->get(ADMIN."/gallery/","admin#gallery","admin.gallery");
+$router->get(ADMIN."/gallery/add/","admin#addGallery","admin.gallery-add");
+$router->post(ADMIN."/gallery/add/","admin#addGallery","admin.gallery-add");
+$router->get(ADMIN."/gallery/edit/:id","admin#editGallery","admin.gallery-edit");
+$router->get(ADMIN."/gallery/edit/","admin#editGallery","admin.gallery-edit");
+
+//users pages
+$router->get(ADMIN."/users/","admin#users","admin.users");
+$router->get(ADMIN."/users/permissions/:id", "admin#permissions", "admin.permissions");
 
 
-
-    $router->get(ADMIN,"admin","administration");
-
-    //articles and blog pages
-    $router->get(ADMIN."/blog/","admin#blog", "blog");
-    $router->get(ADMIN."/blog/edit/:id","admin#edit", "blog articles edition");
-    $router->get(ADMIN."/blog/add/","admin#add", "blog articles redaction");
-    $router->post(ADMIN."/blog/edit/:id","admin#edit", "blog articles edition");
-    $router->post(ADMIN."/blog/add/","admin#add", "blog articles redaction");
-    $router->get(ADMIN."/confirm/:t/:id","admin#confirm","post add online");
-    $router->get(ADMIN."/remove/:t/:id","admin#remove","post remove online");
-    $router->post(ADMIN."/delete/","admin#delete","blog articles deletion");
+/***************************************************************************
+ *                           AJAX ROUTES
+ ****************************************************************************/
+$router->post("/ajax/articles", "ajax#articles", "ajax.articles");
+$router->post("/ajax/blog", "ajax#blog", "ajax.blog");
+$router->get("/ajax/verset", "ajax#verset", "ajax.verses");
 
 
-    $router->get(ADMIN."/articles/","admin#articles","articles");
-
-    //gallery pages
-
-    $router->get(ADMIN."/gallery/","admin#gallery","nggallery");
-    $router->get(ADMIN."/gallery/add/","admin#addGallery","nggallery add");
-    $router->post(ADMIN."/gallery/add/","admin#addGallery","nggallery add");
-    $router->get(ADMIN."/gallery/edit/:id","admin#editGallery","nggallery edit");
-    $router->get(ADMIN."/gallery/edit/","admin#editGallery","ngallery");
-    $router->post(ADMIN."/gallery/delete","admin#deleteGallery","nggallery deletion");
+/***************************************************************************
+ *                           GENERAL ROUTES
+ ****************************************************************************/
+//error pages
+$router->get("/error-404","error#e404","app.found");
+$router->get("/error-500","error#e500","app.internal-server-error");
+$router->get("/error-403","error#e403","app.forbidden");
 
 
-    //users pages
-    $router->get(ADMIN."/users/","users#all","all users");
-    $router->get(ADMIN."/users/edit/:id","users#admEdit","users edition");
-    $router->post(ADMIN."/users/delete/","users#delete","users deletion");
-
-
-
-     /***************************************************************************
-    *
-    *                           AJAX ROUTES
-    *
-    ****************************************************************************/
-
-    $router->post("/ajax/articles", "ajax#articles", "ajax load articles");
-    $router->post("/ajax/blog", "ajax#blog", "ajax load blog");
-    $router->get("/ajax/verset", "ajax#verset", "ajax load verses");
-
-
-
-
-    /***************************************************************************
-    *
-    *                           GENERAL ROUTES
-    *
-    ****************************************************************************/
-
-
-    //error pages
-    $router->get("/error-404","error#e404","page not found");
-    $router->get("/error-500","error#e500","internal server error");
-    $router->get("/error-403","error#e403","forbidden");
-
-
-    $router->run();
-
-} else {
-    Ngpic::redirect();
-}
+$router->run();

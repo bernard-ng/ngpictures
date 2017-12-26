@@ -102,29 +102,34 @@
 	left: 40px;
 }
 
+
+
 </style>
-<?php include(APP."/Views/includes/left-aside.php"); ?>
-<div class="col l9 s12 m12">
-	<section class="card row col l12 m12 s12">
-	<img class="profile-header__img" alt="<?= $user->name; ?>"  src="/uploads/avatars/13.jpg">
+<div class="card col l12 s12 m12 profil-card">
+	<img class="profile-header__img" alt="<?= $user->name; ?>"  src="<?= $user->avatarUrl ?>">
 	<div class="profile-header__content row">
 		<div class="row col lg6 m12">
 		<h1 class="profile-header__title">
-			<?= $user->name; ?>
+			<?= $user->name ?>
 		</h1>
 		<h2 class="profile-header__subtitle"><?= $user->email ?></h2>
-		<div class="profile-header__links">
-			<a class="profile-header__link" href="/account/edit/">
-				<i class="icon icon-edit"></i>&nbsp;Editer le profil
-			</a>
-			<a class="profile-header__link" href="/logout/">
-				<i class="icon icon-edit"></i>&nbsp;deconnexion
-			</a>
-		</div>
+
+		<?php if (Ng\Core\Generic\Session::getInstance()->getValue('auth', 'id') == $user->id): ?>
+			<div class="profile-header__links">
+				<a class="profile-header__link" href="<?= $user->editUrl ?>">
+					<i class="icon icon-edit"></i>&nbsp;Editer le profil
+				</a>
+				<a class="profile-header__link" href="/logout/">
+					<i class="icon icon-off"></i>&nbsp;deconnexion
+				</a>
+			</div>
+		<?php endif; ?>
+
 		</div>
 		<div class="hide-on-med-and-down profile-header__actions">
 			<a class="profile-header__actions  btn primary-c right" title="Suivre cette personne" href="/leaderboard/">
-				<i class="icon icon-plus"></i></a>
+				<i class="icon icon-plus"></i>
+			</a>
 			<a href="#" class="profile-header__actions profile-header__facebook btn" rel="nofollow" target="_blank" title="partager sur facebook">
 				<i class="social social-facebook-1"></i>
 			</a>
@@ -132,13 +137,7 @@
 	</div>
 
 	<div class="col l12 m12 s12 bio">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.		
+		<?= $user->bio ?>		
 	</div>
-</section>
-
 </div>
+<?php include(APP."/Views/includes/left-aside.php"); ?>

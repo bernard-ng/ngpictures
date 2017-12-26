@@ -10,11 +10,7 @@
         <?php include(APP."/Views/includes/mobile-menu.php"); ?>
         <?php include(APP."/Views/includes/menu.php"); ?>
         <?php include(APP."/Views/includes/flash.php"); ?>
-
-        <div class="container row col s12">
             <?php echo $content; ?>        
-        </div>
-        
         <?php include(APP."/Views/includes/default-script.php"); ?>
     </body>
 </html>

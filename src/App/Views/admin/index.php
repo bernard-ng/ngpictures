@@ -1,5 +1,4 @@
 <div class="container row">
-
     <div class="card col l12 s12 m12">
         <div class="section-title mb-20 mt-20 ml-10">
             Les Derniers Articles
@@ -29,7 +28,7 @@
                                     </button>
                                 </form>
                                 <?php if ($a->online): ?>
-                                    <a href="<?= ADMIN."/remove/1/{$a->id}" ?>" title="retirer">
+                                    <a href="<?= ADMIN."/confirm/1/{$a->id}" ?>" title="retirer">
                                         <button class="btn btn-small blue-2 waves-effect waves-light">
                                             <i class="icon icon-cloud-download" style="font-size: smaller !important;"></i>
                                         </button>
@@ -98,7 +97,7 @@
                                         </button>
                                     </a>
                                 <?php else: ?>
-                                    <a href="<?= ADMIN."/remove/3/{$b->id}" ?>" title="retirer">
+                                    <a href="<?= ADMIN."/confirm/3/{$b->id}" ?>" title="retirer">
                                         <button class="btn btn-small blue-2 waves-effect waves-light">
                                             <i class="icon icon-cloud-download" style="font-size: smaller !important;"></i>
                                         </button>
@@ -138,31 +137,13 @@
                     <a href="<?= ADMIN."/blog/add"  ?>">Nouvel Article</a>
                 </li>
                 <li class="collection-item">
-                    <a href="<?= ADMIN."/nggallery/add" ?>">Nouvel Photo</a>
+                    <a href="<?= ADMIN."/gallery/add" ?>">Nouvel Photo</a>
                 </li>
                 <li class="collection-item">
-                    <a href="<?= ADMIN."/godfirst/add" ?>">Nouveau Verset</a>
+                    <a href="<?= ADMIN."/verset/add" ?>">Nouveau Verset</a>
                 </li>
                 <li class="collection-item">
                     <a href="<?= ADMIN."/category/add" ?>">Nouvelle catégorie</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="card col l12 m6 s12">
-            <div class="section-title mb-10 mt-20 ml-10">Pages modifiable</div>
-            <ul class="collection">
-                <li class="collection-item">
-                    <a href="<?= ADMIN."/blog/add"  ?>">About.html</a>
-                </li>
-                <li class="collection-item">
-                    <a href="<?= ADMIN."/nggalery/post" ?>">About-shooting.html</a>
-                </li>
-                <li class="collection-item">
-                    <a href="<?= ADMIN."/godfirst/post" ?>">About-contact.html</a>
-                </li>
-                <li class="collection-item">
-                    <a href="<?= ADMIN."/event/post" ?>">About-us.html</a>
                 </li>
             </ul>
         </div>

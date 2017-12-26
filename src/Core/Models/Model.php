@@ -4,15 +4,24 @@ namespace Ng\Core\Models;
 
 use Ng\Core\Database\Database;
 
-use Ng\Core\Entity\Entity;
-
 
 
 class Model
 {
 
+    /**
+     * nom de la table
+     * @var string
+     */
     protected $table;
+
+
+    /**
+     * connection de la base de donnee
+     * @var Database
+     */
     protected $db;
+
 
     /**
      * Model constructor.
@@ -22,7 +31,7 @@ class Model
     {
         $this->db = $db;
         if (is_null($this->table)) {
-            $part = explode("\\",get_class($this));
+            $part = explode("\\", get_class($this));
             $table = end($part);
             $this->table = strtolower(str_replace("Model","",$table));
         }
@@ -62,6 +71,13 @@ class Model
         }
     }
 
+
+    /**
+     * mise a jour des champs d'une table
+     * @param int $id
+     * @param array $data
+     * @return mixed
+     */
     public function update(int $id,array $data = [])
     {
         $array_sql = [];
@@ -78,14 +94,12 @@ class Model
         return $this->query("UPDATE {$this->table} SET $sql WHERE id = ? ", $array_data);
     }
 
-    public function setThumb(int $id ,string $thumb)
-    {
-        return $this->query(
-            "UPDATE {$this->table} SET thumb = ? WHERE id = ?",
-            [$thumb,$id]
-        );
-    }
 
+    /**
+     * creation de donnee
+     * @param array $data
+     * @return mixed
+     */
     public function create(array $data = [])
     {
         $array_sql = [];
@@ -100,38 +114,68 @@ class Model
         return $this->query("INSERT INTO {$this->table} SET $sql , date_created = NOW() ", $array_data);
     }
 
+
+    /**
+     * suppression des donnees
+     * @param int $id
+     * @return mixed
+     */
     public function delete(int $id)
     {
         return $this->query("DELETE FROM {$this->table} WHERE id = ?",[$id],true,true);
     }
 
 
-    // General methods
+    /**
+     * renvoi le nom de la table
+     * @return string
+     */
     public function getTable(): string
     {
         return $this->table;
     }
-    
+
+
+    /**
+     * dernier id insert dans la base des donnees
+     * @return mixed
+     */
     public function lastInsertId()
     {
         return $this->db->lastInsertId();
     }
 
 
-    // Query methods
-
+    /**
+     * recupere tout les enregistrements
+     * @return mixed
+     */
     public function all()
     {
-        return $this->query("SELECT * FROM {$this->table}");
+        return $this->query("SELECT * FROM {$this->table} ORDER BY id DESC");
     }
 
- 
+
+    /**
+     * recupere un enregistrement
+     * @param int $id
+     * @return mixed
+     */
     public function find(int $id)
     {
-        return $this->query("SELECT * FROM {$this->table} WHERE id = ?",[$id],true,true);
+        return $this->query(
+            "SELECT * FROM {$this->table} WHERE id = ?",
+            [$id],
+            true,true
+        );
     }
 
-
+    /**
+     * recupere un enregistrement avec une contrainte
+     * @param string $field
+     * @param $value
+     * @return mixed
+     */
     public function findWith(string $field, $value)
     {
         return $this->query("SELECT * FROM {$this->table} WHERE {$field} = ?",
@@ -141,21 +185,24 @@ class Model
     }
 
 
+    /**
+     * recupere un enregistrement suivant l'id et un autre champ
+     * @param string $field
+     * @param $value
+     * @return mixed
+     */
     public function findWithId(string $field, $value)
     {
         return $this->query("SELECT * FROM {$this->table} WHERE id = ? AND {$field} = ?",[$value]);
     }
 
 
-    public function findAlternative(array $field, $value)
-    {
-        return $this->query(
-            "SELECT * FROM {$this->table} WHERE ({$field[0]} = :{$field[0]} OR {$field[1]} = :{$field[0]})",
-            [$field[0] => $value],
-            true, true
-        );
-    }
-
+    /**
+     * renvoi par defaut le 4 dernier enregistrement
+     * @param int $from
+     * @param int $to
+     * @return mixed
+     */
     public function latest(int $from = 0, int $to = 4)
     {
         return $this->query("
@@ -168,35 +215,46 @@ class Model
     }
 
 
+    /**
+     * renvoi le dernier enregistrement
+     * @return mixed
+     */
     public function last()
     {
         return $this->query("
             SELECT {$this->table}.*, categories.title as category 
             FROM {$this->table} 
             LEFT JOIN categories ON category_id = categories.id
-            WHERE online = 1 ORDER BY date_created DESC LIMIT 0,1",
+            WHERE online = 1 ORDER BY id DESC",
             null, true, true
         );
     }
 
 
+    /**
+     * tout les enregistrements en ligne
+     * @return mixed
+     */
     public function lastOnline()
     {
         return $this->query("
             SELECT {$this->table}.*, categories.title as category 
             FROM {$this->table} 
             LEFT JOIN categories ON category_id = categories.id
-            WHERE online = 1 ORDER BY date_created DESC ",
+            WHERE online = 1 ORDER BY id DESC ",
             null, true, false
         );
     }
 
 
-    public function lastByDate(string $order = 'DESC'){
-        return $this->query("SELECT * FROM {$this->table} ORDER BY date_created {$order}");
-    }
-
-
+    /**
+     * recupere est classe selon la contrainte
+     * @param string $field
+     * @param string $order
+     * @param int|null $from
+     * @param int|null $to
+     * @return mixed
+     */
     public function orderBy(string $field, string $order = 'DESC', int $from = null, int $to = null)
     {
         if ($from === null && $to === null) {
@@ -208,19 +266,4 @@ class Model
         return $this->query("SELECT * FROM {$this->table} ORDER BY {$field} {$order} LIMIT {$from},{$to}");
     }
 
-
-    public function addOnline(int $id)
-    {
-        return $this->query(
-            "UPDATE {$this->table} SET online = 1 WHERE id = ? ",[$id]
-        );
-    }
-
-
-    public function removeOnline(int $id)
-    {
-        return $this->query(
-            "UPDATE {$this->table} SET online = 0 WHERE id = ?",[$id]
-        );
-    }
 }

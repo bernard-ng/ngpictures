@@ -1,4 +1,23 @@
 <!-- =================  FOOTER   ====================== -->
+<?php
+
+use Ng\Core\Generic\Session;
+
+if (Session::getInstance()->read('auth')):
+    $user = Session::getInstance()->read('auth');
+    ?>
+    <div class="fixed-action-btn toolbar">
+        <a class="btn-floating btn-large primary-c">
+            <i class="icon icon-th"></i>
+        </a>
+        <ul>
+            <li class="waves-effect waves-light"><a href="<?= $user->postUrl; ?>"><i class="icon icon-pencil"></i></a></li>
+            <li class="waves-effect waves-light"><a href="<?= $user->editUrl; ?>"><i class="icon icon-edit"></i></a></li>
+            <li class="waves-effect waves-light"><a href="<?= $user->galleryUrl; ?>"><i class="icon icon-picture"></i></a></li>
+        </ul>
+    </div>
+<?php endif; ?>
+
 <footer class="page-footer primary-c">
     <div class="row container">
         <section class="col l6 m4 s12">

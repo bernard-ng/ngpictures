@@ -3,16 +3,36 @@ $form-font-color: #ffffff;
 $form-transition: all linear 0.5s;
 
 .login-bg{
-    background-image: url('/imgs/site-banner.jpeg');
+    background-image: url('/imgs/bg/lakes-bg.jpg');
+    background-color: rgba(0,0,0,0.6);
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center bottom;
     background-attachment: fixed;
     background-size: cover;
-    -webkit-transition: $form-transition;
-    transition: $form-transition;
-    position: relative;
-    -webkit-animation: actie-cover linear 20s infinite;
-            animation: actve-cover linear 20s infinite;
+
+    height: 100vh;
+
+    margin-top: 4%; margin-bottom: 1%; 
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+   -webkit-box-pack: center;
+       -ms-flex-pack: center;
+           justify-content: center;
+   -webkit-box-align: center;
+       -ms-flex-align: center;
+           align-items: center;
+   -ms-flex-wrap: wrap;
+       flex-wrap: wrap;
+   -ms-flex-line-pack: center;
+       align-content: center;
+}
+
+@media only screen and (max-width: 700px) {
+    .login-bg{
+        margin-top: 20%;
+        height: auto;
+    }
 }
     
 .sign-bg{
@@ -20,9 +40,6 @@ $form-transition: all linear 0.5s;
 }
 
 .loginBox{
-    max-width: 600px;
-    min-width: 400px;
-    min-height: 400px;
     -webkit-transition: $form-transition;
     transition: $form-transition;
 }
@@ -32,18 +49,12 @@ $form-transition: all linear 0.5s;
 }
 
 #loginBox{
-    display: block;
-    background-color: $color-4;
-    border: 3px solid $color-5;
+    max-width: 600px !important;
+    max-height: auto !important;
+    background-color: rgba(0,0,0,0.6);
+    border: 1px solid $color-5;
     border-radius: 3px;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    transform: translateX(-50%) translateY(50%);
-
-
+    padding: 25px !important;
 
     color: $form-font-color;
     & a.forgot {
@@ -60,34 +71,18 @@ $form-transition: all linear 0.5s;
     & input{
         font-family: openSans , sans-serif;
         color: $form-font-color !important;
-        background: $color-5;
-        border: none;
+        background-color: rgba(0,0,0,0.3);
+        border: 1px solid rgba(0,0,0,0.3);
         border-radius: 3px;
         display: inline-block;
-        box-shadow: inset 0px 1px 1px #000;
+        -webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.3);
+                box-shadow: inset 0px 1px 1px rgba(0,0,0,0.3);
         padding-left: 5px;
     }
 }
 
 #signUpBox{
     @extend #loginBox;
-}
-
-.ng-logo{
-    text-align: center;
-    margin-bottom: 20px !important;
-    display: block;
-    height: 55px;
-    max-width: 100%;
-    & a {
-        font-size: 3.25em;
-        color:#000 !important;
-        cursor: pointer;
-        -webkit-transition: $form-transition;
-        transition: $form-transition;
-        -webkit-animation: font-change 60s linear infinite;
-                animation: font-change 60s linear infinite;
-    }
 }
 
 #connect{

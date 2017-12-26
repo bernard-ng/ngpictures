@@ -14,8 +14,8 @@ class FacebookController extends NgpicController
 {
 
 	private $app_namespace = 'ngpictures-test';
-	private $app_id = '1951395041776982';
-	private $app_secret = '55d44750aa7ebaeed280e44c3ae1a1e7T';
+	private $app_id = '518552818524133'; 
+	private $app_secret = '2d3f266e8a3fa73f75fa25b519cd02b7';
 	private $default_graph_version = 'v2.11';
 
 	private function catch($e, string $msg)

@@ -96,5 +96,5 @@
         <div id="feedMore" class="feed-btn" data-ajax="articles">charger la suite</div>
     </div>
 
-    <?php include(APP."/Views/includes/menu-aside.php"); ?>
+<?php include(APP."/Views/includes/menu-aside.php"); ?>
 </main>

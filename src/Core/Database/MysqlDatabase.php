@@ -1,27 +1,38 @@
 <?php
 namespace Ng\Core\Database;
 
+use \Exception;
 use \PDO;
-use Core\Exception\{queryException,prepareException};
 use Ngpictures\Ngpic;
+use \PDOException;
 
 
 /**
- * class MysqlDatabase
- * FR - connexion à la base de donnée et les différentes requètes
- * EN - database connexion and all reqs
- * @package Core\Database
- * @author Bernard ng
- **/
+ * gestion base de donnee avec mysql
+ * Class MysqlDatabase
+ * @package Ng\Core\Database
+ */
 class MysqlDatabase extends Database
 {
 
+    /**
+     * les differents params de connexion a la base de donnee
+     * defini dans le fichier de configuration
+     * @var string
+     */
     private $db_user,
             $db_pass,
             $db_host,
             $db_name,
             $PDO;
 
+    /**
+     * MysqlDatabase constructor.
+     * @param $db_name
+     * @param string $db_host
+     * @param string $db_user
+     * @param string $db_pass
+     */
     public function __construct($db_name,$db_host="127.0.0.1",$db_user="root",$db_pass="") {
 
         $this->db_name = $db_name;
@@ -30,6 +41,11 @@ class MysqlDatabase extends Database
         $this->db_pass = $db_pass;
     }
 
+
+    /**
+     * connexion avec pdo a la base de donnee
+     * @return PDO
+     */
     private function getPDO() {
 
         if ($this->PDO === null) {
@@ -43,11 +59,10 @@ class MysqlDatabase extends Database
                 $PDO->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE ,PDO::FETCH_OBJ);
                 $PDO->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
                $this->PDO = $PDO;
-           } catch (\PDOException $e) {
+           } catch (PDOException $e) {
                if (Ngpic::hasDebug()) {
                     die("{$e->getMessage()}</br>{$e->getLine()}");
                } else {
-                    die("{$e->getMessage()}</br>{$e->getLine()}");
                     Ngpic::redirect("/error-500");
                }
            }
@@ -56,6 +71,14 @@ class MysqlDatabase extends Database
     }
 
 
+    /**
+     * permet de faire des requets normal
+     * @param $statement
+     * @param bool $class_name
+     * @param bool $one
+     * @param bool $rowcount
+     * @return array|int|mixed|\PDOStatement
+     */
     public function query($statement, $class_name = true, $one = false, $rowcount = false)
     {
         try {
@@ -83,11 +106,21 @@ class MysqlDatabase extends Database
             }
             return $result;
 
-        } catch (queryException $e) {
-            (Ngpic::hasDebug())? die("Exception : $e->msg") :  Ngpic::redirect('/e500');
+        } catch (Exception $e) {
+            (Ngpic::hasDebug())? die("Exception : $e->getMessage()") :  Ngpic::redirect('/e500');
         }
     }
 
+
+    /**
+     * permet de faire des requets preparés
+     * @param $statement
+     * @param $data
+     * @param bool $class_name
+     * @param bool $one
+     * @param bool $rowcount
+     * @return array|int|mixed|\PDOStatement
+     */
     public function prepare($statement,$data, $class_name = true, $one = false, $rowcount = false)
     {
         try {
@@ -115,12 +148,16 @@ class MysqlDatabase extends Database
             }
             return $result;
 
-        } catch (prepareException $e) {
+        } catch (Exception $e) {
             (Ngpic::hasDebug())? die("Exception : $e->msg") :  Ngpic::redirect('/e500');
         }
     }
 
-    
+
+    /**
+     * renvoi le dernier id insert dans la base de donnee
+     * @return string
+     */
     public function lastInsertId()
     {
         return $this->getPDO()->lastInsertId();

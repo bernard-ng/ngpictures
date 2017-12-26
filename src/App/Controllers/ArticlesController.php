@@ -21,6 +21,7 @@ class ArticlesController extends NgpicController
     public function index()
     {
         $articles = $this->articles->latest(0, 5);
+        $last = $this->loadModel('blog')->latest(0, 3);
         $verse = $this->callController('verses')->index();
         $categories = $this->categories->orderBy('title', 'ASC', 0, 5);
 
@@ -28,7 +29,7 @@ class ArticlesController extends NgpicController
         Page::setMeta(['property' => 'og:url', 'content' => '//larytech.com/articles']);
         
         $this->setLayout("articles/default");
-        $this->viewRender("articles/index", compact('articles', 'verse', 'categories'));
+        $this->viewRender("articles/index", compact('articles', 'verse', 'categories','last'));
     }
 
 

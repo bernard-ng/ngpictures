@@ -1,32 +1,27 @@
 <main class="container row">
     <?php include(APP."/Views/includes/left-aside.php"); ?>
     <section class="col l9 m12 s12">
-        <div class="card-panel no-padding">
-            <div id="articlesContainer">
-                <?php if (!empty($photo)): ?>
-                    <?php foreach ($photo as $photo): ?>
-                        <article class="card col l6" id="<?= $photo->id ?>">
-                            <div class="card-image waves-effect waves-block waves-light">
-                                <img src="/uploads/ngpictures/thumbs/med/<?= $photo->thumb ?>" class="activator" alt="<?= $photo->name ?>" title="<?= $photo->name ?>">
-                            </div>
-                            <div class="card-content">
-                                <span class="card-title activator"><?= $photo->name ?> <i class="icon icon-chevron-up right"></i></span>
-                            </div>
-                            <div class="card-reveal">
-                                <span class="card-title">poster name<i class="icon icon-chevron-down right"></i></span>
-                                <?= $photo->description ?>
-                            </div>
-                        </article>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <div class="card">
-                        <div class="no-publication">
-                            <div class="ng-cover"></div>
-                            <p><i class="icon icon-picture"></i> &nbsp;aucune publication pour l'instant</p>
+        <div class="card col l12 m12 s12">
+            <?php if (!empty($photo)): ?>
+                <?php foreach ($photo as $photo): ?>
+                    <article class="card col l3" id="<?= $photo->id ?>">
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <img src="/uploads/ngpictures/thumbs/med/<?= $photo->thumb ?>" class="activator" alt="<?= $photo->name ?>" title="<?= $photo->name ?>">
                         </div>
+                        <div class="card-reveal">
+                            <span class="card-title"><i class="icon icon-chevron-down right"></i></span>
+                            <?= $photo->description ?>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="card">
+                    <div class="no-publication">
+                        <div class="ng-cover"></div>
+                        <p><i class="icon icon-picture"></i> &nbsp;aucune publication pour l'instant</p>
                     </div>
-                <?php endif; ?>
-            </div>
+                </div>
+            <?php endif; ?>
         </div>
 
         <div class="card-panel col l12">
@@ -68,13 +63,13 @@
                                     </button>
                                 </form>
                                
-                                <a href="<?= ADMIN."/blog/edit/{$p->id}" ?>">
+                                <a href="<?= ADMIN."/gallery/edit/{$p->id}" ?>">
                                      <button class="btn waves-effect waves-light">
                                         <i class="icon icon-edit" style="font-size: smaller !important;"></i>
                                     </button>
                                 </a>
                                 <?php if ($p->online): ?>
-                                    <a href="<?= ADMIN."/remove/4/{$p->id}" ?>" title="retirer">
+                                    <a href="<?= ADMIN."/confirm/4/{$p->id}" ?>" title="retirer">
                                         <button class="btn btn-small blue-2 waves-effect waves-light">
                                             <i class="icon icon-cloud-download" style="font-size: smaller !important;"></i>
                                         </button>

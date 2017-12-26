@@ -177,45 +177,6 @@ $(document).ready(function(){
         }
     })();
 
-
-    //system de hover pour la galery
-    (function(){
-        var $img = $('#galery .photo');
-        if ($img !== undefined) {
-            var current = null;
-            var top = parseInt($('a:first span.photo-title').css('top'))
-            var top2 = parseInt($('a:first span.photo-desc').css('top')) 
-
-            $('.photo').mouseover(function(){
-                if (current && $(this).index() !== current.index()) {
-                    current.find('span.photo-bg').hide().fadeOut()
-                    current.find('span.photo-title').show().animate({top: top + 15, opacity: 0},90,'linear')
-                    current.find('span.photo-desc').show().animate({ top: top2 + 35, opacity: 0},90,'linear')
-                }
-
-                if (current && $(this).index() === current.index()) { return null }
-
-                $(this).find('span.photo-bg').hide().stop().fadeTo(200,0.8)
-                $(this)
-                    .find('span.photo-title').css({opacity: 0, top: top + 15})
-                    .animate({opacity: 1, top: top},200,'linear')
-
-                $(this)
-                    .find('span.photo-desc').css({opacity: 0, top: top2 + 35})
-                    .animate({opacity: 1, top: top2 })
-                current = $(this);
-            })
-
-            $('.photo').mouseout(function(){
-                if (current && $(this).index() !== current.index()) {
-                    current.find('span.photo-bg').stop().fadeOut()
-                    current.find('span.photo-title').show().animate({top: top + 15, opacity: 0},200,'linear')
-                    current.find('span.photo-desc').show().animate({ top: top2 + 15, opacity: 0},200,'linear')
-                }
-            })
-        }
-    })();
-
     (function(){
         class Tooltip {
             
@@ -267,4 +228,6 @@ $(document).ready(function(){
 
         Tooltip.bind('[title]')
     })();
+
+
 });

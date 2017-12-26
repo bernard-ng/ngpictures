@@ -12,14 +12,16 @@
             <?php include(APP."/Views/includes/menu.php"); ?>
             <div class="container row">
                 <span class="jumbotron-title">
-                    <i class="icon icon-user "></i>
-                    &nbsp;Profile
+                    <i class="icon icon-edit "></i>
+                    &nbsp;Edition du profile
                 </span>
             </div>
         </div>
         <?php include(APP."/Views/includes/flash.php"); ?>
 
-        <div class="row col s12"><?php echo $content; ?></div>
+        <div class="container row col s12">
+            <?php echo $content; ?>
+        </div>
         
         <?php include(APP."/Views/includes/footer.php"); ?>
         <?php include(APP."/Views/includes/default-script.php"); ?>

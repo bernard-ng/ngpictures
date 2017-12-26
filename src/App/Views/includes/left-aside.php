@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-    <div class="card">
+    <div class="card" id="sticky" data-offset="45">
         <div class="card-image">
             <img src="/imgs/ngpic.jpg">
         </div>

@@ -132,30 +132,28 @@
                     <h2>Nos photos</h2>
                 </section>
                 <div class="images-panel ">
-                    <div class="">
-                        <section class="description">
-                            <blockquote>
-                                l'ombre et la lumière surgissent de presque nul part, évanescentes elles apparaissent et disparaissent au gré du temps, elles sont par définition insaisissables et impalpables. seule la prise de vue photographique permet de monter la magie de cette dualité fraternelle. En effet l’ombre et la lumière sont les deux faces déterminantes de la photographie, souvent elles se font un face à face perpétuel dans des compositions surprenantes. Elles ne sont jamais neutres. Ainsi elle peuvent être une forme autonome se superposant à une réalité déjà présente. Nos  photos sont l'expression même de l'ombre sinueuse d'une personne.
-                                <br><a href="/gallery" class="ng-news-card-seemore">Voir la gallerie</a>
-                            </blockquote>
-                        </section>
-                        <aside class="aside-imgs">
-                            <div class="previous-imgs row" id="previousImgs">
-                                <span class="col l3 m6 s12">
-                                    <img src="/imgs/team/prisca.jpg" alt="banner image">
-                                </span>
-                                <span class="col l3 m6 s4">
-                                    <img src="/imgs/team/gael.jpg" alt="banner image" >
-                                </span>
-                                <span class="col l3 m6 s4">
-                                    <img src="/imgs/team/rapha.jpg" alt="banner image">
-                                </span>
-                                <span class="col l3 m6 s4">
-                                    <img src="/imgs/team/bernard.jpg" alt="banner image">
-                                </span>
-                            </div>
-                        </aside>
-                    </div>
+                    <section class="description">
+                        <blockquote>
+                            l'ombre et la lumière surgissent de presque nul part, évanescentes elles apparaissent et disparaissent au gré du temps, elles sont par définition insaisissables et impalpables. seule la prise de vue photographique permet de monter la magie de cette dualité fraternelle. En effet l’ombre et la lumière sont les deux faces déterminantes de la photographie, souvent elles se font un face à face perpétuel dans des compositions surprenantes. Elles ne sont jamais neutres. Ainsi elle peuvent être une forme autonome se superposant à une réalité déjà présente. Nos  photos sont l'expression même de l'ombre sinueuse d'une personne.
+                            <br><a href="/gallery" class="ng-news-card-seemore">Voir la gallerie</a>
+                        </blockquote>
+                    </section>
+                    <aside class="aside-imgs">
+                        <div class="previous-imgs row" id="previousImgs">
+                            <span class="col l3 m3 s3">
+                                <img src="/imgs/team/prisca.jpg" alt="banner image">
+                            </span>
+                            <span class="col l3 m3 s3">
+                                <img src="/imgs/team/gael.jpg" alt="banner image" >
+                            </span>
+                            <span class="col l3 m3 s3">
+                                <img src="/imgs/team/rapha.jpg" alt="banner image">
+                            </span>
+                            <span class="col l3 m3 s3">
+                                <img src="/imgs/team/bernard.jpg" alt="banner image">
+                            </span>
+                        </div>
+                    </aside>
                 </div>
             </section>
         </article>

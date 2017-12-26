@@ -55,8 +55,7 @@ class FollowingModel extends Model
             [$id,$user_id], true, true
         );
         
-        if ($req) { return true; } 
-        else { return false;   } 
+        return ($req)? true : false ;
     }
 
 

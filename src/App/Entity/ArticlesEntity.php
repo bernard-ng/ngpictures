@@ -29,7 +29,7 @@ class ArticlesEntity extends Entity
     public function getCategoryUrl(): string
     {
         $categories = Str::Slugify($this->category);
-        $this->categoryUrl = "/categories/{$categories}";
+        $this->categoryUrl = "/categories/{$categories}-{$this->category_id}";
         return $this->categoryUrl;
     }
 
@@ -82,9 +82,9 @@ class ArticlesEntity extends Entity
 
     public function getSnipet(): string
     {
-        $content = Str::userMention($this->users, $this->content);
-        $this->text = Str::getSnipet(Str::truncateText($content, 300));
-        
+        $content = Str::getSnipet(Str::truncateText($this->content, 300));
+        $this->text = Str::userMention($this->users, $content);
+
         return $this->text;
     }
 

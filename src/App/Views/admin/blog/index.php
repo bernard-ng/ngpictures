@@ -80,13 +80,13 @@
                                     </button>
                                 </a>
                                 <?php if ($a->online): ?>
-                                    <a href="<?= ADMIN."/remove/1/{$a->id}" ?>" title="retirer">
+                                    <a href="<?= ADMIN."/confirm/3/{$a->id}" ?>" title="retirer">
                                         <button class="btn btn-small blue-2 waves-effect waves-light">
                                             <i class="icon icon-cloud-download" style="font-size: smaller !important;"></i>
                                         </button>
                                     </a>
                                 <?php else: ?>
-                                    <a href="<?= ADMIN."/confirm/1/{$a->id}" ?>" title="confirmer">
+                                    <a href="<?= ADMIN."/confirm/3/{$a->id}" ?>" title="confirmer">
                                         <button class="btn btn-small blue-2 waves-effect waves-light">
                                             <i class="icon icon-cloud-upload" style="font-size: smaller !important;"></i>
                                         </button>

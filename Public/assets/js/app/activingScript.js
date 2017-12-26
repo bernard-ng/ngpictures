@@ -7,6 +7,8 @@ $(document).ready(function(){
     $('.dropdown-button').dropdown();
 	$('.parallax').parallax();
 	$('.modal').modal();
+	$('.ul-tabs').tabs();
+	$('select').material_select();
 	
 	
 	//datepicker pour l'adm
@@ -43,25 +45,6 @@ $(document).ready(function(){
 	            {title: "Italique", icon: "italic", format: "italic"},
 	            {title: "Code", icon: "code", format: "code"}
 	          ]},
-	          {title: "Blocks", items: [
-	            {title: "Paragraphe", format: "p"},
-	            {title: "Citation", format: "blockquote"},
-	            {title: "Div", format: "div"}
-	          ]}
-	        ]
-	    });
-
-	    tinymce.init({
-	        selector:"textarea#comment",
-	        theme: "modern",
-	        skin: "lightgray",
-	        width: "100%",
-	        height: 150,
-	        relative_urls: false,
-	        menubar: false,
-	        toolbar: "styleselect |  bold italic | link image ",
-	        plugins: [ "link image lists preview " ],
-	        style_formats: [
 	          {title: "Blocks", items: [
 	            {title: "Paragraphe", format: "p"},
 	            {title: "Citation", format: "blockquote"},

@@ -5,7 +5,12 @@ namespace Ng\Core\Entity;
 
 class Entity
 {
-    
+
+    /**
+     * definie un attribut dynamiquement
+     * @param $key
+     * @return mixed
+     */
     public function __get($key)
     {
         $method = "get".ucfirst($key);
@@ -16,9 +21,12 @@ class Entity
     }
 
 
+    /**
+     * on recupere le temps bien formater
+     * @return string
+     */
     public function getTime(): string
     {
-        $date = new \DateTime();
         return date("D d M  Y", strtotime($this->date_created));
     }
 

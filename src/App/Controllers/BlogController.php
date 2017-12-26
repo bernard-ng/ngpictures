@@ -21,6 +21,7 @@ class BlogController extends NgpicController
     public function index()
     {
         $articles = $this->blog->latest();
+        $last = $this->loadModel('ngGallery')->latest();
         $verse = $this->callController("verses")->index();
         $categories = $this->categories->orderBy('title','ASC', 0, 5);
         
@@ -28,7 +29,7 @@ class BlogController extends NgpicController
         Page::setMeta(['property' => 'og:url', 'content' => '//larytech.com/blog']);
 
         $this->setLayout("articles/default");
-        $this->viewRender("blog/index", compact("articles","verse","categories"));
+        $this->viewRender("blog/index", compact("articles","verse","categories",'last'));
     }
 
     public function show($slug, $id)

@@ -3,21 +3,42 @@ namespace Ng\Core\Generic;
 
 use Ngpictures\Models\UsersModel;
 
+/**
+ * gestion des chaines des charateres
+ * Class Str
+ * @package Ng\Core\Generic
+ */
 class Str
 {
-    
+
+    /**
+     * cree un token
+     * @param int $length
+     * @return string
+     */
     public static function setToken(int $length): string
     {
-        $composants = "1234567890QERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfhjklzxcvbnm";
-        $token = substr(uniqid().str_shuffle(str_repeat($composants,$length)), 0, $length );
+        $components = "1234567890QERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfhjklzxcvbnm";
+        $token = substr(uniqid().str_shuffle(str_repeat($components, $length)), 0, $length );
         return $token;
     }
 
+
+    /**
+     * cree un token pour les cookie
+     * @return string
+     */
     public static function cookieToken(): string
     {
         return mt_rand(1000,9999).".".self::setToken(10);
     }
 
+
+    /**
+     * supprime les accents et rend le string kebaba_case
+     * @param string $string
+     * @return string
+     */
     public static function KebabCase(string $string): string
     {
         //&grave; &acute; &circ; &uml; &cedil; &tilde; &ring;
@@ -37,13 +58,19 @@ class Str
         return $formated;
     }
 
-    
+
+    /**
+     * tronque du text
+     * @param string $text
+     * @param int $maxChar
+     * @return string
+     */
     public static function truncateText(string $text, int $maxChar = 155): string
     {
         if (strlen($text) > $maxChar) {
              $text = substr($text, 0, $maxChar);
              $text = substr($text, 0, strrpos($text, " "));
-             $truncated =  $text."...";
+             $truncated =  $text."[...]";
         } else {
              $truncated = $text;
         }
@@ -51,6 +78,11 @@ class Str
     }
 
 
+    /**
+     * slugifie une valeur de bernard ng a bernard-ng
+     * @param string $text
+     * @return string
+     */
     public static function slugify(string $text): string
     {
         $text = preg_replace('#[^\pL\d]+#u', '-', $text);
@@ -66,46 +98,70 @@ class Str
     }
 
 
+    /**
+     * hash un password ou tout autre valuer int str float
+     * @param string $password
+     * @return string
+     */
     public static function hashPassword(string $password): string
     {
         return password_hash($password, PASSWORD_BCRYPT);
     }
 
+
+    /**
+     * echappe une valeur
+     * @param $unescapestring
+     * @return string
+     */
     public static function escape($unescapestring): string
     {
         return htmlspecialchars($unescapestring);
     }
 
-    public static function getSnipet($string): string
+
+    /**
+     * retire les balises html d'un contenu
+     * @param string $string
+     * @return string
+     */
+    public static function getSnipet(string $string): string
     {
         $snipet = preg_replace('#<p>|</p>#', '', $string);
         $snipet = preg_replace('#<h1>|<h2>|<h3>|<h4>|<h5>|</h1>|</h2>|</h3>|</h4>|</h5>#', '', $snipet);
         $snipet = preg_replace('#<ul>|<ol>|</ul>|</ol>#', '', $snipet);
         $snipet = preg_replace('#<img>#', '', $snipet);
-        $snipet = preg_replace('#<blocquote>|</blocquote>#', '', $snipet);
+        $snipet = preg_replace('#<blockquote>|</blockquote>#', '', $snipet);
         $snipet = preg_replace('#<em>|</em>#', '', $snipet);
         return $snipet;
     }
 
 
+    /**
+     * verifie si la version slug correspond a celle non slug
+     * @param string $url
+     * @param string $name
+     * @return string
+     */
     public static function checkUserUrl(string $url, string $name): string
     {
         $name = self::slugify($name);
-        if ($name == $url) {
-            return true;
-        } else {
-            return false;
-        }
+        return $name == $url;
     }
 
 
+    /**
+     * mention d'un utilisateur
+     * @param UsersModel $users
+     * @param $text
+     * @return string
+     */
     public static function userMention(UsersModel $users, $text): string
     {
         return preg_replace_callback(
-            "#@([A-Za-z0-9_]+)#", 
+            "#@([A-Za-z0-9-_]+)#",
             function ($matches) use ($users) {
                 $user = $users->findWith('name', $matches[1]);
-
                 if ($user) { return "<a href='{$user->accountUrl}' title='Voir le profil'>{$matches[0]}</a>"; }
                 return $matches[0];
             }, 
@@ -114,9 +170,13 @@ class Str
     }
 
 
+    /**
+     * php trimer relatif
+     * @param string $time
+     * @return string
+     */
     public static function relativeTime(string $time): string
     {
-
         setlocale(LC_TIME,'fr');
         $time = self::escape(strtotime($time)); 
         $time = time() - $time ;
@@ -140,8 +200,8 @@ class Str
             case $time > 604800 :
                 $days = substr(strftime('%d', $time), 0,3); 
                 $date = (date("Y") == strftime("Y",$time))? ucfirst(strftime('%B' , $time)) : ucfirst(strftime('%B' , $time));
-
-                $relative_time = "{$jour} {$date}";
+                $relative_time = "{$days} {$date}";
+                break;
 
             default:
                 $ago = intval($time % 60);
@@ -152,6 +212,11 @@ class Str
     }
 
 
+    /**
+     * format un grand monbre en K ou M
+     * @param int $number
+     * @return string
+     */
     public static function truncateNumber(int $number): string
     {
         $number = intval(self::escape($number));
@@ -178,16 +243,18 @@ class Str
     }
 
 
+    /**
+     * genere des balises meta a partir d'un tableau
+     * @param array $data
+     */
     public static function generateMeta(array $data = []) {
         $array_meta = [];
-        $array_data = [];
 
         foreach ($data as $k => $v) {
             $array_meta[] = "{$k} ='$v' ";
         }
 
         $meta = implode(' ',$array_meta);
-        
         echo "<meta {$meta} >";
     }
 }

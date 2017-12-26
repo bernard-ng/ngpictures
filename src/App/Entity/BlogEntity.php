@@ -28,8 +28,8 @@ class BlogEntity extends Entity
 
     public function getCategoryUrl(): string
     {
-        $categories = Str::Slugify($this->category);
-        $this->categoryUrl = "/categories/{$categories}";
+        $category= Str::Slugify($this->category);
+        $this->categoryUrl = "/categories/{$category}-{$this->category_id}";
         return $this->categoryUrl;
     }
 

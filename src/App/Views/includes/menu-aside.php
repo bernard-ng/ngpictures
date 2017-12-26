@@ -1,69 +1,43 @@
-<div class="col l3 m3 hide-on-small-and-down">
+<div class="col l3 m3 no-padding  hide-on-small-and-down">
     <ul class="collapsible" data-collapsible="expandable">
+        <?php if (isset($last) && !empty($last)) : ?>
+            <li>
+                <div class="collapsible-header active">
+                    <span class="section-title">
+                        Récents
+                    </span>
+                </div>
+                <div class="collapsible-body" style="padding: 10px;">
+                    <ul class="no-pad">
+                        <?php foreach ($last as $a): ?>
+                            <li class="collection-item avatar" id="<?= $a->id ?>">
+                                <a href="<?= $a->url ?>">
+                                    <img src="<?= $a->thumbUrl ?>" title="<?= $a->title ?? $a->name ?>"  width="100%">
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </li>
+        <?php endif; ?>
         <li>
-            <div class="collapsible-header active">
+            <div class="collapsible-header">
                 <span class="section-title">
                     Catégories
                 </span>
             </div>
             <div class="collapsible-body">
-                <div>
-                    Rétrouver nos articles dans les catégories suivantes
-                </div>
+                <?php foreach ($categories as $c): ?>
+                   <span>
+                       <b><a href="<?= $c->url ?>" title="<?= $c->title ?>"><?= $c->title ?></a></b>
+                   </span>
+                   <br>
+                <?php endforeach; ?>
                 <br>
-                 <ul>
-                    <?php foreach ($categories as $c): ?>
-                       <span>
-                           <i class="icon icon-chevron-right"></i>&nbsp;<a href="<?= $c->url ?>" title="<?= $c->title ?>"><?= $c->title ?></a>
-                       </span>
-                       <br>
-                    <?php endforeach; ?>
-                    <br>
-                    <i class="icon icon-chevron-right"></i> <a href="/categories">voir tout</a>
-                </ul>
+                <i class="icon icon-chevron-right"></i> <a href="/categories">voir tout</a>
             </div>
         </li>
-        <li>
-            <div class="collapsible-header active">
-                <span class="section-title">
-                    Derniers articles
-                </span>
-        </div>
-            <div class="collapsible-body">
-                <ul>
-                    <?php if (isset($blog) && !empty($blog)) : ?>
-                        <?php foreach ($blog as $b): ?>
-                           <i class="icon icon-pencil"></i>&nbsp;<a href="<?= $b->url ?>" title="Voir plus"><?= $b->title ?></a><br>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
 
-                    <?php if (isset($articles) && !empty($articles)) : ?>
-                        <?php foreach ($articles as $a): ?>
-                           <i class="icon icon-globe"></i>&nbsp;<a href="<?= $a->url ?>" title="Voir plus"><?= $a->title ?></a><br>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </ul>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header active">
-                <span class="section-title">
-                    Archives
-                </span>
-            </div>
-
-            <div class="collapsible-body">
-                <span>
-                   Parcourez nos archives et rétrouver des anciens articles et photos
-                </span><br>
-                <ul>
-                    <br><i class="icon icon-calendar"></i>&nbsp;<a href="/archives/decembre/2017">Décembre</a>
-                    <br><i class="icon icon-calendar"></i>&nbsp;<a href="">Novembre</a>
-                    <br><i class="icon icon-calendar"></i>&nbsp;<a href="">Octobre</a>
-                    <br><i class="icon icon-chevron-right"></i>&nbsp;<a href="/archives">Plus d'archives</a>
-                </ul>
-            </div>
-        </li>
     </ul>
     <?php include(APP."/Views/includes/verset.php"); ?>
 </div>

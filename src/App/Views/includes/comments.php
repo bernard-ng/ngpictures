@@ -18,7 +18,7 @@
             <?php if (!empty($comments)): ?>
                 <?php foreach($comments as $c) : ?>
                     <li class="collection-item avatar" id="<?= $c->id ?>">
-                        <img src="/imgs/default.JPG" class="circle">
+                        <img src="<?= $user->find($c->user_id)->avatarUrl ?>" class="circle">
                         <span class="title">
                             <a href="<?= $user->find($c->user_id)->accountUrl; ?>">
                                     <?= $c->username; ?>

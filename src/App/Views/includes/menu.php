@@ -6,7 +6,7 @@ $session = Session::getInstance();
 ?>
 <!--=============== NAVBAR ===================-->
 <header>
-    <div class="navbar-fixed">
+    <div class="navbar-fixed z-depth-2">
         <nav class="ng-menu-reset">
             <div class="nav-wrapper ng-menu shrink" id="menu">
                 <div class="row container">

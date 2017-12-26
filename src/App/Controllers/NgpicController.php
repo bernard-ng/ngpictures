@@ -15,7 +15,10 @@ class NgpicController extends Controller
                 $str,
                 $validator;
 
-
+    /**
+     * tous les messages d'erreur des controllers
+     * @var array
+     */
     protected $msg = [
 
         //general messages
@@ -27,22 +30,27 @@ class NgpicController extends Controller
         'admin_delete_notAllowed' => "Vous n'avez pas le droit de suppression",
         'admin_delete_notFound' => "La publication n'existe pas ou plus",
         'admin_all_fields' => "Complétez tous les champs",
+        'admin_slug_notKebab' => 'Le slug ne doit contenir que des chiffres, des lettres et des tirés',
         'admin_file_notPicture' => "Le fichier à télécharger doit être une image",
         'admin_modified_success' => "La publication a bien été modifier",
         'admin_post_success' => "La publication a bien été effectuée",
         'admin_picture_required' => "Ajouter une photo de couverture",
         'admin_confirm_success' => "Publication en ligne",
-        'admin_remove_success' =>"Publication hors ligne",
+        'admin_already_confrimed' => "Publication déjà en ligne",
+        'admin_remove_success' => "Publication hors ligne",
+        'admin_removed_admin' => "Suppression d'un administrateur",
+        'admin_added_admin' => "Ajout d'un administrateur",
 
         //comment controller messages
         'comment_post_notFound' => "Cette publication n'éxiste pas ou plus",
         'comment_notFound' => "Ce commentaire n'éxiste pas ou plus",
-        'comment_success' => "Merci pour votre commentaire",
+        'comment_success' => "commentaire posté",
         'comment_delete_success' => "Votre commentaire a bien été supprimé",
         'comment_edit_success' => "Votre commentaire a bien été modifié",
         'comment_delete_notAllowed' => "Vous n'avez pas le droit de suppression sur ce commentaire",
         'comment_edit_notAllowed' => "Vous n'avez pas le droit d'édition sur ce commentaire",
         'comment_required' => "Complétez le champ commentaire",
+        'category_notFound' => "Cette catégorie n'éxiste pas ou plus",
 
         //following controller messages
         'user_notFound' => "l'utilisateur n'a pas été trouvé",
@@ -50,7 +58,7 @@ class NgpicController extends Controller
         //users controller messages
         "user_must_login" => "Connectez-vous pour effectuer cette action",
         "user_not_confirmed" => "Votre compte n'a pas encore été confirmé",
-        "user_registration_succes" => "Un email de confirmation de compte vous a été envoyé",
+        "user_registration_success" => "Un email de confirmation de compte vous a été envoyé",
         "user_email_notFound" => "Aucun compte ne correspond à cet email",
         "user_reset_mail_success" => "Les instructions de rappelle de mot de passe vous ont été envoyées par mail",
         "user_logout_success" => "Vous êtes déconnecté",
@@ -62,8 +70,10 @@ class NgpicController extends Controller
         "user_dont_have_account" => "Vous n'avez pas de compte ? créez en un",
         'user_forbidden' => "Vous n'avez pas le droit d'access à cette page",
         "user_confirmation_failed" => "Une erreur est survenu lors de votre confirmation",
-        "user_username_tokken" => "Ce pseudo est deja pris",
-        "user_usermail_tokken" => "Cette adresse mail est deja prise"
+        "user_username_tokken" => "Ce pseudo est déjà pris",
+        "user_mail_tokken" => "Cette adresse mail est déjà prise",
+        "user_phone_tokken" => "Ce numéro est déjà pris",
+        "user_edit_success" => "Vos informations ont été mises à jour"
 
     ];
 
@@ -83,6 +93,11 @@ class NgpicController extends Controller
     }
 
 
+    /**
+     * charge un model
+     * @param string|array $model
+     * @return mixed|null
+     */
     protected function loadModel($model)
     {
         $Ngpic = Ngpic::getInstance();
@@ -98,12 +113,22 @@ class NgpicController extends Controller
         }
     }
 
+
+    /**
+     * fait appel a un controller dans un autre controller
+     * @param string $name
+     * @return mixed
+     */
     protected function callController(string $name)
     {
         return Ngpic::getInstance()->getController($name);
     }
 
 
+    /**
+     * definit un layout pour une vue
+     * @param string $layout
+     */
     protected function setLayout(string $layout)
     {
         $this->layout = $layout;

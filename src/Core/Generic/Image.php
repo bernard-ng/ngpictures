@@ -3,21 +3,25 @@ namespace Ng\Core\Generic;
 
 use Intervention\Image\ImageManager;
 
-use Ng\Core\Generic\{
-    Session, Str, Flash
-};
-
-use Ngpictures\Ngpic;
 
 Abstract class Image 
 {
 
+    /**
+     * les differents messages d'erreur
+     * @var array
+     */
     private static $msg = [
         'not_image' => 'Le fichier téléchargé doit être une image',
         'error_upload' => 'Une erreur est survenu lors du téléchargement de l\'image',
         'bigger_than_max' => 'Votre image est trop grande, elle ne doit pas dépasser 15 Mo'
     ];
 
+
+    /**
+     * les differents chemins d'upload
+     * @var array
+     */
     private static $path = [
         'blog' => UPLOAD.'/blog',
         'blog-thumbs' => UPLOAD.'/blog/thumbs',
@@ -35,24 +39,46 @@ Abstract class Image
         'avatars' => UPLOAD.'/avatars'
     ];
 
+
+    /**
+     * les formats de croppage disponible
+     * @var array
+     */
     private static $format = [
         'small' => 350,
-        'medium' => 700,
+        'medium' => 640,
         'large' => 1400,
         'ratio' => 500
     ];
 
+
+    /**
+     * extension du fichier attendu
+     * @var array
+     */
     private static $extensions = ['jpg','jpeg','png','gif'];
+
+
+    /**
+     * taille maximal du fichier
+     * @var int
+     */
     private static $size_max = 15728640; // 15mb
 
-    private static function extension(string $file, string $type): bool
+
+    /**
+     * verifi si un fichier est vraiment une image
+     * @param string $file
+     * @param string $type
+     * @return bool
+     */
+    private static function checkExtension(string $file, string $type): bool
     {
         $ext = explode('.', $file);
         $ext = strtolower(end($ext));
         $expected_type = ['image/jpg','image/jpeg','image/png','image/gif'];
-        $extensions = self::$extensions;
 
-        if (in_array($ext, $extensions) && in_array($type, $expected_type)) {
+        if (in_array($ext, self::$extensions) && in_array($type, $expected_type)) {
             return true;
         } else {
             return false;
@@ -60,6 +86,14 @@ Abstract class Image
     }
 
 
+    /**
+     * redimention et telecharge un fichier (une image precisement)
+     * @param Collection $file
+     * @param string $path
+     * @param string $name
+     * @param string $format
+     * @return bool
+     */
     public static function upload(Collection $file, string $path, string $name, string $format)
     {
         $flash = new Flash(Session::getInstance());
@@ -68,19 +102,25 @@ Abstract class Image
             $size = ($file->get('thumb.size'));
             $path = self::$path[$path];
 
-            if (self::extension($file->get('thumb.name'), $file->get('thumb.type'))) {
+            if (self::checkExtension($file->get('thumb.name'), $file->get('thumb.type'))) {
                 if ($size <= self::$size_max) {
                     $manager = new ImageManager();
                     $image = $manager->make($file->get('thumb.tmp_name'));
-    
-                    if ($format === 'ratio') {
-                        $image->fit(self::$format[$format], null, function($c){
-                            $c->aspectRatio();
-                        });
-                    } else {
-                        $image->fit(self::$format[$format], self::$format[$format]);
-                    }
-                       
+
+                    switch ($format) :
+                        case 'ratio' :
+                            $image->fit(self::$format[$format], null, function($c){
+                                $c->aspectRatio();
+                            });
+                            break;
+                        case 'article' :
+                            $image->fit(750, 501);
+                            break;
+                        case 'small' || 'medium' || 'large' :
+                            $image->fit(self::$format[$format], self::$format[$format]);
+                            break;
+                    endswitch;
+
                     $image
                         ->interlace(true)
                         ->save("{$path}/{$name}.jpg")
@@ -102,13 +142,16 @@ Abstract class Image
     }
 
 
+    /**
+     * cree un captcha
+     */
     public static function generateCaptcha()
     {
         Session::getInstance()->write("captcha", mt_rand(1000,9999));
-        $police = realpath(ROOT."/Public/assets/fonts/28 Days Later.ttf");
+        $police = realpath(WEBROOT."/assets/fonts/28 Days Later.ttf");
 
         $manager = new ImageManager();
-        $img = $manager->canvas(100, 30, "#fff") 
+        $manager->canvas(100, 30, "#fff")
             ->text(Session::getInstance()->read('captcha'), 25, 5, function($font) use ($police) {
                 $font->file($police); 
                 $font->size(23);                  

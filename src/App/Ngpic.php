@@ -15,11 +15,25 @@ use Ng\Core\Generic\{
 
 class Ngpic {
 
-	private static  $db_instance,
-                    $instance;
-    
+    /**
+     * la base de donnee
+     * @var
+     */
+    private static  $db_instance;
 
-    public static function getInstance(): Ngpic
+
+    /**
+     * notre application
+     * @var
+     */
+    private static $instance;
+
+
+    /**
+     * permet de recupere une et une meme instance
+     * @return Ngpic
+     */
+    public static function getInstance(): self
     {
 		if (self::$instance === null) {
 			self::$instance = new self();
@@ -61,7 +75,12 @@ class Ngpic {
 		return self::$db_instance;
 	}
 
- 
+
+    /**
+     * recupere est instancie un nouveau model
+     * @param string $class_name
+     * @return mixed
+     */
     public function getModel(string $class_name)
     {
         $class_name = "\\Ngpictures\\Models\\".ucfirst($class_name)."Model";
@@ -69,22 +88,61 @@ class Ngpic {
     }
 
 
+    /**
+     * recupere est instancie un nouveau controller
+     * @param string $name
+     * @return mixed
+     */
     public function getController(string $name)
     {
         $controller = "\\Ngpictures\\Controllers\\".ucfirst($name)."Controller";
         return new $controller();
     }
 
+    /**
+     * recupere une instance de flash
+     * @return Flash
+     */
+    public function getFlash(): Flash
+    {
+        return new Flash($this->getSession());
+    }
 
-    public function getFlash(): Flash { return new Flash($this->getSession()); }
+    /**
+     * recupere une instance de validator
+     * @return Validator
+     */
+    public function getValidator(): Validator
+    {
+        return new Validator($this->getDb(), $this->getFlash(), $_POST);
+    }
 
-    public function getValidator(): Validator { return new Validator($this->getDb(), $_POST); }
+    /**
+     * recupere la session
+     * @return Session
+     */
+    public function getSession(): Session
+    {
+        return Session::getInstance();
+    }
 
-    public function getSession(): Session { return Session::getInstance(); }
+    /**
+     * recupere le cookie
+     * @return cookie
+     */
+    public function getCookie(): Cookie
+    {
+        return Cookie::getInstance();
+    }
 
-    public function getCookie(): Cookie { return Cookie::getInstance(); }
-
-    public function getStr(): str { return new Str(); }
+    /**
+     * recupere le gestion de chaine de charactere
+     * @return str
+     */
+    public function getStr(): str
+    {
+        return new Str();
+    }
     
 
 
@@ -95,33 +153,44 @@ class Ngpic {
     ****************************************************************************/
 
 
+    /**
+     * on a le debugger ?
+     * @return mixed|null
+     */
     public static function hasDebug()
     {
         $settings = Config::getInstance(ROOT."/config/EnvConfig.php");
         return $settings->get('debug');
     }
 
-
+    /**
+     * on active le cache ?
+     * @return bool
+     */
     public static function hasCache(): bool
     {
         $settings = Config::getInstance(ROOT."/config/EnvConfig.php");
         return $settings->get('cache');
     }
 
-
+    /**
+     * gestion de redirection
+     * @param mixed $url
+     */
     public static function redirect($url = null)
     {
-       if ($url === true) {
-            if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
+       if (boolval($url) === true) {
+            if (!empty($_SERVER['HTTP_REFERER'])) {
+                //$self = strtolower($_SERVER['REQUEST_SCHEME'] ."://". $_SERVER['SERVER_NAME']);
                 header("location:{$_SERVER['HTTP_REFERER']}");
                 exit();
             } else {
                header('location:/home');
                exit();
             }
-        } else {
+       } else {
             is_null($url)? header('location:/home') : header("location:{$url}");
             exit();
-        }
+       }
     }
 }
