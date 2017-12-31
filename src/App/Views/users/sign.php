@@ -1,5 +1,8 @@
 <div class="card-panel mt-30" id="signUpBox">
-   <form method="POST" action="">
+    <div class="page-content mb-20">
+        <div class="section-title">Inscription</div>
+    </div>
+   <form method="POST" action="/sign">
         <div class="input-field"">
             <input type="text"  name="name" placeholder="pseudo (nom d'utilisateur)" id="name" value="<?= $post->get('name') ?>">
         </div>

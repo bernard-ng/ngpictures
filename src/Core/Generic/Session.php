@@ -39,6 +39,10 @@ class Session implements SessionInterface
     }
 
 
+    /**
+     * @param string $name
+     * @return bool
+     */
     public  function hasKey(string $name)
     {
         return isset($_SESSION[$name]);

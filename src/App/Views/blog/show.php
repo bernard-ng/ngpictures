@@ -4,14 +4,14 @@
         <!-- ARTICLE -->
             <article class="card ng-neg-top" id="<?= $article->id ?>">
                 <main class="ng-news-card-content">
-                    <content class="article-content">
+                    <main class="article-content">
                         <h1 style="margin-top: 0 !important;text-transform: uppercase;font-size: 2.3em"><?= $article->title ?></h1>
                         <p>
                             <img src="<?= $article->thumbUrl;?>" alt="Article Image" title="<?= $article->title ?>" class="align-center" width="100%">
                         </p>
                         <?= $article->fullText ?>
                         &nbsp;
-                    </content>
+                    </main>
                     <section id="articleInfo">
                         <div class="ng-news-card-stat">
                             <i class="icon icon-time"></i>&nbsp;

@@ -1,8 +1,55 @@
 <div class="container row">
+    <div class="col l3 hide-on-med-and-down">
+        <div class="card col l12">
+            <div class="section-title mb-20 mt-20 ml-10"> Espace sur le serveur</div>
+            <div id="stat2" class="col l12 m12 s12 statistic"></div>
+        </div>
+        <div class="card col l12" id="sticky" data-offset="45">
+            <div class="card-image">
+                <img src="/imgs/ngpic.jpg">
+            </div>
+            <div class="ng-contain">
+                <section class="description">
+                    <blockquote>
+                        The deep shooting, is not about what you see
+                        is about what you feel, when looking at a picture.
+                    </blockquote>
+                </section>
+            </div>
+            <div class="aside-imgs">
+                <div class="previous-imgs row" id="previousImgs">
+                    <span class="col l4 m4 s4">
+                        <img src="/imgs/team/balloy.jpg" alt="preso" title="Balloy fane" class="circle z-depth-1">
+                    </span>
+                    <span class="col l4 m4 s4">
+                        <img src="/imgs/team/precylia.jpg" alt="preso" title="precylia felo" class="circle z-depth-1">
+                    </span>
+                    <span class="col l4 m4 s4">
+                        <img src="/imgs/team/grey.jpg" alt="preso" title="gretta mpunga" class="circle z-depth-1">
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main class="col l9">
+    <div class="card no-padding col l12 s12 m12">
+        <nav class="nav z-depth-2 mb-20">
+            <div class="nav-wrapper">
+            <ul>
+                <li><a href="<?= ADMIN."/blog/add"  ?>">Article</a></li>
+                <li><a href="<?= ADMIN."/gallery/add" ?>">Photo</a> </li>
+                <li><a href="<?= ADMIN."/gallery/albums/add" ?>">Albums</a></li>
+                <li><a href="<?= ADMIN."/blog/categories/add" ?>">Catégorie</a></li>
+            </ul>
+            </div>
+        </nav>
+        <div class="section-title mb-20 mt-20 ml-10"> Statistiques</div>
+        <div id="stat" class="col l12 m12 s12 statistic"></div>
+    </div>
     <div class="card col l12 s12 m12">
         <div class="section-title mb-20 mt-20 ml-10">
             Les Derniers Articles
-            <span class="badge new"><?= count($blog) ?></span>
+            <span class="btn primary-b right"><?= count($site_articles) ?></span>
         </div>
         <div class="col l6 m12 s12 mb-30 z-depth-2">
             <table class="responsive-table bordered striped">
@@ -128,29 +175,7 @@
             </div>
         </div>                                                                                                                                                                                                                                  
     </div>
-
-    <div class="col l3 m12 s12">
-        <div class="card col l12 m6 s12">
-            <div class="section-title mb-10 mt-20 ml-10">Ajouter au site</div>
-            <ul class="collection">
-                <li class="collection-item">
-                    <a href="<?= ADMIN."/blog/add"  ?>">Nouvel Article</a>
-                </li>
-                <li class="collection-item">
-                    <a href="<?= ADMIN."/gallery/add" ?>">Nouvel Photo</a>
-                </li>
-                <li class="collection-item">
-                    <a href="<?= ADMIN."/verset/add" ?>">Nouveau Verset</a>
-                </li>
-                <li class="collection-item">
-                    <a href="<?= ADMIN."/category/add" ?>">Nouvelle catégorie</a>
-                </li>
-            </ul>
-        </div>
     </div>
-    <div class="card col l9 s12 m12">
-        <div class="section-title mb-20 mt-20 ml-10"> Statistiques</div>
-        <div id="stat" class="col l12 m12 s12 statistic"></div>
-    </div>
+    </main>
 </div>
 

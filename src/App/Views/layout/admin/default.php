@@ -9,7 +9,6 @@
         <link rel="stylesheet" type="tex/css" href="/assets/css/morris.css">
         <link rel="stylesheet" type="text/css" href="/assets/js/zoombox/zoombox.css">
     </head>
-    </head>
     <body>
         <?php include(APP."/Views/includes/adm-mobile-menu.php"); ?>
         <div class="jumbotron">
@@ -32,20 +31,82 @@
         <?php include(APP."/Views/includes/default-script.php"); ?>
         <script  type="text/javascript" src="/assets/js/lib/raphael.js"></script>
         <script  type="text/javascript" src="/assets/js/lib/morris.min.js"></script>
+        <script type="text/javascript" src="/assets/js/tinymce/tinymce.min.js"></script>
         <script  type="text/javascript">
-            Morris.Bar({
-              element: 'stat',
-              data: [
-                {x: 'janvier', y: 3, z: 2, a: 3},
-                {x: 'fevrier', y: 2, z: 1, a: 5},
-                {x: 'mars', y: 1, z: 2, a: 4},
-                {x: 'avril', y: 2, z: 4, a: 3}
-              ],
-              xkey: 'x',
-              ykeys: ['y', 'z', 'a'],
-              labels: ['articles', 'blog', 'photos']
+            if (tinymce !== undefined) {
+                tinymce.init({
+                    selector:"textarea#content",
+                    theme: "modern",
+                    skin: "lightgray",
+                    width: "100%",
+                    height: 400,
+                    file_browser_callback :  function (field_name, url, type, win) {
+                        tinyMCE.activeEditor.windowManager.open({
+                            file : "<?= ADMIN."/media-browser" ?>",
+                            title : 'Photo picker',
+                            width : 500,
+                            height: 500,
+                            resizable : "yes",
+                            inline : "yes",
+                            close_previous: "no"
+                        },{
+                            window : win,
+                            input : field_name
+                        });
+                        return false;
+                    },
+                    statusbar: true,
+                    relative_urls: false,
+                    menubar: false,
+                    toolbar: "styleselect |  bold italic  alignleft aligncenter alignright alignjustify  bullist numlist | link | image | preview ",
+                    plugins: [ "link image lists preview inlinepopups" ],
+                    style_formats: [
+                        {title : "Titre", items: [
+                            {title : "Niveau 1", format: "h2"},
+                            {title : "Niveau 2", format: "h3"},
+                            {title : "Niveau 3", format: "h4"}
+                        ]},
+                        {title: "Inline", items: [
+                            {title: "Gras", icon: "bold", format: "bold"},
+                            {title: "Italique", icon: "italic", format: "italic"},
+                            {title: "Code", icon: "code", format: "code"}
+                        ]},
+                        {title: "Blocks", items: [
+                            {title: "Paragraphe", format: "p"},
+                            {title: "Citation", format: "blockquote"},
+                            {title: "Div", format: "div"}
+                        ]}
+                    ]
+                });
+            }
+
+
+            Morris.Donut({
+                element: 'stat2',
+                    data: [
+                        {value: <?= $used_space ?? 5 ?>, label: 'Utiliser'},
+                        {value: <?= $total_space ?? 95 ?>, label: 'Libre'}
+                    ],
+                formatter: function (x) { return x + "%"}
             });
-    </script>
-    
+
+           Morris.Bar({
+               element: 'stat',
+               data: [
+                   {x: 'Users', y: <?= $users[0] ?? 0 ?>, z: <?= $users[1] ?? 0 ?>},
+                   {x: 'Articles', y: <?= $users_articles[0] ?? 0 ?>, z: <?= $users_articles[1] ?? 0?>},
+                   {x: 'Photos', y: <?= $users_photos[0] ?? 0 ?>, z: <?= $users_photos[1] ?? 0 ?>},
+                   {x: 'Online', y: <?= $users_online ?? 0 ?>},
+                   {x: 'pictures', y: <?= $site_photos[0] ?? 0 ?>, z: <?= $site_photos[1] ?? 0 ?>},
+                   {x: 'Blog', y: <?= $site_articles[0] ?? 0 ?>, z: <?= $site_articles[1] ?? 0 ?>},
+                   {x: 'Categ.', y: <?= $site_categories ?? 0 ?>},
+                   {x: 'Bugs', y: <?= $site_bugs  ?? 0 ?>},
+                   {x: 'Ideas', y: <?= $site_ideas  ?? 0 ?>}
+               ],
+               xkey: 'x',
+               ykeys: ['y', 'z'],
+               labels: ['confirmed', 'not confirmed']
+           });
+        </script>
     </body>
 </html>

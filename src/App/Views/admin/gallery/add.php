@@ -4,7 +4,7 @@
         <div class="card">
              <div class="page-title section-title">Poster une photo <i class="icon icon-picture right"></i></div>
 
-            <form action="#" method="POST" class="ml-10 mr-10 mb-30" enctype="multipart/form-data">
+            <form action="" method="POST" class="ml-10 mr-10 mb-30" enctype="multipart/form-data">
 
                 <div class="file-field input-field ">
                     <span class="btn blue-grey darken-1 waves-effect waves-light col s2 m2 l2" style="display: inline-block;">
@@ -18,11 +18,11 @@
                 </div>
 
                 <div class="col l12 m12 s12">
-                    <input type="text" id="name" name="name" placeholder="name" value="<?= $post->getWhenSet('name') ?>">
+                    <input type="text" id="name" name="name" placeholder="name" value="<?= $post->get('name') ?>">
                 </div>
 
                 <div class="col l6 m6 s12">
-                    <input type="text" id="tags" name="tags" placeholder="tags someone" value="<?= $post->getWhenSet('tags') ?>">
+                    <input type="text" id="tags" name="tags" placeholder="tags someone" value="<?= $post->get('tags') ?>">
                 </div>
 
                  <div class="col l6 m6 s12">
@@ -36,7 +36,7 @@
                 
 
                 <div class="input-field col l12 m12 s12">
-                    <textarea id="content" name="description" placeholder="description..."><?= $post->getWhenSet('description') ?></textarea>
+                    <textarea id="content" name="description" placeholder="description..."><?= $post->get('description') ?></textarea>
                 </div>
 
                 <div class="submit-button">

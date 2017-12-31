@@ -32,6 +32,8 @@ class NgpicController extends Controller
         'admin_all_fields' => "Complétez tous les champs",
         'admin_slug_notKebab' => 'Le slug ne doit contenir que des chiffres, des lettres et des tirés',
         'admin_file_notPicture' => "Le fichier à télécharger doit être une image",
+        'admin_file_notUploaded' => "Votre image n'a pas pu être télécharger",
+        'admin_not_directory' => "Impossibe d'ouvrir le dossier demandé, veuillez réessayer",
         'admin_modified_success' => "La publication a bien été modifier",
         'admin_post_success' => "La publication a bien été effectuée",
         'admin_picture_required' => "Ajouter une photo de couverture",
@@ -40,6 +42,9 @@ class NgpicController extends Controller
         'admin_remove_success' => "Publication hors ligne",
         'admin_removed_admin' => "Suppression d'un administrateur",
         'admin_added_admin' => "Ajout d'un administrateur",
+        'admin_ideas_success' => "Nous avons bien reçu votre idée",
+        'admin_bugs_success' => "Nous avons bien reçu votre message et comptons régler le bug dans le plus bref délais",
+        'admin_contact_success' => 'Nous avons bien reçu votre message et comptons vous répondre dans le plus bref délais',
 
         //comment controller messages
         'comment_post_notFound' => "Cette publication n'éxiste pas ou plus",

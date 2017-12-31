@@ -18,7 +18,7 @@ class HomeController extends NgpicController
     public function index()
     {
         $article = $this->blog->last();
-        $last = $this->blog->orderBy('id', 'DESC', 0,3);
+        $last = $this->blog->latest(1,3);
         $categories = $this->categories->orderBy('title','ASC',0,5);
         $verse = $this->callController('verses')->index();
 

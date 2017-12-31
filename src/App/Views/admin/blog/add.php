@@ -4,7 +4,7 @@
         <div class="card">
             <div class="page-title section-title">Rédaction <i class="icon icon-pencil right"></i></div>
 
-            <form action="#" method="POST" class="ml-10 mr-10 mb-30" enctype="multipart/form-data">
+            <form action="" method="POST" class="ml-10 mr-10 mb-30" enctype="multipart/form-data">
 
                 <div class="col l12 m12 s12">
                     <input type="text" id="title" name="title" placeholder="titre" value="<?= $post->get('title') ?>">

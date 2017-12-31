@@ -50,16 +50,6 @@ class UsersModel extends Model
 
 
     /**
-     * dernier utilisateur inscrit
-     * @return mixed
-     */
-    public function lastRegisterUser()
-    {
-        return $this->db->lastInsertId();
-    }
-
-
-    /**
      * verifiation du reset password token
      * @param string $token
      * @param int $user_id
@@ -68,7 +58,7 @@ class UsersModel extends Model
     public function checkResetToken(string $token, int $user_id)
     {
         return $this->query(
-            "SELECT * FROM users WHERE reset_token = ? AND reset_at > DATE_SUB(NOW(), INTERVAL 120 MINUTE) AND id = ? ",
+            "SELECT * FROM users WHERE (reset_token = ? AND reset_at > DATE_SUB(NOW(), INTERVAL 120 MINUTE)) AND id = ? ",
             [$token, $user_id],
             true, true
         );
@@ -174,6 +164,24 @@ class UsersModel extends Model
         return $this->query(
             "SELECT * FROM {$this->table} ORDER BY id DESC LIMIT 1",
             null, true, true
+        );
+    }
+
+
+    public function lastConfirmed()
+    {
+        return $this->query(
+            "SELECT * FROM {$this->table} WHERE confirmed_at IS NOT NULL ",
+            null,true,false
+        );
+    }
+
+
+    public function lastNotConfirmed()
+    {
+        return $this->query(
+            "SELECT * FROM {$this->table} WHERE confirmed_at IS NULL",
+            null, true, false
         );
     }
 }

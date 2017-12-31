@@ -1,4 +1,7 @@
 <div class="card-panel z-depth-4  mt-30" id="loginBox" >
+    <div class="page-content mb-20">
+        <span class="section-title">Connexion</span>
+    </div>
     <form method="POST" action="/login">
         <input type="text" id="name" name="name" placeholder="Pseudo ou adresse mail" value="<?= $post->get('name') ?>" >
         <input type="password" name="password" id="password" placeholder="Mot de passe" >
@@ -23,4 +26,3 @@
     </div>
 </div>
 </div>    
-</div>

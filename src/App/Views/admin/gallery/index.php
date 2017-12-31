@@ -1,7 +1,16 @@
 <main class="container row">
     <?php include(APP."/Views/includes/left-aside.php"); ?>
     <section class="col l9 m12 s12">
-        <div class="card col l12 m12 s12">
+        <div class="card no-padding col l12 m12 s12">
+            <nav class="nav z-depth-2 mb-20">
+                <div class="nav-wrapper">
+                <ul>
+                    <li><a href="<?= ADMIN."/file-browser/ngpictures/" ?>">Photo site</a></li>
+                    <li class="right"><a href="<?= ADMIN."/gallery/albums/"  ?>">Albums</a></li>
+                    <li class="right"><a href="<?= ADMIN."/gallery/albums/add" ?>">Ajouter un Album</a></li>
+                </ul>
+                </div>
+            </nav>
             <?php if (!empty($photo)): ?>
                 <?php foreach ($photo as $photo): ?>
                     <article class="card col l3" id="<?= $photo->id ?>">
@@ -27,6 +36,7 @@
         <div class="card-panel col l12">
             <div class="section-title mb-20 mt-20 ml-10">
                 Les Photos
+                <span class="btn primary-b right"><?= count($photos) ?></span>
                 <a href="<?= ADMIN."/gallery/add" ?>" class="right">
                     <button class="btn">
                         <i class="icon icon-plus" style="font-size: smaller !important;"></i>

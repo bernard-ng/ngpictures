@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 19 Décembre 2017 à 06:20
+-- Généré le :  Lun 01 Janvier 2018 à 17:20
 -- Version du serveur :  5.7.14
 -- Version de PHP :  7.0.10
 
@@ -43,55 +43,6 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`id`, `title`, `content`, `user_id`, `date_created`, `thumb`, `slug`, `category_id`, `online`) VALUES
-(1, 'fermentum metus. Aenean sed pede', 'Lorem ipsum dolor sit amet,', 2, '2017-09-03 11:21:36', 'default.png', 'consectetuer adipiscing elit. Etiam laoreet,', '4', 1),
-(2, 'posuere cubilia Curae; Phasellus ornare.', 'Lorem ipsum dolor sit amet,', 2, '2018-02-07 12:37:30', 'default.png', 'Integer eu lacus. Quisque imperdiet,', '10', 1),
-(3, 'lorem, auctor quis, tristique ac,', 'Lorem', 3, '2018-11-06 16:41:49', 'default.png', 'euismod in, dolor. Fusce feugiat.', '7', 1),
-(4, 'odio tristique pharetra. Quisque ac', 'Lorem ipsum dolor sit', 5, '2017-02-13 11:49:53', 'default.png', 'et ipsum cursus vestibulum. Mauris', '8', 1),
-(5, 'rhoncus. Nullam velit dui, semper', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 5, '2017-10-26 02:46:13', 'default.png', 'tellus. Aenean egestas hendrerit neque.', '10', 1),
-(6, 'ac turpis egestas. Aliquam fringilla', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 4, '2018-10-07 20:11:49', 'default.png', 'non, bibendum sed, est. Nunc', '8', 1),
-(7, 'sociis natoque penatibus et magnis', 'Lorem ipsum dolor sit amet, consectetuer', 2, '2018-10-01 11:40:52', 'default.png', 'blandit mattis. Cras eget nisi', '2', 1),
-(8, 'tristique senectus et netus et', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 5, '2017-06-17 00:45:39', 'default.png', 'semper. Nam tempor diam dictum', '5', 1),
-(9, 'molestie pharetra nibh. Aliquam ornare,', 'Lorem ipsum dolor sit', 3, '2017-10-02 07:50:08', 'default.png', 'egestas hendrerit neque. In ornare', '7', 1),
-(10, 'quis, pede. Praesent eu dui.', 'Lorem ipsum dolor sit amet, consectetuer', 5, '2017-09-23 07:13:36', 'default.png', 'odio. Phasellus at augue id', '9', 1),
-(11, 'pede nec ante blandit viverra.', 'Lorem ipsum dolor sit', 4, '2018-06-12 22:56:17', 'default.png', 'volutpat. Nulla dignissim. Maecenas ornare', '10', 1),
-(12, 'Fusce feugiat. Lorem ipsum dolor', 'Lorem', 4, '2018-04-15 18:29:43', 'default.png', 'vel quam dignissim pharetra. Nam', '4', 1),
-(13, 'sagittis augue, eu tempor erat', 'Lorem ipsum dolor sit amet, consectetuer', 2, '2017-10-08 06:32:54', 'default.png', 'venenatis lacus. Etiam bibendum fermentum', '2', 1),
-(14, 'pellentesque, tellus sem mollis dui,', 'Lorem ipsum dolor sit amet,', 5, '2017-12-12 01:00:50', 'default.png', 'ridiculus mus. Proin vel arcu', '5', 1),
-(15, 'sociis natoque penatibus et magnis', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 1, '2017-08-08 18:46:08', 'default.png', 'placerat velit. Quisque varius. Nam', '1', 1),
-(16, 'amet lorem semper auctor. Mauris', 'Lorem', 2, '2018-02-08 15:43:40', 'default.png', 'sem molestie sodales. Mauris blandit', '4', 1),
-(17, 'mi pede, nonummy ut, molestie', 'Lorem ipsum dolor sit amet,', 5, '2018-05-29 14:50:15', 'default.png', 'felis. Donec tempor, est ac', '3', 1),
-(18, 'vestibulum, neque sed dictum eleifend,', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 2, '2017-04-04 08:45:45', 'default.png', 'non lorem vitae odio sagittis', '8', 1),
-(19, 'mauris sit amet lorem semper', 'Lorem ipsum dolor', 1, '2017-11-09 15:06:33', 'default.png', 'eget nisi dictum augue malesuada', '6', 1),
-(20, 'faucibus orci luctus et ultrices', 'Lorem', 4, '2017-09-18 09:08:12', 'default.png', 'Vestibulum ut eros non enim', '2', 1),
-(21, 'ipsum primis in faucibus orci', 'Lorem ipsum dolor sit', 1, '2017-02-12 23:23:54', 'default.png', 'semper cursus. Integer mollis. Integer', '10', 1),
-(22, 'aliquet vel, vulputate eu, odio.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 1, '2017-04-24 20:24:09', 'default.png', 'fringilla mi lacinia mattis. Integer', '2', 1),
-(23, 'Etiam laoreet, libero et tristique', 'Lorem ipsum dolor sit', 4, '2018-02-21 03:54:17', 'default.png', 'magna, malesuada vel, convallis in,', '9', 1),
-(24, 'eu nibh vulputate mauris sagittis', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 5, '2017-04-01 00:18:54', 'default.png', 'ante. Vivamus non lorem vitae', '5', 1),
-(25, 'ligula. Aenean gravida nunc sed', 'Lorem ipsum', 5, '2017-12-02 14:57:05', 'default.png', 'nec, mollis vitae, posuere at,', '4', 1),
-(26, 'parturient montes, nascetur ridiculus mus.', 'Lorem ipsum dolor sit', 2, '2017-08-20 19:42:43', 'default.png', 'quis, pede. Suspendisse dui. Fusce', '2', 1),
-(27, 'sapien. Cras dolor dolor, tempus', 'Lorem', 3, '2017-05-31 09:47:37', 'default.png', 'Quisque tincidunt pede ac urna.', '7', 1),
-(28, 'eu augue porttitor interdum. Sed', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 1, '2017-04-27 05:05:46', 'default.png', 'mollis. Duis sit amet diam', '5', 1),
-(29, 'diam eu dolor egestas rhoncus.', 'Lorem ipsum dolor sit amet,', 4, '2018-02-24 08:57:42', 'default.png', 'Nulla eget metus eu erat', '8', 1),
-(30, 'commodo auctor velit. Aliquam nisl.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 3, '2018-05-07 20:11:22', 'default.png', 'eu, eleifend nec, malesuada ut,', '3', 1),
-(31, 'odio. Phasellus at augue id', 'Lorem ipsum', 3, '2017-04-07 04:18:28', 'default.png', 'fringilla. Donec feugiat metus sit', '7', 1),
-(32, 'eleifend. Cras sed leo. Cras', 'Lorem ipsum dolor sit', 4, '2017-04-21 13:52:12', 'default.png', 'id, erat. Etiam vestibulum massa', '2', 1),
-(33, 'montes, nascetur ridiculus mus. Proin', 'Lorem ipsum', 2, '2017-05-07 02:34:38', 'default.png', 'porttitor eros nec tellus. Nunc', '4', 1),
-(34, 'justo nec ante. Maecenas mi', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 4, '2017-11-28 22:32:30', 'default.png', 'Cum sociis natoque penatibus et', '10', 1),
-(35, 'tellus. Aenean egestas hendrerit neque.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 3, '2017-12-20 21:59:37', 'default.png', 'Vivamus nisi. Mauris nulla. Integer', '9', 1),
-(36, 'rutrum urna, nec luctus felis', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 2, '2018-05-27 01:10:47', 'default.png', 'orci tincidunt adipiscing. Mauris molestie', '6', 1),
-(37, 'metus. Aliquam erat volutpat. Nulla', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 4, '2018-05-25 17:53:26', 'default.png', 'eget, volutpat ornare, facilisis eget,', '3', 1),
-(38, 'dictum cursus. Nunc mauris elit,', 'Lorem ipsum dolor sit amet,', 3, '2018-10-31 19:55:52', 'default.png', 'facilisis non, bibendum sed, est.', '8', 1),
-(39, 'lobortis tellus justo sit amet', 'Lorem ipsum dolor sit', 5, '2018-08-19 14:01:02', 'default.png', 'eleifend, nunc risus varius orci,', '8', 1),
-(40, 'luctus vulputate, nisi sem semper', 'Lorem ipsum dolor', 2, '2018-07-30 23:39:38', 'default.png', 'tincidunt orci quis lectus. Nullam', '5', 1),
-(41, 'scelerisque neque. Nullam nisl. Maecenas', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 1, '2017-08-31 07:30:07', 'default.png', 'a, malesuada id, erat. Etiam', '5', 1),
-(42, 'ante dictum cursus. Nunc mauris', 'Lorem ipsum dolor sit amet,', 3, '2017-11-14 13:39:07', 'default.png', 'Quisque ac libero nec ligula', '7', 1),
-(43, 'imperdiet, erat nonummy ultricies ornare,', 'Lorem', 1, '2018-10-04 04:52:18', 'default.png', 'Nunc sed orci lobortis augue', '6', 1),
-(44, 'sollicitudin adipiscing ligula. Aenean gravida', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 3, '2017-02-18 01:11:35', 'default.png', 'faucibus orci luctus et ultrices', '2', 1),
-(45, 'semper rutrum. Fusce dolor quam,', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 5, '2017-12-15 13:15:56', 'default.png', 'Phasellus in felis. Nulla tempor', '6', 1),
-(46, 'venenatis lacus. Etiam bibendum fermentum', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 3, '2017-04-01 10:28:53', 'default.png', 'quis massa. Mauris vestibulum, neque', '4', 1),
-(47, 'velit eu sem. Pellentesque ut', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 1, '2017-06-06 02:10:15', 'default.png', 'fermentum metus. Aenean sed pede', '5', 1),
-(48, 'ipsum. Phasellus vitae mauris sit', 'Lorem ipsum dolor sit amet, consectetuer', 1, '2018-02-12 10:28:34', 'default.png', 'tortor. Nunc commodo auctor velit.', '4', 1),
-(49, 'eleifend vitae, erat. Vivamus nisi.', 'Lorem ipsum dolor sit amet,', 3, '2018-04-20 12:12:37', 'default.png', 'velit egestas lacinia. Sed congue,', '6', 1),
 (50, 'eu eros. Nam consequat dolor', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 5, '2018-12-07 14:48:46', 'default.png', 'non, bibendum sed, est. Nunc', '10', 1),
 (51, 'rhoncus. Donec est. Nunc ullamcorper,', 'Lorem ipsum dolor sit', 5, '2018-03-02 14:11:23', 'default.png', 'velit. Pellentesque ultricies dignissim lacus.', '7', 1),
 (52, 'consectetuer euismod est arcu ac', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 5, '2017-12-05 19:56:43', 'default.png', 'semper pretium neque. Morbi quis', '1', 1),
@@ -108,41 +59,13 @@ INSERT INTO `articles` (`id`, `title`, `content`, `user_id`, `date_created`, `th
 (63, 'sem magna nec quam. Curabitur', 'Lorem ipsum dolor sit amet, consectetuer', 5, '2017-05-06 10:00:12', 'default.png', 'pharetra nibh. Aliquam ornare, libero', '7', 1),
 (64, 'elit, pellentesque a, facilisis non,', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 5, '2018-10-13 00:42:10', 'default.png', 'penatibus et magnis dis parturient', '3', 1),
 (65, 'diam eu dolor egestas rhoncus.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 2, '2017-07-29 08:37:48', 'default.png', 'egestas. Aliquam fringilla cursus purus.', '7', 1),
-(66, 'Integer urna. Vivamus molestie dapibus', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 3, '2018-08-21 14:16:56', 'default.png', 'Phasellus ornare. Fusce mollis. Duis', '4', 1),
-(67, 'ligula elit, pretium et, rutrum', 'Lorem ipsum dolor sit', 1, '2017-06-18 23:43:41', 'default.png', 'nulla. Integer vulputate, risus a', '9', 1),
-(68, 'lectus pede, ultrices a, auctor', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 3, '2017-07-30 04:30:27', 'default.png', 'congue, elit sed consequat auctor,', '9', 1),
-(69, 'sed tortor. Integer aliquam adipiscing', 'Lorem ipsum dolor sit amet, consectetuer', 2, '2017-02-18 10:47:08', 'default.png', 'elit elit fermentum risus, at', '8', 1),
-(70, 'libero et tristique pellentesque, tellus', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 1, '2017-05-24 09:39:17', 'default.png', 'Cras dolor dolor, tempus non,', '3', 1),
-(71, 'Vivamus non lorem vitae odio', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 1, '2018-10-26 05:07:59', 'default.png', 'euismod enim. Etiam gravida molestie', '5', 1),
-(72, 'erat, eget tincidunt dui augue', 'Lorem ipsum dolor', 1, '2017-07-21 23:27:23', 'default.png', 'semper, dui lectus rutrum urna,', '4', 1),
-(73, 'montes, nascetur ridiculus mus. Proin', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 1, '2018-04-12 02:41:39', 'default.png', 'fermentum risus, at fringilla purus', '3', 1),
-(74, 'a felis ullamcorper viverra. Maecenas', 'Lorem ipsum dolor', 3, '2017-03-27 03:47:24', 'default.png', 'dolor. Donec fringilla. Donec feugiat', '1', 1),
-(75, 'augue eu tellus. Phasellus elit', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 2, '2018-04-22 03:30:03', 'default.png', 'rutrum lorem ac risus. Morbi', '8', 1),
-(76, 'litora torquent per conubia nostra,', 'Lorem ipsum dolor sit amet,', 5, '2018-11-24 02:00:20', 'default.png', 'sociis natoque penatibus et magnis', '1', 1),
-(77, 'interdum. Nunc sollicitudin commodo ipsum.', 'Lorem ipsum dolor', 2, '2018-02-28 17:40:20', 'default.png', 'Nunc sollicitudin commodo ipsum. Suspendisse', '8', 1),
-(78, 'Curabitur ut odio vel est', 'Lorem ipsum dolor sit amet,', 2, '2017-04-13 21:13:10', 'default.png', 'ultricies dignissim lacus. Aliquam rutrum', '7', 1),
-(79, 'Etiam bibendum fermentum metus. Aenean', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 1, '2018-04-23 23:00:47', 'default.png', 'tincidunt dui augue eu tellus.', '6', 1),
-(80, 'Quisque fringilla euismod enim. Etiam', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 5, '2017-09-03 16:52:58', 'default.png', 'sit amet massa. Quisque porttitor', '4', 1),
-(81, 'taciti sociosqu ad litora torquent', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 4, '2017-02-25 06:53:51', 'default.png', 'sem semper erat, in consectetuer', '6', 1),
-(82, 'vitae aliquam eros turpis non', 'Lorem ipsum dolor', 4, '2018-04-22 10:34:38', 'default.png', 'nisi. Cum sociis natoque penatibus', '3', 1),
-(83, 'turpis vitae purus gravida sagittis.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 3, '2017-06-19 23:56:33', 'default.png', 'Quisque fringilla euismod enim. Etiam', '6', 1),
-(84, 'lacinia. Sed congue, elit sed', 'Lorem ipsum dolor sit', 3, '2017-04-19 13:39:22', 'default.png', 'lacus. Etiam bibendum fermentum metus.', '3', 1),
-(85, 'molestie tortor nibh sit amet', 'Lorem ipsum dolor sit amet, consectetuer', 5, '2018-11-08 22:47:01', 'default.png', 'nec, euismod in, dolor. Fusce', '6', 1),
-(86, 'mauris ipsum porta elit, a', 'Lorem ipsum', 2, '2017-03-04 13:03:15', 'default.png', 'Praesent interdum ligula eu enim.', '6', 1),
-(87, 'non, hendrerit id, ante. Nunc', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 2, '2017-12-12 23:59:28', 'default.png', 'augue malesuada malesuada. Integer id', '8', 1),
-(88, 'libero. Integer in magna. Phasellus', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 4, '2018-02-26 23:29:32', 'default.png', 'mattis velit justo nec ante.', '4', 1),
-(89, 'Mauris ut quam vel sapien', 'Lorem', 2, '2017-10-26 21:13:30', 'default.png', 'Mauris vel turpis. Aliquam adipiscing', '10', 1),
-(90, 'arcu. Vivamus sit amet risus.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 3, '2018-08-18 21:28:35', 'default.png', 'arcu. Vivamus sit amet risus.', '6', 1),
-(91, 'fermentum convallis ligula. Donec luctus', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 2, '2018-06-22 02:33:32', 'default.png', 'feugiat metus sit amet ante.', '5', 1),
-(92, 'dis parturient montes, nascetur ridiculus', 'Lorem ipsum', 4, '2017-07-09 17:25:45', 'default.png', 'et, lacinia vitae, sodales at,', '8', 1),
-(93, 'purus, in molestie tortor nibh', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 4, '2018-06-10 19:11:48', 'default.png', 'vitae risus. Duis a mi', '7', 1),
-(94, 'luctus aliquet odio. Etiam ligula', 'Lorem ipsum', 5, '2018-12-04 14:54:18', 'default.png', 'imperdiet ullamcorper. Duis at lacus.', '8', 1),
-(95, 'vitae risus. Duis a mi', 'Lorem ipsum', 4, '2018-04-04 06:40:47', 'default.png', 'Suspendisse non leo. Vivamus nibh', '1', 1),
-(96, 'lorem ipsum sodales purus, in', 'Lorem ipsum dolor sit amet, consectetuer', 5, '2017-06-10 09:18:29', 'default.png', 'mus. Donec dignissim magna a', '2', 1),
-(97, 'nec tempus scelerisque, lorem ipsum', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 5, '2018-07-19 07:57:25', 'default.png', 'quis diam. Pellentesque habitant morbi', '1', 1),
-(98, 'Vestibulum ante ipsum primis in', 'Lorem ipsum dolor sit amet,', 3, '2017-06-17 23:15:36', 'default.png', 'et nunc. Quisque ornare tortor', '1', 1),
-(99, 'sem. Nulla interdum. Curabitur dictum.', 'Lorem ipsum dolor', 3, '2018-08-08 23:57:31', 'default.png', 'eget lacus. Mauris non dui', '7', 1),
-(100, 'lacus. Aliquam rutrum lorem ac', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 2, '2017-03-17 11:56:41', 'default.png', 'Duis a mi fringilla mi', '6', 1);
+(66, 'Integer urna. Vivamus molestie dapibus', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 3, '2018-08-21 14:16:56', 'default.png', 'Phasellus ornare. Fusce mollis. Duis', '4', 0),
+(67, 'ligula elit, pretium et, rutrum', 'Lorem ipsum dolor sit', 1, '2017-06-18 23:43:41', 'default.png', 'nulla. Integer vulputate, risus a', '9', 0),
+(68, 'lectus pede, ultrices a, auctor', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 3, '2017-07-30 04:30:27', 'default.png', 'congue, elit sed consequat auctor,', '9', 0),
+(69, 'sed tortor. Integer aliquam adipiscing', 'Lorem ipsum dolor sit amet, consectetuer', 2, '2017-02-18 10:47:08', 'default.png', 'elit elit fermentum risus, at', '8', 0),
+(70, 'libero et tristique pellentesque, tellus', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 1, '2017-05-24 09:39:17', 'default.png', 'Cras dolor dolor, tempus non,', '3', 0),
+(71, 'Vivamus non lorem vitae odio', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 1, '2018-10-26 05:07:59', 'default.png', 'euismod enim. Etiam gravida molestie', '5', 0),
+(72, 'erat, eget tincidunt dui augue', 'Lorem ipsum dolor', 1, '2017-07-21 23:27:23', 'default.png', 'semper, dui lectus rutrum urna,', '4', 0);
 
 -- --------------------------------------------------------
 
@@ -167,55 +90,6 @@ CREATE TABLE `blog` (
 --
 
 INSERT INTO `blog` (`id`, `title`, `content`, `user_id`, `date_created`, `thumb`, `slug`, `category_id`, `online`) VALUES
-(1, 'quis urna. Nunc quis arcu', 'Lorem ipsum dolor sit', 3, '2017-11-17 02:19:54', 'Ngpictures.jpg', 'Aliquam rutrum lorem ac risus.', 7, 1),
-(2, 'Lorem ipsum dolor sit amet,', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 4, '2018-06-10 16:55:57', 'Ngpictures.jpg', 'cursus vestibulum. Mauris magna. Duis', 4, 1),
-(3, 'ridiculus mus. Donec dignissim magna', 'Lorem ipsum dolor sit amet,', 1, '2017-10-06 00:58:09', 'Ngpictures.jpg', 'tristique neque venenatis lacus. Etiam', 5, 1),
-(4, 'dignissim lacus. Aliquam rutrum lorem', 'Lorem ipsum dolor', 5, '2018-10-25 13:43:31', 'Ngpictures.jpg', 'magna tellus faucibus leo, in', 1, 1),
-(5, 'justo nec ante. Maecenas mi', 'Lorem ipsum dolor sit amet, consectetuer', 4, '2017-04-08 02:26:59', 'Ngpictures.jpg', 'tellus justo sit amet nulla.', 7, 1),
-(6, 'Ut sagittis lobortis mauris. Suspendisse', 'Lorem ipsum dolor', 1, '2018-05-27 12:55:49', 'Ngpictures.jpg', 'Duis elementum, dui quis accumsan', 4, 1),
-(7, 'ipsum. Donec sollicitudin adipiscing ligula.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 5, '2017-09-07 12:33:31', 'Ngpictures.jpg', 'aliquet lobortis, nisi nibh lacinia', 3, 1),
-(8, 'vel nisl. Quisque fringilla euismod', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 1, '2018-10-13 05:54:37', 'Ngpictures.jpg', 'natoque penatibus et magnis dis', 3, 1),
-(9, 'Pellentesque ut ipsum ac mi', 'Lorem ipsum dolor sit amet, consectetuer', 3, '2017-10-20 20:28:10', 'Ngpictures.jpg', 'libero et tristique pellentesque, tellus', 3, 1),
-(10, 'urna. Nunc quis arcu vel', 'Lorem', 3, '2017-02-24 19:32:57', 'Ngpictures.jpg', 'luctus et ultrices posuere cubilia', 9, 1),
-(11, 'et magnis dis parturient montes,', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 2, '2018-02-05 14:36:22', 'Ngpictures.jpg', 'magna nec quam. Curabitur vel', 5, 1),
-(12, 'dui, in sodales elit erat', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 2, '2017-10-01 00:37:02', 'Ngpictures.jpg', 'semper tellus id nunc interdum', 5, 1),
-(13, 'imperdiet, erat nonummy ultricies ornare,', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 2, '2018-05-19 10:52:15', 'Ngpictures.jpg', 'felis. Nulla tempor augue ac', 10, 1),
-(14, 'egestas hendrerit neque. In ornare', 'Lorem ipsum', 5, '2017-04-14 18:06:34', 'Ngpictures.jpg', 'volutpat nunc sit amet metus.', 9, 1),
-(15, 'neque. Morbi quis urna. Nunc', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 3, '2017-03-31 02:48:58', 'Ngpictures.jpg', 'massa. Quisque porttitor eros nec', 6, 1),
-(16, 'tristique senectus et netus et', 'Lorem ipsum dolor sit amet, consectetuer', 2, '2017-01-07 06:57:53', 'Ngpictures.jpg', 'pede, malesuada vel, venenatis vel,', 2, 1),
-(17, 'tortor at risus. Nunc ac', 'Lorem', 2, '2018-09-09 03:04:11', 'Ngpictures.jpg', 'aliquet. Phasellus fermentum convallis ligula.', 3, 1),
-(18, 'in, cursus et, eros. Proin', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 4, '2018-06-24 20:34:32', 'Ngpictures.jpg', 'ac tellus. Suspendisse sed dolor.', 2, 1),
-(19, 'Aenean eget magna. Suspendisse tristique', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 2, '2018-09-07 06:08:34', 'Ngpictures.jpg', 'tempus risus. Donec egestas. Duis', 4, 1),
-(20, 'non leo. Vivamus nibh dolor,', 'Lorem ipsum dolor', 1, '2017-02-02 03:11:10', 'Ngpictures.jpg', 'tristique pellentesque, tellus sem mollis', 9, 1),
-(21, 'tempus eu, ligula. Aenean euismod', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 2, '2018-06-09 19:31:50', 'Ngpictures.jpg', 'Integer id magna et ipsum', 9, 1),
-(22, 'hendrerit consectetuer, cursus et, magna.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 4, '2018-08-30 15:11:04', 'Ngpictures.jpg', 'ornare tortor at risus. Nunc', 4, 1),
-(23, 'posuere at, velit. Cras lorem', 'Lorem ipsum dolor sit', 3, '2017-08-25 01:33:14', 'Ngpictures.jpg', 'dictum cursus. Nunc mauris elit,', 8, 1),
-(24, 'sem mollis dui, in sodales', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 2, '2018-06-07 05:41:14', 'Ngpictures.jpg', 'eu, accumsan sed, facilisis vitae,', 5, 1),
-(25, 'eu, euismod ac, fermentum vel,', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 4, '2017-12-22 22:22:11', 'Ngpictures.jpg', 'a feugiat tellus lorem eu', 1, 1),
-(26, 'at arcu. Vestibulum ante ipsum', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 4, '2017-01-21 01:07:49', 'Ngpictures.jpg', 'Aenean massa. Integer vitae nibh.', 2, 1),
-(27, 'cursus. Integer mollis. Integer tincidunt', 'Lorem ipsum', 2, '2018-09-12 23:40:00', 'Ngpictures.jpg', 'Nullam suscipit, est ac facilisis', 4, 1),
-(28, 'imperdiet non, vestibulum nec, euismod', 'Lorem ipsum dolor sit', 4, '2017-06-24 08:07:31', 'Ngpictures.jpg', 'consectetuer mauris id sapien. Cras', 1, 1),
-(29, 'rutrum eu, ultrices sit amet,', 'Lorem ipsum dolor sit amet, consectetuer', 5, '2018-08-29 20:39:26', 'Ngpictures.jpg', 'nulla magna, malesuada vel, convallis', 7, 1),
-(30, 'tellus faucibus leo, in lobortis', 'Lorem ipsum dolor sit amet,', 1, '2018-01-21 18:17:14', 'Ngpictures.jpg', 'tortor at risus. Nunc ac', 9, 1),
-(31, 'Phasellus in felis. Nulla tempor', 'Lorem ipsum dolor sit', 5, '2018-06-28 19:43:22', 'Ngpictures.jpg', 'sollicitudin adipiscing ligula. Aenean gravida', 2, 1),
-(32, 'sem egestas blandit. Nam nulla', 'Lorem ipsum dolor sit', 4, '2018-01-19 06:38:45', 'Ngpictures.jpg', 'dictum. Proin eget odio. Aliquam', 2, 1),
-(33, 'orci. Donec nibh. Quisque nonummy', 'Lorem', 3, '2018-05-13 11:20:25', 'Ngpictures.jpg', 'a odio semper cursus. Integer', 2, 1),
-(34, 'ut, pellentesque eget, dictum placerat,', 'Lorem ipsum dolor sit amet, consectetuer', 4, '2018-08-27 22:09:35', 'Ngpictures.jpg', 'euismod enim. Etiam gravida molestie', 1, 1),
-(35, 'urna, nec luctus felis purus', 'Lorem ipsum dolor sit amet, consectetuer', 3, '2018-10-08 11:52:58', 'Ngpictures.jpg', 'vitae semper egestas, urna justo', 2, 1),
-(36, 'ipsum non arcu. Vivamus sit', 'Lorem ipsum dolor sit', 2, '2017-09-04 12:20:46', 'Ngpictures.jpg', 'mi pede, nonummy ut, molestie', 4, 1),
-(37, 'montes, nascetur ridiculus mus. Proin', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 4, '2016-12-18 06:16:22', 'Ngpictures.jpg', 'molestie in, tempus eu, ligula.', 2, 1),
-(38, 'augue malesuada malesuada. Integer id', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 3, '2017-11-07 10:30:17', 'Ngpictures.jpg', 'lorem ac risus. Morbi metus.', 3, 1),
-(39, 'magnis dis parturient montes, nascetur', 'Lorem ipsum dolor', 2, '2017-03-09 23:26:41', 'Ngpictures.jpg', 'natoque penatibus et magnis dis', 5, 1),
-(40, 'erat nonummy ultricies ornare, elit', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 2, '2018-10-12 09:44:30', 'Ngpictures.jpg', 'pellentesque, tellus sem mollis dui,', 1, 1),
-(41, 'Sed malesuada augue ut lacus.', 'Lorem ipsum dolor sit amet,', 1, '2017-12-28 22:52:36', 'Ngpictures.jpg', 'turpis non enim. Mauris quis', 4, 1),
-(42, 'Mauris non dui nec urna', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 3, '2017-02-14 09:08:15', 'Ngpictures.jpg', 'pede. Suspendisse dui. Fusce diam', 10, 1),
-(43, 'sagittis placerat. Cras dictum ultricies', 'Lorem', 4, '2017-02-02 09:55:27', 'Ngpictures.jpg', 'ornare placerat, orci lacus vestibulum', 10, 1),
-(44, 'vitae erat vel pede blandit', 'Lorem ipsum dolor sit amet, consectetuer', 4, '2017-02-02 20:21:45', 'Ngpictures.jpg', 'per inceptos hymenaeos. Mauris ut', 9, 1),
-(45, 'quis urna. Nunc quis arcu', 'Lorem ipsum dolor sit amet,', 1, '2018-02-05 21:14:38', 'Ngpictures.jpg', 'nulla ante, iaculis nec, eleifend', 7, 1),
-(46, 'nisl sem, consequat nec, mollis', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 4, '2017-11-18 00:06:00', 'Ngpictures.jpg', 'gravida non, sollicitudin a, malesuada', 2, 1),
-(47, 'risus quis diam luctus lobortis.', 'Lorem ipsum', 1, '2018-06-06 21:24:48', 'Ngpictures.jpg', 'tempor diam dictum sapien. Aenean', 4, 1),
-(48, 'gravida sagittis. Duis gravida. Praesent', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 2, '2017-02-09 14:29:54', 'Ngpictures.jpg', 'at, nisi. Cum sociis natoque', 3, 1),
-(49, 'dictum eu, eleifend nec, malesuada', 'Lorem ipsum', 2, '2018-04-11 01:47:52', 'Ngpictures.jpg', 'tincidunt adipiscing. Mauris molestie pharetra', 1, 1),
 (50, 'dui quis accumsan convallis, ante', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 5, '2017-09-17 03:35:22', 'Ngpictures.jpg', 'velit eu sem. Pellentesque ut', 7, 1),
 (51, 'eget nisi dictum augue malesuada', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 4, '2017-11-22 19:37:25', 'Ngpictures.jpg', 'non nisi. Aenean eget metus.', 6, 1),
 (52, 'Quisque imperdiet, erat nonummy ultricies', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 5, '2018-09-30 07:45:35', 'Ngpictures.jpg', 'enim. Sed nulla ante, iaculis', 5, 1),
@@ -248,24 +122,40 @@ INSERT INTO `blog` (`id`, `title`, `content`, `user_id`, `date_created`, `thumb`
 (80, 'fermentum arcu. Vestibulum ante ipsum', 'Lorem ipsum dolor sit amet,', 5, '2018-08-02 07:32:13', 'Ngpictures.jpg', 'rutrum urna, nec luctus felis', 3, 1),
 (81, 'rutrum. Fusce dolor quam, elementum', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 5, '2018-09-30 17:34:28', 'Ngpictures.jpg', 'id sapien. Cras dolor dolor,', 4, 1),
 (82, 'molestie. Sed id risus quis', 'Lorem ipsum dolor sit amet,', 1, '2017-06-27 13:44:51', 'Ngpictures.jpg', 'vestibulum lorem, sit amet ultricies', 8, 1),
-(83, 'arcu. Vestibulum ut eros non', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 4, '2017-10-31 09:32:27', 'Ngpictures.jpg', 'magnis dis parturient montes, nascetur', 9, 1),
+(83, 'arcu. Vestibulum ut eros non', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 4, '2017-10-31 09:32:27', 'Ngpictures.jpg', 'magnis dis parturient montes, nascetur', 9, 0),
 (84, 'vitae diam. Proin dolor. Nulla', 'Lorem ipsum dolor sit amet,', 2, '2017-02-18 13:48:07', 'Ngpictures.jpg', 'amet metus. Aliquam erat volutpat.', 9, 1),
 (85, 'penatibus et magnis dis parturient', 'Lorem', 4, '2017-06-20 22:12:30', 'Ngpictures.jpg', 'id, libero. Donec consectetuer mauris', 4, 1),
-(86, 'vel, vulputate eu, odio. Phasellus', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 4, '2016-12-18 03:07:37', 'Ngpictures.jpg', 'risus. In mi pede, nonummy', 10, 1),
-(87, 'sollicitudin adipiscing ligula. Aenean gravida', 'Lorem ipsum dolor sit amet,', 1, '2018-08-15 14:27:52', 'Ngpictures.jpg', 'Nullam feugiat placerat velit. Quisque', 6, 1),
-(88, 'dictum. Phasellus in felis. Nulla', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 2, '2017-09-13 15:25:26', 'Ngpictures.jpg', 'Phasellus nulla. Integer vulputate, risus', 10, 1),
-(89, 'diam. Pellentesque habitant morbi tristique', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 1, '2017-01-15 01:35:29', 'Ngpictures.jpg', 'non enim. Mauris quis turpis', 6, 1),
-(90, 'lectus ante dictum mi, ac', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 5, '2018-07-24 06:52:39', 'Ngpictures.jpg', 'lobortis ultrices. Vivamus rhoncus. Donec', 10, 1),
-(91, 'vehicula risus. Nulla eget metus', 'Lorem ipsum', 1, '2017-02-25 11:13:33', 'Ngpictures.jpg', 'risus. Donec nibh enim, gravida', 10, 1),
-(92, 'tincidunt orci quis lectus. Nullam', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 2, '2018-04-24 07:44:47', 'Ngpictures.jpg', 'hendrerit id, ante. Nunc mauris', 6, 1),
-(93, 'nec quam. Curabitur vel lectus.', 'Lorem ipsum dolor sit', 2, '2018-01-21 12:52:00', 'Ngpictures.jpg', 'Donec elementum, lorem ut aliquam', 1, 1),
-(94, 'ante blandit viverra. Donec tempus,', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 1, '2017-07-21 17:25:17', 'Ngpictures.jpg', 'sed consequat auctor, nunc nulla', 6, 1),
-(95, 'ullamcorper viverra. Maecenas iaculis aliquet', 'Lorem', 3, '2018-05-28 02:00:28', 'Ngpictures.jpg', 'vel, faucibus id, libero. Donec', 4, 1),
-(96, 'tincidunt tempus risus. Donec egestas.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 5, '2017-08-24 00:24:00', 'Ngpictures.jpg', 'facilisis, magna tellus faucibus leo,', 5, 1),
-(97, 'aliquet lobortis, nisi nibh lacinia', 'Lorem', 2, '2017-08-25 18:31:34', 'Ngpictures.jpg', 'magnis dis parturient montes, nascetur', 8, 1),
-(98, 'nulla magna, malesuada vel, convallis', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 3, '2017-01-27 10:40:18', 'Ngpictures.jpg', 'mi felis, adipiscing fringilla, porttitor', 5, 1),
-(99, 'id, ante. Nunc mauris sapien,', 'Lorem ipsum', 2, '2017-04-08 23:36:45', 'Ngpictures.jpg', 'ipsum nunc id enim. Curabitur', 9, 1),
-(100, 'Praesent luctus. Curabitur egestas nunc', 'Lorem ipsum dolor', 3, '2017-07-09 04:12:01', 'Ngpictures.jpg', 'eros. Proin ultrices. Duis volutpat', 10, 1);
+(86, 'vel, vulputate eu, odio. Phasellus', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 4, '2016-12-18 03:07:37', 'Ngpictures.jpg', 'risus. In mi pede, nonummy', 10, 0),
+(106, 'test redim', '<p>djk</p>', 1, '2017-12-29 10:17:34', 'ngpictures-test-redim-106.jpg', 'test-redim', 9, 0),
+(113, 'ngpictures verison 2', '<p>welcom everybody</p>', 1, '2017-12-29 12:01:18', 'ngpictures-new-version-113.jpg', 'new-version', 7, 0),
+(114, 'image bisarre', '<p>asdff</p>', 1, '2017-12-29 12:05:51', 'ngpictures-image-bisarre-114.jpg', 'image-bisarre', 1, 1),
+(115, 'love', '<p>sasdasasdasdasdasdaasdasdasdasdasdasd</p>', 1, '2017-12-29 13:02:14', 'ngpictures-love-115.jpg', 'love', 10, 1),
+(116, 'i never need', '<p>test</p>', 1, '2017-12-29 13:41:19', 'ngpictures-i-never-need-116.jpg', 'i-never-need', 1, 1),
+(118, 'les filles d\'imani', '<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>', 1, '2017-12-29 13:49:34', 'ngpictures-les-filles-d-imani-118.jpg', 'les-filles-d-imani', 1, 1),
+(121, 'dream team', '<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>', 1, '2017-12-29 13:57:26', 'ngpictures-dream-team-121.jpg', 'dream-team', 1, 0),
+(132, 'road of destiny', '<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<h2 style="text-align: left;"><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">Pourquoi ?</span></h2>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<h2 style="text-align: left;"><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">Comment ?</span></h2>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<h2><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">Un Exemple </span></h2>\r\n<p style="text-align: center;"><em><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></em></p>\r\n<p style="text-align: center;"><em><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;"><img src="/imgs/bg/bg.jpg" alt="" width="683" height="384" /></span></em></p>\r\n<p style="text-align: center;"><em><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></em></p>', 1, '2017-12-31 19:05:51', 'ngpictures-on-the-road-of-destiny-132.jpg', 'road-of-destiny', 2, 1),
+(137, 'Atena', '<p>lorem</p>', 1, '2018-01-01 04:13:11', 'ngpictures-une-article-137.jpg', 'Atena', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `bugs`
+--
+
+CREATE TABLE `bugs` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `date_created` datetime NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `bugs`
+--
+
+INSERT INTO `bugs` (`id`, `user_id`, `content`, `date_created`, `status`) VALUES
+(2, 5, 'big Bug', '2018-01-01 12:12:21', 0);
 
 -- --------------------------------------------------------
 
@@ -275,24 +165,27 @@ INSERT INTO `blog` (`id`, `title`, `content`, `user_id`, `date_created`, `thumb`
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
-  `title` varchar(500) NOT NULL
+  `title` varchar(500) NOT NULL,
+  `description` text,
+  `slug` varchar(1000) NOT NULL,
+  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `categories`
 --
 
-INSERT INTO `categories` (`id`, `title`) VALUES
-(1, 'anniverseraire'),
-(2, 'art'),
-(3, 'musique'),
-(4, 'mode et fashion'),
-(5, 'religion'),
-(6, 'culture'),
-(7, 'technologie'),
-(8, 'evenement'),
-(9, 'autres'),
-(10, 'black and white');
+INSERT INTO `categories` (`id`, `title`, `description`, `slug`, `date_created`) VALUES
+(1, 'autre', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'autre', '2018-01-01 02:08:43'),
+(2, 'art', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'art', '2018-01-01 02:08:43'),
+(3, 'musique', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'musique', '2018-01-01 02:08:43'),
+(4, 'mode et fashion', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'mode-et-fashion', '2018-01-01 02:08:43'),
+(5, 'religion', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'religion', '2018-01-01 02:08:43'),
+(6, 'culture', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'culture', '2018-01-01 02:08:43'),
+(7, 'technologie', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'technologie', '2018-01-01 02:08:43'),
+(8, 'evenement', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'evenement', '2018-01-01 02:08:43'),
+(9, 'autres', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'autres', '2018-01-01 02:08:43'),
+(10, 'noir et blanc', '<p>la beaut du monochrome</p>', 'noir-et-blanc', '2018-01-01 02:08:43');
 
 -- --------------------------------------------------------
 
@@ -316,7 +209,8 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `user_id`, `articles`, `galery`, `blog`, `nggalery`, `comment`, `date_created`) VALUES
-(1, 5, NULL, NULL, 64, NULL, '&lt;p&gt;cool&lt;/p&gt;', '2017-12-19 08:04:34');
+(1, 5, NULL, NULL, 64, NULL, '&lt;p&gt;cool&lt;/p&gt;', '2017-12-19 08:04:34'),
+(2, 5, NULL, NULL, 98, NULL, '&lt;p&gt;lol&lt;/p&gt;', '2017-12-26 18:36:54');
 
 -- --------------------------------------------------------
 
@@ -340,9 +234,42 @@ CREATE TABLE `following` (
 CREATE TABLE `gallery` (
   `id` bigint(255) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
-  `thumb` varchar(1000) NOT NULL,
-  `description` mediumtext NOT NULL
+  `name` varchar(500) DEFAULT NULL,
+  `tags` text,
+  `thumb` varchar(1000) DEFAULT NULL,
+  `description` mediumtext,
+  `category_id` tinyint(4) DEFAULT '9',
+  `date_created` datetime NOT NULL,
+  `online` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `gallery`
+--
+
+INSERT INTO `gallery` (`id`, `user_id`, `name`, `tags`, `thumb`, `description`, `category_id`, `date_created`, `online`) VALUES
+(1, 3, 'big test', '@ng', 'ngpictures-big-test-3.jpg', NULL, 2, '2017-12-14 00:00:00', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ideas`
+--
+
+CREATE TABLE `ideas` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `date_created` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `ideas`
+--
+
+INSERT INTO `ideas` (`id`, `user_id`, `content`, `date_created`) VALUES
+(13, 5, 'jkjkjk;kj', '2017-12-31 02:18:25'),
+(12, 5, 'une idee super cool', '2017-12-31 01:05:50');
 
 -- --------------------------------------------------------
 
@@ -365,14 +292,21 @@ CREATE TABLE `likes` (
 --
 
 INSERT INTO `likes` (`id`, `user_id`, `article_id`, `photo_id`, `blog_id`, `ngphoto_id`, `date_created`) VALUES
-(47, 5, NULL, NULL, 98, NULL, '2017-12-16 22:23:22'),
-(55, 5, NULL, NULL, 100, NULL, '2017-12-16 22:26:55'),
-(3, 5, 98, NULL, NULL, NULL, '2017-12-16 00:18:22'),
+(82, 5, NULL, NULL, 121, NULL, '2017-12-29 14:11:19'),
+(73, 5, NULL, NULL, 66, NULL, '2017-12-27 02:48:47'),
+(69, 6, NULL, NULL, 94, NULL, '2017-12-25 17:55:14'),
 (5, 5, NULL, NULL, 87, NULL, '2017-12-16 20:14:11'),
-(51, 5, NULL, NULL, 99, NULL, '2017-12-16 22:25:29'),
-(15, 5, NULL, NULL, 97, NULL, '2017-12-16 20:33:32'),
-(56, 5, NULL, NULL, 96, NULL, '2017-12-16 22:27:28'),
-(58, 5, 100, NULL, NULL, NULL, '2017-12-16 22:28:18');
+(80, 18, 89, NULL, NULL, NULL, '2017-12-28 10:09:07'),
+(77, 5, NULL, NULL, 92, NULL, '2017-12-27 02:50:46'),
+(76, 5, NULL, NULL, 98, NULL, '2017-12-27 02:50:02'),
+(70, 6, NULL, NULL, 95, NULL, '2017-12-25 17:55:28'),
+(72, 5, NULL, NULL, 63, NULL, '2017-12-27 02:44:25'),
+(64, 5, NULL, NULL, 2, NULL, '2017-12-22 19:28:06'),
+(83, 5, NULL, NULL, 79, NULL, '2017-12-31 19:21:08'),
+(88, 5, NULL, NULL, 115, NULL, '2017-12-31 19:21:24'),
+(89, 5, NULL, NULL, 114, NULL, '2017-12-31 19:21:29'),
+(90, 5, NULL, NULL, 132, NULL, '2017-12-31 19:22:52'),
+(91, 5, NULL, NULL, 116, NULL, '2018-01-01 10:00:27');
 
 -- --------------------------------------------------------
 
@@ -383,9 +317,26 @@ INSERT INTO `likes` (`id`, `user_id`, `article_id`, `photo_id`, `blog_id`, `ngph
 CREATE TABLE `ng_gallery` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL DEFAULT '1',
-  `thumb` varchar(1000) NOT NULL,
-  `description` longtext NOT NULL
+  `name` varchar(500) DEFAULT NULL,
+  `tags` text,
+  `thumb` varchar(1000) DEFAULT NULL,
+  `description` longtext,
+  `category_id` tinyint(3) UNSIGNED DEFAULT '9',
+  `date_created` datetime NOT NULL,
+  `online` tinyint(3) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `ng_gallery`
+--
+
+INSERT INTO `ng_gallery` (`id`, `user_id`, `name`, `tags`, `thumb`, `description`, `category_id`, `date_created`, `online`) VALUES
+(9, 1, 'test', '', 'ngpictures-test-9.jpg', '<p>test</p>', 9, '2017-12-19 10:48:34', 1),
+(11, 1, 'team', '', 'ngpictures-team-11.jpg', '<p>test</p>', 9, '2017-12-19 10:52:42', 1),
+(12, 1, 'winners', '', 'ngpictures-winners-12.jpg', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>la vie de louga.</p>\r\n<p><strong>bernard ng</strong></p>\r\n</blockquote>', 9, '2017-12-19 10:58:51', 1),
+(14, 1, 'jemima et elyone', '@jemima @elyone', 'ngpictures-mima et elyone-14.jpg', '<p>journee cultruelle de ouf</p>', 6, '2017-12-21 15:01:49', 1),
+(21, 1, 'africain lady', '@felo', 'precylia-21.jpg', '<p>aficain lady, precylia felo une fille de ouff</p>', 2, '2017-12-29 00:20:56', 1),
+(24, 1, 'maxime single', '@maxime', 'Cg5 promotion 2017-2018-24.jpg', '<p>le shooting avec maxime etait vraiment trops cool</p>', 2, '2018-01-01 04:06:35', 1);
 
 -- --------------------------------------------------------
 
@@ -413,7 +364,7 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` longtext NOT NULL,
   `phone` varchar(45) DEFAULT NULL,
-  `bio` text,
+  `bio` varchar(1000) DEFAULT 'Hey je suis sur Ngpictures 2.0',
   `avatar` varchar(255) NOT NULL,
   `confirmation_token` varchar(60) DEFAULT NULL,
   `confirmed_at` datetime DEFAULT NULL,
@@ -429,8 +380,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `facebook_id`, `name`, `email`, `password`, `phone`, `bio`, `avatar`, `confirmation_token`, `confirmed_at`, `reset_token`, `reset_at`, `remember_token`, `status`, `rank`) VALUES
-(4, 0, 'vv', 'v@v.com', '$2y$10$q075C0PNw3.Y49fU5c4Yt.7a9gJlDMot91TTGIBK.z/xaFuEaK5uy', NULL, NULL, 'default.jpg', NULL, '2017-12-13 21:27:01', NULL, NULL, '3998.5a31873c63', NULL, 'user'),
-(5, NULL, 'bernard_ng', 'ng@ng.com', '$2y$10$RYlVy9yaHjQ8agTlsjnbyuSE2q5sv5ecXzaSYZE2GvtdIoEXcJ/3.', NULL, NULL, 'default.jpg', NULL, '2017-12-16 00:09:39', NULL, NULL, NULL, NULL, 'admin');
+(5, NULL, 'bernard_ng', 'ngandubernard@gmail.com', '$2y$10$RYlVy9yaHjQ8agTlsjnbyuSE2q5sv5ecXzaSYZE2GvtdIoEXcJ/3.', NULL, 'une bio de ouff', 'ngpictures-bernard_ng-5.jpg', NULL, '2017-12-16 00:09:39', NULL, NULL, '4567.5a48f460d0', NULL, 'admin'),
+(6, NULL, 'precylia', 'precylia@gmail.com', '$2y$10$LCD4bY1My3cia61JQoL/LuJJBaiN3lzJnqEixNA0Ylfxlb.BOIVTG', '0973141132', '&lt;p&gt;i\'m using ngpictures&lt;/p&gt;', 'ngpictures-magloire-6.jpg', NULL, '2017-12-22 17:15:11', NULL, NULL, '8249.5a41109cdf', NULL, 'user'),
+(9, NULL, 'bob_kz', 'bob@bob.com', '$2y$10$ePA4c9EXfPG2c5E4W8Tr1ORJAL8iBOM9dxvT5igOJqK7Tl1Bs9e3q', NULL, 'Hey je suis sur Ngpictures 2.0', 'default.jpg', NULL, '2017-12-25 15:57:03', NULL, NULL, NULL, NULL, 'user'),
+(10, NULL, 'endi', 'endi@endi.com', '$2y$10$J1mRXx2oovO4Fe.YgkshruPhAjG0nGj0BHxRg0XIN60CX72xw/wI.', NULL, 'Hey je suis sur Ngpictures 2.0', 'default.jpg', NULL, '2017-12-25 15:58:24', NULL, NULL, NULL, NULL, 'user'),
+(11, NULL, 'lys_ngomba', 'lys@lys.com', '$2y$10$0CQ6rP7t7qlrDa4eu.0bTe.AcVla6Do4Jb7Vk9C7jKHRr3h49UGoK', NULL, 'Hey je suis sur Ngpictures 2.0', 'default.jpg', NULL, '2017-12-25 15:59:00', NULL, NULL, NULL, NULL, 'user'),
+(12, NULL, 'ketsia_sk', 'ketsia@kestia.com', '$2y$10$3k7l8RPwdD3V85QH9aVcx.bt.tEhjGD4Qlzsul5R1XGWHJ8Uk6Hhm', NULL, 'Hey je suis sur Ngpictures 2.0', 'default.jpg', NULL, '2017-12-25 15:59:51', NULL, NULL, NULL, NULL, 'user'),
+(14, NULL, 'princess_fane', 'princess@princess.com', '$2y$10$gaCCrB2CEgDclYQ0cTzbH.5fWnELAKMuPc7ZaosbgSR6GXM8iO9UW', NULL, 'Hey je suis sur Ngpictures 2.0', 'default.jpg', NULL, '2017-12-25 16:01:22', NULL, NULL, NULL, NULL, 'user'),
+(15, NULL, 'joseph', 'joseph@joseph.com', '$2y$10$gru2V4eCUlvVL7B9bYddOeNBV9zn.5QxSwKY/eUOmeqx2a5FeEG5u', NULL, 'Hey je suis sur Ngpictures 2.0', 'ngpictures-joseph-15.jpg', NULL, '2017-12-25 16:03:42', NULL, NULL, NULL, NULL, 'user'),
+(16, NULL, 'jamy-bonds', 'james@gmail.com', '$2y$10$10k4lvVH2xysi18kXK7I8.fwdOd1wpM6ZqEHg2RB.8huGfFdpzdzi', NULL, 'Hey je suis sur Ngpictures 2.0', 'ngpictures-jamy-bonds-16.jpg', NULL, '2017-12-30 21:10:00', NULL, NULL, '3221.5a4a550b04', NULL, 'user'),
+(18, NULL, 'le-man', 'man@man.com', '$2y$10$fA.ErDJrsuKjsE9KONXYVeiiQxPVjr39HdvzBvGvGzDr2tULPOabi', NULL, 'Hey je suis sur Ngpictures 2.0', 'ngpictures-le-man-18.jpg', NULL, '2017-12-28 10:03:33', NULL, NULL, '5983.5a44a57b76', NULL, 'user');
 
 -- --------------------------------------------------------
 
@@ -975,19 +934,28 @@ INSERT INTO `verses` (`id`, `text`, `ref`) VALUES
 -- Index pour la table `articles`
 --
 ALTER TABLE `articles`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Index pour la table `blog`
 --
 ALTER TABLE `blog`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Index pour la table `bugs`
+--
+ALTER TABLE `bugs`
   ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `categories`
 --
 ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Index pour la table `comments`
@@ -1005,6 +973,13 @@ ALTER TABLE `following`
 -- Index pour la table `gallery`
 --
 ALTER TABLE `gallery`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Index pour la table `ideas`
+--
+ALTER TABLE `ideas`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1017,7 +992,8 @@ ALTER TABLE `likes`
 -- Index pour la table `ng_gallery`
 --
 ALTER TABLE `ng_gallery`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Index pour la table `online`
@@ -1042,10 +1018,30 @@ ALTER TABLE `verses`
 --
 
 --
+-- AUTO_INCREMENT pour la table `articles`
+--
+ALTER TABLE `articles`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+--
+-- AUTO_INCREMENT pour la table `blog`
+--
+ALTER TABLE `blog`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+--
+-- AUTO_INCREMENT pour la table `bugs`
+--
+ALTER TABLE `bugs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `following`
 --
@@ -1055,17 +1051,22 @@ ALTER TABLE `following`
 -- AUTO_INCREMENT pour la table `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `id` bigint(255) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(255) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `ideas`
+--
+ALTER TABLE `ideas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT pour la table `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id` bigint(255) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` bigint(255) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 --
 -- AUTO_INCREMENT pour la table `ng_gallery`
 --
 ALTER TABLE `ng_gallery`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT pour la table `online`
 --
@@ -1075,7 +1076,7 @@ ALTER TABLE `online`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT pour la table `verses`
 --

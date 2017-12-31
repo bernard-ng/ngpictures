@@ -3,7 +3,7 @@ namespace Ng\Core\Models;
 
 
 use Ng\Core\Database\Database;
-
+use Ng\Core\Database\MysqlDatabase;
 
 
 class Model
@@ -27,7 +27,7 @@ class Model
      * Model constructor.
      * @param \Core\Database\Database
      */
-    public function __construct(Database $db)
+    public function __construct(MysqlDatabase $db)
     {
         $this->db = $db;
         if (is_null($this->table)) {
@@ -242,6 +242,18 @@ class Model
             FROM {$this->table} 
             LEFT JOIN categories ON category_id = categories.id
             WHERE online = 1 ORDER BY id DESC ",
+            null, true, false
+        );
+    }
+
+
+    public function lastOffline()
+    {
+        return $this->query("
+            SELECT {$this->table}.*, categories.title as category 
+            FROM {$this->table} 
+            LEFT JOIN categories ON category_id = categories.id
+            WHERE online = 0 ORDER BY id DESC ",
             null, true, false
         );
     }

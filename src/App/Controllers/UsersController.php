@@ -1,7 +1,9 @@
 <?php
 namespace Ngpictures\Controllers;
 
-use Ng\Core\Generic\{Collection, Image};
+use Ng\Core\Generic\{
+    Collection, Image, Mailer\MailSender
+};
 use Ngpictures\Entity\UsersEntity;
 use Ngpictures\Ngpic;
 use Ngpictures\Util\Page;
@@ -58,59 +60,70 @@ class UsersController extends NgpicController
     {
         $user = $this->users->find($id);
 
-        if ($user) {
-            if ($this->users->checkRestToken($user->reset_token, $user->id) === $token) {
-                if (isset($_POST) and !empty($_POST)) {
-                    $post = new Collection($_POST);
-                    $validator = $this->validator;
+        if ($user && $user->reset_token == $token) {
+            $post = new Collection($_POST);
 
+            if (isset($_POST) and !empty($_POST)) {
+                if (!empty($post->get('password')) && !empty($post->get('password_confirm'))) {
+                    $validator = $this->validator;
                     $validator->isMatch('password','password_confirm', $this->msg['user_password_notMatch']);
                     if ($validator->isValid()) {
-                        $this->users->resetPassword($post->get('password'), $user->id);
+                        $password = $this->str::hashPassword($post->get('password'));
+                        $this->users->resetPassword($password, $user->id);
 
                         $this->flash->set('success', $this->msg['user_reset_password_success']);
                         $this->connect($user);
                         Ngpic::redirect($user->accountUrl);
                     }
+                } else {
+                    $this->flash->set('danger', $this->msg['admin_all_fields']);
                 }
-            } else {
-                $this->flash->set('danger', $this->msg['indefined_error']);
-                Ngpic::redirect(true);
             }
+
+            Page::setName("Rénitialisation du mot de passe | Ngpictures");
+            $this->setLayout('users/default');
+            $this->viewRender('users/reset', compact('post'));
         } else {
             $this->flash->set('danger', $this->msg['indefined_error']);
             Ngpic::redirect(true);
         }
-        Page::setName("Rénitialisation mot de passe | Ngpictures");
-        $this->viewRender('user/reset');
     }
 
 
     /**
      * mot de pass oubliee
      */
-    public function forgot()                                   //bug #1 a regler.
+    public function forgot()
     {
         $post = new Collection($_POST);
 
-        if ($post->has('email')) {
-            $email = $this->str::escape($post->get('email'));
-            $user = $this->users->findWith('email',$email);
+        if (isset($_POST) && !empty($_POST)) {
+            if(!empty($post->get('email'))) {
+                $email = $this->str::escape($post->get('email'));
+                $user = $this->users->findWith('email',$email);
 
-            if ($user && $user->confrimed_at !== null) {
-                $this->users->setResetToken($this->str::setToken(60),$user->id);
+                if ($user && $user->confirmed_at != null) {
+                    $this->users->setResetToken($this->str::setToken(60), $user->id);
+                    $user = $this->users->find($user->id);
 
-                $link = "/reset/{$user->id}/{$user->reset_token}";
-                //$this->mail::resetpassword($link)
-                $this->flash->set('success',$this->msg['user_reset_mail_success']);
-                
+                    $link = "http://ngpictures.dev/reset/{$user->id}/{$user->reset_token}";
+                    $mailer = new MailSender();
+                    $mailer->resetPassword($link, $email);
+
+                    //$this->flash->set('success',$this->msg['user_reset_mail_success']);
+                    //Ngpic::redirect('/login');
+
+                } else {
+                    $this->flash->set('danger',$this->msg['user_email_notFound']);
+                }
             } else {
-                $this->flash->set('danger',$this->msg['user_email_notFound']);
+                $this->flash->set('danger', $this->msg['admin_all_fields']);
             }
         }
 
         Page::setName('Mot de passe oublié | Ngpictures');
-        $this->viewRender('users/forgot');
+        $this->setLayout('users/default');
+        $this->viewRender('users/forgot', compact('post'));
     }
 
 
@@ -128,10 +141,13 @@ class UsersController extends NgpicController
         $token = $this->str::setToken(60);
         $this->users->add($name,$email,$password,$token);
 
-        //$user_id = $this->users->lastRegisterUser();
-        //$link = "confirm/{$user_id}/{$token}";
-        //$this->mail::confirmation($link);
-        //Ngpic::redirect('/login');
+        $user_id = $this->users->lastInsertId();
+        $link = "http://ngpictures.dev/confirm/{$user_id}/{$token}";
+
+        $mailer = new MailSender();
+        $mailer->accountConfirmation($link, $email);
+        $this->flash->set('success', $this->msg['user_registration_success']);
+        Ngpic::redirect('/login');
     }
 
 
@@ -141,38 +157,33 @@ class UsersController extends NgpicController
      */
     public function sign()
     {
-        if ($this->isLogged()) {
-            $this->flash->set('warning', $this->msg['user_already_connected']);
-            Ngpic::redirect($this->isLogged()->accountUrl);
-        } else {
-            $validator = $this->validator;
-            $post = new Collection($_POST);
+        $validator = $this->validator;
+        $post = new Collection($_POST);
 
-            if (!empty($_POST)) {
+        if (isset($_POST) && !empty($_POST)) {
 
-                $validator->iskebabCase("name");
-                if ($validator->isValid()) {
-                    $validator->isUnique("name", $this->users, $this->msg['user_username_tokken']);
-                }
-
-                $validator->isEmail("email");
-                if ($validator->isValid()) {
-                    $validator->isUnique("email", $this->users, $this->msg['user_usermail_tokken']);
-                }
-                $validator->isMatch("password","password_confirm", $this->msg['user_password_notMatch']);
-
-                if ($validator->isValid()) {
-                    $this->register($post->get('name'), $post->get('email'), $post->get('password'));
-                    $this->flash->set('success', $this->msg['user_registration_success']);
-                    Ngpic::redirect("/login");
-                } else {
-                    var_dump($this->validator->getErrors());
-                }
+            $validator->iskebabCase("name");
+            if ($validator->isValid()) {
+                $validator->isUnique("name", $this->users, $this->msg['user_username_tokken']);
             }
-            Page::setName("Inscription | Ngpictures");
-            $this->setLayout('users/default');
-            $this->viewRender('users/sign', compact('post'));
+
+            $validator->isEmail("email");
+            if ($validator->isValid()) {
+                $validator->isUnique("email", $this->users, $this->msg['user_mail_tokken']);
+            }
+            $validator->isMatch("password", "password_confirm", $this->msg['user_password_notMatch']);
+
+            if ($validator->isValid()) {
+                $this->register($post->get('name'), $post->get('email'), $post->get('password'));
+                $this->flash->set('success', $this->msg['user_registration_success']);
+                Ngpic::redirect("/login");
+            } else {
+                var_dump($this->validator->getErrors());
+            }
         }
+        Page::setName("Inscription | Ngpictures");
+        $this->setLayout('users/default');
+        $this->viewRender('users/sign', compact('post'));
     }
 
 
@@ -214,10 +225,10 @@ class UsersController extends NgpicController
      */
     private function isLogged()
     {
-        if (!$this->session->read("auth")) {
-            return false;
+        if ($this->session->hasKey("auth")) {
+            return $this->session->read("auth");
         }
-        return $this->session->read("auth");
+        return false;
     }
 
 
@@ -242,7 +253,7 @@ class UsersController extends NgpicController
      */
     public function cookieConnect()
     {
-        if ($this->cookie->hasKey("remember") && !$this->isLogged()) {
+        if ($this->cookie->hasKey("rembember") && !$this->isLogged()) {
             $remember_token = $this->cookie->read("remember");
             $parts = explode(".", $remember_token);
             $user = $this->users->find($parts[2]);

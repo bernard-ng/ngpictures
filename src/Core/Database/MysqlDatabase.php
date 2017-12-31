@@ -107,7 +107,7 @@ class MysqlDatabase extends Database
             return $result;
 
         } catch (Exception $e) {
-            (Ngpic::hasDebug())? die("Exception : $e->getMessage()") :  Ngpic::redirect('/e500');
+            (Ngpic::hasDebug())? die("Exception : {$e->getMessage()}") :  Ngpic::redirect('/e500');
         }
     }
 
@@ -149,7 +149,7 @@ class MysqlDatabase extends Database
             return $result;
 
         } catch (Exception $e) {
-            (Ngpic::hasDebug())? die("Exception : $e->msg") :  Ngpic::redirect('/e500');
+            (Ngpic::hasDebug())? die("Exception : {$e->getMessage()}") :  Ngpic::redirect('/e500');
         }
     }
 

@@ -179,7 +179,8 @@ class Ngpic {
      */
     public static function redirect($url = null)
     {
-       if (boolval($url) === true) {
+
+       if (is_bool($url)) {
             if (!empty($_SERVER['HTTP_REFERER'])) {
                 //$self = strtolower($_SERVER['REQUEST_SCHEME'] ."://". $_SERVER['SERVER_NAME']);
                 header("location:{$_SERVER['HTTP_REFERER']}");

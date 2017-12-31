@@ -2,6 +2,15 @@
     <?php include(APP."/Views/includes/left-aside.php"); ?>
     <section class="col l9 m12 s12">
         <div class="card-panel no-padding">
+            <nav class="nav z-depth-2 mb-20">
+                <div class="nav-wrapper">
+                <ul>
+                    <li><a href="<?= ADMIN."/file-browser/blog" ?>">Photo blog</a></li>
+                    <li class="right"><a href="<?= ADMIN."/blog/categories/"  ?>">Catégories</a></li>
+                    <li class="right"><a href="<?= ADMIN."/blog/categories/add" ?>">Ajouter une Catégorie</a></li>
+                </ul>
+                </div>
+            </nav>
             <div id="articlesContainer">
                 <?php if (!empty($article)): ?>
                     <article class="ng-article" id="<?= $article->id ?>">
@@ -39,10 +48,10 @@
                 <?php endif; ?>
             </div>
         </div>
-
         <div class="card-panel">
             <div class="section-title mb-20 mt-20 ml-10">
                 Les Articles
+                <span class="btn primary-b right"><?= count($articles) ?></span>
                 <a href="<?= ADMIN."/blog/add" ?>" class="right">
                     <button class="btn">
                         <i class="icon icon-plus" style="font-size: smaller !important;"></i>
@@ -73,7 +82,7 @@
                                         <i class="icon icon-remove" style="font-size: smaller !important;"></i>
                                     </button>
                                 </form>
-                               
+
                                 <a href="<?= ADMIN."/blog/edit/{$a->id}" ?>">
                                      <button class="btn waves-effect waves-light">
                                         <i class="icon icon-edit" style="font-size: smaller !important;"></i>

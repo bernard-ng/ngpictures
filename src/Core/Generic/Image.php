@@ -116,12 +116,17 @@ Abstract class Image
                         case 'article' :
                             $image->fit(750, 501);
                             break;
-                        case 'small' || 'medium' || 'large' :
-                            $image->fit(self::$format[$format], self::$format[$format]);
+                        case 'small' :
+                            $image->fit(self::$format[$format], self::$format[$format], function($c){
+                                $c->upsize();
+                            });
                             break;
+                        case 'medium '|| 'large' :
+                            $image->fit(self::$format[$format], self::$format[$format]);
                     endswitch;
 
                     $image
+                        ->orientate()
                         ->interlace(true)
                         ->save("{$path}/{$name}.jpg")
                         ->destroy();

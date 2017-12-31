@@ -4,7 +4,14 @@
     <main class="col s12 m12 l9">
         <div id="articlesContainer">
             <?php if (!empty($article)): ?>
-                <article class="card" id="<?= $article->id ?>">
+                <article class="card no-padding" id="<?= $article->id ?>">
+                     <nav class="nav z-depth-2 mb-20">
+                        <div class="nav-wrapper">
+                        <ul>
+                            <li><a href="<?= ADMIN."/file-browser/articles" ?>">Photo articles</a></li>
+                        </ul>
+                        </div>
+                    </nav>
                     <header class="ng-news-card-header">
                         <span class="ng-news-card-image-profil">
                             <img src="<?= $article->userAvatarUrl ?>" alt="Profile <?= $article->username ?>" title="<?= $article->username ?>">
@@ -59,7 +66,7 @@
         <div class="card-panel">
             <div class="section-title mb-20 mt-20 ml-10">
                 <i class="icon icon-pencil"></i>&nbsp;Les Articles
-                <span class="badge new"><?= count($articles); ?></span>
+                <span class="btn primary-b right"><?= count($articles) ?></span>
             </div>
             <table class="card responsive-table bordered striped">
                 <thead>
