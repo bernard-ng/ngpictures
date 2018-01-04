@@ -15,7 +15,7 @@ class RssController extends NgpicController
 	{
 		if ($this->blog->last()) {
 			$last = $this->blog->last()->date_created;
-			$articles = $this->blog->latest(0,25);
+			$articles = $this->blog->latest(0,10);
 		} else {
 			$this->session->setFlash('info', 'Aucun article dans notre flux rss');
 			Ngpic::redirect(true);

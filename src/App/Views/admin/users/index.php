@@ -100,12 +100,12 @@
                                 <form method="POST" action="<?= ADMIN."/delete" ?>" style="display: inline-block !important;">
                                     <input type="hidden" name="id" value="<?= $u->id?>" >
                                     <input type="hidden" name="type" value="5" >
-                                    <button type="submit" class="btn btn-small waves-effect waves-light red">
+                                    <button type="submit" class="btn btn-small waves-effect waves-light red" id="delete">
                                         <i class="icon icon-remove" style="font-size: smaller !important;"></i>
                                     </button>
                                 </form>
                                 <?php if ($u->confirmed_at === null ): ?>
-                                    <a href="<?= ADMIN."/confirm/5/{$u->id}" ?>" title="confirmer">
+                                    <a href="<?= ADMIN."/confirm/5/{$u->id}" ?>" title="confirmer" id="confirm">
                                         <button class="btn btn-small blue-2 waves-effect waves-light">
                                             <i class="icon icon-cloud-upload" style="font-size: smaller !important;"></i>
                                         </button>

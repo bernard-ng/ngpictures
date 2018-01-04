@@ -68,7 +68,7 @@
                                 <form method="POST" action="<?= ADMIN."/delete" ?>" style="display: inline-block !important;">
                                     <input type="hidden" name="id" value="<?= $p->id?>" >
                                     <input type="hidden" name="type" value="4" >
-                                    <button type="submit" class="btn waves-effect waves-light red">
+                                    <button type="submit" class="btn waves-effect waves-light red" id="delete">
                                         <i class="icon icon-remove" style="font-size: smaller !important;"></i>
                                     </button>
                                 </form>
@@ -78,19 +78,15 @@
                                         <i class="icon icon-edit" style="font-size: smaller !important;"></i>
                                     </button>
                                 </a>
-                                <?php if ($p->online): ?>
-                                    <a href="<?= ADMIN."/confirm/4/{$p->id}" ?>" title="retirer">
-                                        <button class="btn btn-small blue-2 waves-effect waves-light">
+                                <a href="<?= ADMIN."/confirm/4/{$a->id}" ?>" title="retirer" id="confirm">
+                                    <button class="btn btn-small blue-2 waves-effect waves-light">
+                                         <?php if ($a->online): ?>
                                             <i class="icon icon-cloud-download" style="font-size: smaller !important;"></i>
-                                        </button>
-                                    </a>
-                                <?php else: ?>
-                                    <a href="<?= ADMIN."/confirm/4/{$p->id}" ?>" title="confirmer">
-                                        <button class="btn btn-small blue-2 waves-effect waves-light">
+                                         <?php else : ?>
                                             <i class="icon icon-cloud-upload" style="font-size: smaller !important;"></i>
-                                        </button>
-                                    </a>
-                                <?php endif; ?>
+                                         <?php endif; ?>
+                                    </button>
+                                </a>
                             </td>
                             <td><?= $p->name ?></td>
                             <td><time><?= $p->time ?></time></td>

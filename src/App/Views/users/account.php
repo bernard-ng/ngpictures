@@ -141,3 +141,14 @@
 	</div>
 </div>
 <?php include(APP."/Views/includes/left-aside.php"); ?>
+<div class="col l9 s12 m12s">
+    <nav class="nav z-depth-2 mb-20">
+        <div class="nav-wrapper">
+            <ul>
+                <li><a href="/account/post">Poster</a></li>
+                <li class="right"><a href="<?= $user->seePostUrl;  ?>">Mes publications</a></li>
+                <li class="right"><a href="<?= $user->friendsUrl; ?>">Mes abonnés</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>

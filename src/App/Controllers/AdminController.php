@@ -2,7 +2,6 @@
 namespace Ngpictures\Controllers;
 
 
-use Intervention\Image\Exception\RuntimeException;
 use Ngpictures\Ngpic;
 use Ngpictures\Util\Page;
 use Ng\Core\Generic\{
@@ -12,11 +11,12 @@ use Ng\Core\Generic\{
 
 use \DirectoryIterator;
 use \UnexpectedValueException;
+use \RuntimeException;
 
 /**
  * Class AdminController
  * @package Ngpictures\Controllers
- * permet de gere l'admin
+ * controller principale de l'administration
  */
 class AdminController extends NgpicController
 {
@@ -49,6 +49,7 @@ class AdminController extends NgpicController
         return $type->get($id);
     }
 
+
     /**
      * verifie si le user est connecter
      * n'index pas la page au resultat de recherche
@@ -63,8 +64,16 @@ class AdminController extends NgpicController
 
         $this->loadModel(
             [
-                'users', 'articles', 'blog', 'gallery',
-                'ngGallery', 'ideas', 'bugs', 'categories', 'verses', 'albums'
+                'users',
+                'articles',
+                'blog',
+                'gallery',
+                'ngGallery',
+                'ideas',
+                'bugs',
+                'categories',
+                'verses',
+                'albums'
             ]
         );
     }
@@ -123,28 +132,6 @@ class AdminController extends NgpicController
     }
 
 
-    /*********************************************************************************************************
-     *                                     Website admin. - blog
-     **********************************************************************************************************/
-
-    /**
-     * gestion du blog
-     */
-    public function blog()
-    {
-        $articles = $this->blog->orderBy('id', 'DESC');
-        $article = $this->blog->last();
-        Page::setName('admin - blog | Ngpictures');
-        $this->setLayout("admin/default");
-        $this->viewRender("admin/blog/index",
-            compact(
-                "articles", "article"
-            )
-        );
-
-    }
-
-
     /**
      * permet de supprime un post dans la base de donnée
      * @param array|null $data
@@ -163,10 +150,12 @@ class AdminController extends NgpicController
                 $this->flash->set('danger', $msg ?? $this->msg['admin_delete_success']);
                 Ngpic::redirect(true);
             } else {
+                if ($this->isAjax()) $this->ajaxFail($this->msg['admin_delete_notFound']);
                 $this->flash->set('danger', $this->msg['admin_delete_notFound']);
                 Ngpic::redirect(true);
             }
         } else {
+            if ($this->isAjax()) $this->ajaxFail($this->msg['admin_delete_failed']);
             $this->flash->set('danger', $this->msg['admin_delete_failed']);
             Ngpic::redirect(true);
         }
@@ -189,14 +178,17 @@ class AdminController extends NgpicController
                         $this->flash->set('success', $this->msg['admin_delete_success']);
                         Ngpic::redirect(true);
                     } else {
+                        if ($this->isAjax()) $this->ajaxFail($this->msg['admin_delete_failed']);
                         $this->flash->set('danger', $this->msg['admin_delete_failed']);
                         Ngpic::redirect(true);
                     }
                 } else {
+                    if ($this->isAjax()) $this->ajaxFail($this->msg['admin_not_directory']);
                     $this->flash->set('danger', $this->msg['admin_not_directory']);
                     Ngpic::redirect(true);
                 }
             } else {
+                if ($this->isAjax()) $this->ajaxFail($this->msg['indefined_error']);
                 $this->flash->set('danger', $this->msg['indefined_error']);
                 Ngpic::redirect(true);
             }
@@ -204,6 +196,80 @@ class AdminController extends NgpicController
             $this->flash->set('danger', $this->msg['indefined_error']);
             Ngpic::redirect(true);
         }
+    }
+
+
+    /**
+     * mettre du contenu en ligne ou pas
+     * @param $t
+     * @param $id
+     */
+    public function confirm($t, $id)
+    {
+        $model = $this->loadModel($this->getType($t));
+        $result = $model->find(intval($id));
+
+        if (intval($t) === 5) {
+            if ($result->confirmed_at === null) {
+                $model->unsetConfirmationToken($result->id);
+                Ngpic::redirect(true);
+            } elseif ($result->confirmed_at !== null) {
+                $this->flash->set('success', $this->msg['admin_already_confrimed']);
+                Ngpic::redirect(true);
+            } else {
+                if ($this->isAjax()) $this->ajaxFail($this->msg['indefined_error']);
+                $this->flash->set('danger', $this->msg['indefined_error']);
+                Ngpic::redirect(true);
+            }
+        } else {
+            if ($result && !$result->online) {
+                $model->update($id, ['online' => 1]);
+
+                if ($this->isAjax()) {
+                    echo '<i class="icon icon-cloud-download" style="font-size: smaller !important;"></i>';
+                    exit;
+                }
+
+                $this->flash->set('success', $this->msg['admin_confirm_success']);
+                Ngpic::redirect(true);
+            } elseif ($result && $result->online) {
+                $model->update($id, ['online' => 0]);
+
+                if ($this->isAjax()) {
+                    echo '<i class="icon icon-cloud-upload" style="font-size: smaller !important;"></i>';
+                    exit;
+                }
+
+                $this->flash->set('success', $this->msg['admin_remove_success']);
+                Ngpic::redirect(true);
+            } else {
+                if ($this->isAjax()) $this->ajaxFail($this->msg['indefined_error']);
+                $this->flash->set('danger', $this->msg['indefined_error']);
+                Ngpic::redirect(true);
+            }
+        }
+    }
+
+
+    /*********************************************************************************************************
+     *                                     Website admin. - blog
+     **********************************************************************************************************/
+
+    /**
+     * gestion du blog
+     */
+    public function blog()
+    {
+        $articles = $this->blog->orderBy('id', 'DESC');
+        $article = $this->blog->last();
+        Page::setName('admin - blog | Ngpictures');
+        $this->setLayout("admin/default");
+        $this->viewRender("admin/blog/index",
+            compact(
+                "articles", "article"
+            )
+        );
+
     }
 
 
@@ -307,44 +373,6 @@ class AdminController extends NgpicController
         Page::setName('admin - blog.add | Ngpictures');
         $this->setLayout('admin/default');
         $this->viewRender('admin/blog/add', compact('post', 'categories'));
-    }
-
-
-    /**
-     * mettre du contenu en ligne ou pas
-     * @param $t
-     * @param $id
-     */
-    public function confirm($t, $id)
-    {
-        $model = $this->loadModel($this->getType($t));
-        $result = $model->find(intval($id));
-
-        if (intval($t) === 5) {
-            if ($result->confirmed_at === null) {
-                $model->unsetConfirmationToken($result->id);
-                Ngpic::redirect(true);
-            } elseif ($result->confirmed_at !== null) {
-                $this->flash->set('success', $this->msg['admin_already_confrimed']);
-                Ngpic::redirect(true);
-            } else {
-                $this->flash->set('danger', $this->msg['indefined_error']);
-                Ngpic::redirect(true);
-            }
-        } else {
-            if ($result && !$result->online) {
-                $model->update($id, ['online' => 1]);
-                $this->flash->set('success', $this->msg['admin_confirm_success']);
-                Ngpic::redirect(true);
-            } elseif ($result && $result->online) {
-                $model->update($id, ['online' => 0]);
-                $this->flash->set('success', $this->msg['admin_remove_success']);
-                Ngpic::redirect(true);
-            } else {
-                $this->flash->set('danger', $this->msg['indefined_error']);
-                Ngpic::redirect(true);
-            }
-        }
     }
 
 
@@ -563,7 +591,8 @@ class AdminController extends NgpicController
 
 
     /**
-     * list les differents album
+     * list les differents albums
+     * un album poura contenir des photo de n'importe quel categorie
      */
     public function album()
     {
@@ -714,7 +743,7 @@ class AdminController extends NgpicController
 
 
     /**
-     * ajout gestiond des ideas
+     * gestion des ideas
      */
     public function ideas()
     {
@@ -723,7 +752,4 @@ class AdminController extends NgpicController
         $this->setLayout('admin/default');
         $this->viewRender('Admin/users/ideas',compact('ideas'));
     }
-
-
-
 }

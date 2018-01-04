@@ -25,6 +25,22 @@ class UsersEntity extends Entity
 	}
 
 
+
+    public function getSeePostUrl()
+    {
+        $this->seePostUrl = "/account/my-posts/".Str::slugify($this->name)."-{$this->id}";
+        return $this->seePostUrl;
+    }
+
+
+    public function getFriendsUrl()
+    {
+        $session = Session::getInstance();
+        $this->friendsUrl = "/account/my-friends/".Str::slugify($this->name)."-{$this->id}/".$session->read('token');
+        return $this->friendsUrl;
+    }
+
+
 	public function getAvatarUrl()
 	{
 		$this->avatarUrl = "/uploads/avatars/{$this->avatar}";

@@ -25,7 +25,8 @@ $(document).ready(function(){
             
         init : function(){
                 var that = this;
-                that.countImg = $('a img.galery-item').length;
+                var imgs = $('a img.galery-item');
+                that.countImg = imgs.length;
 
                 //on cree la bare de progression
                 var $progressBarContainer = $('<div/>').attr('id','progress-bar-container');
@@ -37,7 +38,7 @@ $(document).ready(function(){
                 $fakeContainer.appendTo($('body'));
                 
                 //on parcours le element en le ajoutant au fake
-                $('a img.galery-item').each(function(){
+                imgs.each(function(){
                     $img =  $('<img/>').attr('src', $(this).attr('src'));
                     $img.on('load error', function(){
                             that.loadedImg++;
@@ -53,7 +54,7 @@ $(document).ready(function(){
                 $('#progress-bar').stop().animate({
                     'width' : (progressBar.loadedImg / progressBar.countImg) * 100 + '%' 
                 }, 300, 'linear', function(){
-                    if (progressBar.loadedImg == progressBar.countImg) {
+                    if (progressBar.loadedImg === progressBar.countImg) {
                         setTimeout(function(){
                             $('#progress-bar-container').stop().animate({
                                 'opacity' : 0
@@ -67,82 +68,11 @@ $(document).ready(function(){
             }
         };
 
-        if ($('#galery') != undefined) {
+        if ($('#galery') !== undefined) {
             progressBar.init();
         }
     })();
 
-
-    
-    // System de click pour la home page
-    (function(){
-        var $destination = $("#mainImg");
-        var $imgs = $("#previousImgs img,#nextImgs img");
-        if ($destination && $imgs !== undefined) {
-            $imgs.click(function(e){
-                $this = $(this)
-                e.preventDefault(); e.stopPropagation();
-                var $fake = $('<img/>').attr('src',$this.attr('src'));
-               
-                $destination.find('img').remove().fadeOut();
-                $destination.append($fake);
-               
-                $destination.slideDown();
-                //$destination.slideIn();
-            });
-        }
-    })();
-
-    // timer relatif
-    (function(){
-       if (document.querySelectorAll('time[data-time') !== undefined) {
-            if (NodeList.prototype.forEach === undefined) {
-                NodeList.prototype.forEach = function (callback) {
-                    [].forEach.call(this, callback)
-                }
-            }
-
-            var terms = [
-                {time: 10, divide: 1, text: "%d secondes"},
-                {time: 45, divide: 1, text: "moins d'une minute"},
-                {time: 90, divide: 60, text: "environ une minute"},
-                {time: 45 * 60, divide: 60, text: "%d minutes"},
-                {time: 90 * 60, divide: 60 * 60 , text: "environ une heure"},
-                {time: 24 * 60 * 60 , divide: 60 * 60 , text: "%d heures"},
-                {time: 42 * 60 * 60 , divide: 24 * 60 * 60 , text: "environ un jour"},
-                {time: 30 * 24 * 60 * 60, divide: 24 * 60 * 60 , text: "%d jours"},
-                {time: 42 * 24 * 60 * 60 , divide: 24 * 60 * 60 * 30, text: "environ un mois"},
-                {time: 365 * 24 * 60 * 60, divide: 24 * 60 * 60 * 30, text: "%d mois"},
-                {time: 365 * 1.5 * 24 * 60 * 60 , divide: 24 * 60 * 60 * 365, text: "environ un an"},
-                {time: Infinity, divide: 24 * 60 * 60 * 365 , text: "%d ans"}
-            ]
-
-            document.querySelectorAll('time[data-time]').forEach(function(node) {
-                function setText(){
-                    var seconds = Math.floor((new Date()).getTime()/1000 - parseInt(node.dataset.time, 10))
-                    var prefix = seconds > 0 ? 'Il y a ' : 'Dans ' 
-                    var term = null
-                    seconds = Math.abs(seconds);
-    
-                    for (term of terms) { if (seconds < term.time) { break }}
-                    node.innerHTML = prefix + term.text.replace('%d', Math.round(seconds/term.divide))
-
-                    var nextTick = seconds % term.divide
-                    if ( nextTick === 0) {
-                        nextTick = term.divide
-                    }
-                }
-
-                window.setTimeout(function(){
-                    if (node.parentNode){
-                        window.requestAnimationFrame ?  window.requestAnimationFrame(setText) : setText()               
-                    }
-                },  1000);
-
-                setText();
-            })
-       }      
-    })();
 
     //Message flash
     (function(){
@@ -150,7 +80,7 @@ $(document).ready(function(){
         if ($flash.length > 0) {
             $flash.click(function(){
                 $(document).removeChild($flash);
-            })
+            });
             $flash.fadeIn(600).delay(5000).slideUp();
         }
     })();
@@ -171,7 +101,7 @@ $(document).ready(function(){
     //rendre active un item du menu
     (function(){
         $activeLink = $('#menu-item-active').attr('data-isActive');
-        if ($activeLink != undefined) {
+        if ($activeLink !== undefined) {
             $link = $('ul.links').find("li#" + $activeLink);
             $link.addClass('active');
         }
@@ -181,26 +111,26 @@ $(document).ready(function(){
         class Tooltip {
             
             static bind(selector) {
-                document.querySelectorAll(selector).forEach(element => new Tooltip(element))
+                document.querySelectorAll(selector).forEach(element => new Tooltip(element));
             }
 
             constructor(element) {
                 this.element = element;
-                this.title = element.getAttribute('title')
+                this.title = element.getAttribute('title');
                 this.tooltip = null;
-                this.element.addEventListener('mouseover', this.mouseOver.bind(this))
-                this.element.addEventListener('mouseout', this.mouseOut.bind(this))
+                this.element.addEventListener('mouseover', this.mouseOver.bind(this));
+                this.element.addEventListener('mouseout', this.mouseOut.bind(this));
             }
 
             mouseOver() {
-               let tooltip = this.create();
-               let width = this.tooltip.offsetWidth
-               let height = this.tooltip.offsetHeight
-               let left = this.element.offsetWidth / 2 - width / 2 + this.element.getBoundingClientRect().left + document.documentElement.scrollLeft
-               let top = this.element.getBoundingClientRect().top - height -15 + document.documentElement.scrollTop
-               tooltip.style.left = left + "px"
-               tooltip.style.top = top + "px"
-               tooltip.classList.add('visible')
+               var tooltip = this.create();
+               var width = this.tooltip.offsetWidth;
+               var height = this.tooltip.offsetHeight;
+               var left = this.element.offsetWidth / 2 - width / 2 + this.element.getBoundingClientRect().left + document.documentElement.scrollLeft;
+               var top = this.element.getBoundingClientRect().top - height -15 + document.documentElement.scrollTop;
+               tooltip.style.left = left + "px";
+               tooltip.style.top = top + "px";
+               tooltip.classList.add('visible');
                 
             }
 
@@ -208,26 +138,77 @@ $(document).ready(function(){
                 if (this.tooltip !== null) {
                     this.tooltip.classList.remove('visible');
                     this.tooltip.addEventListener('transitionend', function(){
-                        document.body.removeChild(this.tooltip)
+                        document.body.removeChild(this.tooltip);
                         this.tooltip = null
                     })
                 }
             }
             create() {
                 if (this.tooltip === null) {
-                    let tooltip = document.createElement('div')
-                    tooltip.innerHTML = this.title
-                    tooltip.classList.add('tooltip')
-                    document.body.appendChild(tooltip)
-                    this.tooltip = tooltip
+                    var tooltip = document.createElement('div');
+                    tooltip.innerHTML = this.title;
+                    tooltip.classList.add('tooltip');
+                    document.body.appendChild(tooltip);
+                    this.tooltip = tooltip;
                     return tooltip
                 }
                 return this.tooltip
             }
         }
 
-        Tooltip.bind('[title]')
+        Tooltip.bind('[title]');
+        Tooltip.bind('[data-tooltip');
     })();
 
 
+    // timer relatif
+    (function(){
+        if (document.querySelectorAll('time[data-time') !== undefined) {
+            if (NodeList.prototype.forEach === undefined) {
+                NodeList.prototype.forEach = function (callback) {
+                    [].forEach.call(this, callback)
+                }
+            }
+
+            var terms = [
+                {time: 10, divide: 1, text: "%d secondes"},
+                {time: 45, divide: 1, text: "moins d'une minute"},
+                {time: 90, divide: 60, text: "environ une minute"},
+                {time: 45 * 60, divide: 60, text: "%d minutes"},
+                {time: 90 * 60, divide: 60 * 60 , text: "environ une heure"},
+                {time: 24 * 60 * 60 , divide: 60 * 60 , text: "%d heures"},
+                {time: 42 * 60 * 60 , divide: 24 * 60 * 60 , text: "environ un jour"},
+                {time: 30 * 24 * 60 * 60, divide: 24 * 60 * 60 , text: "%d jours"},
+                {time: 42 * 24 * 60 * 60 , divide: 24 * 60 * 60 * 30, text: "environ un mois"},
+                {time: 365 * 24 * 60 * 60, divide: 24 * 60 * 60 * 30, text: "%d mois"},
+                {time: 365 * 1.5 * 24 * 60 * 60 , divide: 24 * 60 * 60 * 365, text: "environ un an"},
+                {time: Infinity, divide: 24 * 60 * 60 * 365 , text: "%d ans"}
+            ];
+
+            document.querySelectorAll('time[data-time]').forEach(function(node) {
+                function setText(){
+                    var seconds = Math.floor((new Date()).getTime()/1000 - parseInt(node.dataset.time, 10));
+                    var prefix = seconds > 0 ? 'Il y a ' : 'Dans ' ;
+                    var term = null;
+                    seconds = Math.abs(seconds);
+
+                    for (term of terms) { if (seconds < term.time) { break }}
+                    node.innerHTML = prefix + term.text.replace('%d', Math.round(seconds/term.divide));
+
+                    var nextTick = seconds % term.divide;
+                    if ( nextTick === 0) {
+                        nextTick = term.divide
+                    }
+                }
+
+                window.setTimeout(function(){
+                    if (node.parentNode){
+                        window.requestAnimationFrame ?  window.requestAnimationFrame(setText) : setText()
+                    }
+                },  1000);
+
+                setText();
+            })
+        }
+    })();
 });

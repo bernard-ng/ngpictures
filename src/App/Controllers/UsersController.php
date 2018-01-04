@@ -23,13 +23,17 @@ class UsersController extends NgpicController
         $this->loadModel('users');
     }
 
+
+    /**
+     * les differents models pour les publication des users
+     * @var array
+     */
+    private $types = [1 => "articles","gallery"];
+
+
     /***************************************************************************
-    *
     *                    ACCOUNT CREATION && SETTINGS
-    *
     ****************************************************************************/
-
-
     /**
      * confirmation d'un utilisateur
      * @param $user_id
@@ -189,11 +193,8 @@ class UsersController extends NgpicController
 
     
     /***************************************************************************
-    *
     *                   LOGIN SYSTEM && RESTRICTIONS
-    *
     ****************************************************************************/
-
     /**
      * interdire l'access a certaines pages
      * @param string|null $msg
@@ -213,7 +214,7 @@ class UsersController extends NgpicController
     public function isAdmin()
     {
         $this->restrict();
-        if ($this->session->getValue('auth','rank') !== 'admin') {
+        if ($this->session->getValue(AUTH_KEY,'rank') !== 'admin') {
             $this->flash->set('warning', $this->msg['user_forbidden']);
             Ngpic::redirect(true);
         }
@@ -225,8 +226,8 @@ class UsersController extends NgpicController
      */
     private function isLogged()
     {
-        if ($this->session->hasKey("auth")) {
-            return $this->session->read("auth");
+        if ($this->session->hasKey(AUTH_KEY)) {
+            return $this->session->read(AUTH_KEY);
         }
         return false;
     }
@@ -241,7 +242,7 @@ class UsersController extends NgpicController
     private function connect(UsersEntity $user, string $msg = null)
     {
         if (!$this->isLogged()) {
-            $this->session->write('auth', $user);
+            $this->session->write(AUTH_KEY, $user);
             $this->session->write('token', $this->str::setToken(60));
             $this->flash->set('success', $msg ?? $this->msg['user_login_success']);
         }
@@ -252,8 +253,7 @@ class UsersController extends NgpicController
      * permet de connecter un utilisateur a partir d'un cookie
      */
     public function cookieConnect()
-    {
-        if ($this->cookie->hasKey("rembember") && !$this->isLogged()) {
+    {        if ($this->cookie->hasKey("rembember") && !$this->isLogged()) {
             $remember_token = $this->cookie->read("remember");
             $parts = explode(".", $remember_token);
             $user = $this->users->find($parts[2]);
@@ -338,7 +338,7 @@ class UsersController extends NgpicController
     public function logout()
     {
         $this->cookie->delete("remember");
-        $this->session->delete("auth");
+        $this->session->delete(AUTH_KEY);
         $this->session->delete("token");
         $this->flash->set('success', $this->msg['user_logout_success']);
         Ngpic::redirect("/login");
@@ -346,12 +346,8 @@ class UsersController extends NgpicController
 
 
     /***************************************************************************
-    *
     *                         ACCOUNT MANAGEMENT
-    *
     ****************************************************************************/
-
-
     /**
      *  permet de generer le profile d'un utilisateur
      *  page de vue
@@ -427,7 +423,7 @@ class UsersController extends NgpicController
                     if ($this->validator->isValid()) {
                         $this->users->update($user->id, compact('name','email','phone','bio'));
                         $user = $this->users->find($user->id);
-                        $this->session->write('auth', $user);
+                        $this->session->write(AUTH_KEY, $user);
                         $this->flash->set('success', $this->msg['user_edit_success']);
                         Ngpic::redirect($user->accountUrl);
                     }
@@ -439,7 +435,7 @@ class UsersController extends NgpicController
                     if ($isUploaded) {
                         $this->users->update($user->id, ['avatar' => "ngpictures-{$name}.jpg"]);
                         $user = $this->users->find($user->id);
-                        $this->session->write('auth', $user);
+                        $this->session->write(AUTH_KEY, $user);
                         $this->flash->set('success', $this->msg['user_edit_success']);
                         Ngpic::redirect($user->accountUrl);
                     }
@@ -456,4 +452,227 @@ class UsersController extends NgpicController
             Ngpic::redirect(true);
         }
     }
+
+
+    /***************************************************************************
+     *                         USERS POSTS MANAGEMENT
+     ****************************************************************************/
+
+    /**
+     * index pour les publications
+     */
+    public function post()
+    {
+        Page::setName("Publier un article ou une photo | Ngpictures");
+        $this->setLayout("users/account");
+        $this->viewRender("users/posts/index");
+    }
+
+
+    public function postArticle()
+    {
+        $this->restrict();
+        $this->loadModel('articles');
+        $post = new Collection($_POST);
+        $file = new Collection($_FILES);
+        $categories = $this->loadModel('categories')->orderBy('title', 'ASC');
+
+        if (isset($_POST) && !empty($_POST)) {
+            if (!empty($post->get('title')) && !empty($post->get('content')) && !empty($file->get('thumb.name'))) {
+
+                $title = $this->str::escape($post->get('title'));
+                $content = $this->str::escape($post->get('content'));
+                $slug = $this->str::slugify($title);
+                $category_id = ($post->get('category') == 0) ? 1 : $post->get('category');
+                $user_id = (int) $this->session->getValue(AUTH_KEY,'id');
+
+                if (isset($_FILES) && !empty($_FILES)) {
+                    if (!empty($file->get('thumb.name'))) {
+                        if ($this->validator->isValid()) {
+                            $this->articles->create(compact('user_id', 'title', 'content', 'slug', 'category_id'));
+
+                            $last_id = $this->articles->lastInsertId();
+                            $isUploaded = Image::upload($file, 'articles', "ngpictures-{$slug}-{$last_id}", 'article');
+
+                            if ($isUploaded) {
+                                $this->articles->update($last_id, ['thumb' => "ngpictures-{$slug}-{$last_id}.jpg"]);
+                                $this->flash->set('success', $this->msg['admin_post_success']);
+                                Ngpic::redirect("/account/post");
+                            } else {
+                                $this->flash->set('danger', $this->msg['admin_file_notUploaded']);
+                                $this->articles->delete($last_id);
+                            }
+                        } else {
+                            var_dump($this->validator->getErrors());
+                        }
+                    } else {
+                        $this->flash->set('danger', $this->msg['admin_picture_required']);
+                    }
+                }
+            } else {
+                $this->flash->set('danger', $this->msg['admin_all_fields']);
+            }
+        }
+
+        Page::setName("Publier un article | Ngpictures");
+        $this->viewRender("users/posts/article.add",compact('post','categories'));
+    }
+
+
+    public function editArticle($slug , $id, $token)
+    {
+        $this->restrict();
+        $categories = $this->loadModel('categories')->orderBy('title', 'ASC');
+
+       if ($token == $this->session->read('token')) {
+           $post = new Collection($_POST);
+           $article = $this->articles->find(intval($id));
+           $post = new Collection($data ?? $_POST);
+
+           if (isset($_POST) && !empty($_POST)) {
+               if (!empty($post->get('content')) && !empty($post->get('title'))) {
+
+                   $this->validator->isEmpty('title', $this->msg['admin_all_fields']);
+                   $this->validator->isEmpty('content', $this->msg['admin_all_fields']);
+
+                   if ($this->validator->isValid()) {
+                       $title = $this->str::escape($post->get('title'));
+                       $content = $post->get('content');
+                       $slug = $this->str::slugify($title);
+                       $category_id = (int) $post->get('category') ?? 1;
+
+                       $this->articles->update($id, compact('title', 'content', 'slug', 'category_id'));
+                       $this->flash->set("success", $this->msg['admin_modified_success']);
+                       Ngpic::redirect("/account/post");
+                   } else {
+                       var_dump($this->validator->getErrors());
+                   }
+               } else {
+                   $this->flash->set('danger', $this->msg['admin_all_fields']);
+               }
+           }
+
+           Page::setName("Publier un article | Ngpictures");
+           $this->viewRender("users/posts/article.edit",compact('post','categories'));
+       }
+    }
+
+
+    public function postGallery()
+    {
+        $this->restrict();
+        $post = new Collection($_POST);
+        $file = new Collection($_FILES);
+        $categories = $this->loadModel('categories')->orderBy('title', 'ASC');
+
+        if (!empty($_FILES)) {
+            $this->loadModel('gallery');
+            if (empty($post->get('name'))) {
+                $name = strtolower(uniqid("ngpictures-"));
+            } else {
+                $name = $this->str::escape($post->get('name'));
+            }
+            $description = $this->str::escape($post->get('description')) ?? null;
+            $tags = $this->str::escape($post->get('tags')) ?? null;
+            $category_id = (int)$post->get('category') ?? 1;
+            $slug = $this->str::slugify($name);
+            $user_id = $this->session->getValue(AUTH_KEY, 'id');
+
+            if (!empty($file->get('thumb'))) {
+                $this->gallery->create(compact('user_id', 'name', 'description', 'tags', 'category_id', 'slug'));
+                $last_id = $this->gallery->lastInsertId();
+                $isUploaded = Image::upload($file, 'pictures', "{$name}-{$last_id}", 'ratio');
+
+                if ($isUploaded) {
+                    Image::upload($file, 'pictures-thumbs', "{$name}-{$last_id}", 'medium');
+
+                    $this->gallery->update($last_id, ["thumb" => "{$name}-{$last_id}.jpg"]);
+                    $this->flash->set('success', $this->msg['admin_post_success']);
+                    Ngpic::redirect("/account/post");
+
+                } else {
+                    $this->flash->set('danger', $this->msg['admin_file_notUploaded']);
+                    $this->gallery->delete($last_id);
+                }
+            } else {
+                $this->flash->set('danger', $this->msg['admin_picture_required']);
+                Ngpic::redirect(true);
+            }
+        }
+
+        Page::setName("Publier un article | Ngpictures");
+        $this->viewRender("users/posts/gallery.add",compact('post', 'categories'));
+    }
+
+
+    /**
+     * edition des information d'une photo de gallery
+     * @param string $slug
+     * @param int $id
+     * @param string $token
+     */
+    public function editGallery($slug, $id, $token)
+    {
+        $this->restrict();
+        if ($token == $this->session->read('token')) {
+            $photo = $this->gallery->find(intval($id));
+            $post = new Collection($_POST);
+            $categories = $this->loadModel('categories')->orderBy('title', 'ASC');
+            if ($photo && $photo->id == $this->session->getValue(AUTH_KEY,'id')) {
+                if (isset($_POST) && !empty($_POST)) {
+                    $name = $this->str::escape($post->get('name')) ?? $post->name;
+                    $description = $this->str::escape($post->get('description')) ?? $post->description;
+                    $tags = $this->str::escape($post->get('tags')) ?? $post->tags;
+                    $category_id = (int) $post->get('category') ?? $post->category_id;
+                    $slug = $this->str::slugify($name);
+                }
+            } else {
+                if ($this->isAjax()) $this->ajaxFail($this->msg['indefined_error']);
+                $this->flash->set('danger', $this->msg['indefined_error']);
+                Ngpic::redirect(true);
+            }
+
+            Page::setName("Edition photo | Ngpictures");
+            $this->viewRender("/users/posts/gallery.edit", compact('post', 'categories'));
+
+        } else {
+            if ($this->isAjax()) $this->ajaxFail($this->msg['indefined_error']);
+            $this->flash->set('danger', $this->msg['indefined_error']);
+            Ngpic::redirect(true);
+        }
+    }
+
+
+    /**
+     * suppression des publications des users
+     * @param int $t
+     * @param int $id
+     * @param string $token
+     */
+    public function delete($t, $id, $token)
+    {
+        $this->restrict();
+        $model = $this->loadModel($this->types[intval($t)]);
+        $post = $model->find(intval($id));
+
+        if ($this->session->read('token') == $token) {
+            if ($post && $post->user_id == $this->session->getValue(AUTH_KEY,'id')) {
+                $model->delete($post->id);
+                if ($this->isAjax()) {
+                    exit();
+                }
+                $this->flash->set('success', $this->msg['admin_delete_success']);
+                Ngpic::redirect(true);
+            } else {
+                if ($this->isAjax()) $this->ajaxFail($this->msg['indefined_error']);
+                $this->flash->set('danger', $this->msg['indefined_error']);
+                Ngpic::redirect(true);
+            }
+        } else {
+            if ($this->isAjax()) $this->ajaxFail($this->msg['admin_delete_notAllowed']);
+            $this->flash->set('danger', $this->msg['admin_delete_notAllowed']);
+            Ngpic::redirect(true);
+        }
+    }
 }
+

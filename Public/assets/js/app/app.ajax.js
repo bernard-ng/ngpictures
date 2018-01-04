@@ -3,14 +3,14 @@ $('document').ready(function(){
     //System de like en Ajax
     (function(){
         var articles = document.querySelectorAll('article');
-        if (articles != undefined) {
+        if (articles !== undefined) {
             $(articles).each(
                 function(){
-                    var $that = $(this)
+                    var $that = $(this);
                     var $likeBtn = $that.find('#likeBtn');
 
                     $likeBtn.on('click live', function(e){
-                        $this = $(this)
+                        $this = $(this);
                         e.preventDefault(); e.stopPropagation();
                         $this.toggleClass('active');
                         $that.find('#showLikes').html('...');
@@ -21,15 +21,7 @@ $('document').ready(function(){
                             function(data) {
                                 $that.find('#showLikes').html(data);
                             }, function (xhr) {
-                                $(document).append(
-                                    '<div class="flash" id="flash">\
-                                        <div class="flash-content" >\
-                                            <i class="icon icon-close flash-close-icon"></i>\
-                                            <span class="flash-content-icon-'+data.type+'"><i class="icon icon-info-sign"></i></span>\
-                                            <span class="flash-content-message">'+data.message+'</span>\
-                                        </div>\
-                                    </div>'
-                                );
+                                alert(xhr.responseText);
                             }
                         );
                     })
@@ -43,7 +35,7 @@ $('document').ready(function(){
     (function(){
         var action = 'inactive';
         var feedMore = $("#feedMore");
-        var container = $('#dataContainer')
+        var container = $('#dataContainer');
 
         function loadData(lastId){
             $.post({
@@ -78,24 +70,24 @@ $('document').ready(function(){
 
 
     (function(){
-        verse = $('#versesContainer')
-        verse.each(function(){
-            if (verse != undefined) {
+        verses = $('#versesContainer');
+        verses.each(function(){
+            if (verses !== undefined) {
                 function loadData() {
                     $.ajax({url: "/ajax/verset"})
                     .then(
                         function(data) {
-                            verse.html(''); verse.html(data);
+                            verses.html(''); verses.html(data);
                         }, function () {
-                            verse.html('<div class="card-stacked mb-20 ml-20 mg-20 mg-20"><p>impossible de charger les versets</p></div>');
+                            verses.html('<div class="card-stacked mb-20 ml-20 mg-20 mg-20"><p>Impossible de charger les versets</p></div>');
                         }
                     );
                 }
-            setInterval(function(){
-                loadData();
-            },6000)
+                setInterval(function(){
+                    loadData();
+                },6000)
             }
         })
     })()
 
-})
+});

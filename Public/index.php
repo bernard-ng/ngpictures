@@ -9,6 +9,7 @@ define("CORE", ROOT."/src/Core");
 define("APP", ROOT."/src/App");
 define("UPLOAD", WEBROOT."/uploads");
 define("ADMIN", "/admin");
+define("AUTH_KEY", "auth");
 
 
 require(ROOT."/vendor/autoload.php");
@@ -34,10 +35,22 @@ $router->post("/reset/:id/:token", "users#reset", "users.reset");
 $router->get("/sign/", "users#sign", "users.sign");
 $router->post("/sign/", "users#sign", "users.sign");
 $router->get("/confirm/:id/:token", "users#confirm", "users.confirmation");
+
 $router->get("/account/:user-:id", "users#account", "users.account");
-$router->get("/users/", "users", "users");
 $router->get("/account/edit/:user-:id/:token", "users#edit", "users.edit");
 $router->post("/account/edit/:user-:id/:token", "users#edit", "users.edit");
+$router->get("/account/my-posts/:user-:id/", "users#showPosts", "users.show-post");
+$router->get("/account/my-friends/:user-:id/:token", "users#showFriends", "users.show-friends");
+$router->get("/account/post/", "users#post", "users.post");
+$router->get("/account/post/articles/", "users#postArticle", "users.post-article");
+$router->post("/account/post/articles/", "users#postArticle", "users.post-article");
+$router->get("/account/post/articles/edit/:token", "users#editArticle", "users.edit-article");
+$router->post("/account/post/articles/edit/:token", "users#editArticle", "users.edit-article");
+$router->get("/account/post/photos/", "users#postGallery", "users.post-gallery");
+$router->post("/account/post/photos/", "users#postGallery", "users.post-gallery");
+$router->get("/account/post/photos/edit/:token", "users#editGallery", "users.edit-gallery");
+$router->post("/account/post/photos/edit/:token", "users#editGallery", "users.edit-gallery");
+$router->get("/account/post/delete/:type/:id/:token", "users#delete", "users.delete");
 
 
 //articles and blog pages
@@ -53,14 +66,14 @@ $router->get("/categories/:name-:id", "categories#show", "categories.show");
 
 //gallery pages
 $router->get("/gallery/","gallery","gallery.index");
-$router->get("/gallery/:id","gallery#show","gallery.show");
+$router->get("/gallery/:slug-:id","gallery#show","gallery.show");
 
 
 //features
 $router->get("/likes/:t/:slug-:id","likes","likes");
 $router->get("/following/:name-:id","following#follow","following");
 $router->get("/download/:type/:name", "download", "download");
-$router->post("/comments/:t/:slug-:id","comments","comments.show");
+$router->post("/comments/:type/:slug-:id","comments","comments.show");
 $router->post("/comments/edit/:id", "comments#edit", "comments.edit");
 $router->get("/comments/delete/:id", "comments#delete", "comments.delete");
 $router->get("/rss/", "rss", "rss.index");
@@ -108,6 +121,7 @@ $router->post(ADMIN."/gallery/album/edit/:id", "admin#editAlbum", "admin.album-e
 $router->get(ADMIN."/gallery/albums/add/", "admin#addAlbum", "admin.album-add");
 $router->post(ADMIN."/gallery/albums/add/", "admin#addAlbum", "admin.album-add");
 $router->get(ADMIN."/media-browser", "admin#mediaBrowser", "admin.gallery-mediaBrowser");
+$router->get(ADMIN."/file-browser/:dirname", "admin#fileBrowser", "admin.fileBrowser");
 $router->post(ADMIN."/deleteFile/", "admin#deleteFile", "admin.gallery-deletefile");
 
 //users pages
@@ -115,7 +129,6 @@ $router->get(ADMIN."/users/","admin#users","admin.users");
 $router->get(ADMIN."/users/permissions/:id", "admin#permissions", "admin.permissions");
 $router->get(ADMIN."/users/bugs/", "admin#bugs", "admin.bugs");
 $router->get(ADMIN."/users/ideas/", "admin#ideas", "admin.ideas");
-$router->get(ADMIN."/file-browser/:dirname", "admin#fileBrowser", "admin.fileBrowser");
 
 
 /***************************************************************************

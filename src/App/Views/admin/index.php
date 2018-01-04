@@ -70,23 +70,19 @@
                                 <form method="POST" action="<?= ADMIN."/delete" ?>" style="display: inline-block !important;">
                                     <input type="hidden" name="id" value="<?= $a->id?>" >
                                     <input type="hidden" name="type" value="1" >
-                                    <button type="submit" class="btn btn-small waves-effect waves-light red" title="supprimer">
+                                    <button type="submit" class="btn btn-small waves-effect waves-light red" title="supprimer" id="delete">
                                         <i class="icon icon-remove" style="font-size: smaller !important;"></i>
                                     </button>
                                 </form>
-                                <?php if ($a->online): ?>
-                                    <a href="<?= ADMIN."/confirm/1/{$a->id}" ?>" title="retirer">
-                                        <button class="btn btn-small blue-2 waves-effect waves-light">
+                                <a href="<?= ADMIN."/confirm/1/{$a->id}" ?>" title="retirer" id="confirm">
+                                    <button class="btn btn-small blue-2 waves-effect waves-light">
+                                         <?php if ($a->online): ?>
                                             <i class="icon icon-cloud-download" style="font-size: smaller !important;"></i>
-                                        </button>
-                                    </a>
-                                <?php else: ?>
-                                    <a href="<?= ADMIN."/confirm/1/{$a->id}" ?>" title="confirmer">
-                                        <button class="btn btn-small blue-2 waves-effect waves-light">
+                                         <?php else : ?>
                                             <i class="icon icon-cloud-upload" style="font-size: smaller !important;"></i>
-                                        </button>
-                                    </a>
-                                <?php endif; ?>
+                                         <?php endif; ?>
+                                    </button>
+                                </a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -120,14 +116,14 @@
                 <tbody>
                 <?php if (!empty($blog)): ?>
                     <?php foreach ($blog as $b) : ?>
-                        <tr>
+                        <tr id="<?= $b->id ?>">
                             <td><b><?= $b->id ?></b></td>
                             <td><a href="<?= $b->url ?>"><?= $b->title ?></a></td>
                             <td>
                                 <form method="POST" action="<?= ADMIN."/delete"  ?>" style="display: inline-block !important;">
                                     <input type="hidden" name="id" value="<?= $b->id?>" >
                                     <input type="hidden" name="type" value="3" >
-                                    <button type="submit" class="btn btn-small waves-effect waves-light red" title="supprimer">
+                                    <button type="submit" class="btn btn-small waves-effect waves-light red" title="supprimer" id="delete">
                                         <i class="icon icon-remove" style="font-size: smaller !important;"></i>
                                     </button>
                                 </form>
@@ -137,19 +133,15 @@
                                         <i class="icon icon-edit" style="font-size: smaller !important;"></i>
                                     </button>
                                 </a>
-                                <?php if (!$b->online): ?>
-                                    <a href="<?= ADMIN."/confirm/3/{$b->id}" ?>" title="confirmer">
-                                        <button class="btn btn-small blue-2 waves-effect waves-light">
-                                            <i class="icon icon-cloud-upload" style="font-size: smaller !important;"></i>
-                                        </button>
-                                    </a>
-                                <?php else: ?>
-                                    <a href="<?= ADMIN."/confirm/3/{$b->id}" ?>" title="retirer">
-                                        <button class="btn btn-small blue-2 waves-effect waves-light">
+                                <a href="<?= ADMIN."/confirm/1/{$a->id}" ?>" title="retirer" id="confirm">
+                                    <button class="btn btn-small blue-2 waves-effect waves-light">
+                                         <?php if ($a->online): ?>
                                             <i class="icon icon-cloud-download" style="font-size: smaller !important;"></i>
-                                        </button>
-                                    </a>
-                                <?php endif; ?>
+                                         <?php else : ?>
+                                            <i class="icon icon-cloud-upload" style="font-size: smaller !important;"></i>
+                                         <?php endif; ?>
+                                    </button>
+                                </a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

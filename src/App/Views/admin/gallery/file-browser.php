@@ -38,7 +38,7 @@
                    <form method="POST" action="<?= ADMIN."/deleteFile/" ?>" style="display: inline-block !important;">
                        <input type="hidden" name="name" value="<?= $file->getBasename() ?>" >
                        <input type="hidden" name="dir" value="<?= $relative_dos ?>" >
-                       <button type="submit" class="btn btn-small waves-effect waves-light red" >
+                       <button type="submit" class="btn btn-small waves-effect waves-light red" id="deleteFile">
                            <i class="icon icon-remove" style="font-size: smaller !important;"></i>
                        </button>
                    </form>

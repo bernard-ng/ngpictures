@@ -28,7 +28,12 @@
             <?php echo $content; ?>
         </div>
         <?php include(APP."/Views/includes/footer.php"); ?>
-        <?php include(APP."/Views/includes/default-script.php"); ?>
+
+        <script type="text/javascript" src="/assets/js/lib/jquery.min.js" ></script>
+        <script type="text/javascript" src="/assets/js/app/materialize.js" ></script>
+        <script type="text/javascript" src="/assets/js/app/activingScript.js" ></script>
+        <script type="text/javascript" src="/assets/js/app/admin.ajax.js"></script>
+        <script type="text/javascript" src="/assets/js/app/app.js" ></script>
         <script  type="text/javascript" src="/assets/js/lib/raphael.js"></script>
         <script  type="text/javascript" src="/assets/js/lib/morris.min.js"></script>
         <script type="text/javascript" src="/assets/js/tinymce/tinymce.min.js"></script>

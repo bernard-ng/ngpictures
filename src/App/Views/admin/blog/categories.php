@@ -29,7 +29,7 @@
                                 <form method="POST" action="<?= ADMIN."/delete" ?>" style="display: inline-block !important;">
                                     <input type="hidden" name="id" value="<?= $c->id?>" >
                                     <input type="hidden" name="type" value="9" >
-                                    <button type="submit" class="btn btn-small waves-effect waves-light red" >
+                                    <button type="submit" class="btn btn-small waves-effect waves-light red" id="delete">
                                         <i class="icon icon-remove" style="font-size: smaller !important;"></i>
                                     </button>
                                 </form>

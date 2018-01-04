@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 01 Janvier 2018 à 17:20
+-- Généré le :  Sam 06 Janvier 2018 à 11:04
 -- Version du serveur :  5.7.14
 -- Version de PHP :  7.0.10
 
@@ -23,6 +23,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `albums`
+--
+
+CREATE TABLE `albums` (
+  `id` int(11) NOT NULL,
+  `title` varchar(500) NOT NULL,
+  `description` text NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `date_created` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `articles`
 --
 
@@ -35,7 +49,7 @@ CREATE TABLE `articles` (
   `thumb` varchar(255) DEFAULT NULL,
   `slug` varchar(255) DEFAULT NULL,
   `category_id` varchar(255) DEFAULT NULL,
-  `online` tinyint(4) NOT NULL DEFAULT '0'
+  `online` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -43,7 +57,6 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`id`, `title`, `content`, `user_id`, `date_created`, `thumb`, `slug`, `category_id`, `online`) VALUES
-(50, 'eu eros. Nam consequat dolor', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 5, '2018-12-07 14:48:46', 'default.png', 'non, bibendum sed, est. Nunc', '10', 1),
 (51, 'rhoncus. Donec est. Nunc ullamcorper,', 'Lorem ipsum dolor sit', 5, '2018-03-02 14:11:23', 'default.png', 'velit. Pellentesque ultricies dignissim lacus.', '7', 1),
 (52, 'consectetuer euismod est arcu ac', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 5, '2017-12-05 19:56:43', 'default.png', 'semper pretium neque. Morbi quis', '1', 1),
 (53, 'interdum. Nunc sollicitudin commodo ipsum.', 'Lorem ipsum dolor sit amet, consectetuer', 1, '2017-01-29 15:10:27', 'default.png', 'felis purus ac tellus. Suspendisse', '5', 1),
@@ -51,21 +64,16 @@ INSERT INTO `articles` (`id`, `title`, `content`, `user_id`, `date_created`, `th
 (55, 'urna. Nullam lobortis quam a', 'Lorem ipsum dolor sit', 3, '2017-01-12 23:13:52', 'default.png', 'malesuada vel, venenatis vel, faucibus', '2', 1),
 (56, 'tincidunt tempus risus. Donec egestas.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 3, '2017-05-19 23:38:50', 'default.png', 'enim mi tempor lorem, eget', '10', 1),
 (57, 'vulputate ullamcorper magna. Sed eu', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 3, '2018-09-17 10:36:29', 'default.png', 'augue. Sed molestie. Sed id', '3', 1),
-(58, 'netus et malesuada fames ac', 'Lorem', 4, '2017-03-26 00:45:16', 'default.png', 'Cum sociis natoque penatibus et', '3', 1),
-(59, 'nec, eleifend non, dapibus rutrum,', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 4, '2017-05-19 12:32:23', 'default.png', 'interdum. Curabitur dictum. Phasellus in', '7', 1),
-(60, 'tempor erat neque non quam.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 2, '2017-08-24 19:27:08', 'default.png', 'dui quis accumsan convallis, ante', '1', 1),
-(61, 'mauris. Morbi non sapien molestie', 'Lorem', 2, '2018-11-20 09:14:33', 'default.png', 'Vestibulum ante ipsum primis in', '8', 1),
-(62, 'non enim commodo hendrerit. Donec', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 2, '2017-11-16 05:15:33', 'default.png', 'mauris blandit mattis. Cras eget', '10', 1),
-(63, 'sem magna nec quam. Curabitur', 'Lorem ipsum dolor sit amet, consectetuer', 5, '2017-05-06 10:00:12', 'default.png', 'pharetra nibh. Aliquam ornare, libero', '7', 1),
-(64, 'elit, pellentesque a, facilisis non,', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 5, '2018-10-13 00:42:10', 'default.png', 'penatibus et magnis dis parturient', '3', 1),
-(65, 'diam eu dolor egestas rhoncus.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 2, '2017-07-29 08:37:48', 'default.png', 'egestas. Aliquam fringilla cursus purus.', '7', 1),
-(66, 'Integer urna. Vivamus molestie dapibus', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 3, '2018-08-21 14:16:56', 'default.png', 'Phasellus ornare. Fusce mollis. Duis', '4', 0),
-(67, 'ligula elit, pretium et, rutrum', 'Lorem ipsum dolor sit', 1, '2017-06-18 23:43:41', 'default.png', 'nulla. Integer vulputate, risus a', '9', 0),
-(68, 'lectus pede, ultrices a, auctor', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 3, '2017-07-30 04:30:27', 'default.png', 'congue, elit sed consequat auctor,', '9', 0),
-(69, 'sed tortor. Integer aliquam adipiscing', 'Lorem ipsum dolor sit amet, consectetuer', 2, '2017-02-18 10:47:08', 'default.png', 'elit elit fermentum risus, at', '8', 0),
-(70, 'libero et tristique pellentesque, tellus', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 1, '2017-05-24 09:39:17', 'default.png', 'Cras dolor dolor, tempus non,', '3', 0),
-(71, 'Vivamus non lorem vitae odio', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 1, '2018-10-26 05:07:59', 'default.png', 'euismod enim. Etiam gravida molestie', '5', 0),
-(72, 'erat, eget tincidunt dui augue', 'Lorem ipsum dolor', 1, '2017-07-21 23:27:23', 'default.png', 'semper, dui lectus rutrum urna,', '4', 0);
+(66, 'Integer urna. Vivamus molestie dapibus', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 3, '2018-08-21 14:16:56', 'default.png', 'Phasellus ornare. Fusce mollis. Duis', '4', 1),
+(67, 'ligula elit, pretium et, rutrum', 'Lorem ipsum dolor sit', 1, '2017-06-18 23:43:41', 'default.png', 'nulla. Integer vulputate, risus a', '9', 1),
+(68, 'lectus pede, ultrices a, auctor', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 3, '2017-07-30 04:30:27', 'default.png', 'congue, elit sed consequat auctor,', '9', 1),
+(69, 'sed tortor. Integer aliquam adipiscing', 'Lorem ipsum dolor sit amet, consectetuer', 2, '2017-02-18 10:47:08', 'default.png', 'elit elit fermentum risus, at', '8', 1),
+(70, 'libero et tristique pellentesque, tellus', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 1, '2017-05-24 09:39:17', 'default.png', 'Cras dolor dolor, tempus non,', '3', 1),
+(71, 'Vivamus non lorem vitae odio', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 1, '2018-10-26 05:07:59', 'default.png', 'euismod enim. Etiam gravida molestie', '5', 1),
+(72, 'erat, eget tincidunt dui augue', 'Lorem ipsum dolor', 1, '2017-07-21 23:27:23', 'default.png', 'semper, dui lectus rutrum urna,', '4', 1),
+(75, 'ngpictures verison 2', 'nnghjk', 5, '2018-01-06 02:38:45', 'ngpictures-ngpictures-verison-2-75.jpg', 'ngpictures-verison-2', '1', 1),
+(76, 'la vie de blogger', 'lkfdlkfl', 5, '2018-01-06 02:44:54', 'ngpictures-la-vie-de-blogger-76.jpg', 'la-vie-de-blogger', '6', 1),
+(79, 'imani girls', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 5, '2018-01-06 12:57:49', 'ngpictures-imani-girls-79.jpg', 'imani-girls', '6', 1);
 
 -- --------------------------------------------------------
 
@@ -90,11 +98,6 @@ CREATE TABLE `blog` (
 --
 
 INSERT INTO `blog` (`id`, `title`, `content`, `user_id`, `date_created`, `thumb`, `slug`, `category_id`, `online`) VALUES
-(50, 'dui quis accumsan convallis, ante', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 5, '2017-09-17 03:35:22', 'Ngpictures.jpg', 'velit eu sem. Pellentesque ut', 7, 1),
-(51, 'eget nisi dictum augue malesuada', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 4, '2017-11-22 19:37:25', 'Ngpictures.jpg', 'non nisi. Aenean eget metus.', 6, 1),
-(52, 'Quisque imperdiet, erat nonummy ultricies', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 5, '2018-09-30 07:45:35', 'Ngpictures.jpg', 'enim. Sed nulla ante, iaculis', 5, 1),
-(53, 'Nulla facilisis. Suspendisse commodo tincidunt', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 5, '2017-02-17 20:42:56', 'Ngpictures.jpg', 'ullamcorper magna. Sed eu eros.', 7, 1),
-(54, 'Vivamus euismod urna. Nullam lobortis', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 3, '2017-06-04 23:38:18', 'Ngpictures.jpg', 'eget nisi dictum augue malesuada', 10, 1),
 (55, 'neque vitae semper egestas, urna', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 3, '2017-01-03 20:39:51', 'Ngpictures.jpg', 'nec, malesuada ut, sem. Nulla', 7, 1),
 (56, 'In tincidunt congue turpis. In', 'Lorem ipsum dolor sit', 3, '2017-04-28 23:48:48', 'Ngpictures.jpg', 'tincidunt nibh. Phasellus nulla. Integer', 10, 1),
 (57, 'ornare, lectus ante dictum mi,', 'Lorem ipsum dolor sit amet,', 3, '2017-07-02 12:41:23', 'Ngpictures.jpg', 'Praesent interdum ligula eu enim.', 3, 1),
@@ -108,33 +111,14 @@ INSERT INTO `blog` (`id`, `title`, `content`, `user_id`, `date_created`, `thumb`
 (65, 'Donec egestas. Duis ac arcu.', 'Lorem ipsum dolor', 3, '2018-08-18 09:00:13', 'Ngpictures.jpg', 'sit amet, consectetuer adipiscing elit.', 1, 1),
 (66, 'arcu. Sed et libero. Proin', 'Lorem ipsum dolor', 2, '2018-07-19 19:14:36', 'Ngpictures.jpg', 'Aliquam fringilla cursus purus. Nullam', 10, 1),
 (67, 'Quisque varius. Nam porttitor scelerisque', 'Lorem ipsum dolor sit', 3, '2017-01-04 10:22:39', 'Ngpictures.jpg', 'odio tristique pharetra. Quisque ac', 4, 1),
-(69, 'auctor vitae, aliquet nec, imperdiet', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 5, '2017-06-09 18:55:59', 'Ngpictures.jpg', 'Donec est mauris, rhoncus id,', 10, 1),
-(70, 'diam. Duis mi enim, condimentum', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 1, '2018-03-09 04:44:17', 'Ngpictures.jpg', 'molestie pharetra nibh. Aliquam ornare,', 6, 1),
-(71, 'eu arcu. Morbi sit amet', 'Lorem', 2, '2018-10-14 22:36:15', 'Ngpictures.jpg', 'ac nulla. In tincidunt congue', 7, 1),
-(72, 'amet luctus vulputate, nisi sem', 'Lorem', 5, '2017-07-22 03:00:22', 'Ngpictures.jpg', 'dis parturient montes, nascetur ridiculus', 9, 1),
-(73, 'Maecenas libero est, congue a,', 'Lorem ipsum dolor sit amet, consectetuer', 1, '2018-07-18 12:19:30', 'Ngpictures.jpg', 'ligula. Donec luctus aliquet odio.', 8, 1),
-(74, 'Proin velit. Sed malesuada augue', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 1, '2017-02-09 05:36:57', 'Ngpictures.jpg', 'sagittis semper. Nam tempor diam', 1, 1),
-(75, 'in, tempus eu, ligula. Aenean', 'Lorem ipsum dolor sit amet,', 5, '2018-02-25 08:04:03', 'Ngpictures.jpg', 'et arcu imperdiet ullamcorper. Duis', 6, 1),
-(76, 'nibh enim, gravida sit amet,', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 2, '2018-04-21 01:02:13', 'Ngpictures.jpg', 'Donec feugiat metus sit amet', 2, 1),
-(77, 'mauris ut mi. Duis risus', 'Lorem ipsum dolor sit', 3, '2018-05-21 20:38:06', 'Ngpictures.jpg', 'venenatis a, magna. Lorem ipsum', 1, 1),
-(78, 'ipsum ac mi eleifend egestas.', 'Lorem', 3, '2018-10-07 11:04:37', 'Ngpictures.jpg', 'pede et risus. Quisque libero', 6, 1),
-(79, 'sagittis semper. Nam tempor diam', 'Lorem ipsum dolor sit', 2, '2016-12-26 22:11:40', 'Ngpictures.jpg', 'amet ornare lectus justo eu', 2, 1),
-(80, 'fermentum arcu. Vestibulum ante ipsum', 'Lorem ipsum dolor sit amet,', 5, '2018-08-02 07:32:13', 'Ngpictures.jpg', 'rutrum urna, nec luctus felis', 3, 1),
-(81, 'rutrum. Fusce dolor quam, elementum', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 5, '2018-09-30 17:34:28', 'Ngpictures.jpg', 'id sapien. Cras dolor dolor,', 4, 1),
-(82, 'molestie. Sed id risus quis', 'Lorem ipsum dolor sit amet,', 1, '2017-06-27 13:44:51', 'Ngpictures.jpg', 'vestibulum lorem, sit amet ultricies', 8, 1),
-(83, 'arcu. Vestibulum ut eros non', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 4, '2017-10-31 09:32:27', 'Ngpictures.jpg', 'magnis dis parturient montes, nascetur', 9, 0),
-(84, 'vitae diam. Proin dolor. Nulla', 'Lorem ipsum dolor sit amet,', 2, '2017-02-18 13:48:07', 'Ngpictures.jpg', 'amet metus. Aliquam erat volutpat.', 9, 1),
-(85, 'penatibus et magnis dis parturient', 'Lorem', 4, '2017-06-20 22:12:30', 'Ngpictures.jpg', 'id, libero. Donec consectetuer mauris', 4, 1),
-(86, 'vel, vulputate eu, odio. Phasellus', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 4, '2016-12-18 03:07:37', 'Ngpictures.jpg', 'risus. In mi pede, nonummy', 10, 0),
-(106, 'test redim', '<p>djk</p>', 1, '2017-12-29 10:17:34', 'ngpictures-test-redim-106.jpg', 'test-redim', 9, 0),
-(113, 'ngpictures verison 2', '<p>welcom everybody</p>', 1, '2017-12-29 12:01:18', 'ngpictures-new-version-113.jpg', 'new-version', 7, 0),
-(114, 'image bisarre', '<p>asdff</p>', 1, '2017-12-29 12:05:51', 'ngpictures-image-bisarre-114.jpg', 'image-bisarre', 1, 1),
-(115, 'love', '<p>sasdasasdasdasdasdaasdasdasdasdasdasd</p>', 1, '2017-12-29 13:02:14', 'ngpictures-love-115.jpg', 'love', 10, 1),
-(116, 'i never need', '<p>test</p>', 1, '2017-12-29 13:41:19', 'ngpictures-i-never-need-116.jpg', 'i-never-need', 1, 1),
-(118, 'les filles d\'imani', '<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>', 1, '2017-12-29 13:49:34', 'ngpictures-les-filles-d-imani-118.jpg', 'les-filles-d-imani', 1, 1),
-(121, 'dream team', '<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>', 1, '2017-12-29 13:57:26', 'ngpictures-dream-team-121.jpg', 'dream-team', 1, 0),
-(132, 'road of destiny', '<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<h2 style="text-align: left;"><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">Pourquoi ?</span></h2>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<h2 style="text-align: left;"><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">Comment ?</span></h2>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.&nbsp;</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<h2><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">Un Exemple </span></h2>\r\n<p style="text-align: center;"><em><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></em></p>\r\n<p style="text-align: center;"><em><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;"><img src="/imgs/bg/bg.jpg" alt="" width="683" height="384" /></span></em></p>\r\n<p style="text-align: center;"><em><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></em></p>', 1, '2017-12-31 19:05:51', 'ngpictures-on-the-road-of-destiny-132.jpg', 'road-of-destiny', 2, 1),
-(137, 'Atena', '<p>lorem</p>', 1, '2018-01-01 04:13:11', 'ngpictures-une-article-137.jpg', 'Atena', 1, 1);
+(69, 'auctor vitae, aliquet nec, imperdiet', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 5, '2017-06-09 18:55:59', 'Ngpictures.jpg', 'Donec est mauris, rhoncus id,', 10, 0),
+(70, 'diam. Duis mi enim, condimentum', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 1, '2018-03-09 04:44:17', 'Ngpictures.jpg', 'molestie pharetra nibh. Aliquam ornare,', 6, 0),
+(71, 'eu arcu. Morbi sit amet', 'Lorem', 2, '2018-10-14 22:36:15', 'Ngpictures.jpg', 'ac nulla. In tincidunt congue', 7, 0),
+(72, 'amet luctus vulputate, nisi sem', 'Lorem', 5, '2017-07-22 03:00:22', 'Ngpictures.jpg', 'dis parturient montes, nascetur ridiculus', 9, 0),
+(74, 'Proin velit. Sed malesuada augue', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 1, '2017-02-09 05:36:57', 'Ngpictures.jpg', 'sagittis semper. Nam tempor diam', 1, 0),
+(106, 'test redim', '<p>djk</p>', 1, '2017-12-29 10:17:34', 'ngpictures-test-redim-106.jpg', 'test-redim', 9, 1),
+(113, 'ngpictures verison 2', '<p>welcom everybody</p>', 1, '2017-12-29 12:01:18', 'ngpictures-new-version-113.jpg', 'new-version', 7, 1),
+(121, 'dream team', '<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>', 1, '2017-12-29 13:57:26', 'ngpictures-dream-team-121.jpg', 'dream-team', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -149,13 +133,6 @@ CREATE TABLE `bugs` (
   `date_created` datetime NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `bugs`
---
-
-INSERT INTO `bugs` (`id`, `user_id`, `content`, `date_created`, `status`) VALUES
-(2, 5, 'big Bug', '2018-01-01 12:12:21', 0);
 
 -- --------------------------------------------------------
 
@@ -184,8 +161,7 @@ INSERT INTO `categories` (`id`, `title`, `description`, `slug`, `date_created`) 
 (6, 'culture', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'culture', '2018-01-01 02:08:43'),
 (7, 'technologie', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'technologie', '2018-01-01 02:08:43'),
 (8, 'evenement', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'evenement', '2018-01-01 02:08:43'),
-(9, 'autres', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'autres', '2018-01-01 02:08:43'),
-(10, 'noir et blanc', '<p>la beaut du monochrome</p>', 'noir-et-blanc', '2018-01-01 02:08:43');
+(9, 'autres', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'autres', '2018-01-01 02:08:43');
 
 -- --------------------------------------------------------
 
@@ -238,6 +214,7 @@ CREATE TABLE `gallery` (
   `tags` text,
   `thumb` varchar(1000) DEFAULT NULL,
   `description` mediumtext,
+  `slug` varchar(500) NOT NULL,
   `category_id` tinyint(4) DEFAULT '9',
   `date_created` datetime NOT NULL,
   `online` tinyint(4) NOT NULL DEFAULT '1'
@@ -247,8 +224,27 @@ CREATE TABLE `gallery` (
 -- Contenu de la table `gallery`
 --
 
-INSERT INTO `gallery` (`id`, `user_id`, `name`, `tags`, `thumb`, `description`, `category_id`, `date_created`, `online`) VALUES
-(1, 3, 'big test', '@ng', 'ngpictures-big-test-3.jpg', NULL, 2, '2017-12-14 00:00:00', 0);
+INSERT INTO `gallery` (`id`, `user_id`, `name`, `tags`, `thumb`, `description`, `slug`, `category_id`, `date_created`, `online`) VALUES
+(1, 3, 'big test', '@ng', 'ngpictures-big-test-3.jpg', NULL, '', 2, '2017-12-14 00:00:00', 0),
+(2, 5, '', '', '-2.jpg', 'dfda', 'n-a', 2, '2018-01-06 02:54:57', 1),
+(3, 5, 'ngpictures-5a50208cb05d8', '', 'ngpictures-5a50208cb05d8-3.jpg', '', 'ngpictures-5a50208cb05d8', 0, '2018-01-06 03:04:12', 1),
+(4, 5, 'ngpictures-5a50220ad4e9b', '', NULL, '', 'ngpictures-5a50220ad4e9b', 0, '2018-01-06 03:10:34', 1),
+(7, 5, 'ngpictures-5a5022513e400', '', 'ngpictures-5a5022513e400-7.jpg', '', 'ngpictures-5a5022513e400', 0, '2018-01-06 03:11:45', 1),
+(8, 5, 'ngpictures-5a5023d986317', '', 'ngpictures-5a5023d986317-8.jpg', '', 'ngpictures-5a5023d986317', 0, '2018-01-06 03:18:17', 1),
+(9, 5, 'ngpictures-5a50240c8c7ed', '', 'ngpictures-5a50240c8c7ed-9.jpg', '', 'ngpictures-5a50240c8c7ed', 0, '2018-01-06 03:19:08', 1),
+(10, 5, 'ngpictures-5a50244b59db9', '', 'ngpictures-5a50244b59db9-10.jpg', '', 'ngpictures-5a50244b59db9', 0, '2018-01-06 03:20:11', 1),
+(11, 5, 'ngpictures-5a5024a49a852', '', 'ngpictures-5a5024a49a852-11.jpg', '', 'ngpictures-5a5024a49a852', 0, '2018-01-06 03:21:40', 1),
+(12, 5, 'ngpictures-5a5024b117fd2', '', 'ngpictures-5a5024b117fd2-12.jpg', '', 'ngpictures-5a5024b117fd2', 0, '2018-01-06 03:21:53', 1),
+(13, 5, 'ngpictures-5a5024da8ba1a', '', 'ngpictures-5a5024da8ba1a-13.jpg', '', 'ngpictures-5a5024da8ba1a', 0, '2018-01-06 03:22:34', 1),
+(14, 5, 'ngpictures-5a5025693b132', '', 'ngpictures-5a5025693b132-14.jpg', '', 'ngpictures-5a5025693b132', 0, '2018-01-06 03:24:57', 1),
+(15, 5, 'ngpictures-5a50258422122', '', 'ngpictures-5a50258422122-15.jpg', '', 'ngpictures-5a50258422122', 0, '2018-01-06 03:25:24', 1),
+(16, 5, 'ngpictures-5a5025d24d677', '', 'ngpictures-5a5025d24d677-16.jpg', '', 'ngpictures-5a5025d24d677', 0, '2018-01-06 03:26:42', 1),
+(17, 5, 'ngpictures-5a5026225885b', '', 'ngpictures-5a5026225885b-17.jpg', '', 'ngpictures-5a5026225885b', 0, '2018-01-06 03:28:02', 1),
+(21, 5, 'ngpictures-5a5026fa9aaf8', '', 'ngpictures-5a5026fa9aaf8-21.jpg', '', 'ngpictures-5a5026fa9aaf8', 0, '2018-01-06 03:31:38', 1),
+(23, 5, 'ngpictures-5a5027739b60b', '', 'ngpictures-5a5027739b60b-23.jpg', '', 'ngpictures-5a5027739b60b', 0, '2018-01-06 03:33:39', 1),
+(24, 5, 'ngpictures-5a50280ac8e50', '', 'ngpictures-5a50280ac8e50-24.jpg', '', 'ngpictures-5a50280ac8e50', 0, '2018-01-06 03:36:10', 1),
+(25, 5, 'ngpictures-5a502cfd1da40', '', 'ngpictures-5a502cfd1da40-25.jpg', '', 'ngpictures-5a502cfd1da40', 0, '2018-01-06 03:57:17', 1),
+(26, 5, 'ngpictures-5a502d6cc8606', '', 'ngpictures-5a502d6cc8606-26.jpg', '', 'ngpictures-5a502d6cc8606', 0, '2018-01-06 03:59:08', 1);
 
 -- --------------------------------------------------------
 
@@ -262,14 +258,6 @@ CREATE TABLE `ideas` (
   `content` text NOT NULL,
   `date_created` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `ideas`
---
-
-INSERT INTO `ideas` (`id`, `user_id`, `content`, `date_created`) VALUES
-(13, 5, 'jkjkjk;kj', '2017-12-31 02:18:25'),
-(12, 5, 'une idee super cool', '2017-12-31 01:05:50');
 
 -- --------------------------------------------------------
 
@@ -306,7 +294,8 @@ INSERT INTO `likes` (`id`, `user_id`, `article_id`, `photo_id`, `blog_id`, `ngph
 (88, 5, NULL, NULL, 115, NULL, '2017-12-31 19:21:24'),
 (89, 5, NULL, NULL, 114, NULL, '2017-12-31 19:21:29'),
 (90, 5, NULL, NULL, 132, NULL, '2017-12-31 19:22:52'),
-(91, 5, NULL, NULL, 116, NULL, '2018-01-01 10:00:27');
+(91, 5, NULL, NULL, 116, NULL, '2018-01-01 10:00:27'),
+(92, 5, 79, NULL, NULL, NULL, '2018-01-06 12:59:15');
 
 -- --------------------------------------------------------
 
@@ -331,12 +320,10 @@ CREATE TABLE `ng_gallery` (
 --
 
 INSERT INTO `ng_gallery` (`id`, `user_id`, `name`, `tags`, `thumb`, `description`, `category_id`, `date_created`, `online`) VALUES
-(9, 1, 'test', '', 'ngpictures-test-9.jpg', '<p>test</p>', 9, '2017-12-19 10:48:34', 1),
 (11, 1, 'team', '', 'ngpictures-team-11.jpg', '<p>test</p>', 9, '2017-12-19 10:52:42', 1),
 (12, 1, 'winners', '', 'ngpictures-winners-12.jpg', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\r\n<blockquote>\r\n<p>la vie de louga.</p>\r\n<p><strong>bernard ng</strong></p>\r\n</blockquote>', 9, '2017-12-19 10:58:51', 1),
 (14, 1, 'jemima et elyone', '@jemima @elyone', 'ngpictures-mima et elyone-14.jpg', '<p>journee cultruelle de ouf</p>', 6, '2017-12-21 15:01:49', 1),
-(21, 1, 'africain lady', '@felo', 'precylia-21.jpg', '<p>aficain lady, precylia felo une fille de ouff</p>', 2, '2017-12-29 00:20:56', 1),
-(24, 1, 'maxime single', '@maxime', 'Cg5 promotion 2017-2018-24.jpg', '<p>le shooting avec maxime etait vraiment trops cool</p>', 2, '2018-01-01 04:06:35', 1);
+(21, 1, 'africain lady', '@felo', 'precylia-21.jpg', '<p>aficain lady, precylia felo une fille de ouff</p>', 2, '2017-12-29 00:20:56', 1);
 
 -- --------------------------------------------------------
 
@@ -380,16 +367,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `facebook_id`, `name`, `email`, `password`, `phone`, `bio`, `avatar`, `confirmation_token`, `confirmed_at`, `reset_token`, `reset_at`, `remember_token`, `status`, `rank`) VALUES
-(5, NULL, 'bernard_ng', 'ngandubernard@gmail.com', '$2y$10$RYlVy9yaHjQ8agTlsjnbyuSE2q5sv5ecXzaSYZE2GvtdIoEXcJ/3.', NULL, 'une bio de ouff', 'ngpictures-bernard_ng-5.jpg', NULL, '2017-12-16 00:09:39', NULL, NULL, '4567.5a48f460d0', NULL, 'admin'),
+(5, NULL, 'bernard_ng', 'ngandubernard@gmail.com', '$2y$10$PHKfWWJ/6s9zLBZNHScWnuNxLIwmoTk6MeWrtf9ioZcjy7OAYYpeC', NULL, 'une bio de ouff', 'ngpictures-bernard_ng-5.jpg', NULL, '2017-12-16 00:09:39', NULL, NULL, '4147.5a4ad0e29c', NULL, 'admin'),
 (6, NULL, 'precylia', 'precylia@gmail.com', '$2y$10$LCD4bY1My3cia61JQoL/LuJJBaiN3lzJnqEixNA0Ylfxlb.BOIVTG', '0973141132', '&lt;p&gt;i\'m using ngpictures&lt;/p&gt;', 'ngpictures-magloire-6.jpg', NULL, '2017-12-22 17:15:11', NULL, NULL, '8249.5a41109cdf', NULL, 'user'),
 (9, NULL, 'bob_kz', 'bob@bob.com', '$2y$10$ePA4c9EXfPG2c5E4W8Tr1ORJAL8iBOM9dxvT5igOJqK7Tl1Bs9e3q', NULL, 'Hey je suis sur Ngpictures 2.0', 'default.jpg', NULL, '2017-12-25 15:57:03', NULL, NULL, NULL, NULL, 'user'),
-(10, NULL, 'endi', 'endi@endi.com', '$2y$10$J1mRXx2oovO4Fe.YgkshruPhAjG0nGj0BHxRg0XIN60CX72xw/wI.', NULL, 'Hey je suis sur Ngpictures 2.0', 'default.jpg', NULL, '2017-12-25 15:58:24', NULL, NULL, NULL, NULL, 'user'),
 (11, NULL, 'lys_ngomba', 'lys@lys.com', '$2y$10$0CQ6rP7t7qlrDa4eu.0bTe.AcVla6Do4Jb7Vk9C7jKHRr3h49UGoK', NULL, 'Hey je suis sur Ngpictures 2.0', 'default.jpg', NULL, '2017-12-25 15:59:00', NULL, NULL, NULL, NULL, 'user'),
-(12, NULL, 'ketsia_sk', 'ketsia@kestia.com', '$2y$10$3k7l8RPwdD3V85QH9aVcx.bt.tEhjGD4Qlzsul5R1XGWHJ8Uk6Hhm', NULL, 'Hey je suis sur Ngpictures 2.0', 'default.jpg', NULL, '2017-12-25 15:59:51', NULL, NULL, NULL, NULL, 'user'),
 (14, NULL, 'princess_fane', 'princess@princess.com', '$2y$10$gaCCrB2CEgDclYQ0cTzbH.5fWnELAKMuPc7ZaosbgSR6GXM8iO9UW', NULL, 'Hey je suis sur Ngpictures 2.0', 'default.jpg', NULL, '2017-12-25 16:01:22', NULL, NULL, NULL, NULL, 'user'),
-(15, NULL, 'joseph', 'joseph@joseph.com', '$2y$10$gru2V4eCUlvVL7B9bYddOeNBV9zn.5QxSwKY/eUOmeqx2a5FeEG5u', NULL, 'Hey je suis sur Ngpictures 2.0', 'ngpictures-joseph-15.jpg', NULL, '2017-12-25 16:03:42', NULL, NULL, NULL, NULL, 'user'),
-(16, NULL, 'jamy-bonds', 'james@gmail.com', '$2y$10$10k4lvVH2xysi18kXK7I8.fwdOd1wpM6ZqEHg2RB.8huGfFdpzdzi', NULL, 'Hey je suis sur Ngpictures 2.0', 'ngpictures-jamy-bonds-16.jpg', NULL, '2017-12-30 21:10:00', NULL, NULL, '3221.5a4a550b04', NULL, 'user'),
-(18, NULL, 'le-man', 'man@man.com', '$2y$10$fA.ErDJrsuKjsE9KONXYVeiiQxPVjr39HdvzBvGvGzDr2tULPOabi', NULL, 'Hey je suis sur Ngpictures 2.0', 'ngpictures-le-man-18.jpg', NULL, '2017-12-28 10:03:33', NULL, NULL, '5983.5a44a57b76', NULL, 'user');
+(15, NULL, 'joseph', 'joseph@joseph.com', '$2y$10$gru2V4eCUlvVL7B9bYddOeNBV9zn.5QxSwKY/eUOmeqx2a5FeEG5u', NULL, 'Hey je suis sur Ngpictures 2.0', 'ngpictures-joseph-15.jpg', NULL, '2017-12-25 16:03:42', NULL, NULL, NULL, NULL, 'user');
 
 -- --------------------------------------------------------
 
@@ -931,6 +914,13 @@ INSERT INTO `verses` (`id`, `text`, `ref`) VALUES
 --
 
 --
+-- Index pour la table `albums`
+--
+ALTER TABLE `albums`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
 -- Index pour la table `articles`
 --
 ALTER TABLE `articles`
@@ -1018,10 +1008,15 @@ ALTER TABLE `verses`
 --
 
 --
+-- AUTO_INCREMENT pour la table `albums`
+--
+ALTER TABLE `albums`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT pour la table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 --
 -- AUTO_INCREMENT pour la table `blog`
 --
@@ -1051,7 +1046,7 @@ ALTER TABLE `following`
 -- AUTO_INCREMENT pour la table `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `id` bigint(255) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(255) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT pour la table `ideas`
 --
@@ -1061,12 +1056,12 @@ ALTER TABLE `ideas`
 -- AUTO_INCREMENT pour la table `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id` bigint(255) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` bigint(255) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 --
 -- AUTO_INCREMENT pour la table `ng_gallery`
 --
 ALTER TABLE `ng_gallery`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT pour la table `online`
 --
@@ -1076,7 +1071,7 @@ ALTER TABLE `online`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT pour la table `verses`
 --

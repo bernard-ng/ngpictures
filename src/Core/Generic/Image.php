@@ -30,11 +30,10 @@ Abstract class Image
         'articles-thumbs' => UPLOAD.'/articles/thumbs',
 
         'ngpictures' => UPLOAD.'/ngpictures',
-        'ng-thumbs-small' => UPLOAD.'/ngpictures/thumbs/small',
         'ng-thumbs-med' => UPLOAD.'/ngpictures/thumbs/med',
 
         'pictures' => UPLOAD.'/pictures',
-        'pic-thumbs' => UPLOAD.'/pictures/thumbs',
+        'pictures-thumbs' => UPLOAD.'/pictures/thumbs',
 
         'avatars' => UPLOAD.'/avatars'
     ];
@@ -45,10 +44,9 @@ Abstract class Image
      * @var array
      */
     private static $format = [
-        'small' => 350,
-        'medium' => 640,
-        'large' => 1400,
-        'ratio' => 500
+        'small' => 500,
+        'medium' => 840,
+        'ratio' => 1400
     ];
 
 
@@ -94,7 +92,7 @@ Abstract class Image
      * @param string $format
      * @return bool
      */
-    public static function upload(Collection $file, string $path, string $name, string $format)
+    public static function upload(Collection $file, string $path, string $name, string $format)#
     {
         $flash = new Flash(Session::getInstance());
 
@@ -109,12 +107,14 @@ Abstract class Image
 
                     switch ($format) :
                         case 'ratio' :
-                            $image->fit(self::$format[$format], null, function($c){
+                            $image->resize(self::$format[$format], null, function($c){
                                 $c->aspectRatio();
                             });
                             break;
                         case 'article' :
-                            $image->fit(750, 501);
+                            $image->resize(1400, null, function($c){
+                                $c->aspectRatio();
+                            });
                             break;
                         case 'small' :
                             $image->fit(self::$format[$format], self::$format[$format], function($c){

@@ -14,9 +14,10 @@ class Controller
         extract($variables);
         require ("{$this->viewPath}{$view}.php");
         $content = ob_get_clean();
-
         if ($layout === true) {
             require ("{$this->viewPath}layout/{$this->layout}.php");
+        }  else {
+            echo $content;
         }
     }
 
@@ -27,5 +28,13 @@ class Controller
             isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
             strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'
         ) ? true : false ;
-    }   
+    }
+
+
+    public function ajaxFail(string $msg)
+    {
+        header('HTTP/1.1 500 Internal Server Error');
+        echo $msg;
+        exit();
+    }
 }
