@@ -1,7 +1,15 @@
 <section class="row container">
     <?php include(APP."/Views/includes/left-aside.php"); ?>
     <main class="col l9">
-        <div class="card col l12" id ="bugs">
+        <div class="card no-padding col l12" id ="bugs">
+            <nav class="nav col l12 z-depth-2 mb-20">
+                <div class="nav-wrapper">
+                    <ul>
+                        <li><a href="<?= ADMIN."/file-browser/pictures/"  ?>">Photos membres</a></li>
+                        <li><a href="<?= ADMIN."/file-browser/avatars/" ?>">Avatars membres</a></li>
+                        <li class="right"><a href="<?= ADMIN."/users/ideas" ?>"> Ideas </a></li>
+                </div>
+            </nav>
             <section class="ng-news-card-content">
                 <section class="ng-news-card-title">
                     <h2>bugs</h2>

@@ -34,7 +34,7 @@ class AdminController extends NgpicController
         'bugs',
         'verses',
         'categories',
-        'album'
+        'albums'
     ];
 
 
@@ -64,7 +64,7 @@ class AdminController extends NgpicController
         $this->loadModel(
             [
                 'users', 'articles', 'blog', 'gallery',
-                'ngGallery', 'ideas', 'bugs', 'categories', 'verses'
+                'ngGallery', 'ideas', 'bugs', 'categories', 'verses', 'albums'
             ]
         );
     }
@@ -567,11 +567,11 @@ class AdminController extends NgpicController
      */
     public function album()
     {
-        $album = $this->album->all();
+        $albums = $this->albums->all();
 
         Page::setName('admin gallery.album | Ngpictures');
         $this->setLayout('admin/default');
-        $this->viewRender('Admin/gallery/albums', compact('album'));
+        $this->viewRender('Admin/gallery/albums', compact('albums'));
     }
 
 
@@ -585,7 +585,7 @@ class AdminController extends NgpicController
         if (isset($_POST) && !empty($_POST)) {
             if (!empty($post->get('title')) && !empty($post->get('description'))) {
                 $title = $this->str::escape($post->get('title'));
-                $description = $this->get('description');
+                $description = $post->get('description');
                 $slug = $this->str::slugify($title);
 
                 $this->albums->create(compact('title', 'description', 'slug'));
@@ -615,7 +615,7 @@ class AdminController extends NgpicController
             if (isset($_POST) && !empty($_POST)) {
                 if (!empty($post->get('title')) && !empty($post->get('description'))) {
                     $title = $this->str::escape($post->get('title')) ?? $album->title;
-                    $description = $this->get('description') ?? $album->description;
+                    $description = $post->get('description') ?? $album->description;
                     $slug = $this->str::slugify($title);
 
                     $this->albums->update($album->id, compact('title', 'description', 'slug'));
