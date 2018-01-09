@@ -4,23 +4,14 @@ use Ngpictures\Ngpic;
 
 
 define("ROOT", dirname(__DIR__));
-define("WEBROOT", dirname(__FILE__));
-define("CORE", ROOT."/src/Core");
-define("APP", ROOT."/src/App");
-define("UPLOAD", WEBROOT."/uploads");
-define("ADMIN", "/admin");
-define("AUTH_KEY", "auth");
-
-
+require(ROOT."/config/ApplicationConfig.php");
 require(ROOT."/vendor/autoload.php");
-
 
 $router = new Router($_GET["url"] ?? $_SERVER['REQUEST_URI'] ?? "/home");
 
 
-/***************************************************************************
- *                           FRONT-END ROUTES
- ****************************************************************************/
+//  FRONT-END ROUTES
+/***************************************************************************/
 $router->get("/", "home", "home");
 $router->get("/home/", "home", "home");
 
@@ -46,11 +37,7 @@ $router->get("/account/post/articles/", "users#postArticle", "users.post-article
 $router->post("/account/post/articles/", "users#postArticle", "users.post-article");
 $router->get("/account/post/articles/edit/:token", "users#editArticle", "users.edit-article");
 $router->post("/account/post/articles/edit/:token", "users#editArticle", "users.edit-article");
-$router->get("/account/post/photos/", "users#postGallery", "users.post-gallery");
-$router->post("/account/post/photos/", "users#postGallery", "users.post-gallery");
-$router->get("/account/post/photos/edit/:token", "users#editGallery", "users.edit-gallery");
-$router->post("/account/post/photos/edit/:token", "users#editGallery", "users.edit-gallery");
-$router->get("/account/post/delete/:type/:id/:token", "users#delete", "users.delete");
+$router->get("/account/post/delete/:id/:token", "users#delete", "users.delete");
 
 
 //articles and blog pages
@@ -89,9 +76,8 @@ $router->get("/contact", "admin#contact", "admin.contact.index");
 $router->get("/facebook/connect/", "facebook#connect", "facebook.connect");
 
 
-/***************************************************************************
- *                           BACK-END ROUTES
- ****************************************************************************/
+//BACK-END ROUTES
+/***************************************************************************/
 $router->get(ADMIN,"admin","admin.index");
 
 //articles and blog pages
@@ -131,18 +117,15 @@ $router->get(ADMIN."/users/bugs/", "admin#bugs", "admin.bugs");
 $router->get(ADMIN."/users/ideas/", "admin#ideas", "admin.ideas");
 
 
-/***************************************************************************
- *                           AJAX ROUTES
- ****************************************************************************/
+// AJAX ROUTES
+/*****************************************************************************/
 $router->post("/ajax/articles", "ajax#articles", "ajax.articles");
 $router->post("/ajax/blog", "ajax#blog", "ajax.blog");
 $router->get("/ajax/verset", "ajax#verset", "ajax.verses");
 
 
-/***************************************************************************
- *                           GENERAL ROUTES
- ****************************************************************************/
-//error pages
+//ERROR ROUTES
+/******************************************************************************/
 $router->get("/error-404","error#e404","app.found");
 $router->get("/error-500","error#e500","app.internal-server-error");
 $router->get("/error-403","error#e403","app.forbidden");

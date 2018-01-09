@@ -3,17 +3,15 @@ namespace Ngpictures\Entity;
 
 
 use Ng\Core\Entity\Entity;
-
 use Ng\Core\Generic\Str;
-
 use Ngpictures\Ngpic;
 
 
 class BlogEntity extends Entity
 {
-
     public function __construct()
     {
+        parent::__construct();
         $this->like = Ngpic::getInstance()->getModel('likes');
         $this->users = Ngpic::getInstance()->getModel('users');
     }

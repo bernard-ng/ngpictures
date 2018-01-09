@@ -3,21 +3,24 @@
 	<channel>
 		<title>Ngpictures</title>
 		<description>Ceci est notre le flux rss de notre site</description>
-		<lastBuildDate><?= date(DATE_RSS, strtotime($last)) ?></lastBuildDate>
+		<lastBuildDate> date(DATE_RSS, strtotime($last)) </lastBuildDate>
 		<link>http://ngpictures.dev</link>
-
-		<?php foreach($articles as $article) : ?>
 			<item>
-				<title><?= $article->title ?></title>
-				<description><?= $article->text ?></description>
-				<pubDate><?= date(DATE_RSS, strtotime($article->date_created)) ?></pubDate>
-				<link><?= $article->url ?></link>
+				<title>un jolie titre</title>
+				<description>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</description>
+				<pubDate> date(DATE_RSS, strtotime($article->date_created))</pubDate>
+				<link>http://ngpictures.dev/blog/un-article-35</link>
 				<image>
-					<url><?= $article->thumbUrl ?></url>
-					<link><?= $article->url ?></link>
+					<url>http://ngpictures.dev/imgs/moi.jpg</url>
+					<link>http://ngpictures.dev/imgs/moi.jpg</link>
 				</image>
 			</item>
-		<?php endforeach; ?>
-		
 	</channel>
 </rss>

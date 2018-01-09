@@ -73,7 +73,7 @@
                             <?php if ($article->category_id !== null): ?>
                                 <a href="<?= $article->categoryUrl ?>"><i class="icon icon-tags"></i></a>
                             <?php endif; ?>
-                            
+
                             <h2><?= $article->title ?>&nbsp;<small><?= $article->category ?></small></h2>
                         </section>
                         <main>
@@ -121,7 +121,7 @@
 
                 <!-- /CARD END -->
             </div>
-        
+
         <div class="hide-on-med-and-up">
             <?php include(APP."/Views/includes/verset.php"); ?>
         </div>
@@ -159,5 +159,5 @@
         </article>
     </main>
     <?php include(APP."/Views/includes/menu-aside.php"); ?>
-    
+
 </section>

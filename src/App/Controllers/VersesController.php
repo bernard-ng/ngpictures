@@ -3,15 +3,11 @@ namespace Ngpictures\Controllers;
 
 class VersesController extends NgpicController {
 
-	public function __construct()
-	{
-		$this->loadModel('verses');
-	}
-
 	public function index()
 	{
-		$id = mt_rand(1,517);
+		$this->loadModel('verses');
+		$id = mt_rand(1, $this->verses->getVersesNumber());
 		$verse = $this->verses->find($id);
-		return $verse ?? false;
+		return $verse ?? null;
 	}
 }

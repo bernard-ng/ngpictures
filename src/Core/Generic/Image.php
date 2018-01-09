@@ -26,14 +26,11 @@ Abstract class Image
         'blog' => UPLOAD.'/blog',
         'blog-thumbs' => UPLOAD.'/blog/thumbs',
 
-        'articles' => UPLOAD.'/articles',
-        'articles-thumbs' => UPLOAD.'/articles/thumbs',
+        'posts' => UPLOAD.'/posts',
+        'posts-thumbs' => UPLOAD.'/posts/thumbs',
 
-        'ngpictures' => UPLOAD.'/ngpictures',
-        'ng-thumbs-med' => UPLOAD.'/ngpictures/thumbs/med',
-
-        'pictures' => UPLOAD.'/pictures',
-        'pictures-thumbs' => UPLOAD.'/pictures/thumbs',
+        'gallery' => UPLOAD.'/gallery',
+        'gallery-thumbs' => UPLOAD.'/gallery/thumbs/',
 
         'avatars' => UPLOAD.'/avatars'
     ];
@@ -157,7 +154,7 @@ Abstract class Image
 
         $manager = new ImageManager();
         $manager->canvas(100, 30, "#fff")
-            ->text(Session::getInstance()->read('captcha'), 25, 5, function($font) use ($police) {
+            ->text(Session::getInstance()->read(CAPTCHA_KEY), 25, 5, function($font) use ($police) {
                 $font->file($police); 
                 $font->size(23);                  
                 $font->color('#000');         

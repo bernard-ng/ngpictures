@@ -2,14 +2,10 @@
 namespace Ngpictures;
 
 
+use Ng\Core\Traits\SingletonTrait;
 use Ng\Core\Database\MysqlDatabase;
-
 use Ng\Core\Config\Config;
-
-use Ng\Core\Generic\{
-    Session, cookie, collection,
-    str, Validator, Flash
-};
+use Ng\Core\Generic\{Session, cookie, str, Validator, Flash};
 
 
 
@@ -22,30 +18,11 @@ class Ngpic {
     private static  $db_instance;
 
 
-    /**
-     * notre application
-     * @var
-     */
-    private static $instance;
-
-
-    /**
-     * permet de recupere une et une meme instance
-     * @return Ngpic
-     */
-    public static function getInstance(): self
-    {
-		if (self::$instance === null) {
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
+    use SingletonTrait;
 
 
     /***************************************************************************
-    *
     *                                  FACTORING
-    *
     ****************************************************************************/
 
 
@@ -99,6 +76,7 @@ class Ngpic {
         return new $controller();
     }
 
+
     /**
      * recupere une instance de flash
      * @return Flash
@@ -107,6 +85,7 @@ class Ngpic {
     {
         return new Flash($this->getSession());
     }
+
 
     /**
      * recupere une instance de validator
@@ -117,6 +96,7 @@ class Ngpic {
         return new Validator($this->getDb(), $this->getFlash(), $_POST);
     }
 
+
     /**
      * recupere la session
      * @return Session
@@ -126,6 +106,7 @@ class Ngpic {
         return Session::getInstance();
     }
 
+
     /**
      * recupere le cookie
      * @return cookie
@@ -134,6 +115,7 @@ class Ngpic {
     {
         return Cookie::getInstance();
     }
+
 
     /**
      * recupere le gestion de chaine de charactere
@@ -147,9 +129,7 @@ class Ngpic {
 
 
     /***************************************************************************
-    *
     *                           GENERAL APPLICATION METHODS
-    *
     ****************************************************************************/
 
 

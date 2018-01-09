@@ -1,25 +1,14 @@
 <?php
 namespace Ng\Core\Generic;
 
-use Ng\Interfaces\CookieInterface;
+use Ng\Core\Interfaces\CookieInterface;
+use Ng\Core\Traits\SingletonTrait;
 
 
 class Cookie implements CookieInterface
 {
 
-    /**
-     * l'instance la meme
-     * @var
-     */
-    private static $instance;
-
-    public static  function getInstance()
-    {
-        if (self::$instance === null) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+    use SingletonTrait;
 
     /**
      * permet de savoir si une key est definit

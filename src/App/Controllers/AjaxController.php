@@ -1,7 +1,7 @@
 <?php
 namespace Ngpictures\Controllers;
 
-use Ng\Core\Generic\{Collection};
+use Ng\Core\Generic\Collection;
 use Ngpictures\Controllers\NgpicController;
 
 
@@ -10,28 +10,38 @@ class AjaxController extends NgpicController
 	//ajout d'article infinite scroll 
 	public function articles() 
 	{
-		$post = new Collection($_POST);
+		if ($this->isAjax()) {
+			$post = new Collection($_POST);
 
-		if ($post->has('lastId')) {
-			$this->loadModel('articles');
-			$result = $this->articles->findLess($post->get('lastId'));
-			require(APP."/Views/ajax/articles/cards.php");
+			if ($post->has('lastId')) {
+				$result = $this->loadModel('articles')->findLess($post->get('lastId'));
+				require(APP."/Views/ajax/articles/cards.php");
+				exit();
+			} else {
+				$this->ajaxFail($this->msg['indefined_error']);
+			}
 		} else {
-			header("http/1.1 Internal Server Error");
+			$this->flash->set("warning", $this->msg['indefined_error']);
+			Ngpic::redirect();
 		}
 	}
+
 
 	// infinite scroll pour le blog
 	public function blog() 
 	{
-		$post = new Collection($_POST);
-
-		if ($post->has('lastId')) {
-			$this->loadModel('blog');
-			$result = $this->blog->findLess($post->get('lastId'));
-			require(APP."/Views/ajax/blog/cards.php");
+		if ($this->isAjax()) {
+			$post = new Collection($_POST);
+			if ($post->has('lastId')) {
+				$result = $this->loadModel('blog')->findLess($post->get('lastId'));
+				require(APP."/Views/ajax/blog/cards.php");
+				exit();
+			} else {
+				$this->ajaxFail($this->msg['indefined_error']);
+			}
 		} else {
-			header("http/1.1 Internal Server Error");
+			$this->flash->set("warning", $this->msg['indefined_error']);
+			Ngpic::redirect();
 		}
 	}
 

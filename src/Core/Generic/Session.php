@@ -2,40 +2,23 @@
 namespace Ng\Core\Generic;
 
 
-use Ng\Interfaces\SessionInterface;
-
+use Ng\Core\Interfaces\SessionInterface;
+use Ng\Core\Traits\SingletonTrait;
 
 
 class Session implements SessionInterface
 {
-    private static $instance;
 
+    use SingletonTrait;
+
+    /**
+     * Session constructor.
+     */
     public function __construct()
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-    }
-
-
-    public static function getInstance()
-    {
-        if (self::$instance === null) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
-
-
-    public function setFlash(string $type, string $message)
-    {
-        return $_SESSION['flash'][$type] = $message;
-    }
-
-
-    public function hasFlashes()
-    {
-        return isset($_SESSION['flash']);
     }
 
 
@@ -48,32 +31,42 @@ class Session implements SessionInterface
         return isset($_SESSION[$name]);
     }
 
-    public function getFlashes()
-    {
-        $flashes = $_SESSION['flash'];
-        $this->delete('flash');
-        return $flashes;
-    }
 
-
+    /**
+     * @param string $key
+     * @param string $value
+     * @return null
+     */
     public function getValue(string $key, string $value)
     {
         return $_SESSION[$key]->$value ?? null;
     }
 
 
+    /**
+     * @param string $key
+     * @param string $value
+     */
     public function write(string $key, $value)
     {
         $_SESSION[$key] = $value;
     }
 
 
+    /**
+     * @param string $key
+     * @return null
+     */
     public function read(string $key)
     {
         return $_SESSION[$key] ?? null;
     }
 
 
+    /**
+     * @param string $key
+     * @return void
+     */
     public function delete(string $key)
     {
         unset($_SESSION[$key]);

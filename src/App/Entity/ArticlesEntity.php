@@ -57,7 +57,7 @@ class ArticlesEntity extends Entity
 
     public function getThumbUrl(): string
     {
-        $this->thumbUrl = "/uploads/articles/{$this->thumb}";
+        $this->thumbUrl = "/uploads/posts/{$this->thumb}";
         return $this->thumbUrl;
     }
 

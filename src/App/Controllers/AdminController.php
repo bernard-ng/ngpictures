@@ -4,10 +4,7 @@ namespace Ngpictures\Controllers;
 
 use Ngpictures\Ngpic;
 use Ngpictures\Util\Page;
-use Ng\Core\Generic\{
-    Collection,
-    Image
-};
+use Ng\Core\Generic\{Collection,Image};
 
 use \DirectoryIterator;
 use \UnexpectedValueException;
@@ -28,7 +25,7 @@ class AdminController extends NgpicController
         1 => 'articles',
         'gallery',
         'blog',
-        'ngGallery',
+        'gallery',
         'users',
         'ideas',
         'bugs',
@@ -68,7 +65,6 @@ class AdminController extends NgpicController
                 'articles',
                 'blog',
                 'gallery',
-                'ngGallery',
                 'ideas',
                 'bugs',
                 'categories',
@@ -95,13 +91,9 @@ class AdminController extends NgpicController
             count($this->articles->lastOnline()),
             count($this->articles->lastOffline())
         ];
-        $users_photos = [
+        $site_photos = [
             count($this->gallery->lastOnline()),
             count($this->gallery->lastOffline())
-        ];
-        $site_photos = [
-            count($this->ngGallery->lastOnline()),
-            count($this->ngGallery->lastOffline())
         ];
         $users = [
             count($this->users->lastConfirmed()),
@@ -461,8 +453,8 @@ class AdminController extends NgpicController
      */
     public function gallery()
     {
-        $photos = $this->ngGallery->all();
-        $photo = $this->ngGallery->latest();
+        $photos = $this->gallery->all();
+        $photo = $this->gallery->latest();
         page::setName('admin - gallery');
         $this->setLayout("admin/default");
         $this->viewRender("Admin/gallery/index", compact('photos', 'photo'));
@@ -485,21 +477,20 @@ class AdminController extends NgpicController
             $category_id = (int)$post->get('category') ?? 1;
 
             if (!empty($file->get('thumb'))) {
-                $this->ngGallery->create(compact('name', 'description', 'tags', 'category_id'));
-                $last_id = $this->ngGallery->lastInsertId();
-                $isUploaded = Image::upload($file, 'ngpictures', "{$name}-{$last_id}", 'ratio');
+                $this->gallery->create(compact('name', 'description', 'tags', 'category_id'));
+                $last_id = $this->gallery->lastInsertId();
+                $isUploaded = Image::upload($file, 'gallery', "{$name}-{$last_id}", 'ratio');
 
                 if ($isUploaded) {
-                    Image::upload($file, 'ng-thumbs-small', "{$name}-{$last_id}", 'small');
-                    Image::upload($file, 'ng-thumbs-med', "{$name}-{$last_id}", 'medium');
+                    Image::upload($file, 'gallery-thumbs', "{$name}-{$last_id}", 'small');
 
-                    $this->ngGallery->update($last_id, ["thumb" => "{$name}-{$last_id}.jpg"]);
+                    $this->gallery->update($last_id, ["thumb" => "{$name}-{$last_id}.jpg"]);
                     $this->flash->set('success', $this->msg['admin_post_success']);
                     Ngpic::redirect(ADMIN . "/gallery");
 
                 } else {
                     $this->flash->set('danger', $this->msg['admin_file_notUploaded']);
-                    $this->ngGallery->delete($last_id);
+                    $this->gallery->delete($last_id);
                 }
             } else {
                 $this->flash->set('danger', $this->msg['admin_picture_required']);
@@ -518,7 +509,7 @@ class AdminController extends NgpicController
      */
     public function editGallery($id)
     {
-        $photo = $this->ngGallery->find(intval($id));
+        $photo = $this->gallery->find(intval($id));
 
         if ($photo) {
             $post = new Collection($data ?? $_POST);
@@ -529,7 +520,7 @@ class AdminController extends NgpicController
                     $tags = $post->get('tags');
                     $description = $post->get('description');
                     $category_id = (int)$post->get('category') ?? 1;
-                    $this->ngGallery->update($id, compact('name', 'tags', 'description', 'category_id'));
+                    $this->gallery->update($id, compact('name', 'tags', 'description', 'category_id'));
                     $this->flash->set("success", $this->msg['admin_modified_success']);
                     Ngpic::redirect(ADMIN . "/gallery");
                 }
@@ -550,7 +541,7 @@ class AdminController extends NgpicController
      */
     public function mediaBrowser()
     {
-        $images = $this->ngGallery->all();
+        $images = $this->gallery->all();
         Page::setName('admin media-browser | Ngpictures');
         $this->setLayout('modal');
         $this->viewRender('Admin/gallery/media-browser', compact('images'));

@@ -2,43 +2,51 @@
 namespace Ng\Core\Generic;
 
 
+use Ng\Core\Traits\SingletonTrait;
+
 class Flash
 {
-	
-	private $session = null;
-	private static $instance = null;
 
+    use SingletonTrait;
+	private $session = null;
+
+
+    /**
+     * Flash constructor.
+     * @param Session $session
+     */
 	public function __construct(Session $session)
 	{
 		$this->session = $session;
 	}
 
 
-	public static function getInstance()
-	{
-		if (is_null(self::$instance)) {
-			self::$instance = new self(Session::getInstance());
-		}
-		return self::$instance;
-	}
-
-
-
-
+    /**
+     * @param string $type
+     * @param string $message
+     */
 	public function set(string $type, string $message)
 	{
-		return $this->session->setFlash($type,$message);
-	}
+        $_SESSION[FLASH_KEY][$type] = $message;
+    }
 
 
-	public function get(string $stype, string $message)
+    /**
+     * @return mixed
+     */
+	public function get()
 	{
-		return $this->session->getFlashes();
+        $flashes = $_SESSION[FLASH_KEY];
+        $this->session->delete('flash');
+        return $flashes;
 	}
 
 
+    /**
+     * @return bool
+     */
 	public function has(): bool
 	{
-		return $this->session->hasFlashes();
+        return isset($_SESSION[FLASH_KEY]);
 	}
 }

@@ -78,7 +78,9 @@ class NgpicController extends Controller
         "user_username_tokken" => "Ce pseudo est déjà pris",
         "user_mail_tokken" => "Cette adresse mail est déjà prise",
         "user_phone_tokken" => "Ce numéro est déjà pris",
-        "user_edit_success" => "Vos informations ont été mises à jour"
+        "user_edit_success" => "Vos informations ont été mises à jour",
+
+        "download_failed" => "Une Erreur s'est produite lors du téléchargement"
 
     ];
 

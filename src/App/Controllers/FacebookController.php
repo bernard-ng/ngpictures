@@ -94,14 +94,9 @@ class FacebookController extends NgpicController
                 exit;
             } catch(FacebookSDKException $e) { $this->catch($e,'Facebook SDK returned an error'); }
 
-
-
-
             // priting basic info about user on the screen
             print_r($profile);
             // Now you can redirect to another page and use the access token from $_SESSION['facebook_access_token']
-
-
 
         } else {
             $helper = $fb->getRedirectLoginHelper();

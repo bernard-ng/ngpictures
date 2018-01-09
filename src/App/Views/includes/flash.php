@@ -1,6 +1,10 @@
-<?php if (Ng\Core\Generic\Session::getInstance()->hasFlashes()) : ?>
+<?php
+use \Ng\Core\Generic\{Flash, Session};
+$flash = new Flash(Session::getInstance());
+?>
+<?php if ($flash->has()) : ?>
 	<div class="flash" id="flash">
-		<?php foreach (Ng\Core\Generic\Session::getInstance()->getFlashes() as $type => $message) : ?>
+		<?php foreach ($flash->get() as $type => $message) : ?>
 				<div class="flash-content" >
 					<i class="icon icon-close flash-close-icon"></i>
 					<span class="flash-content-icon-<?= $type ?>"><i class="icon icon-info-sign"></i></span>

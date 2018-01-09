@@ -26,7 +26,6 @@ class CategoriesController extends NgpicController
     {
         $categories = $this->categories->orderBy('title', 'ASC');
 
-
         Page::setName('Toutes les catégories | Ngpictures');
         $this->setLayout('default-simple');
         $this->viewRender("categories/index", compact('categories'));
@@ -46,13 +45,12 @@ class CategoriesController extends NgpicController
             $blog = $this->loadModel('blog')->findWith('category_id', $category->id);
             $articles = $this->loadModel('articles')->findWith('category_id', $category->id);
             $gallery = $this->loadModel('gallery')->findWith('category_id', $category->id);
-            $ngGallery = $this->loadModel('ngGallery')->findWith('category_id', $category->id);
 
             Page::setName("Catégorie: {$category->title} | Ngpictures");
             $this->setLayout('articles/default');
             $this->viewRender('categories/show',
                 compact(
-                    'category', 'blog', 'articles', 'gallery', 'ngGallery'
+                    'category', 'blog', 'articles', 'gallery'
                 )
             );
         } else {

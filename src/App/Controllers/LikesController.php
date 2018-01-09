@@ -2,61 +2,44 @@
 namespace Ngpictures\Controllers;
 
 
-use Ng\Core\Generic\{Session,Collection};
-use Ng\Core\Generic\Flash;
+use Ng\Core\Generic\Collection;
 use Ngpictures\Ngpic;
 
 
 class LikesController extends NgpicController
 {
-    private $types = [ 1 => 'articles','gallery','blog','ngGallery'];
+    private $types = [ 1 => 'articles','gallery','blog'];
     private $user_id = null;
 
     public function __construct(){
         parent::__construct();
-        //$this->callController('users')->restrict();
-        $this->user_id = intval($this->session->getValue('auth','id'));
+        $this->callController('users')->restrict();
+        $this->user_id = intval($this->session->getValue(AUTH_KEY, 'id'));
     }
 
-    private function getType(int $t): string
+    private function getType(int $type): string
     {
         $model = new Collection($this->types);
-        return $model->get($t);
+        return $model->get($type);
     }
 
     public function index($t, $slug, $id)
     {
-        if ($this->session->getValue('auth','id') !== null) {
+        $like = $this->loadModel('likes');
+        $post = $this->loadModel($this->getType($type))->find(floor($id));
 
-            $like = $this->LoadModel('likes');
-            $post = $this->LoadModel($this->getType($t))->find(floor($id));
-
-            if ($post && $post->slug === $slug) { 
-                if ($like->isLiked($post->id, $t, $this->user_id)) {
-                    $like->remove($post->id, $t, $this->user_id);
-                    echo ($this->isAjax()) ? $post->likes : Ngpic::redirect(true);
-                } else {
-                    $like->add($post->id, $t, $this->user_id);
-                    echo ($this->isAjax()) ? $post->likes : Ngpic::redirect(true);
-                }
+        if ($post && $post->slug === $slug) { 
+            if ($like->isLiked($post->id, $t, $this->user_id)) {
+                $like->remove($post->id, $t, $this->user_id);
+                echo ($this->isAjax()) ? $post->likes : Ngpic::redirect(true);
             } else {
-                $this->flash->set("danger", $this->msg['indefined_error']);
-                //($this->isAjax()) ? header('HTTP/1.1 500 Internal Server Error') : Ngpic::redirect(true);
-            }  
-        } else {
-            if ($this->isAjax()) {
-                header('HTTP/1.1 500 Internal Server Error');
-                echo json_encode($this->flash->set("warning", $this->msg['user_must_login']));  
-            } else {    
-                Ngpic::redirect(true);
+                $like->add($post->id, $t, $this->user_id);
+                echo ($this->isAjax()) ? $post->likes : Ngpic::redirect(true);
             }
-        }
-    }
-
-    public function show(string $slug, int $id)
-    {
-        Page::setName('Les mentions | Ngpictures');
-        $this->setLayout('features/default');
-        $this->viewRender('features/mentions');
+        } else {
+            if ($this->isAjax()) $this->ajaxFail($this->msg['indefined_error']);
+            $this->flash->set("danger", $this->msg['indefined_error']);
+            Ngpic::redirect(true);
+        } 
     }
 }

@@ -106,11 +106,12 @@ class Page {
 		self::$meta[] = $data;
 	}
 
-	public static function getMeta()
+	public static function getMeta(): string
 	{
 		foreach (self::$meta as $meta) {
 			Str::generateMeta($meta);
 		}
+		return '<meta content="lol" name="vraimetn">';
 	}
 }
 

@@ -15,7 +15,6 @@ class MailSender
 
 
     /**
-     * renvoi l'intance afin de faire du fluent
      * MailSender constructor.
      */
     public function __construct()
@@ -43,10 +42,11 @@ class MailSender
         echo $message;
         die();
 
-        //mail($email, "Confirmation de compte - Ngpictures", $message, $this->headers);
-        //Ngpic::redirect("/login");
+        mail($email, "Confirmation de compte - Ngpictures", $message, $this->headers);
+        Ngpic::redirect("/login");
 
     }
+
 
     /**
      * envoi un mail de mot de passe oublié a un utilisateur
@@ -63,7 +63,7 @@ class MailSender
         echo $message;
         die();
 
-        //mail($email, "Mot de passe oublié - Ngpictures", $message, $this->headers);
-        //Ngpic::redirect("/login");
+        mail($email, "Mot de passe oublié - Ngpictures", $message, $this->headers);
+        Ngpic::redirect("/login");
     }
 }

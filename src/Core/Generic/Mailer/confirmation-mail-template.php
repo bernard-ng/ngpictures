@@ -1,6 +1,6 @@
 <?php echo '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhmtl1/DTD/xhtml1-strict.dtd">
-<html xmlns:v="urn-schemas-microsoft-com:vml">
+<html>
 <head>
 	<meta http-equiv="Content-type" content="text/html">
 	<meta charset="utf-8">

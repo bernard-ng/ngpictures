@@ -5,7 +5,7 @@
             <nav class="nav z-depth-2 mb-20">
                 <div class="nav-wrapper">
                 <ul>
-                    <li><a href="<?= ADMIN."/file-browser/ngpictures/" ?>">Photo site</a></li>
+                    <li><a href="<?= ADMIN."/file-browser/gallery/" ?>">Photo site</a></li>
                     <li class="right"><a href="<?= ADMIN."/gallery/albums/"  ?>">Albums</a></li>
                     <li class="right"><a href="<?= ADMIN."/gallery/albums/add" ?>">Ajouter un Album</a></li>
                 </ul>
@@ -15,7 +15,7 @@
                 <?php foreach ($photo as $photo): ?>
                     <article class="card col l3" id="<?= $photo->id ?>">
                         <div class="card-image waves-effect waves-block waves-light">
-                            <img src="/uploads/ngpictures/thumbs/med/<?= $photo->thumb ?>" class="activator" alt="<?= $photo->name ?>" title="<?= $photo->name ?>">
+                            <img src="/uploads/gallery/thumbs/<?= $photo->thumb ?>" class="activator" alt="<?= $photo->name ?>" title="<?= $photo->name ?>">
                         </div>
                         <div class="card-reveal">
                             <span class="card-title"><i class="icon icon-chevron-down right"></i></span>
@@ -61,7 +61,7 @@
                             <td><b><?= $p->id ?></b></td>
                             <td>
                                 <a href="<?= $p->url ?>">
-                                    <img src="/uploads/ngpictures/thumbs/small/<?= $p->thumb ?>" width="60" height="60">
+                                    <img src="/uploads/gallery/thumbs/<?= $p->thumb ?>" width="60" height="60">
                                 </a>
                             </td>
                             <td>
@@ -78,9 +78,9 @@
                                         <i class="icon icon-edit" style="font-size: smaller !important;"></i>
                                     </button>
                                 </a>
-                                <a href="<?= ADMIN."/confirm/4/{$a->id}" ?>" title="retirer" id="confirm">
+                                <a href="<?= ADMIN."/confirm/4/{$p->id}" ?>" title="retirer" id="confirm">
                                     <button class="btn btn-small blue-2 waves-effect waves-light">
-                                         <?php if ($a->online): ?>
+                                         <?php if ($p->online): ?>
                                             <i class="icon icon-cloud-download" style="font-size: smaller !important;"></i>
                                          <?php else : ?>
                                             <i class="icon icon-cloud-upload" style="font-size: smaller !important;"></i>

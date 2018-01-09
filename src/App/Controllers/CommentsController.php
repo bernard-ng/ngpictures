@@ -2,104 +2,104 @@
 namespace Ngpictures\Controllers;
 
 
-
-use Ng\Core\Generic\{Collection};
-
+use Ng\Core\Generic\Collection;
 use Ngpictures\Util\Page;
-
 use Ngpictures\Ngpic;
 
 
 class CommentsController extends NgpicController
 {
 
-    private $types = [ 1 => 'articles','gallery','blog','ngGallery'];
+    private $types = [ 1 => 'articles','gallery','blog'];
     private $user_id = null;
     
 
     public function __construct(){
         parent::__construct();
         $this->callController('users')->restrict();
-        $this->user_id = intval($this->session->getValue('auth','id'));
+        $this->user_id = intval($this->session->getValue(AUTH_KEY, 'id'));
     }
 
 
-    private function getType(int $t): string
+    private function getType(int $type): string
     {
         $model = new Collection($this->types);
-        return $model->get($t);
+        return $model->get($type);
     }
 
 
-    public function index($t, $slug, $id)
+    public function index($type, $slug, $id)
     {
-        if ($this->session->getValue('auth','id') !== null) {
+        $comments = $this->loadModel('comments');
+        $post = new Collection($_POST);
+        $publication = $this->loadModel($this->getType($type))->find(floor($id));
 
-            $comment = $this->LoadModel('comments');
-            $post = new Collection($_POST);
-            $article = $this->LoadModel($this->getType($t))->find(floor($id));
+        if ($publication && $publication->slug === $slug) {
+            $comment = $this->str::escape($post->get('comment'));
+            if (!empty($comment)) {
+                 $comments->create(
+                    [
+                        'user_id' => $this->user_id,
+                        $this->getType($type) => $publication->id,
+                        'comment' => $comment
+                    ]
+                );
+                $this->flash->set('success', $this->msg['comment_success']);
+                Ngpic::redirect(true);
+            } else {
+                $this->flash->set('danger', $this->msg['comment_required']);
+                Ngpic::redirect(true);
+            }
 
-            if ($article && $article->slug === $slug) {
-                $text = $this->str::escape($post->get('comment'));
-                if (!empty($text)) {
-                     $comment->create(
-                        [
-                            'user_id' => $this->user_id,
-                            $this->getType($t) => $article->id,
-                            'comment' => $text
-                        ]
-                    );
-                    $this->flash->set('success', $this->msg['comment_success']);
+        } else {
+            $this->flash->set('warning', $this->msg['not_found']);
+            Ngpic::redirect(true);
+        }
+    }
+
+
+    public function delete($type, $id, $token)
+    {
+        $comments = $this->loadModel('comments');
+        $comment = $comments->find(intval($id));
+
+        //recupere l'id du poster a travers le type de la publication et on verifie dans la table
+        //de publication si , c vraiment lui qui a poster l'article, alors il aura le droit de 
+        // supprimer le commentaire.
+        $poster = $this->loadModel($this->getType($type))->find($comment->$this->getType($type))->user_id;
+
+        if ($token == $this->session->read('token')) {
+            if ($comment) {
+                if (($comment->user_id == $this->user_id && $poster = $this->user_id) || $this->user_id == 1) {
+                    $comments->delete($id);
+                    $this->flash->set('success', $this->msg['delete_success']);
                     Ngpic::redirect(true);
+
                 } else {
-                    $this->flash->set('danger', $this->msg['comment_required']);
+                    $this->flash->set('danger', $this->msg['notallowed_delete_comment']);
                     Ngpic::redirect(true);
                 }
 
             } else {
-                $this->flash->set('warning', $this->msg['not_found']);
+                $this->flash->set('warning', $this->msg['comment_not_found']);
                 Ngpic::redirect(true);
             }
-
         } else {
-            $this->flash->set("warning", $this->msg['must_login']);
+            $this->flash->set('danger', $this->msg['notallowed_delete_comment']);
             Ngpic::redirect(true);
         }
     }
 
 
-    public function delete(int $id)
-    {
+    public function edit($id, $token) {
         $comments = $this->loadModel('comments');
-        $comment = $comments->find($id);
-        $poster = $this->loadModel('blog')->find($comment->blog)->user_id;
-        if ($comment) {
-            if ($comment->user_id == $this->user_id && $poster = $this->user_id) {
-                $comments->delete($id);
-                $this->flash->set('success', $this->msg['delete_success']);
-                Ngpic::redirect(true);
-
-            } else {
-                $this->flash->set('danger', $this->msg['notallowed_delete_comment']);
-                Ngpic::redirect(true);
-            }
-
-        } else {
-            $this->flash->set('warning', $this->msg['comment_not_found']);
-            Ngpic::redirect(true);
-        }
-    }
-
-
-    public function edit(int $id) {
-        $comments = $this->LoadModel('comments');
-        $comment = $comments->find($id);
+        $comment = $comments->find(intval($id));
         $post = new Collection($_POST);
 
         if ($comment) {
             if ($comment->user_id == $this->user_id) {
-                $text = $this->str::escape($post->get('comment_edit'));
-                $comments->update($comment->id, ['comment' => $text]);
+                $comment = $this->str::escape($post->get('comment_edit'));
+                $comments->update($comment->id, ['comment' => $comment]);
                 $this->flash->set('success', $this->msg['edit_success']);
                 Ngpic::redirect(true);
 
@@ -112,13 +112,5 @@ class CommentsController extends NgpicController
             $this->flash->set('warning', $this->msg['comment_not_found']);
             Ngpic::redirect(true);
         }
-    }
-
-
-    public function show(string $slug, int $id, int $type)
-    {
-        Ngpic::setPageName('Les mentions | Ngpictures');
-        $this->setTemplate('features/default');
-        $this->viewRender('features/mentions');
     }
 }

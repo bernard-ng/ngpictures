@@ -55,13 +55,13 @@ class MysqlDatabase extends Database
                     $this->db_user,
                     $this->db_pass
                 );
-                $PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $PDO->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE ,PDO::FETCH_OBJ);
-                $PDO->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
+               $PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+               $PDO->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE ,PDO::FETCH_OBJ);
+               $PDO->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
                $this->PDO = $PDO;
            } catch (PDOException $e) {
                if (Ngpic::hasDebug()) {
-                    die("{$e->getMessage()}</br>{$e->getLine()}");
+                    die("PDOException : {$e->getMessage()} : {$e->getLine()}");
                } else {
                     Ngpic::redirect("/error-500");
                }
@@ -96,7 +96,7 @@ class MysqlDatabase extends Database
             if ($class_name === true) {
                 $req->setFetchMode(PDO::FETCH_OBJ);
             } else {
-                $req->setFetchMode(PDO::FETCH_CLASS,$class_name);
+                $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
             }
             
             if ($rowcount === true) {
@@ -107,7 +107,7 @@ class MysqlDatabase extends Database
             return $result;
 
         } catch (Exception $e) {
-            (Ngpic::hasDebug())? die("Exception : {$e->getMessage()}") :  Ngpic::redirect('/e500');
+            (Ngpic::hasDebug())? die("QueryException : {$e->getMessage()}") :  Ngpic::redirect('/e500');
         }
     }
 
@@ -149,7 +149,7 @@ class MysqlDatabase extends Database
             return $result;
 
         } catch (Exception $e) {
-            (Ngpic::hasDebug())? die("Exception : {$e->getMessage()}") :  Ngpic::redirect('/e500');
+            (Ngpic::hasDebug())? die("PrepareException : {$e->getMessage()}") :  Ngpic::redirect('/e500');
         }
     }
 

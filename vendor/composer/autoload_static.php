@@ -47,7 +47,7 @@ class ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648
         ),
         'Ng\\Interfaces\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src/Interfaces',
+            0 => __DIR__ . '/../..',
         ),
         'Ng\\Core\\' => 
         array (

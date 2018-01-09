@@ -22,8 +22,9 @@ class RssController extends NgpicController
 		}
 
 
-		$this->viewRender('others/rss', compact('last','articles'), false);
-		header("Content-type: application/rss+xml");
+		//$this->viewRender('others/rss', compact('last','articles'), false);
+        header("Content-type: application/rss+xml");
+        require APP."/Views/others/rss.xml";
 	}
 
 }

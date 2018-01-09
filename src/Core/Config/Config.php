@@ -2,34 +2,48 @@
 namespace Ng\Core\Config;
 
 
+use Ng\Core\Traits\SingletonTrait;
+
+
 /**
- * Class Config
- * FR - ceci est la class qui gère la configuration du site à la base de donnée
- * EN - this class administrates database connexion and the website configuration
- * @package Core
- * @author Bernad ng <ngandubernard@gmail.com>
+ * gestion de configuration du projet
  */
 class Config{
 
+    /**
+    *   le tableau qui contiendra toutes le configuration
+    *   initialiser.
+    */
     private $settings = [];
-    private static $instance;
+    
+    use SingletonTrait;
 
-    public function __construct(string $file)
-    {
-        $this->settings = require "$file";
-    }
-
-
+    /*
+    *   c'est ne pas un singleton ici, on retroune une nouvelle instance
+    *   a chaque fois.
+    */
     public static function getInstance(string $file): Config
     {
         self::$instance = new self($file);
         return self::$instance;
     }
 
-   
+
+    /**
+    * charge la configuration dans l'instance.
+    * a partir d'un fichier. 
+    */
+    public function __construct(string $file)
+    {
+        $this->settings = require "$file";
+    }
+
+
+    /**
+    * permet de recupere un valeur dans un fichier de configuration
+    */
     public function get(string $key)
     {
         return $this->settings[$key] ?? null;
     }
-
 }
