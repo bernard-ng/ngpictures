@@ -168,6 +168,9 @@ class UsersModel extends Model
     }
 
 
+    /**
+     * @return mixed
+     */
     public function lastConfirmed()
     {
         return $this->query(
@@ -177,6 +180,9 @@ class UsersModel extends Model
     }
 
 
+    /**
+     * @return mixed
+     */
     public function lastNotConfirmed()
     {
         return $this->query(

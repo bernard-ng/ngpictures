@@ -1,6 +1,6 @@
 <?php
 namespace Ngpictures\Controllers;
-use Ngpictures\Ngpic;
+use Ngpictures\Ngpictures;
 use Ngpictures\Util\Page;
 
 
@@ -55,7 +55,7 @@ class CategoriesController extends NgpicController
             );
         } else {
             $this->flash->set('danger', $this->msg['category_notFound']);
-            Ngpic::redirect(true);
+            Ngpictures::redirect(true);
         }
     }
 

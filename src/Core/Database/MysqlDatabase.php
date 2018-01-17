@@ -3,7 +3,7 @@ namespace Ng\Core\Database;
 
 use \Exception;
 use \PDO;
-use Ngpictures\Ngpic;
+use Ngpictures\Ngpictures;
 use \PDOException;
 
 
@@ -60,10 +60,10 @@ class MysqlDatabase extends Database
                $PDO->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
                $this->PDO = $PDO;
            } catch (PDOException $e) {
-               if (Ngpic::hasDebug()) {
+               if (Ngpictures::hasDebug()) {
                     die("PDOException : {$e->getMessage()} : {$e->getLine()}");
                } else {
-                    Ngpic::redirect("/error-500");
+                    Ngpictures::redirect("/error-500");
                }
            }
         }
@@ -107,7 +107,7 @@ class MysqlDatabase extends Database
             return $result;
 
         } catch (Exception $e) {
-            (Ngpic::hasDebug())? die("QueryException : {$e->getMessage()}") :  Ngpic::redirect('/e500');
+            (Ngpictures::hasDebug())? die("QueryException, class = {$class_name} : {$e->getMessage()}") :  Ngpictures::redirect('/e500');
         }
     }
 
@@ -138,7 +138,7 @@ class MysqlDatabase extends Database
             if ($class_name === true) {
                 $req->setFetchMode(PDO::FETCH_OBJ);
             } else {
-                $req->setFetchMode(PDO::FETCH_CLASS,$class_name);
+                $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
             }
 
             if ($rowcount === true) {
@@ -149,7 +149,7 @@ class MysqlDatabase extends Database
             return $result;
 
         } catch (Exception $e) {
-            (Ngpic::hasDebug())? die("PrepareException : {$e->getMessage()}") :  Ngpic::redirect('/e500');
+            (Ngpictures::hasDebug())? die("PrepareException : {$e->getMessage()}") :  Ngpictures::redirect('/e500');
         }
     }
 

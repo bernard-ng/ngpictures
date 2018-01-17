@@ -30,7 +30,7 @@ Abstract class Image
         'posts-thumbs' => UPLOAD.'/posts/thumbs',
 
         'gallery' => UPLOAD.'/gallery',
-        'gallery-thumbs' => UPLOAD.'/gallery/thumbs/',
+        'gallery-thumbs' => UPLOAD.'/gallery/thumbs',
 
         'avatars' => UPLOAD.'/avatars'
     ];

@@ -1,6 +1,6 @@
 <?php
 namespace Ngpictures\Controllers;
-use Ngpictures\Ngpic;
+use Ngpictures\Ngpictures;
 
 class RssController extends NgpicController
 {
@@ -18,7 +18,7 @@ class RssController extends NgpicController
 			$articles = $this->blog->latest(0,10);
 		} else {
 			$this->session->setFlash('info', 'Aucun article dans notre flux rss');
-			Ngpic::redirect(true);
+			Ngpictures::redirect(true);
 		}
 
 

@@ -10,7 +10,7 @@
                 <?php foreach ($photo as $photo): ?>
                     <article class="card col l3 s12 m3" id="<?= $photo->id ?>">
                         <div class="card-image waves-effect waves-block waves-light">
-                            <img src="/uploads/ngpictures/thumbs/med/<?= $photo->thumb ?>" class="activator" alt="<?= $photo->name ?>" title="<?= $photo->name ?>">
+                            <img src="<?= $photo->thumbUrl ?>" class="activator" alt="<?= $photo->name ?>" title="<?= $photo->name ?>">
                         </div>
                         <div class="card-reveal">
                             <span class="card-title"><i class="icon icon-chevron-down right"></i></span>

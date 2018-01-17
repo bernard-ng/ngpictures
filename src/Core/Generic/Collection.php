@@ -3,8 +3,9 @@ namespace Ng\Core\Generic;
 
 
 use \ArrayAccess;
-use ArrayIterator;
+use \ArrayIterator;
 use \IteratorAggregate;
+
 
 class Collection implements IteratorAggregate, ArrayAccess
 {
@@ -126,5 +127,8 @@ class Collection implements IteratorAggregate, ArrayAccess
         }
     }
 
-    public function getIterator() { return new ArrayIterator($this->items); }
+    public function getIterator()
+    {
+        return new ArrayIterator($this->items);
+    }
 }

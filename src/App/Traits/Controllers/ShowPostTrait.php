@@ -1,8 +1,8 @@
 <?php
-namespace Ngpictures\Traits;
+namespace Ngpictures\Traits\Controllers;
 
 use Ngpictures\Util\Page;
-use Ngpictures\Ngpic;
+use Ngpictures\Ngpictures;
 
 
 trait ShowPostTrait {
@@ -33,10 +33,10 @@ trait ShowPostTrait {
                         )
                     );
                 } else {
-                    Ngpic::redirect("/e404");
+                    Ngpictures::redirect("/e404");
                 }
             } else {
-                Ngpic::redirect("/e404");
+                Ngpictures::redirect("/e404");
             }
         } else {
             $this->flash->set("danger", $this->msg['indefined_error']);

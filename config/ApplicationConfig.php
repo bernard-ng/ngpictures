@@ -13,3 +13,6 @@ define("UPLOAD", WEBROOT."/uploads");
 define("ADMIN", "/admin");
 define("AUTH_KEY", "auth");
 define("FLASH_KEY", "flash");
+define("TOKEN_KEY", "token");
+define("CAPTCHA_KEY", "captcha");
+define("COOKIE_REMEMBER_KEY", "remember");

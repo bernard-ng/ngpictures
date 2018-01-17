@@ -25,7 +25,6 @@ class HomeController extends NgpicController
 
         Page::setName('Accueil | Ngpictures');
         Page::setMeta(['property' => 'og:url', 'content' => '//larytech.com/home']);
-        $this->setLayout("blank");
-        $this->viewRender("production/index", compact('photos','last','blog','verse','categories'));
+        $this->viewRender("home/index", compact('photos','last','blog','verse','categories'));
     }
 }

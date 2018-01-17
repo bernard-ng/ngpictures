@@ -3,7 +3,7 @@ namespace Ngpictures\Models;
 
 
 use Ng\Core\Models\Model;
-use Ngpictures\Traits\FindQueryTrait;
+use Ngpictures\Traits\Models\FindQueryTrait;
 
 
 class BlogModel extends Model{
@@ -14,6 +14,6 @@ class BlogModel extends Model{
      */
     protected $table = "blog";
 
-    // fetch un article
+
     use FindQueryTrait;
 }

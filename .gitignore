@@ -1,7 +1,7 @@
 /tmp
 /cache
-/public/uploads
-/public/imgs
+public/uploads
+public/imgs
 /public/i
 .idea
 /.idea

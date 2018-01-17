@@ -1,7 +1,7 @@
 <?php
-namespace Ngpictures\Traits;
+namespace Ngpictures\Traits\Controllers;
 
-use Ngpictures\Ngpic;
+
 use Ngpictures\Util\Page;
 
 trait StoryPostTrait {

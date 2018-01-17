@@ -1,8 +1,8 @@
 <?php
 namespace Ngpictures\Controllers;
 
+
 use Ng\Core\Generic\Collection;
-use Ngpictures\Controllers\NgpicController;
 
 
 class AjaxController extends NgpicController 

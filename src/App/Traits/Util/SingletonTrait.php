@@ -1,9 +1,7 @@
 <?php
-namespace Ng\Core\Traits;
+namespace Ngpictures\Traits\Util;
 
 trait SingletonTrait {
-
-
     /**
      * l'instance a renvoyer chaque fois. par default null
      * @var null

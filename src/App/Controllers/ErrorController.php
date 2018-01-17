@@ -3,7 +3,6 @@ namespace Ngpictures\Controllers;
 
 
 use Ngpictures\Util\Page;
-use Ngpictures\Ngpic;
 
 
 class ErrorController extends NgpicController

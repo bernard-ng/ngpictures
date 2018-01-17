@@ -2,7 +2,7 @@
 namespace Ngpictures\Controllers;
 
 
-use Ngpictures\Ngpic;
+use Ngpictures\Ngpictures;
 use Ngpictures\Util\Page;
 use Ng\Core\Generic\{Collection,Image};
 
@@ -140,16 +140,16 @@ class AdminController extends NgpicController
             if ($result) {
                 $model->delete($post->get('id'));
                 $this->flash->set('danger', $msg ?? $this->msg['admin_delete_success']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             } else {
                 if ($this->isAjax()) $this->ajaxFail($this->msg['admin_delete_notFound']);
                 $this->flash->set('danger', $this->msg['admin_delete_notFound']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             }
         } else {
             if ($this->isAjax()) $this->ajaxFail($this->msg['admin_delete_failed']);
             $this->flash->set('danger', $this->msg['admin_delete_failed']);
-            Ngpic::redirect(true);
+            Ngpictures::redirect(true);
         }
     }
 
@@ -168,31 +168,32 @@ class AdminController extends NgpicController
                     if (is_file($file)) {
                         unlink($file);
                         $this->flash->set('success', $this->msg['admin_delete_success']);
-                        Ngpic::redirect(true);
+                        Ngpictures::redirect(true);
                     } else {
                         if ($this->isAjax()) $this->ajaxFail($this->msg['admin_delete_failed']);
                         $this->flash->set('danger', $this->msg['admin_delete_failed']);
-                        Ngpic::redirect(true);
+                        Ngpictures::redirect(true);
                     }
                 } else {
                     if ($this->isAjax()) $this->ajaxFail($this->msg['admin_not_directory']);
                     $this->flash->set('danger', $this->msg['admin_not_directory']);
-                    Ngpic::redirect(true);
+                    Ngpictures::redirect(true);
                 }
             } else {
                 if ($this->isAjax()) $this->ajaxFail($this->msg['indefined_error']);
                 $this->flash->set('danger', $this->msg['indefined_error']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             }
         } else {
             $this->flash->set('danger', $this->msg['indefined_error']);
-            Ngpic::redirect(true);
+            Ngpictures::redirect(true);
         }
     }
 
 
     /**
      * mettre du contenu en ligne ou pas
+     * confirmer un membre aussi
      * @param $t
      * @param $id
      */
@@ -204,14 +205,14 @@ class AdminController extends NgpicController
         if (intval($t) === 5) {
             if ($result->confirmed_at === null) {
                 $model->unsetConfirmationToken($result->id);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             } elseif ($result->confirmed_at !== null) {
                 $this->flash->set('success', $this->msg['admin_already_confrimed']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             } else {
                 if ($this->isAjax()) $this->ajaxFail($this->msg['indefined_error']);
                 $this->flash->set('danger', $this->msg['indefined_error']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             }
         } else {
             if ($result && !$result->online) {
@@ -223,7 +224,7 @@ class AdminController extends NgpicController
                 }
 
                 $this->flash->set('success', $this->msg['admin_confirm_success']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             } elseif ($result && $result->online) {
                 $model->update($id, ['online' => 0]);
 
@@ -233,11 +234,11 @@ class AdminController extends NgpicController
                 }
 
                 $this->flash->set('success', $this->msg['admin_remove_success']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             } else {
                 if ($this->isAjax()) $this->ajaxFail($this->msg['indefined_error']);
                 $this->flash->set('danger', $this->msg['indefined_error']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             }
         }
     }
@@ -293,7 +294,7 @@ class AdminController extends NgpicController
 
                     $this->blog->update($id, compact('title', 'content', 'slug', 'category_id'));
                     $this->flash->set("success", $this->msg['admin_modified_success']);
-                    Ngpic::redirect(ADMIN . "/blog");
+                    Ngpictures::redirect(ADMIN . "/blog");
                 } else {
                     var_dump($this->validator->getErrors());
                 }
@@ -310,6 +311,7 @@ class AdminController extends NgpicController
 
     /**
      * ajout d'un nouvel article
+     * le contenu $content n'est pas echapper a cause de l'editeur
      */
     public function add()
     {
@@ -343,9 +345,10 @@ class AdminController extends NgpicController
                             $isUploaded = Image::upload($file, 'blog', "ngpictures-{$slug}-{$last_id}", 'article');
 
                             if ($isUploaded) {
+                                Image::upload($file, 'blog-thumbs', "ngpictures-{$slug}-{$last_id}", 'small');
                                 $this->blog->update($last_id, ['thumb' => "ngpictures-{$slug}-{$last_id}.jpg"]);
                                 $this->flash->set('success', $this->msg['admin_post_success']);
-                                Ngpic::redirect(ADMIN . "/blog");
+                                Ngpictures::redirect(ADMIN . "/blog");
                             } else {
                                 $this->flash->set('danger', $this->msg['admin_file_notUploaded']);
                                 $this->blog->delete($last_id);
@@ -395,7 +398,7 @@ class AdminController extends NgpicController
 
                 $this->categories->create(compact('title', 'description', 'slug'));
                 $this->flash->set('success', $this->msg['admin_post_success']);
-                Ngpic::redirect(ADMIN . "/blog/categories");
+                Ngpictures::redirect(ADMIN . "/blog/categories");
 
             } else {
                 $this->flash->set('danger', $this->msg['admin_all_fields']);
@@ -425,7 +428,7 @@ class AdminController extends NgpicController
 
                     $this->categories->update($category->id, compact('title', 'description', 'slug'));
                     $this->flash->set('success', $this->msg['admin_modified_success']);
-                    Ngpic::redirect(ADMIN . "/blog/categories");
+                    Ngpictures::redirect(ADMIN . "/blog/categories");
 
                 } else {
                     $this->flash->set('danger', $this->msg['admin_all_fields']);
@@ -437,7 +440,7 @@ class AdminController extends NgpicController
             $this->viewRender('Admin/blog/categories.edit', compact('post', 'category'));
         } else {
             $this->flash->set('danger', $this->msg['indefined_error']);
-            Ngpic::redirect(true);
+            Ngpictures::redirect(true);
         }
     }
 
@@ -471,7 +474,12 @@ class AdminController extends NgpicController
         $categories = $this->categories->orderBy('title', 'ASC');
 
         if (!empty($_FILES)) {
-            $name = $this->str::escape($post->get('name')) ?? strtolower(uniqid("ngpictures-"));
+            if (empty($this->str::escape($post->get('name')))) {
+                $name = strtolower(uniqid("ngpictures-"));
+            } else {
+                $name = $this->str::escape($post->get('name'));
+            }
+
             $description = $post->get('description') ?? null;
             $tags = $this->str::escape($post->get('tags')) ?? null;
             $category_id = (int)$post->get('category') ?? 1;
@@ -486,7 +494,7 @@ class AdminController extends NgpicController
 
                     $this->gallery->update($last_id, ["thumb" => "{$name}-{$last_id}.jpg"]);
                     $this->flash->set('success', $this->msg['admin_post_success']);
-                    Ngpic::redirect(ADMIN . "/gallery");
+                    Ngpictures::redirect(ADMIN . "/gallery");
 
                 } else {
                     $this->flash->set('danger', $this->msg['admin_file_notUploaded']);
@@ -494,7 +502,7 @@ class AdminController extends NgpicController
                 }
             } else {
                 $this->flash->set('danger', $this->msg['admin_picture_required']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             }
         }
         page::setName('admin - gallery.add | Ngpictures');
@@ -522,7 +530,7 @@ class AdminController extends NgpicController
                     $category_id = (int)$post->get('category') ?? 1;
                     $this->gallery->update($id, compact('name', 'tags', 'description', 'category_id'));
                     $this->flash->set("success", $this->msg['admin_modified_success']);
-                    Ngpic::redirect(ADMIN . "/gallery");
+                    Ngpictures::redirect(ADMIN . "/gallery");
                 }
             }
             page::setName('admin - gallery.edit | Ngpictures');
@@ -530,7 +538,7 @@ class AdminController extends NgpicController
             $this->viewRender("Admin/gallery/edit", compact('photo', 'categories'));
         } else {
             $this->flash->set('danger', $this->msg['admin_delete_notFound']);
-            Ngpic::redirect(true);
+            Ngpictures::redirect(true);
         }
     }
 
@@ -560,18 +568,18 @@ class AdminController extends NgpicController
         try {
             $files = new DirectoryIterator($dos);
         } catch (UnexpectedValueException $e) {
-            if (Ngpic::hasDebug()) {
+            if (Ngpictures::hasDebug()) {
                 die($e->getMessage());
             } else {
                 $this->flash->set('danger', $this->msg['indefined_error']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             }
         } catch (RuntimeException $e) {
-            if (Ngpic::hasDebug()) {
+            if (Ngpictures::hasDebug()) {
                 die($e->getMessage());
             } else {
                 $this->flash->set('danger', $this->msg['admin_not_directory']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             }
         }
 
@@ -610,7 +618,7 @@ class AdminController extends NgpicController
 
                 $this->albums->create(compact('title', 'description', 'slug'));
                 $this->flash->set('success', $this->msg['admin_post_success']);
-                Ngpic::redirect(ADMIN . "/gallery");
+                Ngpictures::redirect(ADMIN . "/gallery");
 
             } else {
                 $this->flash->set('danger', $this->msg['admin_all_fields']);
@@ -640,7 +648,7 @@ class AdminController extends NgpicController
 
                     $this->albums->update($album->id, compact('title', 'description', 'slug'));
                     $this->flash->set('success', $this->msg['admin_modified_success']);
-                    Ngpic::redirect(ADMIN . "/gallery");
+                    Ngpictures::redirect(ADMIN . "/gallery");
 
                 } else {
                     $this->flash->set('danger', $this->msg['admin_all_fields']);
@@ -652,7 +660,7 @@ class AdminController extends NgpicController
             $this->viewRender('Admin/gallery/albums.edit', compact('post', 'album'));
         } else {
             $this->flash->set('danger', $this->msg['indefined_error']);
-            Ngpic::redirect(true);
+            Ngpictures::redirect(true);
         }
 
     }
@@ -708,15 +716,15 @@ class AdminController extends NgpicController
             if ($user->rank === "admin") {
                 $this->users->update($user->id, ['rank' => 'user']);
                 $this->flash->set('success', $this->msg['admin_removed_admin']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             } else {
                 $this->users->update($user->id, ['rank' => 'admin']);
                 $this->flash->set('success', $this->msg['admin_added_admin']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             }
         } else {
             $this->flash->set('danger', $this->msg['indefined_error']);
-            Ngpic::redirect(true);
+            Ngpictures::redirect(true);
         }
     }
 

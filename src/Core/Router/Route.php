@@ -2,7 +2,7 @@
 namespace Ng\Core\Router;
 
 
-use Ngpictures\Ngpic;
+use Ngpictures\Ngpictures;
 
 class Route
 {
@@ -50,7 +50,7 @@ class Route
 	{
 		if (is_string($this->controller)) {
 			$url = explode("#", $this->controller);
-			$controller = Ngpic::getInstance()->getController($url[0]);
+			$controller = Ngpictures::getInstance()->getController($url[0]);
 			$action = $url[1] ?? 'index';
 			
 			return call_user_func_array([$controller, $action], $this->matches);

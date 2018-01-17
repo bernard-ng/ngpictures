@@ -1,15 +1,13 @@
 <?php
 namespace Ngpictures\Controllers;
 
-use Ngpictures\Traits\ShowPostTrait;
-use Ngpictures\Traits\StoryPostTrait;
-
+use Ngpictures\Traits\Controllers\ShowPostTrait;
+use Ngpictures\Traits\Controllers\StoryPostTrait;
 
 class BlogController extends NgpicController
 {
+	public $table = "blog";
 
-	private $table = "blog";
-    // fil d'actualite et affiche des posts
     use StoryPostTrait;
     use ShowPostTrait;
 }

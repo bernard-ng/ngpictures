@@ -1,7 +1,7 @@
 <?php
 namespace Ng\Core\Generic\Mailer;
 
-use Ngpictures\Ngpic;
+use Ngpictures\Ngpictures;
 
 
 class MailSender
@@ -43,7 +43,7 @@ class MailSender
         die();
 
         mail($email, "Confirmation de compte - Ngpictures", $message, $this->headers);
-        Ngpic::redirect("/login");
+        Ngpictures::redirect("/login");
 
     }
 
@@ -64,6 +64,6 @@ class MailSender
         die();
 
         mail($email, "Mot de passe oublié - Ngpictures", $message, $this->headers);
-        Ngpic::redirect("/login");
+        Ngpictures::redirect("/login");
     }
 }

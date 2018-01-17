@@ -2,7 +2,7 @@
 namespace Ngpictures\Controllers;
 
 use Ng\Core\Controllers\Controller;
-use Ngpictures\Ngpic;
+use Ngpictures\Ngpictures;
 
 
 
@@ -22,7 +22,7 @@ class NgpicController extends Controller
     protected $msg = [
 
         //general messages
-        "indefined_error" => "Désolé une erreur c'est produite, veuillez réessayer",
+        "indefined_error" => "Désolé une erreur s'est produite, veuillez réessayer",
 
         //admin controller messages
         'admin_delete_success' => 'La publication a bien été supprimé',
@@ -79,8 +79,12 @@ class NgpicController extends Controller
         "user_mail_tokken" => "Cette adresse mail est déjà prise",
         "user_phone_tokken" => "Ce numéro est déjà pris",
         "user_edit_success" => "Vos informations ont été mises à jour",
+        "user_remove_following_success" => "Vous ne suivez plus cette personne",
+        "user_add_following_success" => "Vous suivez cette personne",
 
-        "download_failed" => "Une Erreur s'est produite lors du téléchargement"
+
+        "download_failed" => "Une Erreur s'est produite lors du téléchargement",
+        "download_file_notFound" => "La photo que vous voulez télécharger n'existe pas ou plus"
 
     ];
 
@@ -90,7 +94,7 @@ class NgpicController extends Controller
         $this->viewPath = APP."/Views/";
         $this->layout = 'default';
 
-        $Ngpic = Ngpic::getInstance();
+        $Ngpic = Ngpictures::getInstance();
 
         $this->session = $Ngpic->getSession();
         $this->cookie = $Ngpic->getCookie();
@@ -107,7 +111,7 @@ class NgpicController extends Controller
      */
     protected function loadModel($model)
     {
-        $Ngpic = Ngpic::getInstance();
+        $Ngpic = Ngpictures::getInstance();
 
         if (is_string($model)) {
             return $this->$model = $Ngpic->getModel($model);
@@ -128,7 +132,7 @@ class NgpicController extends Controller
      */
     protected function callController(string $name)
     {
-        return Ngpic::getInstance()->getController($name);
+        return Ngpictures::getInstance()->getController($name);
     }
 
 

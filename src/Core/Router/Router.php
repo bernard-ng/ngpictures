@@ -2,7 +2,7 @@
 
 namespace Ng\Core\Router;
 use Ng\Core\Exception\RouterException;
-use Ngpictures\Ngpic;
+use Ngpictures\Ngpictures;
 
 class Router
 {
@@ -43,10 +43,10 @@ class Router
 	public function run(): bool
 	{
 		if (!isset($_SERVER['REQUEST_METHOD'])) {
-			if (Ngpic::hasDebug()) {
+			if (Ngpictures::hasDebug()) {
 				throw new RouterException("undefinied Request method");
 			} else {
-				Ngpic::redirect('/error-500');
+				Ngpictures::redirect('/error-500');
 				return false;
 			}
 		}
@@ -57,7 +57,7 @@ class Router
 				return true;
 			}
 		}
-		(Ngpic::hasDebug())? var_dump($route) : Ngpic::redirect("/e404");
+		(Ngpictures::hasDebug())? var_dump($route) : Ngpictures::redirect("/error-404");
 		return false;
 	}
 
@@ -65,7 +65,7 @@ class Router
 	private function url(string $name, array $params = [])
 	{
 		if (!isset($this->namedRoute[$name])) {
-			Ngpic::redirect("/error-404");
+			Ngpictures::redirect("/error-404");
 		}
 		return $this->namedRoute[$name]->getUrl($params);
 	}

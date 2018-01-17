@@ -1,12 +1,18 @@
 <?php
 namespace Ngpictures\Controllers;
 
+
 use Ng\Core\Generic\Collection;
 use Ngpictures\Util\Page;
 
 
 class BugsController extends NgpicController
 {
+
+    /**
+     * BugsController constructor.
+     * oblige un user a se connecter pour effectuer l'action
+     */
     public function __construct()
     {
     	parent::__construct();
@@ -15,6 +21,9 @@ class BugsController extends NgpicController
     }
 
 
+    /**
+     * permet de signaler un bug
+     */
     public function index()
     {
         $post = new Collection($_POST);

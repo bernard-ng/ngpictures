@@ -3,7 +3,7 @@ namespace Ngpictures\Controllers;
 
 use Ng\Core\Generic\Collection;
 use Ngpictures\Entity\UsersEntity;
-use Ngpictures\Ngpic;
+use Ngpictures\Ngpictures;
 use Ngpictures\Util\Page;
 
 use Facebook\Facebook;
@@ -20,7 +20,7 @@ class FacebookController extends NgpicController
 
 	private function catch($e, string $msg)
 	{
-		if (Ngpic::hasDebug()) {
+		if (Ngpictures::hasDebug()) {
 			echo "<pre>";
 				echo "{$msg}";
 				print_r($e);
@@ -28,7 +28,7 @@ class FacebookController extends NgpicController
 	        exit;
         } else {
         	$this->flash->set('danger', $this->msg['indefined_error']);
-        	Ngpic::redirect(true);
+        	Ngpictures::redirect(true);
         }
 	}
 

@@ -8,9 +8,19 @@ use Ng\Core\Models\Model;
 
 class FollowingModel extends Model
 {
-
+    /**
+     * nom de la table
+     * @var string
+     */
     protected $table = "following";
 
+
+    /**
+     * ajouter un follower
+     * @param int $followed_id
+     * @param int $follower_id
+     * @return mixed
+     */
     public function add(int $followed_id, int $follower_id)
     {
         return $this->query(
@@ -20,6 +30,12 @@ class FollowingModel extends Model
     }
 
 
+    /**
+     * retire un follower
+     * @param int $followed_id
+     * @param int $follower_id
+     * @return mixed
+     */
     public function remove(int $followed_id, int $follower_id)
     {
         return $this->query(
@@ -30,6 +46,11 @@ class FollowingModel extends Model
     }
 
 
+    /**
+     * renvoi le nombre de followe d'un user
+     * @param int $user_id
+     * @return int
+     */
     public function getFollowers(int $user_id): int
     {
         return $this->query(
@@ -39,6 +60,11 @@ class FollowingModel extends Model
     }
 
 
+    /**
+     * renvoi le nombre de following d'un user
+     * @param int $user_id
+     * @return int
+     */
     public function getFollowing(int $user_id): int
     {
         return $this->query(
@@ -48,22 +74,19 @@ class FollowingModel extends Model
     }
 
 
+    /**
+     * check si un user suis un autre
+     * @param int $followed_id
+     * @param null $user_id
+     * @return bool
+     */
     public function isFollowed(int $followed_id, $user_id = null): bool
     {
         $req = $this->query(
             "SELECT id FROM {$this->table} WHERE followed_id = ? AND follower_id = ? ",
-            [$id,$user_id], true, true
+            [$followed_id,$user_id], true, true
         );
         
         return ($req)? true : false ;
-    }
-
-
-    public function isMentionnedFollow($id){
-        if ($this->isFollowed($id, Ngpic::getInstance()->getSession()->getValue('auth','id'))) {
-            return 'active';
-        } else {
-            return '';
-        }
     }
 }

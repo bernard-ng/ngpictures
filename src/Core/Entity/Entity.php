@@ -2,10 +2,10 @@
 namespace Ng\Core\Entity;
 
 
+use Ngpictures\Ngpictures;
 
 class Entity
 {
-
     /**
      * definie un attribut dynamiquement
      * @param $key
@@ -17,6 +17,28 @@ class Entity
         if (method_exists($this, $method)) {
         	$this->$key = $this->$method();
         	return $this->$key;
+        }
+        return null;
+    }
+
+    /**
+     * @var null
+     */
+    private $user = null;
+
+
+    /**
+     * renvoi un mm utilisateur pour chaque obj
+     * @return null
+     */
+    private function getUser() {
+        if ($this->user !== null) {
+            return $this->user;
+        } else {
+            $this->user = Ngpictures::getInstance()
+                ->getModel('users')
+                ->find($this->user_id ?? $this->id);
+            return $this->user;
         }
     }
 
@@ -31,31 +53,14 @@ class Entity
     }
 
 
-    public function getUsername(): string
-	{
-		//return $this->users->find($this->user_id)->name;
-        return "username";
-	}
-
-
-    public function getUserAccountUrl(): string
+    /**
+     * recupere les infos d'un user
+     * @param string $info
+     * @return mixed
+     */
+    public function userInfos(string $info)
     {
-        //return $this->users->find($this->user_id)->accountUrl;
-        return "account";
-    }
-
-
-    public function getUserAvatarUrl(): string
-    {
-        //return "/uploads/avatars/{$this->avatar}";
-        return "/uploads/avatars/default.jpg";
-    }
-
-
-    public function getUserGalleryUrl(): string 
-    {
-        //return $this->users->find($this->user_id)->galleryUrl;
-        return "gallery";
+        return $this->getUser()->$info;
     }
 
     

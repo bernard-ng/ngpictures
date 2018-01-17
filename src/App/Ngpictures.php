@@ -2,14 +2,14 @@
 namespace Ngpictures;
 
 
-use Ng\Core\Traits\SingletonTrait;
+use Ngpictures\Traits\Util\SingletonTrait;
 use Ng\Core\Database\MysqlDatabase;
 use Ng\Core\Config\Config;
-use Ng\Core\Generic\{Session, cookie, str, Validator, Flash};
+use Ng\Core\Generic\{Session, Cookie, Str, Validator, Flash};
 
 
 
-class Ngpic {
+class Ngpictures {
 
     /**
      * la base de donnee
@@ -37,7 +37,7 @@ class Ngpic {
      *
      * @return MysqlDatabase
      **/
-    public function getDb(): MysqlDatabase
+    private function getDb(): MysqlDatabase
     {
 		$setting = Config::getInstance(ROOT."\config\DatabaseConfig.php");
 

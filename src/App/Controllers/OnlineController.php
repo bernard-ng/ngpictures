@@ -4,11 +4,12 @@ namespace Ngpictures\Controllers;
 
 class OnlineController extends NgpicController
 {
-	public $number = null;
-	public $users = null;
+	private $number = null;
+	private $users = null;
 
 	public function __construct()
 	{
+	    parent::__construct();
 		$this->loadModel('online');
 	}
 

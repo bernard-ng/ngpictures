@@ -1,11 +1,9 @@
 <?php
 namespace Ngpictures\Controllers;
 
-use Ng\Core\Generic\{
-    Collection, Image, Mailer\MailSender
-};
+use Ng\Core\Generic\{Collection, Image, Mailer\MailSender};
 use Ngpictures\Entity\UsersEntity;
-use Ngpictures\Ngpic;
+use Ngpictures\Ngpictures;
 use Ngpictures\Util\Page;
 
 
@@ -22,13 +20,6 @@ class UsersController extends NgpicController
         parent::__construct();
         $this->loadModel('users');
     }
-
-
-    /**
-     * les differents models pour les publication des users
-     * @var array
-     */
-    private $types = [1 => "articles","gallery"];
 
 
     /***************************************************************************
@@ -77,7 +68,7 @@ class UsersController extends NgpicController
 
                         $this->flash->set('success', $this->msg['user_reset_password_success']);
                         $this->connect($user);
-                        Ngpic::redirect($user->accountUrl);
+                        Ngpictures::redirect($user->accountUrl);
                     }
                 } else {
                     $this->flash->set('danger', $this->msg['admin_all_fields']);
@@ -89,7 +80,7 @@ class UsersController extends NgpicController
             $this->viewRender('users/reset', compact('post'));
         } else {
             $this->flash->set('danger', $this->msg['indefined_error']);
-            Ngpic::redirect(true);
+            Ngpictures::redirect(true);
         }
     }
 
@@ -115,7 +106,7 @@ class UsersController extends NgpicController
                     $mailer->resetPassword($link, $email);
 
                     //$this->flash->set('success',$this->msg['user_reset_mail_success']);
-                    //Ngpic::redirect('/login');
+                    //Ngpictures::redirect('/login');
 
                 } else {
                     $this->flash->set('danger',$this->msg['user_email_notFound']);
@@ -151,7 +142,7 @@ class UsersController extends NgpicController
         $mailer = new MailSender();
         $mailer->accountConfirmation($link, $email);
         $this->flash->set('success', $this->msg['user_registration_success']);
-        Ngpic::redirect('/login');
+        Ngpictures::redirect('/login');
     }
 
 
@@ -180,7 +171,7 @@ class UsersController extends NgpicController
             if ($validator->isValid()) {
                 $this->register($post->get('name'), $post->get('email'), $post->get('password'));
                 $this->flash->set('success', $this->msg['user_registration_success']);
-                Ngpic::redirect("/login");
+                Ngpictures::redirect("/login");
             } else {
                 var_dump($this->validator->getErrors());
             }
@@ -203,7 +194,7 @@ class UsersController extends NgpicController
     {
         if (!$this->isLogged()) {
             $this->flash->set("danger", $msg ?? $this->msg["user_must_login"]);
-            Ngpic::redirect(true);
+            Ngpictures::redirect(true);
         }
     }
 
@@ -216,7 +207,7 @@ class UsersController extends NgpicController
         $this->restrict();
         if ($this->session->getValue(AUTH_KEY,'rank') !== 'admin') {
             $this->flash->set('warning', $this->msg['user_forbidden']);
-            Ngpic::redirect(true);
+            Ngpictures::redirect(true);
         }
     }
 
@@ -243,7 +234,7 @@ class UsersController extends NgpicController
     {
         if (!$this->isLogged()) {
             $this->session->write(AUTH_KEY, $user);
-            $this->session->write('token', $this->str::setToken(60));
+            $this->session->write(TOKEN_KEY, $this->str::setToken(60));
             $this->flash->set('success', $msg ?? $this->msg['user_login_success']);
         }
     }
@@ -253,8 +244,8 @@ class UsersController extends NgpicController
      * permet de connecter un utilisateur a partir d'un cookie
      */
     public function cookieConnect()
-    {        if ($this->cookie->hasKey("rembember") && !$this->isLogged()) {
-            $remember_token = $this->cookie->read("remember");
+    {        if ($this->cookie->hasKey(COOKIE_REMEMBER_KEY) && !$this->isLogged()) {
+            $remember_token = $this->cookie->read(COOKIE_REMEMBER_KEY);
             $parts = explode(".", $remember_token);
             $user = $this->users->find($parts[2]);
             
@@ -262,16 +253,17 @@ class UsersController extends NgpicController
                 $expected = "NG.23.".$user->id.".".$user->remember_token;
                 if ($expected === $remember_token) {
                     $this->connect($user);
-                    $this->cookie->write("remember", $remember_token);
+                    $this->cookie->write(COOKIE_REMEMBER_KEY, $remember_token);
                 } else {
-                   $this->cookie->delete("remember");
+                   $this->cookie->delete(COOKIE_REMEMBER_KEY);
                 }
             } else {
-                $this->cookie->delete("remember");
+                $this->cookie->delete(COOKIE_REMEMBER_KEY);
             }
         }
     }
 
+    
     /**
      * definit un remember token
      * @param int $user_id
@@ -280,7 +272,7 @@ class UsersController extends NgpicController
     {
         $remember_token = $this->str::cookieToken();
         $this->users->setRememberToken($remember_token, $user_id);
-        $this->cookie->write("remember","NG.23.{$user_id}.{$remember_token}");
+        $this->cookie->write(COOKIE_REMEMBER_KEY,"NG.23.{$user_id}.{$remember_token}");
     }
 
 
@@ -295,7 +287,7 @@ class UsersController extends NgpicController
 
         if ($this->isLogged()) {
             $this->flash->set('warning', $this->msg['user_already_connected']);
-            Ngpic::redirect($this->isLogged()->accountUrl);
+            Ngpictures::redirect($this->isLogged()->accountUrl);
         } else {
             if (isset($_POST) && !empty($_POST)) {
                 $password = $post->get('password');
@@ -312,7 +304,7 @@ class UsersController extends NgpicController
                                     $this->remember($user->id);
                                 }
                                 $this->flash->set('success', $this->msg['user_login_success']);
-                                Ngpic::redirect($user->accountUrl);
+                                Ngpictures::redirect($user->accountUrl);
                             } else {
                                 $this->flash->set('danger', $this->msg['user_bad_identifier']);
                             }
@@ -337,11 +329,11 @@ class UsersController extends NgpicController
      */
     public function logout()
     {
-        $this->cookie->delete("remember");
+        $this->cookie->delete(COOKIE_REMEMBER_KEY);
         $this->session->delete(AUTH_KEY);
-        $this->session->delete("token");
+        $this->session->delete(TOKEN_KEY);
         $this->flash->set('success', $this->msg['user_logout_success']);
-        Ngpic::redirect("/login");
+        Ngpictures::redirect("/login");
     }
 
 
@@ -368,11 +360,11 @@ class UsersController extends NgpicController
                 $this->viewRender('users/account', compact("verse","user"));
             } else {
                 $this->flash->set('danger', $this->msg['indefined_error']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             }
         } else {
             $this->flash->set('danger', $this->msg['indefined_error']);
-            Ngpic::redirect(true);
+            Ngpictures::redirect(true);
         }
     }
 
@@ -385,10 +377,10 @@ class UsersController extends NgpicController
      */
     public function edit(string $username, $id, string $token)
     {
-        if ($token === $this->session->read('token')) {
+        if ($token === $this->session->read(TOKEN_KEY)) {
             $user = $this->users->find($id);
             
-            if ($user && $this->str::checkUserUrl($username, $user->name) == true  ) {
+            if ($user && $this->str::checkUserUrl($username, $user->name) == true) {
                 $post = new Collection($_POST);
                 $file = new Collection($_FILES);
 
@@ -425,7 +417,7 @@ class UsersController extends NgpicController
                         $user = $this->users->find($user->id);
                         $this->session->write(AUTH_KEY, $user);
                         $this->flash->set('success', $this->msg['user_edit_success']);
-                        Ngpic::redirect($user->accountUrl);
+                        Ngpictures::redirect($user->accountUrl);
                     }
                 } elseif (!empty($file->get('thumb'))) {
 
@@ -437,7 +429,7 @@ class UsersController extends NgpicController
                         $user = $this->users->find($user->id);
                         $this->session->write(AUTH_KEY, $user);
                         $this->flash->set('success', $this->msg['user_edit_success']);
-                        Ngpic::redirect($user->accountUrl);
+                        Ngpictures::redirect($user->accountUrl);
                     }
                 }
                 Page::setName('Edition du profile | Ngpictures');
@@ -445,11 +437,11 @@ class UsersController extends NgpicController
                 $this->viewRender('users/edit', compact('user'));
             } else {
                 $this->flash->set('danger', $this->msg['indefined_error']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             }
         } else {
             $this->flash->set('danger', $this->msg['indefined_error']);
-            Ngpic::redirect(true);
+            Ngpictures::redirect(true);
         }
     }
 
@@ -497,7 +489,7 @@ class UsersController extends NgpicController
                             if ($isUploaded) {
                                 $this->articles->update($last_id, ['thumb' => "ngpictures-{$slug}-{$last_id}.jpg"]);
                                 $this->flash->set('success', $this->msg['admin_post_success']);
-                                Ngpic::redirect("/account/post");
+                                Ngpictures::redirect("/account/post");
                             } else {
                                 $this->flash->set('danger', $this->msg['admin_file_notUploaded']);
                                 $this->articles->delete($last_id);
@@ -524,7 +516,7 @@ class UsersController extends NgpicController
         $this->restrict();
         $categories = $this->loadModel('categories')->orderBy('title', 'ASC');
 
-       if ($token == $this->session->read('token')) {
+       if ($token == $this->session->read(TOKEN_KEY)) {
            $post = new Collection($_POST);
            $article = $this->articles->find(intval($id));
            $post = new Collection($data ?? $_POST);
@@ -543,7 +535,7 @@ class UsersController extends NgpicController
 
                        $this->articles->update($id, compact('title', 'content', 'slug', 'category_id'));
                        $this->flash->set("success", $this->msg['admin_modified_success']);
-                       Ngpic::redirect("/account/post");
+                       Ngpictures::redirect("/account/post");
                    } else {
                        var_dump($this->validator->getErrors());
                    }
@@ -560,33 +552,32 @@ class UsersController extends NgpicController
 
     /**
      * suppression des publications des users
-     * @param int $t
      * @param int $id
      * @param string $token
      */
-    public function delete($t, $id, $token)
+    public function delete($id, $token)
     {
         $this->restrict();
-        $model = $this->loadModel($this->types[intval($t)]);
+        $model = $this->loadModel("articles");
         $post = $model->find(intval($id));
 
-        if ($this->session->read('token') == $token) {
+        if ($this->session->read(TOKEN_KEY) == $token) {
             if ($post && $post->user_id == $this->session->getValue(AUTH_KEY,'id')) {
                 $model->delete($post->id);
                 if ($this->isAjax()) {
                     exit();
                 }
                 $this->flash->set('success', $this->msg['admin_delete_success']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             } else {
                 if ($this->isAjax()) $this->ajaxFail($this->msg['indefined_error']);
                 $this->flash->set('danger', $this->msg['indefined_error']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             }
         } else {
             if ($this->isAjax()) $this->ajaxFail($this->msg['admin_delete_notAllowed']);
             $this->flash->set('danger', $this->msg['admin_delete_notAllowed']);
-            Ngpic::redirect(true);
+            Ngpictures::redirect(true);
         }
     }
 }

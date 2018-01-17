@@ -2,18 +2,21 @@
 namespace Ngpictures\Controllers;
 
 
+use Ngpictures\Traits\Util\TypesActionTrait;
+use Ngpictures\Ngpictures;
 use Ng\Core\Generic\Collection;
-use Ngpictures\Util\Page;
-use Ngpictures\Ngpic;
 
 
 class CommentsController extends NgpicController
 {
 
-    private $types = [ 1 => 'articles','gallery','blog'];
-    private $user_id = null;
-    
+    use TypesActionTrait;
 
+    /**
+     * CommentsController constructor.
+     * oblige un user a se connecter avant de faire une action
+     * si il est connecter alors on set son id dans l'instance;
+     */
     public function __construct(){
         parent::__construct();
         $this->callController('users')->restrict();
@@ -21,18 +24,17 @@ class CommentsController extends NgpicController
     }
 
 
-    private function getType(int $type): string
-    {
-        $model = new Collection($this->types);
-        return $model->get($type);
-    }
-
-
+    /**
+     * permet d'ajouter un commentaire
+     * @param $type
+     * @param $slug
+     * @param $id
+     */
     public function index($type, $slug, $id)
     {
         $comments = $this->loadModel('comments');
         $post = new Collection($_POST);
-        $publication = $this->loadModel($this->getType($type))->find(floor($id));
+        $publication = $this->loadModel($this->getType($type))->find(intval($id));
 
         if ($publication && $publication->slug === $slug) {
             $comment = $this->str::escape($post->get('comment'));
@@ -45,72 +47,82 @@ class CommentsController extends NgpicController
                     ]
                 );
                 $this->flash->set('success', $this->msg['comment_success']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             } else {
                 $this->flash->set('danger', $this->msg['comment_required']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             }
 
         } else {
             $this->flash->set('warning', $this->msg['not_found']);
-            Ngpic::redirect(true);
+            Ngpictures::redirect(true);
         }
     }
 
 
-    public function delete($type, $id, $token)
+    /**
+     * recupere l'id du poster a travers le type de la publication et on verifie dans la table
+     * de publication si , c vraiment lui qui a poster l'article, alors il aura le droit de
+     * supprimer le commentaire.
+     * @param $id
+     * @param $token
+     */
+    public function delete($id, $token)
     {
         $comments = $this->loadModel('comments');
         $comment = $comments->find(intval($id));
 
-        //recupere l'id du poster a travers le type de la publication et on verifie dans la table
-        //de publication si , c vraiment lui qui a poster l'article, alors il aura le droit de 
-        // supprimer le commentaire.
-        $poster = $this->loadModel($this->getType($type))->find($comment->$this->getType($type))->user_id;
-
-        if ($token == $this->session->read('token')) {
+        if ($token == $this->session->read(TOKEN_KEY)) {
             if ($comment) {
-                if (($comment->user_id == $this->user_id && $poster = $this->user_id) || $this->user_id == 1) {
+                if ($comment->user_id == $this->user_id) {
                     $comments->delete($id);
-                    $this->flash->set('success', $this->msg['delete_success']);
-                    Ngpic::redirect(true);
+                    $this->flash->set('success', $this->msg['comment_delete_success']);
+                    Ngpictures::redirect(true);
 
                 } else {
-                    $this->flash->set('danger', $this->msg['notallowed_delete_comment']);
-                    Ngpic::redirect(true);
+                    $this->flash->set('danger', $this->msg['comment_delete_notAllowed']);
+                    Ngpictures::redirect(true);
                 }
 
             } else {
                 $this->flash->set('warning', $this->msg['comment_not_found']);
-                Ngpic::redirect(true);
+                Ngpictures::redirect(true);
             }
         } else {
-            $this->flash->set('danger', $this->msg['notallowed_delete_comment']);
-            Ngpic::redirect(true);
+            $this->flash->set('danger', $this->msg['comment_delete_notAllowed']);
+            Ngpictures::redirect(true);
         }
     }
 
 
-    public function edit($id, $token) {
-        $comments = $this->loadModel('comments');
-        $comment = $comments->find(intval($id));
-        $post = new Collection($_POST);
+    /**
+     * permet d'editer un commentaire, le securite est base sur les tokens csrf
+     * @param $id
+     * @param $token
+     */
+    public function edit($id, $token)
+    {
+        if ($token == $this->session->read(TOKEN_KEY)) {
+            $comments = $this->loadModel('comments');
+            $comment = $comments->find(intval($id));
+            $post = new Collection($_POST);
 
-        if ($comment) {
-            if ($comment->user_id == $this->user_id) {
-                $comment = $this->str::escape($post->get('comment_edit'));
-                $comments->update($comment->id, ['comment' => $comment]);
-                $this->flash->set('success', $this->msg['edit_success']);
-                Ngpic::redirect(true);
+            if ($comment) {
+                if ($comment->user_id == $this->user_id) {
+                    $text = $this->str::escape($post->get('comment_edit'));
+                    $comments->update($comment->id, ['comment' => $text]);
+                    $this->flash->set('success', $this->msg['comment_edit_success']);
+                    Ngpictures::redirect(true);
+
+                } else {
+                    $this->flash->set('danger', $this->msg['comment_edit_notAllowed']);
+                    Ngpictures::redirect(true);
+                }
 
             } else {
-                $this->flash->set('danger', $this->msg['notallowed_edit_comment']);
-                Ngpic::redirect(true);
+                $this->flash->set('warning', $this->msg['comment_not_found']);
+                Ngpictures::redirect(true);
             }
-
-        } else {
-            $this->flash->set('warning', $this->msg['comment_not_found']);
-            Ngpic::redirect(true);
         }
     }
 }

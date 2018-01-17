@@ -1,8 +1,15 @@
 <?php
-namespace Ngpictures\Traits;
+namespace Ngpictures\Traits\Models;
 
 trait FindQueryTrait {
 
+
+    /**
+     * vas chercher les publication en dessus de l'id passer
+     * en parametre
+     * @param $post_id
+     * @return mixed
+     */
 	public function findLess($post_id)
     {
     	return $this->query("
@@ -14,6 +21,12 @@ trait FindQueryTrait {
     	);
     }
 
+
+    /**
+     * return la publication qui a pour id, l'id passer en parametre
+     * @param int $id
+     * @return mixed
+     */
     public function find(int $id)
     {
         return $this->query("

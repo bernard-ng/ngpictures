@@ -2,26 +2,34 @@
 namespace Ngpictures\Models;
 
 
+use Ng\Core\Database\MysqlDatabase;
 use Ng\Core\Models\Model;
-use Ng\Core\Generic\{Collection,Session};
-use Ngpictures\Ngpic;
+use Ng\Core\Generic\Collection;
+use Ngpictures\Ngpictures;
 
 
 
 class LikesModel extends Model
 {
-
+    /**
+     * nom de la table
+     * @var string
+     */
     protected $table = "likes";
-    private $types = [ 1 => 'article_id','photo_id','blog_id'];
+
     
+    /**
+     * les differents type de publication
+     * @var array
+     */
+    private $types = [ 1 => 'article_id','gallery_id','blog_id'];
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->session = Session::getInstance();
-    }
 
-
+    /**
+     * renvoi le type de la publication
+     * @param int $type
+     * @return mixed
+     */
     private function getType(int $type)
     {
         $types = new Collection($this->types);
@@ -30,19 +38,39 @@ class LikesModel extends Model
 
 
     /**
-     * @param  integer $post_id the id of the post
-     * @param integer $t the type of the post
-     * @param int user_id
-     * @return void
+     * LikesModel constructor.
+     * @param MysqlDatabase $db
      */
-    public function add(int $id, int $t, $user_id)
+    public function __construct(MysqlDatabase $db)
+    {
+        parent::__construct($db);
+        $this->session = Ngpictures::getInstance()->getSession();
+    }
+
+
+    /**
+     * ajoute un like
+     * @param int $id
+     * @param int $type
+     * @param $user_id
+     * @return mixed
+     */
+    public function add(int $id, int $type, $user_id)
     {
         return $this->query(
-			"INSERT INTO {$this->table}(user_id,{$this->getType($t)},date_created) VALUES(?,?,NOW())",
+			"INSERT INTO {$this->table}(user_id,{$this->getType($type)},date_created) VALUES(?,?,NOW())",
             [$user_id,$id]
 		);	
     }
 
+
+    /**
+     * retire un like
+     * @param int $id
+     * @param int $t
+     * @param $user_id
+     * @return mixed
+     */
     public function remove(int $id, int $t, $user_id)
     {
         return $this->query(
