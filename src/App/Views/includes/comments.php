@@ -1,8 +1,8 @@
-<div class="card-panel row comments-card">
+<div id="comments" class="card-panel row comments-card">
     <div class="col l12 m12 s12">
         <span class="section-title"><i class="social social-comment"></i> Commentaire </span>
         
-        <form method="POST" action="<?php echo $article->commentUrl; ?>"> 
+        <form method="POST" action="<?= $article->commentUrl; ?>">
             <div class="default-form">
                 <textarea placeholder="Votre commentaire..." name="comment" id="comment"></textarea>
             </div>
@@ -27,7 +27,7 @@
                         <?= $c->comment ?>
                         <p><time  class="secondary-content-b" data-time="<?= strtotime($c->date_created) ?>"><?= $c->time ?></time></p>   
                     
-                        <?php if ($session->read('auth') && $session->getValue('auth','id') == $c->user_id): ?>
+                        <?php if ($session->read(AUTH_KEY) && $session->getValue(AUTH_KEY, 'id') == $c->user_id): ?>
                             <a href="#cmtDel-<?= $c->id ?>" class="secondary-content modal-trigger">
                                 <i class="icon icon-trash"></i>
                             </a>

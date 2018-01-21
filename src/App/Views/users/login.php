@@ -3,7 +3,7 @@
         <span class="section-title">Connexion</span>
     </div>
     <form method="POST" action="/login">
-        <input type="text" id="name" name="name" placeholder="Pseudo ou adresse mail" value="<?= $post->get('name') ?>" >
+        <input type="text" id="name" name="name" placeholder="Pseudo ou adresse mail" value="<?= htmlspecialchars($post->get('name')); ?>" >
         <input type="password" name="password" id="password" placeholder="Mot de passe" >
         
         <div class="row">
@@ -22,7 +22,7 @@
     </p>connectez-vous ou créez un compte plus rapidement en utlisant facebook, cela vous permettra
     de recevoir des notifications et de rester synchro avec Nous</p>
     <div class="mt-30" >
-        <a class="link-btn" href="facebook/connect/">Connexion avec facebook &nbsp;<i class="social social-facebook-1"></i></a>
+        <a class="link-btn" href="facebook/connect">Connexion avec facebook &nbsp;<i class="social social-facebook-1"></i></a>
     </div>
 </div>
 </div>    

@@ -10,18 +10,21 @@
                     <header class="ng-news-card-header">
                         <span class="ng-news-card-image-profil">
                             <a href="<?= $a->userAvatarUrl ?>" class="zoombox">
-                                <img src="<?= $a->userAvatarUrl ?>" alt="Profile <?= $a->username ?>" title="<?= $a->username ?>">
+                                <img src="<?= $a->userAvatarUrl ?>" alt="Profile <?= $a->username ?>">
                             </a>
                         </span>
                         <p class="ng-news-card-header-title">
-                            <a href="<?= $a->userAccountUrl ?>" title="voir le profil">
-                                <?= $a->username ?>        
+                            <a href="<?= $a->userAccountUrl; ?>">
+                               <?= $a->Username; ?>
                             </a>
                         </p>
 
                         <?php if($a->thumb !== null): ?>
-                            <a id="picBtn" class="ng-news-card-header-icon" href="<?= $a->userGalleryUrl ?>" title="voir la galery">
-                                <i class="icon icon icon-picture"></i>
+                            <a id="saveBtn" class="ng-news-card-header-icon" href="<?= $a->downloadUrl ?>" title="Signaler Contenu indésirable">
+                                <i class="icon icon icon-list"></i>
+                            </a>
+                            <a id="picBtn" class="ng-news-card-header-icon" href="<?= $a->userGalleryUrl ?>" title="toutes les publication">
+                                <i class="icon icon icon-book"></i>
                             </a>
                             <a id="saveBtn" class="ng-news-card-header-icon" href="<?= $a->downloadUrl ?>" title="télécharger la photo">
                                 <i class="icon icon icon-save"></i>
@@ -53,19 +56,21 @@
                         </section>
                         <section id="articleInfo">
                             <div class="ng-news-card-stat">
-                                <i class="icon icon-time"></i>&nbsp;
-                                <time id="date_created" data-time="<?= strtotime($a->date_created) ?>"><?= $a->date_created ?></time>
-                            </div>
-                            <div class="ng-news-card-stat">
                                 <i class="icon icon-thumbs-up"></i>&nbsp;
                                 <small>
                                     <a id="showLikes" href="<?= $a->showLikesUrl ?>"><?= $a->likes ?></a>
                                 </small>
                             </div>
                             <div class="ng-news-card-stat">
-                                <i class="social social-chat"></i>&nbsp;
+                                <i class="icon icon-comment"></i>&nbsp;
                                 <small>
-                                    <a id="showComments" href="<?= $a->showCommentsUrl ?>"><?= count($a->comments); ?> commentaires</a>
+                                    <?= $a->commentsNumber ?>
+                                </small>
+                            </div>
+                            <div class="ng-news-card-stat">
+                                <i class="icon icon-time"></i>&nbsp;
+                                <small>
+                                    <time id="date_created" data-time="<?= strtotime($a->date_created) ?>"><?= $a->date_created ?></time>
                                 </small>
                             </div>
                         </section>
@@ -74,9 +79,27 @@
                         <a id="likeBtn" class="ng-news-card-footer-item <?= $a->isLike ?>" href="<?= $a->likeUrl ?>" title="aimer la publication">
                             <i class="icon icon-thumbs-up"></i>&nbsp;J'aime
                         </a>
-                        <a id="commentBtn" class="ng-news-card-footer-item" href="<?= $a->commentUrl ?>" title="commenter la publication">
+
+                        <a id="commentBtn" class="ng-news-card-footer-item modal-trigger" href="#cmtAdd-<?= $a->id ?>">
                             <i class="icon icon-comment" ></i>&nbsp;Commenter
                         </a>
+                        <div id="cmtAdd-<?= $a->id ?>" class="modal">
+                            <div class="modal-content">
+                                <span class="section-title-b mb-20">Commenter</span>
+                                <form action="<?= $a->commentUrl ?>" method="POST">
+                                    <div class="input-field">
+                                        <textarea class="materialize-textarea" name="comment"></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="modal-action btn primary-b">ok</button>
+                                        <button id="cmtAdd-<?= $a->id ?>" type="reset" class="modal-action modal-close btn-flat">
+                                            Annuler
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
                         <a id="shareBtn" class="ng-news-card-footer-item" href="/share/" title="partager la publication">
                             <i class="icon icon-share"></i>&nbsp;partager
                         </a>
@@ -93,7 +116,7 @@
                 </div>
             <?php endif; ?>
         </div>
-        <div id="feedMore" class="feed-btn" data-ajax="articles">charger la suite</div>
+        <div id="feedMore" class="feed-btn" data-ajax="articles"><i class="icon icon-refresh rotate"></i> chargement</div>
     </div>
 
 <?php include(APP."/Views/includes/menu-aside.php"); ?>

@@ -10,15 +10,16 @@ if (!empty($result)) :
                 </a>
             </span>
             <p class="ng-news-card-header-title">
-                <a href="'.$a->userAccountUrl.'" title="voir le profil">
-                    '.$a->username.'        
+                <a href="'.$a->userAccountUrl.'">
+                    '.$a->Username.'
                 </a>
             </p>';
 
             if($a->thumb !== null):
             	echo '
-                <a id="picBtn" class="ng-news-card-header-icon" href="'.$a->userGalleryUrl.'" title="voir la galery">
-                    <i class="icon icon icon-picture"></i>
+            	<a id="badContent" class="ng-news-card-header-icon" href="/bad-content"><i class="icon icon-list"></i></a>
+                <a id="picBtn" class="ng-news-card-header-icon" href="'.$a->userGalleryUrl.'">
+                    <i class="icon icon icon-book"></i>
                 </a>
                 <a id="saveBtn" class="ng-news-card-header-icon" href="'.$a->downloadUrl.'" title="télécharger la photo">
                     <i class="icon icon icon-save"></i>
@@ -50,31 +51,51 @@ if (!empty($result)) :
             </section>
             <section id="articleInfo">
                 <div class="ng-news-card-stat">
-                    <i class="icon icon-time"></i>&nbsp;
-                    <time id="date_created" data-time="'.strtotime($a->date_created).'">'.$a->time.'</time>
-                </div>
-                <div class="ng-news-card-stat">
                     <i class="icon icon-thumbs-up"></i>&nbsp;
                     <small>
                         <a id="showLikes" href="'.$a->showLikesUrl.'">'.$a->likes.'</a>
                     </small>
                 </div>
                 <div class="ng-news-card-stat">
-                    <i class="social social-chat"></i>&nbsp;
+                    <i class="icon icon-comment"></i>&nbsp;
                     <small>
-                        <a id="showComments" href="'.$a->showCommentsUrl.'">'.count($a->comments).'commentaires</a>
+                        '.$a->commentsNumber.'
+                    </small>
+                </div>
+                
+                <div id="cmtAdd-'.$a->id.'" class="modal">
+                    <div class="modal-content">
+                        <span class="section-title-b mb-20">Commenter</span>
+                        <form action="'.$a->commentUrl.'" method="POST">
+                            <div class="input-field">
+                                <textarea class="materialize-textarea" name="comment"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="modal-action btn primary-b">ok</button>
+                                <button id="cmtAdd-'.$a->id.'" type="reset" class="modal-action modal-close btn-flat">
+                                    Annuler
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="ng-news-card-stat">
+                    <i class="icon icon-time"></i>&nbsp;
+                    <small>
+                        <time id="date_created" data-time="'.strtotime($a->date_created).'">'.$a->time.'</time>
                     </small>
                 </div>
             </section>
         </main>
         <footer class="ng-news-card-footer" id="articleOptions">
-            <a id="likeBtn" class="ng-news-card-footer-item '.$a->isLike.'" href="'.$a->likeUrl.'" title="aimer la publication">
+            <a id="likeBtn" class="ng-news-card-footer-item '.$a->isLike.'" href="'.$a->likeUrl.'">
                 <i class="icon icon-thumbs-up"></i>&nbsp;J\'aime
             </a>
-            <a id="commentBtn" class="ng-news-card-footer-item" href="'.$a->commentUrl.'" title="commenter la publication">
+            <a id="commentBtn" class="ng-news-card-footer-item" href="#cmtAdd-'.$a->id.'">
                 <i class="icon icon-comment" ></i>&nbsp;Commenter
             </a>
-            <a id="shareBtn" class="ng-news-card-footer-item" href="/share/" title="partager la publication">
+            <a id="shareBtn" class="ng-news-card-footer-item" href="/share/">
                 <i class="icon icon-share"></i>&nbsp;partager
             </a>
         </footer>

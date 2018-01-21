@@ -1,9 +1,9 @@
-/tmp
-/cache
-public/uploads
-public/imgs
-/public/i
+/tmp/
+/cache/
+public/uploads/
+public/imgs/
+/public/i/
 .idea
-/.idea
-/vendor
+/.idea/
+/vendor/
 Desktop.ini

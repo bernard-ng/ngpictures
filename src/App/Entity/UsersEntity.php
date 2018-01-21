@@ -31,18 +31,6 @@ class UsersEntity extends Entity
 		return $this->editUrl;
 	}
 
-
-    /**
-     * le lien vers toutes les publications d'un user
-     * @return mixed
-     */
-    public function getPostsUrl()
-    {
-        $this->PostsUrl = "/account/my-posts/".Str::slugify($this->name)."-{$this->id}";
-        return $this->PostUrl;
-    }
-
-
     /**
      * le lien vers la liste des ses amies(followers)
      * @return mixed|string

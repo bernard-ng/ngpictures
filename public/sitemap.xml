@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<root>
-    <p>lol</p>
-</root>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>http://www.exemple.org</loc>
+        <lastmod>2018-01-01</lastmod>
+        <changeFreq>monthly</changeFreq>
+        <priority>1</priority>
+    </url>
+</urlset>

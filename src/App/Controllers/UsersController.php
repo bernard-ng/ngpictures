@@ -77,7 +77,7 @@ class UsersController extends NgpicController
 
             Page::setName("Rénitialisation du mot de passe | Ngpictures");
             $this->setLayout('users/default');
-            $this->viewRender('users/reset', compact('post'));
+            $this->viewRender('users/account/reset', compact('post'));
         } else {
             $this->flash->set('danger', $this->msg['indefined_error']);
             Ngpictures::redirect(true);
@@ -118,7 +118,7 @@ class UsersController extends NgpicController
 
         Page::setName('Mot de passe oublié | Ngpictures');
         $this->setLayout('users/default');
-        $this->viewRender('users/forgot', compact('post'));
+        $this->viewRender('users/account/forgot', compact('post'));
     }
 
 
@@ -357,7 +357,7 @@ class UsersController extends NgpicController
                 $verse = $this->callController('verses')->index();
                 Page::setName($user->name . " | Ngpictures");
                 $this->setLayout('users/account');
-                $this->viewRender('users/account', compact("verse","user"));
+                $this->viewRender('users/account/account', compact("verse","user"));
             } else {
                 $this->flash->set('danger', $this->msg['indefined_error']);
                 Ngpictures::redirect(true);
@@ -434,7 +434,7 @@ class UsersController extends NgpicController
                 }
                 Page::setName('Edition du profile | Ngpictures');
                 $this->setLayout('users/edit');
-                $this->viewRender('users/edit', compact('user'));
+                $this->viewRender('users/account/edit', compact('user'));
             } else {
                 $this->flash->set('danger', $this->msg['indefined_error']);
                 Ngpictures::redirect(true);
@@ -450,18 +450,7 @@ class UsersController extends NgpicController
      *                         USERS POSTS MANAGEMENT
      ****************************************************************************/
 
-    /**
-     * index pour les publications
-     */
     public function post()
-    {
-        Page::setName("Publier un article ou une photo | Ngpictures");
-        $this->setLayout("users/account");
-        $this->viewRender("users/posts/index");
-    }
-
-
-    public function postArticle()
     {
         $this->restrict();
         $this->loadModel('articles');
@@ -484,9 +473,10 @@ class UsersController extends NgpicController
                             $this->articles->create(compact('user_id', 'title', 'content', 'slug', 'category_id'));
 
                             $last_id = $this->articles->lastInsertId();
-                            $isUploaded = Image::upload($file, 'articles', "ngpictures-{$slug}-{$last_id}", 'article');
+                            $isUploaded = Image::upload($file, 'posts', "ngpictures-{$slug}-{$last_id}", 'article');
 
                             if ($isUploaded) {
+                                Image::upload($file, 'posts-thumbs', "ngpictures-{$slug}-{$last_id}", 'medium');
                                 $this->articles->update($last_id, ['thumb' => "ngpictures-{$slug}-{$last_id}.jpg"]);
                                 $this->flash->set('success', $this->msg['admin_post_success']);
                                 Ngpictures::redirect("/account/post");
@@ -507,11 +497,11 @@ class UsersController extends NgpicController
         }
 
         Page::setName("Publier un article | Ngpictures");
-        $this->viewRender("users/posts/article.add",compact('post','categories'));
+        $this->viewRender("users/posts/add",compact('post','categories'));
     }
 
 
-    public function editArticle($slug , $id, $token)
+    public function postEdit($slug , $id, $token)
     {
         $this->restrict();
         $categories = $this->loadModel('categories')->orderBy('title', 'ASC');
@@ -545,7 +535,7 @@ class UsersController extends NgpicController
            }
 
            Page::setName("Publier un article | Ngpictures");
-           $this->viewRender("users/posts/article.edit",compact('post','categories'));
+           $this->viewRender("users/posts/edit",compact('post','categories'));
        }
     }
 

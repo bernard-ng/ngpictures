@@ -6,7 +6,7 @@ use Ng\Core\Database\MysqlDatabase;
 use Ng\Core\Models\Model;
 use Ng\Core\Generic\Collection;
 use Ngpictures\Ngpictures;
-
+use Ngpictures\Traits\Util\TypesActionTrait;
 
 
 class LikesModel extends Model
@@ -18,23 +18,7 @@ class LikesModel extends Model
     protected $table = "likes";
 
     
-    /**
-     * les differents type de publication
-     * @var array
-     */
-    private $types = [ 1 => 'article_id','gallery_id','blog_id'];
-
-
-    /**
-     * renvoi le type de la publication
-     * @param int $type
-     * @return mixed
-     */
-    private function getType(int $type)
-    {
-        $types = new Collection($this->types);
-        return $types->get($type);
-    }
+    use TypesActionTrait;
 
 
     /**
@@ -108,31 +92,16 @@ class LikesModel extends Model
         $likes =  $this->getLikes($id, $t);
         $liked = $likes - 1 ;
 
-
-        switch ($isLiked && $likes) {
-            case $isLiked && $likes > 2 :
-                return "Vous et {$liked} personnes aimez ça";
-                break;
-
-            case $isLiked && $likes == 1 :
-                return "Vous aimez ça";
-                break;
-
-            case $isLiked && $likes == 2 :
-                return "Vous et une autre personne aimez ça";
-                break;
-
-            case !$isLiked && $likes >= 2 :
-                return "{$likes} personnes aiment ça";
-                break;
-
-            case !$isLiked && $likes == 1 :
-                return "Une personne aime ça";
-                break;
-            
-            default:
-                return "{$likes} j'aime";
-                break;
+        if ($isLiked && $likes > 2) {
+            return "Vous et {$liked} personnes aimez ça";
+        } elseif ($isLiked && $likes == 1) {
+            return "Vous aimez ça";
+        } elseif (!$isLiked && $likes >= 2) {
+            return "{$likes} personnes aiment ça";
+        } elseif (!$isLiked && $likes == 1) {
+            return "Une personne aime ça";
+        } else {
+            return "{$likes} j'aime";
         }
     }
 

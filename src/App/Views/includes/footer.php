@@ -3,17 +3,17 @@
 
 use Ng\Core\Generic\Session;
 
-if (Session::getInstance()->read('auth')):
-    $user = Session::getInstance()->read('auth');
+if (Session::getInstance()->read(AUTH_KEY)):
+    $user = Session::getInstance()->read(AUTH_KEY);
     ?>
     <div class="fixed-action-btn toolbar">
         <a class="btn-floating btn-large primary-c">
             <i class="icon icon-th"></i>
         </a>
         <ul>
-            <li class="waves-effect waves-light"><a href="<?= $user->postUrl; ?>"><i class="icon icon-pencil"></i></a></li>
+            <li class="waves-effect waves-light"><a href="/account/post"><i class="icon icon-pencil"></i></a></li>
             <li class="waves-effect waves-light"><a href="<?= $user->editUrl; ?>"><i class="icon icon-edit"></i></a></li>
-            <li class="waves-effect waves-light"><a href="<?= $user->galleryUrl; ?>"><i class="icon icon-picture"></i></a></li>
+            <li class="waves-effect waves-light"><a href="<?= $user->friendsUrl; ?>"><i class="icon icon-user"></i></a></li>
         </ul>
     </div>
 <?php endif; ?>

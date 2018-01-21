@@ -96,6 +96,15 @@ trait PostEntityTrait
     }
 
 
+    public function getCommentsNumber(): string
+    {
+        $comments = Ngpictures::getInstance()->getModel('comments');
+        $comments = $comments->getNumber($this->id, $this->action_type);
+        $words = ($comments > 1)? " commentaires" : " commentaire";
+        return $comments." {$words}";
+    }
+
+
     /**
      * renvoi "active" si on aime la publication
      * @return string

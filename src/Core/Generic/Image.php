@@ -1,6 +1,7 @@
 <?php
 namespace Ng\Core\Generic;
 
+use Intervention\Image\Exception\NotReadableException;
 use Intervention\Image\ImageManager;
 
 
@@ -100,7 +101,13 @@ Abstract class Image
             if (self::checkExtension($file->get('thumb.name'), $file->get('thumb.type'))) {
                 if ($size <= self::$size_max) {
                     $manager = new ImageManager();
-                    $image = $manager->make($file->get('thumb.tmp_name'));
+
+                    try {
+                        $image = $manager->make($file->get('thumb.tmp_name'));
+                    } catch (NotReadableException $e) {
+                        $flash->set('danger', self::$msg['not_image']);
+                        return false;
+                    }
 
                     switch ($format) :
                         case 'ratio' :

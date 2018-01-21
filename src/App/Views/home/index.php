@@ -68,8 +68,6 @@
                     </header>
                     <section class="ng-news-card-content">
                         <section class="ng-news-card-title">
-                            <i id="category" class="icon icon-pencil"></i>
-
                             <?php if ($article->category_id !== null): ?>
                                 <a href="<?= $article->categoryUrl ?>"><i class="icon icon-tags"></i></a>
                             <?php endif; ?>
@@ -88,23 +86,47 @@
                                 <a href="<?=$article->downloadUrl ?>" title="Télécharger la photo">Télécharger</a>
                             </div>
                             <div class="ng-news-card-stat">
-                                <i class="icon icon-time"></i>&nbsp;
-                                <time id="date_created" data-time="<?= strtotime($article->date_created) ?>"><?=$article->time ?></time>
+                                <i class="icon icon-thumbs-up"></i>&nbsp;
+                                <small><a id="showLikes" href="/likes/<?= $article->SI ?>"><?=$article->Likes ?></a></small>
                             </div>
                             <div class="ng-news-card-stat">
-                                <i class="icon icon-thumbs-up"></i>&nbsp;
-                                <small><a id="showLikes" href="/likes"><?=$article->Likes ?></a></small>
+                                <i class="icon icon-comment"></i>&nbsp;
+                                <small><?=$article->commentsNumber ?></small>
+                            </div>
+                            <div class="ng-news-card-stat">
+                                <i class="icon icon-time"></i>&nbsp;
+                                <small>
+                                    <time id="date_created" data-time="<?= strtotime($article->date_created) ?>"><?=$article->time ?></time>
+                                </small>
                             </div>
                         </footer>
                     </section>
                     <footer class="ng-news-card-footer" id="articleOptions">
-                        <a id="likeBtn" class="ng-news-card-footer-item <?=$article->isLike ?>" href="<?=$article->likeUrl ?>" title="aimer la publication">
+                        <a id="likeBtn" class="ng-news-card-footer-item <?=$article->isLike ?>" href="<?=$article->likeUrl ?>">
                             <i class="icon icon-thumbs-up"></i>&nbsp;J'aime
                         </a>
-                        <a id="commentBtn" class="ng-news-card-footer-item" href="<?=$article->commentUrl ?>" title="commenter la publication">
+
+                        <a id="commentBtn" class="ng-news-card-footer-item modal-trigger" href="#cmtAdd">
                             <i class="icon icon-comment" ></i>&nbsp;Commenter
                         </a>
-                        <a id="shareBtn" class="ng-news-card-footer-item" href="/share/" title="partager la publication">
+                        <div id="cmtAdd" class="modal">
+                            <div class="modal-content">
+                                <span class="section-title-b mb-20">Commenter</span>
+                                <form action="<?= $article->commentUrl ?>" method="POST">
+                                    <div class="input-field">
+                                        <textarea class="materialize-textarea" name="comment"></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="modal-action btn primary-b">ok</button>
+                                        <button id="cmtAdd" type="reset" class="modal-action modal-close btn-flat">
+                                            Annuler
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <a id="shareBtn" class="ng-news-card-footer-item" href="/share/">
                             <i class="icon icon-share"></i>&nbsp;partager
                         </a>
                     </footer>

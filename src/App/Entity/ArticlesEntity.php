@@ -4,6 +4,7 @@ namespace Ngpictures\Entity;
 
 use Ng\Core\Entity\Entity;
 use Ngpictures\Traits\Entity\PostEntityTrait;
+use Ngpictures\Traits\Entity\UserInfoTrait;
 
 class ArticlesEntity extends Entity
 {
@@ -12,4 +13,5 @@ class ArticlesEntity extends Entity
     private $action_url = "articles";
 
     use PostEntityTrait;
+    use UserInfoTrait;
 }
