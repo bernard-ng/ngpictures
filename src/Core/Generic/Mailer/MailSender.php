@@ -39,12 +39,7 @@ class MailSender
         $confirmation_link = $link;
         $message = require  CORE."/Generic/Mailer/confirmation-mail-template.php";
 
-        echo $message;
-        die();
-
-        mail($email, "Confirmation de compte - Ngpictures", $message, $this->headers);
-        Ngpictures::redirect("/login");
-
+        mail("ngandubernard@gmail.com", "Confirmation de compte - Ngpictures", $message, $this->headers);
     }
 
 
@@ -60,10 +55,6 @@ class MailSender
         $reset_link = $link;
         $message = require CORE."/Generic/Mailer/reset-mail-template.php";
 
-        echo $message;
-        die();
-
-        mail($email, "Mot de passe oublié - Ngpictures", $message, $this->headers);
-        Ngpictures::redirect("/login");
+        mail("ngandubernard@gmail.com", "Mot de passe oublié - Ngpictures", $message, $this->headers);
     }
 }

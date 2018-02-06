@@ -1,4 +1,4 @@
-<span class="col  l1 xl1 hide-on-med-and-down">
+<span class="col  l3 xl3 hide-on-med-and-down">
     <div class="card-panel ng-more-options">
         <a href="/about/shooting">
             <i class="icon icon-camera"></i><br>Shoot

@@ -24,9 +24,12 @@ class CommentsModel extends Model
      * @param $value
      * @return mixed
      */
-    public function findWith(string $field, $value)
+    public function findWith(string $field, $value, $one = true)
     {
-        return $this->query("SELECT * FROM {$this->table} WHERE {$field} = ? ORDER BY date_created DESC",[$value]);
+        return $this->query(
+            "SELECT * FROM {$this->table} WHERE {$field} = ? ORDER BY date_created DESC",
+            [$value], true, $one
+        );
     }
 
 

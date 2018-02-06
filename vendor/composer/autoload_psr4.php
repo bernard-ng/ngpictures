@@ -8,7 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Ngpictures\\' => array($baseDir . '/src/App'),
-    'Ng\\Interfaces\\' => array($baseDir . '/src/Interfaces'),
     'Ng\\Core\\' => array($baseDir . '/src/Core'),
     'Intervention\\Image\\' => array($vendorDir . '/intervention/image/src/Intervention/Image'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),

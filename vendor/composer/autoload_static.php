@@ -19,7 +19,6 @@ class ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648
         'N' => 
         array (
             'Ngpictures\\' => 11,
-            'Ng\\Interfaces\\' => 14,
             'Ng\\Core\\' => 8,
         ),
         'I' => 
@@ -44,10 +43,6 @@ class ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648
         'Ngpictures\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/App',
-        ),
-        'Ng\\Interfaces\\' => 
-        array (
-            0 => __DIR__ . '/../..',
         ),
         'Ng\\Core\\' => 
         array (

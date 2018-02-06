@@ -33,7 +33,9 @@ Abstract class Image
         'gallery' => UPLOAD.'/gallery',
         'gallery-thumbs' => UPLOAD.'/gallery/thumbs',
 
-        'avatars' => UPLOAD.'/avatars'
+        'avatars' => UPLOAD.'/avatars',
+
+        'out' => "http://ngpictures.pe.hu/uploads"
     ];
 
 

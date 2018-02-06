@@ -105,8 +105,8 @@ class UsersController extends NgpicController
                     $mailer = new MailSender();
                     $mailer->resetPassword($link, $email);
 
-                    //$this->flash->set('success',$this->msg['user_reset_mail_success']);
-                    //Ngpictures::redirect('/login');
+                    $this->flash->set('success',$this->msg['user_reset_mail_success']);
+                    Ngpictures::redirect('/login');
 
                 } else {
                     $this->flash->set('danger',$this->msg['user_email_notFound']);
@@ -351,13 +351,16 @@ class UsersController extends NgpicController
         if (!empty($username) && !empty($id)) {
 
             $user = $this->users->find(intval($id));
+
         
             if ($user && $this->str::checkUserUrl($username, $user->name) == true ) {
 
                 $verse = $this->callController('verses')->index();
+                $articles = $this->loadModel('articles')->findWith("user_id", $user->id, false);
+
                 Page::setName($user->name . " | Ngpictures");
                 $this->setLayout('users/account');
-                $this->viewRender('users/account/account', compact("verse","user"));
+                $this->viewRender('users/account/account', compact("verse","user","articles"));
             } else {
                 $this->flash->set('danger', $this->msg['indefined_error']);
                 Ngpictures::redirect(true);

@@ -307,8 +307,7 @@ class AdminController extends NgpicController
         $this->setLayout('admin/default');
         $this->viewRender('admin/blog/edit', compact('article', 'categories', 'post'));
     }
-
-
+    
     /**
      * ajout d'un nouvel article
      * le contenu $content n'est pas echapper a cause de l'editeur

@@ -1,6 +1,6 @@
 <?php
 use Ng\Core\Router\Router;
-use Ngpictures\Ngpic;
+
 
 define("ROOT", dirname(__DIR__));
 require(ROOT."/config/ApplicationConfig.php");

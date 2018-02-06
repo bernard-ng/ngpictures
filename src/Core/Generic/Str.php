@@ -83,7 +83,7 @@ class Str
      * @param string $text
      * @return string
      */
-    public static function slugify(string $text): string
+    public static function slugify($text = "n-a"): string
     {
         $text = preg_replace('#[^\pL\d]+#u', '-', $text);
         $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
