@@ -3,16 +3,13 @@ namespace Ngpictures;
 
 use Ngpictures\Traits\Util\SingletonTrait;
 use Ng\Core\Database\MysqlDatabase;
-use Ng\Core\Managers\{
-    SessionManager,
-    CookieManager,
-    StringManager,
-    FlashMessageManager,
-    ConfigManager,
-    ValidationManager
-};
+use Ng\Core\Managers\SessionManager;
+use Ng\Core\Managers\CookieManager;
+use Ng\Core\Managers\StringManager;
+use Ng\Core\Managers\FlashMessageManager;
+use Ng\Core\Managers\ConfigManager;
+use Ng\Core\Managers\ValidationManager;
 use Ngpictures\Managers\PageManager;
-
 
 class Ngpictures
 {

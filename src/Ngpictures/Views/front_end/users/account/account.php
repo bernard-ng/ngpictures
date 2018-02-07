@@ -122,7 +122,7 @@
         </h1>
         <h2 class="profile-header__subtitle"><?= $user->email ?></h2>
 
-        <?php if (Ng\Core\Generic\Session::getInstance()->getValue('auth', 'id') == $user->id) : ?>
+        <?php if (Ng\Core\Managers\SessionManager::getInstance()->getValue('auth', 'id') == $user->id) : ?>
             <div class="profile-header__links">
                 <a class="profile-header__link" href="<?= $user->editUrl ?>">
                     <i class="icon icon-edit"></i>&nbsp;Editer le profil
@@ -150,12 +150,12 @@
 </div>
 <?php include(APP."/Views/includes/left-aside.php"); ?>
 <div class="col l9 s12 m12 ">
-    <?php if (Ng\Core\Generic\Session::getInstance()->getValue('auth', 'id') == $user->id) : ?>
+    <?php if (Ng\Core\Managers\SessionManager::getInstance()->getValue('auth', 'id') == $user->id) : ?>
         <nav class="nav z-depth-2">
             <div class="nav-wrapper">
                 <ul>
                     <li><a href="/account/post">Poster</a></li>
-                    <li class="right"><a href="<?= $user->seePostUrl;  ?>">Mes publications</a></li>
+                    <li class="right"><a href="<?= $user->postsUrl;  ?>">Mes publications</a></li>
                     <li class="right"><a href="<?= $user->friendsUrl; ?>">Mes abonnés</a></li>
                 </ul>
             </div>

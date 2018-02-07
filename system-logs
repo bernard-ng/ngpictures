@@ -3,9 +3,43 @@
         PROJECT        :    NG-PICTURES
         LINK           :    <a href='http://ngpictures.pe.hu'>Bernard-ng</a>
 
-        BUILD DATE     :    07 Feb 2018 - 01:50:55
+        BUILD DATE     :    07 Feb 2018 - 07:56:31
 **************************************************************
 [NG-PICTURES MESSAGES LOGS] 
 
-* Ng\Core\Managers\FlashMessageManager => 2018-02-07 01:50:55 : Complétez tous les champs  
-* Ng\Core\Managers\FlashMessageManager => 2018-02-07 01:51:01 : Complétez tous les champs  
+* Ngpictures\Controllers\UsersController => 2018-02-07 07:56:31 : Mauvais pseudo ou mot de passe  
+* Ngpictures\Controllers\UsersController => 2018-02-07 07:56:45 : Complétez tous les champs  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-07 19:13:52 : Connectez-vous pour effectuer cette action  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-07 19:14:02 : Mauvais pseudo ou mot de passe  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-07 19:14:15 : Vous êtes connecté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-07 19:14:15 : Vous êtes connecté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-07 20:14:56 : Vous suivez cette personne  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-07 20:15:02 : Vous ne suivez plus cette personne  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-07 20:17:35 : Vous suivez cette personne  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-07 20:18:00 : Vous ne suivez plus cette personne  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-07 20:18:07 : Vous suivez cette personne  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-07 20:23:14 : Vous ne suivez plus cette personne  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-07 20:23:17 : Vous suivez cette personne  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-07 20:23:55 : Vous êtes connecté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-07 20:23:56 : Vous êtes connecté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-07 20:24:53 : Vous ne suivez plus cette personne  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-07 20:25:09 : Vous suivez cette personne  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-07 22:11:57 : commentaire posté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-09 11:51:52 : Mauvais pseudo ou mot de passe  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-09 11:51:58 : Vous êtes connecté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-09 11:51:58 : Vous êtes connecté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-09 13:01:49 : La publication a bien été supprimé  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-09 14:17:46 : Vous êtes connecté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-09 14:17:46 : Vous êtes connecté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-10 07:31:33 : commentaire posté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-10 07:35:28 : Vos informations ont été mises à jour  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-10 07:36:19 : Vos informations ont été mises à jour  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-10 07:36:48 : Vous êtes déconnecté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-10 07:37:00 : Vous êtes connecté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-10 07:37:01 : Vous êtes connecté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-10 10:48:51 : Vous êtes déconnecté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-10 10:48:58 : Connectez-vous pour effectuer cette action  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-10 10:49:02 : Connectez-vous pour effectuer cette action  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-10 13:27:32 : Connectez-vous pour effectuer cette action  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-10 13:28:53 : Vous êtes connecté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-10 13:28:53 : Vous êtes connecté  

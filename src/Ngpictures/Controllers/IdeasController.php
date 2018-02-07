@@ -32,8 +32,8 @@ class IdeasController extends Controller
             }
         }
 
-        $this->pageManager::setName("Donner une idée | Ngpictures");
+        $this->pageManager::setName("Donner une idée");
         $this->setLayout('users/default');
-        $this->viewRender('others/ideas', compact('post'));
+        $this->viewRender('front_end/others/ideas', compact('post'));
     }
 }

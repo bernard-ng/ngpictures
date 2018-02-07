@@ -17,14 +17,16 @@ class FollowingController extends Controller
     {
         parent::__construct($app, $pageManager);
         $this->callController('users')->restrict();
+        $this->loadModel('users');
+        $this->loadModel('following');
         $this->user_id = intval($this->session->getValue(AUTH_KEY, 'id'));
     }
 
 
     public function index($username, $id)
     {
-        $f = $this->LoadModel('following');
-        $user = $this->loadModel('users')->find($id);
+        $f = $this->following;
+        $user = $this->loadModel('users')->find(intval($id));
 
         if ($user) {
             if ($f->isFollowed($user->id, $this->user_id)) {
@@ -33,6 +35,7 @@ class FollowingController extends Controller
                 $this->flash->set("success", $this->msg['user_remove_following_success']);
                 $this->app::redirect(true);
             }
+
             $f->add($user->id, $this->user_id);
             $this->flash->set("success", $this->msg['user_add_following_success']);
             $this->app::redirect(true);
@@ -40,6 +43,26 @@ class FollowingController extends Controller
             $this->flash->set("warning", $this->msg['user_notFound']);
             $this->app::redirect(true);
         }
+    }
+
+
+    public function showFollowers()
+    {
+        $model = $this->users;
+        $user_id = $this->session->getValue(AUTH_KEY, 'id');
+        $followers = $this->following->findWith('followed_id', $user_id, false);
+
+        $followers_list = [];
+        foreach ($followers as $follower) {
+            $followers_list[] = $follower['follower_id'];
+        }
+
+        $followers_list = implode(", ", $followers_list);
+        $followers = $this->users->findList($followers_list);
+
+        $this->pageManager::setName("Mes Abonnés");
+        $this->setLayout("articles/default");
+        $this->viewRender("front_end/users/account/followers", compact("followers"));
     }
 
 
@@ -52,7 +75,7 @@ class FollowingController extends Controller
     public function isMentionnedFollow($id)
     {
         $f = $this->loadModel('following');
-        if ($f->isFollowed($id, $this->app::getInstance()->getSession()->getValue(AUTH_KEY, 'id'))) {
+        if ($f->isFollowed($id, $this->app->getSession()->getValue(AUTH_KEY, 'id'))) {
             return 'active';
         } else {
             return '';

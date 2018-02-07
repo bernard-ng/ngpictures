@@ -5,5 +5,7 @@ public/imgs/
 /public/i/
 .idea
 /.idea/
+.vscode
+/.vscode/
 /vendor/
 Desktop.ini

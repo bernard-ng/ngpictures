@@ -19,7 +19,7 @@ class RssController extends Controller
             $last = $this->blog->last()->date_created;
             $articles = $this->blog->latest(0, 10);
         } else {
-            $this->session->setFlash('info', $this->msg['rss_empty_articles']);
+            $this->flash->set('info', $this->msg['rss_empty_articles']);
             $this->app::redirect(true);
         }
 

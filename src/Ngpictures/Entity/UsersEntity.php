@@ -3,7 +3,7 @@ namespace Ngpictures\Entity;
 
 use Ng\Core\Entity\Entity;
 use Ng\Core\Managers\StringManager;
-use Ng\Core\Managers\Session;
+use Ng\Core\Managers\SessionManager;
 
 class UsersEntity extends Entity
 {
@@ -24,7 +24,7 @@ class UsersEntity extends Entity
      */
     public function getEditUrl()
     {
-        $session = Session::getInstance();
+        $session = SessionManager::getInstance();
         $this->editUrl = "/account/edit/".StringManager::slugify($this->name)."-{$this->id}/".$session->read(TOKEN_KEY);
         return $this->editUrl;
     }
@@ -35,9 +35,24 @@ class UsersEntity extends Entity
      */
     public function getFriendsUrl()
     {
-        $session = Session::getInstance();
+        $session = SessionManager::getInstance();
         $this->friendsUrl = "/account/my-friends/".StringManager::slugify($this->name)."-{$this->id}/".$session->read(TOKEN_KEY);
         return $this->friendsUrl;
+    }
+
+
+    public function getPostsUrl()
+    {
+        $session = SessionManager::getInstance();
+        $this->postsUrl = "/account/my-posts/".StringManager::slugify($this->name)."-{$this->id}/".$session->read(TOKEN_KEY);
+        return $this->postsUrl;
+    }
+
+
+    public function getFollowingUrl()
+    {
+        $this->followingUrl = "/following/".StringManager::slugify($this->name)."-{$this->id}";
+        return $this->followingUrl;
     }
 
 

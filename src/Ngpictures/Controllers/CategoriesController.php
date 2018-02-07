@@ -21,9 +21,9 @@ class CategoriesController extends Controller
     {
         $categories = $this->categories->orderBy('title', 'ASC');
 
-        $this->pageManager::setName('Toutes les catégories | Ngpictures');
+        $this->pageManager::setName('Toutes les catégories');
         $this->setLayout('default-simple');
-        $this->viewRender("categories/index", compact('categories'));
+        $this->viewRender("front_end/categories/index", compact('categories'));
     }
 
 
@@ -41,10 +41,10 @@ class CategoriesController extends Controller
             $articles = $this->loadModel('articles')->findWith('category_id', $category->id);
             $gallery = $this->loadModel('gallery')->findWith('category_id', $category->id);
 
-            $this->pageManager::setName("Catégorie: {$category->title} | Ngpictures");
+            $this->pageManager::setName("Catégorie: {$category->title}");
             $this->setLayout('articles/default');
             $this->viewRender(
-                'categories/show',
+                'front_end/categories/show',
                 compact(
                     'category',
                     'blog',

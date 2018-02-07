@@ -24,6 +24,7 @@ $session = SessionManager::getInstance();
                         <?php endif; ?>
 
                         <li id="Accueil"><a href="/home" class="ng-menu-item">Accueil</a></li>
+                        <li id="Communauté"><a href="/community" class="ng-menu-item">Communauté</a></li>
                         <li id="Blog"><a href="/blog" class="ng-menu-item"> Blog</a></li>
                         <li id="Actualités"><a href="/articles" class="ng-menu-item"> Actualités</a></li>
                         <li id="Gallerie"><a href="/gallery" class="ng-menu-item"> Gallerie</a></li>

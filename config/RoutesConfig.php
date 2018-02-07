@@ -20,13 +20,19 @@ $router->get("/confirm/:id/:token", "users#confirm", "users.confirmation");
 $router->get("/account/:user-:id", "users#account", "users.account");
 $router->get("/account/edit/:user-:id/:token", "users#edit", "users.edit");
 $router->post("/account/edit/:user-:id/:token", "users#edit", "users.edit");
-$router->get("/account/my-posts/:user-:id/", "users#showPosts", "users.show-post");
-$router->get("/account/my-friends/:user-:id/:token", "users#showFriends", "users.show-friends");
-$router->get("/account/post/", "users#post", "users.post");
-$router->post("/account/post/", "users#post", "users.post");
-$router->get("/account/post/edit/:token", "users#edit", "users.edit-article");
-$router->post("/account/post/edit/:token", "users#edit", "users.edit");
+$router->get("/account/my-friends/:user-:id/:token", "following#showFollowers", "users.show-followers");
+$router->get("/account/my-posts/:user-:id/:token", "articles#showPosts", "articles.show-post");
+$router->get("/account/post/", "articles#add", "articles.add");
+$router->post("/account/post/", "articles#add", "articles.add");
+$router->get("/account/post/edit/:id/:token", "users#edit", "users.edit-article");
+$router->post("/account/post/edit/:id/:token", "users#edit", "users.edit");
 $router->get("/account/post/delete/:id/:token", "users#delete", "users.delete");
+
+
+//community pages
+$router->get("/community", "community", "community.index");
+$router->get("/community/designers/", "community#designers", "community.designers");
+$router->get("/community/photographers", "community#photographers", "community.photographers");
 
 
 //articles and blog pages
@@ -47,7 +53,7 @@ $router->get("/gallery/:slug-:id","gallery#show","gallery.show");
 
 //features
 $router->get("/likes/:t/:slug-:id","likes","likes");
-$router->get("/following/:name-:id","following#follow","following");
+$router->get("/following/:name-:id","following","following");
 $router->get("/download/:type/:name", "download", "download");
 $router->post("/comments/:type/:slug-:id","comments","comments.show");
 $router->post("/comments/edit/:id/:token", "comments#edit", "comments.edit");

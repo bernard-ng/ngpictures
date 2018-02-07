@@ -14,7 +14,7 @@ class Mailer
 
 
     /**
-     * MailSender constructor.
+     * Mailer constructor.
      */
     public function __construct()
     {
@@ -55,5 +55,14 @@ class Mailer
         $message = require CORE."/Util/Mailer/templates/reset-mail-template.php";
 
         mail("ngandubernard@gmail.com", "Mot de passe oublié - Ngpictures", $message, $this->headers);
+    }
+
+
+    /* Envoi les logs du site a l'administrateur */
+    public function sendLogs($config)
+    {
+        $email = $config->get('site.email');
+        $message = require ROOT."/system-logs";
+        mail($email, $message, $this->headers);
     }
 }

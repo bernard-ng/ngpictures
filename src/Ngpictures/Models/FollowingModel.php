@@ -43,41 +43,6 @@ class FollowingModel extends Model
         );
     }
 
-
-    /**
-     * renvoi le nombre de followe d'un user
-     * @param int $user_id
-     * @return int
-     */
-    public function getFollowers(int $user_id): int
-    {
-        return $this->query(
-            "SELECT follower_id FROM {$this->table} WHERE followed_id = {$user_id}",
-            [$user_id],
-            true,
-            false,
-            true
-        );
-    }
-
-
-    /**
-     * renvoi le nombre de following d'un user
-     * @param int $user_id
-     * @return int
-     */
-    public function getFollowing(int $user_id): int
-    {
-        return $this->query(
-            "SELECT followed_id FROM {$this->table} WHERE follower_id = {$user_id}",
-            [$user_id],
-            true,
-            false,
-            true
-        );
-    }
-
-
     /**
      * check si un user suis un autre
      * @param int $followed_id

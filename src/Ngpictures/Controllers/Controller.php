@@ -106,7 +106,6 @@ class Controller extends SuperController
         $this->flash = $this->app->getFlash();
     }
 
-
     /**
      * charge un model
      * @param string|array $model

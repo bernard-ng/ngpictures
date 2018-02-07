@@ -9,7 +9,7 @@ final class LogMessageManager
         $last_log = date("d M Y - H:i:s");
         $message = "* ".$file." => {$time} : {$msg}  \n";
 
-        $header = 
+        $header =
         "#*************************************************************
         AUTHOR         :    Bernard-ng                       
         PROJECT        :    NG-PICTURES

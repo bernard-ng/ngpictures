@@ -11,6 +11,6 @@
  ## SOCIAL NETWORK
   * pexels :            **https://www.pexels.com/u/bernard-ng-177497/**
   * github :            **https://www.github.com/bernard-ng**
-  * facebook : 
-  * instagram : 
-  * twitter : 
+  * facebook :          **https://www.facebook.com/bernard.ngandu.5**
+  * instagram :         **https://www.instagram.com/**
+  * twitter :           **https://www.twitter.com"**

@@ -17,8 +17,8 @@ class GalleryController extends Controller
         $photo = $this->gallery->latest();
         $photos = $this->gallery->lastOnline();
 
-        $this->pageManager::setName('Gallerie | Ngpictures');
+        $this->pageManager::setName('Gallerie');
         $this->setLayout('articles/default');
-        $this->viewRender('gallery/index', compact('photo', 'photos'));
+        $this->viewRender('front_end/gallery/index', compact('photo', 'photos'));
     }
 }
