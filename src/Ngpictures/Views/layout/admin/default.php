@@ -1,9 +1,9 @@
-<?php use Ngpictures\Util\Page; ?>
+<?php use Ngpictures\Managers\PageManager; ?>
 <!DOCTYPE HTML>
 <?php include(APP."/Views/includes/ngpictures-watermark.txt"); ?>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
     <head>
-        <title><?php echo Page::getName() ?></title>
+        <title><?php echo PageManager::getName() ?></title>
         <?php require(APP."/Views/includes/default-meta.php"); ?>
         <?php include(APP."/Views/includes/favicon.php"); ?>
         <?php include(APP."/Views/includes/default-style.php"); ?>
@@ -16,7 +16,7 @@
             <?php include(APP."/Views/includes/admin-menu.php"); ?>
             <div class="container row">
                 <span class="jumbotron-title">
-                    <i class="icon icon-lock"></i> <?php echo Page::getTitle() ?>
+                    <i class="icon icon-lock"></i> <?php echo PageManager::getActivePage() ?>
                 </span>
                 <span class="jumbotron-content">
                     Mon administration :)
@@ -26,7 +26,7 @@
 
         <?php include(APP."/Views/includes/flash.php"); ?>
         <div class="page-content" id="pageContent" data-ajax="true">
-            <?php echo $content; ?>
+            <?php echo $page_content; ?>
         </div>
         <?php include(APP."/Views/includes/footer.php"); ?>
 

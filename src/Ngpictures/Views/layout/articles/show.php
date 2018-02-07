@@ -32,7 +32,7 @@
 
         <?php include(APP."/Views/includes/flash.php"); ?>
         <div class="page-content" id="pageContent" data-ajax="true">
-            <?php echo $content; ?>
+            <?php echo $page_content; ?>
         </div>
         <?php include(APP."/Views/includes/footer.php"); ?>
         <?php include(APP."/Views/includes/default-script.php"); ?>

@@ -114,7 +114,7 @@ class AdminController extends Controller
 
         $this->setLayout('admin/default');
         $this->viewRender(
-            'admin/index',
+            'back_end/index',
             compact(
                 'articles',
                 'blog',
@@ -282,7 +282,7 @@ class AdminController extends Controller
         $this->pageManager::setName('admin - blog | Ngpictures');
         $this->setLayout("admin/default");
         $this->viewRender(
-            "admin/blog/index",
+            "back_end/blog/index",
             compact(
                 "articles",
                 "article"
@@ -329,7 +329,7 @@ class AdminController extends Controller
 
         $this->pageManager::setName('admin - blog.edit | Ngpictures');
         $this->setLayout('admin/default');
-        $this->viewRender('admin/blog/edit', compact('article', 'categories', 'post'));
+        $this->viewRender('back_end/blog/edit', compact('article', 'categories', 'post'));
     }
     
     /**
@@ -389,7 +389,7 @@ class AdminController extends Controller
 
         $this->pageManager::setName('admin - blog.add | Ngpictures');
         $this->setLayout('admin/default');
-        $this->viewRender('admin/blog/add', compact('post', 'categories'));
+        $this->viewRender('back_end/blog/add', compact('post', 'categories'));
     }
 
 
@@ -402,7 +402,7 @@ class AdminController extends Controller
 
         $this->pageManager::setName('admin categories | Ngpictures');
         $this->setLayout('admin/default');
-        $this->viewRender('Admin/blog/categories', compact('categories'));
+        $this->viewRender('back_end/blog/categories', compact('categories'));
     }
 
     /**
@@ -428,7 +428,7 @@ class AdminController extends Controller
 
         $this->pageManager::setName('admin categories.add | Ngpictures');
         $this->setLayout('admin/default');
-        $this->viewRender('Admin/blog/categories.add', compact('post'));
+        $this->viewRender('back_end/blog/categories.add', compact('post'));
     }
 
 
@@ -457,7 +457,7 @@ class AdminController extends Controller
 
             $this->pageManager::setName('admin categories.edit | Ngpictures');
             $this->setLayout('admin/default');
-            $this->viewRender('Admin/blog/categories.edit', compact('post', 'category'));
+            $this->viewRender('back_end/blog/categories.edit', compact('post', 'category'));
         } else {
             $this->flash->set('danger', $this->msg['indefined_error']);
             $this->app::redirect(true);
@@ -480,7 +480,7 @@ class AdminController extends Controller
         $photo = $this->gallery->latest();
         $this->pageManager::setName('admin - gallery');
         $this->setLayout("admin/default");
-        $this->viewRender("Admin/gallery/index", compact('photos', 'photo'));
+        $this->viewRender("back_end/gallery/index", compact('photos', 'photo'));
     }
 
 
@@ -526,7 +526,7 @@ class AdminController extends Controller
         }
         $this->pageManager::setName('admin - gallery.add | Ngpictures');
         $this->setLayout("admin/default");
-        $this->viewRender("Admin/gallery/add", compact('post', 'categories'));
+        $this->viewRender("back_end/gallery/add", compact('post', 'categories'));
     }
 
 
@@ -554,7 +554,7 @@ class AdminController extends Controller
             }
             $this->pageManager::setName('admin - gallery.edit | Ngpictures');
             $this->setLayout("admin/default");
-            $this->viewRender("Admin/gallery/edit", compact('photo', 'categories'));
+            $this->viewRender("back_end/gallery/edit", compact('photo', 'categories'));
         } else {
             $this->flash->set('danger', $this->msg['admin_delete_notFound']);
             $this->app::redirect(true);
@@ -571,7 +571,7 @@ class AdminController extends Controller
         $images = $this->gallery->all();
         $this->pageManager::setName('admin media-browser | Ngpictures');
         $this->setLayout('modal');
-        $this->viewRender('Admin/gallery/media-browser', compact('images'));
+        $this->viewRender('back_end/gallery/media-browser', compact('images'));
     }
 
 
@@ -604,7 +604,7 @@ class AdminController extends Controller
 
         $this->pageManager::setName('admin file-browser | Ngpictures');
         $this->setLayout('modal');
-        $this->viewRender('Admin/gallery/file-browser', compact('files', 'relative_dos'));
+        $this->viewRender('back_end/gallery/file-browser', compact('files', 'relative_dos'));
     }
 
 
@@ -618,7 +618,7 @@ class AdminController extends Controller
 
         $this->pageManager::setName('admin gallery.album | Ngpictures');
         $this->setLayout('admin/default');
-        $this->viewRender('Admin/gallery/albums', compact('albums'));
+        $this->viewRender('back_end/gallery/albums', compact('albums'));
     }
 
 
@@ -645,7 +645,7 @@ class AdminController extends Controller
 
         $this->pageManager::setName('admin album.add | Ngpictures');
         $this->setLayout('admin/default');
-        $this->viewRender('Admin/gallery/albums.add', compact('post'));
+        $this->viewRender('back_end/gallery/albums.add', compact('post'));
     }
 
 
@@ -674,7 +674,7 @@ class AdminController extends Controller
 
             $this->pageManager::setName('admin album.edit | Ngpictures');
             $this->setLayout('admin/default');
-            $this->viewRender('Admin/gallery/albums.edit', compact('post', 'album'));
+            $this->viewRender('back_end/gallery/albums.edit', compact('post', 'album'));
         } else {
             $this->flash->set('danger', $this->msg['indefined_error']);
             $this->app::redirect(true);
@@ -698,7 +698,7 @@ class AdminController extends Controller
         $this->pageManager::setName("admin - users | Ngpictures");
         $this->setLayout("admin/default");
         $this->viewRender(
-            "Admin/users/index",
+            "back_end/users/index",
             compact('users', 'user', 'bugs', 'ideas')
         );
     }
@@ -715,7 +715,7 @@ class AdminController extends Controller
         $this->pageManager::setName('admin - articles | Ngpictures');
         $this->setLayout("Admin/default");
         $this->viewRender(
-            "Admin/articles/index",
+            "back_end/articles/index",
             compact(
                 "articles",
                 "article"
@@ -756,7 +756,7 @@ class AdminController extends Controller
         $bugs = $this->bugs->all();
         $this->pageManager::setName('admin - bugs | Ngpictures');
         $this->setLayout('admin/default');
-        $this->viewRender('Admin/users/bugs', compact('bugs'));
+        $this->viewRender('back_end/users/bugs', compact('bugs'));
     }
 
 
@@ -768,6 +768,6 @@ class AdminController extends Controller
         $ideas = $this->ideas->all();
         $this->pageManager::setName('admin - ideas | Ngpictures');
         $this->setLayout('admin/default');
-        $this->viewRender('Admin/users/ideas', compact('ideas'));
+        $this->viewRender('back_end/users/ideas', compact('ideas'));
     }
 }

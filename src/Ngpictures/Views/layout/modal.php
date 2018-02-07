@@ -9,6 +9,6 @@
     </head>
     <body>
         <?php include(APP."/Views/includes/flash.php"); ?>
-        <?php echo $content; ?>
+        <?php echo $page_content; ?>
     </body>
 </html>
