@@ -1,10 +1,8 @@
 <?php
 namespace Ng\Core\Models;
 
-
 use Ng\Core\Database\Database;
 use Ng\Core\Database\MysqlDatabase;
-
 
 class Model
 {
@@ -33,7 +31,7 @@ class Model
         if (is_null($this->table)) {
             $part = explode("\\", get_class($this));
             $table = end($part);
-            $this->table = strtolower(str_replace("Model","",$table));
+            $this->table = strtolower(str_replace("Model", "", $table));
         }
         return $this->table;
     }
@@ -41,26 +39,26 @@ class Model
     /**
      * query permet de faire de requete sql
      *
-     * query cette method prend 5 params, le premier doit etre la statement sql 
+     * query cette method prend 5 params, le premier doit etre la statement sql
      * la seconde est un tableau qui contiendra les donnee pour les requetes preparee
-     * les trois autres sont des bools, qui permet just d'optimiser la req, par contre le 
-     * dernier param est important il ne renvoi pas le resultat de la req mais le nombre de ligne 
+     * les trois autres sont des bools, qui permet just d'optimiser la req, par contre le
+     * dernier param est important il ne renvoi pas le resultat de la req mais le nombre de ligne
      * affecter c'est au fait un rowCount.
      *
      * @param string $statement the mysql query statement
-     * @param array $data for PDO prepare method 
+     * @param array $data for PDO prepare method
      * @param bool $class if true FETCH_CLASS else FETCH_OBJ
      * @param bool $one if true FETCH else FETCHALL
-     * @param bool $rowCount if true retrun the PDO::rowCount() 
+     * @param bool $rowCount if true retrun the PDO::rowCount()
      * @return mixed
      **/
     public function query(
-        string $statement, 
-        array $data = null, 
-        bool $class = true, 
-        bool $one = false, 
-        bool $rowCount = false)
-    {
+        string $statement,
+        array $data = null,
+        bool $class = true,
+        bool $one = false,
+        bool $rowCount = false
+    ) {
         $class = ($class === true)? str_replace("Model", "Entity", get_class($this)) : false;
         $class = str_replace("Entitys", "Entity", $class);
         
@@ -78,7 +76,7 @@ class Model
      * @param array $data
      * @return mixed
      */
-    public function update(int $id,array $data = [])
+    public function update(int $id, array $data = [])
     {
         $array_sql = [];
         $array_data = [];
@@ -88,7 +86,7 @@ class Model
             $array_data[] = $v;
         }
 
-        $sql = implode(', ',$array_sql);
+        $sql = implode(', ', $array_sql);
         $array_data[] = $id;
         
         return $this->query("UPDATE {$this->table} SET $sql WHERE id = ? ", $array_data);
@@ -110,7 +108,7 @@ class Model
             $array_data[] = $v;
         }
 
-        $sql = implode(', ',$array_sql);
+        $sql = implode(', ', $array_sql);
         return $this->query("INSERT INTO {$this->table} SET $sql , date_created = NOW() ", $array_data);
     }
 
@@ -122,7 +120,7 @@ class Model
      */
     public function delete(int $id)
     {
-        return $this->query("DELETE FROM {$this->table} WHERE id = ?",[$id],true,true);
+        return $this->query("DELETE FROM {$this->table} WHERE id = ?", [$id], true, true);
     }
 
 
@@ -166,7 +164,8 @@ class Model
         return $this->query(
             "SELECT * FROM {$this->table} WHERE id = ?",
             [$id],
-            true,true
+            true,
+            true
         );
     }
 
@@ -178,9 +177,11 @@ class Model
      */
     public function findWith(string $field, $value, $one = true)
     {
-        return $this->query("SELECT * FROM {$this->table} WHERE {$field} = ?",
+        return $this->query(
+            "SELECT * FROM {$this->table} WHERE {$field} = ?",
             [$value],
-            true,$one
+            true,
+            $one
         );
     }
 
@@ -193,7 +194,7 @@ class Model
      */
     public function findWithId(string $field, $value)
     {
-        return $this->query("SELECT * FROM {$this->table} WHERE id = ? AND {$field} = ?",[$value]);
+        return $this->query("SELECT * FROM {$this->table} WHERE id = ? AND {$field} = ?", [$value]);
     }
 
 
@@ -205,12 +206,15 @@ class Model
      */
     public function latest(int $from = 0, int $to = 4)
     {
-        return $this->query("
+        return $this->query(
+            "
             SELECT {$this->table}.*, categories.title as category 
             FROM {$this->table} 
             LEFT JOIN categories ON category_id = categories.id
             WHERE online = 1 ORDER BY id DESC LIMIT {$from},{$to}",
-            null, true, false 
+            null,
+            true,
+            false
         );
     }
 
@@ -221,12 +225,15 @@ class Model
      */
     public function last()
     {
-        return $this->query("
+        return $this->query(
+            "
             SELECT {$this->table}.*, categories.title as category 
             FROM {$this->table} 
             LEFT JOIN categories ON category_id = categories.id
             WHERE online = 1 ORDER BY id DESC",
-            null, true, true
+            null,
+            true,
+            true
         );
     }
 
@@ -237,24 +244,30 @@ class Model
      */
     public function lastOnline()
     {
-        return $this->query("
+        return $this->query(
+            "
             SELECT {$this->table}.*, categories.title as category 
             FROM {$this->table} 
             LEFT JOIN categories ON category_id = categories.id
             WHERE online = 1 ORDER BY id DESC ",
-            null, true, false
+            null,
+            true,
+            false
         );
     }
 
 
     public function lastOffline()
     {
-        return $this->query("
+        return $this->query(
+            "
             SELECT {$this->table}.*, categories.title as category 
             FROM {$this->table} 
             LEFT JOIN categories ON category_id = categories.id
             WHERE online = 0 ORDER BY id DESC ",
-            null, true, false
+            null,
+            true,
+            false
         );
     }
 
@@ -272,10 +285,11 @@ class Model
         if ($from === null && $to === null) {
             return $this->query(
                 "SELECT * FROM {$this->table} ORDER BY {$field} {$order}",
-                null, true, false
+                null,
+                true,
+                false
             );
         }
         return $this->query("SELECT * FROM {$this->table} ORDER BY {$field} {$order} LIMIT {$from},{$to}");
     }
-
 }

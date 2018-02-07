@@ -1,14 +1,7 @@
 <?php
 return [
- 	"db_name" => "Ngbdd",
- 	"db_user" => "root",
- 	"db_pass" => "",
- 	"db_host" => "127.0.0.1"
+ 	"db_name" => "Ngbdd", 			//"larytech.com" ,
+ 	"db_user" => "root", 			//"larytech_ngbd",
+ 	"db_pass" => "", 				//"larytech_ngandu",
+ 	"db_host" => "127.0.0.1" 		//"/&sF^2`Wjhquq2Hm~k`,"
 ];
-
-/*
-	$host = "larytech.com";
-	$dbname = "larytech_ngbd";
-	$user = "larytech_ngandu";
-	$pass = "/&sF^2`Wjhquq2Hm~k`,"; 
-*/

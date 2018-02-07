@@ -42,7 +42,7 @@ class ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648
         ),
         'Ngpictures\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src/App',
+            0 => __DIR__ . '/../..' . '/src/Ngpictures',
         ),
         'Ng\\Core\\' => 
         array (

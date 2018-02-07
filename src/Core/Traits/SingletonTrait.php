@@ -1,9 +1,8 @@
 <?php
 namespace Ng\Core\Traits;
 
-trait SingletonTrait {
-
-
+trait SingletonTrait
+{
     /**
      * l'instance a renvoyer chaque fois. par default null
      * @var null

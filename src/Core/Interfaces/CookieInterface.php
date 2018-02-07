@@ -1,7 +1,6 @@
 <?php
 namespace Ng\Core\Interfaces;
 
-
 interface CookieInterface
 {
     /**

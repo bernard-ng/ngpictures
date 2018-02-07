@@ -5,5 +5,5 @@ use \Exception;
 
 class RouterException extends Exception
 {
-	
+    
 }

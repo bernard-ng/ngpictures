@@ -1,7 +1,6 @@
 <?php
 namespace Ng\Core\Entity;
 
-
 use Ngpictures\Ngpictures;
 
 class Entity
@@ -15,8 +14,8 @@ class Entity
     {
         $method = "get".ucfirst($key);
         if (method_exists($this, $method)) {
-        	$this->$key = $this->$method();
-        	return $this->$key;
+            $this->$key = $this->$method();
+            return $this->$key;
         }
         return null;
     }
@@ -31,7 +30,8 @@ class Entity
      * renvoi un mm utilisateur pour chaque obj
      * @return null
      */
-    private function getUser() {
+    private function getUser()
+    {
         if ($this->user !== null) {
             return $this->user;
         } else {
@@ -62,10 +62,4 @@ class Entity
     {
         return $this->getUser()->$info;
     }
-
-    
-
-
-    
-    
 }

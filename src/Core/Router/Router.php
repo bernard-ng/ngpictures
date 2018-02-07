@@ -1,72 +1,73 @@
 <?php
 
 namespace Ng\Core\Router;
+
 use Ng\Core\Exception\RouterException;
 use Ngpictures\Ngpictures;
 
 class Router
 {
-	private $url,
-			$routes = [],
-			$namedRoute = [];
+    private $url,
+            $routes = [],
+            $namedRoute = [];
 
-	public function __construct($url)
-	{
-		$this->url = $url;
-	}
-
-
-	private function add(string $path, $controller, string $name = null, string $method): Route
-	{
-		$route = new Route($path,$controller);
-		$this->routes[$method][] = $route;
-
-		if ($name) {
-			$this->namedRoute[$name] = $route;
-		}
-		return $route;
-	}
+    public function __construct($url)
+    {
+        $this->url = $url;
+    }
 
 
-	public function get(string $path, $controller, string $name = null): Route
-	{
-		return $this->add($path, $controller, $name, "GET");
-	}
+    private function add(string $path, $controller, string $name = null, string $method): Route
+    {
+        $route = new Route($path, $controller);
+        $this->routes[$method][] = $route;
+
+        if ($name) {
+            $this->namedRoute[$name] = $route;
+        }
+        return $route;
+    }
 
 
-	public function post(string $path, $controller, string $name = null): Route
-	{
-		return $this->add($path, $controller, $name, "POST");
-	}
+    public function get(string $path, $controller, string $name = null): Route
+    {
+        return $this->add($path, $controller, $name, "GET");
+    }
 
 
-	public function run(): bool
-	{
-		if (!isset($_SERVER['REQUEST_METHOD'])) {
-			if (Ngpictures::hasDebug()) {
-				throw new RouterException("undefinied Request method");
-			} else {
-				Ngpictures::redirect('/error-500');
-				return false;
-			}
-		}
-
-		foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
-			if ($route->match($this->url)) {
-				$route->call();
-				return true;
-			}
-		}
-		(Ngpictures::hasDebug())? var_dump($route) : Ngpictures::redirect("/error-404");
-		return false;
-	}
+    public function post(string $path, $controller, string $name = null): Route
+    {
+        return $this->add($path, $controller, $name, "POST");
+    }
 
 
-	private function url(string $name, array $params = [])
-	{
-		if (!isset($this->namedRoute[$name])) {
-			Ngpictures::redirect("/error-404");
-		}
-		return $this->namedRoute[$name]->getUrl($params);
-	}
+    public function run(): bool
+    {
+        if (!isset($_SERVER['REQUEST_METHOD'])) {
+            if (Ngpictures::hasDebug()) {
+                throw new RouterException("undefinied Request method");
+            } else {
+                Ngpictures::redirect('/error-500');
+                return false;
+            }
+        }
+
+        foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
+            if ($route->match($this->url)) {
+                $route->call();
+                return true;
+            }
+        }
+        (Ngpictures::hasDebug())? var_dump($route) : Ngpictures::redirect("/error-404");
+        return false;
+    }
+
+
+    private function url(string $name, array $params = [])
+    {
+        if (!isset($this->namedRoute[$name])) {
+            Ngpictures::redirect("/error-404");
+        }
+        return $this->namedRoute[$name]->getUrl($params);
+    }
 }

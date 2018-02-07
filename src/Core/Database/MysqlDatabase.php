@@ -1,17 +1,11 @@
 <?php
 namespace Ng\Core\Database;
 
-use \Exception;
 use \PDO;
 use Ngpictures\Ngpictures;
 use \PDOException;
+use \Exception;
 
-
-/**
- * gestion base de donnee avec mysql
- * Class MysqlDatabase
- * @package Ng\Core\Database
- */
 class MysqlDatabase extends Database
 {
 
@@ -33,7 +27,12 @@ class MysqlDatabase extends Database
      * @param string $db_user
      * @param string $db_pass
      */
-    public function __construct($db_name,$db_host="127.0.0.1",$db_user="root",$db_pass="") {
+    public function __construct(
+        string $db_name,
+        string $db_host = "127.0.0.1",
+        string $db_user = "root",
+        string $db_pass = ""
+    ) {
 
         $this->db_name = $db_name;
         $this->db_host = $db_host;
@@ -46,26 +45,26 @@ class MysqlDatabase extends Database
      * connexion avec pdo a la base de donnee
      * @return PDO
      */
-    private function getPDO() {
-
+    private function getPDO()
+    {
         if ($this->PDO === null) {
-           try {
-               $PDO = new PDO(
+            try {
+                $PDO = new PDO(
                     "mysql:Host={$this->db_host};dbname={$this->db_name};charset=utf8",
                     $this->db_user,
                     $this->db_pass
                 );
-               $PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-               $PDO->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE ,PDO::FETCH_OBJ);
-               $PDO->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
-               $this->PDO = $PDO;
-           } catch (PDOException $e) {
-               if (Ngpictures::hasDebug()) {
+                $PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $PDO->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+                $PDO->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
+                $this->PDO = $PDO;
+            } catch (PDOException $e) {
+                if (Ngpictures::hasDebug()) {
                     die("PDOException : {$e->getMessage()} : {$e->getLine()}");
-               } else {
+                } else {
                     Ngpictures::redirect("/error-500");
-               }
-           }
+                }
+            }
         }
         return $this->PDO;
     }
@@ -84,12 +83,10 @@ class MysqlDatabase extends Database
         try {
             $req = $this->getPDO()->query($statement);
             
-             if (
-                strpos($statement,"INSERT") === 0 || 
-                strpos($statement,"DELETE") === 0 ||
-                strpos($statement,"UPDATE") === 0
+            if (strpos($statement, "INSERT") === 0 ||
+                strpos($statement, "DELETE") === 0 ||
+                strpos($statement, "UPDATE") === 0
             ) {
-               
                 return $req;
             }
 
@@ -105,7 +102,6 @@ class MysqlDatabase extends Database
                 $result = ($one)? $req->fetch() : $req->fetchAll();
             }
             return $result;
-
         } catch (Exception $e) {
             (Ngpictures::hasDebug())? die("QueryException, class = {$class_name} : {$e->getMessage()}") :  Ngpictures::redirect('/e500');
         }
@@ -121,16 +117,15 @@ class MysqlDatabase extends Database
      * @param bool $rowcount
      * @return array|int|mixed|\PDOStatement
      */
-    public function prepare($statement,$data, $class_name = true, $one = false, $rowcount = false)
+    public function prepare($statement, $data, $class_name = true, $one = false, $rowcount = false)
     {
         try {
             $req = $this->getPDO()->prepare($statement);
             $req->execute($data);
 
-            if (
-                strpos($statement,"INSERT") === 0 || 
-                strpos($statement,"DELETE") === 0 ||
-                strpos($statement,"UPDATE") === 0
+            if (strpos($statement, "INSERT") === 0 ||
+                strpos($statement, "DELETE") === 0 ||
+                strpos($statement, "UPDATE") === 0
             ) {
                 return $req;
             }
@@ -147,7 +142,6 @@ class MysqlDatabase extends Database
                 $result = ($one)? $req->fetch() : $req->fetchAll();
             }
             return $result;
-
         } catch (Exception $e) {
             (Ngpictures::hasDebug())? die("PrepareException : {$e->getMessage()}") :  Ngpictures::redirect('/e500');
         }
@@ -162,6 +156,4 @@ class MysqlDatabase extends Database
     {
         return $this->getPDO()->lastInsertId();
     }
-
-
 }
