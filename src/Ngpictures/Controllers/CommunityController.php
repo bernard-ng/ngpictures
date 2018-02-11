@@ -19,12 +19,11 @@ class CommunityController extends Controller
     public function index()
     {
         $model = $this->users;
-        $users = $model->findWith("confirmed_at", NULL, false);
+        $users = $model->all();
 
-
-        echo "<pre>";
-        print_r($users);
-        echo "</pre>";
+        $this->pageManager::setName("La communauté");
+        $this->setLayout("articles/default");
+        $this->viewRender("front_end/community/community", compact('users'));
     }
 
     /*

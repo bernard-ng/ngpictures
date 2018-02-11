@@ -10,6 +10,7 @@ class Controller extends SuperController
     protected $viewPath,
                 $layout,
                 $session,
+                $pageManager,
                 $cookie,
                 $str,
                 $validator,
@@ -104,6 +105,14 @@ class Controller extends SuperController
         $this->str = $this->app->getStr();
         $this->validator = $this->app->getValidator();
         $this->flash = $this->app->getFlash();
+    }
+
+    
+    public function viewRender(string $view, array $variables = [], bool $layout = true)
+    {
+        $variables[] = ['pageManager', $this->pageManager];
+        $variables[] = ['sessionManager', $this->session];
+        parent::viewRender($view, $variables, $layout);
     }
 
     /**

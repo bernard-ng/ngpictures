@@ -1,3 +1,7 @@
+<?php
+use Ng\Core\Managers\SessionManager;
+
+?>
 <section class="row container">
     <?php include(APP."/Views/includes/left-aside.php"); ?>
 
@@ -23,21 +27,15 @@
                             <td><b><?= $a->id ?></b></td>
                             <td><a href="<?= $a->url ?>"><?= $a->title ?></a></td>
                             <td>
-                                <form method="POST" action="<?= ADMIN."/delete" ?>" style="display: inline-block !important;">
+                                <form method="POST" action="<?= "/account/post/delete/".SessionManager::getInstance()->read(TOKEN_KEY) ?>" style="display: inline-block !important;">
                                     <input type="hidden" name="id" value="<?= $a->id?>" >
-                                    <input type="hidden" name="type" value="1" >
                                     <button type="submit" class="btn btn-small waves-effect waves-light red" id="delete">
                                         <i class="icon icon-remove" style="font-size: smaller !important;"></i>
                                     </button>
                                 </form>
-
-                                <a href="<?= ADMIN."/confirm/1/{$a->id}" ?>" title="retirer" id="confirm">
-                                    <button class="btn btn-small blue-2 waves-effect waves-light">
-                                            <?php if ($a->online) : ?>
-                                            <i class="icon icon-cloud-download" style="font-size: smaller !important;"></i>
-                                            <?php else : ?>
-                                            <i class="icon icon-cloud-upload" style="font-size: smaller !important;"></i>
-                                            <?php endif; ?>
+                                <a href=<?= "/account/post/edit/{$a->id}/".SessionManager::getInstance()->read(TOKEN_KEY) ?>>
+                                    <button class="btn btn-small waves-effect waves-light">
+                                        <i class="icon icon-edit" style="font-size: smaller !important;"></i>
                                     </button>
                                 </a>
 

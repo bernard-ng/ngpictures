@@ -24,9 +24,9 @@ $router->get("/account/my-friends/:user-:id/:token", "following#showFollowers", 
 $router->get("/account/my-posts/:user-:id/:token", "articles#showPosts", "articles.show-post");
 $router->get("/account/post/", "articles#add", "articles.add");
 $router->post("/account/post/", "articles#add", "articles.add");
-$router->get("/account/post/edit/:id/:token", "users#edit", "users.edit-article");
-$router->post("/account/post/edit/:id/:token", "users#edit", "users.edit");
-$router->get("/account/post/delete/:id/:token", "users#delete", "users.delete");
+$router->get("/account/post/edit/:id/:token", "articles#edit", "articles.edit-article");
+$router->post("/account/post/edit/:id/:token", "articles#edit", "articles.edit");
+$router->post("/account/post/delete/:token", "articles#delete", "articles.delete");
 
 
 //community pages

@@ -36,7 +36,7 @@ class Mailer
     {
 
         $confirmation_link = $link;
-        $message = require  CORE."/Util/Mailer/templates/confirmation-mail-template.php";
+        $message = require  CORE."/Managers/Mailer/templates/confirmation-mail-template.php";
 
         mail("ngandubernard@gmail.com", "Confirmation de compte - Ngpictures", $message, $this->headers);
     }
@@ -52,7 +52,7 @@ class Mailer
     public function resetPassword($link, $email)
     {
         $reset_link = $link;
-        $message = require CORE."/Util/Mailer/templates/reset-mail-template.php";
+        $message = require CORE."/Managers/Mailer/templates/reset-mail-template.php";
 
         mail("ngandubernard@gmail.com", "Mot de passe oublié - Ngpictures", $message, $this->headers);
     }

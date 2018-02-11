@@ -18,6 +18,13 @@ class UsersEntity extends Entity
     }
 
 
+    public function getFollowingUrl()
+    {
+        $this->followingUrl = "/following/".StringManager::slugify($this->name)."-{$this->id}";
+        return $this->followingUrl;
+    }
+
+
     /**
      * le lien vers l'edition du profile
      * @return mixed|string
@@ -49,13 +56,14 @@ class UsersEntity extends Entity
     }
 
 
-    public function getFollowingUrl()
+    public function getDeletePostsUrl()
     {
-        $this->followingUrl = "/following/".StringManager::slugify($this->name)."-{$this->id}";
-        return $this->followingUrl;
+        $session = SessionManager::getInstance();
+        $this->deletePostsUrl = "/account/post/delete/".$session->read(TOKEN_KEY);
+        return $this->deletePostUrl;
     }
 
-
+    
     /**
      * le lien vers son avatar
      * @return mixed|string

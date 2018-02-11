@@ -42,7 +42,7 @@ class ValidationManager
 
     /**
      * l'objet qui gere les msg flash
-     * @var Flash
+     * @var FlashMessageManager
      */
     private $flash;
 
@@ -93,7 +93,7 @@ class ValidationManager
      */
     public function isUnique(string $field, $table, string $errorMsg = null)
     {
-        $field = Str::escape($field);
+        $field = StringManager::escape($field);
         $req = $table->query(
             "SELECT id FROM {$table->getTable()} WHERE {$field} = ?",
             [$this->getField($field)],
@@ -131,6 +131,17 @@ class ValidationManager
     public function isMatch(string $field, string $field2, string $errorMsg = null)
     {
         if (empty($this->getField($field)) || $this->getField($field) != $this->getField($field2)) {
+            $this->errors[$field] = $errorMsg ?? $this->msg['isMatch'];
+            $this->flash->set('danger', $errorMsg ?? $this->msg['isMatch']);
+        }
+    }
+
+
+    public function isWellSized(string $field, string $errorMsg = null)
+    {
+        if (!strlen($this->getField($field)) >= 8) {
+            
+        } else {
             $this->errors[$field] = $errorMsg ?? $this->msg['isMatch'];
             $this->flash->set('danger', $errorMsg ?? $this->msg['isMatch']);
         }

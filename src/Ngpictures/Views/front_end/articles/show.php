@@ -1,20 +1,15 @@
 <div class="parallax-container hide-on-small-and-down border-b">
     <span class="ng-cover"></span>
     <div class="parallax">
-        <img src="/Pictures/articles/<?= $article->thumb ?>" alt="Article Image" title="<?= $article->title ?>">
+        <img src="<?= $article->thumbUrl ?>" alt="Article Image" title="<?= $article->title ?>">
     </div>
 </div>
 <div class="row container">
     <!-- ==================== PAGE CONTAIN ============================================ -->
-    <div class="col m10 l10 offset-m1 offset-l1 " style="margin-top: -30%">
+    <div class="col m10 l10 offset-m1 offset-l1">
         <!-- ARTICLE -->
             <article class="card ng-neg-top" id="<?= $article->id ?>">
-                <header class="card-image">
-                    <span class="ng-article-category"><i class="icon icon-pencil"></i></span>
-                    <span class="ng-news-card-image-article">
-                        <img src="<?= $article->thumbUrl ?>" alt="Article Image" title="<?= $article->title ?>">
-                    </span>
-                </header>
+                
                 <main class="ng-news-card-content">
                     <span class="ng-news-card-title">
                             <h1><?= $article->title ?></h1>
@@ -55,30 +50,7 @@
                     </a>
                 </footer>
             </article>
-
-        <div class="card-panel row">
-            <div class="col l6 m6 s12">
-                <form>
-                    <textarea placeholder="Votre commentaire"></textarea>
-                </form>
-            </div>
-           
-        </div>
-        <div class="col s12 hide-on-med-and-up" id="singleOptions-mobile">
-            <div class="card-panel"><button class="btn-floating waves-effect waves-light cyan darken-2">
-                <i class="icon icon-save"></i></button>
-            </div>
-            <div class="card-panel"><button class="btn-floating waves-effect waves-light cyan darken-2">
-                <i class="icon icon-tags"></i></button>
-            </div>
-            <div class="card-panel"><button class="btn-floating waves-effect waves-light cyan darken-2">
-                    <i class="icon icon-picture"></i></button>
-            </div>
-            <div class="card-panel"><button class="btn-floating waves-effect waves-light cyan darken-2">
-                    <i class="icon icon-user"></i></button>
-            </div>
-        </div>
-    </div>
-    <!-- ==================== /PAGE CONTAIN (END) ===================================== -->
+        <?php include(APP."/Views/includes/comments.php"); ?>
+        
 </div>
 
