@@ -2,7 +2,7 @@
     <div class="page-content mb-20">
         <span class="section-title">Connexion</span>
     </div>
-    <form method="POST" action="/login">
+    <form method="POST" action="">
         <input type="text" id="name" name="name" placeholder="Pseudo ou adresse mail" value="<?= htmlspecialchars($post->get('name')); ?>" >
         <input type="password" name="password" id="password" placeholder="Mot de passe" >
         

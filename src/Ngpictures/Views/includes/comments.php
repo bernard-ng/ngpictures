@@ -27,7 +27,7 @@
                         <?= $c->comment ?>
                         <p><time  class="secondary-content-b" data-time="<?= strtotime($c->date_created) ?>"><?= $c->time ?></time></p>   
                     
-                        <?php if ($session->read(AUTH_KEY) && $session->getValue(AUTH_KEY, 'id') == $c->user_id) : ?>
+                        <?php if ($activeUser && $activeUser->id == $c->user_id) : ?>
                             <a href="#cmtDel-<?= $c->id ?>" class="secondary-content modal-trigger">
                                 <i class="icon icon-trash"></i>
                             </a>

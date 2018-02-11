@@ -1,7 +1,3 @@
-<?php
-use Ng\Core\Managers\SessionManager;
-
-?>
 <section class="row container">
     <?php include(APP."/Views/includes/left-aside.php"); ?>
 
@@ -27,13 +23,13 @@ use Ng\Core\Managers\SessionManager;
                             <td><b><?= $a->id ?></b></td>
                             <td><a href="<?= $a->url ?>"><?= $a->title ?></a></td>
                             <td>
-                                <form method="POST" action="<?= "/account/post/delete/".SessionManager::getInstance()->read(TOKEN_KEY) ?>" style="display: inline-block !important;">
+                                <form method="POST" action="<?= "/account/post/delete/{$securityToken}" ?>" style="display: inline-block !important;">
                                     <input type="hidden" name="id" value="<?= $a->id?>" >
                                     <button type="submit" class="btn btn-small waves-effect waves-light red" id="delete">
                                         <i class="icon icon-remove" style="font-size: smaller !important;"></i>
                                     </button>
                                 </form>
-                                <a href=<?= "/account/post/edit/{$a->id}/".SessionManager::getInstance()->read(TOKEN_KEY) ?>>
+                                <a href=<?= "/account/post/edit/{$a->id}/{$securityToken}" ?>>
                                     <button class="btn btn-small waves-effect waves-light">
                                         <i class="icon icon-edit" style="font-size: smaller !important;"></i>
                                     </button>

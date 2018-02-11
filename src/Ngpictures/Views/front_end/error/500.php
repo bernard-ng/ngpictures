@@ -4,7 +4,7 @@
 
 <section class="content">
     <div class="error-page">
-        <h1 class="headline text-red"><span class="glyphicon glyphicon-exclamation-sign"></span></h1>
+        <h1 class="headline text-red"><span class="icon icon-exclamation-sign"></span></h1>
         <div class="error-content">
             <h3>Ooups! une erreur s'est produite lors du traitement</h3>
             <p>

@@ -110,8 +110,18 @@ class Controller extends SuperController
     
     public function viewRender(string $view, array $variables = [], bool $layout = true)
     {
-        $variables[] = ['pageManager', $this->pageManager];
-        $variables[] = ['sessionManager', $this->session];
+        $variables['pageManager'] = $this->pageManager;
+        $variables['sessionManager'] = $this->session;
+        $variables['flashMessageManager'] = $this->flash;
+
+        if (!empty($this->session->read(AUTH_KEY))) {
+            $variables['securityToken'] = $this->session->read(TOKEN_KEY);
+            $variables['activeUser'] = $this->session->read(AUTH_KEY);
+        } else {
+            $variables['securityToken'] = false;
+            $variables['activeUser'] = false;
+        }
+
         parent::viewRender($view, $variables, $layout);
     }
 

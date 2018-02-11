@@ -2,12 +2,12 @@
     <div class="page-content mb-20">
         <div class="section-title">Inscription</div>
     </div>
-   <form method="POST" action="/sign">
-        <div class="input-field"">
+   <form method="POST" action="">
+        <div class="input-field">
             <input type="text"  name="name" placeholder="pseudo (nom d'utilisateur)" id="name" value="<?= htmlspecialchars($post->get('name')); ?>">
         </div>
 
-        <div class="input-field"">
+        <div class="input-field">
             <input type="email"  name="email" placeholder="adresse mail" id="email" value="<?= htmlspecialchars($post->get('email')); ?>">
         </div>
 

@@ -47,6 +47,7 @@
 <script src="/assets/js/lib/jquery.min.js"></script>
 <script src="/assets/js/lib/masonry.js"></script>
 <script type="text/javascript">
+
 $("#gallery").masonry({
     itemSelector: ".photo",
     isAnimated: true,

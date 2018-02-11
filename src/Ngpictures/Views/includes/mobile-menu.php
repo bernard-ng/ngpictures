@@ -1,27 +1,22 @@
-<?php
-use Ng\Core\Managers\SessionManager;
- 
-$session = SessionManager::getInstance();
-?>
 <ul id="mobile-side-nav" class="side-nav links">
     <li>
-        <?php if ($session->read('auth')) : ?>
+        <?php if ($activeUser) : ?>
             <div class="user-view">
-                <a href="<?= $session->read('auth')->accountUrl; ?>">
-                    <img class="ng-menu-avatar circle" src="<?= $session->read('auth')->avatarUrl ?>">
+                <a href="<?= $activeUser->accountUrl; ?>">
+                    <img class="ng-menu-avatar circle" src="<?= $activeUser->avatarUrl ?>">
                 </a>
-                <a href="<?= $session->read('auth')->accountUrl; ?>" class="user-view-name">
-                    <?= $session->read('auth')->name; ?>
+                <a href="<?= $activeUser->accountUrl; ?>" class="user-view-name">
+                    <?= $activeUser->name; ?>
                 </a>
                 <span class="user-view-name fullname">
-                    <?= $session->read('auth')->email; ?>
+                    <?= $activeUser->email; ?>
                 </span>
             </div>
         <?php endif; ?>
 
         <ul>
             
-            <?php if (!$session->read('auth')) : ?>
+            <?php if (!$activeUser) : ?>
                 <div class="user-view">
                     <li><a class="link-btn primary-c" href="/login">Connexion<i class="icon icon-lock"></i></a></li>
                     <br>
@@ -29,7 +24,7 @@ $session = SessionManager::getInstance();
                 </div>
             <?php endif; ?>
             
-            <?php if ($session->read('auth')) : ?>
+            <?php if ($activeUser) : ?>
                 <li>
                     <a href="#" class="dropdown-button ng-menu-more" data-activites="mobile-dropdown">
                         Mon Compte <i class="icon icon-user right"></i>
@@ -37,7 +32,7 @@ $session = SessionManager::getInstance();
                 </li>
             <?php endif;?>
 
-            <?php if ($session->read('auth') && $session->getValue('auth', 'rank') == "admin") : ?>
+            <?php if ($activeUser && $activeUser->rank == "admin") : ?>
                 <li><a href="<?= ADMIN ?>"> Admin&nbsp;<i class="icon icon-lock"></i></a></li>
             <?php endif; ?>
             
@@ -49,7 +44,7 @@ $session = SessionManager::getInstance();
         </ul>
     </li>
     <li>
-        <?php if ($session->read('auth')) : ?>
+        <?php if ($activeUser) : ?>
             <li>
                 <a href="/logout" class="ng-menu-logout">
                     Déconnexion <i class="icon icon-off right"></i>

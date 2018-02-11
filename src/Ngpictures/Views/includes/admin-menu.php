@@ -11,7 +11,7 @@
                         <i class="social social-menu"></i>
                     </a>
                     <ul class="right hide-on-med-and-down links">
-                        <span id="menu-item-active" data-isActive="<?= Ngpictures\Managers\pageManager::getActivePage() ?>"></span>
+                        <span id="menu-item-active" data-isActive="<?= $pageManager::getActivePage() ?>"></span>
                         <li id="Accueil"><a href="/home" class="ng-menu-item"> front-end</a></li>
                         <li id="administration - blog"><a href="<?= ADMIN."/blog" ?>" class="ng-menu-item"> blog</a></li>
                         <li id="administration - actualités"><a href="<?= ADMIN."/articles" ?>" class="ng-menu-item"> articles</a></li>

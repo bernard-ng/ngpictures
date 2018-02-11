@@ -1,19 +1,13 @@
 <!-- =================  FOOTER   ====================== -->
-<?php
-
-use Ng\Core\Managers\SessionManager;
-
-if (SessionManager::getInstance()->read(AUTH_KEY)) :
-    $user = SessionManager::getInstance()->read(AUTH_KEY);
-?>
+<?php if ($activeUser) :?>
     <div class="fixed-action-btn toolbar">
         <a class="btn-floating btn-large primary-c">
             <i class="icon icon-th"></i>
         </a>
         <ul>
             <li class="waves-effect waves-light"><a href="/account/post"><i class="icon icon-pencil"></i></a></li>
-            <li class="waves-effect waves-light"><a href="<?= $user->editUrl; ?>"><i class="icon icon-edit"></i></a></li>
-            <li class="waves-effect waves-light"><a href="<?= $user->friendsUrl; ?>"><i class="icon icon-user"></i></a></li>
+            <li class="waves-effect waves-light"><a href="<?= $activeUser->editUrl; ?>"><i class="icon icon-edit"></i></a></li>
+            <li class="waves-effect waves-light"><a href="<?= $activeUser->friendsUrl; ?>"><i class="icon icon-user"></i></a></li>
         </ul>
     </div>
 <?php endif; ?>
@@ -57,7 +51,7 @@ if (SessionManager::getInstance()->read(AUTH_KEY)) :
     </div>
     <div class="footer-copyright primary-d">
         <div class="container">
-            <span class="right page-footer-text">Developped by Bernard ng&nbsp;</span>
+            <span class="right page-footer-text">Developped by <a href="http://ngpictures.pe.hu" target="_blank">Bernard ng</a>&nbsp;</span>
         </div>
     </div>
 </footer>

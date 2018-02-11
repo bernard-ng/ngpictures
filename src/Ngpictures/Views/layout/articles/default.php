@@ -1,9 +1,8 @@
-<?php use Ngpictures\Managers\PageManager; ?>
 <!DOCTYPE HTML>
 <?php include(APP."/Views/includes/ngpictures-watermark.txt"); ?>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
     <head>
-        <title><?= PageManager::getName() ?></title>
+        <title><?= $pageManager::getName() ?></title>
         <?php require(APP."/Views/includes/default-meta.php"); ?>
         <?php include(APP."/Views/includes/favicon.php"); ?>
         <?php include(APP."/Views/includes/default-style.php"); ?>
@@ -16,7 +15,7 @@
             <?php include(APP."/Views/includes/menu.php"); ?>
             <div class="container row">
                 <span class="jumbotron-title">
-                    &nbsp;<?php echo PageManager::getActivePage() ?>
+                    &nbsp;<?php echo $pageManager::getActivePage() ?>
                 </span>
                 <span class="jumbotron-content">
                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio quaerat possimus doloremque consequuntur temporibus incidunt cupiditate consectetur praesentium minus facere exercitationem, dicta iure porro, magni qui culpa. Nostrum, odit voluptate.

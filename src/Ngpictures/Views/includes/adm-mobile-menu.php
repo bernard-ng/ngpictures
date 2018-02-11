@@ -1,8 +1,8 @@
 <ul id="mobile-side-nav" class="side-nav links">
     <li>
         <div class="user-view">
-            <a href="/account/bernard-ng-89"><img class="circle" src="/imgs/moi.jpg"></a>
-            <a href="/account/bernard-ng-89" class="user-view-name">bernard_ng</a>
+            <a href="<?= $activeUser->accountUrl; ?>"><img class="circle" src="<?= $activeUser->avatarUrl ?>"></a>
+            <a href="<?= $activeUser->accountUrl; ?>" class="user-view-name">bernard_ng</a>
             <span class="user-view-name fullname">Bernard Tshabu ngandu</span>
         </div>
         <ul>

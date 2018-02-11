@@ -1,9 +1,3 @@
-<?php
-use Ng\Core\Managers\SessionManager;
-use Ngpictures\Managers\PageManager;
-
-$session = SessionManager::getInstance();
-?>
 <!--=============== NAVBAR ===================-->
 <header>
     <div class="navbar-fixed z-depth-2">
@@ -17,9 +11,9 @@ $session = SessionManager::getInstance();
                         <i class="social social-menu"></i>
                     </a>
                     <ul class="right hide-on-med-and-down links">
-                        <span id="menu-item-active" data-isActive="<?= PageManager::getActivePage() ?>"></span>
+                        <span id="menu-item-active" data-isActive="<?=$pageManager::getActivePage() ?>"></span>
 
-                        <?php if ($session->read('auth') && $session->getValue('auth', 'rank') == "admin") : ?>
+                        <?php if ($activeUser && $activeUser->rank == "admin") : ?>
                             <li><a href="<?= ADMIN ?>" class="ng-menu-item"> Admin</a></li>
                         <?php endif; ?>
 
@@ -29,15 +23,15 @@ $session = SessionManager::getInstance();
                         <li id="Actualités"><a href="/articles" class="ng-menu-item"> Actualités</a></li>
                         <li id="Gallerie"><a href="/gallery" class="ng-menu-item"> Gallerie</a></li>
 
-                        <?php if ($session->read('auth')) : ?>
+                        <?php if ($activeUser) : ?>
                             <li>
-                                <a href="<?= $session->read('auth')->accountUrl; ?>">
-                                    <img src="<?= $session->read('auth')->avatarUrl; ?>" class="ng-menu-avatar" width="50" height="50">
+                                <a href="<?= $activeUser->accountUrl; ?>">
+                                    <img src="<?= $activeUser->avatarUrl; ?>" class="ng-menu-avatar" width="50" height="50">
                                 </a>
                             </li>
                         <?php endif; ?>
 
-                        <?php if (!$session->read('auth')) : ?>
+                        <?php if (!$activeUser) : ?>
                             <li><a href="/sign" class="link-btn">Inscription</a></li>
                             <li><a href="/login" class="link-btn">Connexion</a></li>
                         <?php endif; ?>

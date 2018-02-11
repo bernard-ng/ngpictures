@@ -9,3 +9,4 @@ public/imgs/
 /.vscode/
 /vendor/
 Desktop.ini
+composer.lock

@@ -7,11 +7,11 @@
 <meta name="copyright" content="//larytech.com">
 <meta name="author" content="Bernard Ngandu">
 <meta name="identifier-url" content="//larytech.com" />
-<meta name="keywords" lang="fr" content="ngpictures, larytech, wdp, wonderful design, ngpics" />
+<meta name="keywords" lang="fr" content="ngpictures, larytech, wdp, wonderful design, ng-pictures, photographie, bernard ng, ng, africa photograpy, galerie africain, african gallery" />
 <meta name="description" content="Bienvenue sur Ngpictures, partagez vos photos, profiter de nos services shooting et decouvrez notre gallerie wonderful DP" />
-<meta property="og:title" content="<?= Ngpictures\Managers\PageManager::getName() ?>" />
-<meta property="og:sitename" content="larytech.com" />
+<meta property="og:title" content="<?= $pageManager::getName() ?>" />
+<meta property="og:sitename" content="ngpictures.larytech.com" />
 <meta property="og:language" content="fr">
-<?= Ngpictures\Managers\PageManager::getMeta(); ?>
+<?= $pageManager::getMeta(); ?>
 
 <meta name="turbolinks-cache-control" content="no-cache" />

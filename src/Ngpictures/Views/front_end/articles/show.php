@@ -42,9 +42,6 @@
                     <a href="<?= $article->likeUrl ?>" id="likeBtn" class="ng-news-card-footer-item <?= $article->ML ?>">
                         <i class="icon icon-thumbs-up"></i>&nbsp;J'aime
                     </a>
-                    <a href="<?= $article->dislikeUrl ?>" id="dislikeBtn" class="ng-news-card-footer-item <?= $article->MD ?>">
-                        <i class="icon icon-thumbs-down"></i>&nbsp;je n'aime pas
-                    </a>
                     <a href="/share/<?= $article->SI ?>" id="shareBtn" class="ng-news-card-footer-item">
                         <i class="icon icon-share"></i>&nbsp;partager
                     </a>

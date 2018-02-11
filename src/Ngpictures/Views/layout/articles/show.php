@@ -2,7 +2,7 @@
 <?php include(APP."/Views/includes/ngpictures-watermark.txt"); ?>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
     <head>
-        <title><?php echo Ngpictures\Managers\PageManager::getName() ?></title>
+        <title><?php echo $pageManager::getName() ?></title>
         <?php require(APP."/Views/includes/default-meta.php"); ?>
         <meta name="canonical" content="<?php echo $article->Url ?>">
 
