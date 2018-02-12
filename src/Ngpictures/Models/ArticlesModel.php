@@ -36,7 +36,8 @@ class ArticlesModel extends Model
     }
 
 
-    public function findUserPost($id) {
+    public function findWithUser($id)
+    {
         return $this->query(
             "SELECT {$this->table}.*, categories.title as category 
             FROM {$this->table} 

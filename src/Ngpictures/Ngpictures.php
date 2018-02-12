@@ -1,15 +1,16 @@
 <?php
 namespace Ngpictures;
 
-use Ngpictures\Traits\Util\SingletonTrait;
 use Ng\Core\Database\MysqlDatabase;
-use Ng\Core\Managers\SessionManager;
 use Ng\Core\Managers\CookieManager;
 use Ng\Core\Managers\StringManager;
-use Ng\Core\Managers\FlashMessageManager;
 use Ng\Core\Managers\ConfigManager;
-use Ng\Core\Managers\ValidationManager;
+use Ng\Core\Managers\SessionManager;
 use Ngpictures\Managers\PageManager;
+use Ng\Core\Managers\ValidationManager;
+use Ngpictures\Managers\MessageManager;
+use Ng\Core\Managers\FlashMessageManager;
+use Ngpictures\Traits\Util\SingletonTrait;
 
 class Ngpictures
 {
@@ -78,7 +79,7 @@ class Ngpictures
 
     /**
      * recupere une instance de flash
-     * @return Flash
+     * @return FlashMessageManager
      */
     public function getFlash(): FlashMessageManager
     {
@@ -98,7 +99,7 @@ class Ngpictures
 
     /**
      * recupere la session
-     * @return Session
+     * @return SessionManager
      */
     public function getSession(): SessionManager
     {
@@ -108,7 +109,7 @@ class Ngpictures
 
     /**
      * recupere le cookie
-     * @return cookie
+     * @return cookieManager
      */
     public function getCookie(): CookieManager
     {
@@ -118,11 +119,17 @@ class Ngpictures
 
     /**
      * recupere le gestion de chaine de charactere
-     * @return str
+     * @return stringManager
      */
     public function getStr(): StringManager
     {
         return new StringManager();
+    }
+
+
+    public function getMessageManager(): MessageManager
+    {
+        return new MessageManager;
     }
     
 

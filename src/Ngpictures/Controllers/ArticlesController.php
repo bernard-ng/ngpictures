@@ -15,7 +15,6 @@ class ArticlesController extends Controller
         parent::__construct($app, $pageManager);
         $this->loadModel('articles');
         $this->loadModel('categories');
-
     }
 
     use StoryPostTrait;
@@ -29,7 +28,7 @@ class ArticlesController extends Controller
         $articles = $this->articles->findUserPost($user->id);
         $this->pageManager::setName("Mes publications");
         $this->setLayout("articles/default");
-        $this->viewRender("front_end/users/posts/posts", compact('articles','user'));
+        $this->viewRender("front_end/users/posts/posts", compact('articles', 'user'));
     }
 
 

@@ -137,10 +137,10 @@ class ValidationManager
     }
 
 
-    public function isWellSized(string $field, string $errorMsg = null)
+    public function isGreaterThan(string $field, int $size, string $errorMsg = null)
     {
-        if (!strlen($this->getField($field)) >= 8) {
-            
+        if (strlen($this->getField($field) >= $size)) {
+            return true;
         } else {
             $this->errors[$field] = $errorMsg ?? $this->msg['isMatch'];
             $this->flash->set('danger', $errorMsg ?? $this->msg['isMatch']);
