@@ -7,14 +7,15 @@ use Ng\Core\Controllers\Controller as SuperController;
 
 class Controller extends SuperController
 {
-    protected $viewPath,
-                $layout,
-                $session,
-                $pageManager,
-                $cookie,
-                $str,
-                $validator,
-                $app;
+    protected $viewPath;
+    protected $layout;
+    protected $session;
+    protected $pageManager;
+    protected $cookie;
+    protected $str;
+    protected $msg;
+    protected $validator;
+    protected $app;
 
    
     public function __construct(Ngpictures $app, PageManager $pageManager)
@@ -50,13 +51,6 @@ class Controller extends SuperController
 
         parent::viewRender($view, $variables, $layout);
     }
-
-    
-     /**
-     * tous les messages d'erreur des controllers
-     * @var MessageManager
-     */
-    protected $msg;
 
 
     /**

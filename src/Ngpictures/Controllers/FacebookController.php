@@ -25,7 +25,7 @@ class FacebookController extends Controller
             echo "</pre>";
             exit;
         } else {
-            $this->flash->set('danger', $this->msg['indefined_error']);
+            $this->flash->set('danger', $this->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }

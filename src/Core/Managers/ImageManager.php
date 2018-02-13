@@ -1,23 +1,12 @@
 <?php
 namespace Ng\Core\Managers;
 
+use Ng\Core\Managers\MessageManager as Msg;
 use Intervention\Image\Exception\NotReadableException;
 use Intervention\Image\ImageManager as InterventionImage;
 
 abstract class ImageManager
 {
-
-    /**
-     * les differents messages d'erreur
-     * @var array
-     */
-    private static $msg = [
-        'not_image' => 'Le fichier téléchargé doit être une image',
-        'error_upload' => 'Une erreur est survenu lors du téléchargement de l\'image',
-        'bigger_than_max' => 'Votre image est trop grande, elle ne doit pas dépasser 15 Mo'
-    ];
-
-
     /**
      * les differents chemins d'upload
      * @var array
@@ -32,9 +21,7 @@ abstract class ImageManager
         'gallery' => UPLOAD.'/gallery',
         'gallery-thumbs' => UPLOAD.'/gallery/thumbs',
 
-        'avatars' => UPLOAD.'/avatars',
-
-        'out' => "http://ngpictures.pe.hu/uploads"
+        'avatars' => UPLOAD.'/avatars'
     ];
 
 
@@ -60,11 +47,11 @@ abstract class ImageManager
      * taille maximal du fichier
      * @var int
      */
-    private static $size_max = 15728640; // 15mb
+    private static $size_max = 10485760; // 10mb
 
 
     /**
-     * verifi si un fichier est vraiment une image
+     * verifie si un fichier est vraiment une image
      * @param string $file
      * @param string $type
      * @return bool
@@ -106,7 +93,7 @@ abstract class ImageManager
                     try {
                         $image = $manager->make($file->get('thumb.tmp_name'));
                     } catch (NotReadableException $e) {
-                        $flash->set('danger', self::$msg['not_image']);
+                        $flash->set('danger', Msg::get('files_not_image'));
                         return false;
                     }
 
@@ -138,15 +125,15 @@ abstract class ImageManager
                         
                     return true;
                 } else {
-                    $flash->set('danger', self::$msg['bigger_than_max']);
+                    $flash->set('danger', Msg::get('files_too_big'));
                     return false;
                 }
             } else {
-                $flash->set('danger', self::$msg['not_image']);
+                $flash->set('danger', Msg::get('files_not_image'));
                 return false;
             }
         } else {
-            $flash->set('danger', self::$msg['error_upload']);
+            $flash->set('danger', Msg::get('files_not_uploaded'));
             return false;
         }
     }
@@ -157,7 +144,7 @@ abstract class ImageManager
      */
     public static function generateCaptcha()
     {
-        Session::getInstance()->write("captcha", mt_rand(1000, 9999));
+        SessionManager::getInstance()->write("captcha", mt_rand(1000, 9999));
         $police = realpath(WEBROOT."/assets/fonts/28 Days Later.ttf");
 
         $manager = new InterventionImage();

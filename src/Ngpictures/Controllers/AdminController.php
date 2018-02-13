@@ -149,20 +149,20 @@ class AdminController extends Controller
 
             if ($result) {
                 $model->delete($post->get('id'));
-                $this->flash->set('danger', $msg ?? $this->msg['admin_delete_success']);
+                $this->flash->set('danger', $msg ?? $this->msg['post_delete_success']);
                 $this->app::redirect(true);
             } else {
                 if ($this->isAjax()) {
-                    $this->ajaxFail($this->msg['admin_delete_notFound']);
+                    $this->ajaxFail($this->msg['post_not_found']);
                 }
-                $this->flash->set('danger', $this->msg['admin_delete_notFound']);
+                $this->flash->set('danger', $this->msg['post_not_found']);
                 $this->app::redirect(true);
             }
         } else {
             if ($this->isAjax()) {
-                $this->ajaxFail($this->msg['admin_delete_failed']);
+                $this->ajaxFail($this->msg['post_delete_failed']);
             }
-            $this->flash->set('danger', $this->msg['admin_delete_failed']);
+            $this->flash->set('danger', $this->msg['post_delete_failed']);
             $this->app::redirect(true);
         }
     }
@@ -181,31 +181,31 @@ class AdminController extends Controller
                     $file = $dir.'/'.$post->get('name');
                     if (is_file($file)) {
                         unlink($file);
-                        $this->flash->set('success', $this->msg['admin_delete_success']);
+                        $this->flash->set('success', $this->msg['post_delete_success']);
                         $this->app::redirect(true);
                     } else {
                         if ($this->isAjax()) {
-                            $this->ajaxFail($this->msg['admin_delete_failed']);
+                            $this->ajaxFail($this->msg['post_delete_failed']);
                         }
-                        $this->flash->set('danger', $this->msg['admin_delete_failed']);
+                        $this->flash->set('danger', $this->msg['post_delete_failed']);
                         $this->app::redirect(true);
                     }
                 } else {
                     if ($this->isAjax()) {
-                        $this->ajaxFail($this->msg['admin_not_directory']);
+                        $this->ajaxFail($this->msg['files_not_directory']);
                     }
-                    $this->flash->set('danger', $this->msg['admin_not_directory']);
+                    $this->flash->set('danger', $this->msg['files_not_directory']);
                     $this->app::redirect(true);
                 }
             } else {
                 if ($this->isAjax()) {
-                    $this->ajaxFail($this->msg['indefined_error']);
+                    $this->ajaxFail($this->msg['undefined_error']);
                 }
-                $this->flash->set('danger', $this->msg['indefined_error']);
+                $this->flash->set('danger', $this->msg['undefined_error']);
                 $this->app::redirect(true);
             }
         } else {
-            $this->flash->set('danger', $this->msg['indefined_error']);
+            $this->flash->set('danger', $this->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }
@@ -227,13 +227,13 @@ class AdminController extends Controller
                 $model->unsetConfirmationToken($result->id);
                 $this->app::redirect(true);
             } elseif ($result->confirmed_at !== null) {
-                $this->flash->set('success', $this->msg['admin_already_confrimed']);
+                $this->flash->set('success', $this->msg['post_already_online']);
                 $this->app::redirect(true);
             } else {
                 if ($this->isAjax()) {
-                    $this->ajaxFail($this->msg['indefined_error']);
+                    $this->ajaxFail($this->msg['undefined_error']);
                 }
-                $this->flash->set('danger', $this->msg['indefined_error']);
+                $this->flash->set('danger', $this->msg['undefined_error']);
                 $this->app::redirect(true);
             }
         } else {
@@ -245,7 +245,7 @@ class AdminController extends Controller
                     exit;
                 }
 
-                $this->flash->set('success', $this->msg['admin_confirm_success']);
+                $this->flash->set('success', $this->msg['post_online_success']);
                 $this->app::redirect(true);
             } elseif ($result && $result->online) {
                 $model->update($id, ['online' => 0]);
@@ -255,13 +255,13 @@ class AdminController extends Controller
                     exit;
                 }
 
-                $this->flash->set('success', $this->msg['admin_remove_success']);
+                $this->flash->set('success', $this->msg['post_offline_success']);
                 $this->app::redirect(true);
             } else {
                 if ($this->isAjax()) {
-                    $this->ajaxFail($this->msg['indefined_error']);
+                    $this->ajaxFail($this->msg['undefined_error']);
                 }
-                $this->flash->set('danger', $this->msg['indefined_error']);
+                $this->flash->set('danger', $this->msg['undefined_error']);
                 $this->app::redirect(true);
             }
         }
@@ -305,10 +305,10 @@ class AdminController extends Controller
 
         if (isset($_POST) && !empty($_POST)) {
             if (!empty($post->get('content')) && !empty($post->get('title')) && !empty($post->get('slug'))) {
-                $this->validator->isEmpty('title', $this->msg['admin_all_fields']);
-                $this->validator->isEmpty('content', $this->msg['admin_all_fields']);
-                $this->validator->isEmpty('slug', $this->msg['admin_all_fields']);
-                $this->validator->isKebabCase('slug', $this->msg['admin_slug_notKebab']);
+                $this->validator->isEmpty('title', $this->msg['form_all_required']);
+                $this->validator->isEmpty('content', $this->msg['form_all_required']);
+                $this->validator->isEmpty('slug', $this->msg['form_all_required']);
+                $this->validator->isKebabCase('slug', $this->msg['form_bad_slug']);
 
                 if ($this->validator->isValid()) {
                     $title = $this->str::escape($post->get('title'));
@@ -317,13 +317,13 @@ class AdminController extends Controller
                     $category_id = (int)$post->get('category') ?? 1;
 
                     $this->blog->update($id, compact('title', 'content', 'slug', 'category_id'));
-                    $this->flash->set("success", $this->msg['admin_modified_success']);
+                    $this->flash->set("success", $this->msg['post_edit_success']);
                     $this->app::redirect(ADMIN . "/blog");
                 } else {
                     var_dump($this->validator->getErrors());
                 }
             } else {
-                $this->flash->set('danger', $this->msg['admin_all_fields']);
+                $this->flash->set('danger', $this->msg['form_all_required']);
             }
         }
 
@@ -348,7 +348,7 @@ class AdminController extends Controller
                 $content = $post->get('content');
 
                 if ($post->get('slug') !== '') {
-                    $this->validator->isKebabCase('slug', $this->msg['admin_slug_notKebab']);
+                    $this->validator->isKebabCase('slug', $this->msg['form_bad_slug']);
                     if ($this->validator->isValid()) {
                         $slug = $this->str::escape($post->get('slug'));
                     }
@@ -369,21 +369,21 @@ class AdminController extends Controller
                             if ($isUploaded) {
                                 ImageManager::upload($file, 'blog-thumbs', "ngpictures-{$slug}-{$last_id}", 'small');
                                 $this->blog->update($last_id, ['thumb' => "ngpictures-{$slug}-{$last_id}.jpg"]);
-                                $this->flash->set('success', $this->msg['admin_post_success']);
+                                $this->flash->set('success', $this->msg['form_post_submitted']);
                                 $this->app::redirect(ADMIN . "/blog");
                             } else {
-                                $this->flash->set('danger', $this->msg['admin_file_notUploaded']);
+                                $this->flash->set('danger', $this->msg['files_not_uploaded']);
                                 $this->blog->delete($last_id);
                             }
                         } else {
                             var_dump($this->validator->getErrors());
                         }
                     } else {
-                        $this->flash->set('danger', $this->msg['admin_picture_required']);
+                        $this->flash->set('danger', $this->msg['post_requries_picture']);
                     }
                 }
             } else {
-                $this->flash->set('danger', $this->msg['admin_all_fields']);
+                $this->flash->set('danger', $this->msg['form_all_required']);
             }
         }
 
@@ -419,10 +419,10 @@ class AdminController extends Controller
                 $slug = $this->str::slugify($title);
 
                 $this->categories->create(compact('title', 'description', 'slug'));
-                $this->flash->set('success', $this->msg['admin_post_success']);
+                $this->flash->set('success', $this->msg['form_post_submitted']);
                 $this->app::redirect(ADMIN . "/blog/categories");
             } else {
-                $this->flash->set('danger', $this->msg['admin_all_fields']);
+                $this->flash->set('danger', $this->msg['form_all_required']);
             }
         }
 
@@ -448,10 +448,10 @@ class AdminController extends Controller
                     $slug = $this->str::slugify($title);
 
                     $this->categories->update($category->id, compact('title', 'description', 'slug'));
-                    $this->flash->set('success', $this->msg['admin_modified_success']);
+                    $this->flash->set('success', $this->msg['post_edit_success']);
                     $this->app::redirect(ADMIN . "/blog/categories");
                 } else {
-                    $this->flash->set('danger', $this->msg['admin_all_fields']);
+                    $this->flash->set('danger', $this->msg['form_all_required']);
                 }
             }
 
@@ -459,7 +459,7 @@ class AdminController extends Controller
             $this->setLayout('admin/default');
             $this->viewRender('back_end/blog/categories.edit', compact('post', 'category'));
         } else {
-            $this->flash->set('danger', $this->msg['indefined_error']);
+            $this->flash->set('danger', $this->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }
@@ -513,14 +513,14 @@ class AdminController extends Controller
                     ImageManager::upload($file, 'gallery-thumbs', "{$name}-{$last_id}", 'small');
 
                     $this->gallery->update($last_id, ["thumb" => "{$name}-{$last_id}.jpg"]);
-                    $this->flash->set('success', $this->msg['admin_post_success']);
+                    $this->flash->set('success', $this->msg['form_post_submitted']);
                     $this->app::redirect(ADMIN . "/gallery");
                 } else {
-                    $this->flash->set('danger', $this->msg['admin_file_notUploaded']);
+                    $this->flash->set('danger', $this->msg['files_not_uploaded']);
                     $this->gallery->delete($last_id);
                 }
             } else {
-                $this->flash->set('danger', $this->msg['admin_picture_required']);
+                $this->flash->set('danger', $this->msg['post_requries_picture']);
                 $this->app::redirect(true);
             }
         }
@@ -548,7 +548,7 @@ class AdminController extends Controller
                     $description = $post->get('description');
                     $category_id = (int)$post->get('category') ?? 1;
                     $this->gallery->update($id, compact('name', 'tags', 'description', 'category_id'));
-                    $this->flash->set("success", $this->msg['admin_modified_success']);
+                    $this->flash->set("success", $this->msg['post_edit_success']);
                     $this->app::redirect(ADMIN . "/gallery");
                 }
             }
@@ -556,7 +556,7 @@ class AdminController extends Controller
             $this->setLayout("admin/default");
             $this->viewRender("back_end/gallery/edit", compact('photo', 'categories'));
         } else {
-            $this->flash->set('danger', $this->msg['admin_delete_notFound']);
+            $this->flash->set('danger', $this->msg['post_not_found']);
             $this->app::redirect(true);
         }
     }
@@ -590,14 +590,14 @@ class AdminController extends Controller
             if ($this->app::hasDebug()) {
                 die($e->getMessage());
             } else {
-                $this->flash->set('danger', $this->msg['indefined_error']);
+                $this->flash->set('danger', $this->msg['undefined_error']);
                 $this->app::redirect(true);
             }
         } catch (RuntimeException $e) {
             if ($this->app::hasDebug()) {
                 die($e->getMessage());
             } else {
-                $this->flash->set('danger', $this->msg['admin_not_directory']);
+                $this->flash->set('danger', $this->msg['files_not_directory']);
                 $this->app::redirect(true);
             }
         }
@@ -636,10 +636,10 @@ class AdminController extends Controller
                 $slug = $this->str::slugify($title);
 
                 $this->albums->create(compact('title', 'description', 'slug'));
-                $this->flash->set('success', $this->msg['admin_post_success']);
+                $this->flash->set('success', $this->msg['form_post_submitted']);
                 $this->app::redirect(ADMIN . "/gallery");
             } else {
-                $this->flash->set('danger', $this->msg['admin_all_fields']);
+                $this->flash->set('danger', $this->msg['form_all_required']);
             }
         }
 
@@ -665,10 +665,10 @@ class AdminController extends Controller
                     $slug = $this->str::slugify($title);
 
                     $this->albums->update($album->id, compact('title', 'description', 'slug'));
-                    $this->flash->set('success', $this->msg['admin_modified_success']);
+                    $this->flash->set('success', $this->msg['post_edit_success']);
                     $this->app::redirect(ADMIN . "/gallery");
                 } else {
-                    $this->flash->set('danger', $this->msg['admin_all_fields']);
+                    $this->flash->set('danger', $this->msg['form_all_required']);
                 }
             }
 
@@ -676,7 +676,7 @@ class AdminController extends Controller
             $this->setLayout('admin/default');
             $this->viewRender('back_end/gallery/albums.edit', compact('post', 'album'));
         } else {
-            $this->flash->set('danger', $this->msg['indefined_error']);
+            $this->flash->set('danger', $this->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }
@@ -742,7 +742,7 @@ class AdminController extends Controller
                 $this->app::redirect(true);
             }
         } else {
-            $this->flash->set('danger', $this->msg['indefined_error']);
+            $this->flash->set('danger', $this->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }

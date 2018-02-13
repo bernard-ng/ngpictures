@@ -40,7 +40,7 @@ class UsersController extends Controller
             $this->connect($user);
             $this->login();
         } else {
-            $this->flash->set('danger', $this->msg['user_confirmation_failed']);
+            $this->flash->set('danger', $this->msg['users_confirmation_failed']);
             $this->login();
         }
     }
@@ -62,17 +62,17 @@ class UsersController extends Controller
             if (isset($_POST) and !empty($_POST)) {
                 if (!empty($post->get('password')) && !empty($post->get('password_confirm'))) {
                     $validator = $this->validator;
-                    $validator->isMatch('password', 'password_confirm', $this->msg['user_password_notMatch']);
+                    $validator->isMatch('password', 'password_confirm', $this->msg['users_bad_password']);
                     if ($validator->isValid()) {
                         $password = $this->str::hashPassword($post->get('password'));
                         $this->users->resetPassword($password, $user->id);
 
-                        $this->flash->set('success', $this->msg['user_reset_password_success']);
+                        $this->flash->set('success', $this->msg['users_reset_success']);
                         $this->connect($user);
                         $this->app::redirect($user->accountUrl);
                     }
                 } else {
-                    $this->flash->set('danger', $this->msg['admin_all_fields']);
+                    $this->flash->set('danger', $this->msg['form_all_required']);
                 }
             }
 
@@ -80,7 +80,7 @@ class UsersController extends Controller
             $this->setLayout('users/default');
             $this->viewRender('front_end/users/account/reset', compact('post'));
         } else {
-            $this->flash->set('danger', $this->msg['indefined_error']);
+            $this->flash->set('danger', $this->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }
@@ -104,13 +104,13 @@ class UsersController extends Controller
                     $link = SITE_NAME."/reset/{$user->id}/{$user->reset_token}";
 
                     (new Mailer())->resetPassword($link, $email);
-                    $this->flash->set('success', $this->msg['user_reset_mail_success']);
+                    $this->flash->set('success', $this->msg['users_reset_success']);
                     $this->app::redirect('/login');
                 } else {
-                    $this->flash->set('danger', $this->msg['user_email_notFound']);
+                    $this->flash->set('danger', $this->msg['users_email_notFound']);
                 }
             } else {
-                $this->flash->set('danger', $this->msg['admin_all_fields']);
+                $this->flash->set('danger', $this->msg['form_all_required']);
             }
         }
 
@@ -138,7 +138,7 @@ class UsersController extends Controller
         $link = SITE_NAME."/confirm/{$user_id}/{$token}";
 
         (new Mailer())->accountConfirmation($link, $email);
-        $this->flash->set('success', $this->msg['user_registration_success']);
+        $this->flash->set('success', $this->msg['users_registration_success']);
         $this->app::redirect('/login');
     }
 
@@ -155,19 +155,19 @@ class UsersController extends Controller
             $validator = $this->validator;
             $validator->iskebabCase("name");
             if ($validator->isValid()) {
-                $validator->isUnique("name", $this->users, $this->msg['user_username_tokken']);
+                $validator->isUnique("name", $this->users, $this->msg['users_username_token']);
             }
 
             $validator->isEmail("email");
             if ($validator->isValid()) {
-                $validator->isUnique("email", $this->users, $this->msg['user_mail_tokken']);
+                $validator->isUnique("email", $this->users, $this->msg['users_mail_token']);
             }
-            $validator->isGreaterThan("password", 8, $this->msg['user_password_short']);
-            $validator->isMatch("password", "password_confirm", $this->msg['user_password_notMatch']);
+            $validator->isGreaterThan("password", 8, $this->msg['users_short_password']);
+            $validator->isMatch("password", "password_confirm", $this->msg['users_bad_password']);
 
             if ($validator->isValid()) {
                 $this->register($post->get('name'), $post->get('email'), $post->get('password'));
-                $this->flash->set('success', $this->msg['user_registration_success']);
+                $this->flash->set('success', $this->msg['users_registration_success']);
                 $this->app::redirect("/login");
             } else {
                 var_dump($this->validator->getErrors());
@@ -191,7 +191,7 @@ class UsersController extends Controller
     public function restrict(string $msg = null)
     {
         if (!$this->isLogged()) {
-            $this->flash->set("danger", $msg ?? $this->msg["user_must_login"]);
+            $this->flash->set("danger", $msg ?? $this->msg["users_not_logged"]);
             $this->app::redirect(true);
         }
     }
@@ -204,7 +204,7 @@ class UsersController extends Controller
     {
         $this->restrict();
         if ($this->session->getValue(AUTH_KEY, 'rank') !== 'admin') {
-            $this->flash->set('warning', $this->msg['user_forbidden']);
+            $this->flash->set('warning', $this->msg['users_forbidden']);
             $this->app::redirect(true);
         }
     }
@@ -233,7 +233,7 @@ class UsersController extends Controller
         if (!$this->isLogged()) {
             $this->session->write(AUTH_KEY, $user);
             $this->session->write(TOKEN_KEY, $this->str::setToken(60));
-            $this->flash->set('success', $msg ?? $this->msg['user_login_success']);
+            $this->flash->set('success', $msg ?? $this->msg['users_login_success']);
         }
     }
 
@@ -284,7 +284,7 @@ class UsersController extends Controller
         $post = new Collection($_POST);
 
         if ($this->isLogged()) {
-            $this->flash->set('warning', $this->msg['user_already_connected']);
+            $this->flash->set('warning', $this->msg['users_already_connected']);
             $this->app::redirect($this->isLogged()->accountUrl);
         } else {
             if (isset($_POST) && !empty($_POST)) {
@@ -302,16 +302,16 @@ class UsersController extends Controller
                                     $this->remember($user->id);
                                 }
 
-                                $this->flash->set('success', $this->msg['user_login_success']);
+                                $this->flash->set('success', $this->msg['users_login_success']);
                                 $this->app::redirect($user->accountUrl);
                             } else {
-                                $this->flash->set('danger', $this->msg['user_bad_identifier']);
+                                $this->flash->set('danger', $this->msg['users_bad_identifier']);
                             }
                         } else {
-                            $this->flash->set('warning', $this->msg['user_not_confirmed']);
+                            $this->flash->set('warning', $this->msg['users_not_confirmed']);
                         }
                     } else {
-                        $this->flash->set('danger', $this->msg['user_bad_identifier']);
+                        $this->flash->set('danger', $this->msg['users_bad_identifier']);
                     }
                 }
             }
@@ -331,7 +331,7 @@ class UsersController extends Controller
         $this->cookie->delete(COOKIE_REMEMBER_KEY);
         $this->session->delete(AUTH_KEY);
         $this->session->delete(TOKEN_KEY);
-        $this->flash->set('success', $this->msg['user_logout_success']);
+        $this->flash->set('success', $this->msg['users_logout_success']);
         $this->app::redirect("/login");
     }
 
@@ -358,11 +358,11 @@ class UsersController extends Controller
                 $this->setLayout('users/account');
                 $this->viewRender('front_end/users/account/account', compact("verse", "user", "articles"));
             } else {
-                $this->flash->set('danger', $this->msg['indefined_error']);
+                $this->flash->set('danger', $this->msg['undefined_error']);
                 $this->app::redirect(true);
             }
         } else {
-            $this->flash->set('danger', $this->msg['indefined_error']);
+            $this->flash->set('danger', $this->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }
@@ -389,7 +389,7 @@ class UsersController extends Controller
                     if ($post->get('name') && $post->get('name') !== $user->name) {
                         $this->validator->isKebabCase('name');
                         if ($this->validator->isValid()) {
-                            $this->validator->isUnique('name', $this->users, $this->msg['user_username_tokken']);
+                            $this->validator->isUnique('name', $this->users, $this->msg['users_username_token']);
                             $name = $this->str::escape($post->get('name'));
                         }
                     } else {
@@ -399,13 +399,13 @@ class UsersController extends Controller
                     if ($post->get('email') && $post->get('email') !== $user->email) {
                         $this->validator->isEmail('email');
                         if ($this->validator->isValid()) {
-                            $this->validator->isUnique('email', $this->users, $this->msg['user_mail_tokken']);
+                            $this->validator->isUnique('email', $this->users, $this->msg['users_mail_token']);
                             $email = $this->str::escape($post->get('email'));
                         }
                     }
 
                     if ($post->get('phone') && $post->get('phone') !== $user->phone) {
-                        $this->validator->isUnique('phone', $this->users, $this->msg['user_phone_tokken']);
+                        $this->validator->isUnique('phone', $this->users, $this->msg['users_phone_token']);
                         $phone = $this->str::escape($post->get('phone'));
                     } else {
                         $phone = $user->phone;
@@ -416,7 +416,7 @@ class UsersController extends Controller
                         $user = $this->users->find($user->id);
 
                         $this->session->write(AUTH_KEY, $user); // updating active user is session
-                        $this->flash->set('success', $this->msg['user_edit_success']);
+                        $this->flash->set('success', $this->msg['users_edit_success']);
                         $this->app::redirect($user->accountUrl);
                     }
                 } elseif (!empty($file->get('thumb'))) {
@@ -428,7 +428,7 @@ class UsersController extends Controller
                         $user = $this->users->find($user->id);
                         
                         $this->session->write(AUTH_KEY, $user); // updating active user is session
-                        $this->flash->set('success', $this->msg['user_edit_success']);
+                        $this->flash->set('success', $this->msg['users_edit_success']);
                         $this->app::redirect($user->accountUrl);
                     }
                 }
@@ -437,11 +437,11 @@ class UsersController extends Controller
                 $this->setLayout('users/edit');
                 $this->viewRender('front_end/users/account/edit', compact('user'));
             } else {
-                $this->flash->set('danger', $this->msg['indefined_error']);
+                $this->flash->set('danger', $this->msg['undefined_error']);
                 $this->app::redirect(true);
             }
         } else {
-            $this->flash->set('danger', $this->msg['indefined_error']);
+            $this->flash->set('danger', $this->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }

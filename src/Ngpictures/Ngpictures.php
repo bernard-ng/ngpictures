@@ -1,16 +1,18 @@
 <?php
 namespace Ngpictures;
 
-use Ng\Core\Database\MysqlDatabase;
-use Ng\Core\Managers\CookieManager;
+
 use Ng\Core\Managers\StringManager;
 use Ng\Core\Managers\ConfigManager;
+use Ng\Core\Managers\CookieManager;
+use Ng\Core\Database\MysqlDatabase;
 use Ng\Core\Managers\SessionManager;
 use Ngpictures\Managers\PageManager;
 use Ng\Core\Managers\ValidationManager;
 use Ngpictures\Managers\MessageManager;
 use Ng\Core\Managers\FlashMessageManager;
 use Ngpictures\Traits\Util\SingletonTrait;
+use Ng\Core\Exception\ConfigManagerException;
 
 class Ngpictures
 {
@@ -39,17 +41,21 @@ class Ngpictures
      **/
     private function getDb(): MysqlDatabase
     {
-        $setting = new ConfigManager(ROOT."\config\DatabaseConfig.php");
+        try {
+            $setting = new ConfigManager(ROOT."\config\DatabaseConfig.php");
 
-        if (!isset(self::$db_instance)) {
-            self::$db_instance = new MysqlDatabase(
-                $setting->get("db_name"),
-                $setting->get("db_host"),
-                $setting->get("db_user"),
-                $setting->get("db_pass")
-            );
+            if (!isset(self::$db_instance)) {
+                self::$db_instance = new MysqlDatabase(
+                    $setting->get("db_name"),
+                    $setting->get("db_host"),
+                    $setting->get("db_user"),
+                    $setting->get("db_pass")
+                );
+            }
+            return self::$db_instance;
+        } catch (ConfigManagerException $e) {
+            self::redirect("/error-500");
         }
-        return self::$db_instance;
     }
 
 
@@ -143,8 +149,12 @@ class Ngpictures
      */
     public static function hasDebug()
     {
-        $settings = new ConfigManager(ROOT."/config/SystemConfig.php");
-        return $settings->get('sys.debug');
+        try {
+            $settings = new ConfigManager(ROOT."/config/SystemConfig.php");
+            return $settings->get('sys.debug');
+        } catch(ConfigManagerException $e) {
+            self::redirect("/error-500");
+        }
     }
 
     /**
@@ -153,8 +163,12 @@ class Ngpictures
      */
     public static function hasCache(): bool
     {
-        $settings = new ConfigManager(ROOT."/config/SystemConfig.php");
-        return $settings->get('sys.cache');
+       try {
+            $settings = new ConfigManager(ROOT."/config/SystemConfig.php");
+            return $settings->get('sys.cache');
+       } catch(ConfigManagerException $e) {
+           self::redirect("/error-500");
+       }
     }
 
 

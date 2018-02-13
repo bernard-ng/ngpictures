@@ -2,6 +2,7 @@
 namespace Ng\Core\Managers;
 
 use Ng\Core\Database\MysqlDatabase;
+use Ng\Core\Managers\MessageManager as Msg;
 
 class ValidationManager
 {
@@ -23,22 +24,6 @@ class ValidationManager
      * @var MysqlDatabase
      */
     private $db;
-
-
-    /**
-     * les messages d'erreur
-     * @var array
-     */
-    public $msg = [
-
-        "isKebabCase" => "Votre pseudo n'est pas valide",
-        "isUnique" => "Cet information est deja utiliser",
-        "isEmail" => "Cet adresse mail n'est pas valide",
-        "isMatch" => "Les deux champs ne correspondent pas",
-        "isEmpty" => "Complétez le champ"
-
-    ];
-
 
     /**
      * l'objet qui gere les msg flash
@@ -79,8 +64,8 @@ class ValidationManager
     public function isKebabCase(string $field, string $errorMsg = null)
     {
         if (!preg_match('/^[a-zA-Z0-9-_]+$/', $this->getField($field))) {
-            $this->errors[$field] = $errorMsg ?? $this->msg['isKebabCase'];
-            $this->flash->set('danger', $errorMsg ?? $this->msg['isKebabCase']);
+            $this->errors[$field] = $errorMsg ?? Msg::get['isKebabCase'];
+            $this->flash->set('danger', $errorMsg ?? Msg::get['isKebabCase']);
         }
     }
 
@@ -102,8 +87,8 @@ class ValidationManager
         );
 
         if ($req) {
-            $this->errors[$field] = $errorMsg ?? $this->msg['isUnique'];
-            $this->flash->set('danger', $errorMsg ?? $this->msg['isUnique']);
+            $this->errors[$field] = $errorMsg ?? Msg::get('isUnique');
+            $this->flash->set('danger', $errorMsg ?? Msg::get('isUnique'));
         }
     }
 
@@ -116,8 +101,8 @@ class ValidationManager
     public function isEmail(string $field, string $errorMsg = null)
     {
         if (!filter_var($this->getField($field), FILTER_VALIDATE_EMAIL)) {
-            $this->errors[$field] = $errorMsg ?? $this->msg['isEmail'];
-            $this->flash->set('danger', $errorMsg ?? $this->msg['isEmail']);
+            $this->errors[$field] = $errorMsg ?? Msg::get('isEmail');
+            $this->flash->set('danger', $errorMsg ?? Msg::get('isEmail'));
         }
     }
 
@@ -131,8 +116,8 @@ class ValidationManager
     public function isMatch(string $field, string $field2, string $errorMsg = null)
     {
         if (empty($this->getField($field)) || $this->getField($field) != $this->getField($field2)) {
-            $this->errors[$field] = $errorMsg ?? $this->msg['isMatch'];
-            $this->flash->set('danger', $errorMsg ?? $this->msg['isMatch']);
+            $this->errors[$field] = $errorMsg ?? Msg::get('isMatch');
+            $this->flash->set('danger', $errorMsg ?? Msg::get('isMatch'));
         }
     }
 
@@ -142,8 +127,8 @@ class ValidationManager
         if (strlen($this->getField($field) >= $size)) {
             return true;
         } else {
-            $this->errors[$field] = $errorMsg ?? $this->msg['isMatch'];
-            $this->flash->set('danger', $errorMsg ?? $this->msg['isMatch']);
+            $this->errors[$field] = $errorMsg ?? Msg::get('isMatch');
+            $this->flash->set('danger', $errorMsg ?? Msg::get('isMatch'));
         }
     }
 
@@ -156,8 +141,8 @@ class ValidationManager
     public function isEmpty(string $field, string $errorMsg)
     {
         if (empty($this->getField($field))) {
-            $this->errors[$field] = $errorMsg ?? $this->msg['isEmpty'];
-            $this->flash->set('danger', $errorMsg ?? $this->msg['isEmpty']);
+            $this->errors[$field] = $errorMsg ?? Msg::get('isEmpty');
+            $this->flash->set('danger', $errorMsg ?? Msg::get('isEmpty'));
         }
     }
 

@@ -37,23 +37,15 @@ class CategoriesController extends Controller
         $category = $this->categories->find(intval($id));
 
         if ($category && $this->str::checkUserUrl($name, $category->title)) {
-            $blog = $this->loadModel('blog')->findWith('category_id', $category->id);
-            $articles = $this->loadModel('articles')->findWith('category_id', $category->id);
-            $gallery = $this->loadModel('gallery')->findWith('category_id', $category->id);
+            $blog = $this->loadModel('blog')->findWith('category_id', $category->id, false);
+            $articles = $this->loadModel('articles')->findWith('category_id', $category->id, false);
+            $gallery = $this->loadModel('gallery')->findWith('category_id', $category->id, false);
 
             $this->pageManager::setName("Catégorie: {$category->title}");
             $this->setLayout('articles/default');
-            $this->viewRender(
-                'front_end/categories/show',
-                compact(
-                    'category',
-                    'blog',
-                    'articles',
-                    'gallery'
-                )
-            );
+            $this->viewRender('front_end/categories/show', compact('category', 'blog', 'articles'));
         } else {
-            $this->flash->set('danger', $this->msg['category_notFound']);
+            $this->flash->set('danger', $this->msg['category_not_found']);
             $this->app::redirect(true);
         }
     }

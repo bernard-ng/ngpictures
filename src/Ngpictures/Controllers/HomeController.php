@@ -9,10 +9,7 @@ class HomeController extends Controller
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
-        $this->loadModel('blog');
-        $this->loadModel('articles');
-        $this->loadModel('categories');
-        $this->loadModel('gallery');
+        $this->loadModel(['blog', 'articles', 'categories', 'gallery']);
     }
 
     public function index()
@@ -24,7 +21,6 @@ class HomeController extends Controller
         $verse = $this->callController('verses')->index();
 
         $this->pageManager::setName('Accueil');
-        $this->pageManager::setMeta(['property' => 'og:url', 'content' => '//larytech.com/home']);
         $this->viewRender("front_end/index", compact('photos', 'last', 'article', 'verse', 'categories'));
     }
 }

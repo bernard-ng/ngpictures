@@ -21,4 +21,19 @@ class GalleryController extends Controller
         $this->setLayout('articles/default');
         $this->viewRender('front_end/gallery/index', compact('photo', 'photos'));
     }
+
+
+    public function show(string $slug, int $id)
+    {
+        $photo = $this->gallery->find(intval($id));
+
+        if ($photo && $photo->slug === $slug) {
+            $this->pageManager::setName($photo->name);
+            $this->setLayout('articles/default');
+            $this->viewRender('front_end/gallery/show', compact('photo'));
+        } else {
+            $this->flash->set("danger", $this->msg['post_not_found']);
+            $this->app::redirect(true);
+        }
+    }
 }

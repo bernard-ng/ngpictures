@@ -16,10 +16,10 @@ class AjaxController extends Controller
                 require(APP."/Views/ajax/articles/cards.php");
                 exit();
             } else {
-                $this->ajaxFail($this->msg['indefined_error']);
+                $this->ajaxFail($this->msg['undefined_error']);
             }
         } else {
-            $this->flash->set("warning", $this->msg['indefined_error']);
+            $this->flash->set("warning", $this->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }
@@ -35,10 +35,10 @@ class AjaxController extends Controller
                 require(APP."/Views/ajax/blog/cards.php");
                 exit();
             } else {
-                $this->ajaxFail($this->msg['indefined_error']);
+                $this->ajaxFail($this->msg['undefined_error']);
             }
         } else {
-            $this->flash->set("warning", $this->msg['indefined_error']);
+            $this->flash->set("warning", $this->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }

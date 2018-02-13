@@ -26,9 +26,9 @@ class IdeasController extends Controller
                 $content = $this->str::escape($post->get('ideas'));
                 $user_id = $this->session->getValue('auth', 'id');
                 $this->loadModel('ideas')->create(compact('content', 'user_id'));
-                $this->flash->set('success', $this->msg['admin_ideas_success']);
+                $this->flash->set('success', $this->msg['form_idea_submitted']);
             } else {
-                $this->flash->set('danger', $this->msg['admin_all_fields']);
+                $this->flash->set('danger', $this->msg['form_fied_required']);
             }
         }
 

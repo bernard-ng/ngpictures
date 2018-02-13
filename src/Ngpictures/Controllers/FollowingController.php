@@ -17,8 +17,7 @@ class FollowingController extends Controller
     {
         parent::__construct($app, $pageManager);
         $this->callController('users')->restrict();
-        $this->loadModel('users');
-        $this->loadModel('following');
+        $this->loadModel(['users', 'following']);
         $this->user_id = intval($this->session->getValue(AUTH_KEY, 'id'));
     }
 
@@ -32,37 +31,46 @@ class FollowingController extends Controller
             if ($f->isFollowed($user->id, $this->user_id)) {
                 $f->remove($user->id, $this->user_id);
 
-                $this->flash->set("success", $this->msg['user_remove_following_success']);
+                $this->flash->set("success", $this->msg['users_unfollowing_success']);
                 $this->app::redirect(true);
             }
 
             $f->add($user->id, $this->user_id);
-            $this->flash->set("success", $this->msg['user_add_following_success']);
+            $this->flash->set("success", $this->msg['users_following_success']);
             $this->app::redirect(true);
         } else {
-            $this->flash->set("warning", $this->msg['user_notFound']);
+            $this->flash->set("warning", $this->msg['users_not_found']);
             $this->app::redirect(true);
         }
     }
 
 
-    public function showFollowers()
+    public function showFollowers(string $name, int $id, string $token)
     {
-        $model = $this->users;
-        $user_id = $this->session->getValue(AUTH_KEY, 'id');
-        $followers = $this->following->findWith('followed_id', $user_id, false);
+       if ($this->session->read(TOKEN_KEY) == $token) {
+        $user =  $this->users->find(intval($id));
+            if ($user) {
+                $followers = $this->following->findWith('followed_id', $user->id, false);
 
-        $followers_list = [];
-        foreach ($followers as $follower) {
-            $followers_list[] = $follower['follower_id'];
+                $followers_list = [];
+                foreach ($followers as $follower) {
+                    $followers_list[] = $follower['follower_id'];
+                }
+
+                $followers_list = implode(", ", $followers_list);
+                $followers = $this->users->findList($followers_list);
+
+                $this->pageManager::setName("Mes Abonnés");
+                $this->setLayout("articles/default");
+                $this->viewRender("front_end/users/account/followers", compact("followers"));
+            } else {
+                $this->flash->set('danger', $this->msg['undefined_error']);
+                $this->app::redirect(true);
+            }
+        } else {
+           $this->flash->set('danger', $this->msg['undefined_error']);
+           $this->app::redirect(true);
         }
-
-        $followers_list = implode(", ", $followers_list);
-        $followers = $this->users->findList($followers_list);
-
-        $this->pageManager::setName("Mes Abonnés");
-        $this->setLayout("articles/default");
-        $this->viewRender("front_end/users/account/followers", compact("followers"));
     }
 
 
@@ -75,7 +83,7 @@ class FollowingController extends Controller
     public function isMentionnedFollow($id)
     {
         $f = $this->loadModel('following');
-        if ($f->isFollowed($id, $this->app->getSession()->getValue(AUTH_KEY, 'id'))) {
+        if ($f->isFollowed($id, $this->user_id)) {
             return 'active';
         } else {
             return '';

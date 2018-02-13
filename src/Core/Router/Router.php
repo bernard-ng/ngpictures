@@ -7,9 +7,9 @@ use Ngpictures\Ngpictures;
 
 class Router
 {
-    private $url,
-            $routes = [],
-            $namedRoute = [];
+    private $url;
+    private $routes = [];
+    private $namedRoute = [];
 
     public function __construct($url)
     {
@@ -17,6 +17,14 @@ class Router
     }
 
 
+    /*
+     * permet d'ajouter une url, registrer une route
+     * @param string $path
+     * @param mixed $controller
+     * @param string $name
+     * @param string $method
+     * @return Route 
+     */
     private function add(string $path, $controller, string $name = null, string $method): Route
     {
         $route = new Route($path, $controller);
@@ -44,12 +52,7 @@ class Router
     public function run(): bool
     {
         if (!isset($_SERVER['REQUEST_METHOD'])) {
-            if (Ngpictures::hasDebug()) {
-                throw new RouterException("undefinied Request method");
-            } else {
-                Ngpictures::redirect('/error-500');
-                return false;
-            }
+            throw new RouterException("undefinied Request method");
         }
 
         foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {

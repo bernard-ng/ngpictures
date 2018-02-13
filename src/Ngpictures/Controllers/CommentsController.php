@@ -46,14 +46,14 @@ class CommentsController extends Controller
                         'comment' => $comment
                     ]
                 );
-                $this->flash->set('success', $this->msg['comment_success']);
+                $this->flash->set('success', $this->msg['form_comment_submitted']);
                 $this->app::redirect(true);
             } else {
-                $this->flash->set('danger', $this->msg['comment_required']);
+                $this->flash->set('danger', $this->msg['form_all_required']);
                 $this->app::redirect(true);
             }
         } else {
-            $this->flash->set('warning', $this->msg['not_found']);
+            $this->flash->set('warning', $this->msg['comment_not_found']);
             $this->app::redirect(true);
         }
     }
@@ -78,7 +78,7 @@ class CommentsController extends Controller
                     $this->flash->set('success', $this->msg['comment_delete_success']);
                     $this->app::redirect(true);
                 } else {
-                    $this->flash->set('danger', $this->msg['comment_delete_notAllowed']);
+                    $this->flash->set('danger', $this->msg['delete_not_allowed']);
                     $this->app::redirect(true);
                 }
             } else {
@@ -86,7 +86,7 @@ class CommentsController extends Controller
                 $this->app::redirect(true);
             }
         } else {
-            $this->flash->set('danger', $this->msg['comment_delete_notAllowed']);
+            $this->flash->set('danger', $this->msg['delete_not_allowed']);
             $this->app::redirect(true);
         }
     }
@@ -111,7 +111,7 @@ class CommentsController extends Controller
                     $this->flash->set('success', $this->msg['comment_edit_success']);
                     $this->app::redirect(true);
                 } else {
-                    $this->flash->set('danger', $this->msg['comment_edit_notAllowed']);
+                    $this->flash->set('danger', $this->msg['dit_not_allowed']);
                     $this->app::redirect(true);
                 }
             } else {

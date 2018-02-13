@@ -42,11 +42,11 @@ class DownloadController extends Controller
                 echo readfile($file);
                 exit();
             } else {
-                $this->flash->set('danger', $this->msg['download_file_notFound']);
+                $this->flash->set('danger', $this->msg['files_not_found']);
                 $this->app::redirect(true);
             }
         } else {
-            $this->flash->set('danger', $this->msg['download_failed']);
+            $this->flash->set('danger', $this->msg['files_download_failed']);
             $this->app::redirect(true);
         }
     }

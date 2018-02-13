@@ -32,9 +32,9 @@ class LikesController extends Controller
             }
         } else {
             if ($this->isAjax()) {
-                $this->ajaxFail($this->msg['indefined_error']);
+                $this->ajaxFail($this->msg['undefined_error']);
             }
-            $this->flash->set("danger", $this->msg['indefined_error']);
+            $this->flash->set("danger", $this->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }

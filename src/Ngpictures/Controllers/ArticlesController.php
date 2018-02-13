@@ -21,14 +21,25 @@ class ArticlesController extends Controller
     use ShowPostTrait;
 
 
-    public function showPosts()
+    public function showPosts(string $name, int $id, string $token)
     {
         $this->callController("users")->restrict();
-        $user = $this->session->read(AUTH_KEY);
-        $articles = $this->articles->findUserPost($user->id);
-        $this->pageManager::setName("Mes publications");
-        $this->setLayout("articles/default");
-        $this->viewRender("front_end/users/posts/posts", compact('articles', 'user'));
+        if ($this->session->read(TOKEN_KEY) == $token) {
+            $user = $this->loadModel('users')->find(intval($id));
+            
+            if ($user) {
+                $articles = $this->articles->findWithUser($user->id);
+                $this->pageManager::setName("Mes publications");
+                $this->setLayout("articles/default");
+                $this->viewRender("front_end/users/posts/posts", compact('articles', 'user'));
+            } else {
+                $this->flash->set("danger", $this->msg['users_not_found']);
+                $this->app::redirect(true);
+            }
+        } else {
+            $this->flash->set("danger", $this->msg['undefined_error']);
+            $this->app::redirect(true);
+        }
     }
 
 
@@ -58,21 +69,21 @@ class ArticlesController extends Controller
                             if ($isUploaded) {
                                 ImageManager::upload($file, 'posts-thumbs', "ngpictures-{$slug}-{$last_id}", 'medium');
                                 $this->articles->update($last_id, ['thumb' => "ngpictures-{$slug}-{$last_id}.jpg"]);
-                                $this->flash->set('success', $this->msg['admin_post_success']);
+                                $this->flash->set('success', $this->msg['form_post_submitted']);
                                 $this->app::redirect("/articles");
                             } else {
-                                $this->flash->set('danger', $this->msg['admin_file_notUploaded']);
+                                $this->flash->set('danger', $this->msg['files_not_uploaded']);
                                 $this->articles->delete($last_id);
                             }
                         } else {
                             var_dump($this->validator->getErrors());
                         }
                     } else {
-                        $this->flash->set('danger', $this->msg['admin_picture_required']);
+                        $this->flash->set('danger', $this->msg['post_requires_picture']);
                     }
                 }
             } else {
-                $this->flash->set('danger', $this->msg['admin_all_fields']);
+                $this->flash->set('danger', $this->msg['form_all_required']);
             }
         }
 
@@ -94,8 +105,8 @@ class ArticlesController extends Controller
 
             if (isset($_POST) && !empty($_POST)) {
                 if (!empty($post->get('content')) && !empty($post->get('title'))) {
-                    $this->validator->isEmpty('title', $this->msg['admin_all_fields']);
-                    $this->validator->isEmpty('content', $this->msg['admin_all_fields']);
+                    $this->validator->isEmpty('title', $this->msg['form_all_required']);
+                    $this->validator->isEmpty('content', $this->msg['form_all_required']);
 
                     if ($this->validator->isValid()) {
                         $title = $this->str::escape($post->get('title'));
@@ -104,13 +115,13 @@ class ArticlesController extends Controller
                         $category_id = (int) $post->get('category') ?? 1;
 
                         $this->articles->update($id, compact('title', 'content', 'slug', 'category_id'));
-                        $this->flash->set("success", $this->msg['admin_modified_success']);
+                        $this->flash->set("success", $this->msg['post_edit_success']);
                         $this->app::redirect("/account/post");
                     } else {
                         var_dump($this->validator->getErrors());
                     }
                 } else {
-                    $this->flash->set('danger', $this->msg['admin_all_fields']);
+                    $this->flash->set('danger', $this->msg['form_all_required']);
                 }
             }
 
@@ -137,20 +148,20 @@ class ArticlesController extends Controller
                 if ($this->isAjax()) {
                     exit();
                 }
-                $this->flash->set('success', $this->msg['admin_delete_success']);
+                $this->flash->set('success', $this->msg['post_delete_success']);
                 $this->app::redirect(true);
             } else {
                 if ($this->isAjax()) {
-                    $this->ajaxFail($this->msg['indefined_error']);
+                    $this->ajaxFail($this->msg['undefined_error']);
                 }
-                $this->flash->set('danger', $this->msg['indefined_error']);
+                $this->flash->set('danger', $this->msg['undefined_error']);
                 $this->app::redirect(true);
             }
         } else {
             if ($this->isAjax()) {
-                $this->ajaxFail($this->msg['admin_delete_notAllowed']);
+                $this->ajaxFail($this->msg['delete_not_allowed']);
             }
-            $this->flash->set('danger', $this->msg['admin_delete_notAllowed']);
+            $this->flash->set('danger', $this->msg['delete_not_allowed']);
             $this->app::redirect(true);
         }
     }
