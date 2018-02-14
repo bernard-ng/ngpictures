@@ -8,7 +8,7 @@
         <ul>
             <li id="Accueil"><a href="<?= ADMIN ?>"> front-end<i class="icon icon-home right"></i></a></li>
             <li id="administration - Blog"><a href="<?= ADMIN."/blog" ?>">blog <i class="icon icon-pencil right"></i></a></li>
-            <li id="administration - Actualités"><a href="<?= ADMIN."/articles" ?>">articles <i class="icon icon-globe right"></i></a></li>
+            <li id="administration - Actualités"><a href="<?= ADMIN."/posts" ?>">posts <i class="icon icon-globe right"></i></a></li>
             <li id="administration - Gallerie"><a href="<?= ADMIN."/gallery" ?>">Gallerie <i class="icon icon-picture right"></i></a></li>
             <li id="administration - users"><a href="<?= ADMIN."/users" ?>" class="ng-menu-item"> membres</a></li>
             <li>

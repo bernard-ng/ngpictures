@@ -37,10 +37,10 @@ CREATE TABLE `albums` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `articles`
+-- Structure de la table `posts`
 --
 
-CREATE TABLE `articles` (
+CREATE TABLE `posts` (
   `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(255) NOT NULL,
   `content` longtext NOT NULL,
@@ -53,10 +53,10 @@ CREATE TABLE `articles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `articles`
+-- Contenu de la table `posts`
 --
 
-INSERT INTO `articles` (`id`, `title`, `content`, `user_id`, `date_created`, `thumb`, `slug`, `category_id`, `online`) VALUES
+INSERT INTO `posts` (`id`, `title`, `content`, `user_id`, `date_created`, `thumb`, `slug`, `category_id`, `online`) VALUES
 (51, 'rhoncus. Donec est. Nunc ullamcorper,', 'Lorem ipsum dolor sit', 5, '2018-03-02 14:11:23', 'default.png', 'velit. Pellentesque ultricies dignissim lacus.', '7', 1),
 (52, 'consectetuer euismod est arcu ac', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 5, '2017-12-05 19:56:43', 'default.png', 'semper pretium neque. Morbi quis', '1', 1),
 (53, 'interdum. Nunc sollicitudin commodo ipsum.', 'Lorem ipsum dolor sit amet, consectetuer', 1, '2017-01-29 15:10:27', 'default.png', 'felis purus ac tellus. Suspendisse', '5', 1),
@@ -172,7 +172,7 @@ INSERT INTO `categories` (`id`, `title`, `description`, `slug`, `date_created`) 
 CREATE TABLE `comments` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
-  `articles` int(10) UNSIGNED DEFAULT NULL,
+  `posts` int(10) UNSIGNED DEFAULT NULL,
   `galery` int(10) UNSIGNED DEFAULT NULL,
   `blog` int(10) UNSIGNED DEFAULT NULL,
   `nggalery` int(10) UNSIGNED DEFAULT NULL,
@@ -184,7 +184,7 @@ CREATE TABLE `comments` (
 -- Contenu de la table `comments`
 --
 
-INSERT INTO `comments` (`id`, `user_id`, `articles`, `galery`, `blog`, `nggalery`, `comment`, `date_created`) VALUES
+INSERT INTO `comments` (`id`, `user_id`, `posts`, `galery`, `blog`, `nggalery`, `comment`, `date_created`) VALUES
 (1, 5, NULL, NULL, 64, NULL, '&lt;p&gt;cool&lt;/p&gt;', '2017-12-19 08:04:34'),
 (2, 5, NULL, NULL, 98, NULL, '&lt;p&gt;lol&lt;/p&gt;', '2017-12-26 18:36:54');
 
@@ -921,9 +921,9 @@ ALTER TABLE `albums`
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Index pour la table `articles`
+-- Index pour la table `posts`
 --
-ALTER TABLE `articles`
+ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
@@ -1013,9 +1013,9 @@ ALTER TABLE `verses`
 ALTER TABLE `albums`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT pour la table `articles`
+-- AUTO_INCREMENT pour la table `posts`
 --
-ALTER TABLE `articles`
+ALTER TABLE `posts`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 --
 -- AUTO_INCREMENT pour la table `blog`

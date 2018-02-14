@@ -2,9 +2,9 @@ $('document').ready(function(){
 
     //System de like en Ajax
     (function(){
-        var articles = document.querySelectorAll('article');
-        if (articles !== undefined) {
-            $(articles).each(
+        var posts = document.querySelectorAll('article');
+        if (posts !== undefined) {
+            $(posts).each(
                 function(){
                     var $that = $(this);
                     var $likeBtn = $that.find('#likeBtn');

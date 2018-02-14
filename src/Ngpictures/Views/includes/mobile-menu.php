@@ -34,11 +34,12 @@
 
             <?php if ($activeUser && $activeUser->rank == "admin") : ?>
                 <li><a href="<?= ADMIN ?>"> Admin&nbsp;<i class="icon icon-lock"></i></a></li>
+                <li><a href="/community">Communauté&nbsp;<i class="social social-users"></i></a></li>
             <?php endif; ?>
             
             <li id="Accueil"><a href="/home">Accueil&nbsp;<i class="icon icon-home"></i></a></li>
             <li id="Blog"><a href="/blog">Blog&nbsp;<i class="icon icon-pencil"></i></a></li>
-            <li id="Actualités"><a href="/articles">Actualités&nbsp;<i class="icon icon-globe"></i></a></li>
+            <li id="Actualites"><a href="/posts">Actualités&nbsp;<i class="icon icon-globe"></i></a></li>
             <li id="Gallerie"><a href="/gallery">Gallerie&nbsp;<i class="icon icon-picture"></i></a></li>
             
         </ul>

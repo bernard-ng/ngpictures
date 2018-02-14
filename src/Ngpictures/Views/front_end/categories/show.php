@@ -28,16 +28,16 @@
     </div>
     
     <div class="col s12">
-        <h2>Articles</h2>
-        <?php foreach ($articles as $article) : ?>
+        <h2>posts</h2>
+        <?php foreach ($posts as $post) : ?>
             <div class="col l3 m6 s12">
                 <div class="card verse-panel">
                     <div class="card-content ng-contain">
-                        <img src="<?= $article->thumbUrl ?>" width="100%" height="auto" alt="Photo de Profile">
-                        <span class="card-title"><?= $article->title ?></span>     
+                        <img src="<?= $post->thumbUrl ?>" width="100%" height="auto" alt="Photo de Profile">
+                        <span class="card-title"><?= $post->title ?></span>     
                     </div>
                     <div class="card-action">
-                        <a href="<?= $article->Url ?>">Voir</a>
+                        <a href="<?= $post->Url ?>">Voir</a>
                     </div>
                 </div>
             </div>

@@ -48,8 +48,8 @@
     </div>
     <div class="card col l12 s12 m12">
         <div class="section-title mb-20 mt-20 ml-10">
-            Les Derniers Articles
-            <span class="btn primary-b right"><?= count($site_articles) ?></span>
+            Les Derniers posts
+            <span class="btn primary-b right"><?= count($site_posts) ?></span>
         </div>
         <div class="col l6 m12 s12 mb-30 z-depth-2">
             <table class="responsive-table bordered striped">
@@ -61,8 +61,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php if (!empty($articles)) : ?>
-                    <?php foreach ($articles as $a) : ?>
+                <?php if (!empty($posts)) : ?>
+                    <?php foreach ($posts as $a) : ?>
                         <tr>
                             <td><b><?= $a->id ?></b></td>
                             <td><a href="<?= $a->url ?>"><?= $a->title ?></a></td>
@@ -100,7 +100,7 @@
                 </tbody>
             </table>
             <div class="card-action">
-                <b>Users posts</b> <a href="<?= ADMIN."/articles" ?>" class="right">see all</a>
+                <b>Users posts</b> <a href="<?= ADMIN."/posts" ?>" class="right">see all</a>
             </div>
         </div>
 

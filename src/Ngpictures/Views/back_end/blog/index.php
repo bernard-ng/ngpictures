@@ -11,7 +11,7 @@
                 </ul>
                 </div>
             </nav>
-            <div id="articlesContainer">
+            <div id="postsContainer">
                 <?php if (!empty($article)) : ?>
                     <article class="ng-article" id="<?= $article->id ?>">
                         <section class="ng-news-card-content">
@@ -50,8 +50,8 @@
         </div>
         <div class="card-panel">
             <div class="section-title mb-20 mt-20 ml-10">
-                Les Articles
-                <span class="btn primary-b right"><?= count($articles) ?></span>
+                Les posts
+                <span class="btn primary-b right"><?= count($posts) ?></span>
                 <a href="<?= ADMIN."/blog/add" ?>" class="right">
                     <button class="btn">
                         <i class="icon icon-plus" style="font-size: smaller !important;"></i>
@@ -69,8 +69,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php if (!empty($articles)) : ?>
-                    <?php foreach ($articles as $a) : ?>
+                <?php if (!empty($posts)) : ?>
+                    <?php foreach ($posts as $a) : ?>
                         <tr>
                             <td><b><?= $a->id ?></b></td>
                             <td><a href="<?= $a->url ?>"><?= $a->title ?></a></td>

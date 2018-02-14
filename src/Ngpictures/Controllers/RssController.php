@@ -17,14 +17,14 @@ class RssController extends Controller
     {
         if ($this->blog->last()) {
             $last = $this->blog->last()->date_created;
-            $articles = $this->blog->latest(0, 10);
+            $posts = $this->blog->latest(0, 10);
         } else {
             $this->flash->set('info', $this->msg['rss_empty']);
             $this->app::redirect(true);
         }
 
 
-        //$this->viewRender('others/rss', compact('last','articles'), false);
+        //$this->viewRender('others/rss', compact('last','posts'), false);
         header("Content-type: application/rss+xml");
         require APP."/Views/others/rss.xml";
     }

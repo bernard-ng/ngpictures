@@ -352,11 +352,11 @@ class UsersController extends Controller
         
             if ($user && $this->str::checkUserUrl($username, $user->name) == true) {
                 $verse = $this->callController('verses')->index();
-                $articles = $this->loadModel('articles')->findWithUser($user->id);
+                $posts = $this->loadModel('posts')->findWithUser($user->id);
 
                 $this->pageManager::setName($user->name);
                 $this->setLayout('users/account');
-                $this->viewRender('front_end/users/account/account', compact("verse", "user", "articles"));
+                $this->viewRender('front_end/users/account/account', compact("verse", "user", "posts"));
             } else {
                 $this->flash->set('danger', $this->msg['undefined_error']);
                 $this->app::redirect(true);

@@ -61,7 +61,7 @@ class FollowingController extends Controller
                 $followers = $this->users->findList($followers_list);
 
                 $this->pageManager::setName("Mes Abonnés");
-                $this->setLayout("articles/default");
+                $this->setLayout("posts/default");
                 $this->viewRender("front_end/users/account/followers", compact("followers"));
             } else {
                 $this->flash->set('danger', $this->msg['undefined_error']);

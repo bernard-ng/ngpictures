@@ -14,7 +14,7 @@
                         <span id="menu-item-active" data-isActive="<?= $pageManager::getActivePage() ?>"></span>
                         <li id="Accueil"><a href="/home" class="ng-menu-item"> front-end</a></li>
                         <li id="administration - blog"><a href="<?= ADMIN."/blog" ?>" class="ng-menu-item"> blog</a></li>
-                        <li id="administration - actualités"><a href="<?= ADMIN."/articles" ?>" class="ng-menu-item"> articles</a></li>
+                        <li id="administration - actualités"><a href="<?= ADMIN."/posts" ?>" class="ng-menu-item"> posts</a></li>
                         <li id="administration - gallerie"><a href="<?= ADMIN."/gallery" ?>" class="ng-menu-item"> Gallerie</a></li>
                         <li id="administration - users"><a href="<?= ADMIN."/users" ?>" class="ng-menu-item"> membres</a></li>
                         <li><a href="#"> <icon class="icon icon-chevron-down"></icon></a></li>

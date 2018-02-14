@@ -18,7 +18,7 @@ class GalleryController extends Controller
         $photos = $this->gallery->lastOnline();
 
         $this->pageManager::setName('Gallerie');
-        $this->setLayout('articles/default');
+        $this->setLayout('posts/default');
         $this->viewRender('front_end/gallery/index', compact('photo', 'photos'));
     }
 
@@ -29,7 +29,7 @@ class GalleryController extends Controller
 
         if ($photo && $photo->slug === $slug) {
             $this->pageManager::setName($photo->name);
-            $this->setLayout('articles/default');
+            $this->setLayout('posts/default');
             $this->viewRender('front_end/gallery/show', compact('photo'));
         } else {
             $this->flash->set("danger", $this->msg['post_not_found']);

@@ -9,7 +9,7 @@ class HomeController extends Controller
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
-        $this->loadModel(['blog', 'articles', 'categories', 'gallery']);
+        $this->loadModel(['blog', 'posts', 'categories', 'gallery']);
     }
 
     public function index()

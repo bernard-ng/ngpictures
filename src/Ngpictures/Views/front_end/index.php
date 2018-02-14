@@ -57,7 +57,7 @@
 
     <!-- ==================== PAGE CONTAIN ==================== -->
     <main class="col s12 m9 l6 xl6">
-       <div id="articlesContainer">
+       <div id="postsContainer">
             <!-- CARD -->
             <?php if (!empty($article)) : ?>
                 <article class="card" id="<?=$article->id ?>">

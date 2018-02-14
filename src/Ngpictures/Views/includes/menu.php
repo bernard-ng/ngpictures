@@ -11,7 +11,7 @@
                         <i class="social social-menu"></i>
                     </a>
                     <ul class="right hide-on-med-and-down links">
-                        <span id="menu-item-active" data-isActive="<?=$pageManager::getActivePage() ?>"></span>
+                        <span id="menu-item-active" data-isActive="<?= $pageManager::getActivePage() ?>"></span>
 
                         <?php if ($activeUser && $activeUser->rank == "admin") : ?>
                             <li><a href="<?= ADMIN ?>" class="ng-menu-item"> Admin</a></li>
@@ -24,7 +24,7 @@
 
 
                         <li id="Blog"><a href="/blog" class="ng-menu-item"> Blog</a></li>
-                        <li id="Actualités"><a href="/articles" class="ng-menu-item"> Actualités</a></li>
+                        <li id="Actualites"><a href="/posts" class="ng-menu-item"> Actualités</a></li>
                         <li id="Gallerie"><a href="/gallery" class="ng-menu-item"> Gallerie</a></li>
 
                         <?php if ($activeUser) : ?>

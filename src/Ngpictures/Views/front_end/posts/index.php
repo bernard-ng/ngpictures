@@ -1,41 +1,50 @@
 <main class="row container">
+    <nav class="nav z-depth-2">
+            <div class="nav-wrapper">
+                <ul>
+                    <li><a href="<?= $activeUser->friendsUrl; ?>">Mes abonnés</a></li>
+                    <li><a href="/posts/followers">Publication des mes abonnés</a></li>
+                    <li><a href="/posts/following">Publication des ceux que je suis</a></li>
+                </ul>
+            </div>
+        </nav>
     <?php include(APP."/Views/includes/left-aside.php"); ?>
 
     <div class="col s12 m9 l6 xl6">
         <div id="dataContainer">
-            <?php if (!empty($articles)) : ?>
-            <?php foreach ($articles as $a) : ?>
-                <article class="card" id="<?= $a->id ?>">
+            <?php if (!empty($posts)) : ?>
+            <?php foreach ($posts as $post) : ?>
+                <article class="card" id="<?= $post->id ?>">
                     <header class="ng-news-card-header">
                         <span class="ng-news-card-image-profil">
-                            <a href="<?= $a->userAvatarUrl ?>" class="zoombox">
-                                <img src="<?= $a->userAvatarUrl ?>" alt="Profile <?= $a->username ?>">
+                            <a href="<?= $post->userAvatarUrl ?>" class="zoombox">
+                                <img src="<?= $post->userAvatarUrl ?>" alt="Profile <?= $post->username ?>">
                             </a>
                         </span>
                         <p class="ng-news-card-header-title">
-                            <a href="<?= $a->userAccountUrl; ?>">
-                                <?= $a->Username; ?>
+                            <a href="<?= $post->userAccountUrl; ?>">
+                                <?= $post->Username; ?>
                             </a>
                         </p>
 
-                        <?php if ($a->thumb !== null) : ?>
-                            <a id="saveBtn" class="ng-news-card-header-icon" href="<?= $a->downloadUrl ?>" title="Signaler Contenu indésirable">
+                        <?php if ($post->thumb !== null) : ?>
+                            <a id="saveBtn" class="ng-news-card-header-icon" href="<?= $post->downloadUrl ?>" title="Signaler Contenu indésirable">
                                 <i class="icon icon icon-list"></i>
                             </a>
-                            <a id="picBtn" class="ng-news-card-header-icon" href="<?= $a->userGalleryUrl ?>" title="toutes les publication">
+                            <a id="picBtn" class="ng-news-card-header-icon" href="<?= $post->userGalleryUrl ?>" title="toutes les publication">
                                 <i class="icon icon icon-book"></i>
                             </a>
-                            <a id="saveBtn" class="ng-news-card-header-icon" href="<?= $a->downloadUrl ?>" title="télécharger la photo">
+                            <a id="saveBtn" class="ng-news-card-header-icon" href="<?= $post->downloadUrl ?>" title="télécharger la photo">
                                 <i class="icon icon icon-save"></i>
                             </a>
                         <?php endif; ?>
                     </header>
 
-                    <?php if ($a->thumb !== null) : ?>
+                    <?php if ($post->thumb !== null) : ?>
                         <div class="card-image">
                             <span class="ng-news-card-image-article">
-                                <a href="<?= $a->url ?>">
-                                    <img src="<?= $a->thumbUrl ?>" alt="Article Image" title="<?= $a->title ?>">
+                                <a href="<?= $post->url ?>">
+                                    <img src="<?= $post->thumbUrl ?>" alt="Article Image" title="<?= $post->title ?>">
                                 </a>
                             </span>
                         </div>
@@ -43,55 +52,55 @@
 
                     <main class="ng-news-card-content">
                         <section class="ng-news-card-title">
-                            <?php if ($a->category_id !== null) : ?>
-                                <a href="<?= $a->categoryUrl ?>"><i class="icon icon-tags"></i></a>
+                            <?php if ($post->category_id !== null) : ?>
+                                <a href="<?= $post->categoryUrl ?>"><i class="icon icon-tags"></i></a>
                             <?php endif; ?>
                             
-                            <h2><?= $a->title ?>&nbsp;<small><?= $a->category ?></small></h2>
+                            <h2><?= $post->title ?>&nbsp;<small><?= $post->category ?></small></h2>
                         </section>
                         <section>
-                            <p><?= $a->snipet ?></p>
-                            <a href="<?= $a->url ?>" class="ng-news-card-seemore right">Voir plus</a>
+                            <p><?= $post->snipet ?></p>
+                            <a href="<?= $post->url ?>" class="ng-news-card-seemore right">Voir plus</a>
                         </section>
                         <section id="articleInfo">
                             <div class="ng-news-card-stat">
                                 <i class="icon icon-thumbs-up"></i>&nbsp;
                                 <small>
-                                    <a id="showLikes" href="<?= $a->showLikesUrl ?>"><?= $a->likes ?></a>
+                                    <a id="showLikes" href="<?= $post->showLikesUrl ?>"><?= $post->likes ?></a>
                                 </small>
                             </div>
                             <div class="ng-news-card-stat">
                                 <i class="icon icon-comment"></i>&nbsp;
                                 <small>
-                                    <?= $a->commentsNumber ?>
+                                    <?= $post->commentsNumber ?>
                                 </small>
                             </div>
                             <div class="ng-news-card-stat">
                                 <i class="icon icon-time"></i>&nbsp;
                                 <small>
-                                    <time id="date_created" data-time="<?= strtotime($a->date_created) ?>"><?= $a->date_created ?></time>
+                                    <time id="date_created" data-time="<?= strtotime($post->date_created) ?>"><?= $post->date_created ?></time>
                                 </small>
                             </div>
                         </section>
                     </main>
                     <footer class="ng-news-card-footer" id="articleOptions">
-                        <a id="likeBtn" class="ng-news-card-footer-item <?= $a->isLike ?>" href="<?= $a->likeUrl ?>" title="aimer la publication">
+                        <a id="likeBtn" class="ng-news-card-footer-item <?= $post->isLike ?>" href="<?= $post->likeUrl ?>" title="aimer la publication">
                             <i class="icon icon-thumbs-up"></i>&nbsp;J'aime
                         </a>
 
-                        <a id="commentBtn" class="ng-news-card-footer-item modal-trigger" href="#cmtAdd-<?= $a->id ?>">
+                        <a id="commentBtn" class="ng-news-card-footer-item modal-trigger" href="#cmtAdd-<?= $post->id ?>">
                             <i class="icon icon-comment" ></i>&nbsp;Commenter
                         </a>
-                        <div id="cmtAdd-<?= $a->id ?>" class="modal">
+                        <div id="cmtAdd-<?= $post->id ?>" class="modal">
                             <div class="modal-content">
                                 <span class="section-title-b mb-20">Commenter</span>
-                                <form action="<?= $a->commentUrl ?>" method="POST">
+                                <form action="<?= $post->commentUrl ?>" method="POST">
                                     <div class="input-field">
                                         <textarea class="materialize-textarea" name="comment"></textarea>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="modal-action btn primary-b">ok</button>
-                                        <button id="cmtAdd-<?= $a->id ?>" type="reset" class="modal-action modal-close btn-flat">
+                                        <button id="cmtAdd-<?= $post->id ?>" type="reset" class="modal-action modal-close btn-flat">
                                             Annuler
                                         </button>
                                     </div>
@@ -115,7 +124,7 @@
                 </div>
             <?php endif; ?>
         </div>
-        <div id="feedMore" class="feed-btn" data-ajax="articles"><i class="icon icon-refresh rotate"></i> chargement</div>
+        <div id="feedMore" class="feed-btn" data-ajax="posts"><i class="icon icon-refresh rotate"></i> chargement</div>
     </div>
 
 <?php include(APP."/Views/includes/menu-aside.php"); ?>

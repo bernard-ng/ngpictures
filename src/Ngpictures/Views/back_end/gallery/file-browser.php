@@ -4,7 +4,7 @@
             <li class="right"><a href="<?= ADMIN."/file-browser/blog" ?>">Photo blog</a></li>
             <li class="right"><a href="<?= ADMIN."/file-browser/gallery" ?>">Photo site</a></li>
             <li class="right"><a href="<?= ADMIN."/file-browser/avatars/" ?>">Avatar membres</a></li>
-            <li class="right"><a href="<?= ADMIN."/file-browser/posts"?>">Photo articles</a></li>
+            <li class="right"><a href="<?= ADMIN."/file-browser/posts"?>">Photo posts</a></li>
             <li><a href="<?= ADMIN ?>">Back-end</a></li>
             <li><a href="/home">front-end</a></li>
         </ul>

@@ -11,7 +11,7 @@ trait TypesActionTrait
      * aimer et partager.
      * @var array
      */
-    private $types = [ 1 => 'articles','gallery','blog'];
+    private $types = [ 1 => 'posts','gallery','blog'];
 
 
     /**

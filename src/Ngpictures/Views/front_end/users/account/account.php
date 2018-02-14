@@ -163,8 +163,8 @@
     <?php endif; ?>
         <div class="col s12 m12 l9">
         <div id="dataContainers">
-            <?php if (!empty($articles)) : ?>
-            <?php foreach ($articles as $a) : ?>
+            <?php if (!empty($posts)) : ?>
+            <?php foreach ($posts as $a) : ?>
                 <article class="card" id="<?= $a->id ?>">
                     <header class="ng-news-card-header">
                         <span class="ng-news-card-image-profil">
@@ -275,7 +275,7 @@
                 </div>
             <?php endif; ?>
         </div>
-       <div id="feedMore" class="feed-btn" data-ajax="articles" data-user="<?= $user->id ?>"><i class="icon icon-refresh rotate"></i> chargement</div>
+       <div id="feedMore" class="feed-btn" data-ajax="posts" data-user="<?= $user->id ?>"><i class="icon icon-refresh rotate"></i> chargement</div>
     </div>
     <?php include(APP."/Views/includes/verset.php"); ?>
     <?php include(APP."/Views/includes/right-aside.php"); ?>

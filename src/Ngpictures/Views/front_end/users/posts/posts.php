@@ -5,7 +5,7 @@
         <div class="card-panel">
             <div class="section-title mb-20 mt-20 ml-10">
                 <i class="icon icon-pencil"></i>&nbsp;Mes publications
-                <span class="btn primary-b right"><?= count($articles) ?></span>
+                <span class="btn primary-b right"><?= count($posts) ?></span>
             </div>
             <table class="card responsive-table bordered striped">
                 <thead>
@@ -17,8 +17,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php if (!empty($articles)) : ?>
-                    <?php foreach ($articles as $a) : ?>
+                <?php if (!empty($posts)) : ?>
+                    <?php foreach ($posts as $a) : ?>
                         <tr>
                             <td><b><?= $a->id ?></b></td>
                             <td><a href="<?= $a->url ?>"><?= $a->title ?></a></td>

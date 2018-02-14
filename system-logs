@@ -554,3 +554,17 @@
 * Ng\Core\Managers\FlashMessageManager => 2018-02-14 18:32:37 : Vous êtes maintenant connecté  
 * Ng\Core\Managers\FlashMessageManager => 2018-02-14 18:32:38 : Vous êtes maintenant connecté  
 * Ng\Core\Managers\FlashMessageManager => 2018-02-14 18:34:32 : Votre publication a bien été effectuée  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-14 19:10:57 : Vous êtes maintenant déconnecté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-14 19:11:39 : Vous êtes maintenant connecté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-14 19:11:39 : Vous êtes maintenant connecté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-14 19:14:59 : Tous les champs doivent être compléter  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-14 19:17:47 : Tous les champs doivent être compléter  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-14 19:17:54 : Votre commentaire a bien été posté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-14 19:17:54 : Votre commentaire a bien été posté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-14 19:18:04 : Votre commentaire a bien été supprimé  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-14 19:18:12 : Votre commentaire a bien été supprimé  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-14 19:18:19 : Tous les champs doivent être compléter  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-14 19:18:35 : Votre commentaire a bien été posté  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-14 19:18:46 : Votre commentaire a bien été édité  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-14 19:20:00 : Vos informations ont été mises à jour  
+* Ng\Core\Managers\FlashMessageManager => 2018-02-14 20:14:42 : Votre publication a bien été supprimée  

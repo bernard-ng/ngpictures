@@ -17,7 +17,7 @@
         <section class="col l6 m4 s12">
         <h5 class="white-text page-footer-title">A propos</h5>
         <p class="grey-text text-lighten-4 page-footer-text">
-       Ngpictures est une galerie d'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos articles sur les sujets qui vous intéresses, étant chrétiens le site vous propose une fonctionnalité incroyable, "godfirst" : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l'avance.
+       Ngpictures est une galerie d'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens le site vous propose une fonctionnalité incroyable, "godfirst" : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l'avance.
         </p>
         </section>
         <section class="col l3 m4 s6">

@@ -12,7 +12,7 @@
                 
                 <main class="ng-news-card-content">
                     <span class="ng-news-card-title">
-                            <h1><?= $article->title ?></h1>
+                        <h1><?= $article->title ?></h1>
                     </span>
                     <content class="article-content">
                         <?= $article->content ?>
@@ -29,12 +29,7 @@
                         </div>
                         <div class="ng-news-card-stat">
                             <i class="icon icon-thumbs-up"></i>&nbsp;
-                            <small><a id="showLikes" href="/likes/<?= $article->SI ?>"><?= $article->likes ?></a></small>
-                        </div>
-                         <div class="ng-news-card-stat">
-                            <i class="icon icon-thumbs-down"></i>&nbsp;
-                            <small><a id="showLikes" href="/dislikes/<?= $article->SI ?>"><?= $article->dislikes ?></a></small>
-                            <a id="showMentions" href="#"><i class="right icon icon-menu-down"></i></a>
+                            <small><a id="showLikes" href="<?= $article->likeUrl ?>"><?= $article->likes ?></a></small>
                         </div>
                     </section>
                 </main>

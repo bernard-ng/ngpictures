@@ -99,10 +99,10 @@
                element: 'stat',
                data: [
                    {x: 'Users', y: <?= $users[0] ?? 0 ?>, z: <?= $users[1] ?? 0 ?>},
-                   {x: 'Articles', y: <?= $users_articles[0] ?? 0 ?>, z: <?= $users_articles[1] ?? 0?>},
+                   {x: 'posts', y: <?= $users_posts[0] ?? 0 ?>, z: <?= $users_posts[1] ?? 0?>},
                    {x: 'Online', y: <?= $users_online ?? 0 ?>},
                    {x: 'pictures', y: <?= $site_photos[0] ?? 0 ?>, z: <?= $site_photos[1] ?? 0 ?>},
-                   {x: 'Blog', y: <?= $site_articles[0] ?? 0 ?>, z: <?= $site_articles[1] ?? 0 ?>},
+                   {x: 'Blog', y: <?= $site_posts[0] ?? 0 ?>, z: <?= $site_posts[1] ?? 0 ?>},
                    {x: 'Categ.', y: <?= $site_categories ?? 0 ?>},
                    {x: 'Bugs', y: <?= $site_bugs  ?? 0 ?>},
                    {x: 'Ideas', y: <?= $site_ideas  ?? 0 ?>}

@@ -8,7 +8,7 @@
             </div>
             <div class="collapsible-body">
                 <div>
-                    Rétrouver nos articles dans les catégories suivantes
+                    Rétrouver nos posts dans les catégories suivantes
                 </div>
                 <br>
                  <ul>
@@ -27,13 +27,13 @@
         <li>
             <div class="collapsible-header active">
                 <span class="section-title">
-                    Derniers articles
+                    Derniers posts
                 </span>
         </div>
             <div class="collapsible-body">
                 <ul>
-                    <?php if (isset($articles) && !empty($articles)) : ?>
-                        <?php foreach ($articles as $a) : ?>
+                    <?php if (isset($posts) && !empty($posts)) : ?>
+                        <?php foreach ($posts as $a) : ?>
                            <i class="icon icon-globe"></i>&nbsp;<a href="<?= $a->url ?>" title="Voir plus"><?= $a->title ?></a><br>
                         <?php endforeach; ?>
                     <?php endif; ?>
@@ -49,7 +49,7 @@
 
             <div class="collapsible-body">
                 <span>
-                   Parcourez nos archives et rétrouver des anciens articles et photos
+                   Parcourez nos archives et rétrouver des anciens posts et photos
                 </span><br>
                 <ul>
                     <br><i class="icon icon-calendar"></i>&nbsp;<a href="/archives/decembre/2017">Décembre</a>

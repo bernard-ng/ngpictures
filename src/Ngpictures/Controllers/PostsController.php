@@ -6,14 +6,14 @@ use Ng\Core\Managers\ImageManager;
 use Ngpictures\Traits\Controllers\ShowPostTrait;
 use Ngpictures\Traits\Controllers\StoryPostTrait;
 
-class ArticlesController extends Controller
+class PostsController extends Controller
 {
-    public $table = "articles";
+    public $table = "posts";
 
     public function __construct(\Ngpictures\Ngpictures $app, \Ngpictures\Managers\PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
-        $this->loadModel('articles');
+        $this->loadModel('posts');
         $this->loadModel('categories');
     }
 
@@ -28,10 +28,10 @@ class ArticlesController extends Controller
             $user = $this->loadModel('users')->find(intval($id));
             
             if ($user) {
-                $articles = $this->articles->findWithUser($user->id);
+                $posts = $this->posts->findWithUser($user->id);
                 $this->pageManager::setName("Mes publications");
-                $this->setLayout("articles/default");
-                $this->viewRender("front_end/users/posts/posts", compact('articles', 'user'));
+                $this->setLayout("posts/default");
+                $this->viewRender("front_end/users/posts/posts", compact('posts', 'user'));
             } else {
                 $this->flash->set("danger", $this->msg['users_not_found']);
                 $this->app::redirect(true);
@@ -61,19 +61,19 @@ class ArticlesController extends Controller
                 if (isset($_FILES) && !empty($_FILES)) {
                     if (!empty($file->get('thumb.name'))) {
                         if ($this->validator->isValid()) {
-                            $this->articles->create(compact('user_id', 'title', 'content', 'slug', 'category_id'));
+                            $this->posts->create(compact('user_id', 'title', 'content', 'slug', 'category_id'));
 
-                            $last_id = $this->articles->lastInsertId();
+                            $last_id = $this->posts->lastInsertId();
                             $isUploaded = ImageManager::upload($file, 'posts', "ngpictures-{$slug}-{$last_id}", 'article');
 
                             if ($isUploaded) {
                                 ImageManager::upload($file, 'posts-thumbs', "ngpictures-{$slug}-{$last_id}", 'medium');
-                                $this->articles->update($last_id, ['thumb' => "ngpictures-{$slug}-{$last_id}.jpg"]);
+                                $this->posts->update($last_id, ['thumb' => "ngpictures-{$slug}-{$last_id}.jpg"]);
                                 $this->flash->set('success', $this->msg['form_post_submitted']);
-                                $this->app::redirect("/articles");
+                                $this->app::redirect("/posts");
                             } else {
                                 $this->flash->set('danger', $this->msg['files_not_uploaded']);
-                                $this->articles->delete($last_id);
+                                $this->posts->delete($last_id);
                             }
                         } else {
                             var_dump($this->validator->getErrors());
@@ -100,7 +100,7 @@ class ArticlesController extends Controller
 
         if ($token == $this->session->read(TOKEN_KEY)) {
             $post = new Collection($_POST);
-            $article = $this->articles->find(intval($id));
+            $article = $this->posts->find(intval($id));
             $post = new Collection($data ?? $_POST);
 
             if (isset($_POST) && !empty($_POST)) {
@@ -114,7 +114,7 @@ class ArticlesController extends Controller
                         $slug = $this->str::slugify($title);
                         $category_id = (int) $post->get('category') ?? 1;
 
-                        $this->articles->update($id, compact('title', 'content', 'slug', 'category_id'));
+                        $this->posts->update($id, compact('title', 'content', 'slug', 'category_id'));
                         $this->flash->set("success", $this->msg['post_edit_success']);
                         $this->app::redirect("/account/post");
                     } else {
@@ -138,7 +138,7 @@ class ArticlesController extends Controller
     public function delete($token)
     {
         $this->callController("users")->restrict();
-        $model = $this->loadModel("articles");
+        $model = $this->loadModel("posts");
         $post = new Collection($_POST);
         $post = $model->find(intval($post->get('id')));
        

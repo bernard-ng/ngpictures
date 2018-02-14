@@ -1,7 +1,7 @@
 <div class="parallax-container hide-on-small-and-down border-b">
     <span class="ng-cover"></span>
     <div class="parallax">
-        <img src="/Pictures/articles/<?= $article->thumb ?>" alt="Article Image" title="<?= $article->title ?>">
+        <img src="/Pictures/posts/<?= $article->thumb ?>" alt="Article Image" title="<?= $article->title ?>">
     </div>
 </div>
 <div class="row container">

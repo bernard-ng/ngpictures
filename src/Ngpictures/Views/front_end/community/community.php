@@ -3,8 +3,6 @@
         <div class="nav-wrapper">
             <ul>
                 <li><a href="<?= $activeUser->friendsUrl; ?>">Mes abonnés</a></li>
-                <li class="right"><a href="/community/designers">Les Designers</a></li>
-                <li class="right"><a href="/community/photographers">Les Photographes</a></li>
             </ul>
         </div>
     </nav>

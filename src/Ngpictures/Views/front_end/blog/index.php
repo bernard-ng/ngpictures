@@ -4,8 +4,8 @@
     <main class="col s12 l6 xl6 m9" role="main">
         <div class="no-padding">
             <div id="dataContainer">
-                <?php if (!empty($articles)) : ?>
-                <?php foreach ($articles as $a) : ?>
+                <?php if (!empty($posts)) : ?>
+                <?php foreach ($posts as $a) : ?>
                     <article class="card" id="<?= $a->id ?>">
                         <header class="card-image">
                             <div class="ng-article-img">

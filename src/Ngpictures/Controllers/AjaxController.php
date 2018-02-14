@@ -6,14 +6,14 @@ use Ng\Core\Managers\Collection;
 class AjaxController extends Controller
 {
     //ajout d'article infinite scroll
-    public function articles()
+    public function posts()
     {
         if ($this->isAjax()) {
             $post = new Collection($_POST);
 
             if ($post->has('lastId')) {
-                $result = $this->loadModel('articles')->findLess($post->get('lastId'));
-                require(APP."/Views/ajax/articles/cards.php");
+                $result = $this->loadModel('posts')->findLess($post->get('lastId'));
+                require(APP."/Views/ajax/posts/cards.php");
                 exit();
             } else {
                 $this->ajaxFail($this->msg['undefined_error']);

@@ -18,28 +18,10 @@ class CommunityController extends Controller
 
     public function index()
     {
-        $model = $this->users;
-        $users = $model->all();
+        $users = $this->users->all();
 
         $this->pageManager::setName("La communauté");
-        $this->setLayout("articles/default");
+        $this->setLayout("posts/default");
         $this->viewRender("front_end/community/community", compact('users'));
-    }
-
-    /*
-     * list les differents users photographer
-    */
-    public function photographers()
-    {
-        echo "photographers";
-    }
-
-
-    /*
-     * liste de designers
-    */
-    public function designers()
-    {
-        echo "designers";
     }
 }

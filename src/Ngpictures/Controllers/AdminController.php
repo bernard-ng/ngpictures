@@ -23,7 +23,7 @@ class AdminController extends Controller
      * @var array
      */
     private $types = [
-        1 => 'articles',
+        1 => 'posts',
         'gallery',
         'blog',
         'gallery',
@@ -58,21 +58,9 @@ class AdminController extends Controller
     {
         parent::__construct($app, $pageManager);
         $this->callController('users')->isAdmin();
+        
         $this->pageManager::setMeta(['name' => 'robots', 'content' => 'noindex']);
-
-        $this->loadModel(
-            [
-                'users',
-                'articles',
-                'blog',
-                'gallery',
-                'ideas',
-                'bugs',
-                'categories',
-                'verses',
-                'albums'
-            ]
-        );
+        $this->loadModel(['users', 'posts', 'blog', 'gallery', 'ideas', 'bugs', 'categories', 'verses', 'albums']);
     }
 
 
@@ -81,16 +69,16 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $articles = $this->articles->latest();
+        $posts = $this->posts->latest();
         $blog = $this->blog->latest();
 
-        $site_articles = [
+        $site_posts = [
             count($this->blog->lastOnline()),
             count($this->blog->lastOffline())
         ];
-        $users_articles = [
-            count($this->articles->lastOnline()),
-            count($this->articles->lastOffline())
+        $users_posts = [
+            count($this->posts->lastOnline()),
+            count($this->posts->lastOffline())
         ];
         $site_photos = [
             count($this->gallery->lastOnline()),
@@ -116,10 +104,10 @@ class AdminController extends Controller
         $this->viewRender(
             'back_end/index',
             compact(
-                'articles',
+                'posts',
                 'blog',
-                'site_articles',
-                'users_articles',
+                'site_posts',
+                'users_posts',
                 'site_photos',
                 'users_photos',
                 'users',
@@ -277,14 +265,14 @@ class AdminController extends Controller
      */
     public function blog()
     {
-        $articles = $this->blog->orderBy('id', 'DESC');
+        $posts = $this->blog->orderBy('id', 'DESC');
         $article = $this->blog->last();
         $this->pageManager::setName('admin - blog');
         $this->setLayout("admin/default");
         $this->viewRender(
             "back_end/blog/index",
             compact(
-                "articles",
+                "posts",
                 "article"
             )
         );
@@ -564,7 +552,7 @@ class AdminController extends Controller
 
     /**
      * modal de selection d'imageManager
-     * c'est juste un mediabrowser pour les articles
+     * c'est juste un mediabrowser pour les posts
      */
     public function mediaBrowser()
     {
@@ -706,18 +694,18 @@ class AdminController extends Controller
 
 
     /**
-     * gestion d'articles des utilisateurs
+     * gestion d'posts des utilisateurs
      */
-    public function articles()
+    public function posts()
     {
-        $articles = $this->articles->orderBy('id', 'DESC');
-        $article = $this->articles->last();
-        $this->pageManager::setName('admin - articles');
+        $posts = $this->posts->orderBy('id', 'DESC');
+        $article = $this->posts->last();
+        $this->pageManager::setName('admin - posts');
         $this->setLayout("Admin/default");
         $this->viewRender(
-            "back_end/articles/index",
+            "back_end/posts/index",
             compact(
-                "articles",
+                "posts",
                 "article"
             )
         );
