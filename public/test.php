@@ -1,20 +1,10 @@
 <?php
-
-use Ng\Core\Managers\SitemapManager;
-require dirname(__DIR__)."/src/Core/Managers/SitemapManager.php";
-
-$sitename = "http://127.1.1.1/";
-
-$sitemap = new SitemapManager($sitename);
-
-// ADDING URL TO SITEMAPS.XML
-$sitemap->addUrl("{$sitename}",                date('c'),  'daily',    '1');
-$sitemap->addUrl("{$sitename}/community",          date('c'),  'daily',    '0.5');
-$sitemap->addUrl("{$sitename}/gallery",          date('c'),  'daily');
-$sitemap->addUrl("{$sitename}/blog",          date('c'));
-
-// CREATING AND SUBMIT SITEMAPS.XML
-$sitemap->createSitemap();
-$sitemap->writeSitemap();
-$sitemap->updateRobots();
-$sitemap->submitSitemap();
+if (!isset($_SERVER['PHP_AUTH_USER'])) {
+header('WWW-Authenticate: Basic realm="Slyunix"');
+header('HTTP/1.0 401 Unauthorized');
+echo 'Texte utilisé si le visiteur utilise le bouton d\'annulation';
+exit;
+} else {
+echo "<p>Bonjour, {$_SERVER['PHP_AUTH_USER']}.</p>";
+echo "<p>Votre mot de passe est {$_SERVER['PHP_AUTH_PW']}.</p>";
+}

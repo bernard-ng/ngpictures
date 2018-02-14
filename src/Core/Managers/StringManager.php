@@ -39,7 +39,7 @@ class StringManager
      * @param string $string
      * @return string
      */
-    public static function KebabCase(string $string): string
+    public static function kebabCase(string $string): string
     {
         //&grave; &acute; &circ; &uml; &cedil; &tilde; &ring;
         $removed = preg_replace("#À|À|Á|Â|Ã|Ä|Å|à|á|â|ã|ä|å#", "a", $string);

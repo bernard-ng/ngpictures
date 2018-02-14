@@ -18,7 +18,7 @@
                         <?php endif; ?>
 
                         <li id="Accueil"><a href="/home" class="ng-menu-item">Accueil</a></li>
-                        <?php if ($activeUser): ?>
+                        <?php if ($activeUser) : ?>
                             <li id="Communauté"><a href="/community" class="ng-menu-item">Communauté</a></li>
                         <?php endif; ?>
 

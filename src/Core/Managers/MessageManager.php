@@ -29,7 +29,8 @@ abstract class MessageManager
        
     ];
 
-    public static function get(string $key) {
+    public static function get(string $key)
+    {
         return self::$msg[$key] ?? null;
     }
 }

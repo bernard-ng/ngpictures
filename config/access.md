@@ -2,7 +2,7 @@
  * db_host    =           larytech.com
  * db_name    =           larytech_ngbd
  * db_user    =           larytech_ngandu
- * db_pass    =           /&sF^2`Wjhquq2Hm~k`,   
+ * db_pass    =           /&sF^2`Wjhquq2Hm~k`,
 
 ## FTP ACCESS
  * user :	            bernard@larytech.com

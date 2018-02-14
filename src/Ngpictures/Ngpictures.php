@@ -1,15 +1,15 @@
 <?php
 namespace Ngpictures;
 
-
 use Ng\Core\Managers\StringManager;
-use Ng\Core\Managers\ConfigManager;
 use Ng\Core\Managers\CookieManager;
 use Ng\Core\Database\MysqlDatabase;
+use Ng\Core\Managers\ConfigManager;
 use Ng\Core\Managers\SessionManager;
 use Ngpictures\Managers\PageManager;
-use Ng\Core\Managers\ValidationManager;
+use Ng\Core\Managers\LogMessageManager;
 use Ngpictures\Managers\MessageManager;
+use Ng\Core\Managers\ValidationManager;
 use Ng\Core\Managers\FlashMessageManager;
 use Ngpictures\Traits\Util\SingletonTrait;
 use Ng\Core\Exception\ConfigManagerException;
@@ -137,10 +137,24 @@ class Ngpictures
     {
         return new MessageManager;
     }
-    
+
 
     //GENERAL APPLICATION METHODS
     //****************************************************************************/
+
+
+    public function exceptionHandler($e) {
+        $flash = new FlashMessageManager(new SessionManager());
+        $flash->set("danger", $e->getMessage());
+        self::redirect("/error-500");
+
+    }
+
+    public function errorHandler (int $errno , string $errstr , string $errfile) {
+        $flash = new FlashMessageManager(new SessionManager());
+        $flash->set("danger", $errstr);
+        self::redirect("/error-500");
+    }
 
 
     /**
@@ -152,7 +166,7 @@ class Ngpictures
         try {
             $settings = new ConfigManager(ROOT."/config/SystemConfig.php");
             return $settings->get('sys.debug');
-        } catch(ConfigManagerException $e) {
+        } catch (ConfigManagerException $e) {
             self::redirect("/error-500");
         }
     }
@@ -163,12 +177,12 @@ class Ngpictures
      */
     public static function hasCache(): bool
     {
-       try {
+        try {
             $settings = new ConfigManager(ROOT."/config/SystemConfig.php");
             return $settings->get('sys.cache');
-       } catch(ConfigManagerException $e) {
-           self::redirect("/error-500");
-       }
+        } catch (ConfigManagerException $e) {
+            self::redirect("/error-500");
+        }
     }
 
 

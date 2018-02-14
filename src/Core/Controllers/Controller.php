@@ -3,8 +3,8 @@ namespace Ng\Core\Controllers;
 
 class Controller
 {
-    protected $viewPath,
-                $layout;
+    protected $viewPath;
+    protected $layout;
 
    
     public function viewRender(string $view, array $variables = [], bool $layout = true)

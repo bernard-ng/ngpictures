@@ -4,6 +4,7 @@ namespace Ngpictures\Models;
 use Ng\Core\Models\Model;
 use Ngpictures\Traits\Models\FindQueryTrait;
 use Ngpictures\Traits\Models\LastQueryTrait;
+use Ngpictures\Traits\Models\SearchQueryTrait;
 
 class GalleryModel extends Model
 {
@@ -16,4 +17,5 @@ class GalleryModel extends Model
 
     use LastQueryTrait;
     use FindQueryTrait;
+    use SearchQueryTrait;
 }

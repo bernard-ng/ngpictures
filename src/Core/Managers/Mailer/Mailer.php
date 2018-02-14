@@ -18,8 +18,8 @@ class Mailer
      */
     public function __construct()
     {
-        $this->headers = "MIME-Version: 1.0\r\n";
-        $this->headers .= 'From: "Ngpictures"<ngpictures@larytech.com>'.'\n';
+        $this->headers = "MIME-Version: 1.0".'\n';
+        $this->headers .= 'From: "Ngpictures" <ngpictures@larytech.com>'.'\n';
         $this->headers .= 'Content-Type: text/html; charset="utf-8"'.'\n';
         $this->headers .= 'Content-Transfer-Encoding: 8bit';
     }
@@ -32,13 +32,13 @@ class Mailer
      * @param $link
      * @param $email
      */
-    public function accountConfirmation($link, $email)
+    public function accountConfirmation(string $link, string $email)
     {
 
         $confirmation_link = $link;
         $message = require  CORE."/Managers/Mailer/templates/confirmation-mail-template.php";
 
-        mail("ngandubernard@gmail.com", "Confirmation de compte - Ngpictures", $message, $this->headers);
+        mail($email, "Confirmation de compte - Ngpictures", $message, $this->headers);
     }
 
 
@@ -49,12 +49,12 @@ class Mailer
      * @param $link
      * @param $email
      */
-    public function resetPassword($link, $email)
+    public function resetPassword(string $link, string $email)
     {
         $reset_link = $link;
         $message = require CORE."/Managers/Mailer/templates/reset-mail-template.php";
 
-        mail("ngandubernard@gmail.com", "Mot de passe oublié - Ngpictures", $message, $this->headers);
+        mail($email, "Mot de passe oublié - Ngpictures", $message, $this->headers);
     }
 
 

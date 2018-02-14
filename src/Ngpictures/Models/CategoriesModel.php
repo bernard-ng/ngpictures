@@ -2,6 +2,7 @@
 namespace Ngpictures\Models;
 
 use Ng\Core\Models\Model;
+use Ngpictures\Traits\Models\SearchQueryTrait;
 
 class CategoriesModel extends Model
 {
@@ -10,4 +11,6 @@ class CategoriesModel extends Model
      * @var string
      */
     protected $table = "categories";
+
+    use SearchQueryTrait;
 }

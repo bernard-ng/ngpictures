@@ -58,6 +58,8 @@ $router->get("/download/:type/:name", "download", "download");
 $router->post("/comments/:type/:slug-:id","comments","comments.show");
 $router->post("/comments/edit/:id/:token", "comments#edit", "comments.edit");
 $router->get("/comments/delete/:id/:token", "comments#delete", "comments.delete");
+$router->get("/search", "search", "search.index");
+$router->get("/search/:q", "search", "search.index");
 $router->get("/rss", "rss", "rss.index");
 $router->get("/ideas", "ideas", "ideas.index");
 $router->post("/ideas", "ideas", "ideas.index");

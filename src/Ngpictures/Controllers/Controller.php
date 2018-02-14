@@ -17,7 +17,7 @@ class Controller extends SuperController
     protected $validator;
     protected $app;
 
-   
+
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         $this->viewPath = APP."/Views/";
@@ -34,7 +34,7 @@ class Controller extends SuperController
         $this->msg = $this->app->getMessageManager();
     }
 
-    
+
     public function viewRender(string $view, array $variables = [], bool $layout = true)
     {
         $variables['pageManager'] = $this->pageManager;

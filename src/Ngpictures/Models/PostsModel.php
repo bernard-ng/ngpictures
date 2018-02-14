@@ -3,6 +3,7 @@ namespace Ngpictures\Models;
 
 use Ng\Core\Models\Model;
 use Ngpictures\Traits\Models\FindQueryTrait;
+use Ngpictures\Traits\Models\SearchQueryTrait;
 
 class PostsModel extends Model
 {
@@ -11,9 +12,10 @@ class PostsModel extends Model
      * @var string
      */
     protected $table = "posts";
-    
+
 
     use FindQueryTrait;
+    use SearchQueryTrait;
 
 
     /**
@@ -39,8 +41,8 @@ class PostsModel extends Model
     public function findWithUser($id)
     {
         return $this->query(
-            "SELECT {$this->table}.*, categories.title as category 
-            FROM {$this->table} 
+            "SELECT {$this->table}.*, categories.title as category
+            FROM {$this->table}
             LEFT JOIN categories ON category_id = categories.id
             WHERE {$this->table}.user_id = ? ORDER BY date_created DESC LIMIT 0,5",
             [$id],

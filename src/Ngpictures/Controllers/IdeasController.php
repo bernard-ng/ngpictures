@@ -27,8 +27,9 @@ class IdeasController extends Controller
                 $user_id = $this->session->getValue('auth', 'id');
                 $this->loadModel('ideas')->create(compact('content', 'user_id'));
                 $this->flash->set('success', $this->msg['form_idea_submitted']);
+                $this->app::redirect("/home");
             } else {
-                $this->flash->set('danger', $this->msg['form_fied_required']);
+                $this->flash->set('danger', $this->msg['form_field_required']);
             }
         }
 

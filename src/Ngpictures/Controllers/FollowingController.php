@@ -47,8 +47,8 @@ class FollowingController extends Controller
 
     public function showFollowers(string $name, int $id, string $token)
     {
-       if ($this->session->read(TOKEN_KEY) == $token) {
-        $user =  $this->users->find(intval($id));
+        if ($this->session->read(TOKEN_KEY) == $token) {
+            $user =  $this->users->find(intval($id));
             if ($user) {
                 $followers = $this->following->findWith('followed_id', $user->id, false);
 
@@ -68,8 +68,8 @@ class FollowingController extends Controller
                 $this->app::redirect(true);
             }
         } else {
-           $this->flash->set('danger', $this->msg['undefined_error']);
-           $this->app::redirect(true);
+            $this->flash->set('danger', $this->msg['undefined_error']);
+            $this->app::redirect(true);
         }
     }
 

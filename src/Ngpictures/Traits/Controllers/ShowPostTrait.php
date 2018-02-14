@@ -1,7 +1,6 @@
 <?php
 namespace Ngpictures\Traits\Controllers;
 
-
 trait ShowPostTrait
 {
 
@@ -29,10 +28,10 @@ trait ShowPostTrait
                         compact("article", "verse", "comments", "user", "session")
                     );
                 } else {
-                   $this->app::redirect("/error-404");
+                    $this->app::redirect("/error-404");
                 }
             } else {
-               $this->app::redirect("/error-404");
+                $this->app::redirect("/error-404");
             }
         } else {
             $this->flash->set("danger", $this->msg['undefined_error']);

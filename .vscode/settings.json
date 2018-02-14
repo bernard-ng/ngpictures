@@ -1,2 +1,12 @@
 {
+    "mssql.connections": [
+        {
+            "server": "localhost",
+            "database": "ngbdd",
+            "user": "root",
+            "password": ""
+        }
+    ],
+    "files.defaultLanguage": "PHP",
+    "intelephense.completionProvider.backslashPrefix": false
 }

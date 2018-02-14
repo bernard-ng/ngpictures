@@ -14,11 +14,11 @@ class MysqlDatabase extends Database
      * defini dans le fichier de configuration
      * @var string
      */
-    private $db_user,
-            $db_pass,
-            $db_host,
-            $db_name,
-            $PDO;
+    private $db_user;
+    private $db_pass;
+    private $db_host;
+    private $db_name;
+    private $PDO;
 
     /**
      * MysqlDatabase constructor.

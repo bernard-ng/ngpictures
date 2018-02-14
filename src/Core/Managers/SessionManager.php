@@ -14,6 +14,7 @@ class SessionManager implements SessionInterface
      */
     public function __construct()
     {
+        session_name("NGPICTURES-SESSID");
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }

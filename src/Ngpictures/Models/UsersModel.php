@@ -2,6 +2,7 @@
 namespace Ngpictures\Models;
 
 use Ng\Core\Models\Model;
+use Ngpictures\Traits\Models\SearchQueryTrait;
 
 class UsersModel extends Model
 {
@@ -17,6 +18,9 @@ class UsersModel extends Model
      * @var string
      */
     protected $table = "users";
+
+
+    use SearchQueryTrait;
 
 
     /**

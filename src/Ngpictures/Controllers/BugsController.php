@@ -32,7 +32,8 @@ class BugsController extends Controller
                 $content = $this->str::escape($post->get('bugs'));
                 $user_id = $this->session->getValue('auth', 'id');
                 $this->loadModel('bugs')->create(compact('content', 'user_id'));
-                $this->flash->set('success', $this->msg['form_idea_submitted']);
+                $this->flash->set('success', $this->msg['form_bug_submitted']);
+                $this->app::redirect("/home");
             } else {
                 $this->flash->set('danger', $this->msg['form_field_required']);
             }

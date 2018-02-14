@@ -58,7 +58,7 @@ class AdminController extends Controller
     {
         parent::__construct($app, $pageManager);
         $this->callController('users')->isAdmin();
-        
+
         $this->pageManager::setMeta(['name' => 'robots', 'content' => 'noindex']);
         $this->loadModel(['users', 'posts', 'blog', 'gallery', 'ideas', 'bugs', 'categories', 'verses', 'albums']);
     }
@@ -319,7 +319,7 @@ class AdminController extends Controller
         $this->setLayout('admin/default');
         $this->viewRender('back_end/blog/edit', compact('article', 'categories', 'post'));
     }
-    
+
     /**
      * ajout d'un nouvel article
      * le contenu $content n'est pas echapper a cause de l'editeur

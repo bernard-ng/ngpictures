@@ -5,10 +5,10 @@ use Ngpictures\Ngpictures;
 
 class Route
 {
-    private $path,
-            $controller,
-            $matches = [],
-            $params = [];
+    private $path;
+    private $controller;
+    private $matches = [];
+    private $params = [];
 
     public function __construct(string $path, $controller)
     {
