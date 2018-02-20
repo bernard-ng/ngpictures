@@ -143,14 +143,15 @@ class Ngpictures
     //****************************************************************************/
 
 
-    public function exceptionHandler($e) {
+    public function exceptionHandler($e)
+    {
         $flash = new FlashMessageManager(new SessionManager());
         $flash->set("danger", $e->getMessage());
         self::redirect("/error-500");
-
     }
 
-    public function errorHandler (int $errno , string $errstr , string $errfile) {
+    public function errorHandler(int $errno, string $errstr, string $errfile)
+    {
         $flash = new FlashMessageManager(new SessionManager());
         $flash->set("danger", $errstr);
         self::redirect("/error-500");

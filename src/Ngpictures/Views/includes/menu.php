@@ -26,6 +26,12 @@
                         <li id="Blog"><a href="/blog" class="ng-menu-item"> Blog</a></li>
                         <li id="Actualites"><a href="/posts" class="ng-menu-item"> Actualités</a></li>
                         <li id="Gallerie"><a href="/gallery" class="ng-menu-item"> Gallerie</a></li>
+                        <li>
+                            <form action="/search" method="get">
+                                <input class="default-form" type="search" name="q" id="q">
+                                <input type="submit" value="send">
+                            </form>
+                        </li>
 
                         <?php if ($activeUser) : ?>
                             <li>

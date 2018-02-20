@@ -34,7 +34,7 @@
     </form>
 
     <div class="col s12">
-        <?php if(!empty($blog)): ?>
+        <?php if (!empty($blog)) : ?>
         <h4>Blog</h4>
         <?php foreach ($blog as $b) : ?>
             <div class="col l3 m6 s12">
@@ -53,7 +53,7 @@
     </div>
 
     <div class="col s12">
-    <?php if(!empty($posts)): ?>
+    <?php if (!empty($posts)) : ?>
         <h4>posts</h4>
         <?php foreach ($posts as $post) : ?>
             <div class="col l3 m6 s12">
@@ -68,10 +68,10 @@
                 </div>
             </div>
         <?php endforeach; ?>
-        <?php endif;?>
+    <?php endif;?>
     </div>
 
-    <?php if(empty($post) && empty($blog)): ?>
+    <?php if (empty($post) && empty($blog)) : ?>
         <div class="col s12">
             <h4>Aucun résultats :(</h4>
         </div>
