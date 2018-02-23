@@ -16,10 +16,10 @@ class SearchController extends Controller
     /*
      * index pour les recherches
     */
-    public function index(string $q = '')
+    public function index()
     {
-        if (isset($_GET['q']) or isset($q) && !empty($_GET['q']) or !empty($q)) {
-            $query = $this->str::escape($_GET['q'] ?? $q);
+        if (isset($_GET['q']) && !empty($_GET['q'])) {
+            $query = $this->str::escape($_GET['q']);
 
             $posts = $this->posts->search($query, "begin");
             $blog = $this->blog->search($query, "begin");

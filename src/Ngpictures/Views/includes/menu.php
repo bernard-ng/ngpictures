@@ -12,27 +12,25 @@
                     </a>
                     <ul class="right hide-on-med-and-down links">
                         <span id="menu-item-active" data-isActive="<?= $pageManager::getActivePage() ?>"></span>
-
-                        <?php if ($activeUser && $activeUser->rank == "admin") : ?>
-                            <li><a href="<?= ADMIN ?>" class="ng-menu-item"> Admin</a></li>
-                        <?php endif; ?>
-
-                        <li id="Accueil"><a href="/home" class="ng-menu-item">Accueil</a></li>
-                        <?php if ($activeUser) : ?>
-                            <li id="Communauté"><a href="/community" class="ng-menu-item">Communauté</a></li>
-                        <?php endif; ?>
-
-
-                        <li id="Blog"><a href="/blog" class="ng-menu-item"> Blog</a></li>
-                        <li id="Actualites"><a href="/posts" class="ng-menu-item"> Actualités</a></li>
-                        <li id="Gallerie"><a href="/gallery" class="ng-menu-item"> Gallerie</a></li>
                         <li>
                             <form action="/search" method="get">
                                 <input class="default-form" type="search" name="q" id="q">
                                 <input type="submit" value="send">
                             </form>
                         </li>
+                        <?php if ($activeUser && $activeUser->rank == "admin") : ?>
+                            <li><a href="<?= ADMIN ?>" class="ng-menu-item"> Admin</a></li>
+                        <?php endif; ?>
 
+                        <li id="Accueil"><a href="/home" class="ng-menu-item">Accueil</a></li>
+                        <?php if ($activeUser) : ?>
+                            <li id="La Communauté"><a href="/community" class="ng-menu-item">Communauté</a></li>
+                        <?php endif; ?>
+
+
+                        <li id="blog"><a href="/blog" class="ng-menu-item"> Blog</a></li>
+                        <li id="posts"><a href="/posts" class="ng-menu-item"> Actualités</a></li>
+                        <li id="Gallerie"><a href="/gallery" class="ng-menu-item"> Gallerie</a></li>
                         <?php if ($activeUser) : ?>
                             <li>
                                 <a href="<?= $activeUser->accountUrl; ?>">

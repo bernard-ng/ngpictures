@@ -10,8 +10,8 @@ class ConfigManager
     *   le tableau qui contiendra toutes le configuration initialiser.
     */
     private $settings = [];
-    
-    
+
+
     /**
     * charge la configuration dans l'instance. a partir d'un fichier.
     */

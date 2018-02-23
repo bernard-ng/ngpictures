@@ -1,7 +1,7 @@
 <?php
 namespace Ng\Core\Managers;
 
-use Ng\Core\Managers\MessageManager as Msg;
+use Ng\Core\Managers\MessageManager;
 use Intervention\Image\Exception\NotReadableException;
 use Intervention\Image\ImageManager as InterventionImage;
 
@@ -78,7 +78,7 @@ abstract class ImageManager
      * @param string $format
      * @return bool
      */
-    public static function upload(Collection $file, string $path, string $name, string $format)#
+    public static function upload(Collection $file, string $path, string $name, string $format)
     {
         $flash = new FlashMessageManager(SessionManager::getInstance());
 
@@ -93,7 +93,7 @@ abstract class ImageManager
                     try {
                         $image = $manager->make($file->get('thumb.tmp_name'));
                     } catch (NotReadableException $e) {
-                        $flash->set('danger', Msg::get('files_not_image'));
+                        $flash->set('danger', MessageManager::get('files_not_image'));
                         return false;
                     }
 
@@ -122,18 +122,18 @@ abstract class ImageManager
                         ->interlace(true)
                         ->save("{$path}/{$name}.jpg")
                         ->destroy();
-                        
+
                     return true;
                 } else {
-                    $flash->set('danger', Msg::get('files_too_big'));
+                    $flash->set('danger', MessageManager::get('files_too_big'));
                     return false;
                 }
             } else {
-                $flash->set('danger', Msg::get('files_not_image'));
+                $flash->set('danger', MessageManager::get('files_not_image'));
                 return false;
             }
         } else {
-            $flash->set('danger', Msg::get('files_not_uploaded'));
+            $flash->set('danger', MessageManager::get('files_not_uploaded'));
             return false;
         }
     }
@@ -144,18 +144,18 @@ abstract class ImageManager
      */
     public static function generateCaptcha()
     {
-        SessionManager::getInstance()->write("captcha", mt_rand(1000, 9999));
+        SessionManager::getInstance()->write(CAPTCHA_KEY, mt_rand(1000, 9999));
         $police = realpath(WEBROOT."/assets/fonts/28 Days Later.ttf");
 
         $manager = new InterventionImage();
         $manager->canvas(100, 30, "#fff")
-            ->text(Session::getInstance()->read(CAPTCHA_KEY), 25, 5, function ($font) use ($police) {
+            ->text(SessionManager::getInstance()->read(CAPTCHA_KEY), 25, 5, function ($font) use ($police) {
                 $font->file($police);
                 $font->size(23);
                 $font->color('#000');
                 $font->valign('top');
             })
-            ->save(ROOT."/Public/imgs/captcha.jpg")
+            ->save(ROOT."/public/imgs/captcha.jpg")
             ->destroy();
         exit();
     }
