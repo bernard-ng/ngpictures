@@ -2,7 +2,9 @@
     <nav class="nav z-depth-2">
             <div class="nav-wrapper">
                 <ul>
-                    <li><a href="<?= $activeUser->friendsUrl; ?>">Mes abonnés</a></li>
+                    <?php if ($activeUser): ?>
+                        <li><a href="<?= $activeUser->friendsUrl ?>">Mes abonnés</a></li>
+                    <?php endif; ?>
                     <li><a href="/posts/followers">Publication des mes abonnés</a></li>
                     <li><a href="/posts/following">Publication des ceux que je suis</a></li>
                 </ul>
@@ -22,8 +24,8 @@
                             </a>
                         </span>
                         <p class="ng-news-card-header-title">
-                            <a href="<?= $post->userAccountUrl; ?>">
-                                <?= $post->Username; ?>
+                            <a href="<?= $post->userAccountUrl ?>">
+                                <?= $post->Username ?>
                             </a>
                         </p>
 
@@ -55,7 +57,7 @@
                             <?php if ($post->category_id !== null) : ?>
                                 <a href="<?= $post->categoryUrl ?>"><i class="icon icon-tags"></i></a>
                             <?php endif; ?>
-                            
+
                             <h2><?= $post->title ?>&nbsp;<small><?= $post->category ?></small></h2>
                         </section>
                         <section>
@@ -66,7 +68,7 @@
                             <div class="ng-news-card-stat">
                                 <i class="icon icon-thumbs-up"></i>&nbsp;
                                 <small>
-                                    <a id="showLikes" href="<?= $post->showLikesUrl ?>"><?= $post->likes ?></a>
+                                    <a id="showLikes" href="<?= $post->likersUrl ?>"><?= $post->likes ?></a>
                                 </small>
                             </div>
                             <div class="ng-news-card-stat">
@@ -113,7 +115,7 @@
                         </a>
                     </footer>
                 </article>
-               
+
             <?php endforeach; ?>
             <?php else : ?>
                 <div class="card">

@@ -21,7 +21,7 @@
                         </div>
                         <div class="ng-news-card-stat">
                             <i class="icon icon-thumbs-up"></i>&nbsp;
-                            <small><a id="showLikes" href="/likes/<?= $article->SI ?>"><?= $article->likes ?></a></small>
+                            <small><a id="showLikes" href="<?= $article->likersUrl ?>"><?= $article->likes ?></a></small>
                         </div>
                          <div class="ng-news-card-stat">
                             <i class="icon icon-thumbs-down"></i>&nbsp;
@@ -61,4 +61,3 @@
     </div>
     <?php include(APP."/Views/includes/left-aside.php"); ?>
 </div>
-

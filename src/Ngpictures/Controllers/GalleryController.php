@@ -36,4 +36,14 @@ class GalleryController extends Controller
             $this->app::redirect(true);
         }
     }
+
+
+    public function albums()
+    {
+        $albums = $this->loadModel('albums')->all();
+
+        $this->pageManager::setName('albums');
+        $this->setLayout('posts/default');
+        $this->viewRender('front_end/gallery/albums', compact("albums"));
+    }
 }

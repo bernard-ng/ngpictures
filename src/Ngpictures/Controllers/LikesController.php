@@ -17,10 +17,10 @@ class LikesController extends Controller
         $this->user_id = intval($this->session->getValue(AUTH_KEY, 'id'));
     }
 
-    public function index($type, $slug, $id)
+    public function index(string $type, string $slug, int $id)
     {
         $like = $this->loadModel('likes');
-        $post = $this->loadModel($this->getType($type))->find(floor($id));
+        $post = $this->loadModel($this->getType($type))->find(intval($id));
 
         if ($post && $post->slug === $slug) {
             if ($like->isLiked($post->id, $type, $this->user_id)) {
@@ -36,6 +36,29 @@ class LikesController extends Controller
             }
             $this->flash->set("danger", $this->msg['undefined_error']);
             $this->app::redirect(true);
+        }
+    }
+
+
+    public function show(string $type, string $slug, int $id)
+    {
+        $post = $this->loadModel($this->getType($type))->find(intval($id));
+
+        if ($post && $post->slug === $slug) {
+            $likes = $this->loadModel('likes');
+            $likers = $likes->getLikers($id, $type);
+
+            $likers_list = [];
+            foreach($likers as $liker) {
+                $likers_list[] = $liker['user_id'];
+            }
+
+            $likers_list = implode(", ", $likers_list);
+            $likers = $this->loadModel('users')->findList($likers_list);
+
+            $this->pageManager::setName("Mentions j'aime");
+            $this->setLayout("posts/default");
+            $this->viewRender("front_end/posts/likers", compact("likers"));
         }
     }
 }

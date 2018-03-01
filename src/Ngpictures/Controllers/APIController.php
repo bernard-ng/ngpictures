@@ -9,7 +9,7 @@ use Ngpictures\Managers\PageManager;
 class APIController extends Controller
 {
     
-    private $clinet_app = null;
+    private $client_app = null;
 
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {

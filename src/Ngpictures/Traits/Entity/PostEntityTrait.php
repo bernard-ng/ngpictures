@@ -62,6 +62,13 @@ trait PostEntityTrait
     }
 
 
+    public function getLikersUrl(): string
+    {
+        $this->likersUrl = "/likes/show/{$this->action_type}/{$this->slug}-{$this->id}";
+        return $this->likersUrl;
+    }
+
+
     /**
      * lien pour commenter un publication
      * @return string

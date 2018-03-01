@@ -9,7 +9,7 @@
     <div class="col m10 l10 offset-m1 offset-l1">
         <!-- ARTICLE -->
             <article class="card ng-neg-top" id="<?= $article->id ?>">
-                
+
                 <main class="ng-news-card-content">
                     <span class="ng-news-card-title">
                         <h1><?= $article->title ?></h1>
@@ -29,7 +29,7 @@
                         </div>
                         <div class="ng-news-card-stat">
                             <i class="icon icon-thumbs-up"></i>&nbsp;
-                            <small><a id="showLikes" href="<?= $article->likeUrl ?>"><?= $article->likes ?></a></small>
+                            <small><a id="showLikes" href="<?= $article->likersUrl ?>"><?= $article->likes ?></a></small>
                         </div>
                     </section>
                 </main>
@@ -43,6 +43,5 @@
                 </footer>
             </article>
         <?php include(APP."/Views/includes/comments.php"); ?>
-        
-</div>
 
+</div>

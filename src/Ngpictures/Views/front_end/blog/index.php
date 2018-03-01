@@ -17,7 +17,7 @@
                                 <?php if ($a->category_id !== null) : ?>
                                     <a href="<?= $a->categoryUrl ?>"><i class="icon icon-tags"></i></a>
                                 <?php endif; ?>
-                                
+
                                 <h2><?= $a->title ?>&nbsp;<small><?= $a->category ?></small></h2>
                             </section>
                             <main>
@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="ng-news-card-stat">
                                     <i class="icon icon-thumbs-up"></i>&nbsp;
-                                    <small><a id="showLikes" href="/likes"><?= $a->Likes ?></a></small>
+                                    <small><a id="showLikes" href="<?= $a->LikersUrl; ?>"><?= $a->Likes ?></a></small>
                                 </div>
                             </footer>
                         </section>
@@ -63,7 +63,7 @@
                     </div>
                 <?php endif; ?>
             </div>
-            <div id="feedMore" class="feed-btn" data-ajax="blog"><i class="icon icon-refresh rotate"></i> chargement</div>    
+            <div id="feedMore" class="feed-btn" data-ajax="blog"><i class="icon icon-refresh rotate"></i> chargement</div>
         </div>
     </main>
     <section class="col s12 hide-on-med-and-up" id="singleOptions-mobile">
@@ -80,7 +80,7 @@
                 <i class="icon icon-user"></i></button>
         </div>
     </section>
-    
+
     <?php include(APP."/Views/includes/menu-aside.php"); ?>
-   
+
 </section>

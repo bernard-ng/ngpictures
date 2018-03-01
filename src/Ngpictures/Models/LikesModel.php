@@ -15,7 +15,7 @@ class LikesModel extends Model
      */
     protected $table = "likes";
 
-    
+
     use TypesActionTrait;
 
 
@@ -71,6 +71,18 @@ class LikesModel extends Model
             true,
             false,
             true
+        );
+    }
+
+
+    public function getLikers(int $id, int $t)
+    {
+        return $this->query(
+            "SELECT user_id FROM {$this->table} WHERE {$this->getType($t)} = {$id}",
+            [$id],
+            true,
+            false,
+            false
         );
     }
 
