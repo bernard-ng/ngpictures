@@ -17,16 +17,17 @@ $router->get("/sign", "users#sign", "users.sign");
 $router->post("/sign", "users#sign", "users.sign");
 $router->get("/confirm/:id/:token", "users#confirm", "users.confirmation");
 
-$router->get("/account/:user-:id", "users#account", "users.account");
-$router->get("/account/edit/:user-:id/:token", "users#edit", "users.edit");
-$router->post("/account/edit/:user-:id/:token", "users#edit", "users.edit");
-$router->get("/account/my-friends/:user-:id/:token", "following#showFollowers", "users.show-followers");
-$router->get("/account/my-posts/:user-:id/:token", "posts#showPosts", "posts.show-post");
-$router->get("/account/post", "posts#add", "posts.add");
-$router->post("/account/post", "posts#add", "posts.add");
-$router->get("/account/post/edit/:id/:token", "posts#edit", "posts.edit-article");
-$router->post("/account/post/edit/:id/:token", "posts#edit", "posts.edit");
-$router->post("/account/post/delete/:token", "posts#delete", "posts.delete");
+$router->get("/:user-:id", "users#account", "users.account");
+$router->get("/u/edit/:user-:id/:token", "users#edit", "users.edit");
+$router->post("/u/edit/:user-:id/:token", "users#edit", "users.edit");
+$router->get("/u/followers/:user-:id/:token", "following#showFollowers", "users.show-followers");
+$router->get("/u/following/:user-:id/:token", "following#showFollowing", "users.show-following");
+$router->get("/u/posts/:user-:id/:token", "posts#showPosts", "posts.show-post");
+$router->get("/u/post", "posts#add", "posts.add");
+$router->post("/u/post", "posts#add", "posts.add");
+$router->get("/u/post/edit/:id/:token", "posts#edit", "posts.edit-article");
+$router->post("/u/post/edit/:id/:token", "posts#edit", "posts.edit");
+$router->post("/u/post/delete/:token", "posts#delete", "posts.delete");
 
 
 //community pages

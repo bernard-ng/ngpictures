@@ -33,6 +33,13 @@ class CommentsModel extends Model
     }
 
 
+    /**
+     * renvoi le nombre de commentaire
+     *
+     * @param integer $id
+     * @param string $type
+     * @return void
+     */
     public function getNumber(int $id, string $type)
     {
         return $this->query(

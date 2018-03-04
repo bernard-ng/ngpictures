@@ -8,28 +8,28 @@
 
 
 .tag-label {
-    background: rgb(85, 85, 85); 
-    padding: 2px 5px; 
-    border-radius: 3px; 
-    color: rgb(255, 255, 255); 
-    font-size: 12px; 
-    text-decoration: none; 
-    margin-left: 5px; 
-    vertical-align: middle; 
+    background: rgb(85, 85, 85);
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+    text-decoration: none;
+    margin-left: 5px;
+    vertical-align: middle;
     display: inline-block;
 }
 
 .profile-header {
-    
+
 }
 .profile-header__img {
     background: rgb(238, 238, 238);
     border-radius: 50%;
-    width: 100px; 
-    height: 100px; 
-    overflow: hidden; 
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
     margin: 10px;
-    vertical-align: middle; 
+    vertical-align: middle;
     display: inline-block;
 }
 .profile-header__content {
@@ -51,35 +51,35 @@
     font-family: robot-title
 }
 .profile-header__subtitle {
-    margin: 5px 0px; 
-    color: #00695c; 
-    font-size: 14px; 
+    margin: 5px 0px;
+    color: #00695c;
+    font-size: 14px;
     display: block;
 }
 .profile-header__links {
-    color: rgb(85, 85, 85); 
+    color: rgb(85, 85, 85);
     font-size: 14px;
 }
 .profile-header__link {
-    color: inherit; 
-    text-decoration: none; 
-    margin-right: 10px; 
+    color: inherit;
+    text-decoration: none;
+    margin-right: 10px;
     white-space: nowrap;
 }
 
 
 .profile-header__actions {
-    top: 50%; 
-    text-align: right; 
-    right: -15px; 
-    margin-top: -20px; 
+    top: 50%;
+    text-align: right;
+    right: -15px;
+    margin-top: -20px;
     position: absolute;
 }
 .profile-header__action {
-    padding: 0px; 
-    width: 60px; 
-    height: 40px; 
-    line-height: 40px; 
+    padding: 0px;
+    width: 60px;
+    height: 40px;
+    line-height: 40px;
     margin-left: 10px;
 }
 .profile-header__facebook {
@@ -145,7 +145,7 @@
     </div>
 
     <div class="col l12 m12 s12 bio">
-        <?= $user->bio ?>       
+        <?= $user->bio ?>
     </div>
 </div>
 <?php include(APP."/Views/includes/left-aside.php"); ?>
@@ -154,9 +154,10 @@
         <nav class="nav z-depth-2">
             <div class="nav-wrapper">
                 <ul>
-                    <li><a href="/account/post">Poster</a></li>
+                    <li><a href="<?= $user->addPostUrl ?>">Poster</a></li>
                     <li class="right"><a href="<?= $user->postsUrl;  ?>">Mes publications</a></li>
-                    <li class="right"><a href="<?= $user->friendsUrl; ?>">Mes abonnés</a></li>
+                    <li class="right"><a href="<?= $user->followersUrl; ?>">Mes abonnés</a></li>
+                    <li class="right"><a href="<?= $user->followingsUrl; ?>">Mes abonnements</a></li>
                 </ul>
             </div>
         </nav>
@@ -206,7 +207,7 @@
                             <?php if ($a->category_id !== null) : ?>
                                 <a href="<?= $a->categoryUrl ?>"><i class="icon icon-tags"></i></a>
                             <?php endif; ?>
-                            
+
                             <h2><?= $a->title ?>&nbsp;<small><?= $a->category ?></small></h2>
                         </section>
                         <section>
@@ -264,7 +265,7 @@
                         </a>
                     </footer>
                 </article>
-               
+
             <?php endforeach; ?>
             <?php else : ?>
                 <div class="card">

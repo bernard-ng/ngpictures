@@ -1,15 +1,15 @@
 <main class="row container">
+
+    <?php if ($activeUser) : ?>
     <nav class="nav z-depth-2">
             <div class="nav-wrapper">
                 <ul>
-                    <?php if ($activeUser): ?>
-                        <li><a href="<?= $activeUser->friendsUrl ?>">Mes abonnés</a></li>
-                    <?php endif; ?>
-                    <li><a href="/posts/followers">Publication des mes abonnés</a></li>
-                    <li><a href="/posts/following">Publication des ceux que je suis</a></li>
+                    <li><a href="/posts/following">Mes abonnements</a></li>
                 </ul>
             </div>
         </nav>
+    <?php endif; ?>
+
     <?php include(APP."/Views/includes/left-aside.php"); ?>
 
     <div class="col s12 m9 l6 xl6">

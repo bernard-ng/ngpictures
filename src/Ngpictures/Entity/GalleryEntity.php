@@ -18,7 +18,20 @@ class GalleryEntity extends Entity
      */
     public function getThumbUrl(): string
     {
-        $this->thumbUrl = "/uploads/{$this->file_path}/thumbs/{$this->thumb}";
+        $this->thumbUrl = "/uploads";
+        $this->thumbUrl .= "/{$this->file_path}/{$this->thumb}";
         return $this->thumbUrl;
+    }
+
+
+    /**
+     * lien vers l'image de la publication
+     * @return string
+     */
+    public function getImageUrl(): string
+    {
+        $this->imageUrl = "/uploads";
+        $this->imageUrl .= "/{$this->file_path}/{$this->thumb}";
+        return $this->imageUrl;
     }
 }

@@ -12,7 +12,8 @@ trait PostEntityTrait
      */
     public function getUrl(): string
     {
-        $this->url = "/{$this->action_url}/{$this->slug}-{$this->id}";
+        $this->url = "/{$this->action_url}";
+        $this->url .= "/{$this->slug}-{$this->id}";
         return $this->url;
     }
 
@@ -23,8 +24,9 @@ trait PostEntityTrait
      */
     public function getCategoryUrl(): string
     {
-        $category= StringManager::Slugify($this->category);
-        $this->categoryUrl = "/categories/{$category}-{$this->category_id}";
+        $category = StringManager::Slugify($this->category);
+        $this->categoryUrl = "/categories";
+        $this->categoryUrl .= "/{$category}-{$this->category_id}";
         return $this->categoryUrl;
     }
 
@@ -35,7 +37,8 @@ trait PostEntityTrait
      */
     public function getThumbUrl(): string
     {
-        $this->thumbUrl = "/uploads/{$this->file_path}/{$this->thumb}";
+        $this->thumbUrl = "/uploads";
+        $this->thumbUrl .= "/{$this->file_path}/{$this->thumb}";
         return $this->thumbUrl;
     }
 
@@ -46,7 +49,8 @@ trait PostEntityTrait
      */
     public function getDownloadUrl(): string
     {
-        $this->downloadUrl = "/download/{$this->action_type}/{$this->thumb}";
+        $this->downloadUrl = "/download";
+        $this->downloadUrl .= "/{$this->action_type}/{$this->thumb}";
         return $this->downloadUrl;
     }
 
@@ -57,14 +61,23 @@ trait PostEntityTrait
      */
     public function getLikeUrl(): string
     {
-        $this->likeurl = "/likes/{$this->action_type}/{$this->slug}-{$this->id}";
-        return $this->likeurl;
+        $this->likeUrl = "/likes";
+        $this->likeUrl .= "/{$this->action_type}";
+        $this->likeUrl .= "/{$this->slug}-{$this->id}";
+        return $this->likeUrl;
     }
 
 
+    /**
+     * lien pour voir ceux qui aime la publication
+     *
+     * @return string
+     */
     public function getLikersUrl(): string
     {
-        $this->likersUrl = "/likes/show/{$this->action_type}/{$this->slug}-{$this->id}";
+        $this->likersUrl = "/likes/show";
+        $this->likersUrl .= "/{$this->action_type}";
+        $this->likersUrl .= "/{$this->slug}-{$this->id}";
         return $this->likersUrl;
     }
 
@@ -75,7 +88,9 @@ trait PostEntityTrait
      */
     public function getCommentUrl(): string
     {
-        $this->commentUrl = "/comments/{$this->action_type}/{$this->slug}-{$this->id}";
+        $this->commentUrl = "/comments";
+        $this->commentUrl .= "/{$this->action_type}";
+        $this->commentUrl .= "/{$this->slug}-{$this->id}";
         return $this->commentUrl;
     }
 
@@ -101,6 +116,11 @@ trait PostEntityTrait
     }
 
 
+    /**
+     * renvoi le woridins de commentaire
+     *
+     * @return string
+     */
     public function getCommentsNumber(): string
     {
         $comments = Ngpictures::getInstance()->getModel('comments');

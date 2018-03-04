@@ -36,6 +36,17 @@ class Model
         return $this->table;
     }
 
+
+    /**
+     * renvoi le nom de la table
+     * @return string
+     */
+    public function getTable(): string
+    {
+        return $this->table;
+    }
+
+
     /**
      * query permet de faire de requete sql
      *
@@ -61,7 +72,7 @@ class Model
     ) {
         $class = ($class === true)? str_replace("Model", "Entity", get_class($this)) : false;
         $class = str_replace("Entitys", "Entity", $class);
-        
+
         if ($data === null) {
             return $this->db->query($statement, $class, $one, $rowCount);
         } else {
@@ -88,7 +99,7 @@ class Model
 
         $sql = implode(', ', $array_sql);
         $array_data[] = $id;
-        
+
         return $this->query("UPDATE {$this->table} SET $sql WHERE id = ? ", $array_data);
     }
 
@@ -121,16 +132,6 @@ class Model
     public function delete(int $id)
     {
         return $this->query("DELETE FROM {$this->table} WHERE id = ?", [$id], true, true);
-    }
-
-
-    /**
-     * renvoi le nom de la table
-     * @return string
-     */
-    public function getTable(): string
-    {
-        return $this->table;
     }
 
 
@@ -187,6 +188,24 @@ class Model
 
 
     /**
+     * query les donnes par rapport a une liste
+     * de resultat.
+     *
+     * @param string $list
+     * @return void
+     */
+    public function findList(string $list)
+    {
+        return $this->query(
+            "SELECT * FROM {$this->table} WHERE id IN ({$list}) ",
+            null,
+            true,
+            false
+        );
+    }
+
+
+    /**
      * recupere un enregistrement suivant l'id et un autre champ
      * @param string $field
      * @param $value
@@ -208,8 +227,8 @@ class Model
     {
         return $this->query(
             "
-            SELECT {$this->table}.*, categories.title as category 
-            FROM {$this->table} 
+            SELECT {$this->table}.*, categories.title as category
+            FROM {$this->table}
             LEFT JOIN categories ON category_id = categories.id
             WHERE online = 1 ORDER BY id DESC LIMIT {$from},{$to}",
             null,
@@ -227,8 +246,8 @@ class Model
     {
         return $this->query(
             "
-            SELECT {$this->table}.*, categories.title as category 
-            FROM {$this->table} 
+            SELECT {$this->table}.*, categories.title as category
+            FROM {$this->table}
             LEFT JOIN categories ON category_id = categories.id
             WHERE online = 1 ORDER BY id DESC",
             null,
@@ -246,8 +265,8 @@ class Model
     {
         return $this->query(
             "
-            SELECT {$this->table}.*, categories.title as category 
-            FROM {$this->table} 
+            SELECT {$this->table}.*, categories.title as category
+            FROM {$this->table}
             LEFT JOIN categories ON category_id = categories.id
             WHERE online = 1 ORDER BY id DESC ",
             null,
@@ -261,8 +280,8 @@ class Model
     {
         return $this->query(
             "
-            SELECT {$this->table}.*, categories.title as category 
-            FROM {$this->table} 
+            SELECT {$this->table}.*, categories.title as category
+            FROM {$this->table}
             LEFT JOIN categories ON category_id = categories.id
             WHERE online = 0 ORDER BY id DESC ",
             null,

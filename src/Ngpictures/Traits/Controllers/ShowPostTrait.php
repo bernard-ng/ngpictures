@@ -5,9 +5,13 @@ trait ShowPostTrait
 {
 
     /**
-    * affichage d'un article
-    */
-    public function show($slug, $id)
+     * affiche une publication
+     *
+     * @param string $slug
+     * @param integer $id
+     * @return void
+     */
+    public function show(string $slug, int $id)
     {
         if (!empty($slug) && !empty($id)) {
             $article = $this->loadModel($this->table)->find(intval($id));

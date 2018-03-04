@@ -49,7 +49,7 @@ class LikesController extends Controller
             $likers = $likes->getLikers($id, $type);
 
             $likers_list = [];
-            foreach($likers as $liker) {
+            foreach ($likers as $liker) {
                 $likers_list[] = $liker['user_id'];
             }
 

@@ -11,7 +11,8 @@ class AlbumsEntity extends Entity
      */
     public function getUrl(): string
     {
-        $this->url = "/Albums/{$this->slug}-{$this->id}";
+        $this->url = "/gallery/albums";
+        $this->url .= "/{$this->slug}-{$this->id}";
         return $this->url;
     }
 }

@@ -19,16 +19,7 @@ class PostsModel extends Model
 
 
     /**
-     * @param $user_id
-     * @return mixed
-     */
-    public function lastByUser($user_id)
-    {
-        return $this->query("SELECT * FROM {$this->table} WHERE user_id = ? ORDER BY date_created DESC", [$user_id]);
-    }
-
-
-    /**
+     * listage des publication par categories
      * @param $category_id
      * @return mixed
      */
@@ -38,7 +29,13 @@ class PostsModel extends Model
     }
 
 
-    public function findWithUser($id)
+    /**
+     * find toute les publication du user selon la category
+     *
+     * @param int $id
+     * @return void
+     */
+    public function findWithUser(int $id)
     {
         return $this->query(
             "SELECT {$this->table}.*, categories.title as category

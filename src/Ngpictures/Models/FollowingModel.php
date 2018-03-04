@@ -2,9 +2,19 @@
 namespace Ngpictures\Models;
 
 use Ng\Core\Models\Model;
+use Ngpictures\Ngpictures;
+use Ng\Core\Database\MysqlDatabase;
 
 class FollowingModel extends Model
 {
+
+    public function __construct(MysqlDatabase $db)
+    {
+        parent::__construct($db);
+        $this->session = Ngpictures::getInstance()->getSession();
+    }
+
+
     /**
      * nom de la table
      * @var string
@@ -43,21 +53,34 @@ class FollowingModel extends Model
         );
     }
 
+
     /**
-     * check si un user suis un autre
-     * @param int $followed_id
-     * @param null $user_id
-     * @return bool
+     * le user est follow ?
+     *
+     * @param integer $id
+     * @param int|null $user_id
+     * @return boolean
      */
-    public function isFollowed(int $followed_id, $user_id = null): bool
+    public function isFollowed(int $id, $user_id = null): bool
     {
         $req = $this->query(
             "SELECT id FROM {$this->table} WHERE followed_id = ? AND follower_id = ? ",
-            [$followed_id,$user_id],
+            [$id,$user_id],
             true,
             true
         );
-        
-        return ($req)? true : false ;
+        return ($req)? true : false;
+    }
+
+
+    /**
+     * le user est follow ?
+     * methode pour les entity
+     * @param int $id
+     * @return string
+     */
+    public function isMentionnedFollow(int $id): string
+    {
+        return $this->isFollowed($id, $this->session->getValue(AUTH_KEY, 'id'));
     }
 }

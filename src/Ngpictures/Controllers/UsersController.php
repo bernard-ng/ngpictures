@@ -34,7 +34,7 @@ class UsersController extends Controller
     {
         $token = $this->str::escape($token);
         $user = $this->users->isNotConfirmed(intval($user_id));
-        
+
         if ($user && $user->confirmation_token === $token) {
             $this->users->unsetConfirmationToken($user->id);
             $this->connect($user);
@@ -133,7 +133,7 @@ class UsersController extends Controller
         $email = $this->str::escape($email);
         $token = $this->str::setToken(60);
         $this->users->add($name, $email, $password, $token);
-        
+
         $user_id = $this->users->lastInsertId();
         $link = SITE_NAME."/confirm/{$user_id}/{$token}";
 
@@ -180,7 +180,7 @@ class UsersController extends Controller
     }
 
 
-    
+
     /***************************************************************************
     *                   LOGIN SYSTEM && RESTRICTIONS
     ****************************************************************************/
@@ -232,7 +232,7 @@ class UsersController extends Controller
     {
         if (!$this->isLogged()) {
             $this->session->write(AUTH_KEY, $user);
-            $this->session->write(TOKEN_KEY, $this->str::setToken(60));
+            $this->session->write(TOKEN_KEY, $this->str::setToken(10));
             $this->flash->set('success', $msg ?? $this->msg['users_login_success']);
         }
     }
@@ -246,7 +246,7 @@ class UsersController extends Controller
         if ($this->cookie->hasKey(COOKIE_REMEMBER_KEY) && !$this->isLogged()) {
             $remember_token = $this->cookie->read(COOKIE_REMEMBER_KEY);
             $user = $this->users->find(explode(".", $remember_token)[2]);  //user id
-            
+
             if ($user) {
                 $expected = "NG.23.{$user->id}.{$user->remember_token}";
                 if ($expected === $remember_token) {
@@ -261,7 +261,7 @@ class UsersController extends Controller
         }
     }
 
-    
+
     /**
      * definit un remember token
      * @param int $user_id
@@ -349,7 +349,7 @@ class UsersController extends Controller
         if (!empty($username) && !empty($id)) {
             $user = $this->users->find(intval($id));
 
-        
+
             if ($user && $this->str::checkUserUrl($username, $user->name) == true) {
                 $verse = $this->callController('verses')->index();
                 $posts = $this->loadModel('posts')->findWithUser($user->id);
@@ -378,7 +378,7 @@ class UsersController extends Controller
     {
         if ($token === $this->session->read(TOKEN_KEY)) {
             $user = $this->users->find(intval($id));
-            
+
             if ($user && $this->str::checkUserUrl($username, $user->name) == true) {
                 $post = new Collection($_POST);
                 $file = new Collection($_FILES);
@@ -426,7 +426,7 @@ class UsersController extends Controller
                     if ($isUploaded) {
                         $this->users->update($user->id, ['avatar' => "ngpictures-{$name}.jpg"]);
                         $user = $this->users->find($user->id);
-                        
+
                         $this->session->write(AUTH_KEY, $user); // updating active user is session
                         $this->flash->set('success', $this->msg['users_edit_success']);
                         $this->app::redirect($user->accountUrl);

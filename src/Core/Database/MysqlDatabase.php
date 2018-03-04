@@ -82,7 +82,7 @@ class MysqlDatabase extends Database
     {
         try {
             $req = $this->getPDO()->query($statement);
-            
+
             if (strpos($statement, "INSERT") === 0 ||
                 strpos($statement, "DELETE") === 0 ||
                 strpos($statement, "UPDATE") === 0
@@ -95,7 +95,7 @@ class MysqlDatabase extends Database
             } else {
                 $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
             }
-            
+
             if ($rowcount === true) {
                 $result = $req->rowCount();
             } else {

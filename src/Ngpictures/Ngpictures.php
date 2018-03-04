@@ -145,15 +145,15 @@ class Ngpictures
 
     public function exceptionHandler($e)
     {
-        $flash = new FlashMessageManager(new SessionManager());
-        $flash->set("danger", $e->getMessage());
+        FlashMessageManager::getInstance()->set('danger', MessageManager['undefined_error']);
+        LogMessageManager::register($e->getFile(), $e->getMessage());
         self::redirect("/error-500");
     }
 
     public function errorHandler(int $errno, string $errstr, string $errfile)
     {
-        $flash = new FlashMessageManager(new SessionManager());
-        $flash->set("danger", $errstr);
+        FlashMessageManager::getInstance()->set('danger', MessageManager['undefined_error']);
+        LogMessageManager::register($errfile, $errstr);
         self::redirect("/error-500");
     }
 

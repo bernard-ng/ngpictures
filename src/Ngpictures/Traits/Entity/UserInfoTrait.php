@@ -15,7 +15,7 @@ trait UserInfoTrait
 
     private function getUsersModel(int $id)
     {
-        return $this->usersModel= Ngpictures::getInstance()
+        return $this->usersModel = Ngpictures::getInstance()
            ->getModel("users")
            ->find($id);
     }
@@ -31,6 +31,7 @@ trait UserInfoTrait
 
 
     /**
+     * account url du user
      * @return string
      */
     public function getUserAccountUrl()
@@ -39,12 +40,22 @@ trait UserInfoTrait
     }
 
 
-    public function getUserAvatarUrl()
+    /**
+     * avatar thumb path
+     *
+     * @return string
+     */
+    public function getUserAvatarUrl(): string
     {
         return $this->getUsersModel($this->user_id)->avatarUrl;
     }
 
-    public function getUserBio()
+    /**
+     * bio text
+     *
+     * @return string
+     */
+    public function getUserBio(): string
     {
         return $this->getUsersModel($this->user_id)->bio;
     }

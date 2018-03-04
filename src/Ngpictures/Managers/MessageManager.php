@@ -2,7 +2,7 @@
 namespace Ngpictures\Managers;
 
 /**
- * tous les messages
+ * tous les  message d'erreur
  */
 class MessageManager implements \ArrayAccess
 {
@@ -49,14 +49,14 @@ class MessageManager implements \ArrayAccess
         'files_not_directory' => "Impossibe d'ouvrir le dossier demandé, veuillez réessayer",
         "files_download_failed" => "Ooups, une Erreur s'est produite lors du téléchargement",
         "files_not_found" => "La photo que vous désirer télécharger n'est plus disponible",
-        
-    
+
+
         //ADMIN
         //****************************************************************************************** */
         'admin_removed_admin' => "Suppression d'un administrateur",
         'admin_added_admin' => "Ajout d'un administrateur",
 
-        
+
 
         //COMMENTS
         //******************************************************************************************* */

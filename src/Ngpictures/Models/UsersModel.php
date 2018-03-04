@@ -200,15 +200,4 @@ class UsersModel extends Model
             false
         );
     }
-
-
-    public function findList(string $list)
-    {
-        return $this->query(
-            "SELECT * FROM {$this->table} WHERE id IN ({$list}) ",
-            null,
-            true,
-            false
-        );
-    }
 }

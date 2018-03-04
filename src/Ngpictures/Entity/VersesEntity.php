@@ -1,6 +1,7 @@
 <?php
 namespace Ngpictures\Entity;
 
+use Ngpictures\Ngpictures;
 use Ng\Core\Entity\Entity;
 
 class VersesEntity extends Entity
@@ -10,7 +11,7 @@ class VersesEntity extends Entity
      * afin de donner la vrai reference
      * @return string
      */
-    public function getReference()
+    public function getReference(): string
     {
         return implode(' ', explode('.', $this->ref));
     }

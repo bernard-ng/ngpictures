@@ -8,5 +8,6 @@
         }
     ],
     "files.defaultLanguage": "PHP",
-    "intelephense.completionProvider.backslashPrefix": false
+    "intelephense.completionProvider.backslashPrefix": false,
+    "php-docblocker.extra": []
 }

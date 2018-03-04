@@ -12,7 +12,8 @@ class CategoriesEntity extends Entity
      */
     public function getUrl(): string
     {
-        $this->url = "/categories/{$this->slug}-{$this->id}";
+        $this->url = "/categories";
+        $this->url .= "/{$this->slug}-{$this->id}";
         return $this->url;
     }
 }

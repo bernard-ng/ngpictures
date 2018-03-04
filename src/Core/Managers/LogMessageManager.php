@@ -11,9 +11,9 @@ final class LogMessageManager
 
         $header =
         "#*************************************************************
-        AUTHOR         :    Bernard-ng                       
+        AUTHOR         :    Bernard-ng
         PROJECT        :    NG-PICTURES
-        LINK           :    <a href='http://ngpictures.pe.hu'>Bernard-ng</a>
+        LINK           :    ngpictures.pe.hu
 
         BUILD DATE     :    {$last_log}
 **************************************************************

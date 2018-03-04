@@ -4,7 +4,7 @@ namespace Ngpictures\Traits\Models;
 trait SearchQueryTrait
 {
 
-    /*
+    /**
      * permet de faire une recherche selon l'option donnee
      * begin    :   vas chercher du contenu commencant par $query
      * end      :   vas chercher du contenu finissant par $query
@@ -12,7 +12,7 @@ trait SearchQueryTrait
      * concat   :   vase Chercher du contenu contenant dans le titre et le contenu la $query
      * @param string $query
      * @param string $option l'option de la rechercher
-    */
+     */
     public function search(string $query, string $option = "begin")
     {
         $query = addslashes(htmlentities($query));
