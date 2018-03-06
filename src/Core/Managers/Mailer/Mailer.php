@@ -1,7 +1,9 @@
 <?php
 namespace Ng\Core\Managers\Mailer;
 
+use \RuntimeException;
 use Ngpictures\Ngpictures;
+use Ng\Core\Managers\ConfigManager;
 
 class Mailer
 {
@@ -37,7 +39,6 @@ class Mailer
 
         $confirmation_link = $link;
         $message = require  CORE."/Managers/Mailer/templates/confirmation-mail-template.php";
-
         mail($email, "Confirmation de compte - Ngpictures", $message, $this->headers);
     }
 
@@ -53,16 +54,23 @@ class Mailer
     {
         $reset_link = $link;
         $message = require CORE."/Managers/Mailer/templates/reset-mail-template.php";
-
         mail($email, "Mot de passe oublié - Ngpictures", $message, $this->headers);
     }
 
 
-    /* Envoi les logs du site a l'administrateur */
-    public function sendLogs($config)
+    /**
+     * envoyer les logs par mail a l'admin
+     *
+     * @param string $email
+     * @return void
+     */
+    public function sendLogs(string $email)
     {
-        $email = $config->get('site.email');
-        $message = require ROOT."/system-logs";
-        mail($email, $message, $this->headers);
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $message = require ROOT."/system-logs";
+            mail($email, $message, $this->headers);
+        } else {
+            throw new RuntimeException("email invalide");
+        }
     }
 }

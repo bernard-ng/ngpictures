@@ -127,7 +127,7 @@
                                         <i class="icon icon-remove" style="font-size: smaller !important;"></i>
                                     </button>
                                 </form>
-                               
+
                                 <a href="<?= ADMIN."/blog/edit/{$b->id}" ?>" title="editer">
                                      <button class="btn btn-small waves-effect waves-light">
                                         <i class="icon icon-edit" style="font-size: smaller !important;"></i>
@@ -165,9 +165,8 @@
             <div class="card-action">
                 <b>Sites posts</b> <a href="<?= ADMIN."/blog" ?>" class="right">see all</a>
             </div>
-        </div>                                                                                                                                                                                                                                  
+        </div>
     </div>
     </div>
     </main>
 </div>
-

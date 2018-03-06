@@ -93,6 +93,11 @@ $router->get("/facebook/connect", "facebook#connect", "facebook.connect");
 /***************************************************************************/
 $router->get(ADMIN,"admin","admin.index");
 
+//logs
+$router->get(ADMIN."/logs","admin#showLogs","admin.logs");
+$router->get(ADMIN."/logs/delete", "admin#deleteLogs", "admin.deleteLogs");
+$router->get(ADMIN."/logs/send", "admin#sendLogs", "admin.sendLogs");
+
 //posts and blog pages
 $router->get(ADMIN."/blog","admin#blog", "admin.blog");
 $router->get(ADMIN."/blog/edit/:id","admin#edit", "admin.blog-edit");

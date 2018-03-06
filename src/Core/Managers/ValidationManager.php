@@ -64,8 +64,8 @@ class ValidationManager
     public function isKebabCase(string $field, string $errorMsg = null)
     {
         if (!preg_match('/^[a-zA-Z0-9-_]+$/', $this->getField($field))) {
-            $this->errors[$field] = $errorMsg ?? Msg::get['isKebabCase'];
-            $this->flash->set('danger', $errorMsg ?? Msg::get['isKebabCase']);
+            $this->errors[$field] = $errorMsg ?? Msg::get('isKebabCase');
+            $this->flash->set('danger', $errorMsg ?? Msg::get('isKebabCase'));
         }
     }
 

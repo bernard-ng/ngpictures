@@ -5,17 +5,16 @@ final class LogMessageManager
 {
     public static function register($file, $msg)
     {
-        $time = date("Y-m-d H:i:s");
-        $last_log = date("d M Y - H:i:s");
-        $message = "* ".$file." => {$time} : {$msg}  \n";
+        $time = date("d-M H:i");
+        $last_log = date("d-M-Y  H:i:s");
+        $message = "* ".$file."\n\t=> {$time} : {$msg}  \n\n";
 
         $header =
         "#*************************************************************
         AUTHOR         :    Bernard-ng
         PROJECT        :    NG-PICTURES
         LINK           :    ngpictures.pe.hu
-
-        BUILD DATE     :    {$last_log}
+        BUILT AT       :    {$last_log}
 **************************************************************
 [NG-PICTURES MESSAGES LOGS] \n\n";
 
@@ -33,15 +32,5 @@ final class LogMessageManager
     {
         $file = fopen(ROOT."/system-logs", "w");
         fclose($file);
-    }
-
-    public static function show()
-    {
-        $back = $_SERVER['HTTP_REFERER'] ?? "/home";
-        echo '<a href='.$back.'> << Back </a>';
-        echo "<br><br>";
-        echo "<pre>";
-        echo file_get_contents(ROOT."/system-logs");
-        echo "</pre>";
     }
 }

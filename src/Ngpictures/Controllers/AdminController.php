@@ -3,10 +3,11 @@ namespace Ngpictures\Controllers;
 
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\ImageManager;
+use Ng\Core\Managers\LogMessageManager;
+use Ng\Core\Managers\Mailer\Mailer;
+use Ng\Core\Managers\ConfigManager;
 use Ngpictures\Ngpictures;
 use Ngpictures\Managers\PageManager;
-
-
 use \DirectoryIterator;
 use \UnexpectedValueException;
 use \RuntimeException;
@@ -267,7 +268,7 @@ class AdminController extends Controller
     {
         $posts = $this->blog->orderBy('id', 'DESC');
         $article = $this->blog->last();
-        $this->pageManager::setName('admin - blog');
+        $this->pageManager::setName('Adm - blog');
         $this->setLayout("admin/default");
         $this->viewRender(
             "back_end/blog/index",
@@ -315,7 +316,7 @@ class AdminController extends Controller
             }
         }
 
-        $this->pageManager::setName('admin - blog.edit');
+        $this->pageManager::setName('Adm - blog.edit');
         $this->setLayout('admin/default');
         $this->viewRender('back_end/blog/edit', compact('article', 'categories', 'post'));
     }
@@ -375,7 +376,7 @@ class AdminController extends Controller
             }
         }
 
-        $this->pageManager::setName('admin - blog.add');
+        $this->pageManager::setName('Adm - blog.add');
         $this->setLayout('admin/default');
         $this->viewRender('back_end/blog/add', compact('post', 'categories'));
     }
@@ -466,7 +467,7 @@ class AdminController extends Controller
     {
         $photos = $this->gallery->all();
         $photo = $this->gallery->latest();
-        $this->pageManager::setName('admin - gallery');
+        $this->pageManager::setName('Adm - gallery');
         $this->setLayout("admin/default");
         $this->viewRender("back_end/gallery/index", compact('photos', 'photo'));
     }
@@ -512,7 +513,7 @@ class AdminController extends Controller
                 $this->app::redirect(true);
             }
         }
-        $this->pageManager::setName('admin - gallery.add');
+        $this->pageManager::setName('Adm - gallery.add');
         $this->setLayout("admin/default");
         $this->viewRender("back_end/gallery/add", compact('post', 'categories'));
     }
@@ -540,7 +541,7 @@ class AdminController extends Controller
                     $this->app::redirect(ADMIN . "/gallery");
                 }
             }
-            $this->pageManager::setName('admin - gallery.edit');
+            $this->pageManager::setName('Adm - gallery.edit');
             $this->setLayout("admin/default");
             $this->viewRender("back_end/gallery/edit", compact('photo', 'categories'));
         } else {
@@ -683,7 +684,7 @@ class AdminController extends Controller
         $users = $this->users->all();
         $user = $this->users->last();
 
-        $this->pageManager::setName("admin - users");
+        $this->pageManager::setName("Adm - users");
         $this->setLayout("admin/default");
         $this->viewRender(
             "back_end/users/index",
@@ -700,7 +701,7 @@ class AdminController extends Controller
     {
         $posts = $this->posts->orderBy('id', 'DESC');
         $article = $this->posts->last();
-        $this->pageManager::setName('admin - posts');
+        $this->pageManager::setName('Adm - posts');
         $this->setLayout("Admin/default");
         $this->viewRender(
             "back_end/posts/index",
@@ -742,7 +743,7 @@ class AdminController extends Controller
     public function bugs()
     {
         $bugs = $this->bugs->all();
-        $this->pageManager::setName('admin - bugs');
+        $this->pageManager::setName('Adm - bugs');
         $this->setLayout('admin/default');
         $this->viewRender('back_end/users/bugs', compact('bugs'));
     }
@@ -754,8 +755,49 @@ class AdminController extends Controller
     public function ideas()
     {
         $ideas = $this->ideas->all();
-        $this->pageManager::setName('admin - ideas');
+        $this->pageManager::setName('Adm - ideas');
         $this->setLayout('admin/default');
         $this->viewRender('back_end/users/ideas', compact('ideas'));
+    }
+
+
+    /*********************************************************************************************************
+     *                                     Website admin. -message logs
+     **********************************************************************************************************/
+
+
+    public function showLogs()
+    {
+        if (is_file(ROOT."/system-logs")) {
+            $logs = file_get_contents(ROOT."/system-logs");
+        } else {
+            $logs = "file : system-logs not found";
+        }
+
+        $this->pageManager::setName('Adm - Logs');
+        $this->setLayout("admin/default");
+        $this->viewRender('back_end/logs', compact('logs'));
+    }
+
+
+    public function deleteLogs()
+    {
+        LogMessageManager::clear();
+        $this->flash->set("success", $this->msg['success']);
+        $this->app::redirect(true);
+    }
+
+
+    public function sendLogs()
+    {
+        $email = (new ConfigManager(ROOT."/config/SystemConfig.php"))->get('site.email');
+        try {
+            (new Mailer())->sendLogs($email);
+            $this->flash->set("success", $this->msg['success']);
+            $this->app::redirect(true);
+        } catch (RuntimeException $e) {
+            $this->flash->set('danger', $this->msg['undefined_error']);
+            $this->app::redirect(true);
+        }
     }
 }

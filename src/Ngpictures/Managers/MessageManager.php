@@ -1,16 +1,24 @@
 <?php
 namespace Ngpictures\Managers;
 
-/**
- * tous les  message d'erreur
- */
-class MessageManager implements \ArrayAccess
+use \ArrayAccess;
+
+
+class MessageManager implements ArrayAccess
 {
+
+    /**
+     * gestionnaire de message flash par rapport au action
+     * de l'application
+     *
+     * @var array
+     */
     private $messages = [
 
         //GENERAL
         //***************************************************************************************/
         "undefined_error" => "Ooups, une erreur s'est produite, veuillez réessayer",
+        "success" => "Action effectuée",
         "delete_not_allowed" => "Vous n'avez pas le droit de suppression",
         "edit_not_allowed" => "Vous n'avez pas le droit d'édition",
         "rss_empty" => "Notre flux RSS est actuellement vide",
@@ -95,13 +103,25 @@ class MessageManager implements \ArrayAccess
     public function offsetExists($offset)
     {
     }
+
+
+    /**
+     * renvoi la valeur de la key voulu
+     *
+     * @param string $offset
+     * @return string|null
+     */
     public function offsetGet($offset)
     {
         return $this->messages[$offset] ?? null;
     }
+
+
     public function offsetSet($offset, $value)
     {
     }
+
+
     public function offsetUnset($offset)
     {
     }
