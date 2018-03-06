@@ -1,7 +1,7 @@
 <main class="container row">
     <?php include(APP."/Views/includes/left-aside.php"); ?>
     <section class="col l9 m12 s12">
-        <div class="card">
+        <div class="card col s12">
             <div class="page-title section-title">Rédaction <i class="icon icon-pencil right"></i></div>
 
             <form action="" method="POST" class="ml-10 mr-10 mb-30" enctype="multipart/form-data">
@@ -40,4 +40,3 @@
         </div>
     </section>
 </main>
-

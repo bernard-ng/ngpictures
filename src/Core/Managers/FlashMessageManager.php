@@ -9,6 +9,20 @@ class FlashMessageManager
     use SingletonTrait;
     private $session = null;
 
+    /**
+     * recupere la mm instance du falshmessagemanager
+     *
+     * @param SessionManager $session
+     * @return FlashMessageManager
+     */
+    public static function getInstance(): FlashMessageManager
+    {
+        if (self::$instance === null) {
+            self::$instance = new self(new SessionManager);
+        }
+        return self::$instance;
+    }
+
 
     /**
      * Flash constructor.
@@ -27,7 +41,6 @@ class FlashMessageManager
     public function set(string $type, string $message)
     {
         $_SESSION[FLASH_MESSAGE_KEY][$type] = $message;
-        LogMessageManager::register(__CLASS__, $message);
     }
 
 

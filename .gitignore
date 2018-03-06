@@ -11,3 +11,4 @@ public/imgs/
 Desktop.ini
 composer.lock
 system-logs
+/system-logs

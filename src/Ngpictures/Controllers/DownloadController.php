@@ -23,10 +23,10 @@ class DownloadController extends Controller
      * @param int $type
      * @param string $file_name
     */
-    public function index($type, $file_name, $namespace = null)
+    public function index(int $type, string $file_name, $namespace = null)
     {
         if (isset($type, $file_name) && !empty($type) && !empty($file_name)) {
-            $type = $this->str::escape($type);
+            $type = intval($type);
             $file_name = $this->str::escape($file_name);
 
             if ($namespace !== null) {
@@ -50,4 +50,22 @@ class DownloadController extends Controller
             $this->app::redirect(true);
         }
     }
+
+
+
+    public function show(int $type, string $file_name, $namespace = null)
+    {
+        $type = intval($type);
+            $file_name = $this->str::escape($file_name);
+
+            if ($namespace !== null) {
+                $file = self::$path[$type].$namespace.$filename;
+            } else {
+                $file = self::$path[$type].$file_name;
+            }
+
+            $this->pageManager::setName("Télécharger");
+            $this->setLayout("posts/default");
+            $this->viewRender("front_end/others/download");
+        }
 }

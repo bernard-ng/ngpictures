@@ -25,7 +25,7 @@
                         <?php endif; ?>
                     </div>
                     <div class="card-action">
-                        <a href="<?= $user->url ?>">Voir</a>
+                        <a href="<?= $user->accountUrl ?>">Voir</a>
                     </div>
                 </div>
             </div>

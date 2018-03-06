@@ -352,7 +352,7 @@ class UsersController extends Controller
 
             if ($user && $this->str::checkUserUrl($username, $user->name) == true) {
                 $verse = $this->callController('verses')->index();
-                $posts = $this->loadModel('posts')->findWithUser($user->id);
+                $posts = $this->loadModel('posts')->findWith('user_id', $user->id, false);
 
                 $this->pageManager::setName($user->name);
                 $this->setLayout('users/account');

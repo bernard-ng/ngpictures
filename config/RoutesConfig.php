@@ -53,17 +53,30 @@ $router->get("/gallery/:slug-:id","gallery#show","gallery.show");
 $router->get("/gallery/albums", "gallery#albums", "gallery.albums");
 
 
-//features
+//likes
 $router->get("/likes/:type/:slug-:id","likes","likes");
 $router->get("/likes/show/:type/:slug-:id", "likes#show", "likes.show");
+
+//following
 $router->get("/following/:name-:id","following","following");
+
+//download
 $router->get("/download/:type/:name", "download", "download");
+$router->get("/download/show/:type/:name", "download#show", "download");
+
+//comments
 $router->post("/comments/:type/:slug-:id","comments","comments.show");
 $router->post("/comments/edit/:id/:token", "comments#edit", "comments.edit");
 $router->get("/comments/delete/:id/:token", "comments#delete", "comments.delete");
+
+//search
 $router->get("/search", "search", "search.index");
 $router->get("/search/:q", "search", "search.index");
+
+//rss
 $router->get("/rss", "rss", "rss.index");
+
+//contact
 $router->get("/ideas", "ideas", "ideas.index");
 $router->post("/ideas", "ideas", "ideas.index");
 $router->get("/bugs", "bugs", "bugs.index");

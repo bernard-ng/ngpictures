@@ -1,87 +1,12 @@
 #*************************************************************
-        AUTHOR         :    Bernard-ng                       
+        AUTHOR         :    Bernard-ng
         PROJECT        :    NG-PICTURES
-        LINK           :    <a href='http://ngpictures.pe.hu'>Bernard-ng</a>
+        LINK           :    ngpictures.pe.hu
 
-        BUILD DATE     :    02 Mar 2018 - 21:40:10
+        BUILD DATE     :    06 Mar 2018 - 19:41:30
 **************************************************************
 [NG-PICTURES MESSAGES LOGS] 
 
-* Ng\Core\Managers\FlashMessageManager => 2018-03-02 21:40:10 : Connectez-vous pour continuer  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-02 21:47:36 : Vos identifiants sont incorrectes  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-02 21:49:35 : Vos identifiants sont incorrectes  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-02 21:49:37 : Vos identifiants sont incorrectes  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:08:55 : Vos identifiants sont incorrectes  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:09:02 : Vos identifiants sont incorrectes  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:09:10 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:09:10 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:11:57 : Ola, vous êtes déjà connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:22:11 : Vous ne suivez plus cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:22:17 : Vous suivez cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:28:16 : Vous ne suivez plus cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:28:18 : Vous suivez cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:30:39 : Vous ne suivez plus cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:44:11 : Vous suivez cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:46:52 : Vous ne suivez plus cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:46:55 : Vous suivez cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:48:19 : Vous ne suivez plus cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:48:21 : Vous ne suivez plus cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:48:23 : Vous ne suivez plus cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:48:27 : Vous ne suivez plus cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:48:32 : Vous ne suivez plus cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:48:36 : Vous suivez cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:51:35 : Vous êtes maintenant déconnecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:52:29 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 14:52:29 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:01:21 : Vous suivez cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:01:23 : Vous suivez cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:01:25 : Vous suivez cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:01:27 : Vous suivez cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:01:29 : Vous suivez cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:08:29 : Vous êtes maintenant déconnecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:08:36 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:08:36 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:12:23 : Vous êtes maintenant déconnecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:12:29 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:12:29 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:14:33 : Vous êtes maintenant déconnecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:14:39 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:14:39 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:18:38 : Vous êtes maintenant déconnecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:18:44 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:18:44 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:21:50 : Vous êtes maintenant déconnecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:21:57 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:21:57 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:24:13 : Une erreur est survenu lors du téléchargement de l'image  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:24:22 : Vos informations ont été mises à jour  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:39:57 : Vous êtes maintenant déconnecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:40:49 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:40:49 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:59:24 : Vous ne suivez plus cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:59:27 : Vous ne suivez plus cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:59:36 : Vous suivez cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:59:48 : Vous ne suivez plus cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:59:51 : Vous ne suivez plus cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:59:53 : Vous ne suivez plus cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:59:54 : Vous ne suivez plus cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 15:59:56 : Vous ne suivez plus cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 16:00:12 : Vous suivez cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 16:03:19 : Vous ne suivez plus cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 16:06:34 : Vous suivez cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 16:06:40 : Vous suivez cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 16:06:41 : Vous suivez cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 16:11:53 : Vous êtes maintenant déconnecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 16:12:00 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 16:12:00 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 16:24:07 : Votre commentaire a bien été posté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 16:24:20 : Votre commentaire a bien été édité  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 16:24:25 : Votre commentaire a bien été supprimé  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 16:24:33 : Ooups, une erreur s'est produite, veuillez réessayer  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 16:24:43 : Ooups, une erreur s'est produite, veuillez réessayer  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 16:25:23 : Ooups, une erreur s'est produite, veuillez réessayer  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 16:25:31 : Vous êtes maintenant déconnecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 16:25:39 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 16:25:39 : Vous êtes maintenant connecté  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 17:06:02 : Vous suivez cet utilisateur  
-* Ng\Core\Managers\FlashMessageManager => 2018-03-04 17:08:34 : Ooups, une erreur s'est produite, veuillez réessayer  
+* D:\sites\ng-pictures\src\Ngpictures\Views\layout\admin\default.php => 2018-03-06 19:41:30 : Object of class Ngpictures\Entity\UsersEntity could not be converted to string  
+* D:\sites\ng-pictures\src\Ngpictures\Views\layout\admin\default.php => 2018-03-06 19:41:52 : Object of class Ngpictures\Entity\UsersEntity could not be converted to string  
+* D:\sites\ng-pictures\src\Core\Models\Model.php => 2018-03-06 20:22:44 : Missing argument 2 for Ng\Core\Models\Model::findWith(), called in D:\sites\ng-pictures\src\Ngpictures\Controllers\UsersController.php on line 355 and defined  
