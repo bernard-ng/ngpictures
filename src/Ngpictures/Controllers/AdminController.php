@@ -765,7 +765,9 @@ class AdminController extends Controller
      *                                     Website admin. -message logs
      **********************************************************************************************************/
 
-
+     /**
+      * affiche les erreurs grace au logMessageManager
+      */
     public function showLogs()
     {
         if (is_file(ROOT."/system-logs")) {
@@ -780,6 +782,11 @@ class AdminController extends Controller
     }
 
 
+    /**
+     * supprimer les erreurs logs, renitialise
+     *
+     * @return void
+     */
     public function deleteLogs()
     {
         LogMessageManager::clear();
@@ -788,6 +795,11 @@ class AdminController extends Controller
     }
 
 
+    /**
+     * envoyer les logs a l'admin par mail
+     *
+     * @return void
+     */
     public function sendLogs()
     {
         $email = (new ConfigManager(ROOT."/config/SystemConfig.php"))->get('site.email');
@@ -800,4 +812,55 @@ class AdminController extends Controller
             $this->app::redirect(true);
         }
     }
+
+
+    /*********************************************************************************************************
+     *                                     Website admin. - page html modifiable
+    **********************************************************************************************************/
+
+    public function showPages()
+    {
+        $path = APP."/Views/front_end/static/";
+
+        try {
+            $files = new DirectoryIterator($path);
+        } catch (UnexpectedValueException $e) {
+            $this->flash->set('danger', $this->msg['undefined_error']);
+            $this->app::redirect(true);
+        } catch (RuntimeException $e) {
+            $this->flash->set('danger', $this->msg['files_not_directory']);
+            $this->app::redirect(true);
+        }
+
+        $this->pageManager::setName("Adm - Les Pages");
+        $this->setLayout('admin/default');
+        $this->viewRender("back_end/pages/pages", compact('files'));
+    }
+
+
+    public function editPages(string $page_name)
+    {
+        $file_url = APP."/Views/front_end/static/{$page_name}";
+        $file_name = $page_name;
+
+        if (is_file($file_url)) {
+            $post = new Collection($_POST);
+            $file_content = file_get_contents($file_url);
+
+            if (isset($_POST) && !empty($_POST)) {
+                $file_content = $post->get('file_content');
+                $file = fopen($file_url, 'w');
+                fwrite($file, $post->get('file_content'));
+                fclose($file);
+            }
+
+            $this->setLayout("admin/default");
+            $this->pageManager::setName("Adm - Modifier une page");
+            $this->viewRender("back_end/pages/edit", compact('file_content', 'file_name', 'post'));
+        } else {
+            $this->flash->set('danger', $this->msg['undefined_error']);
+            $this->app::redirect(true);
+        }
+    }
+
 }

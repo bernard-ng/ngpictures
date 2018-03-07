@@ -98,6 +98,11 @@ $router->get(ADMIN."/logs","admin#showLogs","admin.logs");
 $router->get(ADMIN."/logs/delete", "admin#deleteLogs", "admin.deleteLogs");
 $router->get(ADMIN."/logs/send", "admin#sendLogs", "admin.sendLogs");
 
+//pages
+$router->get(ADMIN."/pages", "admin#showPages", "admin.showPages");
+$router->get(ADMIN."/pages/:name", "admin#editPages", "admin.editPages");
+$router->post(ADMIN."/pages/:name", "admin#editPages", "admin.editPages");
+
 //posts and blog pages
 $router->get(ADMIN."/blog","admin#blog", "admin.blog");
 $router->get(ADMIN."/blog/edit/:id","admin#edit", "admin.blog-edit");

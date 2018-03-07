@@ -13,6 +13,7 @@
                     <ul class="right hide-on-med-and-down links">
                         <span id="menu-item-active" data-isActive="<?= $pageManager::getActivePage() ?>"></span>
                         <li id="Accueil"><a href="/home" class="ng-menu-item"> Front-end</a></li>
+                        <li id="Adm - pages"><a href="<?= ADMIN."/pages" ?>">Pages</a></li>
                         <li id="Adm - logs"><a href="<?= ADMIN."/logs" ?>" class="ng-menu-item"> <i class="icon icon-file"></i></a></li>
                         <li id="Adm - blog"><a href="<?= ADMIN."/blog" ?>" class="ng-menu-item"> <i class="icon icon-pencil"></i></a></li>
                         <li id="Adm - actualites"><a href="<?= ADMIN."/posts" ?>" class="ng-menu-item"> <i class="icon icon-edit"></i></a></li>
