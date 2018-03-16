@@ -129,6 +129,8 @@ $router->get(ADMIN."/gallery/albums/edit/:id", "admin#editAlbum", "admin.album-e
 $router->post(ADMIN."/gallery/album/edit/:id", "admin#editAlbum", "admin.album-edit");
 $router->get(ADMIN."/gallery/albums/add", "admin#addAlbum", "admin.album-add");
 $router->post(ADMIN."/gallery/albums/add", "admin#addAlbum", "admin.album-add");
+$router->get(ADMIN."/gallery/watermark/:type/:filename", "admin#watermark", "admin.watermarker");
+$router->post(ADMIN."/gallery/watermark/:type/:filename", "admin#watermark", "admin.watermarker");
 $router->get(ADMIN."/media-browser", "admin#mediaBrowser", "admin.gallery-mediaBrowser");
 $router->get(ADMIN."/file-browser/:dirname", "admin#fileBrowser", "admin.fileBrowser");
 $router->post(ADMIN."/deleteFile", "admin#deleteFile", "admin.gallery-deletefile");

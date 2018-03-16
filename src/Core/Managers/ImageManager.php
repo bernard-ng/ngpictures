@@ -139,6 +139,39 @@ abstract class ImageManager
     }
 
 
+    public static function watermark(string $filename, string $logo, string $type)
+    {
+        $flash = new FlashMessageManager(SessionManager::getInstance());
+        $manager = new InterventionImage();
+
+        try {
+            $logo = $manager
+                ->make(WEBROOT."/imgs/logo/{$logo}.png");
+        } catch (NotReadableException $e) {
+            $flash->set('danger', 'logo '. MessageManager::get('files_not_image'));
+            return false;
+        }
+
+        try {
+            $manager = $manager
+                ->make(self::$path[$type]."/{$filename}")
+                ->orientate()
+                ->insert($logo, 'bottom-right', 30, 30);
+
+            if (file_exists(self::$path[$type]."/{$filename}")) {
+                $manager
+                    ->save(self::$path[$type]."/{$filename}")
+                    ->destroy();
+            }
+
+        } catch(NotReadableException $e) {
+            $flash->set('danger', 'image '. MessageManager::get('files_not_image'));
+            return false;
+        }
+
+    }
+
+
     /**
      * cree un captcha
      */

@@ -672,6 +672,36 @@ class AdminController extends Controller
 
 
 
+    public function watermark(int $type, string $filename)
+    {
+        $path = [1 => 'posts', 'gallery', 'blog'];
+        $image = UPLOAD."/$path[$type]/{$filename}";
+        $post = new Collection($_POST);
+
+        if (is_file($image)) {
+            if (isset($_POST) and !empty($_POST)) {
+                $isWatermarked = ImageManager::watermark($filename, $post->get('logo'), $path[intval($type)]);
+
+                if ($isWatermarked) {
+                    $this->flash->set('success', $this->msg['success']);
+                    $this->app::redirect(true);
+                } else {
+                    $this->flash->set('danger', $this->msg['undefined_error']);
+                    $this->app::redirect(true);
+                }
+            }
+
+            $this->pageManager::setName('adm - watermarker');
+            $this->setLayout("admin/default");
+            $this->viewRender("back_end/gallery/watermark", ['image' => "/uploads/$path[$type]/{$filename}"]);
+        } else {
+            $this->flash->set('danger', $this->msg['files_not_image']);
+            $this->app::redirect(true);
+        }
+    }
+
+
+
     /*********************************************************************************************************
      *                                     Website admin. -users
      **********************************************************************************************************/

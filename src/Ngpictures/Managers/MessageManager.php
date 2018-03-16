@@ -52,7 +52,7 @@ class MessageManager implements ArrayAccess
 
         //FILES
         //***************************************************************************************** */
-        'files_not_picture' => "Le fichier à télécharger doit être une image (jpg, jpeg, png, gif)",
+        'files_not_image' => "Le fichier à télécharger doit être une image (jpg, jpeg, png, gif)",
         'files_not_uploaded' => "Ooups, votre image n'a pas pu être télécharger",
         'files_not_directory' => "Impossibe d'ouvrir le dossier demandé, veuillez réessayer",
         "files_download_failed" => "Ooups, une Erreur s'est produite lors du téléchargement",
