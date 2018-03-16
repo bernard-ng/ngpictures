@@ -97,6 +97,11 @@
                                             <?php endif; ?>
                                     </button>
                                 </a>
+                                <a href="<?= ADMIN."{$a->watermarkUrl}" ?>">
+                                     <button class="btn blue waves-effect waves-light">
+                                        <i class="icon icon-copy" style="font-size: smaller !important;"></i>
+                                    </button>
+                                </a>
                             </td>
                             <td><time><?= $a->time ?></time></td>
                         </tr>

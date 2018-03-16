@@ -72,7 +72,7 @@
                                         <i class="icon icon-remove" style="font-size: smaller !important;"></i>
                                     </button>
                                 </form>
-                               
+
                                 <a href="<?= ADMIN."/gallery/edit/{$p->id}" ?>">
                                      <button class="btn waves-effect waves-light">
                                         <i class="icon icon-edit" style="font-size: smaller !important;"></i>
@@ -85,6 +85,11 @@
                                             <?php else : ?>
                                             <i class="icon icon-cloud-upload" style="font-size: smaller !important;"></i>
                                             <?php endif; ?>
+                                    </button>
+                                </a>
+                                <a href="<?= ADMIN."{$p->watermarkUrl}" ?>">
+                                    <button class="btn btn-small blue wavs">
+                                        <i class="icon icon-copy" style="font-size: smaller !important;"></i>
                                     </button>
                                 </a>
                             </td>

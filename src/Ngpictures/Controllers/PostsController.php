@@ -5,12 +5,14 @@ use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\ImageManager;
 use Ngpictures\Traits\Controllers\ShowPostTrait;
 use Ngpictures\Traits\Controllers\StoryPostTrait;
+use Ngpictures\Managers\PageManager;
+use Ngpictures\Ngpictures;
 
 class PostsController extends Controller
 {
     public $table = "posts";
 
-    public function __construct(\Ngpictures\Ngpictures $app, \Ngpictures\Managers\PageManager $pageManager)
+    public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
         $this->loadModel('posts');
