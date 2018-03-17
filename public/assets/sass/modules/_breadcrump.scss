@@ -1,0 +1,46 @@
+.breadcrumb {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.breadcrumb-container {
+  color: #ccc;
+  font-size: small;
+  font : {
+      size: small;
+      weight: 100;
+  }
+  background-color: #263238 !important;
+  width: 100%;
+  height: 35px;
+  line-height: 35px;
+  overflow: hidden;
+}
+
+
+.breadcrumb i,
+.breadcrumb [class^="mdi-"], .breadcrumb [class*="mdi-"],
+.breadcrumb i.material-icons {
+  display: inline-block;
+  float: left;
+  font-size: 24px;
+}
+
+.breadcrumb:before {
+  color: #ccc;
+  vertical-align: top;
+  display: inline-block;
+  font-weight: normal;
+  font-style: normal;
+  font-size: small;
+  margin: 0 10px 0 8px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.breadcrumb:first-child:before {
+  display: none;
+}
+
+.breadcrumb:last-child {
+  color: #fff;
+}
