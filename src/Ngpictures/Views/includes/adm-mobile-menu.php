@@ -1,37 +1,33 @@
-<ul id="mobile-side-nav" class="side-nav links">
+<ul id="mobile-admin-menu" class="side-nav links">
     <li>
         <div class="user-view">
-            <a href="<?= $activeUser->accountUrl; ?>"><img class="circle" src="<?= $activeUser->avatarUrl ?>"></a>
-            <a href="<?= $activeUser->accountUrl; ?>" class="user-view-name">bernard_ng</a>
-            <span class="user-view-name fullname">Bernard Tshabu ngandu</span>
+            <?php if ($activeUser) : ?>
+                <div class="background">
+                    <img src="/imgs/bgjumbo.jpeg" alt="bg">
+                </div>
+                <a href=""><img src="<?= $activeUser->avatarUrl; ?>" alt="bg2" class="circle"></a>
+                <a href=""><span class="white-txt name"><?= $activeUser->name; ?></span></a>
+                <a href=""><span class="email"><?= $activeUser->email; ?></span></a>
+            <?php endif; ?>
         </div>
-        <ul>
-            <li id="Accueil"><a href="<?= ADMIN ?>"> front-end<i class="icon icon-home right"></i></a></li>
-            <li id="administration - Blog"><a href="<?= ADMIN."/blog" ?>">blog <i class="icon icon-pencil right"></i></a></li>
-            <li id="administration - Actualités"><a href="<?= ADMIN."/posts" ?>">posts <i class="icon icon-globe right"></i></a></li>
-            <li id="administration - Gallerie"><a href="<?= ADMIN."/gallery" ?>">Gallerie <i class="icon icon-picture right"></i></a></li>
-            <li id="administration - users"><a href="<?= ADMIN."/users" ?>" class="ng-menu-item"> membres</a></li>
+    </li>
+    <div class="user-action">
+        <?php if ($activeUser) : ?>
             <li>
-                <a href="#" class="dropdown-button" data-activites="mobile-dropdown">
-                    Plus <i class="icon icon-plus right"></i>
-                </a>
+                <a href="<?= ADMIN."/blog/add" ?>" class="btn btn-flat blue dark-3 waves-effect">Article</a>
+                <a href="<?= ADMIN."/gallery/add" ?>" class="btn btn-flat blue dark-3 waves-effect">Photo</a>
+                <a href="<?= ADMIN."/gallery/albums/add" ?>" class="btn btn-flat blue dark-3 waves-effect">Albums</a>
+                <a href="<?= ADMIN."/blog/categories/add" ?>" class="btn btn-flat blue dark-3 waves-effect">Catégories</a>
             </li>
-            <li style="color:#fff !important;">
-                <a href="/home">
-                    Front-end <i class="icon icon-off right"></i>
-                </a>
-            </li>
+        <?php endif; ?>
+    </div>
+    <li>
+        <ul>
+            <li id="Accueil"><a href="/"> Front-end<i class="icon icon-home"></i></a></li>
+            <li id="Blog"><a href="<?= ADMIN."/blog" ?>">Blog <i class="icon icon-quote-left "></i></a></li>
+            <li id="users"><a href="<?= ADMIN."/users" ?>"> Users <i class="icon icon-users"></i></a></li>
+            <li id="Actualités"><a href="<?= ADMIN."/posts" ?>">Users Posts <i class="icon icon-attach "></i></a></li>
+            <li id="Gallerie"><a href="<?= ADMIN."/gallery" ?>">Gallerie <i class="icon icon-picture "></i></a></li>
         </ul>
     </li>
-</ul>
-<ul id="mobile-dropdown" class="dropdown-content">
-    <li><a href="/help">Aide</a></li>
-    <li><a href="/ideas">Donner une idee</a></li>
-    <li><a href="/bugs">Signaler un probleme</a></li>
-    <li><a href="/contact">contact</a></li>
-    <li class="divider"></li>
-    <li><a href="/about">A propos de nous</a></li>
-    <li><a href="/privacy">Condition générales</a></li>
-    <li class="divider"></li>
-    <li><a href="/logout"></a>Déconnexion</li>
 </ul>

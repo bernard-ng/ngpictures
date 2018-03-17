@@ -1,16 +1,23 @@
 <ul class="side-nav" id="mobile-menu">
-    <li>
-        <div class="user-view">
-            <?php if ($activeUser) : ?>
+    <?php if ($activeUser) : ?>
+        <li>
+            <div class="user-view">
                 <div class="background">
                     <img src="/imgs/bgjumbo.jpeg" alt="bg">
                 </div>
                 <a href=""><img src="<?= $activeUser->avatarUrl; ?>" alt="bg2" class="circle"></a>
                 <a href=""><span class="white-txt name"><?= $activeUser->name; ?></span></a>
                 <a href=""><span class="email"><?= $activeUser->email; ?></span></a>
-            <?php endif; ?>
-        </div>
-    </li>
+            </div>
+        </li>
+    <?php else : ?>
+        <li class="logo" style="margin: 20px 20px 30px 20px;">
+            <a href="/" class="brand-logo" id="logo-container">
+                <img src="/imgs/logo-white.png" alt="" width="100%" height="auto">
+            </a>
+        </li>
+    <?php endif; ?>
+
     <div class="user-action">
         <?php if (!$activeUser) : ?>
             <li>
