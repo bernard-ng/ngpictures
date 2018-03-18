@@ -163,12 +163,10 @@ abstract class ImageManager
                     ->save(self::$path[$type]."/{$filename}")
                     ->destroy();
             }
-
-        } catch(NotReadableException $e) {
+        } catch (NotReadableException $e) {
             $flash->set('danger', 'image '. MessageManager::get('files_not_image'));
             return false;
         }
-
     }
 
 

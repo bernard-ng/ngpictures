@@ -39,7 +39,7 @@
                                 <img src="<?= $activeUser->avatarUrl; ?>" class="user" width="50" height="50">
                             </a>
                         </li>
-                    <?php else: ?>
+                    <?php else : ?>
                         <li class="action"><a href="/sign" class="btn blue-grey waves-effect dark-3">Inscription</a></li>
                         <li class="action"><a href="/login" class="btn blue-grey waves-effect dark-3">Connexion</a></li>
                     <?php endif; ?>

@@ -58,14 +58,14 @@ class DownloadController extends Controller
         $type = intval($type);
             $file_name = $this->str::escape($file_name);
 
-            if ($namespace !== null) {
-                $file = self::$path[$type].$namespace.$filename;
-            } else {
-                $file = self::$path[$type].$file_name;
-            }
+        if ($namespace !== null) {
+            $file = self::$path[$type].$namespace.$filename;
+        } else {
+            $file = self::$path[$type].$file_name;
+        }
 
             $this->pageManager::setName("Télécharger");
             $this->setLayout("posts/default");
             $this->viewRender("front_end/others/download");
-        }
+    }
 }

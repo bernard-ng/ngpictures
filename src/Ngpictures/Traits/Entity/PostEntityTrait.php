@@ -42,6 +42,13 @@ trait PostEntityTrait
         return $this->thumbUrl;
     }
 
+    public function getSmallThumbUrl(): string
+    {
+        $this->smallThumbUrl = "/uploads";
+        $this->smallThumbUrl .= "/{$this->file_path}/thumbs/{$this->thumb}";
+        return $this->smallThumbUrl;
+    }
+
 
     public function getWatermarkUrl(): string
     {
@@ -158,7 +165,7 @@ trait PostEntityTrait
     {
         $users = Ngpictures::getInstance()->getModel('users');
         $content = StringManager::getSnipet(StringManager::truncateText($this->content, 300));
-        return StringManager::userMention($users, $content);
+        return (StringManager::userMention($users, $content));
     }
 
 

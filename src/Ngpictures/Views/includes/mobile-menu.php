@@ -24,7 +24,7 @@
                 <a href="/sign" class="btn btn-flat blue dark-3 waves-effect">Inscription</a>
                 <a href="/login" class="btn btn-flat blue dark-3 waves-effect">Connexion</a>
             </li>
-        <?php else: ?>
+        <?php else : ?>
             <li>
                 <a href="<?= $activeUser->postUrl; ?>" class="btn btn-flat blue dark-3 waves-effect">Poster</a>
                 <a href="<?= $activeUser->postsUrl; ?>" class="btn btn-flat blue dark-3 waves-effect">Mes Publications</a>

@@ -3,7 +3,6 @@ use Ng\Core\Router\Router;
 use Ngpictures\Ngpictures;
 use Ng\Core\Exception\RouterException;
 
-
 /**
  * declaration de la racine du projet
  * inclusion de configuration

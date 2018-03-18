@@ -14,7 +14,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $last = $this->blog->latest(1, 3);
+        $last = $this->blog->latest(1, 4);
         $article = $this->blog->last();
         $photos = $this->gallery->latest(0, 6);
         $categories = $this->categories->orderBy('title', 'ASC', 0, 5);
