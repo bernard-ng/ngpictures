@@ -73,9 +73,7 @@
             </span>
             <div class="ui divided items col l6 m12 s12">
                 <div class="item">
-                    <div class="image">
-                        <img src="/imgs/team/bernard.jpg" class="waves-effect">
-                    </div>
+                    <div class="image"><img src="/imgs/team/bernard.jpg"></div>
                     <div class="content">
                         <a href="http://ngpictures.pe.hu" target="_blank" class="header">Bernard Ngandu</a>
                         <div class="meta">  Fondateur  - developpeur - Photographe </div>
@@ -98,9 +96,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <div class="image">
-                        <img src="/imgs/team/rapha.jpg">
-                    </div>
+                    <div class="image"><img src="/imgs/team/rapha.jpg"></div>
                     <div class="content">
                         <span class="header">Rapha Truck</span>
                         <div class="meta"> Design - Création</div>
@@ -114,9 +110,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <div class="image">
-                    <img src="/imgs/team/gael.jpg">
-                    </div>
+                    <div class="image"><img src="/imgs/team/gael.jpg"></div>
                     <div class="content">
                         <a class="header">Gael Balo</a>
                         <div class="meta">Markerting - shooting model</div>
