@@ -5,19 +5,19 @@
                 <div class="background">
                     <img src="/imgs/bgjumbo.jpeg" alt="bg">
                 </div>
-                <a href=""><img src="<?= $activeUser->avatarUrl; ?>" alt="bg2" class="circle"></a>
-                <a href=""><span class="white-txt name"><?= $activeUser->name; ?></span></a>
-                <a href=""><span class="email"><?= $activeUser->email; ?></span></a>
+                <a href="<?= $activeUser->accountUrl; ?>"><img src="<?= $activeUser->avatarUrl; ?>" alt="bg" class="circle"></a>
+                <span class="white-txt name"><?= $activeUser->name; ?></span>
+                <span class="email"><?= $activeUser->email; ?></span>
             <?php endif; ?>
         </div>
     </li>
     <div class="user-action">
         <?php if ($activeUser) : ?>
             <li>
-                <a href="<?= ADMIN."/blog/add" ?>" class="btn btn-flat blue dark-3 waves-effect">Article</a>
-                <a href="<?= ADMIN."/gallery/add" ?>" class="btn btn-flat blue dark-3 waves-effect">Photo</a>
-                <a href="<?= ADMIN."/gallery/albums/add" ?>" class="btn btn-flat blue dark-3 waves-effect">Albums</a>
-                <a href="<?= ADMIN."/blog/categories/add" ?>" class="btn btn-flat blue dark-3 waves-effect">Catégories</a>
+                <a href="<?= ADMIN."/blog/add" ?>" class="btn blue dark-3 waves-effect">Article</a>
+                <a href="<?= ADMIN."/gallery/add" ?>" class="btn blue dark-3 waves-effect">Photo</a>
+                <a href="<?= ADMIN."/gallery/albums/add" ?>" class="btn blue dark-3 waves-effect">Albums</a>
+                <a href="<?= ADMIN."/blog/categories/add" ?>" class="btn blue dark-3 waves-effect">Catégories</a>
             </li>
         <?php endif; ?>
     </div>

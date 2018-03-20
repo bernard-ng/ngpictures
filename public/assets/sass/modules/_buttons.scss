@@ -2,14 +2,31 @@
 .btn-flat {
   border: none;
   border-radius: 2px;
+  color: #fff !important;
+  font-weight: 300 !important;
   display: inline-block;
   height: 36px;
   line-height: 36px;
   padding: 0 1.5rem;
-  text-transform: uppercase;
+  text-transform: capitalize;
   vertical-align: middle;
   -webkit-tap-highlight-color: transparent;
 }
+
+.btn.action {
+  text-transform: capitalize !important;
+  -webkit-transition: all .3s linear;
+  -o-transition: all .3s linear;
+  transition: all .3s linear;
+
+}
+
+.btn.action:hover {
+  background-color: #1565C0 !important;
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 
 .btn.disabled, .disabled.btn-large,
 .btn-floating.disabled,
@@ -268,6 +285,7 @@ button.btn-floating {
 }
 
 .btn-flat {
+  width: 100%;
   -webkit-box-shadow: none;
           box-shadow: none;
   background-color: transparent;

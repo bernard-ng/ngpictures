@@ -11,19 +11,21 @@
     </head>
     <body>
         <?php include(APP."/Views/includes/adm-mobile-menu.php"); ?>
-        <div class="jumbotron">
-            <?php include(APP."/Views/includes/admin-menu.php"); ?>
+        <?php include(APP."/Views/includes/admin-menu.php"); ?>
+        <div class="jumbotron-small">
             <div class="container row">
-                <span class="jumbotron-title">
-                    <i class="icon icon-lock"></i> <?php echo $pageManager::getActivePage() ?>
+                <span class="ui header">
+                    <h4> <?php echo $pageManager::getActivePage() ?> </h4>
                 </span>
                 <span class="jumbotron-content">
-                    Mon administration :)
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Dolore veniam incidunt earum optio temporibus illo doloribus eaque!
+                    Tenetur sunt, quaerat iste veniam suscipit obcaecati?
+                    At ducimus modi rerum praesentium placeat!
                 </span>
             </div>
         </div>
 
-        <?php include(APP."/Views/includes/flash.php"); ?>
         <div class="page-content" id="pageContent" data-ajax="true">
             <?php echo $page_content; ?>
         </div>
@@ -85,32 +87,34 @@
                 });
             }
 
-
-            Morris.Donut({
-                element: 'stat2',
+            if (Morris != undefined) {
+                Morris.Donut({
+                    element: 'stat2',
                     data: [
                         {value: <?= $used_space ?? 5 ?>, label: 'Utiliser'},
                         {value: <?= $total_space ?? 95 ?>, label: 'Libre'}
                     ],
-                formatter: function (x) { return x + "%"}
-            });
+                    formatter: function (x) { return x + "%"}
+                });
 
-           Morris.Bar({
-               element: 'stat',
-               data: [
-                   {x: 'Users', y: <?= $users[0] ?? 0 ?>, z: <?= $users[1] ?? 0 ?>},
-                   {x: 'posts', y: <?= $users_posts[0] ?? 0 ?>, z: <?= $users_posts[1] ?? 0?>},
-                   {x: 'Online', y: <?= $users_online ?? 0 ?>},
-                   {x: 'pictures', y: <?= $site_photos[0] ?? 0 ?>, z: <?= $site_photos[1] ?? 0 ?>},
-                   {x: 'Blog', y: <?= $site_posts[0] ?? 0 ?>, z: <?= $site_posts[1] ?? 0 ?>},
-                   {x: 'Categ.', y: <?= $site_categories ?? 0 ?>},
-                   {x: 'Bugs', y: <?= $site_bugs  ?? 0 ?>},
-                   {x: 'Ideas', y: <?= $site_ideas  ?? 0 ?>}
-               ],
-               xkey: 'x',
-               ykeys: ['y', 'z'],
-               labels: ['confirmed', 'not confirmed']
-           });
-        </script>
+                Morris.Bar({
+                    element: 'stat',
+                    data: [
+                        {x: 'Users', y: <?= $users[0] ?? 0 ?>, z: <?= $users[1] ?? 0 ?>},
+                        {x: 'posts', y: <?= $users_posts[0] ?? 0 ?>, z: <?= $users_posts[1] ?? 0?>},
+                        {x: 'Online', y: <?= $users_online ?? 0 ?>},
+                        {x: 'pictures', y: <?= $site_photos[0] ?? 0 ?>, z: <?= $site_photos[1] ?? 0 ?>},
+                        {x: 'Blog', y: <?= $site_posts[0] ?? 0 ?>, z: <?= $site_posts[1] ?? 0 ?>},
+                        {x: 'Categ.', y: <?= $site_categories ?? 0 ?>},
+                        {x: 'Bugs', y: <?= $site_bugs  ?? 0 ?>},
+                        {x: 'Ideas', y: <?= $site_ideas  ?? 0 ?>}
+                    ],
+                    xkey: 'x',
+                    ykeys: ['y', 'z'],
+                    labels: ['confirmed', 'not confirmed']
+                });
+            }
+            </script>
+    <?php include(APP."/Views/includes/flash.php"); ?>
     </body>
-</html>
+    </html>

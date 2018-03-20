@@ -1,9 +1,9 @@
 /*
- * This is my javascript code for ngpictures project, 
+ * This is my javascript code for ngpictures project,
  * as you know I am a beginner so hope you gonna make perfect this code et gonna my logic
  * all annimation and smart effect are here, ajax gonna be in app.ajax.js
- * 
- * 
+ *
+ *
  * PS: I'm a french speaker so if my english is broken , just understand...
  * @author Bernard ng;
  */
@@ -22,7 +22,7 @@ $(document).ready(function(){
         var progressBar = {
         countImg : 0,
         loadedImg: 0,
-            
+
         init : function(){
                 var that = this;
                 var imgs = $('a img.galery-item');
@@ -36,7 +36,7 @@ $(document).ready(function(){
                 //le fake container histoir de compter mm les image charger du cache.
                 var $fakeContainer = $('<div/>').attr('id','fakeImgContainer');
                 $fakeContainer.appendTo($('body'));
-                
+
                 //on parcours le element en le ajoutant au fake
                 imgs.each(function(){
                     $img =  $('<img/>').attr('src', $(this).attr('src'));
@@ -52,7 +52,7 @@ $(document).ready(function(){
 
             update : function(){
                 $('#progress-bar').stop().animate({
-                    'width' : (progressBar.loadedImg / progressBar.countImg) * 100 + '%' 
+                    'width' : (progressBar.loadedImg / progressBar.countImg) * 100 + '%'
                 }, 300, 'linear', function(){
                     if (progressBar.loadedImg === progressBar.countImg) {
                         setTimeout(function(){
@@ -73,19 +73,6 @@ $(document).ready(function(){
         }
     })();
 
-
-    //Message flash
-    (function(){
-        var $flash = $('#flash');
-        if ($flash.length > 0) {
-            $flash.click(function(){
-                $(document).removeChild($flash);
-            });
-            $flash.fadeIn(600).delay(5000).slideUp();
-        }
-    })();
-
-    
     //Navbar animation
     (function(){
         $window = $(window);
@@ -109,7 +96,7 @@ $(document).ready(function(){
 
     (function(){
         class Tooltip {
-            
+
             static bind(selector) {
                 document.querySelectorAll(selector).forEach(element => new Tooltip(element));
             }
@@ -131,7 +118,7 @@ $(document).ready(function(){
                tooltip.style.left = left + "px";
                tooltip.style.top = top + "px";
                tooltip.classList.add('visible');
-                
+
             }
 
             mouseOut() {

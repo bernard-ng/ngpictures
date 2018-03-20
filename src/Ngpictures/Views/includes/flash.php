@@ -1,11 +1,10 @@
 <?php if ($flashMessageManager->has()) : ?>
-    <div class="flash" id="flash">
-        <?php foreach ($flashMessageManager->get() as $type => $message) : ?>
-                <div class="flash-content" >
-                    <i class="icon icon-close flash-close-icon"></i>
-                    <span class="flash-content-icon-<?= $type ?>"><i class="icon icon-info-sign"></i></span>
-                    <span class="flash-content-message"><?= $message ?></span>
-                </div>
-        <?php endforeach; ?>
-    </div>
+    <?php foreach ($flashMessageManager->get() as $type => $message) : ?>
+    <audio src="/sounds/flash_message.ogg" autoplay></audio>
+        <script>
+            var message = "<?php echo $message ?>";
+            var type = "<?php echo $type ?>";
+            Materialize.toast(message, 5000, type);
+        </script>
+    <?php endforeach; ?>
 <?php endif; ?>

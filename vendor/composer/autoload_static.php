@@ -15,6 +15,7 @@ class ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648
         'P' => 
         array (
             'Psr\\Http\\Message\\' => 17,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'N' => 
         array (
@@ -39,6 +40,10 @@ class ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Ngpictures\\' => 
         array (

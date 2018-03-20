@@ -1,57 +1,31 @@
 <div class="container row">
     <div class="col l3 hide-on-med-and-down">
-        <div class="card col l12">
-            <div class="section-title mb-20 mt-20 ml-10"> Espace sur le serveur</div>
+        <div class="card  dark-2 col l12">
+            <div class="ui divided header">Espace sur le serveur</div>
             <div id="stat2" class="col l12 m12 s12 statistic"></div>
         </div>
-        <div class="card col l12" id="sticky" data-offset="45">
-            <div class="card-image">
-                <img src="/imgs/ngpic.jpg">
-            </div>
-            <div class="ng-contain">
-                <section class="description">
-                    <blockquote>
-                        The deep shooting, is not about what you see
-                        is about what you feel, when looking at a picture.
-                    </blockquote>
-                </section>
-            </div>
-            <div class="aside-imgs">
-                <div class="previous-imgs row" id="previousImgs">
-                    <span class="col l4 m4 s4">
-                        <img src="/imgs/team/balloy.jpg" alt="preso" title="Balloy fane" class="circle z-depth-1">
-                    </span>
-                    <span class="col l4 m4 s4">
-                        <img src="/imgs/team/precylia.jpg" alt="preso" title="precylia felo" class="circle z-depth-1">
-                    </span>
-                    <span class="col l4 m4 s4">
-                        <img src="/imgs/team/grey.jpg" alt="preso" title="gretta mpunga" class="circle z-depth-1">
-                    </span>
-                </div>
-            </div>
-        </div>
     </div>
-    <main class="col l9">
-    <div class="card no-padding col l12 s12 m12">
-        <nav class="nav z-depth-2 mb-20">
+    <main class="col l9 m12 s12">
+    <div class="card  dark-2 no-padding col l12 s12 m12">
+        <nav class="nav shadow-2">
             <div class="nav-wrapper">
-            <ul>
-                <li><a href="<?= ADMIN."/blog/add"  ?>">Article</a></li>
-                <li><a href="<?= ADMIN."/gallery/add" ?>">Photo</a> </li>
-                <li><a href="<?= ADMIN."/gallery/albums/add" ?>">Albums</a></li>
-                <li><a href="<?= ADMIN."/blog/categories/add" ?>">Catégorie</a></li>
-            </ul>
+                <ul>
+                    <li><a href="<?= ADMIN."/blog/add"  ?>">Article</a></li>
+                    <li><a href="<?= ADMIN."/gallery/add" ?>">Photo</a> </li>
+                    <li><a href="<?= ADMIN."/gallery/albums/add" ?>">Albums</a></li>
+                    <li><a href="<?= ADMIN."/blog/categories/add" ?>">Catégorie</a></li>
+                </ul>
             </div>
         </nav>
-        <div class="section-title mb-20 mt-20 ml-10"> Statistiques</div>
+        <div class="ui divided header">Statistiques</div>
         <div id="stat" class="col l12 m12 s12 statistic"></div>
     </div>
-    <div class="card col l12 s12 m12">
-        <div class="section-title mb-20 mt-20 ml-10">
+    <div class="card teal dark-4 col l12 s12 m12">
+        <div class="ui header">
             Les Derniers posts
-            <span class="btn primary-b right"><?= count($site_posts) ?></span>
+            <span class="btn blue-grey dark-3 right"><?= count($site_posts) ?></span>
         </div>
-        <div class="col l6 m12 s12 mb-30 z-depth-2">
+        <div class="col l6 m12 s12 mb-30 shadow-2">
             <table class="responsive-table bordered striped">
                 <thead>
                     <tr>
@@ -104,7 +78,7 @@
             </div>
         </div>
 
-        <div class="col l6 m12 s12 z-depth-2 mb-10">
+        <div class="col l6 m12 s12 shadow-2 mb-10">
             <table class="responsive-table bordered striped">
                 <thead>
                     <tr>

@@ -29,8 +29,8 @@
 }
 
 .toast {
-  border-radius: 2px;
-  top: 35px;
+  top: 250px;
+  border-radius: 3px;
   width: auto;
   margin-top: 10px;
   position: relative;
@@ -39,11 +39,11 @@
   min-height: 48px;
   line-height: 1.5em;
   word-break: break-all;
-  background-color: #323232;
+  background-color: #1c1b1b;
   padding: 10px 25px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 300;
-  color: #fff;
+  color: rgb(255, 255, 255);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -54,6 +54,26 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   cursor: default;
+  -webkit-box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+}
+
+.toast {
+  &.danger {
+    border-top: 3px solid #da191f;
+  }
+
+  &.warning {
+    border-top: 3px solid #e8d422;
+  }
+
+  &.success {
+    border-top: 3px solid rgb(32, 214, 38);
+  }
+
+  &.info {
+    border-top: 3px solid rgb(22, 135, 228);
+  }
 }
 
 .toast .toast-action {

@@ -5,9 +5,9 @@
                 <div class="background">
                     <img src="/imgs/bgjumbo.jpeg" alt="bg">
                 </div>
-                <a href=""><img src="<?= $activeUser->avatarUrl; ?>" alt="bg2" class="circle"></a>
-                <a href=""><span class="white-txt name"><?= $activeUser->name; ?></span></a>
-                <a href=""><span class="email"><?= $activeUser->email; ?></span></a>
+                <a href="<?= $activeUser->accountUrl; ?>"><img src="<?= $activeUser->avatarUrl; ?>" alt="bg2" class="circle"></a>
+                <span class="white-txt name"><?= $activeUser->name; ?></span>
+                <span class="email"><?= $activeUser->email; ?></span>
             </div>
         </li>
     <?php else : ?>
@@ -21,13 +21,13 @@
     <div class="user-action">
         <?php if (!$activeUser) : ?>
             <li>
-                <a href="/sign" class="btn btn-flat blue dark-3 waves-effect">Inscription</a>
-                <a href="/login" class="btn btn-flat blue dark-3 waves-effect">Connexion</a>
+                <a href="/sign" class="btn action blue-grey dark-3 waves-effect">Inscription</a>
+                <a href="/login" class="btn action blue-grey dark-3 waves-effect">Connexion</a>
             </li>
         <?php else : ?>
             <li>
-                <a href="<?= $activeUser->postUrl; ?>" class="btn btn-flat blue dark-3 waves-effect">Poster</a>
-                <a href="<?= $activeUser->postsUrl; ?>" class="btn btn-flat blue dark-3 waves-effect">Mes Publications</a>
+                <a href="<?= $activeUser->postUrl; ?>" class="btn action blue-grey dark-3 waves-effect">Poster</a>
+                <a href="<?= $activeUser->postsUrl; ?>" class="btn action blue-grey dark-3 waves-effect">Mes Publications</a>
             </li>
         <?php endif; ?>
     </div>
