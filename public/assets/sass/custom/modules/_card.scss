@@ -15,6 +15,19 @@
   padding: 0em;
   border: none;
   border-radius: 1px;
+
+  &.outlined {
+    background: transparent;
+    border-radius: 2px;
+    border: 1px dashed #ccc;
+    color: #ccc !important;
+
+
+    & .content {
+      border: none;
+      color: #ccc !important;
+    }
+  }
 }
 .ui.card {
   margin: 1em 0em;
@@ -41,6 +54,7 @@
   margin: -0.875em -0.5em;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+
 }
 .ui.cards > .card {
   display: -webkit-box;

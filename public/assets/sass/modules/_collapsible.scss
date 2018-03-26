@@ -1,7 +1,7 @@
 .collapsible {
-  border-top: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-left: 1px solid #ddd;
+  border-top: 2px solid rgba(204, 204, 204, 0.207);
+  border-right: 2px solid rgba(204, 204, 204, 0.207);;
+  border-left: 2px solid rgba(204, 204, 204, 0.207);;
   margin: 0.5rem 0 1rem 0;
 }
 
@@ -13,8 +13,11 @@
   -webkit-tap-highlight-color: transparent;
   line-height: 1.5;
   padding: 1rem;
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(204, 204, 204, 0.207);
+  text-transform: capitalize;
+  font-size: 1em;
+  color: rgba(204, 204, 204, 0.816);
 }
 
 .collapsible-header i {
@@ -27,10 +30,11 @@
 
 .collapsible-body {
   display: none;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid rgba(204, 204, 204, 0.207);;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  padding: 2rem;
+  padding: 1rem;
+  color: #ccc;
 }
 
 .side-nav .collapsible,

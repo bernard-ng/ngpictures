@@ -10,12 +10,39 @@
         </nav>
     <?php endif; ?>
 
-    <?php include(APP."/Views/includes/left-aside.php"); ?>
-
-    <div class="col s12 m9 l6 xl6">
+    <div class="col s12 m12 l9 xl9">
         <div id="dataContainer">
             <?php if (!empty($posts)) : ?>
             <?php foreach ($posts as $post) : ?>
+            <div class="ui card">
+                <div class="content">
+                    <div class="right floated meta">14h</div>
+                    <img class="ui avatar image materialbox" href="<?= $post->userAvatarUrl ?>">
+                    <a href="<?= $post->userAccountUrl ?>">
+                        <?= $post->Username ?>
+                    </a>
+                </div>
+                <div class="image">
+                    <a href="<?= $post->url ?>">
+                        <img src="<?= $post->thumbUrl ?>" alt="Article Image" title="<?= $post->title ?>">
+                    </a>
+                </div>
+                <div class="content">
+                    <span class="right floated">
+                    <i class="icon icon-heart"></i>
+                        <?php $post->likes; ?>
+                    </span>
+                    <i class="icon icon-comment"></i>
+                    <?php $post->commentNumber; ?>
+                </div>
+                <div class="extra content">
+                    <div class="ui large transparent left icon input">
+                    <i class="heart outline icon"></i>
+                    <input type="text" placeholder="Add Comment...">
+                    </div>
+                </div>
+            </div>
+
                 <article class="card" id="<?= $post->id ?>">
                     <header class="ng-news-card-header">
                         <span class="ng-news-card-image-profil">

@@ -22,6 +22,7 @@ class PageManager
 
 
     /**
+     * retourne le nom de la page courante
      * @return string
      */
     public static function getName(): string
@@ -30,6 +31,12 @@ class PageManager
     }
 
 
+    /**
+     * retourne la page active,
+     * ce qui nous permet de faire un system de hover.
+     *
+     * @return string
+     */
     public static function getActivePage(): string
     {
         return trim(explode("|", self::$pageTitle)[0]);
@@ -37,6 +44,7 @@ class PageManager
 
 
     /**
+     * definit le nom de la page courante
      * @param string $name
      * @return string
      */
@@ -49,6 +57,7 @@ class PageManager
 
 
     /**
+     * defini des metas pour la page courante
      * @param array $data
      */
     public static function setMeta(array $data = [])
@@ -56,7 +65,11 @@ class PageManager
         self::$meta[] = $data;
     }
 
-   
+
+    /**
+     * permet de generer des metas
+     * dans les views
+     */
     public static function getMeta()
     {
         foreach (self::$meta as $meta) {

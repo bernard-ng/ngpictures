@@ -14,13 +14,4 @@ $(document).ready(function(){
 	$('.modal').modal();
 	$('.ul-tabs').tabs();
 	$('select').material_select();
-
-	//Message flash
-	(function(){
-        var $flash = $('#flash');
-        if ($flash.length > 0) {
-            Materialize.toast($flash.find('.flash-content-message'), 3000);
-        }
-    })();
-
 });

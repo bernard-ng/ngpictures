@@ -50,7 +50,7 @@ class StringManager
         $removed = preg_replace("#Ù|Ú|Û|Ü|ù|ú|û|ü#", "u", $removed);
         $removed = preg_replace("#Ý|ý|ÿ#", "y", $removed);
         $removed = preg_replace("#Ñ|ñ#", "n", $removed);
-    
+
         $formated = trim($removed);
         if (preg_match("/[ ]+/", $formated)) {
             $formated = implode(explode(" ", $formated), "_");
@@ -70,7 +70,7 @@ class StringManager
         if (strlen($text) > $maxChar) {
              $text = substr($text, 0, $maxChar);
              $text = substr($text, 0, strrpos($text, " "));
-             $truncated =  $text."[...]";
+             $truncated =  $text." ...";
         } else {
              $truncated = $text;
         }
@@ -133,6 +133,7 @@ class StringManager
         $snipet = preg_replace('#<img>#', '', $snipet);
         $snipet = preg_replace('#<blockquote>|</blockquote>#', '', $snipet);
         $snipet = preg_replace('#<em>|</em>#', '', $snipet);
+        $snipet = preg_replace('#<span>|</span>#', '', $snipet);
         return $snipet;
     }
 
@@ -182,7 +183,7 @@ class StringManager
         setlocale(LC_TIME, 'fr');
         $time = self::escape(strtotime($time));
         $time = time() - $time ;
-        
+
         switch ($time) {
             case $time >= 3600 && $time <= 86400:
                 $ago = intval($time / 3600);
@@ -237,7 +238,7 @@ class StringManager
                 $number = round(($number / 100000), 1);
                 return "{$number}M";
                 break;
-            
+
             default:
                 return $number;
                 break;

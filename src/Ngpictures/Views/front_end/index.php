@@ -41,7 +41,7 @@
                             <img src="<?=$article->thumbUrl ?>" alt="<?= $article->title ?>">
                         </a>
                         <span class="post-description">
-                            <?= $article->snipet ?>
+                            <?= $article->title ?>
                         </span>
                     </div>
                 <?php endif; ?>
@@ -71,7 +71,7 @@
             <span class="row col l12 s12 m12">
                 <h2 class="ui header"> Les Héros dans l'ombre</h2>
             </span>
-            <div class="ui divided items col l6 m12 s12">
+            <div class="ui divided items col l6 m12 s12 animated slideInLeft">
                 <div class="item">
                     <div class="image"><img src="/imgs/team/bernard.jpg"></div>
                     <div class="content">
@@ -84,14 +84,6 @@
                                 consectetur assumenda nemo quia saepe nobis voluptatibus dolor
                                 minus, corporis, illo, provident expedita...
                             </p>
-                        </div>
-                        <div class="extra">
-                            <a href="http://ngpictures.pe.hu" target="_blank" class="btn blue-grey dark-1">
-                                Portfolio
-                            </a>
-                            <a href="https://github.com/bernard-ng" target="_blank" class="btn blue-grey dark-1">
-                                Github
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -125,7 +117,7 @@
                     </div>
                 </div>
             </div>
-            <div class="ui divided items col l6 m12 s12">
+            <div class="ui divided items col l6 m12 s12 animated slideInRight">
                 <div class="item">
                     <div class="image"><img src="/imgs/team/balloy.jpg"></div>
                     <div class="content">
@@ -150,9 +142,6 @@
                                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur ullam natus harum distinctio molestiae, molestias nulla voluptates error alias, voluptate assumenda. Accusamus at quidem non quos laborum ea ex rem.
                             </p>
                         </div>
-                        <div class="extra">
-                            <a href="https://instagram.com/grey" target="_blank" class="btn blue-grey dark-1">Instagram</a>
-                        </div>
                     </div>
                 </div>
                 <div class="item">
@@ -167,15 +156,12 @@
                                 aliquid dolores iste fugiat velit nemo nulla, suscipit delectus, fugit porro quae?
                             </p>
                         </div>
-                        <div class="extra">
-                            <a href="https://instagram.com/grey" target="_blank" class="btn blue-grey dark-1">Instagram</a>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="jumbotron dark col l12 s12 m12">
+    <section class="jumbotron section dark col l12 s12 m12">
         <div class="row container">
             <div class="col l4 m12 s12">
                 <h2 class="ui header">Nous Rétrouver</h2>
@@ -183,7 +169,7 @@
                     République Démocratique du Congo<br>
                     Province du Haut-Katanga, Ville de Lubumbashi<br>
                     Commune Lubumbashi, Quartier Kalubwe<br>
-                    Avenue Lackipopo, numéro 10465</br><br>
+                    Avenue Lackipopo, numéro 10465</br>
                 </address>
                 <p>
                     <a href="/contact" class="btn btn-flat blue-grey dark-1 action waves-effect">Nous Contacter</a>
@@ -194,6 +180,35 @@
                     2d27.466621714359682!3d-11.646862391734508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!
                     4f13.1!3m3!1m2!1s0x1972394d26719141%3A0xa8515a298fe31a63!2sAvenue+du+lac+Kipopo%2C+Lubumbashi!5e0!3m2!1sfr!2scd!4v1517072954604"
                     width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+    <section class="section col l12 m12 s12">
+        <div class="row container">
+            <span class="row col l12 s12 m12">
+                <h2 class="ui header"> Nos Sponsors</h2>
+            </span>
+            <div class="row col l2 m2 s4 center-align">
+                <a href="https://www.itotafrica.com" class="waves-effect" target="_blank">
+                    <img src="/imgs/logo/itot.png" class="hoverable shadow-3" width="100%" height="100%" alt="">
+                </a>
+            </div>
+            <div class="row col l2 m2 s4 center-align">
+                <a href="https://www.facebook.com/WDPhotograpy" class="waves-effect" target="_blank">
+                    <img src="/imgs/logo/wd.png" class="hoverable shadow-3" alt="wd logo" width="100%" height="100%">
+                </a>
+            </div>
+            <div class="row col l2 m2 s4">
+                <img src="/imgs/logo/rapha.png" class="hoverable shadow-3" width="100%" height="100%" alt="">
+            </div>
+            <div class="row col l2 m2 s4 center-align">
+                <img src="/imgs/logo/rapha.jpg" class="hoverable shadow-3" alt="wd logo" width="100%" height="100%">
+            </div>
+            <div class="row col l2 m2 s4">
+                <img src="/imgs/logo/biso.png" class="hoverable shadow-3" width="100%" height="100%" alt="">
+            </div>
+            <div class="row col l2 m2 s4 center-align">
+                <img src="/imgs/logo/lst.png" class="hoverable shadow-3" alt="wd logo" width="100%" height="100%">
             </div>
         </div>
     </section>
