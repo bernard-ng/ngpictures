@@ -1,5 +1,10 @@
 $(document).ready(function(){
 	$('.button-collapse').sideNav();
+	$('.user-actions-sideNav').sideNav({
+		edge: 'right',
+		closeOnClick: true,
+		draggable: false,
+	})
 	$('.collapsible').collapsible();
 	$('.carousel .big').carousel({fullWidth: true});
     $('.carousel').carousel();
@@ -9,16 +14,4 @@ $(document).ready(function(){
 	$('.modal').modal();
 	$('.ul-tabs').tabs();
 	$('select').material_select();
-
-
-	//datepicker pour l'adm
-    $('.datepicker').pickadate({
-    	selectMonths: true,
-    	selectYears: 5,
-    	today: "Ajourd'hui",
-    	clear: "Effacez",
-    	close: 'ok',
-    	closeOnSelect: false
-	});
-
 });

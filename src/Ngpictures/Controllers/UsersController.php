@@ -138,7 +138,7 @@ class UsersController extends Controller
         $link = SITE_NAME."/confirm/{$user_id}/{$token}";
 
         (new Mailer())->accountConfirmation($link, $email);
-        $this->flash->set('success', $this->msg['users_registration_success']);
+        $this->flash->set('success', $this->msg['form_registration_submitted']);
         $this->app::redirect('/login');
     }
 

@@ -3,7 +3,6 @@ namespace Ngpictures\Managers;
 
 use \ArrayAccess;
 
-
 class MessageManager implements ArrayAccess
 {
 

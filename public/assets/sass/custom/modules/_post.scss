@@ -1,0 +1,39 @@
+.post-hoverable {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding: 0;
+    height: auto;
+
+    & img {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    & .post-description {
+        position: absolute;
+        display: inline-block;
+        bottom: 6px; left: 0; right: 0;
+        height: auto; width: 100%;
+
+        background: rgba(#000000, 0.5);
+        padding-left: 10px; padding-bottom: 15px; padding-top: 15px;
+        z-index: 2;
+        cursor: default;
+
+        -webkit-transition: all ease-in-out 0.3s;
+        -o-transition: all ease-in-out 0.3s;
+        transition: all ease-in-out 0.3s;
+
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+        visibility: visible;
+    }
+
+    &:hover {
+       & .post-description {
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+       }
+    }
+}

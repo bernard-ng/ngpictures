@@ -1,185 +1,215 @@
-<section class="row container">
-    <div class="col l3 no-padding">
-        <div class="card hide-on-med-and-down ">
-            <div class="card-image">
-                <img src="/imgs/wdp.png">
-            </div>
-            <div class="ng-contain">
-                <section class="description">
-                    <blockquote>
-                        We make design and photography wonderful.
-                        want to like or have something wonderful ?
-                        you are at the right place.
-                    </blockquote>
-                </section>
-            </div>
-            <div class="aside-imgs">
-                <div class="previous-imgs row" id="previousImgs">
-                    <span class="col l4 m4 s4">
-                        <img src="/imgs/team/bernard.jpg" alt="preso" title="Bernard - photographer" class="circle z-depth-1">
-                    </span>
-                    <span class="col l4 m4 s4">
-                        <img src="/imgs/team/gael.jpg" alt="preso" title="Gaël - marketing" class="circle z-depth-1">
-                    </span>
-                    <span class="col l4 m4 s4">
-                        <img src="/imgs/team/rapha.jpg" alt="preso" title="rapha - designer" class="circle z-depth-1">
-                    </span>
+<main>
+    <section class="section row container animated slideInUp">
+    <span class="row col l12 s12 m12">
+        <h2 class="ui header"> Derniers Articles</h2>
+    </span>
+    <?php foreach ($last as $a) : ?>
+        <div class="row col s12 m3 l3">
+            <article class="ui link card hoverable">
+                <div class="image waves-effect">
+                    <a href="<?= $a->url; ?>"><img src="<?= $a->smallThumbUrl; ?>"></a>
                 </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-image">
-                <img src="/imgs/ngpic.jpg">
-            </div>
-            <div class="ng-contain">
-                <section class="description">
-                    <blockquote>
-                        The deep shooting, is not about what you see
-                        is about what you feel, when looking at a picture.
-                    </blockquote>
-                </section>
-            </div>
-            <div class="aside-imgs">
-                <div class="previous-imgs row" id="previousImgs">
-                    <span class="col l4 m4 s4">
-                        <img src="/imgs/team/balloy.jpg" alt="preso" title="Balloy fane" class="circle z-depth-1">
-                    </span>
-                    <span class="col l4 m4 s4">
-                        <img src="/imgs/team/precylia.jpg" alt="preso" title="precylia felo" class="circle z-depth-1">
-                    </span>
-                    <span class="col l4 m4 s4">
-                        <img src="/imgs/team/grey.jpg" alt="preso" title="gretta mpunga" class="circle z-depth-1">
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==================== PAGE CONTAIN ==================== -->
-    <main class="col s12 m9 l6 xl6">
-       <div id="postsContainer">
-            <!-- CARD -->
-            <?php if (!empty($article)) : ?>
-                <article class="card" id="<?=$article->id ?>">
-                    <header class="card-image">
-                        <div class="ng-article-img">
-                            <img src="<?=$article->thumbUrl ?>" alt="<?=$article->title ?>">
-                        </div>
-                    </header>
-                    <section class="ng-news-card-content">
-                        <section class="ng-news-card-title">
-                            <?php if ($article->category_id !== null) : ?>
-                                <a href="<?= $article->categoryUrl ?>"><i class="icon icon-tags"></i></a>
-                            <?php endif; ?>
-
-                            <h2><?= $article->title ?>&nbsp;<small><?= $article->category ?></small></h2>
-                        </section>
-                        <main>
-                            <p>
-                                <?=$article->snipet ?>
-                            </p>
-                            <a href="<?=$article->url ?>" class="ng-news-card-seemore right">Voir plus</a>
-                        </main>
-                        <footer id="articleInfo">
-                            <div class="ng-news-card-stat">
-                                <i class="icon icon-save"></i>&nbsp;
-                                <a href="<?=$article->downloadUrl ?>" title="Télécharger la photo">Télécharger</a>
-                            </div>
-                            <div class="ng-news-card-stat">
-                                <i class="icon icon-thumbs-up"></i>&nbsp;
-                                <small><a id="showLikes" href="/likes/<?= $article->SI ?>"><?=$article->Likes ?></a></small>
-                            </div>
-                            <div class="ng-news-card-stat">
-                                <i class="icon icon-comment"></i>&nbsp;
-                                <small><?=$article->commentsNumber ?></small>
-                            </div>
-                            <div class="ng-news-card-stat">
-                                <i class="icon icon-time"></i>&nbsp;
-                                <small>
-                                    <time id="date_created" data-time="<?= strtotime($article->date_created) ?>"><?=$article->time ?></time>
-                                </small>
-                            </div>
-                        </footer>
-                    </section>
-                    <footer class="ng-news-card-footer" id="articleOptions">
-                        <a id="likeBtn" class="ng-news-card-footer-item <?=$article->isLike ?>" href="<?=$article->likeUrl ?>">
-                            <i class="icon icon-thumbs-up"></i>&nbsp;J'aime
-                        </a>
-
-                        <a id="commentBtn" class="ng-news-card-footer-item modal-trigger" href="#cmtAdd">
-                            <i class="icon icon-comment" ></i>&nbsp;Commenter
-                        </a>
-                        <div id="cmtAdd" class="modal">
-                            <div class="modal-content">
-                                <span class="section-title-b mb-20">Commenter</span>
-                                <form action="<?= $article->commentUrl ?>" method="POST">
-                                    <div class="input-field">
-                                        <textarea class="materialize-textarea" name="comment"></textarea>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="modal-action btn primary-b">ok</button>
-                                        <button id="cmtAdd" type="reset" class="modal-action modal-close btn-flat">
-                                            Annuler
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <a id="shareBtn" class="ng-news-card-footer-item" href="/share/">
-                            <i class="icon icon-share"></i>&nbsp;partager
-                        </a>
-                    </footer>
-                </article>
-
-            <?php else : ?>
-                <div class="card">
-                    <div class="no-publication">
-                        <div class="ng-cover"></div>
-                        <p><i class="icon icon-picture"></i> &nbsp;aucune publication pour l'instant</p>
+                <div class="content center">
+                    <div class="header"><?= $a->title ?? $a->name; ?></div>
+                    <div class="meta">
+                        <a href="<?= $a->categoryUrl; ?>" class="category"><?= $a->category; ?></a>
                     </div>
                 </div>
-            <?php endif; ?>
-
-                <!-- /CARD END -->
+            </article>
+        </div>
+    <?php endforeach; ?>
+    </section>
+    <section class="jumbotron dark col l12 s12 m12">
+        <div class="container row">
+            <div class="row col l7 s12 m12">
+                <h2 class="ui header">A Propos De Nos Photos</h2>
+                <div class="">
+                    <p class="justify-align">
+                        l'ombre et la lumière surgissent de presque nul part,
+                        évanescentes elles apparaissent et disparaissent au gré du temps,
+                        elles sont par définition insaisissables et impalpables.
+                        seule la prise de vue photographique permet de monter la magie de cette dualité fraternelle.
+                        En effet l’ombre et la lumière sont les deux faces déterminantes de la photographie,
+                        souvent elles se font un face à face perpétuel dans des compositions surprenantes.
+                        Elles ne sont jamais neutres. Ainsi elle peuvent être une forme autonome se superposant à une réalité déjà présente.
+                        Nos photos sont l'expression même de l'ombre sinueuse d'une personne.
+                    </p>
+                </div>
+                <?php if ($article && !empty($article)): ?>
+                    <div class="post-hoverable">
+                        <a href="<?= $article->url; ?>" class="waves-effect">
+                            <img src="<?=$article->thumbUrl ?>" alt="<?= $article->title ?>">
+                        </a>
+                        <span class="post-description">
+                            <?= $article->title ?>
+                        </span>
+                    </div>
+                <?php endif; ?>
             </div>
 
-        <div class="hide-on-med-and-up">
-            <?php include(APP."/Views/includes/verset.php"); ?>
-        </div>
-        <article class="card">
-            <section class="ng-news-card-content">
-                <section class="ng-news-card-title">
-                    <i class="icon icon-picture"></i>
-                    <h2>Nos photos</h2>
-                </section>
-                <div class="images-panel ">
-                    <section class="description">
-                        <blockquote>
-                            l'ombre et la lumière surgissent de presque nul part, évanescentes elles apparaissent et disparaissent au gré du temps, elles sont par définition insaisissables et impalpables. seule la prise de vue photographique permet de monter la magie de cette dualité fraternelle. En effet l’ombre et la lumière sont les deux faces déterminantes de la photographie, souvent elles se font un face à face perpétuel dans des compositions surprenantes. Elles ne sont jamais neutres. Ainsi elle peuvent être une forme autonome se superposant à une réalité déjà présente. Nos  photos sont l'expression même de l'ombre sinueuse d'une personne.
-                            <br><a href="/gallery" class="ng-news-card-seemore">Voir la gallerie</a>
-                        </blockquote>
-                    </section>
-                    <aside class="aside-imgs">
-                        <div class="previous-imgs row" id="previousImgs">
-                            <span class="col l3 m3 s3">
-                                <img src="/imgs/team/prisca.jpg" alt="banner image">
-                            </span>
-                            <span class="col l3 m3 s3">
-                                <img src="/imgs/team/gael.jpg" alt="banner image" >
-                            </span>
-                            <span class="col l3 m3 s3">
-                                <img src="/imgs/team/rapha.jpg" alt="banner image">
-                            </span>
-                            <span class="col l3 m3 s3">
-                                <img src="/imgs/team/bernard.jpg" alt="banner image">
-                            </span>
+            <div class="row col l5 s12 m12">
+                <h2 class="ui header">Catégories</h2>
+                <div class="ui relaxed divided list">
+                    <?php foreach ($categories as $category) : ?>
+                        <div class="item">
+                            <i class="icon icon-tag"></i>
+                            <div class="content">
+                            <a class="header" href="<?= $category->url; ?>"><?= $category->title; ?></a>
+                            <div class="description"><?= $category->description ?></div>
+                            </div>
                         </div>
-                    </aside>
+                    <?php endforeach; ?>
+                    <a href="/categories" class="btn btn-flat action blue-grey dark-1 waves-effect">
+                        Voir Plus
+                    </a>
                 </div>
-            </section>
-        </article>
-    </main>
-    <?php include(APP."/Views/includes/menu-aside.php"); ?>
-
-</section>
+            </div>
+        </div>
+    </section>
+    <section class="section col l12 m12 s12">
+        <div class="row container">
+            <span class="row col l12 s12 m12">
+                <h2 class="ui header"> Les Héros dans l'ombre</h2>
+            </span>
+            <div class="ui divided items col l6 m12 s12 animated slideInLeft">
+                <div class="item">
+                    <div class="image"><img src="/imgs/team/bernard.jpg"></div>
+                    <div class="content">
+                        <a href="http://ngpictures.pe.hu" target="_blank" class="header">Bernard Ngandu</a>
+                        <div class="meta">  Fondateur  - developpeur - Photographe </div>
+                        <div class="description">
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Eum quidem incidunt maiores asperiores consequuntur recusandae totam quo
+                                consectetur assumenda nemo quia saepe nobis voluptatibus dolor
+                                minus, corporis, illo, provident expedita...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="image"><img src="/imgs/team/rapha.jpg"></div>
+                    <div class="content">
+                        <span class="header">Rapha Truck</span>
+                        <div class="meta"> Design - Création</div>
+                        <div class="description">
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                                Aspernatur ullam natus harum distinctio molestiae, molestias nulla voluptates error alias,
+                                 voluptate assumenda. Accusamus at quidem non quos laborum ea ex rem.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="image"><img src="/imgs/team/gael.jpg"></div>
+                    <div class="content">
+                        <a class="header">Gael Balo</a>
+                        <div class="meta">Markerting - shooting model</div>
+                        <div class="description">
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Sint facilis nobis labore atque. Amet beatae a quidem consequuntur
+                                aliquid dolores iste fugiat velit nemo nulla,
+                                 suscipit delectus, fugit porro quae?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui divided items col l6 m12 s12 animated slideInRight">
+                <div class="item">
+                    <div class="image"><img src="/imgs/team/balloy.jpg"></div>
+                    <div class="content">
+                        <span class="header">Balloy Fane</span>
+                        <div class="meta">Directrice de Publication</div>
+                        <div class="description">
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Eum quidem incidunt maiores asperiores consequuntur recusandae totam quo consectetur
+                                assumenda nemo quia saepe nobis voluptatibus dolor minus, corporis, illo, provident expedita.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="image"><img src="/imgs/team/grey.jpg"></div>
+                    <div class="content">
+                        <span class="header">Gretta Mpunga</span>
+                        <div class="meta">shooting model</div>
+                        <div class="description">
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur ullam natus harum distinctio molestiae, molestias nulla voluptates error alias, voluptate assumenda. Accusamus at quidem non quos laborum ea ex rem.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="image"><img src="/imgs/team/precylia.jpg"></div>
+                    <div class="content">
+                        <span class="header">Precylia Felo</span>
+                        <div class="meta">shooting model</div>
+                        <div class="description">
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Sint facilis nobis labore atque. Amet beatae a quidem consequuntur
+                                aliquid dolores iste fugiat velit nemo nulla, suscipit delectus, fugit porro quae?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="jumbotron section dark col l12 s12 m12">
+        <div class="row container">
+            <div class="col l4 m12 s12">
+                <h2 class="ui header">Nous Rétrouver</h2>
+                <address style="font-style: normal !important;">
+                    République Démocratique du Congo<br>
+                    Province du Haut-Katanga, Ville de Lubumbashi<br>
+                    Commune Lubumbashi, Quartier Kalubwe<br>
+                    Avenue Lackipopo, numéro 10465</br>
+                </address>
+                <p>
+                    <a href="/contact" class="btn btn-flat blue-grey dark-1 action waves-effect">Nous Contacter</a>
+                </p>
+            </div>
+            <div class="col l8 m12 s12 goole-maps">
+                <iframe class="hoverable" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3907.669795348674!
+                    2d27.466621714359682!3d-11.646862391734508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!
+                    4f13.1!3m3!1m2!1s0x1972394d26719141%3A0xa8515a298fe31a63!2sAvenue+du+lac+Kipopo%2C+Lubumbashi!5e0!3m2!1sfr!2scd!4v1517072954604"
+                    width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+    <section class="section col l12 m12 s12">
+        <div class="row container">
+            <span class="row col l12 s12 m12">
+                <h2 class="ui header"> Nos Sponsors</h2>
+            </span>
+            <div class="row col l2 m2 s4 center-align">
+                <a href="https://www.itotafrica.com" class="waves-effect" target="_blank">
+                    <img src="/imgs/logo/itot.png" class="hoverable shadow-3" width="100%" height="100%" alt="">
+                </a>
+            </div>
+            <div class="row col l2 m2 s4 center-align">
+                <a href="https://www.facebook.com/WDPhotograpy" class="waves-effect" target="_blank">
+                    <img src="/imgs/logo/wd.png" class="hoverable shadow-3" alt="wd logo" width="100%" height="100%">
+                </a>
+            </div>
+            <div class="row col l2 m2 s4">
+                <img src="/imgs/logo/rapha.png" class="hoverable shadow-3" width="100%" height="100%" alt="">
+            </div>
+            <div class="row col l2 m2 s4 center-align">
+                <img src="/imgs/logo/rapha.jpg" class="hoverable shadow-3" alt="wd logo" width="100%" height="100%">
+            </div>
+            <div class="row col l2 m2 s4">
+                <img src="/imgs/logo/biso.png" class="hoverable shadow-3" width="100%" height="100%" alt="">
+            </div>
+            <div class="row col l2 m2 s4 center-align">
+                <img src="/imgs/logo/lst.png" class="hoverable shadow-3" alt="wd logo" width="100%" height="100%">
+            </div>
+        </div>
+    </section>
+</main>

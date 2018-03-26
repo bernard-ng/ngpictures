@@ -1,65 +1,76 @@
-<ul id="mobile-side-nav" class="side-nav links">
-    <li>
-        <?php if ($activeUser) : ?>
+<ul class="side-nav" id="mobile-menu">
+    <?php if ($activeUser) : ?>
+        <li>
             <div class="user-view">
-                <a href="<?= $activeUser->accountUrl; ?>">
-                    <img class="ng-menu-avatar circle" src="<?= $activeUser->avatarUrl ?>">
-                </a>
-                <a href="<?= $activeUser->accountUrl; ?>" class="user-view-name">
-                    <?= $activeUser->name; ?>
-                </a>
-                <span class="user-view-name fullname">
-                    <?= $activeUser->email; ?>
-                </span>
-            </div>
-        <?php endif; ?>
-
-        <ul>
-            
-            <?php if (!$activeUser) : ?>
-                <div class="user-view">
-                    <li><a class="link-btn primary-c" href="/login">Connexion<i class="icon icon-lock"></i></a></li>
-                    <br>
-                    <li><a class="link-btn primary-c" href="/sign">Inscription<i class="icon icon-lock"></i></a></li>
+                <div class="background">
+                    <img src="/imgs/bgjumbo.jpeg" alt="bg">
                 </div>
-            <?php endif; ?>
-            
-            <?php if ($activeUser) : ?>
-                <li>
-                    <a href="#" class="dropdown-button ng-menu-more" data-activites="mobile-dropdown">
-                        Mon Compte <i class="icon icon-user right"></i>
-                    </a>
-                </li>
-            <?php endif;?>
+                <a href="<?= $activeUser->accountUrl; ?>"><img src="<?= $activeUser->avatarUrl; ?>" alt="bg2" class="circle"></a>
+                <span class="white-txt name"><?= $activeUser->name; ?></span>
+                <span class="email"><?= $activeUser->email; ?></span>
+            </div>
+        </li>
+    <?php else : ?>
+        <li class="logo" style="margin: 20px 20px 30px 20px;">
+            <a href="/" class="brand-logo" id="logo-container">
+                <img src="/imgs/logo-white.png" alt="" width="100%" height="auto">
+            </a>
+        </li>
+    <?php endif; ?>
 
-            <?php if ($activeUser && $activeUser->rank == "admin") : ?>
-                <li><a href="<?= ADMIN ?>"> Admin&nbsp;<i class="icon icon-lock"></i></a></li>
-                <li><a href="/community">Communauté&nbsp;<i class="social social-users"></i></a></li>
-            <?php endif; ?>
-            
-            <li id="Accueil"><a href="/home">Accueil&nbsp;<i class="icon icon-home"></i></a></li>
-            <li id="Blog"><a href="/blog">Blog&nbsp;<i class="icon icon-pencil"></i></a></li>
-            <li id="Actualites"><a href="/posts">Actualités&nbsp;<i class="icon icon-globe"></i></a></li>
-            <li id="Gallerie"><a href="/gallery">Gallerie&nbsp;<i class="icon icon-picture"></i></a></li>
-            
-        </ul>
-    </li>
-    <li>
-        <?php if ($activeUser) : ?>
+    <div class="user-action">
+        <?php if (!$activeUser) : ?>
             <li>
-                <a href="/logout" class="ng-menu-logout">
-                    Déconnexion <i class="icon icon-off right"></i>
-                </a>
+                <a href="/sign" class="btn action blue-grey dark-3 waves-effect">Inscription</a>
+                <a href="/login" class="btn action blue-grey dark-3 waves-effect">Connexion</a>
+            </li>
+        <?php else : ?>
+            <li>
+                <a href="<?= $activeUser->postUrl; ?>" class="btn action blue-grey dark-3 waves-effect">Poster</a>
+                <a href="<?= $activeUser->postsUrl; ?>" class="btn action blue-grey dark-3 waves-effect">Mes Publications</a>
             </li>
         <?php endif; ?>
+    </div>
+    <?php if ($activeUser) : ?>
+        <li>
+            <ul class="collapsible collapsible-accordion">
+                <li>
+                    <a class="collapsible-header waves-effect">Mon compte</a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a href="<?= $activeUser->accountUrl; ?>">Profile <i class="icon icon-user"></i></a></li>
+                            <li><a href="<?= $activeUser->editUrl; ?>">Editer le Profile <i class="icon icon-cog-alt"></i></a></li>
+                            <li><a href="<?= $activeUser->followingUrl; ?>">Mes abonnements <i class="icon icon-users"></i></a></li>
+                            <li><a href="/logout">Déconnexion <i class="icon icon-off"></i></a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    <?php endif; ?>
+
+    <?php if ($activeUser && $activeUser->rank == "admin") : ?>
+        <li><a href="<?= ADMIN ?>">Administration <i class="icon icon-code"></i></a></li>
+    <?php endif; ?>
+
+
+    <li><a href="/blog">Blog <i class="icon icon-quote-left"></i></a></li>
+    <li><a href="/posts">Actualités </a></li>
+    <li ><a href="/community">Communauté <i class="icon icon-users"></i></a></li>
+    <li><a href="/gallery">Gallerie <i class="icon icon-picture"></i></a></li>
+    <li>
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a class="collapsible-header waves-effect">Plus</a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="/bugs">Signaler un Bug <i class="icon icon-comment-empty"></i></a></li>
+                        <li><a href="/ideas">Donner une idée <i class="icon icon-comment-empty"></i></a></li>
+                        <li><a href="/privacy-terms">Mentions légales <i class="icon icon-plus"></i></a></li>
+                        <li><a href="/about">A propos <i class="icon icon-star"></i></a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
     </li>
-</ul>
-<ul id="mobile-dropdown" class="dropdown-content">
-    <li><a href="/help"></a></li>
-    <li><a href="/ideas">Donner une idee</a></li>
-    <li><a href="/bugs">Signaler un probleme</a></li>
-    <li><a href="/contact">contact</a></li>
-    <li class="divider"></li>
-    <li><a href="/about">A propos de nous</a></li>
-    <li><a href="/privacy">Condition générales</a></li>
 </ul>

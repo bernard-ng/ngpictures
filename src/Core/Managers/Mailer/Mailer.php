@@ -3,6 +3,7 @@ namespace Ng\Core\Managers\Mailer;
 
 use \RuntimeException;
 use Ngpictures\Ngpictures;
+use PHPMailer\PHPMailer\PHPMailer;
 use Ng\Core\Managers\ConfigManager;
 
 class Mailer
@@ -37,9 +38,27 @@ class Mailer
     public function accountConfirmation(string $link, string $email)
     {
 
+        $mail = new PHPMailer(true);
         $confirmation_link = $link;
-        $message = require  CORE."/Managers/Mailer/templates/confirmation-mail-template.php";
-        mail($email, "Confirmation de compte - Ngpictures", $message, $this->headers);
+
+        ob_start();
+            require CORE."/Managers/Mailer/templates/confirmation-mail-template.php";
+        $message = ob_get_clean();
+
+        try {
+            $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
+            $mail->addAddress($email);
+            $mail->addReplyTo('ngpictures@larytech.com', 'Information');
+            $mail->isHTML(true);
+
+            $mail->Subject = 'Bienvenue Sur Ngpictures';
+            $mail->Body    =  $message;
+            $mail->AltBody = "Cliquez pour confirmer votre compte: {$link}";
+            $mail->send();
+
+        } catch (Exception $e) {
+            echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+        }
     }
 
 

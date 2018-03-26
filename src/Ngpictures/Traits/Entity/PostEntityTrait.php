@@ -42,6 +42,21 @@ trait PostEntityTrait
         return $this->thumbUrl;
     }
 
+    public function getSmallThumbUrl(): string
+    {
+        $this->smallThumbUrl = "/uploads";
+        $this->smallThumbUrl .= "/{$this->file_path}/thumbs/{$this->thumb}";
+        return $this->smallThumbUrl;
+    }
+
+
+    public function getWatermarkUrl(): string
+    {
+        $this->watermarkUrl = "/gallery/watermark";
+        $this->watermarkUrl .= "/{$this->action_type}/{$this->thumb}";
+        return $this->watermarkUrl;
+    }
+
 
     public function getWatermarkUrl(): string
     {
@@ -157,8 +172,8 @@ trait PostEntityTrait
     public function getSnipet(): string
     {
         $users = Ngpictures::getInstance()->getModel('users');
-        $content = StringManager::getSnipet(StringManager::truncateText($this->content, 300));
-        return StringManager::userMention($users, $content);
+        $content = StringManager::getSnipet(StringManager::truncateText($this->content, 600));
+        return (StringManager::userMention($users, $content));
     }
 
 

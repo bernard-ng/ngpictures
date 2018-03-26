@@ -1,52 +1,105 @@
-<!--=============== NAVBAR ===================-->
 <header>
-    <div class="navbar-fixed z-depth-2">
-        <nav class="ng-menu-reset">
-            <div class="nav-wrapper ng-menu shrink" id="menu">
-                <div class="row container">
-                    <a href="/home" class="brand-logo left ng-menu-title">
-                        Ngpictures
-                    </a>
-                    <a href="#" data-activates="mobile-side-nav" class="button-collapse btn primary-c right">
-                        <i class="social social-menu"></i>
-                    </a>
-                    <ul class="right hide-on-med-and-down links">
-                        <span id="menu-item-active" data-isActive="<?= $pageManager::getActivePage() ?>"></span>
-                        <li>
-                            <form action="/search" method="get">
-                                <input class="default-form" type="search" name="q" id="q">
+    <div class="navbar-fixed">
+        <nav class="shadow-3">
+            <div class="nav-wrapper container " id="menu">
+                <a href="/" class="brand-logo">
+                    <img src="/imgs/logo-white.png" class="logo" alt="logo">
+                </a>
+                <a href="#" data-activates="mobile-menu" class="btn blue-grey dark-3 button-collapse">
+                    <i class="icon icon icon-th"></i>
+                </a>
+                <ul class="right hide-on-med-and-down">
+                    <span id="menu-item-active" data-isActive="<?= $pageManager::getActivePage() ?>"></span>
+
+                    <li class="search">
+                        <div class="search">
+                            <form action="/search" method="get" class="ui icon input">
+                                <input name="q" type="text" placeholder="Recherches...">
+                                <i class="icon icon-search"></i>
                                 <input type="submit" value="send">
                             </form>
+                        </div>
+                    </li>
+
+                    <?php if ($activeUser && $activeUser->rank == "admin") : ?>
+                        <li><a href="<?= ADMIN ?>"> <i class="icon icon-code"></i></a></li>
+                    <?php endif; ?>
+
+                    <?php if ($activeUser) : ?>
+                        <li id="La Communauté"><a href="/community">Communauté</a></li>
+                    <?php endif; ?>
+
+                    <li id="blog"><a href="/blog"> Blog</a></li>
+                    <li id="posts"><a href="/posts"> Actualités</a></li>
+                    <li id="Gallerie"><a href="/gallery"> Gallerie</a></li>
+
+                    <?php if ($activeUser) : ?>
+                        <li class="user-actions">
+                            <a href="#" class="user-actions-sideNav show-on-large" data-activates="user-actions">
+                                <img src="<?= $activeUser->avatarUrl; ?>" class="user" width="50" height="50">
+                            </a>
                         </li>
-                        <?php if ($activeUser && $activeUser->rank == "admin") : ?>
-                            <li><a href="<?= ADMIN ?>" class="ng-menu-item"> Admin</a></li>
-                        <?php endif; ?>
-
-                        <li id="Accueil"><a href="/home" class="ng-menu-item">Accueil</a></li>
-                        <?php if ($activeUser) : ?>
-                            <li id="La Communauté"><a href="/community" class="ng-menu-item">Communauté</a></li>
-                        <?php endif; ?>
-
-
-                        <li id="blog"><a href="/blog" class="ng-menu-item"> Blog</a></li>
-                        <li id="posts"><a href="/posts" class="ng-menu-item"> Actualités</a></li>
-                        <li id="Gallerie"><a href="/gallery" class="ng-menu-item"> Gallerie</a></li>
-                        <?php if ($activeUser) : ?>
-                            <li>
-                                <a href="<?= $activeUser->accountUrl; ?>">
-                                    <img src="<?= $activeUser->avatarUrl; ?>" class="ng-menu-avatar" width="50" height="50">
-                                </a>
-                            </li>
-                        <?php endif; ?>
-
-                        <?php if (!$activeUser) : ?>
-                            <li><a href="/sign" class="link-btn">Inscription</a></li>
-                            <li><a href="/login" class="link-btn">Connexion</a></li>
-                        <?php endif; ?>
-
-                    </ul>
-                </div>
+                    <?php else : ?>
+                        <li class="action"><a href="/sign" class="btn blue-grey waves-effect dark-3">Inscription</a></li>
+                        <li class="action"><a href="/login" class="btn blue-grey waves-effect dark-3">Connexion</a></li>
+                    <?php endif; ?>
+                </ul>
             </div>
         </nav>
     </div>
+    <ul class="side-nav" id="user-actions">
+        <?php if ($activeUser) : ?>
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                        <img src="/imgs/bgjumbo.jpeg" alt="bg">
+                    </div>
+                    <a href="<?= $activeUser->accountUrl; ?>"><img src="<?= $activeUser->avatarUrl; ?>" alt="bg2" class="circle"></a>
+                    <span class="white-txt name"><?= $activeUser->name; ?></span>
+                    <span class="email"><?= $activeUser->email; ?></span>
+                </div>
+            </li>
+        <?php else : ?>
+            <li class="logo" style="margin: 20px 20px 30px 20px;">
+                <a href="/" class="brand-logo" id="logo-container">
+                    <img src="/imgs/logo-white.png" alt="" width="100%" height="auto">
+                </a>
+            </li>
+        <?php endif; ?>
+
+        <div class="user-action">
+            <?php if (!$activeUser) : ?>
+                <li>
+                    <a href="/sign" class="btn action blue-grey dark-3 waves-effect">Inscription</a>
+                    <a href="/login" class="btn action blue-grey dark-3 waves-effect">Connexion</a>
+                </li>
+            <?php else : ?>
+                <li>
+                    <a href="<?= $activeUser->postUrl; ?>" class="btn action blue-grey dark-3 waves-effect">Poster</a>
+                    <a href="<?= $activeUser->postsUrl; ?>" class="btn action blue-grey dark-3 waves-effect">Mes Publications</a>
+                </li>
+            <?php endif; ?>
+        </div>
+        <?php if ($activeUser) : ?>
+            <li><a href="<?= $activeUser->accountUrl; ?>">Profile <i class="icon icon-user"></i></a></li>
+            <li><a href="<?= $activeUser->editUrl; ?>">Editer le Profile <i class="icon icon-cog-alt"></i></a></li>
+            <li><a href="<?= $activeUser->followingUrl; ?>">Mes abonnements <i class="icon icon-users"></i></a></li>
+            <li><a href="/logout">Déconnexion <i class="icon icon-off"></i></a></li>
+        <?php endif; ?>
+        <li>
+            <ul class="collapsible collapsible-accordion">
+                <li>
+                    <a class="collapsible-header waves-effect">Plus</a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a href="/bugs">Signaler un Bug <i class="icon icon-comment-empty"></i></a></li>
+                            <li><a href="/ideas">Donner une idée <i class="icon icon-comment-empty"></i></a></li>
+                            <li><a href="/privacy-terms">Mentions légales <i class="icon icon-plus"></i></a></li>
+                            <li><a href="/about">A propos <i class="icon icon-star"></i></a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
 </header>

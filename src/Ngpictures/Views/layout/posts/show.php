@@ -12,11 +12,11 @@
     </head>
     </head>
     <body>
-         <div class="jumbotron">
-            <?php include(APP."/Views/includes/menu.php"); ?>
+        <?php include(APP."/Views/includes/menu.php"); ?>
+         <div class="jumbotron-small">
             <span class="ng-cover"></span>
             <div class="container row">
-                <span class="jumbotron-title">
+                <span class="ui header">
                     <i class="icon icon-paperclip"></i>&nbsp;Article <?= $article->id ?>
                 </span>
                 <span class="jumbotron-content">
@@ -30,11 +30,11 @@
             </div>
         </div>
 
-        <?php include(APP."/Views/includes/flash.php"); ?>
         <div class="page-content" id="pageContent" data-ajax="true">
             <?php echo $page_content; ?>
         </div>
         <?php include(APP."/Views/includes/footer.php"); ?>
         <?php include(APP."/Views/includes/default-script.php"); ?>
+        <?php include(APP."/Views/includes/flash.php"); ?>
     </body>
 </html>

@@ -1,0 +1,41 @@
+.jumbotron {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding-top: 2em !important;
+
+    &.dark {
+        background: #100f0f !important;
+        color: #ccc;
+    }
+
+    &.light {
+        background:rgb(247, 246, 246);
+        color: #111111;
+    }
+}
+
+
+.jumbotron-small {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: 2em !important;
+    background: url("/imgs/bgjumbo.jpeg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 1em;
+}
+
+.statistic {
+    width: 100%;
+    min-height: 400px !important;
+    display: block;
+    color: #100f0f !important;
+    padding: 10px;
+}

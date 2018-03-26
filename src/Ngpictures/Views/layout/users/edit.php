@@ -18,13 +18,13 @@
                 </span>
             </div>
         </div>
-        <?php include(APP."/Views/includes/flash.php"); ?>
 
         <div class="container row col s12">
             <?php echo $page_content ?>
         </div>
-        
+
         <?php include(APP."/Views/includes/footer.php"); ?>
         <?php include(APP."/Views/includes/default-script.php"); ?>
+        <?php include(APP."/Views/includes/flash.php"); ?>
     </body>
 </html>

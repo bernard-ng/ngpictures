@@ -1,4 +1,3 @@
-<?php echo '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhmtl1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
@@ -18,7 +17,7 @@
 							<tr>
 								<td align="center" style="text-align: center;">
 									<a href="http://ngpictures.dev/home">
-										<img src="http://ngpictures.dev/imgs/ngpic-2.png" width="100" border="0" alt="logo ngpictures">
+										<img src="http://127.1.1.1/imgs/logo-white.png" width="500" border="0" alt="logo ngpictures">
 									</a>
 								</td>
 							</tr>
@@ -40,9 +39,9 @@
 							</tr>
 							<tr><td height="30" style="font-size: 30px; line-height: 30px;"> &nbsp;</td></tr>
 							<tr>
-								<td align="center" style="text-align: center; color: #808a8f; mso-line-height: exactly; line-height: 25px; font-family: robot-title, sans-serif;">
+								<td align="center" style="text-align: center; padding: 20px; color: #808a8f; mso-line-height: exactly; line-height: 25px; font-family: robot-title, sans-serif;">
 									Salut, vous venez tout juste de créer un compte sur Ngpictures,
-									Confirmez-le en cliquant le button si dessous, si vous n\'est pas responsable de la création 
+									Confirmez-le en cliquant le button si dessous, si vous n'est pas responsable de la création
 									de ce compte, Veuillez tout simplement ignorer ce mail.
 								</td>
 							</tr>
@@ -54,8 +53,8 @@
 										<tbody>
 											<tr>
 												<td align="center" height="60" valign="middle" bgcolor="#263238" style="font-size: 18px; font-family: robot-title,sans-serif; color: #fff; text-align: center; border-radius: 3px;">
-													<a href="'.$confirmation_link.'" style="font-size: 18px; font-family: robot-title,sans-serif; color: #fff; text-align: center; text-decoration: none; line-height: 60px; display: block; height: 60;">
-														Valider mon Compte
+													<a href="<?php echo $confirmation_link ?>" style="font-size: 18px; font-family: robot-title,sans-serif; color: #fff; text-align: center; text-decoration: none; line-height: 60px; display: block; height: 60;">
+														Valider Mon Compte
 													</a>
 												</td>
 											</tr>
@@ -83,5 +82,3 @@
 	</table>
 </body>
 </html>
-
-';

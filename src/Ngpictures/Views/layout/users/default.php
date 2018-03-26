@@ -10,8 +10,8 @@
     <body class="login-bg">
         <?php include(APP."/Views/includes/mobile-menu.php"); ?>
         <?php include(APP."/Views/includes/menu.php"); ?>
-        <?php include(APP."/Views/includes/flash.php"); ?>
-            <?php echo $page_content; ?>        
+        <?php echo $page_content; ?>
         <?php include(APP."/Views/includes/default-script.php"); ?>
+        <?php include(APP."/Views/includes/flash.php"); ?>
     </body>
 </html>

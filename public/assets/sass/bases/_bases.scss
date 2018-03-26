@@ -1,0 +1,17 @@
+@import "container-row";
+@import "media-query";
+@import "normalize";
+@import "reset";
+@import "transition";
+@import "typography";
+@import "utility";
+@import "fonts";
+@import "icons";
+@import "../custom/bases/variables";
+
+body {
+    background: $bg-color;
+    color: $txt-color;
+    font-weight: 300;
+    overflow-x: hidden;
+}

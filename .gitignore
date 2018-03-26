@@ -1,6 +1,7 @@
 /tmp/
 /cache/
 public/uploads/
+public/assets/.sass-cache
 public/imgs/
 /public/i/
 .idea

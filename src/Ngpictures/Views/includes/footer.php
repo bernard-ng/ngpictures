@@ -1,7 +1,7 @@
 <!-- =================  FOOTER   ====================== -->
 <?php if ($activeUser) :?>
     <div class="fixed-action-btn toolbar">
-        <a class="btn-floating btn-large primary-c">
+        <a class="btn-floating btn-large blue-grey dark-2 action">
             <i class="icon icon-th"></i>
         </a>
         <ul>
@@ -12,7 +12,7 @@
     </div>
 <?php endif; ?>
 
-<footer class="page-footer primary-c">
+<footer class="page-footer jumbotron dark shadow-2">
     <div class="row container">
         <section class="col l6 m4 s12">
         <h5 class="white-text page-footer-title">A propos</h5>
@@ -35,7 +35,7 @@
             </ul>
         </section>
         <section class="col l3 m4 s6">
-            <h5 class="white-tex page-footer-title">Résaux sociaux</h5>
+            <h5 class="white-txt page-footer-title">Résaux sociaux</h5>
             <ul>
                 <li><a class="white-text page-footer-text" href="https://www.Facebook.com/wonderfulDP" target="_blank">
                     <i class="social social-facebook-1"></i>&nbsp;Facebook</a>
@@ -47,12 +47,11 @@
                 </li>
             </ul>
         </section>
-         
+
     </div>
-    <div class="footer-copyright primary-d">
+    <div class="footer-copyright black">
         <div class="container">
             <span class="right page-footer-text">Developped by <a href="http://ngpictures.pe.hu" target="_blank">Bernard ng</a>&nbsp;</span>
         </div>
     </div>
 </footer>
-
