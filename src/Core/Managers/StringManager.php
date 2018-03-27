@@ -33,32 +33,6 @@ class StringManager
         return mt_rand(1000, 9999).".".self::setToken(10);
     }
 
-
-    /**
-     * supprime les accents et rend le string kebaba_case
-     * @param string $string
-     * @return string
-     */
-    public static function kebabCase(string $string): string
-    {
-        //&grave; &acute; &circ; &uml; &cedil; &tilde; &ring;
-        $removed = preg_replace("#À|À|Á|Â|Ã|Ä|Å|à|á|â|ã|ä|å#", "a", $string);
-        $removed = preg_replace("#Ò|Ó|Ô|Õ|Ö|Ø|ò|ó|ô|õ|ö|ø#", "o", $removed);
-        $removed = preg_replace("#È|É|Ê|Ë|è|é|ê|ë#", "e", $removed);
-        $removed = preg_replace("#Ç|ç#", "c", $removed);
-        $removed = preg_replace("#Ì|Í|Î|Ï|ì|í|î|ï#", "i", $removed);
-        $removed = preg_replace("#Ù|Ú|Û|Ü|ù|ú|û|ü#", "u", $removed);
-        $removed = preg_replace("#Ý|ý|ÿ#", "y", $removed);
-        $removed = preg_replace("#Ñ|ñ#", "n", $removed);
-
-        $formated = trim($removed);
-        if (preg_match("/[ ]+/", $formated)) {
-            $formated = implode(explode(" ", $formated), "_");
-        }
-        return $formated;
-    }
-
-
     /**
      * tronque du text
      * @param string $text

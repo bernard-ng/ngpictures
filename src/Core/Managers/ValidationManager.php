@@ -122,14 +122,22 @@ class ValidationManager
     }
 
 
+    /**
+     * verifi si une valeur est supperieur a une limit
+     *
+     * @param string $field
+     * @param integer $size
+     * @param string $errorMsg
+     * @return boolean
+     */
     public function isGreaterThan(string $field, int $size, string $errorMsg = null)
     {
         if (strlen($this->getField($field) >= $size)) {
             return true;
-        } else {
-            $this->errors[$field] = $errorMsg ?? Msg::get('isMatch');
-            $this->flash->set('danger', $errorMsg ?? Msg::get('isMatch'));
         }
+
+        $this->errors[$field] = $errorMsg ?? Msg::get('isMatch');
+        $this->flash->set('danger', $errorMsg ?? Msg::get('isMatch'));
     }
 
 

@@ -46,7 +46,7 @@
                             </div>
                         </div>
                     </div>
-                <?php endforeach ; ?>
+                    <?php endforeach ; ?>
                 <?php else : ?>
                     <div class="card">
                         <div class="no-publication">

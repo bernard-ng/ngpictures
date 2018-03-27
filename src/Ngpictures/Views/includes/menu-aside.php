@@ -8,12 +8,12 @@
                     <?= $verse->ref; ?>
                 </div>
             </li>
-            <?php if (isset($categories) && !empty($categories)): ?>
+            <?php if (isset($categories) && !empty($categories)) : ?>
                 <li>
                     <div class="collapsible-header active">Catégories</div>
                     <div class="collapsible-body">
                         <div class="ui list">
-                            <?php foreach($categories as $category): ?>
+                            <?php foreach ($categories as $category) : ?>
                             <div class="item">
                                 <i class="icon icon-tag"></i>
                                 <a href="<?= $category->url; ?>" class="content grey-txt">

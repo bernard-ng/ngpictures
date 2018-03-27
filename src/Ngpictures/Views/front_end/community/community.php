@@ -18,14 +18,14 @@
                         <img src="<?= $user->avatarUrl; ?>" alt="" width="100%">
                     </a>
                     <div class="content">
-                        <?php if ($user->rank == 'admin' || $user->certified == 1): ?>
+                        <?php if ($user->rank == 'admin' || $user->certified == 1) : ?>
                             <div class="right floated meta"><i class="icon icon-ok-circled green-txt"></i></div>
                         <?php endif; ?>
                         <div class="header">
                             <?= $user->name ?>
                         </div>
                         <div class="meta">
-                           <?= $user->bio ?>
+                            <?= $user->bio ?>
 
                         </div>
                         <div class="description">

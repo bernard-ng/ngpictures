@@ -5,23 +5,72 @@ use Ngpictures\Ngpictures;
 
 class Route
 {
+
+    /**
+     * l'url ou chemin a l'entree
+     * @var string
+     */
     private $path;
+
+    /**
+     * le callback
+     * @var callable|string
+     */
     private $controller;
+
+    /**
+     * les parametres matches
+     * pour les url particulieres
+     * @var array
+     */
     private $matches = [];
+
+    /**
+     * les params avec la method "with"
+     * @var array
+     */
     private $params = [];
 
-    public function __construct(string $path, $controller)
+
+    /**
+     * l'application
+     * @var Ngpictures
+     */
+    private $app;
+
+
+    /**
+     * Route constructor
+     * @param string $path
+     * @param callable|string $controller
+     */
+    public function __construct(string $path, $controller, Ngpictures $app)
     {
         $this->path = trim($path, "/");
         $this->controller = $controller;
+        $this->app = $app;
     }
 
+
+    /**
+     * match des param particulier
+     * @param string $param
+     * @param string $regex
+     * @return Route
+     */
     public function with(string $param, string $regex): Route
     {
         $this->params[$param] = str_replace("(", "(?:", $regex);
         return $this;
     }
 
+
+    /**
+     * verifi si une url correspond a une route
+     *
+     * @param string $url
+     * @return void
+     */
     public function match(string $url)
     {
         $url = trim($url, "/");
@@ -37,6 +86,12 @@ class Route
         return true;
     }
 
+
+    /**
+     * les param matcher avec la method "with"
+     * @param mixed $match
+     * @return string
+     */
     private function paramMatch($match): string
     {
         if (isset($this->params[$match[1]])) {
@@ -45,18 +100,12 @@ class Route
         return '([^/]+)';
     }
 
-    public function call()
-    {
-        if (is_string($this->controller)) {
-            $url = explode("#", $this->controller);
-            $controller = Ngpictures::getInstance()->getController($url[0]);
-            $action = $url[1] ?? 'index';
-            
-            return call_user_func_array([$controller, $action], $this->matches);
-        }
-        return call_user_func_array($this->controller, $this->matches);
-    }
 
+     /**
+     * genere une url
+     * @param array $params
+     * @return string
+     */
     public function getUrl(array $params): string
     {
         $path = $this->path;
@@ -64,5 +113,22 @@ class Route
             $path = str_replace(":$k", "$v", $path);
         }
         return $path;
+    }
+
+
+    /**
+     * execute la callable correspondant a la route.
+     * @return void
+     */
+    public function call()
+    {
+        if (is_string($this->controller)) {
+            $url = explode("#", $this->controller);
+            $action = $url[1] ?? 'index';
+            $controller = $this->app->getController($url[0]);
+
+            return call_user_func_array([$controller, $action], $this->matches);
+        }
+        return call_user_func_array($this->controller, $this->matches);
     }
 }

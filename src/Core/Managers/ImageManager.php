@@ -47,7 +47,7 @@ abstract class ImageManager
      * taille maximal du fichier
      * @var int
      */
-    private static $size_max = 10485760; // 10mb
+    private static $size_max = 5242880; // 5mb
 
 
     /**
@@ -56,11 +56,11 @@ abstract class ImageManager
      * @param string $type
      * @return bool
      */
-    private static function checkExtension(string $file, string $type): bool
+    private static function checkFile(string $file, string $type): bool
     {
         $ext = explode('.', $file);
         $ext = strtolower(end($ext));
-        $expected_type = ['image/jpg','image/jpeg','image/png','image/gif'];
+        $expected_type = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 
         if (in_array($ext, self::$extensions) && in_array($type, $expected_type)) {
             return true;
@@ -86,7 +86,7 @@ abstract class ImageManager
             $size = ($file->get('thumb.size'));
             $path = self::$path[$path];
 
-            if (self::checkExtension($file->get('thumb.name'), $file->get('thumb.type'))) {
+            if (self::checkFile($file->get('thumb.name'), $file->get('thumb.type'))) {
                 if ($size <= self::$size_max) {
                     $manager = new InterventionImage();
 
@@ -139,6 +139,14 @@ abstract class ImageManager
     }
 
 
+    /**
+     * ajout d'un logo sur les images
+     *
+     * @param string $filename
+     * @param string $logo
+     * @param string $type
+     * @return void
+     */
     public static function watermark(string $filename, string $logo, string $type)
     {
         $flash = new FlashMessageManager(SessionManager::getInstance());
@@ -163,7 +171,6 @@ abstract class ImageManager
                     ->save(self::$path[$type]."/{$filename}")
                     ->destroy();
             }
-
         } catch (NotReadableException $e) {
             $flash->set('danger', 'image '. MessageManager::get('files_not_image'));
             return false;

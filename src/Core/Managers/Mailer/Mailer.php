@@ -55,7 +55,6 @@ class Mailer
             $mail->Body    =  $message;
             $mail->AltBody = "Cliquez pour confirmer votre compte: {$link}";
             $mail->send();
-
         } catch (Exception $e) {
             echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
         }

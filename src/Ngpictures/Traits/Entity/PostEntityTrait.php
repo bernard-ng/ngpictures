@@ -58,14 +58,6 @@ trait PostEntityTrait
     }
 
 
-    public function getWatermarkUrl(): string
-    {
-        $this->watermarkUrl = "/gallery/watermark";
-        $this->watermarkUrl .= "/{$this->action_type}/{$this->thumb}";
-        return $this->watermarkUrl;
-    }
-
-
     /**
      * lien de telechargement de la miniature de la publication
      * @return string
