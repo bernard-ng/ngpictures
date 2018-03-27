@@ -35,7 +35,7 @@
                         Nos photos sont l'expression même de l'ombre sinueuse d'une personne.
                     </p>
                 </div>
-                <?php if ($article && !empty($article)): ?>
+                <?php if ($article && !empty($article)) : ?>
                     <div class="post-hoverable">
                         <a href="<?= $article->url; ?>" class="waves-effect">
                             <img src="<?=$article->thumbUrl ?>" alt="<?= $article->title ?>">

@@ -3,7 +3,15 @@ namespace Ng\Core\Managers;
 
 final class LogMessageManager
 {
-    public static function register($file, $msg)
+
+    /**
+     * ajout d'un message de log
+     *
+     * @param string $file
+     * @param string $msg
+     * @return void
+     */
+    public static function register(string $file, string $msg)
     {
         $time = date("d-M H:i");
         $last_log = date("d-M-Y  H:i:s");
@@ -13,10 +21,11 @@ final class LogMessageManager
         "#*************************************************************
         AUTHOR         :    Bernard-ng
         PROJECT        :    NG-PICTURES
-        LINK           :    ngpictures.pe.hu
+        LINK           :    https://larytech.com
         BUILT AT       :    {$last_log}
 **************************************************************
 [NG-PICTURES MESSAGES LOGS] \n\n";
+
 
         $file = fopen(ROOT."/system-logs", "a+");
 
@@ -28,6 +37,13 @@ final class LogMessageManager
         fclose($file);
     }
 
+
+    /**
+     * suppression d'un fichier log
+     * juste le contenu
+     *
+     * @return void
+     */
     public static function clear()
     {
         $file = fopen(ROOT."/system-logs", "w");

@@ -6,7 +6,13 @@ class Controller
     protected $viewPath;
     protected $layout;
 
-   
+
+    /**
+     * rendu de la vue
+     * @param string $view
+     * @param array $variables
+     * @param boolean $layout
+     */
     public function viewRender(string $view, array $variables = [], bool $layout = true)
     {
         ob_start();
@@ -22,7 +28,12 @@ class Controller
     }
 
 
-    public function isAjax()
+    /**
+     * defini si la request est faite en ajax
+     *
+     * @return boolean
+     */
+    public function isAjax(): bool
     {
         return (
             isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
@@ -31,6 +42,9 @@ class Controller
     }
 
 
+    /**
+     * en cas d'erreur en ajax
+     */
     public function ajaxFail(string $msg)
     {
         header('HTTP/1.1 500 Internal Server Error');

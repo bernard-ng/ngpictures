@@ -68,7 +68,7 @@ class Collection implements IteratorAggregate, ArrayAccess
     {
         $this->items[$key] = $value;
     }
-    
+
 
     /**
      * verifie si un tableau a une clef
@@ -82,39 +82,7 @@ class Collection implements IteratorAggregate, ArrayAccess
     }
 
 
-    /**
-     * list les elements d'un tableau par rapport a une valeur
-     *
-     * @param mixed $key la clef
-     * @param mixed $key la valeur cherchée
-     * @return Collection
-     **/
-    public function lists($key, $value): Collection
-    {
-        $result = [];
-        foreach ($this->items as $item) {
-            $result[$this->item[$key]] = $item[$value];
-        }
-        return new self($result);
-    }
-
-
-    /**
-     * liste les valeurs d'un tableau par rapport a une clef
-     *
-     * @param mixed $key la clef
-     * @return Collection
-     **/
-    public function extract($key): Collection
-    {
-        $result = [];
-        foreach ($this->items as $item) {
-            $result[] = $item[$key];
-        }
-        return new self($result);
-    }
-    
-
+    //implementation des interfaces
     public function offsetExists($offset)
     {
         return $this->has($offset);
@@ -129,7 +97,7 @@ class Collection implements IteratorAggregate, ArrayAccess
     {
         $this->set($offset, $value);
     }
-    
+
     public function offsetUnset($offset)
     {
         if ($this->has($offset)) {

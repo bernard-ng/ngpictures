@@ -147,7 +147,7 @@ class SitemapManager
         }
     }
 
-    
+
     /**
      * Use this to add single URL to sitemap.
      * @param string $url URL
@@ -193,10 +193,7 @@ class SitemapManager
             throw new InvalidArgumentException("More than 50,000 URLs per single sitemap is not allowed.");
         }
 
-        $generatorInfo = '<!-- generator="SimpleSitemapGenerator/'.$this->classVersion.'" -->
-                          <!-- sitemap-generator-url="http://www.antczak.org"
-                          sitemap-generator-version="'.$this->classVersion.'" -->
-                          <!-- generated-on="'.date('c').'" -->';
+        $generatorInfo = '<!-- Ngpictures sitemap -->';
         $sitemapHeader = '<?xml version="1.0" encoding="UTF-8"?>'.$generatorInfo.'
                             <urlset
                                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

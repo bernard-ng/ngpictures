@@ -6,35 +6,26 @@ $router->get("/", "home", "home");
 $router->get("/home", "home", "home");
 
 //users pages
-$router->get("/login", "users#login", "users.login");
-$router->post("/login", "users#login", "users.login");
-$router->get("/logout", "users#logout", "users.logout");
-$router->get("/forgot", "users#forgot", "users.forgot");
-$router->post("/forgot", "users#forgot", "users.forgot");
-$router->get("/reset/:id/:token", "users#reset", "users.reset");
-$router->post("/reset/:id/:token", "users#reset", "users.reset");
-$router->get("/sign", "users#sign", "users.sign");
-$router->post("/sign", "users#sign", "users.sign");
-$router->get("/confirm/:id/:token", "users#confirm", "users.confirmation");
+$router->any("/login", "users#login", "users.login");
+$router->any("/forgot", "users#forgot", "users.forgot");
+$router->any("/reset/:id/:token", "users#reset", "users.reset");
+$router->any("/sign", "users#sign", "users.sign");
+$router->any("/u/edit/:user-:id/:token", "users#edit", "users.edit");
+$router->any("/u/post/edit/:id/:token", "posts#edit", "posts.edit-article");
+$router->any("/u/post", "posts#add", "posts.add");;
 
+$router->get("/confirm/:id/:token", "users#confirm", "users.confirmation");
+$router->get("/logout", "users#logout", "users.logout");
 $router->get("/:user-:id", "users#account", "users.account");
-$router->get("/u/edit/:user-:id/:token", "users#edit", "users.edit");
-$router->post("/u/edit/:user-:id/:token", "users#edit", "users.edit");
 $router->get("/u/followers/:user-:id/:token", "following#showFollowers", "users.show-followers");
 $router->get("/u/following/:user-:id/:token", "following#showFollowing", "users.show-following");
 $router->get("/u/posts/:user-:id/:token", "posts#showPosts", "posts.show-post");
-$router->get("/u/post", "posts#add", "posts.add");
-$router->post("/u/post", "posts#add", "posts.add");
-$router->get("/u/post/edit/:id/:token", "posts#edit", "posts.edit-article");
-$router->post("/u/post/edit/:id/:token", "posts#edit", "posts.edit");
+
 $router->post("/u/post/delete/:token", "posts#delete", "posts.delete");
 
 
 //community pages
 $router->get("/community", "community", "community.index");
-$router->get("/community/designers", "community#designers", "community.designers");
-$router->get("/community/photographers", "community#photographers", "community.photographers");
-
 
 //posts and blog pages
 $router->get("/blog","blog", "blog.index");
@@ -77,11 +68,9 @@ $router->get("/search/:q", "search", "search.index");
 $router->get("/rss", "rss", "rss.index");
 
 //contact
-$router->get("/ideas", "ideas", "ideas.index");
-$router->post("/ideas", "ideas", "ideas.index");
-$router->get("/bugs", "bugs", "bugs.index");
-$router->post("/bugs", "bugs", "bugs.index");
-$router->get("/contact", "contact", "contact.index");
+$router->any("/ideas", "ideas", "ideas.index");
+$router->any("/bugs", "bugs", "bugs.index");
+$router->any("/contact", "contact", "contact.index");
 
 
 
@@ -100,39 +89,34 @@ $router->get(ADMIN."/logs/send", "admin#sendLogs", "admin.sendLogs");
 
 //pages
 $router->get(ADMIN."/pages", "admin#showPages", "admin.showPages");
-$router->get(ADMIN."/pages/:name", "admin#editPages", "admin.editPages");
-$router->post(ADMIN."/pages/:name", "admin#editPages", "admin.editPages");
+$router->any(ADMIN."/pages/:name", "admin#editPages", "admin.editPages");
+
 
 //posts and blog pages
+$router->any(ADMIN."/blog/edit/:id","admin#edit", "admin.blog-edit");
+$router->any(ADMIN."/blog/add","admin#add", "admin.blog-add");
+$router->any(ADMIN."/blog/categories/add", "admin#addCategory", "admin.categories-add");
+$router->any(ADMIN."/blog/categories/edit/:id", "admin#editCategory", "admin.categories-edit");
+
 $router->get(ADMIN."/blog","admin#blog", "admin.blog");
-$router->get(ADMIN."/blog/edit/:id","admin#edit", "admin.blog-edit");
-$router->get(ADMIN."/blog/add","admin#add", "admin.blog-add");
-$router->post(ADMIN."/blog/edit/:id","admin#edit", "admin.blog-edit");
-$router->post(ADMIN."/blog/add","admin#add", "admin.blog-add");
 $router->get(ADMIN."/blog/categories", "admin#categories", "admin.categories");
-$router->get(ADMIN."/blog/categories/add", "admin#addCategory", "admin.categories-add");
-$router->post(ADMIN."/blog/categories/add", "admin#addCategory", "admin.categories-add");
-$router->get(ADMIN."/blog/categories/edit/:id", "admin#editCategory", "admin.categories-edit");
-$router->post(ADMIN."/blog/categories/edit/:id", "admin#editCategory", "admin.categories-edit");
 $router->get(ADMIN."/confirm/:t/:id","admin#confirm","admin.confirm");
-$router->post(ADMIN."/delete","admin#delete","admin.delete");
 $router->get(ADMIN."/posts","admin#posts","admin.posts");
 
+$router->post(ADMIN."/delete","admin#delete","admin.delete");
+
 //gallery pages
+$router->any(ADMIN."/gallery/add","admin#addGallery","admin.gallery-add");
+$router->any(ADMIN."/gallery/edit/:id","admin#editGallery","admin.gallery-edit");
+$router->any(ADMIN."/gallery/albums/edit/:id", "admin#editAlbum", "admin.album-edit");
+$router->any(ADMIN."/gallery/albums/add", "admin#addAlbum", "admin.album-add");
+$router->any(ADMIN."/gallery/watermark/:type/:filename", "admin#watermark", "admin.watermarker");
+
 $router->get(ADMIN."/gallery","admin#gallery","admin.gallery");
-$router->get(ADMIN."/gallery/add","admin#addGallery","admin.gallery-add");
-$router->post(ADMIN."/gallery/add","admin#addGallery","admin.gallery-add");
-$router->get(ADMIN."/gallery/edit/:id","admin#editGallery","admin.gallery-edit");
-$router->post(ADMIN."/gallery/edit/:id","admin#editGallery","admin.gallery-edit");
 $router->get(ADMIN."/gallery/albums", "admin#album", "admin.gallery.album");
-$router->get(ADMIN."/gallery/albums/edit/:id", "admin#editAlbum", "admin.album-edit");
-$router->post(ADMIN."/gallery/album/edit/:id", "admin#editAlbum", "admin.album-edit");
-$router->get(ADMIN."/gallery/albums/add", "admin#addAlbum", "admin.album-add");
-$router->post(ADMIN."/gallery/albums/add", "admin#addAlbum", "admin.album-add");
-$router->get(ADMIN."/gallery/watermark/:type/:filename", "admin#watermark", "admin.watermarker");
-$router->post(ADMIN."/gallery/watermark/:type/:filename", "admin#watermark", "admin.watermarker");
 $router->get(ADMIN."/media-browser", "admin#mediaBrowser", "admin.gallery-mediaBrowser");
 $router->get(ADMIN."/file-browser/:dirname", "admin#fileBrowser", "admin.fileBrowser");
+
 $router->post(ADMIN."/deleteFile", "admin#deleteFile", "admin.gallery-deletefile");
 
 //users pages

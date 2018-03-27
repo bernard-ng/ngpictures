@@ -59,11 +59,7 @@ class MysqlDatabase extends Database
                 $PDO->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
                 $this->PDO = $PDO;
             } catch (PDOException $e) {
-                if (Ngpictures::hasDebug()) {
-                    die("PDOException : {$e->getMessage()} : {$e->getLine()}");
-                } else {
-                    Ngpictures::redirect("/error-500");
-                }
+                die($e->getMessage());
             }
         }
         return $this->PDO;
@@ -102,8 +98,8 @@ class MysqlDatabase extends Database
                 $result = ($one)? $req->fetch() : $req->fetchAll();
             }
             return $result;
-        } catch (Exception $e) {
-            (Ngpictures::hasDebug())? die("QueryException, class = {$class_name} : {$e->getMessage()}") :  Ngpictures::redirect('/e500');
+        } catch (PDOException $e) {
+            die($e->getMessage());
         }
     }
 
@@ -142,8 +138,8 @@ class MysqlDatabase extends Database
                 $result = ($one)? $req->fetch() : $req->fetchAll();
             }
             return $result;
-        } catch (Exception $e) {
-            (Ngpictures::hasDebug())? die("PrepareException : {$e->getMessage()}") :  Ngpictures::redirect('/e500');
+        } catch (PDOException $e) {
+            die($e->getMessage());
         }
     }
 

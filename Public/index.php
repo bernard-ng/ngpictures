@@ -27,7 +27,7 @@ if (!Ngpictures::getInstance()->hasDebug()) {
  * registration des routes dans la RoutesConfig.php
  */
 try {
-    $router = new Router($_GET['url'] ?? $_SERVER['REQUEST_URI'] ?? '/home');
+    $router = new Router($_GET['url'] ?? $_SERVER['REQUEST_URI'], Ngpictures::getInstance());
     require(ROOT."/config/RoutesConfig.php");
     $router->run();
 } catch (RouterException $e) {

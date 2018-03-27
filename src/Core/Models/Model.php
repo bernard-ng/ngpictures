@@ -18,16 +18,16 @@ class Model
      * connection de la base de donnee
      * @var Database
      */
-    protected $db;
+    protected $database;
 
 
     /**
      * Model constructor.
-     * @param \Core\Database\Database
+     * @param MysqlDatabase
      */
-    public function __construct(MysqlDatabase $db)
+    public function __construct(MysqlDatabase $database)
     {
-        $this->db = $db;
+        $this->database = $database;
         if (is_null($this->table)) {
             $part = explode("\\", get_class($this));
             $table = end($part);
@@ -74,9 +74,9 @@ class Model
         $class = str_replace("Entitys", "Entity", $class);
 
         if ($data === null) {
-            return $this->db->query($statement, $class, $one, $rowCount);
+            return $this->database->query($statement, $class, $one, $rowCount);
         } else {
-            return $this->db->prepare($statement, $data, $class, $one, $rowCount);
+            return $this->database->prepare($statement, $data, $class, $one, $rowCount);
         }
     }
 
@@ -107,9 +107,10 @@ class Model
     /**
      * creation de donnee
      * @param array $data
+     * @param boolean $date_created
      * @return mixed
      */
-    public function create(array $data = [])
+    public function create(array $data = [], bool $date_created = true)
     {
         $array_sql = [];
         $array_data = [];
@@ -120,7 +121,10 @@ class Model
         }
 
         $sql = implode(', ', $array_sql);
-        return $this->query("INSERT INTO {$this->table} SET $sql , date_created = NOW() ", $array_data);
+        if ($date_created) {
+            return $this->query("INSERT INTO {$this->table} SET $sql , date_created = NOW() ", $array_data);
+        }
+        return $this->query("INSERT INTO {$this->table} SET $sql ", $array_data);
     }
 
 
@@ -141,7 +145,7 @@ class Model
      */
     public function lastInsertId()
     {
-        return $this->db->lastInsertId();
+        return $this->database->lastInsertId();
     }
 
 
