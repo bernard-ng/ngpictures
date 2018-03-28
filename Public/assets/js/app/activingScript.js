@@ -1,5 +1,7 @@
 $(document).ready(function(){
-	$('.button-collapse').sideNav();
+	$('.button-collapse').sideNav({
+		size: 250
+	});
 	$('.user-actions-sideNav').sideNav({
 		edge: 'right',
 		closeOnClick: true,

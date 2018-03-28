@@ -24,7 +24,7 @@
             <div class="row col l7 s12 m12">
                 <h2 class="ui header">A Propos De Nos Photos</h2>
                 <div class="">
-                    <p class="justify-align">
+                    <p>
                         l'ombre et la lumière surgissent de presque nul part,
                         évanescentes elles apparaissent et disparaissent au gré du temps,
                         elles sont par définition insaisissables et impalpables.
@@ -179,7 +179,7 @@
                 <iframe class="hoverable" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3907.669795348674!
                     2d27.466621714359682!3d-11.646862391734508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!
                     4f13.1!3m3!1m2!1s0x1972394d26719141%3A0xa8515a298fe31a63!2sAvenue+du+lac+Kipopo%2C+Lubumbashi!5e0!3m2!1sfr!2scd!4v1517072954604"
-                    width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
             </div>
         </div>
     </section>
@@ -188,27 +188,27 @@
             <span class="row col l12 s12 m12">
                 <h2 class="ui header"> Nos Sponsors</h2>
             </span>
-            <div class="row col l2 m2 s4 center-align">
+            <div class="col l2 m2 s4 center-align">
                 <a href="https://www.itotafrica.com" class="waves-effect" target="_blank">
-                    <img src="/imgs/logo/itot.png" class="hoverable shadow-3" width="100%" height="100%" alt="">
+                    <img src="/imgs/logo/itot.png" class="hoverable" width="100%" height="100%" alt="">
                 </a>
             </div>
-            <div class="row col l2 m2 s4 center-align">
+            <div class="col l2 m2 s4 center-align">
                 <a href="https://www.facebook.com/WDPhotograpy" class="waves-effect" target="_blank">
-                    <img src="/imgs/logo/wd.png" class="hoverable shadow-3" alt="wd logo" width="100%" height="100%">
+                    <img src="/imgs/logo/wd.png" class="hoverable" alt="wd logo" width="100%" height="100%">
                 </a>
             </div>
-            <div class="row col l2 m2 s4">
-                <img src="/imgs/logo/rapha.png" class="hoverable shadow-3" width="100%" height="100%" alt="">
+            <div class="col l2 m2 s4">
+                <img src="/imgs/logo/rapha.png" class="hoverable" width="100%" height="100%" alt="">
             </div>
-            <div class="row col l2 m2 s4 center-align">
-                <img src="/imgs/logo/rapha.jpg" class="hoverable shadow-3" alt="wd logo" width="100%" height="100%">
+            <div class="col l2 m2 s4 center-align">
+                <img src="/imgs/logo/rapha.jpg" class="hoverable" alt="wd logo" width="100%" height="100%">
             </div>
-            <div class="row col l2 m2 s4">
-                <img src="/imgs/logo/biso.png" class="hoverable shadow-3" width="100%" height="100%" alt="">
+            <div class="col l2 m2 s4">
+                <img src="/imgs/logo/biso.png" class="hoverable" width="100%" height="100%" alt="">
             </div>
-            <div class="row col l2 m2 s4 center-align">
-                <img src="/imgs/logo/lst.png" class="hoverable shadow-3" alt="wd logo" width="100%" height="100%">
+            <div class="col l2 m2 s4 center-align">
+                <img src="/imgs/logo/lst.png" class="hoverable" alt="wd logo" width="100%" height="100%">
             </div>
         </div>
     </section>
