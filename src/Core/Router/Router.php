@@ -143,7 +143,7 @@ class Router
 
             foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
                 if ($route->match($this->url)) {
-                    $route->call();
+                    return $route->call();
                 }
             }
             $this->app::redirect("/error-404");

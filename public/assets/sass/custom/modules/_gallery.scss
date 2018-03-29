@@ -1,0 +1,17 @@
+.gallery {
+    &-details {
+        display: none;
+    }
+
+    &-container {
+        & img {
+            cursor: pointer !important;
+        }
+    }
+}
+
+#gallery {
+    -webkit-transition: all linear 0.3s;
+    -o-transition: all linear 0.3s;
+    transition: all linear 0.3s;
+}

@@ -1,8 +1,7 @@
 <div class="container row">
-    <?php include(APP."/Views/includes/left-aside.php"); ?>
     <?php foreach ($albums as $album) : ?>
         <div class="col l3 m6 s12">
-            <div class="card verse-panel">
+            <div class="card verse-panel ark-4">
                 <div class="card-content ng-contain">
                     <span class="card-title"><?= $album->title ?>  <span class="badge new right">123</span></span>
                     <p>
