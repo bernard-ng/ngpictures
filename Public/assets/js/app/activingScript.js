@@ -7,6 +7,7 @@ $(document).ready(function(){
 		closeOnClick: true,
 		draggable: false,
 	})
+	$("img.boxed").materialbox();
 	$('.collapsible').collapsible();
 	$('.carousel .big').carousel({fullWidth: true});
     $('.carousel').carousel();

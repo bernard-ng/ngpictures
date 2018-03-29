@@ -23,15 +23,15 @@ class GalleryController extends Controller
     }
 
 
-    public function show(string $slug, int $id)
+    public function show(int $id)
     {
         $photo = $this->gallery->find(intval($id));
-
-        if ($photo && $photo->slug === $slug) {
-            $this->pageManager::setName($photo->name);
-            $this->setLayout('posts/default');
-            $this->viewRender('front_end/gallery/show', compact('photo'));
+        if ($photo) {
+            $this->viewRender('front_end/gallery/show', compact('photo'), false);
         } else {
+            if ($this->isAjax()) {
+                $this->ajaxFail($this->msg['post_not_found']);
+            }
             $this->flash->set("danger", $this->msg['post_not_found']);
             $this->app::redirect(true);
         }
