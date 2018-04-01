@@ -38,6 +38,7 @@ class MessageManager implements ArrayAccess
         //FORM
         //**************************************************************************************** */
         'form_all_required' => "Tous les champs doivent être compléter",
+        "form_multi_errors" => "Le formulaire a été mal rempli",
         'form_field_required' => "Le champ doit être complété",
         'form_bad_slug' => 'Le slug ne doit contenir que des chiffres, des lettres et des tirés',
         'form_idea_submitted' => "Ola, nous avons bien reçu votre idée",

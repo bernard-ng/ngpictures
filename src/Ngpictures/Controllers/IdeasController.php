@@ -20,21 +20,26 @@ class IdeasController extends Controller
     public function index()
     {
         $post = new Collection($_POST);
+        $errors = [];
 
         if (isset($_POST) && !empty($_POST)) {
-            if (!empty($post->get('ideas'))) {
+            $this->validator->setRule('ideas', 'required');
+
+            if ($this->validator->isValid()) {
                 $content = $this->str::escape($post->get('ideas'));
-                $user_id = $this->session->getValue('auth', 'id');
+                $user_id = $this->session->getValue(AUTH_KEY, 'id');
+
                 $this->loadModel('ideas')->create(compact('content', 'user_id'));
                 $this->flash->set('success', $this->msg['form_idea_submitted']);
-                $this->app::redirect("/home");
+                $this->app::redirect("/");
             } else {
+                $errors = $this->validator->getErrors();
                 $this->flash->set('danger', $this->msg['form_field_required']);
             }
         }
 
         $this->pageManager::setName("Donner une idée");
         $this->setLayout('users/default');
-        $this->viewRender('front_end/others/ideas', compact('post'));
+        $this->viewRender('front_end/others/ideas', compact('post', "errors"));
     }
 }
