@@ -13,6 +13,7 @@ class FollowingController extends Controller
      */
     private $user_id = null;
 
+
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
@@ -22,18 +23,26 @@ class FollowingController extends Controller
     }
 
 
+    /**
+     * following system
+     *
+     * @param string $username
+     * @param integer $id
+     * @return void
+     */
     public function index(string $username, int $id)
     {
-        $f = $this->following;
+        $model = $this->following;
         $user = $this->loadModel('users')->find(intval($id));
 
         if ($user) {
-            if ($f->isFollowed($user->id, $this->user_id)) {
-                $f->remove($user->id, $this->user_id);
+            if ($model->isFollowed($user->id, $this->user_id)) {
+                $model->remove($user->id, $this->user_id);
                 $this->flash->set("success", $this->msg['users_unfollowing_success']);
                 $this->app::redirect(true);
             }
-            $f->add($user->id, $this->user_id);
+
+            $model->add($user->id, $this->user_id);
             $this->flash->set("success", $this->msg['users_following_success']);
             $this->app::redirect(true);
         } else {
@@ -43,6 +52,14 @@ class FollowingController extends Controller
     }
 
 
+    /**
+     * show followers
+     *
+     * @param string $name
+     * @param integer $id
+     * @param string $token
+     * @return void
+     */
     public function showFollowers(string $name, int $id, string $token)
     {
         if ($this->session->read(TOKEN_KEY) == $token) {
@@ -76,6 +93,14 @@ class FollowingController extends Controller
     }
 
 
+    /**
+     * show following
+     *
+     * @param string $name
+     * @param integer $id
+     * @param string $token
+     * @return void
+     */
     public function showFollowing(string $name, int $id, string $token)
     {
         if ($this->session->read(TOKEN_KEY) == $token) {
@@ -87,13 +112,9 @@ class FollowingController extends Controller
                 foreach ($followings as $following) {
                     $followings_list[] = $following['followed_id'];
                 }
-                $followings_list = implode(", ", $followings_list);
 
-                if (empty($followings_list)) {
-                    $followings = null;
-                } else {
-                    $followings = $this->users->findList($followings_list);
-                }
+                $followings_list = implode(", ", $followings_list);
+                $followoings = empty($followings_list)? null : $this->users->findList($followings_list);
 
                 $this->pageManager::setName("Mes Abonnements");
                 $this->setLayout("posts/default");

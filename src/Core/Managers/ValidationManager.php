@@ -127,7 +127,7 @@ class ValidationManager
     private function alpha_num(string $field)
     {
         $this->required($field);
-        if(ctype_alnum($this->getValue($field))) {
+        if (ctype_alnum($this->getValue($field))) {
             $this->errors[$field] = MessageManager::get("form_invalid_alnum");
         }
         return;
@@ -170,8 +170,7 @@ class ValidationManager
             $url = $matches[2];
         }
 
-        if (
-                preg_match('/^\[([^\]]+)\]/', $url, $matches) &&
+        if (preg_match('/^\[([^\]]+)\]/', $url, $matches) &&
                 ! version_compare(PHP_VERSION, "7", '>=') &&
                 filter_var($matches[1], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false
             ) {
@@ -196,7 +195,6 @@ class ValidationManager
         $email = $this->getValue($field);
 
         if (function_exists('idn_to_ascii') && preg_match('#\A([^@]+)@(.+)\z#', $email, $matches)) {
-
             $domain = (version_compare(PHP_VERSION, "5.4", '>='))
                 ? idn_to_ascii($matches[2], 0, INTL_IDNA_VARIANT_UTS46)
                 : idn_to_ascii($matches[2]);

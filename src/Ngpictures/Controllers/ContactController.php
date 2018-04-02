@@ -12,8 +12,7 @@ class ContactController extends Controller
         $post = new Collection($_POST);
         $errors = new Collection([]);
 
-        if (!empty($_POST) && isset($_POST))
-        {
+        if (!empty($_POST) && isset($_POST)) {
             if ($this->session->read(AUTH_KEY)) {
                 $this->validator->setRule('message', 'required');
 
@@ -24,7 +23,7 @@ class ContactController extends Controller
 
                     try {
                         (new Mailer())->contact($name, $email, $message);
-                    } catch(Exception $e) {
+                    } catch (Exception $e) {
                         $this->flash->set("danger", $this->msg['undefined_error']);
                     }
                 } else {
@@ -42,7 +41,7 @@ class ContactController extends Controller
 
                     try {
                         (new Mailer())->contact($name, $email, $message);
-                    } catch(Exception $e) {
+                    } catch (Exception $e) {
                         $this->flash->set("danger", $this->msg['undefined_error']);
                     }
                 } else {

@@ -28,7 +28,7 @@ class PostsController extends Controller
         $this->callController("users")->restrict();
         if ($this->session->read(TOKEN_KEY) == $token) {
             $user = $this->loadModel('users')->find(intval($id));
-            
+
             if ($user) {
                 $posts = $this->posts->findWithUser($user->id);
                 $this->pageManager::setName("Mes publications");
@@ -99,36 +99,33 @@ class PostsController extends Controller
         $this->callController("users")->restrict();
         $categories = $this->categories->orderBy('title', 'ASC');
 
-
         if ($token == $this->session->read(TOKEN_KEY)) {
             $post = new Collection($_POST);
             $article = $this->posts->find(intval($id));
             $post = new Collection($data ?? $_POST);
+            $errors = [];
 
             if (isset($_POST) && !empty($_POST)) {
-                if (!empty($post->get('content')) && !empty($post->get('title'))) {
-                    $this->validator->isEmpty('title', $this->msg['form_all_required']);
-                    $this->validator->isEmpty('content', $this->msg['form_all_required']);
+                $this->validator->setRule('title', 'required');
+                $this->validator->setRule('content', 'required');
 
-                    if ($this->validator->isValid()) {
-                        $title = $this->str::escape($post->get('title'));
-                        $content = $this->str::escape($post->get('content'));
-                        $slug = $this->str::slugify($title);
-                        $category_id = (int) $post->get('category') ?? 1;
+                if ($this->validator->isValid()) {
+                    $title = $this->str::escape($post->get('title'));
+                    $content = $this->str::escape($post->get('content'));
+                    $slug = $this->str::slugify($title);
+                    $category_id = (int) $post->get('category') ?? 1;
 
-                        $this->posts->update($id, compact('title', 'content', 'slug', 'category_id'));
-                        $this->flash->set("success", $this->msg['post_edit_success']);
-                        $this->app::redirect("/account/post");
-                    } else {
-                        var_dump($this->validator->getErrors());
-                    }
+                    $this->posts->update($id, compact('title', 'content', 'slug', 'category_id'));
+                    $this->flash->set("success", $this->msg['post_edit_success']);
+                    $this->app::redirect("/account/post");
                 } else {
-                    $this->flash->set('danger', $this->msg['form_all_required']);
+                    $errors = $this->validator->getErrors();
+                    $this->flash->set('danger', $this->msg['form_multi_errors']);
                 }
             }
 
             $this->pageManager::setName("Edition");
-            $this->viewRender("front_end/users/posts/edit", compact('article', 'categories', 'post'));
+            $this->viewRender("front_end/users/posts/edit", compact('article', 'categories', 'post', 'errors'));
         }
     }
 
@@ -143,7 +140,7 @@ class PostsController extends Controller
         $model = $this->loadModel("posts");
         $post = new Collection($_POST);
         $post = $model->find(intval($post->get('id')));
-       
+
         if ($this->session->read(TOKEN_KEY) == $token) {
             if ($post && $post->user_id == $this->session->getValue(AUTH_KEY, 'id')) {
                 $model->delete($post->id);

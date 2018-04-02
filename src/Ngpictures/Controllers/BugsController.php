@@ -29,7 +29,7 @@ class BugsController extends Controller
         $errors = [];
 
         if (isset($_POST) && !empty($_POST)) {
-            $this->validator->setRule('email', "isEmpty");
+            $this->validator->setRule('email', "required");
 
             if ($this->validator->isValid()) {
                 $content = $this->str::escape($post->get('bugs'));

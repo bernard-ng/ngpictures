@@ -128,7 +128,6 @@ class Mailer
     public function contact(string $name, string $email, string $message)
     {
         if (fliter_var($email, FILTER_VALIDATE_EMAIL)) {
-
             $mail = PHPMailer();
 
             try {

@@ -16,7 +16,6 @@ class GalleryController extends Controller
     {
         $photo = $this->gallery->latest();
         $photos = $this->gallery->lastOnline();
-
         $this->pageManager::setName('Gallerie');
         $this->setLayout('posts/default');
         $this->viewRender('front_end/gallery/index', compact('photo', 'photos'));
@@ -41,7 +40,6 @@ class GalleryController extends Controller
     public function albums()
     {
         $albums = $this->loadModel('albums')->all();
-
         $this->pageManager::setName('albums');
         $this->setLayout('posts/default');
         $this->viewRender('front_end/gallery/albums', compact("albums"));
