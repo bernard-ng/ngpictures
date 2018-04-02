@@ -2,175 +2,208 @@
 namespace Ng\Core\Managers;
 
 use Ng\Core\Database\MysqlDatabase;
-use Ng\Core\Managers\MessageManager as Msg;
+use Ng\Core\Managers\MessageManager;
 
 class ValidationManager
 {
+
     /**
      * les donnees a valider
      * @var array
      */
-    private $data;
+    private $data = [];
 
     /**
-     * stock les differentes erreurs
+     * les errors rencontrer
      * @var array
      */
     private $errors = [];
 
-
     /**
-     * la base de donnee pour les validations complexes
-     * @var MysqlDatabase
+     * les regles de validation
+     * @var array
      */
-    private $db;
-
-    /**
-     * l'objet qui gere les msg flash
-     * @var FlashMessageManager
-     */
-    private $flash;
+    private $rules = [];
 
 
     /**
-     * Validator constructor.
-     * @param MysqlDatabase $db
-     * @param Flash $flash
+     * ValidationManager constructor
      * @param array $data
+     * @return void
      */
-    public function __construct(MysqlDatabase $db, FlashMessageManager $flash, array $data = [])
+    public function __construct(array $data = [])
     {
-        $this->db = $db;
-        $this->data = $data;
-        $this->flash = $flash;
-    }
-
-    /**
-     * recupere une donnee dans la tableau de donnee d'instance
-     * @param string $field
-     * @return mixed|null
-     */
-    private function getField(string $field)
-    {
-        return $this->data[$field] ?? null ;
+        $this->data = $_POST;
     }
 
 
     /**
-     * expression reguliere pour le nom d'utilisateur
+     * recupere un champ dans les donnees a valider
      * @param string $field
-     * @param string|null $errorMsg
+     * @return mixed
      */
-    public function isKebabCase(string $field, string $errorMsg = null)
+    private function getValue(string $field)
     {
-        if (!preg_match('/^[a-zA-Z0-9-_]+$/', $this->getField($field))) {
-            $this->errors[$field] = $errorMsg ?? Msg::get('isKebabCase');
-            $this->flash->set('danger', $errorMsg ?? Msg::get('isKebabCase'));
-        }
+        return $this->data[$field] ?? null;
     }
 
 
     /**
-     * permet de dire si une donne est unique
-     * @param string $field
-     * @param $table
-     * @param string|null $errorMsg
-     */
-    public function isUnique(string $field, $table, string $errorMsg = null)
-    {
-        $field = StringManager::escape($field);
-        $req = $table->query(
-            "SELECT id FROM {$table->getTable()} WHERE {$field} = ?",
-            [$this->getField($field)],
-            true,
-            true
-        );
-
-        if ($req) {
-            $this->errors[$field] = $errorMsg ?? Msg::get('isUnique');
-            $this->flash->set('danger', $errorMsg ?? Msg::get('isUnique'));
-        }
-    }
-
-
-    /**
-     * permet de verifier si la donnee est un email
-     * @param string $field
-     * @param string|null $errorMsg
-     */
-    public function isEmail(string $field, string $errorMsg = null)
-    {
-        if (!filter_var($this->getField($field), FILTER_VALIDATE_EMAIL)) {
-            $this->errors[$field] = $errorMsg ?? Msg::get('isEmail');
-            $this->flash->set('danger', $errorMsg ?? Msg::get('isEmail'));
-        }
-    }
-
-
-    /**
-     * permet de verifier si deux donnee correspondent
-     * @param string $field
-     * @param string $field2
-     * @param string|null $errorMsg
-     */
-    public function isMatch(string $field, string $field2, string $errorMsg = null)
-    {
-        if (empty($this->getField($field)) || $this->getField($field) != $this->getField($field2)) {
-            $this->errors[$field] = $errorMsg ?? Msg::get('isMatch');
-            $this->flash->set('danger', $errorMsg ?? Msg::get('isMatch'));
-        }
-    }
-
-
-    /**
-     * verifi si une valeur est supperieur a une limit
-     *
-     * @param string $field
-     * @param integer $size
-     * @param string $errorMsg
+     * renseigne si les donnees sont valides
      * @return boolean
      */
-    public function isGreaterThan(string $field, int $size, string $errorMsg = null)
+    public function isValid(): bool
     {
-        if (strlen($this->getField($field) >= $size)) {
-            return true;
+        foreach ($this->rules as $field => $rule) {
+            call_user_func_array([$this, $rule], [$field]);
         }
-
-        $this->errors[$field] = $errorMsg ?? Msg::get('isMatch');
-        $this->flash->set('danger', $errorMsg ?? Msg::get('isMatch'));
-    }
-
-
-    /**
-     * verifie si le champ est vide
-     * @param string $field
-     * @param string $errorMsg
-     */
-    public function isEmpty(string $field, string $errorMsg)
-    {
-        if (empty($this->getField($field))) {
-            $this->errors[$field] = $errorMsg ?? Msg::get('isEmpty');
-            $this->flash->set('danger', $errorMsg ?? Msg::get('isEmpty'));
-        }
-    }
-
-
-    /**
-     * permet de dire si toutes les donnees sont valides
-     * @return bool
-     */
-    public function isValid()
-    {
         return empty($this->errors);
     }
 
 
     /**
-     * return le tableau d'erreur
+     * renvoi les erreurs rencontrer
      * @return array
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
+    }
+
+
+    /**
+     * definition de regle de validation
+     *
+     * @param string $field
+     * @param string $rule
+     * @return void
+     */
+    public function setRule(string $field, string $rule)
+    {
+        $this->rules[$field] = $rule;
+    }
+
+
+
+    //VALIDATION METHODS
+    //----------------------------------------------------------------------------------------------
+
+    /**
+     * le champ ne doit pas etre vide
+     * @param string $field
+     * @return boolean
+     */
+    private function required(string $field)
+    {
+        if ($this->getValue($field) === '' && trim($this->getValue($field) === '')) {
+            $this->errors[$field] = MessageManager::get('form_empty_field');
+        }
+        return;
+    }
+
+
+    /**
+     * le champ doit etre alpha
+     *
+     * @param string $field
+     * @return boolean
+     */
+    private function alpha(string $field)
+    {
+        $this->required($field);
+        if (ctype_alpha($this->getValue($field))) {
+            $this->errors[$field] = MessageManager::get('form_invalid_alpha');
+        }
+        return;
+    }
+
+
+    /**
+     * le champ doit etre alphanum
+     *
+     * @param string $field
+     * @return void
+     */
+    private function alpha_num(string $field)
+    {
+        $this->required($field);
+        if (ctype_alnum($this->getValue($field))) {
+            $this->errors[$field] = MessageManager::get("form_invalid_alnum");
+        }
+        return;
+    }
+
+
+    /**
+     * le champ doit etre alnum et - ou _
+     *
+     * @param string $field
+     * @return void
+     */
+    private function alpha_dash(string $field)
+    {
+        $this->required($field);
+        if (!preg_match('/^[a-z0-9_-]+$/i', $this->getValue($field))) {
+            $this->errors[$field] = MessageManager::get("form_invalid_username");
+        }
+        return;
+    }
+
+
+    /**
+     * Valid URL
+     *
+     * @param string  $field
+     */
+    private function valid_url($field)
+    {
+        $this->required($field);
+        $url = $this->getValue($field);
+
+        if (preg_match('/^(?:([^:]*)\:)?\/\/(.+)$/', $url, $matches)) {
+            if (empty($matches[2])) {
+                return false;
+            } elseif (! in_array(strtolower($matches[1]), ['http', 'https'], true)) {
+                return false;
+            }
+
+            $url = $matches[2];
+        }
+
+        if (preg_match('/^\[([^\]]+)\]/', $url, $matches) &&
+                ! version_compare(PHP_VERSION, "7", '>=') &&
+                filter_var($matches[1], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false
+            ) {
+            $url = 'ipv6.host'.substr($url, strlen($matches[1]) + 2);
+        }
+
+        if (filter_var('http://'.$url, FILTER_VALIDATE_URL) !== false) {
+            $this->errors[$field] = MessageManager::get("form_invalid_url");
+        }
+        return;
+    }
+
+
+    /**
+     * Valid Email
+     *
+     * @param string
+     */
+    private function valid_email($field)
+    {
+        $this->required($field);
+        $email = $this->getValue($field);
+
+        if (function_exists('idn_to_ascii') && preg_match('#\A([^@]+)@(.+)\z#', $email, $matches)) {
+            $domain = (version_compare(PHP_VERSION, "5.4", '>='))
+                ? idn_to_ascii($matches[2], 0, INTL_IDNA_VARIANT_UTS46)
+                : idn_to_ascii($matches[2]);
+            $email = $matches[1].'@'.$domain;
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->errors[$field] = MessageManager::get("form_invalid_email");
+        }
+        return;
     }
 }

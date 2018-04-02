@@ -1,36 +1,91 @@
-<div class="row container ">
-<nav class="nav z-depth-2">
-        <div class="nav-wrapper">
-            <ul>
-                <li class="right"><a href="/account/my-pictures/<?= $securityToken ?>">Mes photos</a></li>
-                <li><a href="/categories">Categories</a></li>
-                <li><a href="/gallery/albums">albums</a></li>
-            </ul>
-        </div>
-    </nav>
-    <?php include(APP."/Views/includes/left-aside.php"); ?>
-    <div class="col l9 m12 s12">
-        <div class="card col s12">
-             <section id="gallery" style="margin: 0 auto;">
-                <?php foreach ($photos as $photo) :  ?>
-                    <a class="photo" href="<?= $photo->thumbUrl ?>" alt="<?= $photo->name ?>">
-                        <span class="photo-title"><?= $photo->name ?></span>
-                        <span class="photo-bg"></span>
-                        <img src="<?= $photo->thumbUrl ?>" width="60" class="galery-item materialbox"/>
-                    </a>
-                <?php endforeach;?>
-            </section>
-        </div>
-    </div>
-</div>
+<main>
+    <section class="row container">
+        <hearder class="col l12 m12 s12">
+            <div class="ui pointing secondary menu">
+                <a class="item" href="/account/my-pictures/<?= $securityToken ?>">Mes Photos</a>
+                <a class="item" href="/gallery/albums">Albums</a>
+            </div>
+        </hearder>
+        <section id="gallery" class="gallery-container animated fast slideInLeft">
+            <?php foreach ($photos as $key => $photo) :  ?>
+                <article class="col l3 s3 m3" data-show="<?= $photo->url; ?>" id="pic-<?= $photo->id ?>">
+                    <img src="<?= $photo->smallthumbUrl ?>" class="gallery-item"/>
+                </article>
+                <?php if ($key % 4 === 0) : ?>
+                    <div class="col l12 gallery-details"></div>
+                <?php endif; ?>
+            <?php endforeach;?>
+            <div class="col l12 gallery-details"></div>
+        </section>
+    </section>
+</main>
+<script type="text/javascript" src="/assets/js/lib/jquery.min.js" ></script>
+<script type="text/javascript" src="/assets/js/app/materialize.js" ></script>
+<script type="text/javascript" src="/assets/js/app/activingScript.js" ></script>
 
-<script src="/assets/js/lib/jquery.min.js"></script>
-<script src="/assets/js/lib/masonry.js"></script>
-<script type="text/javascript">
+<script>
+    var $active = false
+    $("#gallery .gallery-item").on("click", function(e){
 
-$("#gallery").masonry({
-    itemSelector: ".photo",
-    isAnimated: true,
-    isFitWidth: true
-});
+        var $item = $(this)
+        var $details = $item.parent().nextAll(".gallery-details:first")
+
+        if ($item.hasClass("active")) {
+            return true;
+        }
+
+        $(".gallery-item").removeClass("active")
+        $item.addClass("active")
+
+        $.ajax(
+            {url: $item.parent().attr('data-show')}
+        ).then(
+            function($detailsInfo) {
+
+                var $del = $active
+                if ($active) {
+                    $active.slideUp(300, function() {
+                        $del.remove()
+                    })
+                }
+
+                $details.append($detailsInfo).slideDown()
+                $work_details =  $details.find('.gallery-container-details')
+                scrollTo($work_details)
+
+                //animation
+                for (var i = 1; i <= 3; i++)
+                {
+                    $(".stagger" + i, $work_details).css({
+                        opacity:0, marginLeft:-30
+                    }).delay(300 + 100 * i).animate({
+                        opacity:1, marginLeft: 0
+                    })
+                }
+
+                $active = $work_details;
+                $active.find(".gallery-details-img").on("click", function() {
+                    $(this).find('img').materialbox()
+                })
+            },
+            function() {
+                return Materialize.toast("Impossibe de charge l'image, vérifiez votre connexion internet", 5000, "danger")
+            }
+        )
+
+        window.location.hash = $item.parent().attr('id')
+    });
+
+    if (window.location.hash) {
+        var $target = $(window.location.hash + " img.gallery-item");
+        if ($target.length > 0) {
+            $target.trigger('click')
+            scrollTo($target)
+        }
+    }
+
+    var scrollTo = function(cible) {
+        $('html, boby').animate({scrollTop: cible.offset().top - 80 }, 750);
+    }
+
 </script>

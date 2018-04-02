@@ -16,22 +16,21 @@ class GalleryController extends Controller
     {
         $photo = $this->gallery->latest();
         $photos = $this->gallery->lastOnline();
-
         $this->pageManager::setName('Gallerie');
         $this->setLayout('posts/default');
         $this->viewRender('front_end/gallery/index', compact('photo', 'photos'));
     }
 
 
-    public function show(string $slug, int $id)
+    public function show(int $id)
     {
         $photo = $this->gallery->find(intval($id));
-
-        if ($photo && $photo->slug === $slug) {
-            $this->pageManager::setName($photo->name);
-            $this->setLayout('posts/default');
-            $this->viewRender('front_end/gallery/show', compact('photo'));
+        if ($photo) {
+            $this->viewRender('front_end/gallery/show', compact('photo'), false);
         } else {
+            if ($this->isAjax()) {
+                $this->ajaxFail($this->msg['post_not_found']);
+            }
             $this->flash->set("danger", $this->msg['post_not_found']);
             $this->app::redirect(true);
         }
@@ -41,7 +40,6 @@ class GalleryController extends Controller
     public function albums()
     {
         $albums = $this->loadModel('albums')->all();
-
         $this->pageManager::setName('albums');
         $this->setLayout('posts/default');
         $this->viewRender('front_end/gallery/albums', compact("albums"));

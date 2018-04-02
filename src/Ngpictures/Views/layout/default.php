@@ -8,8 +8,8 @@
         <?php include(APP."/Views/includes/default-style.php"); ?>
     </head>
     <body>
-        <?php include(APP."/Views/includes/mobile-menu.php"); ?>
         <?php include(APP."/Views/includes/menu.php"); ?>
+        <?php include(APP."/Views/includes/mobile-menu.php"); ?>
         <?php include(APP."/Views/includes/default-slider.php"); ?>
         <div class="page-content" id="pageContent">
             <?php echo $page_content; ?>

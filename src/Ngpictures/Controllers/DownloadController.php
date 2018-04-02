@@ -23,17 +23,12 @@ class DownloadController extends Controller
      * @param int $type
      * @param string $file_name
     */
-    public function index(int $type, string $file_name, $namespace = null)
+    public function index(int $type, string $file_name)
     {
         if (isset($type, $file_name) && !empty($type) && !empty($file_name)) {
-            $type = intval($type);
-            $file_name = $this->str::escape($file_name);
-
-            if ($namespace !== null) {
-                $file = self::$path[$type].$namespace.$filename;
-            } else {
-                $file = self::$path[$type].$file_name;
-            }
+            $type       =   intval($type);
+            $file       =   self::$path[$type].$file_name;
+            $file_name  =   $this->str::escape($file_name);
 
             if (file_exists($file)) {
                 header('Content-Type: application/octet-stream');
@@ -52,20 +47,22 @@ class DownloadController extends Controller
     }
 
 
-
-    public function show(int $type, string $file_name, $namespace = null)
+    /**
+     * information sur le telechargement
+     *
+     * @param integer $type
+     * @param string $file_name
+     * @param string $namespace
+     * @return void
+     */
+    public function show(int $type, string $file_name)
     {
-        $type = intval($type);
-            $file_name = $this->str::escape($file_name);
+        $type       =   intval($type);
+        $file       =   self::$path[$type].$file_name;
+        $file_name  =   $this->str::escape($file_name);
 
-        if ($namespace !== null) {
-            $file = self::$path[$type].$namespace.$filename;
-        } else {
-            $file = self::$path[$type].$file_name;
-        }
-
-            $this->pageManager::setName("Télécharger");
-            $this->setLayout("posts/default");
-            $this->viewRender("front_end/others/download");
+        $this->pageManager::setName("Télécharger");
+        $this->setLayout("posts/default");
+        $this->viewRender("front_end/others/download");
     }
 }

@@ -12,15 +12,18 @@ class HomeController extends Controller
         $this->loadModel(['blog', 'posts', 'categories', 'gallery']);
     }
 
+
+    /**
+     * homepage
+     *
+     * @return void
+     */
     public function index()
     {
         $last = $this->blog->latest(1, 4);
         $article = $this->blog->last();
-        $photos = $this->gallery->latest(0, 6);
         $categories = $this->categories->orderBy('title', 'ASC', 0, 5);
-        $verse = $this->callController('verses')->index();
-
         $this->pageManager::setName('Accueil');
-        $this->viewRender("front_end/index", compact('photos', 'last', 'article', 'verse', 'categories'));
+        $this->viewRender("front_end/index", compact('last', 'article', 'categories'));
     }
 }

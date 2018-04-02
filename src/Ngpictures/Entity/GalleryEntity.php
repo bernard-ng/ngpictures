@@ -12,6 +12,13 @@ class GalleryEntity extends Entity
 
     use PostEntityTrait;
 
+    public function getUrl()
+    {
+        $this->url = "/gallery/{$this->id}";
+        return $this->url;
+    }
+
+
     /**
      * lien vers la miniature de la publication
      * @return string

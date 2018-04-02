@@ -54,7 +54,7 @@ class Ngpictures
             }
             return self::$db_instance;
         } catch (ConfigManagerException $e) {
-            self::redirect("/error-500");
+            die($e->getMessage());
         }
     }
 
@@ -99,7 +99,7 @@ class Ngpictures
      */
     public function getValidator(): ValidationManager
     {
-        return new ValidationManager($this->getDb(), $this->getFlash(), $_POST);
+        return new ValidationManager();
     }
 
 
@@ -135,7 +135,7 @@ class Ngpictures
 
     public function getMessageManager(): MessageManager
     {
-        return new MessageManager;
+        return new MessageManager();
     }
 
 

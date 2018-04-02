@@ -17,6 +17,15 @@ class LikesController extends Controller
         $this->user_id = intval($this->session->getValue(AUTH_KEY, 'id'));
     }
 
+
+    /**
+     * like system
+     *
+     * @param string $type
+     * @param string $slug
+     * @param integer $id
+     * @return void
+     */
     public function index(string $type, string $slug, int $id)
     {
         $like = $this->loadModel('likes');
@@ -40,6 +49,14 @@ class LikesController extends Controller
     }
 
 
+    /**
+     * show likers
+     *
+     * @param string $type
+     * @param string $slug
+     * @param integer $id
+     * @return void
+     */
     public function show(string $type, string $slug, int $id)
     {
         $post = $this->loadModel($this->getType($type))->find(intval($id));
