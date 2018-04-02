@@ -11,7 +11,7 @@
                 <article class="col l3 s3 m3" data-show="<?= $photo->url; ?>" id="pic-<?= $photo->id ?>">
                     <img src="<?= $photo->smallthumbUrl ?>" class="gallery-item"/>
                 </article>
-                <?php if ($key % 4 === 0): ?>
+                <?php if ($key % 4 === 0) : ?>
                     <div class="col l12 gallery-details"></div>
                 <?php endif; ?>
             <?php endforeach;?>

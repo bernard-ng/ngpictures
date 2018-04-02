@@ -26,21 +26,25 @@ class BugsController extends Controller
     public function index()
     {
         $post = new Collection($_POST);
+        $errors = [];
 
         if (isset($_POST) && !empty($_POST)) {
-            if (!empty($post->get('bugs'))) {
+            $this->validator->setRule('email', "required");
+
+            if ($this->validator->isValid()) {
                 $content = $this->str::escape($post->get('bugs'));
                 $user_id = $this->session->getValue('auth', 'id');
                 $this->loadModel('bugs')->create(compact('content', 'user_id'));
                 $this->flash->set('success', $this->msg['form_bug_submitted']);
                 $this->app::redirect("/home");
             } else {
+                $errors = $this->validator->getErrors();
                 $this->flash->set('danger', $this->msg['form_field_required']);
             }
         }
 
         $this->pageManager::setName("Signaler un Bug");
         $this->setLayout('users/default');
-        $this->viewRender('front_end/others/bugs', compact('post'));
+        $this->viewRender('front_end/others/bugs', compact('post', "errors"));
     }
 }
