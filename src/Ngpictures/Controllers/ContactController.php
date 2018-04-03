@@ -10,7 +10,7 @@ class ContactController extends Controller
     public function index()
     {
         $post = new Collection($_POST);
-        $errors = new Collection([]);
+        $errors = new Collection();
 
         if (!empty($_POST) && isset($_POST)) {
             if ($this->session->read(AUTH_KEY)) {

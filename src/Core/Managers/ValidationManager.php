@@ -55,7 +55,13 @@ class ValidationManager
     public function isValid(): bool
     {
         foreach ($this->rules as $field => $rule) {
-            call_user_func_array([$this, $rule], [$field]);
+            if (preg_match("#([a-z_]+)(\[.+\])#i", $rule, $matches)) {
+                $method     =   $matches[1];
+                $param      =   str_replace(['[', ']'], '', $matches[2]);
+                call_user_func_array([$this, $method], [$field, $param]);
+            } else {
+                call_user_func_array([$this, $rule], [$field]);
+            }
         }
         return empty($this->errors);
     }
@@ -71,16 +77,23 @@ class ValidationManager
     }
 
 
+
     /**
      * definition de regle de validation
      *
      * @param string $field
-     * @param string $rule
+     * @param array|string $rule
      * @return void
      */
-    public function setRule(string $field, string $rule)
+    public function setRule(string $field, $rule)
     {
-        $this->rules[$field] = $rule;
+        if (is_array($rule)) {
+            foreach ($rule as $r) {
+                $this->rules[$field] = $r;
+            }
+        } else {
+            $this->rules[$field] = $rule;
+        }
     }
 
 
@@ -97,6 +110,60 @@ class ValidationManager
     {
         if ($this->getValue($field) === '' && trim($this->getValue($field) === '')) {
             $this->errors[$field] = MessageManager::get('form_empty_field');
+        }
+        return;
+    }
+
+
+    /**
+     * le champ doit etre unique
+     *
+     * @param string $field
+     * @param mixed $table
+     * @return void
+     */
+    public function unique(string $field, $table)
+    {
+        $this->required($field);
+        $unexpected = $table->findWith($field, $this->getValue($field));
+        if ($unexpected) {
+            $this->errors[$field] = MessageManager::get('form_used_field');
+        }
+        return;
+    }
+
+
+
+    /**
+     * le champ doit etre superieur ou egale
+     * @param string $field
+     * @param integer $min_length
+     * @return void
+     */
+    private function min_length(string $field, int $min_length)
+    {
+        $this->required($field);
+        if (strlen($this->getValue($field)) < $min_length) {
+            $this->errors[$field] = sprintf("le %s doit faire au moins %d caractères", $field, $min_length);
+        }
+        return;
+    }
+
+
+    /**
+     * le champ doit egal a un autre
+     *
+     * @param string $field
+     * @param string $expected_match
+     * @return void
+     */
+    private function must_match(string $field, string $expected_match)
+    {
+        $this->required($field);
+        if ($this->getValue($field) !== $this->getValue($expected_match))
+        {
+            $this->errors[$field]           =   MessageManager::get("form_invalid_password");
+            $this->errors[$expected_match]  =   MessageManager::get('form_invalid_password');
         }
         return;
     }
@@ -143,7 +210,7 @@ class ValidationManager
     private function alpha_dash(string $field)
     {
         $this->required($field);
-        if (!preg_match('/^[a-z0-9_-]+$/i', $this->getValue($field))) {
+        if (!preg_match('/^[a-z0-9-]+$/i', $this->getValue($field))) {
             $this->errors[$field] = MessageManager::get("form_invalid_username");
         }
         return;
@@ -154,6 +221,7 @@ class ValidationManager
      * Valid URL
      *
      * @param string  $field
+     * @author CodeIngniter Framework
      */
     private function valid_url($field)
     {
@@ -188,6 +256,7 @@ class ValidationManager
      * Valid Email
      *
      * @param string
+     * @author CodeIngniter Framework
      */
     private function valid_email($field)
     {

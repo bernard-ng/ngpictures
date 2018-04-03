@@ -138,7 +138,7 @@ class Router
             // trailingSlash
             if (strlen($this->url) > 1 && strripos($this->url, "/") === strlen($this->url) - 1) {
                 $url = substr($this->url, 0, -1);
-                $this->app::redirect("/{$url}");
+                $this->app::redirect("/{$url}", true);
             }
 
             foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {

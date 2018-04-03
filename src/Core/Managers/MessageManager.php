@@ -12,6 +12,7 @@ abstract class MessageManager
         //***************************************************************************************/
         "undefined_error" => "Ooups, une erreur s'est produite, veuillez réessayer",
 
+
         //IMAGE MANAGER
         //**************************************************************************************/
         'files_not_image' => 'Le fichier téléchargé doit être une image (jpg, jpeg, git, png)',
@@ -21,12 +22,11 @@ abstract class MessageManager
 
         //VALIDATOR
         //***************************************************************************************
-        "isKebabCase" => "Votre pseudo n'est pas valide",
-        "isUnique" => "Cet information est deja utiliser",
-        "isEmail" => "Cet adresse mail n'est pas valide",
-        "isMatch" => "Les deux champs ne correspondent pas",
-        "isEmpty" => "Complétez le champ"
-       
+        "form_invalid_username" => "Votre pseudo n'est pas valide",
+        "form_invalid_email" => "Cet adresse mail n'est pas valide",
+        "form_invalid_password" => "les deux mdp ne correspondent pas",
+        "form_empty_field" => "Complétez le champ"
+
     ];
 
     public static function get(string $key)

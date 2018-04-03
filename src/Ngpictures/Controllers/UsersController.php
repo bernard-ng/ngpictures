@@ -61,9 +61,9 @@ class UsersController extends Controller
 
             if (isset($_POST) and !empty($_POST)) {
                 if (!empty($post->get('password')) && !empty($post->get('password_confirm'))) {
-                    $validator = $this->validator;
-                    $validator->isMatch('password', 'password_confirm', $this->msg['users_bad_password']);
-                    if ($validator->isValid()) {
+                    $this->validator = $this->validator;
+                    $this->validator->isMatch('password', 'password_confirm', $this->msg['users_bad_password']);
+                    if ($this->validator->isValid()) {
                         $password = $this->str::hashPassword($post->get('password'));
                         $this->users->resetPassword($password, $user->id);
 
@@ -150,27 +150,28 @@ class UsersController extends Controller
     public function sign()
     {
         $post = new Collection($_POST);
+        $errors = new Collection();
 
         if (isset($_POST) && !empty($_POST)) {
-            $validator = $this->validator;
-            $validator->iskebabCase("name");
-            if ($validator->isValid()) {
-                $validator->isUnique("name", $this->users, $this->msg['users_username_token']);
+            $this->validator->setRule("name", ["alpha_dash", "min_length[5]"]);
+            if ($this->validator->isValid()) {
+                $this->validator->unique("name", $this->users, $this->msg['users_username_token']);
             }
 
-            $validator->isEmail("email");
-            if ($validator->isValid()) {
-                $validator->isUnique("email", $this->users, $this->msg['users_mail_token']);
+            $this->validator->setRule("email", 'valid_email');
+            if ($this->validator->isValid()) {
+                $this->validator->unique("email", $this->users, $this->msg['users_mail_token']);
             }
-            $validator->isGreaterThan("password", 8, $this->msg['users_short_password']);
-            $validator->isMatch("password", "password_confirm", $this->msg['users_bad_password']);
 
-            if ($validator->isValid()) {
+            $this->validator->setRule("password", ["min_length[8]", "must_match[password_confirm]"]);
+
+            if ($this->validator->isValid()) {
                 $this->register($post->get('name'), $post->get('email'), $post->get('password'));
                 $this->flash->set('success', $this->msg['users_registration_success']);
                 $this->app::redirect("/login");
             } else {
-                var_dump($this->validator->getErrors());
+                $errors = new Collection($this->validator->getErrors());
+                $this->flash->set("danger", $this->msg['form_multi_errors']);
             }
         }
 
@@ -282,17 +283,21 @@ class UsersController extends Controller
     {
         $this->cookieConnect();
         $post = new Collection($_POST);
+        $errors = new Collection();
 
         if ($this->isLogged()) {
             $this->flash->set('warning', $this->msg['users_already_connected']);
             $this->app::redirect($this->isLogged()->accountUrl);
         } else {
             if (isset($_POST) && !empty($_POST)) {
-                $password = $post->get('password');
-                $name = $this->str::escape($post->get('name'));
-                $remember = intval($post->get('remember'));
+                $this->validator->setRule('name', 'required');
+                $this->validator->setRule('password', 'required');
 
-                if ($post->has('password') && $post->has('name')) {
+                if ($this->validator->isValid()) {
+                    $password = $post->get('password');
+                    $name = $this->str::escape($post->get('name'));
+                    $remember = intval($post->get('remember'));
+
                     $user  = $this->users->findAlternative(['name','email'], $name);
                     if ($user) {
                         if ($user->confirmed_at !== null) {
@@ -313,12 +318,15 @@ class UsersController extends Controller
                     } else {
                         $this->flash->set('danger', $this->msg['users_bad_identifier']);
                     }
+                } else {
+                    $errors = new Collection($this->validator->getErrors());
+                    $this->flash->set('danger', $this->msg['form_multi_errors']);
                 }
             }
 
             $this->pageManager::setName('Connexion');
             $this->setLayout('users/default');
-            $this->viewRender('front_end/users/login', compact('post'));
+            $this->viewRender('front_end/users/login', compact('post', 'errors'));
         }
     }
 
@@ -389,7 +397,7 @@ class UsersController extends Controller
                     if ($post->get('name') && $post->get('name') !== $user->name) {
                         $this->validator->isKebabCase('name');
                         if ($this->validator->isValid()) {
-                            $this->validator->isUnique('name', $this->users, $this->msg['users_username_token']);
+                            $this->validator->unique('name', $this->users, $this->msg['users_username_token']);
                             $name = $this->str::escape($post->get('name'));
                         }
                     } else {
@@ -399,13 +407,13 @@ class UsersController extends Controller
                     if ($post->get('email') && $post->get('email') !== $user->email) {
                         $this->validator->isEmail('email');
                         if ($this->validator->isValid()) {
-                            $this->validator->isUnique('email', $this->users, $this->msg['users_mail_token']);
+                            $this->validator->unique('email', $this->users, $this->msg['users_mail_token']);
                             $email = $this->str::escape($post->get('email'));
                         }
                     }
 
                     if ($post->get('phone') && $post->get('phone') !== $user->phone) {
-                        $this->validator->isUnique('phone', $this->users, $this->msg['users_phone_token']);
+                        $this->validator->unique('phone', $this->users, $this->msg['users_phone_token']);
                         $phone = $this->str::escape($post->get('phone'));
                     } else {
                         $phone = $user->phone;

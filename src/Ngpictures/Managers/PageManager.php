@@ -18,7 +18,28 @@ class PageManager
      * le nom de la page
      * @var string
      */
-    public static $pageTitle = "Ngpictures";
+    private static $pageTitle = "Ngpictures";
+
+
+    /**
+     * description of the page
+     * @var string
+     */
+    private static $description =
+        "Galerie, Entreprise d'art photographique et
+        mini résaux social où vous pouvez voir et partager vos propres photos";
+
+    /**
+     * og url
+     * @var string
+     */
+    private static $url = "https://www.larytech.com";
+
+    /**
+     * og image
+     * @var string
+     */
+    private static $image = "https://www.larytech.com/imgs/logo.png";
 
 
     /**
@@ -45,6 +66,7 @@ class PageManager
 
     /**
      * definit le nom de la page courante
+     *
      * @param string $name
      * @return string
      */
@@ -58,7 +80,9 @@ class PageManager
 
     /**
      * defini des metas pour la page courante
+     *
      * @param array $data
+     * @return void
      */
     public static function setMeta(array $data = [])
     {
@@ -69,6 +93,7 @@ class PageManager
     /**
      * permet de generer des metas
      * dans les views
+     * @return void
      */
     public static function getMeta()
     {
@@ -82,5 +107,76 @@ class PageManager
             $data_meta = implode(' ', $array_meta);
             echo "<meta {$data_meta} >";
         }
+    }
+
+
+
+    /**
+     * get description
+     *
+     * @return string
+     */
+    public static function getDescription()
+    {
+        return self::$description;
+    }
+
+
+
+    /**
+     * Set the value of description
+     * @return void
+     */
+    public static function setDescription(string $description)
+    {
+        self::$description = $description;
+    }
+
+
+
+    /**
+     * Get the value of url
+     * @return  string
+     */
+    public static function getUrl()
+    {
+        return self::$url;
+    }
+
+
+
+   /**
+    * set url
+    *
+    * @param string $url
+    * @return void
+    */
+    public static function setUrl(string $url)
+    {
+        self::$url = $url;
+    }
+
+
+
+    /**
+     * get image
+     *
+     * @return string
+     */
+    public static function getImage()
+    {
+        return self::$image;
+    }
+
+
+    /**
+     * set image
+     *
+     * @param string $image
+     * @return void
+     */
+    public static function setImage(string $image)
+    {
+        self::$image = $image;
     }
 }

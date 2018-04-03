@@ -191,18 +191,27 @@ class Ngpictures
      * gestion de redirection
      * @param mixed $url
      */
-    public static function redirect($url = null)
+    public static function redirect($url = null, $moved_permantly = false)
     {
         if (is_bool($url)) {
             if (!empty($_SERVER['HTTP_REFERER'])) {
                 header("location:{$_SERVER['HTTP_REFERER']}");
+                if ($moved_permantly) {
+                    header("HTTP/1.1 301 Moved Permanently");
+                }
                 exit();
             } else {
                 header('location:/home');
+                if ($moved_permantly) {
+                    header("HTTP/1.1 301 Moved Permanently");
+                }
                 exit();
             }
         } else {
             is_null($url)? header('location:/home') : header("location:{$url}");
+            if ($moved_permantly) {
+                header("HTTP/1.1 301 Moved Permanently");
+            }
             exit();
         }
     }
