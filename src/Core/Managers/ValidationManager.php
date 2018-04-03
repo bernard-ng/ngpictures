@@ -1,6 +1,7 @@
 <?php
 namespace Ng\Core\Managers;
 
+use \RuntimeException;
 use Ng\Core\Database\MysqlDatabase;
 use Ng\Core\Managers\MessageManager;
 
@@ -58,9 +59,17 @@ class ValidationManager
             if (preg_match("#([a-z_]+)(\[.+\])#i", $rule, $matches)) {
                 $method     =   $matches[1];
                 $param      =   str_replace(['[', ']'], '', $matches[2]);
-                call_user_func_array([$this, $method], [$field, $param]);
+                if (method_exists($this, $method)) {
+                    call_user_func_array([$this, $method], [$field, $param]);
+                } else {
+                    throw new RuntimeException("method {$method} does not exists");
+                }
             } else {
-                call_user_func_array([$this, $rule], [$field]);
+                if (method_exists($this, $rule)) {
+                    call_user_func_array([$this, $rule], [$field]);
+                } else {
+                    throw new RuntimeException("method {$method} does not exists");
+                }
             }
         }
         return empty($this->errors);
