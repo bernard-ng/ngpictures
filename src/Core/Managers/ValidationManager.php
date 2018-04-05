@@ -68,7 +68,7 @@ class ValidationManager
                 if (method_exists($this, $rule)) {
                     call_user_func_array([$this, $rule], [$field]);
                 } else {
-                    throw new RuntimeException("method {$method} does not exists");
+                    throw new RuntimeException("method {$rule} does not exists");
                 }
             }
         }
@@ -169,8 +169,7 @@ class ValidationManager
     private function must_match(string $field, string $expected_match)
     {
         $this->required($field);
-        if ($this->getValue($field) !== $this->getValue($expected_match))
-        {
+        if ($this->getValue($field) !== $this->getValue($expected_match)) {
             $this->errors[$field]           =   MessageManager::get("form_invalid_password");
             $this->errors[$expected_match]  =   MessageManager::get('form_invalid_password');
         }
@@ -221,6 +220,21 @@ class ValidationManager
         $this->required($field);
         if (!preg_match('/^[a-z0-9-]+$/i', $this->getValue($field))) {
             $this->errors[$field] = MessageManager::get("form_invalid_username");
+        }
+        return;
+    }
+
+
+    /**
+     * le champ doit etre un num
+     *
+     * @param int $field
+     * @return void
+     */
+    private function numeric($field)
+    {
+        if (!preg_match('/^[\-+]?[0-9-]+$/', $field)) {
+            $this->errors[$field] = MessageManager::get("form_invalid_data");
         }
         return;
     }

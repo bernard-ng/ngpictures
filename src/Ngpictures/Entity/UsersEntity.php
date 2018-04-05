@@ -51,8 +51,7 @@ class UsersEntity extends Entity
      */
     public function getEditUrl(): string
     {
-        $this->editUrl = "/u/edit/";
-        $this->editUrl .= StringManager::slugify($this->name)."-{$this->id}/";
+        $this->editUrl = "/edit-profile/";
         $this->editUrl .= Ngpictures::getInstance()->getSession()->read(TOKEN_KEY);
         return $this->editUrl;
     }
