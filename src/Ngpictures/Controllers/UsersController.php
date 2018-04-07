@@ -32,8 +32,8 @@ class UsersController extends Controller
      */
     public function confirm(int $user_id, string $token)
     {
-        $token = $this->str::escape($token);
-        $user = $this->users->isNotConfirmed(intval($user_id));
+        $token  =   $this->str::escape($token);
+        $user   =   $this->users->isNotConfirmed(intval($user_id));
 
         if ($user && $user->confirmation_token === $token) {
             $this->users->unsetConfirmationToken($user->id);
@@ -53,8 +53,8 @@ class UsersController extends Controller
      */
     public function reset($id, string $token)
     {
-        $user = $this->users->find(intval($id));
-        $token = $this->str::escape($token);
+        $user   =   $this->users->find(intval($id));
+        $token  =   $this->str::escape($token);
 
         if ($user && $user->reset_token == $token) {
             $post = new Collection($_POST);
@@ -95,13 +95,13 @@ class UsersController extends Controller
 
         if (isset($_POST) && !empty($_POST)) {
             if (!empty($post->get('email'))) {
-                $email = $this->str::escape($post->get('email'));
-                $user = $this->users->findWith('email', $email);
+                $email  =    $this->str::escape($post->get('email'));
+                $user   =    $this->users->findWith('email', $email);
 
                 if ($user && $user->confirmed_at != null) {
                     $this->users->setResetToken($this->str::setToken(60), $user->id);
-                    $user = $this->users->find($user->id);
-                    $link = SITE_NAME."/reset/{$user->id}/{$user->reset_token}";
+                    $user   =   $this->users->find($user->id);
+                    $link   =   SITE_NAME."/reset/{$user->id}/{$user->reset_token}";
 
                     (new Mailer())->resetPassword($link, $email);
                     $this->flash->set('success', $this->msg['users_reset_success']);
@@ -128,12 +128,12 @@ class UsersController extends Controller
      */
     private function register(string $name, string $email, string $password)
     {
-        $password = $this->str::hashPassword($password);
-        $name = $this->str::escape($name);
-        $email = $this->str::escape($email);
-        $token = $this->str::setToken(60);
-        $this->users->add($name, $email, $password, $token);
+        $name       =   $this->str::escape($name);
+        $email      =   $this->str::escape($email);
+        $token      =   $this->str::setToken(60);
+        $password   =   $this->str::hashPassword($password);
 
+        $this->users->add($name, $email, $password, $token);
         $user_id = $this->users->lastInsertId();
         $link = SITE_NAME."/confirm/{$user_id}/{$token}";
 
@@ -149,8 +149,8 @@ class UsersController extends Controller
      */
     public function sign()
     {
-        $post = new Collection($_POST);
-        $errors = new Collection();
+        $post       =   new Collection($_POST);
+        $errors     =   new Collection();
 
         if (isset($_POST) && !empty($_POST)) {
             $this->validator->setRule("email", 'valid_email');
@@ -295,8 +295,8 @@ class UsersController extends Controller
     public function login()
     {
         $this->cookieConnect();
-        $post = new Collection($_POST);
-        $errors = new Collection();
+        $post       =   new Collection($_POST);
+        $errors     =   new Collection();
 
         if ($this->isLogged()) {
             $this->flash->set('warning', $this->msg['users_already_connected']);
@@ -307,9 +307,9 @@ class UsersController extends Controller
                 $this->validator->setRule('password', 'required');
 
                 if ($this->validator->isValid()) {
-                    $password = $post->get('password');
-                    $name = $this->str::escape($post->get('name'));
-                    $remember = intval($post->get('remember'));
+                    $name       =   $this->str::escape($post->get('name'));
+                    $remember   =   intval($post->get('remember'));
+                    $password   =   $post->get('password');
 
                     $user  = $this->users->findAlternative(['name','email'], $name);
                     if ($user) {
@@ -371,8 +371,8 @@ class UsersController extends Controller
             $user = $this->users->find(intval($id));
 
             if ($user) {
-                $verse = $this->callController('verses')->index();
-                $posts = $this->loadModel('posts')->findWith('user_id', $user->id, false);
+                $verse  =   $this->callController('verses')->index();
+                $posts  =   $this->loadModel('posts')->findWith('user_id', $user->id, false);
 
                 $this->pageManager::setName($user->name);
                 $this->setLayout('users/account');
@@ -396,11 +396,10 @@ class UsersController extends Controller
     {
         $this->restrict();
         if ($token === $this->session->read(TOKEN_KEY)) {
-            $user = $this->session->read(AUTH_KEY);
-
-            $post = new Collection($_POST);
-            $file = new Collection($_FILES);
-            $errors = new Collection();
+            $user       =   $this->session->read(AUTH_KEY);
+            $post       =   new Collection($_POST);
+            $file       =   new Collection($_FILES);
+            $errors     =   new Collection();
 
             if (isset($_POST) && !empty($_POST)) {
                 $this->validator->setRule('name', ['required','apha_dash', 'min_length[3]']);
@@ -438,8 +437,8 @@ class UsersController extends Controller
                     $this->flash->set('danger', $this->msg['form_multi_errors']);
                 }
             } elseif (!empty($file->get('thumb'))) {
-                $name = $user->id;
-                $isUploaded = ImageManager::upload($file, 'avatars', "ngpictures-avatar-{$name}", 'medium');
+                $name           =   $user->id;
+                $isUploaded     =   ImageManager::upload($file, 'avatars', "ngpictures-avatar-{$name}", 'medium');
 
                 if ($isUploaded) {
                     $this->users->update($user->id, ['avatar' => "ngpictures-avatar-{$name}.jpg"]);

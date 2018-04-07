@@ -161,8 +161,8 @@
             </div>
         </div>
     </section>
-    <section class="jumbotron section dark col l12 s12 m12">
-        <div class="row container">
+    <div class="jumbotron parallax-container col l12 s12 m12">
+         <div class="row container">
             <div class="col l4 m12 s12">
                 <h2 class="ui header">Nous Rétrouver</h2>
                 <address style="font-style: normal !important;">
@@ -179,10 +179,13 @@
                 <iframe class="hoverable" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3907.669795348674!
                     2d27.466621714359682!3d-11.646862391734508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!
                     4f13.1!3m3!1m2!1s0x1972394d26719141%3A0xa8515a298fe31a63!2sAvenue+du+lac+Kipopo%2C+Lubumbashi!5e0!3m2!1sfr!2scd!4v1517072954604"
-                    width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
             </div>
         </div>
-    </section>
+        <div class="parallax">
+            <img src="/imgs/outils.jpeg" alt="">
+        </div>
+    </div>
     <section class="section col l12 m12 s12">
         <div class="row container">
             <span class="row col l12 s12 m12">

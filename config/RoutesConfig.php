@@ -11,17 +11,18 @@ $router->any("/forgot", "users#forgot", "users.forgot");
 $router->any("/reset/:id/:token", "users#reset", "users.reset");
 $router->any("/sign", "users#sign", "users.sign");
 $router->any("/edit-profile/:token", "users#edit", "users.edit");
-$router->any("/u/post/edit/:id/:token", "posts#edit", "posts.edit-article");
-$router->any("/u/post", "posts#add", "posts.add");;
+$router->any("/edit-post/:id/:token", "posts#edit", "posts.edit-article");
+$router->any("/submit-photo", "posts#add", "posts.add");;
 
 $router->get("/confirm/:id/:token", "users#confirm", "users.confirmation");
 $router->get("/logout", "users#logout", "users.logout");
-$router->get("/:user-:id", "users#account", "users.account");
-$router->get("/u/followers/:user-:id/:token", "following#showFollowers", "users.show-followers");
-$router->get("/u/following/:user-:id/:token", "following#showFollowing", "users.show-following");
-$router->get("/u/posts/:user-:id/:token", "posts#showPosts", "posts.show-post");
 
-$router->post("/u/post/delete/:token", "posts#delete", "posts.delete");
+$router->get("/:user-:id", "users#account", "users.account");
+$router->get("/my-posts/:token", "posts#showPosts", "posts.show-post");
+$router->get("/my-followers/:token", "following#showFollowers", "users.show-followers");
+$router->get("/my-following/:token", "following#showFollowing", "users.show-following");
+
+$router->post("/delete-post/:token", "posts#delete", "posts.delete");
 
 
 //community pages

@@ -19,15 +19,15 @@ class IdeasController extends Controller
 
     public function index()
     {
-        $post = new Collection($_POST);
-        $errors = [];
+        $post       =   new Collection($_POST);
+        $errors     =   [];
 
         if (isset($_POST) && !empty($_POST)) {
             $this->validator->setRule('ideas', 'required');
 
             if ($this->validator->isValid()) {
-                $content = $this->str::escape($post->get('ideas'));
-                $user_id = $this->session->getValue(AUTH_KEY, 'id');
+                $content    =   $this->str::escape($post->get('ideas'));
+                $user_id    =    $this->session->getValue(AUTH_KEY, 'id');
 
                 $this->loadModel('ideas')->create(compact('content', 'user_id'));
                 $this->flash->set('success', $this->msg['form_idea_submitted']);
