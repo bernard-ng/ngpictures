@@ -28,16 +28,16 @@ class LikesController extends Controller
      */
     public function index(string $type, string $slug, int $id)
     {
-        $like = $this->loadModel('likes');
-        $post = $this->loadModel($this->getType($type))->find(intval($id));
+        $like   =   $this->loadModel('likes');
+        $post   =   $this->loadModel($this->getType($type))->find(intval($id));
 
         if ($post && $post->slug === $slug) {
             if ($like->isLiked($post->id, $type, $this->user_id)) {
                 $like->remove($post->id, $type, $this->user_id);
-                echo ($this->isAjax()) ? $post->likes : $this->app::redirect(true);
+                return ($this->isAjax()) ? $post->likes : $this->app::redirect(true);
             } else {
                 $like->add($post->id, $type, $this->user_id);
-                echo ($this->isAjax()) ? $post->likes : $this->app::redirect(true);
+                return ($this->isAjax()) ? $post->likes : $this->app::redirect(true);
             }
         } else {
             if ($this->isAjax()) {
@@ -62,8 +62,8 @@ class LikesController extends Controller
         $post = $this->loadModel($this->getType($type))->find(intval($id));
 
         if ($post && $post->slug === $slug) {
-            $likes = $this->loadModel('likes');
-            $likers = $likes->getLikers($id, $type);
+            $likes      =   $this->loadModel('likes');
+            $likers     =   $likes->getLikers($id, $type);
 
             $likers_list = [];
             foreach ($likers as $liker) {

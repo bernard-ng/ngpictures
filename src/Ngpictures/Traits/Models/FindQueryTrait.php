@@ -16,7 +16,7 @@ trait FindQueryTrait
             "
     		SELECT {$this->table}.* , categories.title as category
             FROM {$this->table}
-            LEFT JOIN categories ON category_id = categories.id
+            LEFT JOIN categories ON categories_id = categories.id
             WHERE (online = 1 AND {$this->table}.id < ?) ORDER BY id DESC LIMIT 0,5",
             [$post_id]
         );
@@ -34,7 +34,7 @@ trait FindQueryTrait
             "
             SELECT {$this->table}.*, categories.title as category
             FROM {$this->table}
-            LEFT JOIN categories ON category_id = categories.id
+            LEFT JOIN categories ON categories_id = categories.id
             WHERE {$this->table}.id = ? ORDER BY date_created DESC LIMIT 0,1",
             [$id],
             true,

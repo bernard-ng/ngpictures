@@ -23,11 +23,11 @@ class PostsController extends Controller
     use ShowPostTrait;
 
 
-    public function showPosts(string $name, int $id, string $token)
+    public function showPosts(string $token)
     {
         $this->callController("users")->restrict();
         if ($this->session->read(TOKEN_KEY) == $token) {
-            $user = $this->loadModel('users')->find(intval($id));
+            $user = $this->session->read(AUTH_KEY);
 
             if ($user) {
                 $posts = $this->posts->findWithUser($user->id);
@@ -48,44 +48,52 @@ class PostsController extends Controller
     public function add()
     {
         $this->callController("users")->restrict();
-        $post = new Collection($_POST);
-        $file = new Collection($_FILES);
-        $categories = $this->categories->orderBy('title', 'ASC');
+        $post           =   new Collection($_POST);
+        $file           =   new Collection($_FILES);
+        $errors         =   new Collection();
+        $categories     =   $this->categories->orderBy('title', 'ASC');
 
         if (isset($_POST) && !empty($_POST)) {
-            if (!empty($post->get('title')) && !empty($post->get('content')) && !empty($file->get('thumb.name'))) {
-                $title = $this->str::escape($post->get('title'));
-                $content = $this->str::escape($post->get('content'));
-                $slug = $this->str::slugify($title);
-                $category_id = ($post->get('category') == 0) ? 1 : $post->get('category');
-                $user_id = (int) $this->session->getValue(AUTH_KEY, 'id');
+            $this->validator->setRule('title', 'required');
+            $this->validator->setRule('content', 'required');
 
-                if (isset($_FILES) && !empty($_FILES)) {
-                    if (!empty($file->get('thumb.name'))) {
-                        if ($this->validator->isValid()) {
-                            $this->posts->create(compact('user_id', 'title', 'content', 'slug', 'category_id'));
+            if ($this->validator->isValid()) {
+                $title          =   $this->str::escape($post->get('title'));
+                $content        =   $this->str::escape($post->get('content'));
+                $slug           =   $this->str::slugify($title);
+                $category_id    =   ($post->get('category') == 0) ? 1 : $post->get('category');
+                $user_id        =   intval($this->session->getValue(AUTH_KEY, 'id'));
+            } else {
+                $errors = new Collection($this->validator->getErrors());
+                $this->flash->set('danger', $this->msg['form_multi_errors']);
+            }
 
-                            $last_id = $this->posts->lastInsertId();
-                            $isUploaded = ImageManager::upload($file, 'posts', "ngpictures-{$slug}-{$last_id}", 'article');
+            if (isset($_FILES) && !empty($_FILES)) {
+                if (!empty($file->get('thumb.name'))) {
+                    if ($this->validator->isValid()) {
+                        $this->posts->create(compact('user_id', 'title', 'content', 'slug', 'category_id'));
 
-                            if ($isUploaded) {
-                                ImageManager::upload($file, 'posts-thumbs', "ngpictures-{$slug}-{$last_id}", 'medium');
-                                $this->posts->update($last_id, ['thumb' => "ngpictures-{$slug}-{$last_id}.jpg"]);
-                                $this->flash->set('success', $this->msg['form_post_submitted']);
-                                $this->app::redirect("/posts");
-                            } else {
-                                $this->flash->set('danger', $this->msg['files_not_uploaded']);
-                                $this->posts->delete($last_id);
-                            }
+                        $last_id    =   $this->posts->lastInsertId();
+                        $isUploaded =   ImageManager::upload($file, 'posts', "ngpictures-{$slug}-{$last_id}", 'article');
+
+                        if ($isUploaded) {
+                            ImageManager::upload($file, 'posts-thumbs', "ngpictures-{$slug}-{$last_id}", 'medium');
+                            $this->posts->update($last_id, ['thumb' => "ngpictures-{$slug}-{$last_id}.jpg"]);
+                            $this->flash->set('success', $this->msg['form_post_submitted']);
+                            $this->app::redirect("/posts");
                         } else {
-                            var_dump($this->validator->getErrors());
+                            $this->flash->set('danger', $this->msg['files_not_uploaded']);
+                            $this->posts->delete($last_id);
                         }
                     } else {
-                        $this->flash->set('danger', $this->msg['post_requires_picture']);
+                        $errors = new Collection($this->validator->getErrors());
+                        $this->flash->set('danger', $this->msg['form_multi_errors']);
                     }
+                } else {
+                    $this->flash->set('danger', $this->msg['post_requires_picture']);
                 }
             } else {
-                $this->flash->set('danger', $this->msg['form_all_required']);
+                $this->flash->set('danger', $this->msg['post_requires_picture']);
             }
         }
 
@@ -100,26 +108,25 @@ class PostsController extends Controller
         $categories = $this->categories->orderBy('title', 'ASC');
 
         if ($token == $this->session->read(TOKEN_KEY)) {
-            $post = new Collection($_POST);
-            $article = $this->posts->find(intval($id));
-            $post = new Collection($data ?? $_POST);
-            $errors = [];
+            $post       =   new Collection($data ?? $_POST);
+            $errors     =   new Collection();
+            $article    =   $this->posts->find(intval($id));
 
             if (isset($_POST) && !empty($_POST)) {
                 $this->validator->setRule('title', 'required');
                 $this->validator->setRule('content', 'required');
 
                 if ($this->validator->isValid()) {
-                    $title = $this->str::escape($post->get('title'));
-                    $content = $this->str::escape($post->get('content'));
-                    $slug = $this->str::slugify($title);
-                    $category_id = (int) $post->get('category') ?? 1;
+                    $title          =   $this->str::escape($post->get('title'));
+                    $content        =   $this->str::escape($post->get('content'));
+                    $slug           =   $this->str::slugify($title);
+                    $category_id    =   intval($post->get('category')) ?? 1;
 
                     $this->posts->update($id, compact('title', 'content', 'slug', 'category_id'));
                     $this->flash->set("success", $this->msg['post_edit_success']);
                     $this->app::redirect("/account/post");
                 } else {
-                    $errors = $this->validator->getErrors();
+                    $errors = new Collection($this->validator->getErrors());
                     $this->flash->set('danger', $this->msg['form_multi_errors']);
                 }
             }
@@ -137,9 +144,9 @@ class PostsController extends Controller
     public function delete($token)
     {
         $this->callController("users")->restrict();
-        $model = $this->loadModel("posts");
-        $post = new Collection($_POST);
-        $post = $model->find(intval($post->get('id')));
+        $model  =   $this->loadModel("posts");
+        $post   =   new Collection($_POST);
+        $post   =   $model->find(intval($post->get('id')));
 
         if ($this->session->read(TOKEN_KEY) == $token) {
             if ($post && $post->user_id == $this->session->getValue(AUTH_KEY, 'id')) {

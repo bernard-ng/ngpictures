@@ -7,46 +7,61 @@ use Ng\Core\Controllers\Controller as SuperController;
 
 class Controller extends SuperController
 {
-    protected $viewPath;
-    protected $layout;
-    protected $session;
-    protected $pageManager;
-    protected $cookie;
+    protected $app;
     protected $str;
     protected $msg;
+    protected $cookie;
+    protected $layout;
+    protected $session;
+    protected $viewPath;
     protected $validator;
-    protected $app;
+    protected $pageManager;
 
 
+    /**
+     * va construire le controller avec une instance de l'application
+     * et du pagemanager, en tant que variable global
+     *
+     * @param Ngpictures $app
+     * @param PageManager $pageManager
+     */
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
-        $this->viewPath = APP."/Views/";
-        $this->layout = 'default';
+        $this->app              =   $app;
+        $this->layout           =   'default';
+        $this->viewPath         =   APP."/Views/";
+        $this->pageManager      =   $pageManager;
 
-        $this->app = $app;
-        $this->pageManager = $pageManager;
-
-        $this->session = $this->app->getSession();
-        $this->cookie = $this->app->getCookie();
-        $this->str = $this->app->getStr();
-        $this->validator = $this->app->getValidator();
-        $this->flash = $this->app->getFlash();
-        $this->msg = $this->app->getMessageManager();
+        $this->str              =   $this->app->getStr();
+        $this->msg              =   $this->app->getMessageManager();
+        $this->flash            =   $this->app->getFlash();
+        $this->cookie           =   $this->app->getCookie();
+        $this->session          =   $this->app->getSession();
+        $this->validator        =   $this->app->getValidator();
     }
 
 
+    /**
+     * permet de rendre une vue
+     *
+     * @param string $view
+     * @param array $variables
+     * @param boolean $layout
+     * @return void
+     */
     public function viewRender(string $view, array $variables = [], bool $layout = true)
     {
-        $variables['pageManager'] = $this->pageManager;
-        $variables['sessionManager'] = $this->session;
-        $variables['flashMessageManager'] = $this->flash;
+        $variables['verse']                 =   $this->callController('verses')->index();
+        $variables['pageManager']           =   $this->pageManager;
+        $variables['sessionManager']        =   $this->session;
+        $variables['flashMessageManager']   =   $this->flash;
 
         if (!empty($this->session->read(AUTH_KEY))) {
-            $variables['securityToken'] = $this->session->read(TOKEN_KEY);
-            $variables['activeUser'] = $this->session->read(AUTH_KEY);
+            $variables['activeUser']        =   $this->session->read(AUTH_KEY);
+            $variables['securityToken']     =   $this->session->read(TOKEN_KEY);
         } else {
-            $variables['securityToken'] = false;
-            $variables['activeUser'] = false;
+            $variables['activeUser']        =   false;
+            $variables['securityToken']     =   false;
         }
 
         parent::viewRender($view, $variables, $layout);

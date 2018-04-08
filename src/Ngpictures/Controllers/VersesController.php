@@ -7,8 +7,12 @@ class VersesController extends Controller
     public function index()
     {
         $this->loadModel('verses');
-        $id = mt_rand(1, $this->verses->getVersesNumber());
-        $verse = $this->verses->find($id);
-        return $verse ?? null;
+        $max = $this->verses->getVersesNumber();
+
+        if ($max >= 1) {
+            $id = mt_rand(1, $max);
+            $verse = $this->verses->find($id);
+            return $verse ?? null;
+        }
     }
 }

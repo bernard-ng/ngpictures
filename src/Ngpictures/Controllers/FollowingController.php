@@ -60,10 +60,10 @@ class FollowingController extends Controller
      * @param string $token
      * @return void
      */
-    public function showFollowers(string $name, int $id, string $token)
+    public function showFollowers(string $token)
     {
         if ($this->session->read(TOKEN_KEY) == $token) {
-            $user =  $this->users->find(intval($id));
+            $user = $this->session->read(AUTH_KEY);
             if ($user) {
                 $followers = $this->following->findWith('followed_id', $user->id, false);
                 $followers_list = [];
@@ -101,20 +101,20 @@ class FollowingController extends Controller
      * @param string $token
      * @return void
      */
-    public function showFollowing(string $name, int $id, string $token)
+    public function showFollowing(string $token)
     {
         if ($this->session->read(TOKEN_KEY) == $token) {
-            $user =  $this->users->find(intval($id));
+            $user =  $this->session->read(AUTH_KEY);
             if ($user) {
-                $followings = $this->following->findWith('follower_id', $user->id, false);
-                $followings_list = [];
+                $followings         =   $this->following->findWith('follower_id', $user->id, false);
+                $followings_list    =   [];
 
                 foreach ($followings as $following) {
                     $followings_list[] = $following['followed_id'];
                 }
 
-                $followings_list = implode(", ", $followings_list);
-                $followoings = empty($followings_list)? null : $this->users->findList($followings_list);
+                $followings_list    =   implode(", ", $followings_list);
+                $followings         =   empty($followings_list)? null : $this->users->findList($followings_list);
 
                 $this->pageManager::setName("Mes Abonnements");
                 $this->setLayout("posts/default");

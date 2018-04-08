@@ -71,37 +71,24 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $posts = $this->posts->latest();
-        $blog = $this->blog->latest();
+        $posts         =  $this->posts->latest();
+        $blog          =  $this->blog->latest();
 
-        $site_posts = [
-            count($this->blog->lastOnline()),
-            count($this->blog->lastOffline())
-        ];
-        $users_posts = [
-            count($this->posts->lastOnline()),
-            count($this->posts->lastOffline())
-        ];
-        $site_photos = [
-            count($this->gallery->lastOnline()),
-            count($this->gallery->lastOffline())
-        ];
-        $users = [
-            count($this->users->lastConfirmed()),
-            count($this->users->lastNotConfirmed())
-        ];
+        $site_posts    = [count($this->blog->lastOnline()), count($this->blog->lastOffline())];
+        $users_posts   = [count($this->posts->lastOnline()), count($this->posts->lastOffline())];
+        $site_photos   = [count($this->gallery->lastOnline()), count($this->gallery->lastOffline())];
+        $users         = [count($this->users->lastConfirmed()), count($this->users->lastNotConfirmed())];
 
-        $disk_space = disk_free_space(CORE) * 100 / disk_total_space(CORE);
-        $used_space = 100 - ceil($disk_space);
-        $total_space = ceil($disk_space);
+        $disk_space    = disk_free_space(CORE) * 100 / disk_total_space(CORE);
+        $used_space    = 100 - ceil($disk_space);
+        $total_space   = ceil($disk_space);
 
-        $users_online = count($this->loadModel('online')->all());
-        $site_categories = count($this->loadModel('categories')->all());
-        $site_bugs = count($this->loadModel('bugs')->all());
-        $site_ideas = count($this->loadModel('ideas')->all());
+        $site_bugs          =   count($this->loadModel('bugs')->all());
+        $site_ideas         =   count($this->loadModel('ideas')->all());
+        $users_online       =   count($this->loadModel('online')->all());
+        $site_categories    =   count($this->loadModel('categories')->all());
 
         $this->pageManager::setName('admin');
-
         $this->setLayout('admin/default');
         $this->viewRender(
             'back_end/index',
@@ -134,8 +121,8 @@ class AdminController extends Controller
         $post = new Collection($data ?? $_POST);
 
         if ($post->get('id') && $post->get('type')) {
-            $model = $this->loadModel($this->getType($post->get('type')));
-            $result = $model->find(intval($post->get('id')));
+            $model      =    $this->loadModel($this->getType($post->get('type')));
+            $result     =    $model->find(intval($post->get('id')));
 
             if ($result) {
                 $model->delete($post->get('id'));
@@ -267,8 +254,8 @@ class AdminController extends Controller
      */
     public function blog()
     {
-        $posts = $this->blog->orderBy('id', 'DESC');
-        $article = $this->blog->last();
+        $posts      =   $this->blog->orderBy('id', 'DESC');
+        $article    =   $this->blog->last();
         $this->pageManager::setName('Adm - blog');
         $this->setLayout("admin/default");
         $this->viewRender("back_end/blog/index", compact("posts", "article"));
@@ -284,10 +271,10 @@ class AdminController extends Controller
      */
     public function edit(int $id, $data = null)
     {
-        $article = $this->blog->find(intval($id));
-        $categories = $this->categories->orderBy('title', 'ASC');
-        $errors = [];
         $post = new Collection($data ?? $_POST);
+        $errors         =   new Collection();
+        $article        =   $this->blog->find(intval($id));
+        $categories     =   $this->categories->orderBy('title', 'ASC');
 
         if (isset($_POST) && !empty($_POST)) {
             if (!empty($post->get('content')) && !empty($post->get('title')) && !empty($post->get('slug'))) {
@@ -326,11 +313,10 @@ class AdminController extends Controller
      */
     public function add()
     {
-        $post = new Collection($_POST);
-        $file = new Collection($_FILES);
-        $categories = $this->categories->orderBy('title', 'ASC');
-        $post_errors = [];
-        $file_errors = [];
+        $post           =   new Collection($_POST);
+        $file           =   new Collection($_FILES);
+        $errors         =   new Collection();
+        $categories     =   $this->categories->orderBy('title', 'ASC');
 
         if (isset($_POST) && !empty($_POST)) {
             $this->validator->setRule('title', 'required');
@@ -338,12 +324,12 @@ class AdminController extends Controller
             $this->validator->setRule('category_id', 'numeric');
 
             if ($this->validator->isValid()) {
-                $title = $this->str::escape($post->get('title'));
-                $content = $post->get('content');
-                $category_id = ($post->get('category') == 0) ? 1 : $post->get('category');
+                $title          =   $this->str::escape($post->get('title'));
+                $content        =   $post->get('content');
+                $category_id    =   ($post->get('category') == 0) ? 1 : $post->get('category');
             } else {
                 $this->flash->set('danger', $this->msg['form_multi_errors']);
-                $post_errors = $this->validator->getErrors();
+                $errors = new Collection($this->validator->getErrors());
             }
 
             if ($post->get('slug') !== '') {
@@ -361,8 +347,8 @@ class AdminController extends Controller
                     if ($this->validator->isValid()) {
                         $this->blog->create(compact('title', 'content', 'slug', 'category_id'));
 
-                        $last_id = $this->blog->lastInsertId();
-                        $isUploaded = ImageManager::upload($file, 'blog', "ngpictures-{$slug}-{$last_id}", 'article');
+                        $last_id        =   $this->blog->lastInsertId();
+                        $isUploaded     =   ImageManager::upload($file, 'blog', "ngpictures-{$slug}-{$last_id}", 'article');
 
                         if ($isUploaded) {
                             ImageManager::upload($file, 'blog-thumbs', "ngpictures-{$slug}-{$last_id}", 'small');
@@ -375,7 +361,7 @@ class AdminController extends Controller
                         }
                     } else {
                         $this->flash->set("danger", $this->msg['form_multi_errors']);
-                        $file_errors = $this->validator->getErrors();
+                        $errors = new Collection($this->validator->getErrors());
                     }
                 } else {
                     $this->flash->set('danger', $this->msg['post_requries_picture']);
@@ -385,7 +371,7 @@ class AdminController extends Controller
 
         $this->pageManager::setName('Adm - blog.add');
         $this->setLayout('admin/default');
-        $this->viewRender('back_end/blog/add', compact('post', 'categories', 'post_errors', 'file_errors'));
+        $this->viewRender('back_end/blog/add', compact('post', 'categories', 'errors'));
     }
 
 
@@ -408,17 +394,17 @@ class AdminController extends Controller
      */
     public function addCategory()
     {
-        $post = new Collection($_POST);
-        $errors = [];
+        $post       =   new Collection($_POST);
+        $errors     =   new Collection();
 
         if (isset($_POST) && !empty($_POST)) {
             $this->validator->setRule('title', 'required');
             $this->validator->setRule('description', 'required');
 
             if ($this->validor->isValid()) {
-                $title = $this->str::escape($post->get('title'));
-                $description = $post->get('description');
-                $slug = $this->str::slugify($title);
+                $title          =   $this->str::escape($post->get('title'));
+                $slug           =   $this->str::slugify($title);
+                $description    =   $post->get('description');
                 $this->categories->create(compact('title', 'description', 'slug'));
 
                 $this->flash->set('success', $this->msg['form_post_submitted']);
@@ -442,8 +428,9 @@ class AdminController extends Controller
      */
     public function editCategory($id)
     {
-        $post = new Collection($_POST);
-        $category = $this->categories->find(intval($id));
+        $post       =   new Collection($_POST);
+        $errors     =   new Collection();
+        $category   =   $this->categories->find(intval($id));
 
         if ($category) {
             if (isset($_POST) && !empty($_POST)) {
@@ -451,16 +438,16 @@ class AdminController extends Controller
                 $this->validator->setRule('description', 'required');
 
                 if ($this->validator->isValid()) {
-                    $title = $this->str::escape($post->get('title')) ?? $category->title;
-                    $description = $post->get('description') ?? $category->description;
-                    $slug = $this->str::slugify($title);
+                    $title          =   $this->str::escape($post->get('title')) ?? $category->title;
+                    $slug           =   $this->str::slugify($title);
+                    $description    =   $post->get('description') ?? $category->description;
 
                     $this->categories->update($category->id, compact('title', 'description', 'slug'));
                     $this->flash->set('success', $this->msg['post_edit_success']);
                     $this->app::redirect(ADMIN . "/blog/categories");
                 } else {
                     $this->flash->set("danger", $this->msg['form_multi_errors']);
-                    $errors = $this->validator->getErrors();
+                    $errors = new Collection($this->validator->getErrors());
                 }
             }
 
@@ -498,17 +485,17 @@ class AdminController extends Controller
      */
     public function addGallery()
     {
-        $post = new Collection($_POST);
-        $file = new Collection($_FILES);
-        $categories = $this->categories->orderBy('title', 'ASC');
+        $post           =   new Collection($_POST);
+        $file           =   new Collection($_FILES);
+        $categories     =   $this->categories->orderBy('title', 'ASC');
 
         if (!empty($_FILES)) {
             $name = (empty($post->get('name')))
                 ? strtolower(uniqid("ngpictures-"))
                 : $this->str::escape($post->get('name'));
 
-            $description    =   $this->str::escape($post->get('description')) ?? null;
             $tags           =   $this->str::escape($post->get('tags')) ?? null;
+            $description    =   $this->str::escape($post->get('description')) ?? null;
             $category_id    =   intval($post->get('category')) ?? 1;
 
             if (!empty($file->get('thumb'))) {

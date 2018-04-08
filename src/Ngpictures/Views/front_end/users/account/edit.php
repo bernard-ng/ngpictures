@@ -29,7 +29,7 @@
 
                 <div class="default-form col  l6 m6 s12">
                     <label for="phone">Mobile</label>
-                    <input type="text" id="phone" name="phone" placeholder="numéro mobile" value="<?= $user->phone ?>">
+                    <input type="tel" id="phone" name="phone" placeholder="numéro mobile" value="<?= $user->phone ?>">
                 </div>
 
                 <div class="default-form  col l6 m6 s12">
@@ -49,4 +49,3 @@
         </div>
     </section>
 </main>
-
