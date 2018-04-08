@@ -14,13 +14,9 @@ trait ShowPostTrait
     public function show(string $slug, int $id)
     {
         if (!empty($slug) && !empty($id)) {
-            $article = $this->loadModel($this->table)->find(intval($id));
-            $verse = $this->callController("verses")->index();
-
-            $user = $this->loadModel('users');
-            $comments = $this->loadModel('comments')->findWith($this->table, $id, false);
-
-            $session = $this->session;
+            $user       =   $this->loadModel('users');
+            $article    =   $this->loadModel($this->table)->find(intval($id));
+            $comments   =   $this->loadModel('comments')->findWith($this->table, $id, false);
 
             if ($article) {
                 if ($article->slug === $slug) {
@@ -29,12 +25,14 @@ trait ShowPostTrait
                     $this->setLayout("posts/show");
                     $this->viewRender(
                         "front_end/{$this->table}/show",
-                        compact("article", "verse", "comments", "user", "session")
+                        compact("article", "comments", "user")
                     );
                 } else {
+                    $this->flash->set("danger", $this->msg['posts_not_found']);
                     $this->app::redirect("/error-404");
                 }
             } else {
+                $this->flash->set("danger", $this->msg['posts_not_found']);
                 $this->app::redirect("/error-404");
             }
         } else {

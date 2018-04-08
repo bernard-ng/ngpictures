@@ -1,13 +1,15 @@
 <div class="jumbotron dark row col l3 s12 m12 animated fast slideInRight">
         <ul class="collapsible outlined" data-collapsible="accordion">
-            <li>
-                <div class="collapsible-header active">God First</div>
-                <div class="collapsible-body">
-                    <?= $verse->text; ?>
-                    <br><br>
-                    <?= $verse->ref; ?>
-                </div>
-            </li>
+            <?php if(isset($verse) && !empty($verse)): ?>
+                <li>
+                    <div class="collapsible-header active">God First</div>
+                    <div class="collapsible-body">
+                        <?= $verse->text; ?>
+                        <br><br>
+                        <?= $verse->ref; ?>
+                    </div>
+                </li>
+            <?php endif; ?>
             <?php if (isset($categories) && !empty($categories)) : ?>
                 <li>
                     <div class="collapsible-header active">Catégories</div>

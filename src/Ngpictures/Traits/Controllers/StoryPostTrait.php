@@ -13,15 +13,14 @@ trait StoryPostTrait
      */
     public function index()
     {
-        $posts = $this->loadModel($this->table)->latest();
-        $last = $this->loadModel('gallery')->latest(1, 3);
-        $verse = $this->callController("verses")->index();
-        $categories = $this->loadModel('categories')->orderBy('title', 'ASC', 0, 5);
+        $last       =   $this->loadModel('gallery')->latest(1, 3);
+        $posts      =   $this->loadModel($this->table)->latest();
+        $categories =   $this->loadModel('categories')->orderBy('title', 'ASC', 0, 5);
 
-        PageManager::setName("$this->table");
-        PageManager::setMeta(['property' => 'og:url', 'content' => '//larytech.com/'.$this->table]);
+        $this->pageManager::setName("$this->table");
+        $this->pageManager::setMeta(['property' => 'og:url', 'content' => '//larytech.com/'.$this->table]);
 
         $this->setLayout("posts/default");
-        $this->viewRender("front_end/{$this->table}/index", compact("posts", "verse", "categories", 'last'));
+        $this->viewRender("front_end/{$this->table}/index", compact("posts", "categories", 'last'));
     }
 }

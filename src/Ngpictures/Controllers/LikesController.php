@@ -34,10 +34,10 @@ class LikesController extends Controller
         if ($post && $post->slug === $slug) {
             if ($like->isLiked($post->id, $type, $this->user_id)) {
                 $like->remove($post->id, $type, $this->user_id);
-                echo ($this->isAjax()) ? $post->likes : $this->app::redirect(true);
+                return ($this->isAjax()) ? $post->likes : $this->app::redirect(true);
             } else {
                 $like->add($post->id, $type, $this->user_id);
-                echo ($this->isAjax()) ? $post->likes : $this->app::redirect(true);
+                return ($this->isAjax()) ? $post->likes : $this->app::redirect(true);
             }
         } else {
             if ($this->isAjax()) {

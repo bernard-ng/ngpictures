@@ -233,7 +233,7 @@ class Model
             "
             SELECT {$this->table}.*, categories.title as category
             FROM {$this->table}
-            LEFT JOIN categories ON category_id = categories.id
+            LEFT JOIN categories ON categories_id = categories.id
             WHERE online = 1 ORDER BY id DESC LIMIT {$from},{$to}",
             null,
             true,
@@ -252,7 +252,7 @@ class Model
             "
             SELECT {$this->table}.*, categories.title as category
             FROM {$this->table}
-            LEFT JOIN categories ON category_id = categories.id
+            LEFT JOIN categories ON categories_id = categories.id
             WHERE online = 1 ORDER BY id DESC",
             null,
             true,
@@ -271,7 +271,7 @@ class Model
             "
             SELECT {$this->table}.*, categories.title as category
             FROM {$this->table}
-            LEFT JOIN categories ON category_id = categories.id
+            LEFT JOIN categories ON categories_id = categories.id
             WHERE online = 1 ORDER BY id DESC ",
             null,
             true,
@@ -286,7 +286,7 @@ class Model
             "
             SELECT {$this->table}.*, categories.title as category
             FROM {$this->table}
-            LEFT JOIN categories ON category_id = categories.id
+            LEFT JOIN categories ON categories_id = categories.id
             WHERE online = 0 ORDER BY id DESC ",
             null,
             true,
