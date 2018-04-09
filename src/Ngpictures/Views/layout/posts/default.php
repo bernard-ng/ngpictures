@@ -12,11 +12,11 @@
         <?php include(APP."/Views/includes/menu.php"); ?>
         <div class="jumbotron-small">
             <div class="container row">
-                <span class="ui header">
-                    <h4><?php echo $pageManager::getActivePage() ?></h4>
+                <span class="ui header title col l12 m12 s12">
+                    <h3><?php echo $pageManager::getActivePage() ?></h3>
                 </span>
-                <span class="jumbotron-content">
-                   Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio quaerat possimus doloremque consequuntur temporibus incidunt cupiditate consectetur praesentium minus facere exercitationem, dicta iure porro, magni qui culpa. Nostrum, odit voluptate.
+                <span class="jumbotron-content col l6 m12 s12">
+                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 </span>
             </div>
         </div>

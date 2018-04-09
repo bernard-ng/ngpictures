@@ -81,7 +81,7 @@
 
                     <main class="ng-news-card-content">
                         <section class="ng-news-card-title">
-                            <?php if ($post->category_id !== null) : ?>
+                            <?php if ($post->categories_id !== null) : ?>
                                 <a href="<?= $post->categoryUrl ?>"><i class="icon icon-tags"></i></a>
                             <?php endif; ?>
 

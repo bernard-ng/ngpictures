@@ -37,9 +37,9 @@ class CategoriesController extends Controller
         $category = $this->categories->find(intval($id));
 
         if ($category && $this->str::checkUserUrl($name, $category->title)) {
-            $blog = $this->loadModel('blog')->findWith('category_id', $category->id, false);
-            $posts = $this->loadModel('posts')->findWith('category_id', $category->id, false);
-            $gallery = $this->loadModel('gallery')->findWith('category_id', $category->id, false);
+            $blog = $this->loadModel('blog')->findWith('categories_id', $category->id, false);
+            $posts = $this->loadModel('posts')->findWith('categories_id', $category->id, false);
+            $gallery = $this->loadModel('gallery')->findWith('categories_id', $category->id, false);
 
             $this->pageManager::setName("Catégorie: {$category->title}");
             $this->setLayout('posts/default');

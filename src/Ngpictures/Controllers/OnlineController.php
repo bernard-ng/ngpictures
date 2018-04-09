@@ -20,16 +20,16 @@ class OnlineController extends Controller
         $now = date("U");
         $session_time = $now - 15;
 
-        $user_id = $id;
-        $isOnline = $this->online->findWith('user_id', $id);
+        $users_id = $id;
+        $isOnline = $this->online->findWith('users_id', $id);
 
         if (!$isOnline) {
             $this->online->create(
-                ["user_id" => $user_id, "online_time" => $now]
+                ["users_id" => $users_id, "online_time" => $now]
             );
         } else {
             $this->online->update(
-                $user_id,
+                $users_id,
                 ["time" => $now]
             );
         }

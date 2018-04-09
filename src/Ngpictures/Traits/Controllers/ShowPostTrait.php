@@ -16,7 +16,8 @@ trait ShowPostTrait
         if (!empty($slug) && !empty($id)) {
             $user       =   $this->loadModel('users');
             $article    =   $this->loadModel($this->table)->find(intval($id));
-            $comments   =   $this->loadModel('comments')->findWith($this->table, $id, false);
+            $comments   =   $this->loadModel('comments')->findWith($this->field, $id, false);
+
 
             if ($article) {
                 if ($article->slug === $slug) {

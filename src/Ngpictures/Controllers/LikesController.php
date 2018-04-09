@@ -14,7 +14,7 @@ class LikesController extends Controller
     {
         parent::__construct($app, $pageManager);
         $this->callController('users')->restrict();
-        $this->user_id = intval($this->session->getValue(AUTH_KEY, 'id'));
+        $this->users_id = intval($this->session->getValue(AUTH_KEY, 'id'));
     }
 
 
@@ -32,11 +32,11 @@ class LikesController extends Controller
         $post   =   $this->loadModel($this->getType($type))->find(intval($id));
 
         if ($post && $post->slug === $slug) {
-            if ($like->isLiked($post->id, $type, $this->user_id)) {
-                $like->remove($post->id, $type, $this->user_id);
+            if ($like->isLiked($post->id, $type, $this->users_id)) {
+                $like->remove($post->id, $type, $this->users_id);
                 return ($this->isAjax()) ? $post->likes : $this->app::redirect(true);
             } else {
-                $like->add($post->id, $type, $this->user_id);
+                $like->add($post->id, $type, $this->users_id);
                 return ($this->isAjax()) ? $post->likes : $this->app::redirect(true);
             }
         } else {
@@ -67,7 +67,7 @@ class LikesController extends Controller
 
             $likers_list = [];
             foreach ($likers as $liker) {
-                $likers_list[] = $liker['user_id'];
+                $likers_list[] = $liker['users_id'];
             }
 
             $likers_list = implode(", ", $likers_list);

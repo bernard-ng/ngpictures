@@ -1,33 +1,33 @@
 <div id="comments" class="card-panel row comments-card">
     <div class="col l12 m12 s12">
         <span class="section-title"><i class="social social-comment"></i> Commentaire </span>
-        
+
         <form method="POST" action="<?= $article->commentUrl; ?>">
             <div class="default-form">
                 <textarea placeholder="Votre commentaire..." name="comment" id="comment"></textarea>
             </div>
             <button type="submit" class="ng-btn"> Envoyer</button>
         </form>
-        
+
         <div class="mt-30">
             <span class="section-title"><i class="social social-chat"></i> Les commentaires </span>
             <span class="badge new"><?= count($comments) ?></span>
         </div>
-        
+
         <ul class="collection" id="commentContainer">
             <?php if (!empty($comments)) : ?>
                 <?php foreach ($comments as $c) : ?>
                     <li class="collection-item avatar" id="<?= $c->id ?>">
-                        <img src="<?= $user->find($c->user_id)->avatarUrl ?>" class="circle">
+                        <img src="<?= $user->find($c->users_id)->avatarUrl ?>" class="circle">
                         <span class="title">
-                            <a href="<?= $user->find($c->user_id)->accountUrl; ?>">
+                            <a href="<?= $user->find($c->users_id)->accountUrl; ?>">
                                     <?= $c->username; ?>
                             </a>
                         </span>
                         <?= $c->comment ?>
-                        <p><time  class="secondary-content-b" data-time="<?= strtotime($c->date_created) ?>"><?= $c->time ?></time></p>   
-                    
-                        <?php if ($activeUser && $activeUser->id == $c->user_id) : ?>
+                        <p><time  class="secondary-content-b" data-time="<?= strtotime($c->date_created) ?>"><?= $c->time ?></time></p>
+
+                        <?php if ($activeUser && $activeUser->id == $c->users_id) : ?>
                             <a href="#cmtDel-<?= $c->id ?>" class="secondary-content modal-trigger">
                                 <i class="icon icon-trash"></i>
                             </a>

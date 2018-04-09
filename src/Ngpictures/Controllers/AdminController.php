@@ -287,9 +287,9 @@ class AdminController extends Controller
                     $title = $this->str::escape($post->get('title'));
                     $content = $post->get('content');
                     $slug = $this->str::escape($post->get('slug'));
-                    $category_id = (int)$post->get('category') ?? 1;
+                    $categories_id = (int)$post->get('category') ?? 1;
 
-                    $this->blog->update($id, compact('title', 'content', 'slug', 'category_id'));
+                    $this->blog->update($id, compact('title', 'content', 'slug', 'categories_id'));
                     $this->flash->set("success", $this->msg['post_edit_success']);
                     $this->app::redirect(ADMIN . "/blog");
                 } else {
@@ -321,12 +321,12 @@ class AdminController extends Controller
         if (isset($_POST) && !empty($_POST)) {
             $this->validator->setRule('title', 'required');
             $this->validator->setRule('content', 'requried');
-            $this->validator->setRule('category_id', 'numeric');
+            $this->validator->setRule('categories_id', 'numeric');
 
             if ($this->validator->isValid()) {
                 $title          =   $this->str::escape($post->get('title'));
                 $content        =   $post->get('content');
-                $category_id    =   ($post->get('category') == 0) ? 1 : $post->get('category');
+                $categories_id    =   ($post->get('category') == 0) ? 1 : $post->get('category');
             } else {
                 $this->flash->set('danger', $this->msg['form_multi_errors']);
                 $errors = new Collection($this->validator->getErrors());
@@ -345,7 +345,7 @@ class AdminController extends Controller
             if (isset($_FILES) && !empty($_FILES)) {
                 if (!empty($file->get('thumb.name'))) {
                     if ($this->validator->isValid()) {
-                        $this->blog->create(compact('title', 'content', 'slug', 'category_id'));
+                        $this->blog->create(compact('title', 'content', 'slug', 'categories_id'));
 
                         $last_id        =   $this->blog->lastInsertId();
                         $isUploaded     =   ImageManager::upload($file, 'blog', "ngpictures-{$slug}-{$last_id}", 'article');
@@ -496,10 +496,10 @@ class AdminController extends Controller
 
             $tags           =   $this->str::escape($post->get('tags')) ?? null;
             $description    =   $this->str::escape($post->get('description')) ?? null;
-            $category_id    =   intval($post->get('category')) ?? 1;
+            $categories_id    =   intval($post->get('category')) ?? 1;
 
             if (!empty($file->get('thumb'))) {
-                $this->gallery->create(compact('name', 'description', 'tags', 'category_id'));
+                $this->gallery->create(compact('name', 'description', 'tags', 'categories_id'));
                 $last_id    =   $this->gallery->lastInsertId();
                 $isUploaded =   ImageManager::upload($file, 'gallery', "{$name}-{$last_id}", 'ratio');
 
@@ -542,9 +542,9 @@ class AdminController extends Controller
                 $name           =   $this->str::escape($post->get('name')) ?? $photo->name;
                 $tags           =   $this->str::escape($post->get('tags')) ?? $photo->tags;
                 $description    =   $this->str::escape($post->get('description')) ?? $photo->description;
-                $category_id    =   intval($post->get('category')) ?? 1;
+                $categories_id    =   intval($post->get('category')) ?? 1;
 
-                $this->gallery->update($id, compact('name', 'tags', 'description', 'category_id'));
+                $this->gallery->update($id, compact('name', 'tags', 'description', 'categories_id'));
                 $this->flash->set("success", $this->msg['post_edit_success']);
                 $this->app::redirect(ADMIN . "/gallery");
             }

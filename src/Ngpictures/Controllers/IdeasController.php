@@ -27,9 +27,9 @@ class IdeasController extends Controller
 
             if ($this->validator->isValid()) {
                 $content    =   $this->str::escape($post->get('ideas'));
-                $user_id    =    $this->session->getValue(AUTH_KEY, 'id');
+                $users_id    =    $this->session->getValue(AUTH_KEY, 'id');
 
-                $this->loadModel('ideas')->create(compact('content', 'user_id'));
+                $this->loadModel('ideas')->create(compact('content', 'users_id'));
                 $this->flash->set('success', $this->msg['form_idea_submitted']);
                 $this->app::redirect("/");
             } else {

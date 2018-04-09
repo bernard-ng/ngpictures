@@ -11,7 +11,7 @@ class FollowingController extends Controller
      * l'id du user qui va suivre une autr personne
      * @var int|null
      */
-    private $user_id = null;
+    private $users_id = null;
 
 
     public function __construct(Ngpictures $app, PageManager $pageManager)
@@ -19,7 +19,7 @@ class FollowingController extends Controller
         parent::__construct($app, $pageManager);
         $this->callController('users')->restrict();
         $this->loadModel(['users', 'following']);
-        $this->user_id = intval($this->session->getValue(AUTH_KEY, 'id'));
+        $this->users_id = intval($this->session->getValue(AUTH_KEY, 'id'));
     }
 
 
@@ -36,13 +36,13 @@ class FollowingController extends Controller
         $user = $this->loadModel('users')->find(intval($id));
 
         if ($user) {
-            if ($model->isFollowed($user->id, $this->user_id)) {
-                $model->remove($user->id, $this->user_id);
+            if ($model->isFollowed($user->id, $this->users_id)) {
+                $model->remove($user->id, $this->users_id);
                 $this->flash->set("success", $this->msg['users_unfollowing_success']);
                 $this->app::redirect(true);
             }
 
-            $model->add($user->id, $this->user_id);
+            $model->add($user->id, $this->users_id);
             $this->flash->set("success", $this->msg['users_following_success']);
             $this->app::redirect(true);
         } else {

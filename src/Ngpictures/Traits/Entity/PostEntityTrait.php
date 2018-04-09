@@ -26,7 +26,7 @@ trait PostEntityTrait
     {
         $category = StringManager::Slugify($this->category);
         $this->categoryUrl = "/categories";
-        $this->categoryUrl .= "/{$category}-{$this->category_id}";
+        $this->categoryUrl .= "/{$category}-{$this->categories_id}";
         return $this->categoryUrl;
     }
 

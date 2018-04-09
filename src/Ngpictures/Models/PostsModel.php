@@ -41,7 +41,7 @@ class PostsModel extends Model
             "SELECT {$this->table}.*, categories.title as category
             FROM {$this->table}
             LEFT JOIN categories ON categories_id = categories.id
-            WHERE {$this->table}.user_id = ? ORDER BY date_created DESC LIMIT 0,5",
+            WHERE {$this->table}.users_id = ? ORDER BY date_created DESC LIMIT 0,5",
             [$id],
             true,
             false

@@ -27,13 +27,13 @@ class UsersController extends Controller
     ****************************************************************************/
     /**
      * confirmation d'un utilisateur
-     * @param $user_id
+     * @param $users_id
      * @param string $token
      */
-    public function confirm(int $user_id, string $token)
+    public function confirm(int $users_id, string $token)
     {
         $token  =   $this->str::escape($token);
-        $user   =   $this->users->isNotConfirmed(intval($user_id));
+        $user   =   $this->users->isNotConfirmed(intval($users_id));
 
         if ($user && $user->confirmation_token === $token) {
             $this->users->unsetConfirmationToken($user->id);
@@ -134,8 +134,8 @@ class UsersController extends Controller
         $password   =   $this->str::hashPassword($password);
 
         $this->users->add($name, $email, $password, $token);
-        $user_id = $this->users->lastInsertId();
-        $link = SITE_NAME."/confirm/{$user_id}/{$token}";
+        $users_id = $this->users->lastInsertId();
+        $link = SITE_NAME."/confirm/{$users_id}/{$token}";
 
         (new Mailer())->accountConfirmation($link, $email);
         $this->flash->set('success', $this->msg['form_registration_submitted']);
@@ -278,13 +278,13 @@ class UsersController extends Controller
 
     /**
      * definit un remember token
-     * @param int $user_id
+     * @param int $users_id
      */
-    private function remember(int $user_id)
+    private function remember(int $users_id)
     {
         $remember_token = $this->str::cookieToken();
-        $this->users->setRememberToken($remember_token, $user_id);
-        $this->cookie->write(COOKIE_REMEMBER_KEY, "NG.23.{$user_id}.{$remember_token}");
+        $this->users->setRememberToken($remember_token, $users_id);
+        $this->cookie->write(COOKIE_REMEMBER_KEY, "NG.23.{$users_id}.{$remember_token}");
     }
 
 
@@ -372,7 +372,7 @@ class UsersController extends Controller
 
             if ($user) {
                 $verse  =   $this->callController('verses')->index();
-                $posts  =   $this->loadModel('posts')->findWith('user_id', $user->id, false);
+                $posts  =   $this->loadModel('posts')->findWith('users_id', $user->id, false);
 
                 $this->pageManager::setName($user->name);
                 $this->setLayout('users/account');
