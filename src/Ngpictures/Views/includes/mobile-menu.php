@@ -31,6 +31,26 @@
             </li>
         <?php endif; ?>
     </div>
+    <style>
+        .search-mobile {
+            padding-left: 15px;
+            font-weight: 400;
+            width: 100%;
+        }
+    </style>
+    <li class="search">
+        <nav>
+    <div class="nav-wrapper">
+      <form>
+        <div class="input-field">
+          <input id="search" type="search" placeholder="Recherches..." required>
+          <i class="icon icon-cancel"></i>
+        </div>
+      </form>
+    </div>
+  </nav>
+    </li>
+
     <?php if ($activeUser) : ?>
         <li>
             <ul class="collapsible collapsible-accordion">
@@ -50,7 +70,7 @@
     <?php endif; ?>
 
     <?php if ($activeUser && $activeUser->rank == "admin") : ?>
-        <li><a href="<?= ADMIN ?>">Administration <i class="icon icon-code"></i></a></li>
+        <li><a href="<?= ADMIN ?>">Administration <i class="icon icon-code right"></i></a></li>
     <?php endif; ?>
 
 

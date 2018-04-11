@@ -6,7 +6,7 @@
                     <img src="/imgs/logo-white.png" class="logo" alt="logo">
                 </a>
                 <a href="#" data-activates="mobile-menu" class="btn blue-grey dark-3 button-collapse">
-                    <i class="icon icon icon-th"></i>
+                    <i class="icon icon icon-menu"></i>
                 </a>
                 <ul class="right hide-on-med-and-down">
                     <span id="menu-item-active" data-isActive="<?= $pageManager::getActivePage() ?>"></span>

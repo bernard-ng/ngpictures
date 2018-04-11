@@ -4,15 +4,40 @@
         <h2 class="ui header"> Derniers Articles</h2>
     </span>
     <?php foreach ($last as $a) : ?>
-        <div class="row col s12 m3 l3">
-            <article class="ui link card hoverable">
-                <div class="image waves-effect">
-                    <a href="<?= $a->url; ?>"><img src="<?= $a->smallThumbUrl; ?>"></a>
+        <div class="row nexted col s12 m3 l3">
+            <article class="card hoverable blue-grey dark-4">
+                <div class="card-image">
+                    <img src="<?= $a->smallThumbUrl; ?>" class="activator">
                 </div>
-                <div class="content center">
-                    <div class="header"><?= $a->title ?? $a->name; ?></div>
-                    <div class="meta">
-                        <a href="<?= $a->categoryUrl; ?>" class="category"><?= $a->category; ?></a>
+                <div class="card-reveal">
+                    <span class="card-title"><?= $a->title; ?><i class="icon icon-cancel right"></i></span>
+                    <?= $a->snipet; ?>
+                    <footer class="card-footer" id="articleOptions">
+                        <a id="likesBtn" class="card-footer-item" href="<?= $a->likeUrl ?>">
+                            <i class="icon icon-heart red-text"></i>
+                        </a>
+                        <a id="commentBtn" class="card-footer-item" href="<?= '#cmtAdd-'.$a->id ?>">
+                            <i class="icon icon-comment-empty" ></i>
+                        </a>
+                        <a id="shareBtn" class="card-footer-item" href="#share-<?= $a->id ?>">
+                            <i class="icon icon-share" ></i>
+                        </a>
+                    </footer>
+                </div>
+                <div id="<?= 'cmtAdd-'.$a->id ?>" class="modal">
+                    <div class="modal-content">
+                        <span class="ui header">Commenter</span>
+                        <form action="<?= $a->commentUrl ?>" method="POST">
+                            <div class="input-field">
+                                <textarea class="materialize-textarea" name="comment"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="modal-action btn btn-action blue-grey">ok</button>
+                                <button id="cmtAdd-<?= $a->id ?>" type="reset" class="modal-action modal-close blue-grey btn">
+                                    Annuler
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </article>
@@ -22,7 +47,7 @@
     <section class="jumbotron dark col l12 s12 m12">
         <div class="container row">
             <div class="row col l7 s12 m12">
-                <h2 class="ui header">A Propos De Nos Photos</h2>
+                <h2 class="ui header">Nos photos</h2>
                 <div class="">
                     <p>
                         l'ombre et la lumière surgissent de presque nul part,
@@ -48,20 +73,25 @@
             </div>
 
             <div class="row col l5 s12 m12">
-                <h2 class="ui header">Catégories</h2>
                 <div class="ui relaxed divided list">
-                    <?php foreach ($categories as $category) : ?>
-                        <div class="item">
-                            <i class="icon icon-tag"></i>
-                            <div class="content">
-                            <a class="header" href="<?= $category->url; ?>"><?= $category->title; ?></a>
-                            <div class="description"><?= $category->description ?></div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                    <a href="/categories" class="btn btn-flat action blue-grey dark-1 waves-effect">
-                        Voir Plus
-                    </a>
+                    <ul class="collection hoverable">
+                        <?php foreach ($categories as $category) : ?>
+                            <li class="collection-item dark waves-effect">
+                                <a href="<?= $category->url; ?>">
+                                    <div>
+                                        <span class="collection-item-title">
+                                            <?= $category->title; ?>
+                                            <span class="secondary-content"><i class="icon icon-right-open"></i></span>
+                                        </span>
+                                        <p><?= $category->description ?></p>
+                                    </div>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                        <li>
+                            <a href="/categories" class="btn btn-flat action blue-grey waves-effect">Voir Plus</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -69,7 +99,7 @@
     <section class="section col l12 m12 s12">
         <div class="row container">
             <span class="row col l12 s12 m12">
-                <h2 class="ui header"> Les Héros dans l'ombre</h2>
+                <h2 class="ui header">Les Héros dans l'ombre</h2>
             </span>
             <div class="ui divided items col l6 m12 s12 animated slideInLeft">
                 <div class="item">
@@ -81,22 +111,6 @@
                             <p>
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                 Eum quidem incidunt maiores asperiores consequuntur recusandae totam quo
-                                consectetur assumenda nemo quia saepe nobis voluptatibus dolor
-                                minus, corporis, illo, provident expedita...
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="image"><img src="/imgs/team/rapha.jpg"></div>
-                    <div class="content">
-                        <span class="header">Rapha Truck</span>
-                        <div class="meta"> Design - Création</div>
-                        <div class="description">
-                            <p>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                Aspernatur ullam natus harum distinctio molestiae, molestias nulla voluptates error alias,
-                                 voluptate assumenda. Accusamus at quidem non quos laborum ea ex rem.
                             </p>
                         </div>
                     </div>
@@ -108,8 +122,6 @@
                         <div class="meta">Markerting - shooting model</div>
                         <div class="description">
                             <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Sint facilis nobis labore atque. Amet beatae a quidem consequuntur
                                 aliquid dolores iste fugiat velit nemo nulla,
                                  suscipit delectus, fugit porro quae?
                             </p>
@@ -126,8 +138,7 @@
                         <div class="description">
                             <p>
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Eum quidem incidunt maiores asperiores consequuntur recusandae totam quo consectetur
-                                assumenda nemo quia saepe nobis voluptatibus dolor minus, corporis, illo, provident expedita.
+                                Eum quidem
                             </p>
                         </div>
                     </div>
@@ -139,21 +150,7 @@
                         <div class="meta">shooting model</div>
                         <div class="description">
                             <p>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur ullam natus harum distinctio molestiae, molestias nulla voluptates error alias, voluptate assumenda. Accusamus at quidem non quos laborum ea ex rem.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="image"><img src="/imgs/team/precylia.jpg"></div>
-                    <div class="content">
-                        <span class="header">Precylia Felo</span>
-                        <div class="meta">shooting model</div>
-                        <div class="description">
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Sint facilis nobis labore atque. Amet beatae a quidem consequuntur
-                                aliquid dolores iste fugiat velit nemo nulla, suscipit delectus, fugit porro quae?
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
                             </p>
                         </div>
                     </div>
@@ -171,8 +168,25 @@
                     Commune Lubumbashi, Quartier Kalubwe<br>
                     Avenue Lackipopo, numéro 10465</br>
                 </address>
+                <ul>
+                <a href="https://www.Facebook.com/ngpictures23" target="_blank">
+                    <i class="icon icon-facebook-rect"></i></a>
+                <a class="white-text page-footer-text" href="https://www.instagram.com/ngpictures_23" target="_blank">
+                    <i class="icon icon-instagram"></i></a>
+
+                <a class="white-text page-footer-text" href="https://www.pexels.com/ngpictures_23" target="_blank">
+                    <i class="icon icon-instagram-filled"></i></a>
+
+                <a href="https://www.github.com/bernard-ng" target="_blank">
+                    <i class="icon icon-github"></i>
+                </a>
+
+                <a href="https://www.twitter.com/bernardngandu">
+                    <i class="icon  icon-twitter-bird"></i>
+                </a>
+            </ul>
                 <p>
-                    <a href="/contact" class="btn btn-flat blue-grey dark-1 action waves-effect">Nous Contacter</a>
+                    <a href="/contact" class="btn btn-flat blue-grey action waves-effect">Nous Contacter</a>
                 </p>
             </div>
             <div class="col l8 m12 s12 goole-maps">
@@ -183,36 +197,7 @@
             </div>
         </div>
         <div class="parallax">
-            <img src="/imgs/outils.jpeg" alt="">
+            <img src="/imgs/map-2.jpg" alt="">
         </div>
     </div>
-    <section class="section col l12 m12 s12">
-        <div class="row container">
-            <span class="row col l12 s12 m12">
-                <h2 class="ui header"> Nos Sponsors</h2>
-            </span>
-            <div class="col l2 m2 s4 center-align">
-                <a href="https://www.itotafrica.com" class="waves-effect" target="_blank">
-                    <img src="/imgs/logo/itot.png" class="hoverable" width="100%" height="100%" alt="">
-                </a>
-            </div>
-            <div class="col l2 m2 s4 center-align">
-                <a href="https://www.facebook.com/WDPhotograpy" class="waves-effect" target="_blank">
-                    <img src="/imgs/logo/wd.png" class="hoverable" alt="wd logo" width="100%" height="100%">
-                </a>
-            </div>
-            <div class="col l2 m2 s4">
-                <img src="/imgs/logo/rapha.png" class="hoverable" width="100%" height="100%" alt="">
-            </div>
-            <div class="col l2 m2 s4 center-align">
-                <img src="/imgs/logo/rapha.jpg" class="hoverable" alt="wd logo" width="100%" height="100%">
-            </div>
-            <div class="col l2 m2 s4">
-                <img src="/imgs/logo/biso.png" class="hoverable" width="100%" height="100%" alt="">
-            </div>
-            <div class="col l2 m2 s4 center-align">
-                <img src="/imgs/logo/lst.png" class="hoverable" alt="wd logo" width="100%" height="100%">
-            </div>
-        </div>
-    </section>
 </main>

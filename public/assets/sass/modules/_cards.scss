@@ -4,7 +4,7 @@
   -o-transition: box-shadow .25s;
   transition: box-shadow .25s;
   transition: box-shadow .25s, -webkit-box-shadow .25s;
-  padding: 24px;
+  padding: 15px;
   margin: 0.5rem 0 1rem 0;
   border-radius: 2px;
   background-color: #fff;
@@ -13,18 +13,62 @@
 .card {
   position: relative;
   margin: 0.5rem 0 1rem 0;
-  background-color: #fff;
+  background-color: rgb(255, 255, 255);
   -webkit-transition: -webkit-box-shadow .25s;
   transition: -webkit-box-shadow .25s;
   -o-transition: box-shadow .25s;
   transition: box-shadow .25s;
   transition: box-shadow .25s, -webkit-box-shadow .25s;
   border-radius: 2px;
+
+  &-footer {
+    border-top: 1px solid rgba(204, 204, 204, 0.33);
+    position: absolute;
+    bottom:0; left: 0; right: 0;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    &-item {
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-preferred-size: 0;
+      flex-basis: 0;
+      -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+      -ms-flex-negative: 0;
+      flex-shrink: 0;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      padding: 0.30rem;
+      text-decoration: none !important;
+      font-size: smaller;
+      cursor: pointer;
+      color: #ccc;
+      font-weight: 300;
+      border-color: rgba(204, 204, 204, 0.33);;
+
+      &:not(:last-child) {
+        border-right: 1px solid rgba(204, 204, 204, 0.33);
+        ;
+      }
+    }
+  }
 }
 
 .card .card-title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 300;
+  text-transform: capitalize;
 }
 
 .card .card-title.activator {
@@ -57,7 +101,7 @@
 }
 
 .card.small {
-  height: 300px;
+  height: 270px;
 }
 
 .card.medium {
@@ -144,12 +188,13 @@
   bottom: 0;
   left: 0;
   max-width: 100%;
-  padding: 24px;
+  padding: 15px;
 }
 
 .card .card-content {
-  padding: 24px;
+  padding: 15px;
   border-radius: 0 0 2px 2px;
+  height: auto;
 }
 
 .card .card-content p {
@@ -192,9 +237,9 @@
 }
 
 .card .card-reveal {
-  padding: 24px;
+  padding: 15px;
   position: absolute;
-  background-color: #fff;
+  background-color: rgba(0,0,0,0.8);
   width: 100%;
   overflow-y: auto;
   left: 0;
@@ -207,4 +252,5 @@
 .card .card-reveal .card-title {
   cursor: pointer;
   display: block;
+  padding-bottom: 10px;
 }

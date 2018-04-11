@@ -65,7 +65,13 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
+
+  &.nexted {
+    margin-bottom: -10px;
+  }
 }
+
+
 
 .row:after {
   content: "";

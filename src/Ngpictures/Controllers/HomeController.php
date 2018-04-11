@@ -20,10 +20,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $last = $this->blog->latest(1, 4);
-        $article = $this->blog->last();
-        $categories = $this->categories->orderBy('title', 'ASC', 0, 5);
+        $last           =   $this->blog->latest(1, 4);
+        $photos         =   $this->gallery->latest();
+        $article        =   $this->blog->last();
+        $categories     =   $this->categories->orderBy('id', 'ASC', 0, 4);
+
         $this->pageManager::setName('Accueil');
-        $this->viewRender("front_end/index", compact('last', 'article', 'categories'));
+        $this->viewRender("front_end/index", compact('last', 'article', 'photos', 'categories'));
     }
 }

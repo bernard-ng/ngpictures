@@ -320,27 +320,25 @@ class AdminController extends Controller
 
         if (isset($_POST) && !empty($_POST)) {
             $this->validator->setRule('title', 'required');
-            $this->validator->setRule('content', 'requried');
-            $this->validator->setRule('categories_id', 'numeric');
+            $this->validator->setRule('content', 'required');
 
             if ($this->validator->isValid()) {
                 $title          =   $this->str::escape($post->get('title'));
                 $content        =   $post->get('content');
                 $categories_id    =   ($post->get('category') == 0) ? 1 : $post->get('category');
+
+                if ($post->get('slug') !== '') {
+                    $this->validator->setRule('slug', 'alnum_dash');
+                    if ($this->validator->isValid()) {
+                        $slug = $this->str::escape($post->get('slug'));
+                    }
+                } else {
+                    $slug = $this->str::slugify($title);
+                }
             } else {
                 $this->flash->set('danger', $this->msg['form_multi_errors']);
                 $errors = new Collection($this->validator->getErrors());
             }
-
-            if ($post->get('slug') !== '') {
-                $this->validator->setRule('slug', 'alnum_dash');
-                if ($this->validator->isValid()) {
-                    $slug = $this->str::escape($post->get('slug'));
-                }
-            } else {
-                $slug = $this->str::slugify($title);
-            }
-
 
             if (isset($_FILES) && !empty($_FILES)) {
                 if (!empty($file->get('thumb.name'))) {
