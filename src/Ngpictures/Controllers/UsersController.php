@@ -61,8 +61,8 @@ class UsersController extends Controller
 
             if (isset($_POST) and !empty($_POST)) {
                 if (!empty($post->get('password')) && !empty($post->get('password_confirm'))) {
-                    $this->validator = $this->validator;
-                    $this->validator->isMatch('password', 'password_confirm', $this->msg['users_bad_password']);
+                    $this->validator->setRule('password', ["min_length[8]", "must_match[password_confirm]"]);
+
                     if ($this->validator->isValid()) {
                         $password = $this->str::hashPassword($post->get('password'));
                         $this->users->resetPassword($password, $user->id);

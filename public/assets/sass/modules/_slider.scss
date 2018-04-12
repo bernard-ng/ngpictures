@@ -1,6 +1,6 @@
 .slider {
   position: relative;
-  height: 350px !important;
+  height: auto !important;
   width: 100%;
   margin-bottom: 2em;
 }
@@ -17,6 +17,20 @@
 
 .slider.fullscreen ul.slides {
   height: 100%;
+
+  & li {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden !important;
+    border: none !important;
+  }
 }
 
 .slider.fullscreen ul.indicators {
@@ -50,7 +64,7 @@
   left: 0;
   z-index: 1;
   width: 100%;
-  height: inherit;
+  height: 100%;
   overflow: hidden;
   border-bottom: 2px solid #ccc !important;
 }
@@ -68,7 +82,7 @@
   font-family: 'Roboto', sans-serif;
   position: absolute;
   display: inherit;
-  top: 10%;
+  top: 25%;
   left: 15%;
   width: 70%;
   opacity: 0;
@@ -79,11 +93,6 @@
   font-weight: 700;
   letter-spacing: 2px;
   text-shadow: 2px 1px rgba(0,0,0,0.4);
-}
-
-.slider .slides li .caption h6 {
-  font-family: 200;
-  font-size: 1.2em;
 }
 
 .slider .slides li .caption p {

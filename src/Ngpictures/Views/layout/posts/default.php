@@ -16,14 +16,14 @@
                     <h3><?php echo $pageManager::getActivePage() ?></h3>
                 </span>
                 <span class="jumbotron-content col l6 m12 s12">
-                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                   <?php echo $pageManager::getDescription(); ?>
                 </span>
             </div>
         </div>
 
-        <div class="page-content" id="pageContent" data-ajax="true">
+        <main class="page-content" id="pageContent" data-ajax="true" role="main">
             <?php echo $page_content; ?>
-        </div>
+        </main>
         <?php include(APP."/Views/includes/footer.php"); ?>
         <?php include(APP."/Views/includes/default-script.php"); ?>
         <?php include(APP."/Views/includes/flash.php"); ?>

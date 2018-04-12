@@ -18,6 +18,11 @@
             <div class="col l12 gallery-details"></div>
         </section>
     </section>
+    <div class="fixed-action-btn second">
+        <a href="/gallery/slider" class="btn-floating btn-large blue dark-2 waves-effect shadow-4">
+            <i class="icon icon-resize-full"></i>
+        </a>
+    </div>
 </main>
 <script type="text/javascript" src="/assets/js/lib/jquery.min.js" ></script>
 <script type="text/javascript" src="/assets/js/app/materialize.js" ></script>
@@ -35,6 +40,7 @@
         }
 
         $(".gallery-item").removeClass("active")
+        $(".gallery-details").removeClass('jumbotron jumbotron-img dark')
         $item.addClass("active")
 
         $.ajax(
@@ -42,16 +48,16 @@
         ).then(
             function($detailsInfo) {
 
+                $details.addClass('jumbotron jumbotron-img dark')
+                $details.append($detailsInfo).slideDown()
+                $work_details =  $details.find('.gallery-container-details')
+
                 var $del = $active
                 if ($active) {
                     $active.slideUp(300, function() {
                         $del.remove()
                     })
                 }
-
-                $details.append($detailsInfo).slideDown()
-                $work_details =  $details.find('.gallery-container-details')
-                scrollTo($work_details)
 
                 //animation
                 for (var i = 1; i <= 3; i++)
@@ -67,9 +73,11 @@
                 $active.find(".gallery-details-img").on("click", function() {
                     $(this).find('img').materialbox()
                 })
+
+                scrollTo($active);
             },
             function() {
-                return Materialize.toast("Impossibe de charge l'image, vérifiez votre connexion internet", 5000, "danger")
+                return Materialize.toast("Impossibe de charge l'Image", 5000, "danger")
             }
         )
 
@@ -85,7 +93,9 @@
     }
 
     var scrollTo = function(cible) {
-        $('html, boby').animate({scrollTop: cible.offset().top - 80 }, 750);
+        window.setTimeout(function(){
+            $('html, boby').animate({scrollTop: cible.offset().top - 80 }, 750);
+        }, 300)
     }
 
 </script>

@@ -4,6 +4,17 @@
     height: auto;
     position: relative;
     padding-top: 2em !important;
+    -webkit-transition: all linear 0.3s;
+    -o-transition: all linear 0.3s;
+    transition: all linear 0.3s;
+
+    &.jumbotron-img {
+        display: none;
+        padding-top: 1em !important;
+        padding-bottom: 1em !important;
+        margin-top: 1em !important;
+        margin-bottom: 1em !important;
+    }
 
     &.dark {
         background: #100f0f !important;

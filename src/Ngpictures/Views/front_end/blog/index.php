@@ -1,12 +1,6 @@
 <section class="row container">
-    <hearder class="col l12 m12 s12">
-        <div class="ui pointing secondary menu">
-            <a class="item active" data-tab="first">Tout</a>
-            <a class="item" data-tab="second">Nouveaux</a>
-            <a class="item" data-tab="third">Anciens</a>
-        </div>
-    </hearder>
-    <section class="section col l9 m12 s12 animated slideInLeft" role="main">
+    <?php require(APP . "/Views/includes/menu-aside.php"); ?>
+    <section class="section col l6 m12 s12 animated slideInLeft" role="main">
         <div class="no-padding">
             <div class="ui divided items" id="dataContainer">
                 <?php if (!empty($posts)) : ?>
@@ -48,11 +42,8 @@
                     </div>
                     <?php endforeach ; ?>
                 <?php else : ?>
-                    <div class="card">
-                        <div class="no-publication">
-                            <div class="ng-cover"></div>
-                            <p><i class="icon icon-picture"></i> &nbsp;aucune publication pour l'instant</p>
-                        </div>
+                    <div class="full-infos">
+                        Aucun Publication pour l'instant
                     </div>
                 <?php endif; ?>
             </div>

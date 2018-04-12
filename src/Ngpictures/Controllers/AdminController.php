@@ -323,9 +323,9 @@ class AdminController extends Controller
             $this->validator->setRule('content', 'required');
 
             if ($this->validator->isValid()) {
-                $title          =   $this->str::escape($post->get('title'));
-                $content        =   $post->get('content');
-                $categories_id    =   ($post->get('category') == 0) ? 1 : $post->get('category');
+                $title              =   $this->str::escape($post->get('title'));
+                $content            =   $post->get('content');
+                $categories_id      =   ($post->get('category') == 0) ? 1 : $post->get('category');
 
                 if ($post->get('slug') !== '') {
                     $this->validator->setRule('slug', 'alnum_dash');

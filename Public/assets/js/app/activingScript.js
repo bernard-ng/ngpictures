@@ -11,7 +11,13 @@ $(document).ready(function(){
 	$('.collapsible').collapsible();
 	$('.carousel .big').carousel({fullWidth: true});
     $('.carousel').carousel();
-	$('.slider').slider();
+	$('.slider').slider({
+		interval: 5000
+	});
+	$('.slider.fullsize').slider({
+		transition: 300,
+		interval: 5000
+	});
     $('.dropdown-button').dropdown();
 	$('.parallax').parallax();
 	$('.modal').modal();

@@ -12,33 +12,6 @@
                 <div class="card-reveal">
                     <span class="card-title"><?= $a->title; ?><i class="icon icon-cancel right"></i></span>
                     <?= $a->snipet; ?>
-                    <footer class="card-footer" id="articleOptions">
-                        <a id="likesBtn" class="card-footer-item" href="<?= $a->likeUrl ?>">
-                            <i class="icon icon-heart red-text"></i>
-                        </a>
-                        <a id="commentBtn" class="card-footer-item" href="<?= '#cmtAdd-'.$a->id ?>">
-                            <i class="icon icon-comment-empty" ></i>
-                        </a>
-                        <a id="shareBtn" class="card-footer-item" href="#share-<?= $a->id ?>">
-                            <i class="icon icon-share" ></i>
-                        </a>
-                    </footer>
-                </div>
-                <div id="<?= 'cmtAdd-'.$a->id ?>" class="modal">
-                    <div class="modal-content">
-                        <span class="ui header">Commenter</span>
-                        <form action="<?= $a->commentUrl ?>" method="POST">
-                            <div class="input-field">
-                                <textarea class="materialize-textarea" name="comment"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="modal-action btn btn-action blue-grey">ok</button>
-                                <button id="cmtAdd-<?= $a->id ?>" type="reset" class="modal-action modal-close blue-grey btn">
-                                    Annuler
-                                </button>
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </article>
         </div>
@@ -74,24 +47,26 @@
 
             <div class="row col l5 s12 m12">
                 <div class="ui relaxed divided list">
-                    <ul class="collection hoverable">
-                        <?php foreach ($categories as $category) : ?>
-                            <li class="collection-item dark waves-effect">
-                                <a href="<?= $category->url; ?>">
-                                    <div>
-                                        <span class="collection-item-title">
-                                            <?= $category->title; ?>
-                                            <span class="secondary-content"><i class="icon icon-right-open"></i></span>
-                                        </span>
-                                        <p><?= $category->description ?></p>
-                                    </div>
-                                </a>
+                    <?php if(isset($categories) && !empty($categories)): ?>
+                        <ul class="collection hoverable">
+                            <?php foreach ($categories as $category) : ?>
+                                <li class="collection-item dark waves-effect">
+                                    <a href="<?= $category->url; ?>">
+                                        <div>
+                                            <span class="collection-item-title">
+                                                <?= $category->title; ?>
+                                                <span class="secondary-content"><i class="icon icon-right-open"></i></span>
+                                            </span>
+                                            <p><?= $category->description ?></p>
+                                        </div>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                            <li>
+                                <a href="/categories" class="btn btn-flat action blue-grey waves-effect">Voir Plus</a>
                             </li>
-                        <?php endforeach; ?>
-                        <li>
-                            <a href="/categories" class="btn btn-flat action blue-grey waves-effect">Voir Plus</a>
-                        </li>
-                    </ul>
+                        </ul>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -103,7 +78,7 @@
             </span>
             <div class="ui divided items col l6 m12 s12 animated slideInLeft">
                 <div class="item">
-                    <div class="image"><img src="/imgs/team/bernard.jpg"></div>
+                    <div class="image"><img src="<?= CDN."/imgs/team/bernard.jpg" ?>"></div>
                     <div class="content">
                         <a href="http://ngpictures.pe.hu" target="_blank" class="header">Bernard Ngandu</a>
                         <div class="meta">  Fondateur  - developpeur - Photographe </div>
@@ -116,7 +91,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <div class="image"><img src="/imgs/team/gael.jpg"></div>
+                    <div class="image"><img src="<?= CDN."/imgs/team/gael.jpg" ?>"></div>
                     <div class="content">
                         <a class="header">Gael Balo</a>
                         <div class="meta">Markerting - shooting model</div>
@@ -131,7 +106,7 @@
             </div>
             <div class="ui divided items col l6 m12 s12 animated slideInRight">
                 <div class="item">
-                    <div class="image"><img src="/imgs/team/balloy.jpg"></div>
+                    <div class="image"><img src="<?= CDN."/imgs/team/balloy.jpg" ?>"></div>
                     <div class="content">
                         <span class="header">Balloy Fane</span>
                         <div class="meta">Directrice de Publication</div>
@@ -144,7 +119,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <div class="image"><img src="/imgs/team/grey.jpg"></div>
+                    <div class="image"><img src="<?= CDN."/imgs/team/grey.jpg" ?>"></div>
                     <div class="content">
                         <span class="header">Gretta Mpunga</span>
                         <div class="meta">shooting model</div>
@@ -162,7 +137,7 @@
          <div class="row container">
             <div class="col l4 m12 s12">
                 <h2 class="ui header">Nous Rétrouver</h2>
-                <address style="font-style: normal !important;">
+                <address style="font-style: normal !important;" class="grey-txt">
                     République Démocratique du Congo<br>
                     Province du Haut-Katanga, Ville de Lubumbashi<br>
                     Commune Lubumbashi, Quartier Kalubwe<br>
@@ -197,7 +172,7 @@
             </div>
         </div>
         <div class="parallax">
-            <img src="/imgs/map-2.jpg" alt="">
+            <img src="<?= CDN."/imgs/map-2.jpg" ?>" alt="">
         </div>
     </div>
 </main>

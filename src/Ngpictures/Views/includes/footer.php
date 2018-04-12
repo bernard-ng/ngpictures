@@ -5,9 +5,9 @@
             <i class="icon icon-menu"></i>
         </a>
         <ul>
-            <li class="waves-effect waves-light"><a href="/submit-photo"><i class="icon icon-upload"></i></a></li>
-            <li class="waves-effect waves-light"><a href="<?= $activeUser->editUrl; ?>"><i class="icon icon-cog-alt"></i></a></li>
-            <li class="waves-effect waves-light"><a href="<?= $activeUser->followersUrl; ?>"><i class="icon icon-users"></i></a></li>
+            <li class="waves-effect"><a href="/submit-photo"><i class="icon icon-plus"></i></a></li>
+            <li class="waves-effect"><a href="<?= $activeUser->editUrl; ?>"><i class="icon icon-cog"></i></a></li>
+            <li class="waves-effect"><a href="<?= $activeUser->followersUrl; ?>"><i class="icon icon-users"></i></a></li>
         </ul>
     </div>
 <?php endif; ?>
@@ -25,15 +25,18 @@
        <a href="/godfirst">godfirst</a> : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l'avance.
         </p>
         <div class="ui horizontal bulleted list">
-            <a class="item" href="/bugs">Signaler un Bug</a>
+            <a class="item" href="/bugs">Un bug ?</a>
             <a class="item" href="/ideas">Votre avis</a>
+            <a href="/privacy-terms" class="item">Mentions légales</a>
             <a class="item" href="/contact">Contact</a>
         </div>
         </section>
     </div>
     <div class="footer-copyright black">
         <div class="container">
-            <span class="right">Developped by <a href="http://ngpictures.pe.hu" class="grey-txt" target="_blank">Bernard ng</a>&nbsp;</span>
+            <span class="right">All Rigths Reserved &copy; <?= date('Y') ?></span>
+            <span >
+                With <i class="icon icon-heart red-txt"></i> by <a href="http://ngpictures.pe.hu" class="grey-txt" target="_blank">Bernard ng</a>&nbsp;</span>
         </div>
     </div>
 </footer>

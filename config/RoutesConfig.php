@@ -41,8 +41,9 @@ $router->get("/categories/:name-:id", "categories#show", "categories.show");
 
 //gallery pages
 $router->get("/gallery","gallery","gallery.index");
-$router->get("/gallery/:id","gallery#show","gallery.show");
+$router->get("/gallery/slider", "gallery#slider", "gallery.slider");
 $router->get("/gallery/albums", "gallery#albums", "gallery.albums");
+$router->get("/gallery/:id","gallery#show","gallery.show");
 
 
 //likes

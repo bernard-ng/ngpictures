@@ -164,7 +164,7 @@ trait PostEntityTrait
     public function getSnipet(): string
     {
         $users = Ngpictures::getInstance()->getModel('users');
-        $content = StringManager::getSnipet(StringManager::truncateText($this->content, 600));
+        $content = StringManager::getSnipet(StringManager::truncateText($this->content, 150));
         return (StringManager::userMention($users, $content));
     }
 

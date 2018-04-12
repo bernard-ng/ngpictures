@@ -176,6 +176,10 @@ button.btn-floating {
   padding-top: 15px;
   margin-bottom: 0;
   z-index: 997;
+
+  &.second {
+    bottom: 90px !important;
+  }
 }
 
 .fixed-action-btn.active ul {
