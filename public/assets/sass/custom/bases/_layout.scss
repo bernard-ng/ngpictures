@@ -51,6 +51,47 @@
     }
 }
 
+
+.jumbotron-user {
+    width: 100%;
+    position: absolute;
+    background-color: #100f0f;
+    background-image: url(/imgs/bgjumbo.jpeg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    top: 40px; left: 0; right: 0;
+    padding-top: 20px;
+    height: auto;
+    border-bottom: 2px solid #ccc;
+    color: #ccc;
+    z-index: 20000px;
+    }
+
+    .user-avatar {
+        width: 180px;
+        height: 180px;
+        border-radius: 100%;
+        background: #100f0f;
+        border: 2px solid #ccc;
+        position: absolute;
+        &:hover {
+             -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2),
+             0 6px 20px 0 rgba(0, 0, 0, 0.19);
+             box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2),
+             0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        -webkit-filter: none !important;
+                filter: none !important;
+
+        overflow: hidden;
+        img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
 .statistic {
     width: 100%;
     min-height: 200px !important;
