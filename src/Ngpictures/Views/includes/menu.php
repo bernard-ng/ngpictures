@@ -25,15 +25,13 @@
                         <li><a href="<?= ADMIN ?>"> <i class="icon icon-code"></i></a></li>
                     <?php endif; ?>
 
-                    <?php if ($activeUser) : ?>
-                        <li id="La Communauté"><a href="/community">Communauté</a></li>
-                    <?php endif; ?>
-
+                    <li id="acceuil"><a href="/">Acceuil</a></li>
                     <li id="blog"><a href="/blog"> Blog</a></li>
-                    <li id="posts"><a href="/posts"> Actualités</a></li>
                     <li id="Gallerie"><a href="/gallery"> Gallerie</a></li>
 
                     <?php if ($activeUser) : ?>
+                        <li id="posts"><a href="/posts"> Actualités</a></li>
+                        <li id="La Communauté"><a href="/community">Communauté</a></li>
                         <li class="user-actions">
                             <a href="#" class="user-actions-sideNav show-on-large" data-activates="user-actions">
                                 <img src="<?= $activeUser->avatarUrl; ?>" class="user" width="50" height="50">
@@ -86,20 +84,5 @@
             <li><a href="<?= $activeUser->followingUrl; ?>">Mes abonnements <i class="icon icon-users"></i></a></li>
             <li><a href="/logout">Déconnexion <i class="icon icon-off"></i></a></li>
         <?php endif; ?>
-        <li>
-            <ul class="collapsible collapsible-accordion">
-                <li>
-                    <a class="collapsible-header waves-effect">Plus</a>
-                    <div class="collapsible-body">
-                        <ul>
-                            <li><a href="/bugs">Signaler un Bug <i class="icon icon-comment-empty"></i></a></li>
-                            <li><a href="/ideas">Donner une idée <i class="icon icon-comment-empty"></i></a></li>
-                            <li><a href="/privacy-terms">Mentions légales <i class="icon icon-plus"></i></a></li>
-                            <li><a href="/about">A propos <i class="icon icon-star"></i></a></li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </li>
     </ul>
 </header>

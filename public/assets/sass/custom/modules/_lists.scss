@@ -19,6 +19,7 @@ ol.ui.list,
   list-style-type: none;
   margin: 1em 0em;
   padding: 0em 0em;
+  color: #ccc;
 }
 ul.ui.list:first-child,
 ol.ui.list:first-child,
@@ -160,9 +161,8 @@ ol.ui.list ol li,
 .ui.list > .item .header {
   display: block;
   margin: 0em;
-  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-weight: bold;
-  color: rgba(0, 0, 0, 0.87);
+  font-weight: 300;
+  color: rgba(204, 204, 204, 0.727);
 }
 
 /* Description */
@@ -678,7 +678,7 @@ ol.ui.horizontal.list li:before,
 --------------------*/
 
 .ui.divided.list > .item {
-  border-top: 1px solid rgba(204, 204, 204, 0.166);
+  border-top: 1px solid rgba(204, 204, 204, 0.542);
 }
 .ui.divided.list .list > .item {
   border-top: none;
@@ -742,7 +742,7 @@ ol.ui.horizontal.list li:before,
 }
 .ui.divided.horizontal.list > .item {
   border-top: none;
-  border-left: 1px solid rgba(34, 36, 38, 0.15);
+  border-left: 1px solid #393838;
   margin: 0em;
   line-height: 0.6;
 }

@@ -810,7 +810,7 @@ class AdminController extends Controller
       */
     public function showLogs()
     {
-        $log = (is_file(ROOT."/system-logs"))
+        $logs = (is_file(ROOT."/system-logs"))
             ? file_get_contents(ROOT."/system-logs")
             : "file: system-log not found";
 
