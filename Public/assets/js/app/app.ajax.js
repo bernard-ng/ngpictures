@@ -1,93 +1,105 @@
-$('document').ready(function(){
+document.addEventListener('load Turbolinks:load', function(){
+    class Ngpictures {
 
-    //System de like en Ajax
-    (function(){
-        var posts = document.querySelectorAll('article');
-        if (posts !== undefined) {
-            $(posts).each(
-                function(){
-                    var $that = $(this);
-                    var $likeBtn = $that.find('#likeBtn');
+        /**
+         * premet de rendre un itme du menu active
+         * @returns {boolean}
+         */
+        static toggleMenuItem() {
+            let menu    =   document.querySelector('#menu-items');
+            let active  =   document.querySelector('#menu-items-active').textContent;
+            active.toLowerCase();
 
-                    $likeBtn.on('click live', function(e){
-                        $this = $(this);
-                        e.preventDefault(); e.stopPropagation();
-                        $this.toggleClass('active');
-                        $that.find('#showLikes').html('...');
-
-                        $.ajax({
-                            url: $likeBtn.attr('href')
-                        }).then(
-                            function(data) {
-                                $that.find('#showLikes').html(data);
-                            }, function (xhr) {
-                                alert(xhr.responseText);
-                            }
-                        );
-                    })
+            if (menu && active !== undefined) {
+                let item = menu.querySelector("#"+active);
+                if (item) {
+                    return item.classList.toggle('active');
+                } else {
+                    return false;
                 }
-            )
+            }
         }
-    })();
+
+        /**
+         * premet de rendre un item du menu mobile active
+         * @returns {boolean}
+         */
+        static toggleMobileMenuItem() {
+            let menu    =   document.querySelector('#menu-items');
+            let active  =   document.querySelector('#menu-items-active').textContent;
+            active.toLowerCase();
+
+            if (menu && active !== undefined) {
+                let item = menu.querySelector("#"+active);
+                if (item) {
+                    return item.classList.toggle('active');
+                } else {
+                    return false;
+                }
+            }
+        }
 
 
-    //Ajoute du nouveau contenu avec Ajax
-    (function(){
-        var action = 'inactive';
-        var feedMore = $("#feedMore");
-        var container = $('#dataContainer');
-
-        function loadData(lastId){
-            $.post({
-                url: "/ajax/"+ feedMore.attr('data-ajax'),
-                data: {lastId: lastId}
-            })
-            .then(
-                function(data) {
-                    if (data == '') {
-                        feedMore.html('aucun contenu à charger');
-                        action = 'active';
-                    } else {
-                        feedMore.html('<i class="icon icon-refresh rotate"></i> chargement...');
-                        action = 'inactive';
+        /**
+         * recupere une instance du xhr pour les req ajax.
+         * @returns {*}
+         */
+        static getXhr() {
+            let xhr;
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+                if (xhr.overrideMimeType()) {
+                    xhr.overrideMimeType('text/xml');
+                }
+            } else if (window.ActiveXObject) {
+                try {
+                    xhr = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e) {
+                    try {
+                        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                    } catch (e) {
                     }
-                    container.append(data);
-                }, function() {
-                    feedMore.html('impossible de charger la suite');
                 }
-            );
+            }
+
+            if (!xhr) {
+                return false;
+            }
+            return xhr;
         }
 
-        $(window).scroll(function(){
-            if ($(window).scrollTop() + $(window).height() > container.height() && action == 'inactive') {
-                action = 'active';
-                setTimeout(function(){
-                    loadData($("#dataContainer article").last().attr('id'));
-                },3000);
-            }
-        })
-    })();
 
-
-    (function(){
-        verses = $('#versesContainer');
-        verses.each(function(){
-            if (verses !== undefined) {
-                function loadData() {
-                    $.ajax({url: "/ajax/verset"})
-                    .then(
-                        function(data) {
-                            verses.html(''); verses.html(data);
-                        }, function () {
-                            verses.html('<div class="card-stacked mb-20 ml-20 mg-20 mg-20"><p>Impossible de charger les versets</p></div>');
+        /**
+         * system de likes ajax
+         * @param element
+         */
+        static likes(element) {
+            let postContainer = document.querySelector(element);
+            if (postContainer !== undefined) {
+                postContainer.addEventListener('onclick', '.likeBtn', function(e) {
+                    e.preventDefaults();
+                    e.stopPropagation();
+                    this.classList.toggle('active');
+                    if (self.getXhr()) {
+                        let xhr = self.getXhr();
+                        xhr.open('GET', this.getAttribute('href'), true);
+                        xhr.send();
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4) {
+                                if (xhr.status === 200) {
+                                    this.textContent = xhr.responseText;
+                                } else {
+                                    window.alert(xhr.responseText);
+                                }
+                            }
                         }
-                    );
-                }
-                setInterval(function(){
-                    loadData();
-                },6000)
+                    }
+                })
             }
-        })
-    })()
-
+        }
+    }
 });
+
+Ngpictures.toggleMenuItem();
+Ngpictures.toggleMobileMenuItem();
+Ngpictures.likes('#post-container');

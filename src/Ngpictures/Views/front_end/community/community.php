@@ -42,7 +42,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-flat blue-grey dark-2 btn-action" >Suivre</button>
+                            <?php if ($user->id != $activeUser->id) : ?>
+                                <a href="<?= $user->followingUrl ?>" class="btn btn-flat action blue-grey dark-1">
+                                    <?= $user->isFollowed ? "Se désabonner" : "S'abonner" ?>
+                                </a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 <?php endforeach; ?>

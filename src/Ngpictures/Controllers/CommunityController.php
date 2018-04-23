@@ -19,7 +19,7 @@ class CommunityController extends Controller
     public function index()
     {
         $users = $this->users->all();
-        $this->pageManager::setName("La communauté");
+        $this->pageManager::setName("Les Membres");
         $this->setLayout("posts/default");
         $this->viewRender("front_end/community/community", compact('users'));
     }
