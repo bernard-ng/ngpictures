@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4862a466-f72e-41f7-87e3-2b36a8216ed9" name="Default" comment="finissage du backend">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Public/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Public/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Public/assets/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/Public/assets/css/style.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Public/assets/js/app/app.ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/Public/assets/js/app/app.ajax.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Public/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/ApplicationConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/ApplicationConfig.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/SystemConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/SystemConfig.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/js/app/particles.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/custom/modules/_particles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/custom/modules/_particles.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/avatars/default.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/avatars/default.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/CommunityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/CommunityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/community/community.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/community/community.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/default-style.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/default-style.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,11 +16,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="app.ajax.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.ajax.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/assets/js/app/app.ajax.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="78" column="59" lean-forward="true" selection-start-line="78" selection-start-column="59" selection-end-line="78" selection-end-column="59" />
+            <state relative-caret-position="498">
+              <caret line="97" column="19" selection-start-line="97" selection-start-column="19" selection-end-line="97" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="default.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/layout/default.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="default-script.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/includes/default-script.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="default-style.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/includes/default-style.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="75" selection-start-line="1" selection-start-column="75" selection-end-line="1" selection-end-column="75" />
             </state>
           </provider>
         </entry>
@@ -109,7 +117,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/App/Views/gallery/media-browser.php" />
         <option value="$PROJECT_DIR$/public/assets/js/app/activingScript.js" />
         <option value="$PROJECT_DIR$/src/App/Views/includes/default-script.php" />
         <option value="$PROJECT_DIR$/src/App/Views/admin/gallery/media-browser.php" />
@@ -160,6 +167,7 @@
         <option value="$PROJECT_DIR$/src/Core/Generic/Image.php" />
         <option value="$PROJECT_DIR$/public/assets/js/app/app.js" />
         <option value="$PROJECT_DIR$/public/assets/js/app/app.ajax.js" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/includes/default-style.php" />
       </list>
     </option>
   </component>
@@ -225,7 +233,7 @@
               <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -362,12 +370,12 @@
       <workItem from="1514968689836" duration="23022000" />
       <workItem from="1516991013142" duration="43000" />
       <workItem from="1517903980068" duration="603000" />
-      <workItem from="1524336787211" duration="10091000" />
+      <workItem from="1524336787211" duration="12834000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="209743000" />
+    <option name="totallyTimeSpent" value="212486000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -462,11 +470,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/App/Views/users/account.php" />
-    <entry file="file://$PROJECT_DIR$/src/App/Views/users/login.php" />
-    <entry file="file://$PROJECT_DIR$/src/App/Views/users/reset.php" />
-    <entry file="file://$PROJECT_DIR$/src/App/Views/users/forgot.php" />
-    <entry file="file://$PROJECT_DIR$/src/App/Models/UsersModel.php" />
     <entry file="file://$PROJECT_DIR$/src/App/Controllers/UsersController.php" />
     <entry file="file://$PROJECT_DIR$/src/App/Controllers/NgpicController.php" />
     <entry file="jar://$APPLICATION_PLUGINS_DIR$/php/lib/php.jar!/stubs/standard/standard_1.php" />
@@ -568,10 +571,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/js/lib/turbolinks.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/assets/js/app/app.ajax.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="78" column="59" lean-forward="true" selection-start-line="78" selection-start-column="59" selection-end-line="78" selection-end-column="59" />
+        <state relative-caret-position="498">
+          <caret line="97" column="19" selection-start-line="97" selection-start-column="19" selection-end-line="97" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/layout/default.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/includes/default-script.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/includes/default-style.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="75" selection-start-line="1" selection-start-column="75" selection-end-line="1" selection-end-column="75" />
         </state>
       </provider>
     </entry>

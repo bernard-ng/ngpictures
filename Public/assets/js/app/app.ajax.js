@@ -83,6 +83,7 @@ document.addEventListener('load Turbolinks:load', function(){
                     if (self.getXhr()) {
                         let xhr = self.getXhr();
                         xhr.open('GET', this.getAttribute('href'), true);
+                        xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
                         xhr.send();
                         xhr.onreadystatechange = function () {
                             if (xhr.readyState === 4) {
@@ -94,7 +95,7 @@ document.addEventListener('load Turbolinks:load', function(){
                             }
                         }
                     }
-                })
+                });
             }
         }
     }
