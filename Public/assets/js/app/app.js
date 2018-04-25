@@ -4,10 +4,12 @@
  * @returns {boolean}
  */
 function toggleMenuItem() {
-    let active = document.querySelector("#menu-item-active").getAttribute('data-active');
-    if (active !== undefined) {
-        let link = document.querySelector("ul.links").querySelector("li#"+ active);
+    let active = document.querySelector("#menu-item-active");
+    if (active) {
+        let link = document.querySelector("ul.links").querySelector("li#"+ active.getAttribute('data-active'));
         link.classList.add('active');
+    } else {
+        return false;
     }
 }
 
@@ -16,10 +18,12 @@ function toggleMenuItem() {
  * @returns {boolean}
  */
 function toggleMobileMenuItem() {
-    let active = document.querySelector("#menu-mobile-item-active").getAttribute('data-active');
-    if (active !== undefined) {
-        let link = document.querySelector("ul.mobile-links").querySelector("li#"+ active);
+    let active = document.querySelector("#menu-mobile-item-active");
+    if (active) {
+        let link = document.querySelector("ul.mobile-links").querySelector("li#"+ active.getAttribute('data-active'));
         link.classList.add('active');
+    } else {
+        return false;
     }
 }
 
@@ -27,11 +31,11 @@ function toggleMobileMenuItem() {
 /**
  * cree un timer relatif pour les dates
  */
-function timer(){
-    if (document.querySelectorAll('[data-time]') !== undefined) {
+function relativeTimer(){
+    if (document.querySelectorAll('time[data-time]') ) {
         if (NodeList.prototype.forEach === undefined) {
             NodeList.prototype.forEach = function (callback) {
-                [].forEach.call(this, callback)
+                [].forEach.call(this, callback);
             }
         }
 
@@ -50,11 +54,11 @@ function timer(){
             {time: Infinity, divide: 24 * 60 * 60 * 365 , text: "%d ans"}
         ];
 
-        document.querySelectorAll('[data-time]').forEach(function(node) {
+        document.querySelectorAll('time[data-time]').forEach(function(node) {
             function setText(){
-                let seconds = Math.floor((new Date()).getTime()/1000 - parseInt(node.dataset.time, 10));
+                let seconds = Math.floor((new Date()).getTime()/1000 - parseInt(node.getAttribute('data-time'), 10));
                 let prefix = seconds > 0 ? 'Il y a ' : 'Dans ' ;
-                let term = null;
+                let term;
                 seconds = Math.abs(seconds);
 
                 for (term of terms) {
@@ -67,21 +71,23 @@ function timer(){
 
                 let nextTick = seconds % term.divide;
                 if (nextTick === 0) {
-                    nextTick = term.divide
+                    nextTick = term.divide;
                 }
+
+                window.setTimeout(function(){
+                    if (node.parentNode){
+                        window.requestAnimationFrame ? window.requestAnimationFrame(setText) : setText();
+                    }
+                },  nextTick);
             }
 
             setText();
-
-            window.setTimeout(function(){
-                if (node.parentNode){
-                    window.requestAnimationFrame ?  window.requestAnimationFrame(setText) : setText()
-                }
-            },  nextTick);
-        })
+        });
+    } else {
+        return false;
     }
 }
 
 toggleMenuItem();
 toggleMobileMenuItem();
-timer();
+relativeTimer();

@@ -4,9 +4,8 @@ public/uploads/
 public/assets/.sass-cache
 public/imgs/
 /public/i/
-.idea
-/.idea/
-.vscode/settings.json
+.idea/*
+/.idea/*
 /.vscode/
 /vendor/
 Desktop.ini

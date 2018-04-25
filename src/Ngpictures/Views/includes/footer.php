@@ -33,10 +33,11 @@
         </section>
     </div>
     <div class="footer-copyright black">
-        <div class="container">
+        <div class="container row">
             <span class="right">All Rigths Reserved &copy; <?= date('Y') ?></span>
             <span >
-                With <i class="icon icon-heart red-txt"></i> by <a href="http://ngpictures.pe.hu" class="grey-txt" target="_blank">Bernard ng</a>&nbsp;</span>
+                With <i class="icon icon-heart red-txt"></i> by <a href="http://ngpictures.pe.hu" class="grey-txt" target="_blank">Bernard ng</a>
+            </span>
         </div>
     </div>
 </footer>

@@ -1,17 +1,19 @@
 .container {
-  margin: 0 auto;
+  margin: 0;
   max-width: 1280px;
   width: 100% !important;
 }
 
 @media only screen and (min-width: 701px) {
   .container {
+    margin: 0 auto;
     width: 100% !important;
   }
 }
 
 @media only screen and (min-width: 993px) {
   .container {
+    margin: 0 auto;
     width: 98% !important;
   }
 }
