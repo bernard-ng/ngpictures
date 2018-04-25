@@ -8,8 +8,9 @@
                 <a href="#" data-activates="mobile-menu" class="btn blue-grey dark-3 button-collapse">
                     <i class="icon icon icon-menu"></i>
                 </a>
-                <ul class="right hide-on-med-and-down">
-                    <span id="menu-item-active" data-isActive="<?= $pageManager::getActivePage() ?>"></span>
+
+                <span id="menu-item-active" data-active="<?= $pageManager::getActivePage() ?>"></span>
+                <ul class="right hide-on-med-and-down links">
 
                     <li class="search">
                         <div class="search">
@@ -25,13 +26,13 @@
                         <li><a href="<?= ADMIN ?>"> <i class="icon icon-code"></i></a></li>
                     <?php endif; ?>
 
-                    <li id="acceuil"><a href="/">Acceuil</a></li>
+                    <li id="Accueil"><a href="/">Accueil</a></li>
                     <li id="blog"><a href="/blog"> Blog</a></li>
                     <li id="Gallerie"><a href="/gallery"> Gallerie</a></li>
 
                     <?php if ($activeUser) : ?>
                         <li id="posts"><a href="/posts"> Actualités</a></li>
-                        <li id="La Communauté"><a href="/community">Communauté</a></li>
+                        <li id="Communauté"><a href="/community">Communauté</a></li>
                         <li class="user-actions">
                             <a href="#" class="user-actions-sideNav show-on-large" data-activates="user-actions">
                                 <img src="<?= $activeUser->avatarUrl; ?>" class="user" width="50" height="50">

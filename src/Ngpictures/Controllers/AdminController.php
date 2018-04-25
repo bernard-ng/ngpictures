@@ -810,8 +810,8 @@ class AdminController extends Controller
       */
     public function showLogs()
     {
-        $logs = (is_file(ROOT."/system-logs"))
-            ? file_get_contents(ROOT."/system-logs")
+        $logs = (is_file(ROOT."/system.log"))
+            ? file_get_contents(ROOT."/system.log")
             : "file: system-log not found";
 
         $this->pageManager::setName('Adm - Logs');
