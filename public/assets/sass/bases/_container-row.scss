@@ -89,6 +89,14 @@
   min-height: 1px;
 }
 
+.col.nexted{
+  float: left;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0 0.40rem;
+  min-height: 1px;
+}
+
 .row .col[class*="push-"], .row .col[class*="pull-"] {
   position: relative;
 }

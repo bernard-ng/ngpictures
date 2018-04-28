@@ -140,8 +140,7 @@ trait PostEntityTrait
     {
         $comments = Ngpictures::getInstance()->getModel('comments');
         $comments = $comments->getNumber($this->id, $this->action_type);
-        $words = ($comments > 1)? " commentaires" : " commentaire";
-        return $comments." {$words}";
+        return $comments;
     }
 
 

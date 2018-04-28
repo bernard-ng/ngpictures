@@ -10,6 +10,7 @@ class Controller extends SuperController
     protected $app;
     protected $str;
     protected $msg;
+    protected $flash;
     protected $cookie;
     protected $layout;
     protected $session;
@@ -59,6 +60,9 @@ class Controller extends SuperController
         if (!empty($this->session->read(AUTH_KEY))) {
             $variables['activeUser']        =   $this->session->read(AUTH_KEY);
             $variables['securityToken']     =   $this->session->read(TOKEN_KEY);
+
+            $this->pageManager::setMeta(['active-user' => $this->session->getValue(AUTH_KEY, 'id')]);
+            $this->pageManager::setMeta(['active-token' => $this->session->read(TOKEN_KEY)]);
         } else {
             $variables['activeUser']        =   false;
             $variables['securityToken']     =   false;

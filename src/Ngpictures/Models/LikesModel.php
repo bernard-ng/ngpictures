@@ -3,7 +3,6 @@ namespace Ngpictures\Models;
 
 use Ng\Core\Database\MysqlDatabase;
 use Ng\Core\Models\Model;
-use Ng\Core\Managers\Collection;
 use Ngpictures\Ngpictures;
 use Ngpictures\Traits\Util\TypesActionTrait;
 

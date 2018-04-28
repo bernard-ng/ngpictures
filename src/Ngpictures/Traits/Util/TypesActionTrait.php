@@ -37,7 +37,7 @@ trait TypesActionTrait
 
     /**
      * permet de recuperer un action grace a son index
-     * @param int $type
+     * @param int $actions
      * @return string
      */
     private function getAction(int $actions) : string

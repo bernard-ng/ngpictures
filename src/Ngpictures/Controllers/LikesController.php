@@ -19,25 +19,30 @@ class LikesController extends Controller
 
 
     /**
-     * like system
-     *
      * @param string $type
      * @param string $slug
-     * @param integer $id
-     * @return void
+     * @param int $id
      */
     public function index(string $type, string $slug, int $id)
     {
         $like   =   $this->loadModel('likes');
-        $post   =   $this->loadModel($this->getType($type))->find(intval($id));
+        $post   =   $this->loadModel($this->getAction($type))->find(intval($id));
 
         if ($post && $post->slug === $slug) {
             if ($like->isLiked($post->id, $type, $this->users_id)) {
                 $like->remove($post->id, $type, $this->users_id);
-                return ($this->isAjax()) ? $post->likes : $this->app::redirect(true);
+                if ($this->isAjax()) {
+                    echo $post->likes;
+                } else {
+                    $this->app::redirect(true);
+                }
             } else {
                 $like->add($post->id, $type, $this->users_id);
-                return ($this->isAjax()) ? $post->likes : $this->app::redirect(true);
+                if ($this->isAjax()) {
+                    echo $post->likes;
+                } else {
+                    $this->app::redirect(true);
+                }
             }
         } else {
             if ($this->isAjax()) {
