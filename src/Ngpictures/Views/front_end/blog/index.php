@@ -43,13 +43,34 @@
                                        <i class="icon icon-heart-empty"></i>
                                    <?php endif; ?>
                                 </a>
-                                <a data-action="comment" class="news-card-footer-item" href="<?= $a->commentUrl ?>">
-                                    <i class="icon icon-comment-empty"></i>
+                                <a class="news-card-footer-item modal-trigger" href="#cmtAdd-<?= $a->id ?>" data-action="showComment">
+                                    <?php if ($a->commentsNumber > 0 ): ?>
+                                        <i class="icon icon-comment" ></i>&nbsp;
+                                    <?php else: ?>
+                                        <i class="icon icon-comment-empty" ></i>&nbsp;
+                                    <?php endif; ?>
+                                    <span><?= $a->commentsNumber ?></span>
                                 </a>
-                                <a data-action="share" class="news-card-footer-item" href="/share/">
+                                <a data-action="share" class="news-card-footer-item modal-trigger" href="#share-<?= $a->id ?>">
                                     <i class="icon icon-share"></i>
                                 </a>
                             </footer>
+                            <div id="cmtAdd-<?= $a->id ?>" class="modal dark bottom-sheet">
+                                <div class="modal-content">
+                                    <form action="<?= $a->commentUrl ?>" method="POST" data-action="comment">
+                                        <div class="input-field">
+                                            <label for="comment">Commentaire</label>
+                                            <textarea class="mdz-textarea" name="comment" id="comment" data-length="255"></textarea>
+                                        </div>
+                                        <div class="modal-footer dark comment">
+                                            <button type="submit" class="modal-action btn waves-effect">Envoyer</button>
+                                            <button id="cmtAdd-<?= $a->id ?>" type="reset" class="btn btn-small transparent waves-effect modal-action modal-close">
+                                                Annuler
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </article>
                     <?php endforeach ; ?>
                 <?php else : ?>

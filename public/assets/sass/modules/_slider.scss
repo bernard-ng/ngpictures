@@ -72,7 +72,7 @@
 .slider .slides li img {
   height: 100%;
   width: 100%;
-  background-size: cover;
+  background-size: cover !important;
   background-position: center;
   position: relative;
 }

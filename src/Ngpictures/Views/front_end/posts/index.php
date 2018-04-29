@@ -16,7 +16,7 @@
                             <a href="<?= $a->categoryUrl ?>" class="news-card-header-icon">
                                 <i class="icon icon-tag"></i>
                             </a>
-                            <a data-action="report" class="news-card-header-icon">
+                            <a data-action="report" class="news-card-header-icon modal-trigger" href="#report-<?= $a->id ?>">
                                 <i class="icon icon-bell-alt"></i>
                             </a>
                             <a data-action="download" class="news-card-header-icon" href="<?= $a->downloadUrl ?>">
@@ -48,48 +48,13 @@
 
                         <section id="articleInfo">
                             <div class="news-card-stat">
-                            <i class="icon icon-thumbs-up"></i>&nbsp;
+                            <i class="icon icon-thumbs-up"></i>
                                 <small>
                                 <a data-action="showLikes" href="<?= $a->showLikesUrl ?>"><?= $a->likes ?></a>
                                 </small>
                             </div>
-
-                            <div id="cmtAdd-<?= $a->id ?>" class="modal">
-                                <div class="modal-content">
-                                    <form action="<?= $a->commentUrl ?>" method="POST">
-                                        <div class="materialize-textarea">
-                                            <label for="comment">Commenter...</label>
-                                            <textarea class="materialize-textarea" name="comment" id="comment"></textarea>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="modal-action btn waves-effect">Envoyer</button>
-                                            <button id="cmtAdd-<?= $a->id ?>" type="reset" class="btn waves-effect modal-action modal-close">
-                                                Annuler
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <div id="share-<?= $a->id ?>" class="modal">
-                                <div class="modal-content">
-                                    <form action="<?= $a->commentUrl ?>" method="POST">
-                                        <div class="materialize-textarea">
-                                            <label for="comment">Commenter...</label>
-                                            <textarea class="materialize-textarea" name="comment" id="comment"></textarea>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="modal-action btn waves-effect">Envoyer</button>
-                                            <button id="cmtAdd-<?= $a->id ?>" type="reset" class="btn waves-effect modal-action modal-close">
-                                                Annuler
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
                             <div class="news-card-stat">
-                                <i class="icon icon-calendar"></i>&nbsp;
+                                <i class="icon icon-calendar"></i>
                                 <time data-time="<?= strtotime($a->date_created) ?>"><?= $a->time ?></time>
                             </div>
                         </section>
@@ -97,23 +62,39 @@
                     <footer class="news-card-footer" id="articleOptions">
                         <a data-action="like" class="news-card-footer-item <?= $a->isLike ?>" href="<?= $a->likeUrl ?>">
                             <?php if ($a->isLike == 'active'): ?>
-                                <i class="icon icon-heart red-txt"></i>
+                                <i class="icon icon-heart red-txt"></i>&nbsp;
                             <?php else: ?>
-                                <i class="icon icon-heart-empty"></i>
+                                <i class="icon icon-heart-empty"></i>&nbsp;
                             <?php endif; ?>
                         </a>
-                        <a data-action="comment" class="news-card-footer-item modal-trigger" href="#cmtAdd-<?= $a->id ?>">
+                        <a class="news-card-footer-item modal-trigger" href="#cmtAdd-<?= $a->id ?>" data-action="showComment">
                             <?php if ($a->commentsNumber > 0 ): ?>
                                 <i class="icon icon-comment" ></i>&nbsp;
                             <?php else: ?>
                                 <i class="icon icon-comment-empty" ></i>&nbsp;
                             <?php endif; ?>
-                            <?= $a->commentsNumber ?>
+                            <span><?= $a->commentsNumber ?></span>
                         </a>
                         <a data-action="share" class="news-card-footer-item modal-trigger" href="#share-<?= $a->id ?>">
                             <i class="icon icon-share"></i>
                         </a>
                     </footer>
+                    <div id="cmtAdd-<?= $a->id ?>" class="modal dark bottom-sheet">
+                        <div class="modal-content">
+                            <form action="<?= $a->commentUrl ?>" method="POST" data-action="comment">
+                                <div class="input-field">
+                                    <label for="comment">Commentaire</label>
+                                    <textarea class="mdz-textarea" name="comment" id="comment" data-length="255"></textarea>
+                                </div>
+                                <div class="modal-footer dark comment">
+                                    <button type="submit" class="modal-action btn waves-effect">Envoyer</button>
+                                    <button id="cmtAdd-<?= $a->id ?>" type="reset" class="btn btn-small transparent waves-effect modal-action modal-close">
+                                        Annuler
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </article>
             <?php endforeach; ?>
             <?php else : ?>
@@ -127,6 +108,26 @@
         </div>
         <div id="statusBar" class="feed-btn" data-ajax="posts">chargement</div>
     </section>
-
+    <?php foreach ($posts as $a): ?>
+        <div id="report-<?= $a->id ?>" class="modal dark">
+            <div class="modal-content">
+                <span class="ui header">Signaler</span>
+                <p>Aidez nous à garder notre application sereine, que trouvez de mal à cette publication ?</p>
+                <form action="<?= $a->commentUrl ?>" method="POST" data-action="comment">
+                    <div class="input-field">
+                        <textarea class="mdz-textarea" name="comment" data-length="255"></textarea>
+                    </div>
+                    <div class="modal-footer dark comment">
+                        <button type="submit" class="modal-action btn blue-grey dark-2 waves-effect">
+                            <span class="loader"></span> tk
+                        </button>
+                        <button id="cmtAdd-<?= $a->id ?>" type="reset" class="btn btn-small transparent waves-effect modal-action modal-close">
+                            Annuler
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    <?php endforeach; ?>
 <?php include(APP."/Views/includes/menu-aside.php"); ?>
 </section>

@@ -1,3 +1,6 @@
+// HELPERS
+//------------------------------------------------------------------------------------
+
 /**
  * recupere une instance du xhr pour les req ajax.
  * @returns {*}
@@ -25,6 +28,156 @@ function getXhr() {
     }
     return xhr;
 }
+
+
+/**
+ * cree un toast de materializecss
+ * @param message
+ * @param type
+ */
+function setFlash(type, message) {
+    Materialize.toast(message, 4000, type);
+}
+
+
+/**
+ * permet de simuler le declanchement d'un event.
+ * @param element
+ * @param eventName
+ */
+function setEventTrigger(element, eventName) {
+    switch (eventName) {
+        case 'click':
+            element.click();
+            break;
+        case 'focus':
+            element.focus();
+            break;
+        default:
+            let event = document.createEvent('Event');
+            event.initEvent(eventName, false, true);
+            element.dispatchEvent(event);
+            break;
+    }
+}
+
+
+/**
+ * cree un loader dans un element...
+ */
+function setLoader(element){
+    let loader = document.createElement("span");
+    loader.classList.add("loader");
+    element.innerText = '';
+    element.innerHtml = '';
+    element.appendChild(loader);
+}
+
+
+/**
+ * remove un loader dans un element et remplace par le text
+ * @param element
+ * @param text
+ */
+function removeLoader(element, text) {
+    let loader = element.querySelector("span.loader");
+    element.removeChild(loader);
+    element.innerText = text;
+}
+
+
+/**
+ * le message d'erreur ou de success.
+ */
+const msg = {
+    usersNotLogged:         "Connectez-vous pour continuer",
+    undefinedError:         "Aucune Connexion Internet",
+    formFieldRequired:      "Compléter le champ",
+    formCommentSubmitted:   "Commentaire Ajouté",
+};
+
+// MAIN SCRIPTS
+//------------------------------------------------------------------------------------
+
+/**
+ * envoyer un commentaire en ajax
+ * @param element
+ */
+function comments(element) {
+    let postContainer       =   document.querySelector(element);
+    let activeUser          =   document.querySelector("meta[active-user]");
+    if (postContainer) {
+        let posts = postContainer.getElementsByTagName("article");
+        for (let i = 0; i < posts.length; i++) {
+            let submitBtn =  posts[i].querySelector("button[type='submit']");
+            submitBtn.addEventListener('click', function(){
+                setLoader(this);
+            });
+
+            posts[i].querySelector("form").addEventListener('submit', function(e){
+                e.preventDefault();
+                e.stopPropagation();
+
+                let comment         =   this.querySelector('textarea').value;
+                let closeBtn        =   this.querySelector("[type='reset']");
+                let showComment     =   posts[i].querySelector("[data-action='showComment']");
+                let icon            =   showComment.querySelector("i.icon");
+
+                if (activeUser) {
+                    if (comment.length > 0 && comment !== ' ') {
+                        if (getXhr()) {
+                            let xhr = getXhr();
+                            xhr.open('POST', this.getAttribute('action'), true);
+                            xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+                            xhr.send(new FormData(this));
+                            xhr.onreadystatechange = function () {
+                                if (xhr.readyState === 4) {
+                                    if (xhr.status === 200) {
+                                        let number = parseInt(xhr.responseText, 10);
+                                        icon.classList.remove('icon-comment');
+                                        icon.classList.remove('icon-comment-empty');
+
+                                        if (number >= 1) {
+                                            icon.classList.add('icon-comment');
+                                            showComment.querySelector('span').innerText = number.toString();
+
+                                            removeLoader(submitBtn, "Envoyer");
+                                            setEventTrigger(closeBtn, 'click');
+                                            setFlash('success', msg.formCommentSubmitted);
+                                        } else {
+                                            icon.classList.add('icon-comment-empty');
+                                            showComment.querySelector('span').innerText = number.toString();
+
+                                            removeLoader(submitBtn, "Envoyer");
+                                            setEventTrigger(closeBtn, 'click');
+                                            setFlash('success', msg.formCommentSubmitted);
+                                        }
+                                    } else {
+                                        removeLoader(submitBtn,'Envoyer');
+                                        setEventTrigger(closeBtn, 'click');
+                                        setFlash(
+                                            'danger',
+                                            xhr.responseText ? xhr.responseText : msg.undefinedError
+                                        );
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        removeLoader(submitBtn,'Envoyer');
+                        $(closeBtn).trigger('click');
+                        setFlash('danger', msg.formFieldRequired);
+                    }
+                } else {
+                    removeLoader(submitBtn,'Envoyer');
+                    $(closeBtn).trigger('click');
+                    setFlash('danger', msg.usersNotLogged);
+                }
+            });
+        }
+    }
+}
+
 
 /**
  * system de likes ajax
@@ -71,7 +224,7 @@ function likes(element) {
                         }
                     }
                 } else {
-                    window.alert('not online');
+                    setFlash('danger', msg.usersNotLogged);
                 }
             });
         }
@@ -79,7 +232,39 @@ function likes(element) {
         return false;
     }
 }
-likes("#dataContainer");
+
+
+/**
+ * recuperer les donnees de godfirst
+ * @param element
+ */
+function loadVerses(element) {
+    let verseContainer = document.querySelector(element);
+    if (verseContainer) {
+        xhr = getXhr();
+        if (xhr) {
+            xhr.open('GET', '/ajax/verset', true);
+            xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+            xhr.send();
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        verseContainer.innerHTML = '';
+                        verseContainer.innerHTML = xhr.responseText;
+                    } else {
+                        setFlash(
+                            xhr.responseText? xhr.responseText : msg.undefinedError,
+                            5000,
+                            'danger'
+                        );
+                    }
+                }
+            }
+        }
+    }
+}
+
 
 /**
  * inifinty scroll, ajour du contenu avec ajax
@@ -133,31 +318,8 @@ function loadPosts(element) {
 }
 
 
-/**
- * recuperer les donnees de godfirst
- * @param element
- */
-function loadVerses(element) {
-    let verseContainer = document.querySelector(element);
-    if (verseContainer) {
-        xhr = getXhr();
-        if (xhr) {
-            xhr.open('GET', '/ajax/verset', true);
-            xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-            xhr.send();
-
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        verseContainer.innerHTML = '';
-                        verseContainer.innerHTML = xhr.responseText;
-                    } else {
-                        window.alert(xhr.responseText);
-                    }
-                }
-            }
-        }
-    }
-}
-
-window.setInterval(loadVerses("#verses"), 10000);
+// CALLS
+//------------------------------------------------------------------------------------
+comments('#dataContainer');
+likes("#dataContainer");
+window.setInterval(loadVerses("#verses"), 5000);

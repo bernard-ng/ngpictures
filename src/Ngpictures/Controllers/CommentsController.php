@@ -15,6 +15,8 @@ class CommentsController extends Controller
      * CommentsController constructor.
      * oblige un user a se connecter avant de faire une action
      * si il est connecter alors on set son id dans l'instance;
+     * @param Ngpictures $app
+     * @param PageManager $pageManager
      */
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
@@ -48,15 +50,28 @@ class CommentsController extends Controller
                         'comment' => $comment
                     ]
                 );
-                $this->flash->set('success', $this->msg['form_comment_submitted']);
-                $this->app::redirect(true);
+
+                if ($this->isAjax()) {
+                    echo $this->loadModel(
+                        $this->getAction($type))->find(intval($id)
+                    )->getCommentsNumber();
+                    exit();
+                } else {
+                    $this->flash->set('success', $this->msg['form_comment_submitted']);
+                    $this->app::redirect(true);
+                }
+
             } else {
-                $this->flash->set('danger', $this->msg['form_all_required']);
-                $this->app::redirect(true);
+                $this->isAjax() ?
+                    $this->ajaxFail($this->msg['form_all_required']) :
+                    $this->flash->set('danger', $this->msg['form_all_required']);
+                    $this->app::redirect(true);
             }
         } else {
-            $this->flash->set('warning', $this->msg['comment_not_found']);
-            $this->app::redirect(true);
+            $this->isAjax()?
+                $this->ajaxFail($this->msg['comment_not_found']) :
+                $this->flash->set('warning', $this->msg['comment_not_found']);
+                $this->app::redirect(true);
         }
     }
 

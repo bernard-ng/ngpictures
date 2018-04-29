@@ -80,7 +80,6 @@ function relativeTimer(){
                     }
                 },  nextTick);
             }
-
             setText();
         });
     } else {

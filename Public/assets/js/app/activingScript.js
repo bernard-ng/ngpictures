@@ -23,7 +23,13 @@ $(document).ready(function(){
 	$('.tool').tooltip();
     $('.dropdown-button').dropdown();
 	$('.parallax').parallax();
-	$('.modal').modal();
+	$('.modal').modal({
+        opacity: 0.5,
+        dismissible: false,
+        outDuration: 150,
+        inDuration: 150,
+        preventScrolling: false
+    });
 	$('.ul-tabs').tabs();
 	$('select').material_select();
 

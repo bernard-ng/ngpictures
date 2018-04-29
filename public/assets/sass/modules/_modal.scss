@@ -12,6 +12,10 @@
   border-radius: 2px;
   will-change: top, opacity;
   z-index: 100000000000 !important;
+
+  &.dark {
+    background-color: #1c1b1b;
+  }
 }
 
 @media only screen and (max-width: 992px) {
@@ -39,24 +43,22 @@
   height: 56px;
   width: 100%;
   text-align: right;
+
+  &.dark {
+    background-color: #1c1b1b;
+  }
+
+  &.comment {
+    margin-top: 10px !important;
+  }
 }
 
 .modal .modal-footer .btn, .modal .modal-footer .btn-large, .modal .modal-footer .btn-flat {
-  margin: 6px 0;
+  margin: 6px 0 0 0;
 }
 
 .modal-overlay {
-  position: fixed;
-  z-index: -1;
-  top: -25%;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  height: 125%;
-  width: 100%;
-  background: #000;
-  display: none;
-  will-change: opacity;
+
 }
 
 .modal.modal-fixed-footer {
@@ -80,7 +82,8 @@
 
 .modal.bottom-sheet {
   top: auto;
-  bottom: -100%;
+  position: absolute;
+  bottom: 0;
   margin: 0;
   width: 100%;
   max-height: 45%;
