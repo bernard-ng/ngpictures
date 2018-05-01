@@ -17,7 +17,7 @@
                                 <i class="icon icon-tag"></i>
                             </a>
                             <a data-action="report" class="news-card-header-icon modal-trigger" href="#report-<?= $a->id ?>">
-                                <i class="icon icon-bell-alt"></i>
+                                <i class="icon icon-megaphone"></i>
                             </a>
                             <a data-action="download" class="news-card-header-icon" href="<?= $a->downloadUrl ?>">
                                 <i class="icon icon icon-download"></i>
@@ -93,6 +93,37 @@
                                     </button>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                    <div id="share-<?= $a->id ?>" class="modal dark bottom-sheet">
+                        <div class="modal-content">
+                            <div class="col l12 m12 s12">
+                                <div class="col l3 m3 s3">
+                                    <button class="btn btn-flat waves-effect hoverable" style="background: #4c67a1" data-action="share-facebook" data-url="<?= $a->url ?>">
+                                        <i class="icon icon-facebook"></i>
+                                    </button>
+                                </div>
+                               <div class="col l3 m3 s3">
+                                   <button class="btn btn-flat waves-effect hoverable" style="background: #55acee" data-action="share-twitter" data-url="<?= $a->url ?>">
+                                       <i class="icon icon-twitter"></i>
+                                   </button>
+                               </div>
+                                <div class="col l3 m3 s3">
+                                    <button class="btn btn-flat waves-effect hoverable" style="background: #d23f31" data-action="share-google-plus" data-url="<?= $a->url ?>">
+                                        <i class="icon icon-googleplus-rect"></i>
+                                    </button>
+                                </div>
+                                <div class="col l3 m3 s3">
+                                    <button class="btn btn-flat waves-effect hoverable" style="background: #11a84d" data-action="share-whatsapp" data-url="<?= $a->url ?>">
+                                        <i class="icon icon-whatsapp"></i>
+                                    </button>
+                                </div>
+                                <div class="modal-footer col s12 dark" style="margin-top: 10px;">
+                                    <button class="btn transparent shadow-0 modal-action modal-close">
+                                        Annuler
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </article>

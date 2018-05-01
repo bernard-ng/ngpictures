@@ -1,3 +1,10 @@
+
+
+
+//Main Scripts
+//---------------------------------------------------------------------
+
+
 /**
  * premet de rendre un itme du menu active
  * @returns {boolean}
@@ -122,7 +129,6 @@ function makeSticky(selector) {
             fakeElement.style.height    =   boundingRect.height + "px";
 
             let onScrollSticky = function () {
-                let isFixed = element.classList.contains('fixed');
                 if (scrollY() > constraintBottom && element.style.position !== 'absolute') {
                     element.style.position  = 'absolute';
                     element.style.bottom    = '0';
@@ -164,8 +170,11 @@ function makeSticky(selector) {
 }
 
 
+/**
+ * les bouttons de partages sur les social network
+ */
 function share() {
-    let popup = function (url, title) {
+    let sharePopup = function (url, title) {
         let windowTop = window.screenTop || window.screenY;
         let windowLeft = window.screenLeft || window.screenX;
         let windowWidth = window.innerWidth || document.documentElement.clientWidth;
@@ -180,34 +189,54 @@ function share() {
             title,
             "scrollbars=yes, " +
             "width="+popupWidth+",height="+popupHeight+",top="+popupTop+",left="+popupLeft
-        );
+        ).focus();
+        return true;
     };
 
     let twitter = document.querySelector("[data-action='share-twitter']");
-    twitter.addEventListener('click', function (e){
-        e.preventDefault();
-        e.stopPropagation();
-        let url = encodeURIComponent(this.getAttribute('data-url'));
-        let text = encodeURIComponent(msg.usersNotLogged);
-        let share =
-            "https://twitter.com/intent/tweet?text=" + text +
-            "&via=Ngpictures"
-            + "&url=" + url;
+    if (twitter) {
+        twitter.addEventListener('click', function (e){
+            e.preventDefault();
+            e.stopPropagation();
+            let url = encodeURIComponent(this.getAttribute('data-url'));
+            let text = encodeURIComponent(msg.usersNotLogged);
+            let share =
+                "https://twitter.com/intent/tweet?text=" + text +
+                "&via=Ngpictures"
+                + "&url=" + url;
 
-        popup(share, "Partager Sur Twitter");
-    });
+            sharePopup(share, "Partager Sur Twitter");
+        });
+    }
 
     let facebook = document.querySelector("[data-action='share-facebook']");
-    facebook.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        let url = encodeURIComponent(this.getAttribute('data-url'));
-        let share = "https://www.facebook.com/sharer.php?u="+url;
-        popup(share, "Partager Sur Facebook");
-    })
+    if (facebook) {
+        facebook.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            let url = encodeURIComponent(this.getAttribute('data-url'));
+            let share = "https://www.facebook.com/sharer.php?u="+url;
+            sharePopup(share, "Partager Sur Facebook");
+        });
+    }
+
+    let googlePlus = document.querySelector("[data-action='share-google-plus']");
+    if (googlePlus) {
+        googlePlus.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            let url = encodeURIComponent(this.getAttribute('data-url'));
+            let share = "https://plus.google.com/share?url="+url;
+            sharePopup(share, "Partager Sur Google+");
+        });
+    }
 }
 
+
+//CALL
+//----------------------------------------------------------------------
 toggleMenuItem();
 toggleMobileMenuItem();
 relativeTimer();
 makeSticky('[data-sticky]');
+share();
