@@ -19,6 +19,7 @@ function getXhr() {
             try {
                 xhr = new ActiveXObject("Microsoft.XMLHTTP");
             } catch (e) {
+                setFlash('danger', msg.browserNotUpdate);
             }
         }
     }
@@ -89,12 +90,14 @@ function removeLoader(element, text) {
 /**
  * le message d'erreur ou de success.
  */
-const msg = {
+var msg = {
     usersNotLogged:         "Connectez-vous pour continuer",
+    browserNotUpdate:       "Erreur, veuillez mettre à jour votre navigateur",
     undefinedError:         "Aucune Connexion Internet",
     formFieldRequired:      "Compléter le champ",
     formCommentSubmitted:   "Commentaire Ajouté",
 };
+
 
 // MAIN SCRIPTS
 //------------------------------------------------------------------------------------
@@ -165,12 +168,12 @@ function comments(element) {
                         }
                     } else {
                         removeLoader(submitBtn,'Envoyer');
-                        $(closeBtn).trigger('click');
+                        setEventTrigger(closeBtn, 'click');
                         setFlash('danger', msg.formFieldRequired);
                     }
                 } else {
                     removeLoader(submitBtn,'Envoyer');
-                    $(closeBtn).trigger('click');
+                    setEventTrigger(closeBtn, 'click');
                     setFlash('danger', msg.usersNotLogged);
                 }
             });

@@ -5,7 +5,10 @@
                 <a href="/" class="brand-logo">
                     <img src="/imgs/logo-white.png" class="logo" alt="logo">
                 </a>
-                <a href="#" data-activates="mobile-menu" class="btn blue-grey dark-3 button-collapse">
+                <a href="/search?q="  class="action right">
+                    <i class="icon icon icon-search"></i>
+                </a>
+                <a href="#" data-activates="mobile-menu" class="button-collapse left">
                     <i class="icon icon icon-menu"></i>
                 </a>
 
@@ -26,12 +29,12 @@
                         <li><a href="<?= ADMIN ?>"> <i class="icon icon-code"></i></a></li>
                     <?php endif; ?>
 
-                    <li id="Accueil"><a href="/">Accueil</a></li>
-                    <li id="blog"><a href="/blog"> Blog</a></li>
-                    <li id="Gallerie"><a href="/gallery"> Gallerie</a></li>
+                    <li id="Ngpictures"><a href="/">Accueil</a></li>
+                    <li id="Blog"><a href="/blog"> Blog</a></li>
+                    <li id="Galerie"><a href="/gallery"> Galerie</a></li>
 
                     <?php if ($activeUser) : ?>
-                        <li id="posts"><a href="/posts"> Actualités</a></li>
+                        <li id="Posts"><a href="/posts"> Actualités</a></li>
                         <li id="Communauté"><a href="/community">Communauté</a></li>
                         <li class="user-actions">
                             <a href="#" class="user-actions-sideNav show-on-large" data-activates="user-actions">
@@ -66,19 +69,7 @@
             </li>
         <?php endif; ?>
 
-        <div class="user-action">
-            <?php if (!$activeUser) : ?>
-                <li>
-                    <a href="/sign" class="btn action blue-grey dark-3 waves-effect">Inscription</a>
-                    <a href="/login" class="btn action blue-grey dark-3 waves-effect">Connexion</a>
-                </li>
-            <?php else : ?>
-                <li>
-                    <a href="<?= $activeUser->postUrl; ?>" class="btn action blue-grey dark-3 waves-effect">Poster</a>
-                    <a href="<?= $activeUser->postsUrl; ?>" class="btn action blue-grey dark-3 waves-effect">Mes Publications</a>
-                </li>
-            <?php endif; ?>
-        </div>
+
         <?php if ($activeUser) : ?>
             <li><a href="<?= $activeUser->accountUrl; ?>">Profile <i class="icon icon-user"></i></a></li>
             <li><a href="<?= $activeUser->editUrl; ?>">Editer le Profile <i class="icon icon-cog-alt"></i></a></li>

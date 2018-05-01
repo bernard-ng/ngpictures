@@ -1,3 +1,5 @@
+@import "../custom/bases/variables";
+
 /* Text Inputs + Textarea
    ========================================================================== */
 /* Style Placeholders */
@@ -482,6 +484,11 @@ textarea.mdz-textarea + label:after, .select-wrapper + label:after {
   -webkit-box-shadow: none;
           box-shadow: none;
   color: #444;
+
+  &.transparent {
+    background-color: transparent;
+    color: $txt-color;
+  }
 }
 
 .input-field input[type=search]:focus + label i,

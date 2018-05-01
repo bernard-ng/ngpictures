@@ -1,19 +1,22 @@
+@import "../custom/bases/variables";
+
 .page-footer {
   padding-top: 20px;
-  color: #fff;
-  background-color: #ee6e73;
+  color: $txt-light-color;
+  background-color: $bg-color;
 }
 
 .page-footer .footer-copyright {
   overflow: hidden;
-  min-height: 50px;
+  height: 56px;
+  line-height: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 10px 0px;
-  color: rgba(255, 255, 255, 0.8);
+  padding: 25px 10px 0 10px;
+  color: $txt-color;
   background-color: rgba(51, 51, 51, 0.08);
 }

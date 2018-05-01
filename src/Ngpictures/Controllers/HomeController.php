@@ -25,7 +25,7 @@ class HomeController extends Controller
         $article        =   $this->blog->last();
         $categories     =   $this->categories->orderBy('id', 'ASC', 0, 4);
 
-        $this->pageManager::setName('Accueil');
+        $this->pageManager::setName('Ngpictures');
         $this->viewRender("front_end/index", compact('last', 'article', 'photos', 'categories'));
     }
 }

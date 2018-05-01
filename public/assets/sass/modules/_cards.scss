@@ -1,9 +1,10 @@
+@import "../custom/bases/variables";
+
 .card-panel {
   -webkit-transition: -webkit-box-shadow .25s;
   transition: -webkit-box-shadow .25s;
   -o-transition: box-shadow .25s;
-  transition: box-shadow .25s;
-  transition: box-shadow .25s, -webkit-box-shadow .25s;
+  
   padding: 15px;
   margin: 0.5rem 0 1rem 0;
   border-radius: 2px;
@@ -17,52 +18,7 @@
   -webkit-transition: -webkit-box-shadow .25s;
   transition: -webkit-box-shadow .25s;
   -o-transition: box-shadow .25s;
-  transition: box-shadow .25s;
-  transition: box-shadow .25s, -webkit-box-shadow .25s;
   border-radius: 2px;
-
-  &-footer {
-    border-top: 1px solid rgba(204, 204, 204, 0.33);
-    position: absolute;
-    bottom:0; left: 0; right: 0;
-    -webkit-box-align: stretch;
-    -ms-flex-align: stretch;
-    align-items: stretch;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-
-    &-item {
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      align-items: center;
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-preferred-size: 0;
-      flex-basis: 0;
-      -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-      flex-grow: 1;
-      -ms-flex-negative: 0;
-      flex-shrink: 0;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
-      justify-content: center;
-      padding: 0.30rem;
-      text-decoration: none !important;
-      font-size: smaller;
-      cursor: pointer;
-      color: #ccc;
-      font-weight: 300;
-      border-color: rgba(204, 204, 204, 0.33);;
-
-      &:not(:last-child) {
-        border-right: 1px solid rgba(204, 204, 204, 0.33);
-        ;
-      }
-    }
-  }
 }
 
 .card .card-title {
@@ -224,7 +180,7 @@
 }
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
-  color: #ffab40;
+  color: $active-color;
   margin-right: 24px;
   -webkit-transition: color .3s ease;
   -o-transition: color .3s ease;
@@ -233,7 +189,7 @@
 }
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
-  color: #ffd8a6;
+  color: $active-hover-color;
 }
 
 .card .card-reveal {

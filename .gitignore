@@ -10,5 +10,5 @@ public/imgs/
 /vendor/
 Desktop.ini
 composer.lock
-system-logs
-/system-logs
+system.log
+/system.log

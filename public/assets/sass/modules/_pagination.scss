@@ -1,3 +1,5 @@
+@import "../custom/bases/variables";
+
 .pagination li {
   display: inline-block;
   border-radius: 2px;
@@ -19,7 +21,7 @@
 }
 
 .pagination li.active {
-  background-color: #ee6e73;
+  background-color: $active-color;
 }
 
 .pagination li.disabled a {

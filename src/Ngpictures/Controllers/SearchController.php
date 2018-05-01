@@ -45,7 +45,7 @@ class SearchController extends Controller
             }
 
             $this->pageManager::setName("Recherches");
-            $this->setLayout("posts/default");
+            $this->setLayout("search");
             $this->viewRender("front_end/others/search", compact("query", "posts", "blog"));
         } else {
             $this->flash->set("danger", $this->msg['form_field_required']);

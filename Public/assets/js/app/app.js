@@ -7,7 +7,9 @@ function toggleMenuItem() {
     let active = document.querySelector("#menu-item-active");
     if (active) {
         let link = document.querySelector("ul.links").querySelector("li#"+ active.getAttribute('data-active'));
-        link.classList.add('active');
+        if (link) {
+            link.classList.add('active');
+        }
     } else {
         return false;
     }
@@ -21,7 +23,9 @@ function toggleMobileMenuItem() {
     let active = document.querySelector("#menu-mobile-item-active");
     if (active) {
         let link = document.querySelector("ul.mobile-links").querySelector("li#"+ active.getAttribute('data-active'));
-        link.classList.add('active');
+        if (link) {
+            link.classList.add('active');
+        }
     } else {
         return false;
     }

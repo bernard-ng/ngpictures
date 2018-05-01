@@ -22,7 +22,7 @@ class GalleryController extends Controller
     {
         $photo = $this->gallery->latest();
         $photos = $this->gallery->lastOnline();
-        $this->pageManager::setName('Gallerie');
+        $this->pageManager::setName('Galerie');
         $this->setLayout('posts/default');
         $this->viewRender('front_end/gallery/index', compact('photo', 'photos'));
     }

@@ -1,5 +1,6 @@
-.btn, .btn-large,
-.btn-flat {
+@import "../custom/bases/variables";
+
+.btn, .btn-large, .btn-flat {
   border: none;
   border-radius: 2px;
   color: #fff !important;
@@ -22,7 +23,7 @@
 }
 
 .btn.action:hover {
-  background-color: #1565C0 !important;
+  background-color: $active-color !important;
   -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
           box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -86,13 +87,13 @@
 
 .btn:focus, .btn-large:focus,
 .btn-floating:focus {
-  background-color: #1d7d74;
+  background-color: $btn-focus-color;
 }
 
 .btn, .btn-large {
   text-decoration: none;
   color: #fff;
-  background-color: #26a69a;
+  background-color: $btn-color;
   text-align: center;
   letter-spacing: .5px;
   -webkit-transition: .2s ease-out;
@@ -102,7 +103,7 @@
 }
 
 .btn:hover, .btn-large:hover {
-  background-color: #2bbbad;
+  background-color: $active-color;
 }
 
 .btn-floating {
@@ -115,7 +116,7 @@
   height: 40px;
   line-height: 40px;
   padding: 0;
-  background-color: #26a69a;
+  background-color: $btn-color;
   border-radius: 50%;
   -webkit-transition: .3s;
   -o-transition: .3s;
@@ -125,7 +126,7 @@
 }
 
 .btn-floating:hover {
-  background-color: #26a69a;
+  background-color: $active-color;
 }
 
 .btn-floating:before {
@@ -281,7 +282,7 @@ button.btn-floating {
   z-index: -1;
   width: 40px;
   height: 40px;
-  background-color: #26a69a;
+  background-color: $nav-color;
   border-radius: 50%;
   -webkit-transform: scale(0);
           -ms-transform: scale(0);
@@ -293,7 +294,7 @@ button.btn-floating {
   -webkit-box-shadow: none;
           box-shadow: none;
   background-color: transparent;
-  color: #343434;
+  color: #fff;
   cursor: pointer;
   -webkit-transition: background-color .2s;
   -o-transition: background-color .2s;
@@ -306,7 +307,7 @@ button.btn-floating {
 }
 
 .btn-flat:focus {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: $btn-focus-color;
 }
 
 .btn-flat.disabled {

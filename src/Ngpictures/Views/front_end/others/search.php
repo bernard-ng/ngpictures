@@ -1,39 +1,35 @@
-<div class="container row">
-    <div class="col l12">
+<ul class="tabs blue-grey dark-4 shadow-2" style="margin-top: -16px;">
+    <div class="container row">
+        <li class="tab col s3">
+            <a href="search?q=<?= $query ?>&tab=blog">
+                <i class="icon icon-quote-left"></i>
+            </a>
+        </li>
 
-    <h4>
-        <?= count($blog) + count($posts) ?> Résultats pour: <?= $query ?>
-    </h4>
-    <hr>
+        <li class="tab col s3">
+            <a href="search?q=<?= $query ?>$tab=posts">
+                <i class="icon icon-globe"></i></span>
+            </a>
+        </li>
 
+        <li class="tab col s3">
+            <a href="search?q=<?= $query ?>&tab=gallery">
+                <i class="icon icon-picture"></i>
+            </a>
+        </li>
 
-    <nav class="nav z-depth-2">
-        <div class="nav-wrapper">
-            <ul>
-                <li class="right"><a href="/search/me">Moi</a></li>
-                <li><a href="/categories">Categories</a></li>
-                <li><a href="/community">Membres</a></li>
-                <li><a href="/albums">Albums</a></li>
-                <li><a href="/gallery/search">Photos</a></li>
-            </ul>
-        </div>
-    </nav>
+        <li class="tab col s3">
+            <a href="search?q=<?= $query ?>&tab=community">
+               <i class="icon icon-users"></i>
+            </a>
+        </li>
     </div>
+</ul>
+<div class="container row">
+    <div class="col l12 m12 s12">
 
-    <form action="/search" method="GET">
-        <div class="input-field">
-            <span class=" col s10 l10 m10" style="display: inline-block;" >
-                <input name="q" placeholder="recherches..." autofocus type="text">
-            </span>
-            <div>
-            <button type="submit" value="rechercher" class="btn btn-large waves-effect waves-light col s2 m2 l2">
-                <i class="icon icon-search"></i>
-            </button>
-            </div>
-        </div>
-    </form>
 
-    <div class="col s12">
+        <div class="col s12">
         <?php if (!empty($blog)) : ?>
         <h4>Blog</h4>
         <?php foreach ($blog as $b) : ?>
