@@ -2,48 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4862a466-f72e-41f7-87e3-2b36a8216ed9" name="Default" comment="finissage du backend">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Public/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Public/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Public/assets/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/Public/assets/css/style.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Public/assets/js/app/app.ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/Public/assets/js/app/app.ajax.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Public/assets/sass/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/Public/assets/sass/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/_materialize.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/_materialize.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/bases/_icons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/bases/_icons.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/bases/_normalize.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/bases/_normalize.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/bases/_reset.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/bases/_reset.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/bases/_transition.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/bases/_transition.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/app/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/assets/sass/bases/_utility.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/bases/_utility.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/custom/bases/_layout.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/custom/bases/_layout.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/custom/bases/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/custom/bases/_variables.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/custom/modules/_card.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/custom/modules/_card.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/custom/modules/_particles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/custom/modules/_particles.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/modules/_badge.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/modules/_badge.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/modules/_box.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/modules/_box.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/modules/_buttons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/modules/_buttons.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/modules/_cards.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/modules/_cards.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/modules/_carousel.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/modules/_carousel.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/modules/_collapsible.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/modules/_collapsible.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/modules/_collection.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/modules/_collection.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/modules/_footer.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/modules/_footer.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/modules/_forms.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/modules/_forms.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/modules/_modules.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/modules/_modules.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/modules/_navbar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/modules/_navbar.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/modules/_pagination.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/modules/_pagination.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/modules/_parallax.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/modules/_parallax.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/modules/_side-nav.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/modules/_side-nav.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/modules/_tabs.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/modules/_tabs.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/themes/_colors.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/themes/_colors.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/themes/_shadow.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/themes/_shadow.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/GalleryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/GalleryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/SearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/SearchController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Traits/Controllers/StoryPostTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Traits/Controllers/StoryPostTrait.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/search.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/search.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/mobile-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/mobile-menu.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -92,7 +54,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SearchController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SearchController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Ngpictures/Controllers/SearchController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="337">
@@ -101,14 +63,38 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/assets/js/app/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="203" column="68" selection-start-line="203" selection-start-column="68" selection-end-line="203" selection-end-column="68" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_utility.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/assets/sass/bases/_utility.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_navbar.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/assets/sass/modules/_navbar.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="274" column="9" selection-start-line="274" selection-start-column="2" selection-end-line="274" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="search.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/search.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="31" lean-forward="true" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
-              <folding>
-                <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
-              </folding>
+            <state>
+              <caret column="72" selection-start-column="72" selection-end-column="72" />
             </state>
           </provider>
         </entry>
@@ -116,8 +102,8 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+            <state>
+              <caret column="102" selection-start-column="33" selection-end-column="102" />
               <folding>
                 <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
               </folding>
@@ -134,38 +120,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_tabs.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/assets/sass/modules/_tabs.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="36" selection-start-column="36" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="_badge.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/assets/sass/modules/_badge.scss">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="299">
               <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_modules.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/assets/sass/modules/_modules.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret lean-forward="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mobile-menu.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/includes/mobile-menu.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
-              <caret line="57" column="43" selection-start-line="57" selection-start-column="43" selection-end-line="57" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -181,17 +140,15 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>$c</find>
       <find>var</find>
-      <find>static</find>
       <find>liear</find>
       <find>$color</find>
       <find>$transition</find>
       <find>border-right</find>
       <find>border-top</find>
       <find>border-bottom</find>
-      <find />
-      <find />
+      <find>&amp;&amp; null</find>
+      <find>!== undefined || null</find>
       <find>##</find>
       <find>ng-news</find>
       <find>col</find>
@@ -202,15 +159,17 @@
       <find>Materialize.toast</find>
       <find>trigger(c</find>
       <find>modal-overlay</find>
-      <find />
-      <find />
+      <find>/* 2 */</find>
+      <find>/* 3 */</find>
       <find>#ee6e73</find>
-      <find />
+      <find>rgba(204, 204, 204, 0.207</find>
       <find>r)</find>
       <find>#ccc</find>
       <find>focus</find>
       <find>background</find>
-      <find />
+      <find>&lt;?= $query ?&gt;</find>
+      <find>z-index</find>
+      <find>static</find>
     </findStrings>
     <replaceStrings>
       <replace>lastByCategory</replace>
@@ -228,8 +187,8 @@
       <replace>let</replace>
       <replace>function</replace>
       <replace>#ccc</replace>
-      <replace />
-      <replace />
+      <replace>|| null</replace>
+      <replace>all .3s linear</replace>
       <replace>news</replace>
       <replace>setFlash</replace>
       <replace>setEventTrigger</replace>
@@ -237,6 +196,7 @@
       <replace>$border-color</replace>
       <replace>r</replace>
       <replace>$txt-color</replace>
+      <replace>relative</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -268,7 +228,6 @@
         <option value="$PROJECT_DIR$/public/assets/sass/bases/_normalize.scss" />
         <option value="$PROJECT_DIR$/public/assets/sass/bases/_reset.scss" />
         <option value="$PROJECT_DIR$/public/assets/sass/bases/_transition.scss" />
-        <option value="$PROJECT_DIR$/public/assets/sass/bases/_utility.scss" />
         <option value="$PROJECT_DIR$/public/assets/sass/themes/_colors.scss" />
         <option value="$PROJECT_DIR$/public/assets/sass/themes/_shadow.scss" />
         <option value="$PROJECT_DIR$/public/assets/sass/bases/_icons.scss" />
@@ -279,7 +238,6 @@
         <option value="$PROJECT_DIR$/public/assets/sass/custom/modules/_particles.scss" />
         <option value="$PROJECT_DIR$/public/assets/sass/style.scss" />
         <option value="$PROJECT_DIR$/public/assets/sass/modules/_box.scss" />
-        <option value="$PROJECT_DIR$/public/assets/js/app/app.ajax.js" />
         <option value="$PROJECT_DIR$/public/assets/sass/modules/_buttons.scss" />
         <option value="$PROJECT_DIR$/public/assets/sass/custom/bases/_variables.scss" />
         <option value="$PROJECT_DIR$/public/assets/sass/modules/_cards.scss" />
@@ -292,7 +250,6 @@
         <option value="$PROJECT_DIR$/public/assets/sass/modules/_parallax.scss" />
         <option value="$PROJECT_DIR$/public/assets/sass/modules/_side-nav.scss" />
         <option value="$PROJECT_DIR$/public/assets/sass/modules/_navbar.scss" />
-        <option value="$PROJECT_DIR$/public/assets/js/app/app.js" />
         <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/HomeController.php" />
         <option value="$PROJECT_DIR$/src/Ngpictures/Traits/Controllers/StoryPostTrait.php" />
         <option value="$PROJECT_DIR$/src/Ngpictures/Views/includes/mobile-menu.php" />
@@ -301,11 +258,14 @@
         <option value="$PROJECT_DIR$/public/assets/sass/modules/_modules.scss" />
         <option value="$PROJECT_DIR$/public/assets/sass/modules/_tabs.scss" />
         <option value="$PROJECT_DIR$/public/assets/sass/modules/_badge.scss" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/search.php" />
         <option value="$PROJECT_DIR$/src/Ngpictures/Views/layout/search.php" />
         <option value="$PROJECT_DIR$/public/assets/sass/modules/_forms.scss" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/index.php" />
         <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/SearchController.php" />
+        <option value="$PROJECT_DIR$/public/assets/js/app/app.ajax.js" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/index.php" />
+        <option value="$PROJECT_DIR$/public/assets/sass/bases/_utility.scss" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/search.php" />
+        <option value="$PROJECT_DIR$/public/assets/js/app/app.js" />
       </list>
     </option>
   </component>
@@ -384,56 +344,6 @@
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Ngpictures" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
-            <path>
-              <item name="ng-pictures" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-pictures" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Ngpictures" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Views" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ng-pictures" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-pictures" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Ngpictures" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="front_end" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ng-pictures" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-pictures" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Ngpictures" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="front_end" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="gallery" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ng-pictures" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-pictures" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Ngpictures" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="front_end" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="posts" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ng-pictures" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-pictures" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Ngpictures" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="layout" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ng-pictures" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-pictures" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Ngpictures" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="layout" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="posts" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -444,7 +354,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="app.js&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/app/app.js&#10;posts&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/posts&#10;account&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/layout/users/account.php&#10;search.&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/others/search.php&#10;search&#9;null&#9;null&#10;Gall&#9;null&#9;null&#10;blogC&#9;null&#9;null&#10;homeCon&#9;null&#9;null&#10;app&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/app/app.js&#10;mobile&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/mobile-menu.php&#10;menu.php&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/menu.php&#10;footer.php&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/footer.php&#10;app.ajax.js&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/app/app.ajax.js&#10;slider&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/modules/_slider.scss&#10;blog/index&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/blog/index.php&#10;commentsC&#9;null&#9;null&#10;app.aja&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/app/app.ajax.js&#10;materialize-textarea&#9;null&#9;null&#10;#comment&#9;null&#9;null&#10;material&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/materialize.js&#10;activ&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/app/activingScript.js&#10;modal&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/modules/_modal.scss&#10;comment&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/comments.php&#10;show&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Traits/Controllers/ShowPostTrait.php&#10;gallery/index&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/gallery/index.php&#10;row&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/bases/_container-row.scss&#10;custom/_card.scss&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/custom/modules/_card.scss&#10;likesM&#9;null&#9;null&#10;controller&#9;null&#9;null&#10;Like&#9;null&#9;null&#10;likesModel&#9;null&#9;null&#10;container-row&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/bases/_container-row.scss&#10;admin&#9;FILE&#9;file://D:/sites/ngpictures/src/App/Controllers/AdminController.php" />
+    <property name="SearchEverywhereHistoryKey" value="nav&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/modules/_navbar.scss&#10;uti&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/bases/_utility.scss&#10;app.ajax&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/app/app.ajax.js&#10;app.js&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/app/app.js&#10;posts&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/posts&#10;account&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/layout/users/account.php&#10;search.&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/others/search.php&#10;search&#9;null&#9;null&#10;Gall&#9;null&#9;null&#10;blogC&#9;null&#9;null&#10;homeCon&#9;null&#9;null&#10;app&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/app/app.js&#10;mobile&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/mobile-menu.php&#10;menu.php&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/menu.php&#10;footer.php&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/footer.php&#10;app.ajax.js&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/app/app.ajax.js&#10;slider&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/modules/_slider.scss&#10;blog/index&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/blog/index.php&#10;commentsC&#9;null&#9;null&#10;app.aja&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/app/app.ajax.js&#10;materialize-textarea&#9;null&#9;null&#10;#comment&#9;null&#9;null&#10;material&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/materialize.js&#10;activ&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/app/activingScript.js&#10;modal&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/modules/_modal.scss&#10;comment&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/comments.php&#10;show&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Traits/Controllers/ShowPostTrait.php&#10;gallery/index&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/gallery/index.php&#10;row&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/bases/_container-row.scss&#10;custom/_card.scss&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/custom/modules/_card.scss&#10;likesM&#9;null&#9;null&#10;controller&#9;null&#9;null&#10;Like&#9;null&#9;null&#10;likesModel&#9;null&#9;null&#10;container-row&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/bases/_container-row.scss&#10;admin&#9;FILE&#9;file://D:/sites/ngpictures/src/App/Controllers/AdminController.php" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
@@ -575,12 +485,12 @@
       <workItem from="1524774726520" duration="13887000" />
       <workItem from="1524934093192" duration="32021000" />
       <workItem from="1525039636804" duration="1483000" />
-      <workItem from="1525153036912" duration="22959000" />
+      <workItem from="1525153036912" duration="36088000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="314014000" />
+    <option name="totallyTimeSpent" value="327143000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -701,7 +611,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="13" />
+      <option name="time" value="14" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -747,13 +657,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/sass/bases/_utility.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3">
-          <caret line="29" column="28" lean-forward="true" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/assets/sass/_materialize.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1632">
@@ -775,32 +678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="371">
           <caret line="42" column="12" lean-forward="true" selection-start-line="42" selection-start-column="12" selection-end-line="42" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/js/app/app.ajax.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="175" column="55" selection-start-line="175" selection-start-column="55" selection-end-line="175" selection-end-column="55" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="n#!!doc;n#getXhr#0" />
-            <element signature="n#!!block;n#getXhr#0" />
-            <element signature="e#238#373#0" />
-            <element signature="n#!!doc;n#setFlash#0" />
-            <element signature="n#!!block;n#setFlash#0" />
-            <element signature="n#!!block;n#setEventTrigger#0" />
-            <element signature="n#!!doc;n#setLoader#0" />
-            <element signature="n#!!block;n#setLoader#0" />
-            <element signature="n#!!doc;n#removeLoader#0" />
-            <element signature="n#!!block;n#removeLoader#0" />
-            <element signature="n#!!doc;n#likes#0" />
-            <element signature="n#!!block;n#likes#0" />
-            <element signature="n#!!doc;n#loadVerses#0" />
-            <element signature="n#!!block;n#loadVerses#0" />
-            <element signature="n#!!doc;n#loadPosts#0" />
-            <element signature="n#!!block;n#loadPosts#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -883,13 +760,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/sass/modules/_navbar.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="53" column="17" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/assets/sass/modules/_side-nav.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1929">
@@ -904,13 +774,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="23" column="34" lean-forward="true" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/js/app/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="28" column="12" lean-forward="true" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -1021,6 +884,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/js/app/app.ajax.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="400" lean-forward="true" selection-start-line="400" selection-end-line="400" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc;n#getXhr#0" />
+            <element signature="n#!!block;n#getXhr#0" />
+            <element signature="e#238#373#0" />
+            <element signature="n#!!doc;n#setFlash#0" />
+            <element signature="n#!!block;n#setFlash#0" />
+            <element signature="n#!!block;n#setEventTrigger#0" />
+            <element signature="n#!!doc;n#setLoader#0" />
+            <element signature="n#!!block;n#setLoader#0" />
+            <element signature="n#!!doc;n#removeLoader#0" />
+            <element signature="n#!!block;n#removeLoader#0" />
+            <element signature="n#!!block;n#comments#0" />
+            <element signature="n#!!doc;n#likes#0" />
+            <element signature="n#!!block;n#likes#0" />
+            <element signature="n#!!doc;n#loadVerses#0" />
+            <element signature="n#!!block;n#loadVerses#0" />
+            <element signature="n#!!doc;n#loadPosts#0" />
+            <element signature="n#!!block;n#loadPosts#0" />
+            <element signature="n#!!doc;n#loadPictureInfo#0" />
+            <element signature="n#!!block;n#loadPictureInfo#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="102" selection-start-column="33" selection-end-column="102" />
+          <folding>
+            <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/layout/search.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -1028,23 +930,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/search.php">
+    <entry file="file://$PROJECT_DIR$/public/assets/sass/modules/_navbar.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="31" lean-forward="true" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
-          <folding>
-            <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="177">
+          <caret line="274" column="9" selection-start-line="274" selection-start-column="2" selection-end-line="274" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/index.php">
+    <entry file="file://$PROJECT_DIR$/public/assets/sass/bases/_utility.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
-          <folding>
-            <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="153">
+          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -1052,6 +948,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="337">
           <caret line="47" column="36" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="72" selection-start-column="72" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/js/app/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="203" column="68" selection-start-line="203" selection-start-column="68" selection-end-line="203" selection-end-column="68" />
         </state>
       </provider>
     </entry>

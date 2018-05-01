@@ -321,6 +321,85 @@ function loadPosts(element) {
 }
 
 
+/**
+ * charge les information d'une image  en ajax
+ */
+function loadPictureInfo() {
+    let active = false;
+
+    document.querySelector("#gallery .gallery-item").addEventListener('click', function(e){
+       e.stopPropagation();
+
+       let item = this;
+       let details = item.nextElementSibling.querySelectorAll(".gallery-details:frist");
+
+       if (item.classList.contains('active')) {
+           return true;
+       }
+
+       let galleryItem = document.querySelectorAll('.gallery-item');
+       let galleryDetails = document.querySelectorAll('.gallery-details');
+       for(let i = 0; i < galleryItem.length; i++) {
+           galleryItem[i].classList.remove('active');
+       }
+
+       for(let i = 0; i < galleryDetails.length; i++) {
+           galleryDetails.classList.remove('jumbotron', 'jumbotron-img', 'dark');
+       }
+
+       item.classList.add('active');
+
+       if (getXhr()) {
+           let xhr = getXhr();
+           xhr.open('GET', item.parentElement.getAttribute('data-show'), true);
+           xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+           xhr.send();
+           xhr.onreadystatechange = function () {
+               if (xhr.readState() === 4) {
+                   if  (xhr.status === 200) {
+                       details.classList.add('jumbotron', 'jumbotron-img', 'dark');
+                       details.appendChild(xhr.responseText);
+                       let workDetails = details.querySelector('.gallery-container-details');
+
+                       let toDelete = active;
+                       if (active) {
+                           document.removeChild(toDelete);
+                       }
+
+                       active = workDetails;
+                       active.querySelector(".gallery-details-img").addEventListener("click", function(e) {
+                           e.stopPropagation();
+                           this.getElementsByTagName('img')[0].materialbox()
+                       });
+                       scrollTo(active);
+                   } else {
+                       setFlash('danger', xhr.responseText? xhr.responseText : msg.undefinedError);
+                   }
+               }
+           }
+       }
+
+        window.location.hash = item.parentElement.getAttribute('id');
+    });
+
+    let scrollTo = function(cible) {
+        window.setTimeout(function(){
+            document.body.scrollTop = cible.getBoundingClientRect().top - 80;
+            document.querySelector('html').scrollTop = cible.getBoundingClientRect.top - 80;
+        }, 300)
+    };
+
+    if (window.location.hash) {
+        let target = document.querySelector(window.location.hash + "img.gallery-item");
+        if (target.length > 0) {
+            setEventTrigger(target, 'click');
+            scrollTo($target);
+        }
+    }
+}
+
+
+
 // CALLS
 //------------------------------------------------------------------------------------
 comments('#dataContainer');

@@ -2,6 +2,15 @@
   display: none !important;
 }
 
+.fixed {
+  position: fixed !important;
+  top: 0;
+}
+
+.sticky {
+  z-index: 996 !important;
+}
+
 .left-align {
   text-align: left;
 }

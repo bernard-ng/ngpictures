@@ -1,4 +1,3 @@
-
 /**
  * premet de rendre un itme du menu active
  * @returns {boolean}
@@ -91,6 +90,124 @@ function relativeTimer(){
     }
 }
 
+/**
+ * rend un element sticky
+ * @param selector
+ */
+function makeSticky(selector) {
+    /**
+     * return le nombre de scroll en Y
+     * @returns {number}
+     */
+    let scrollY = function () {
+        let supportPageOffset   = window.pageXOffset !== undefined;
+        let isCSS1Compat        = ((document.compatMode || "") === "CSS1Compat");
+        return supportPageOffset ? window.pageYOffset :
+            isCSS1Compat? document.documentElement.scrollTop : document.body.scrollTop;
+    };
+
+    let elements = document.querySelectorAll(selector);
+    for (let i = 0; i < elements.length; i++) {
+        (function(element){
+            let boundingRect = element.getBoundingClientRect();
+            let top          = boundingRect.top + scrollY();
+            let offset       = parseInt(element.getAttribute('data-sticky-offset') || 0, 10);
+            let constraint      = element.getAttribute('data-sticky-constraint')?
+                document.querySelector(element.getAttribute('data-sticky-constraint')) : document.body;
+            let constraintRect = constraint.getBoundingClientRect();
+            let constraintBottom = constraintRect.top + scrollY() + constraintRect.height - offset - boundingRect.height;
+
+            let fakeElement             =   document.createElement('div');
+            fakeElement.style.width     =   boundingRect.width + "px";
+            fakeElement.style.height    =   boundingRect.height + "px";
+
+            let onScrollSticky = function () {
+                let isFixed = element.classList.contains('fixed');
+                if (scrollY() > constraintBottom && element.style.position !== 'absolute') {
+                    element.style.position  = 'absolute';
+                    element.style.bottom    = '0';
+                    element.style.top       = 'auto';
+                } else if (scrollY() > top - offset && scrollY() < constraintBottom && element.style.position !== 'fixed') {
+                    element.style.position = 'fixed';
+                    element.style.top   = offset + "px";
+                    element.style.bottom       = 'auto';
+                    element.style.width = boundingRect.width + "px";
+                    element.parentNode.insertBefore(fakeElement, element);
+                } else if (scrollY() < top - offset && element.style.position !== 'static') {
+                    element.style.position = "static";
+                    if(element.parentNode.contains(fakeElement))  {
+                        element.parentNode.removeChild(fakeElement);
+                    }
+                }
+            };
+
+            let onResizeSticky = function () {
+                element.style.width = "auto";
+                element.style.position = "static";
+                fakeElement.style.display = 'none';
+                boundingRect = element.getBoundingClientRect();
+                top          = boundingRect.top + scrollY();
+
+                constraintRect = constraint.getBoundingClientRect();
+                constraintBottom = constraintRect.top + scrollY() + constraintRect.height - offset - boundingRect.height;
+
+                fakeElement.style.width     =   boundingRect.width + "px";
+                fakeElement.style.height    =   boundingRect.height + "px";
+                fakeElement.style.display   =   "block";
+                onScrollSticky();
+            };
+
+            window.addEventListener('scroll', onScrollSticky);
+            window.addEventListener('resize', onResizeSticky);
+        })(elements[i]);
+    }
+}
+
+
+function share() {
+    let popup = function (url, title) {
+        let windowTop = window.screenTop || window.screenY;
+        let windowLeft = window.screenLeft || window.screenX;
+        let windowWidth = window.innerWidth || document.documentElement.clientWidth;
+        let windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        let popupWidth = 640;
+        let popupHeight = 320;
+        let popupLeft = (windowLeft + windowWidth / 2) - popupWidth / 2;
+        let popupTop = (windowTop + windowHeight / 2) - popupHeight / 2;
+
+        window.open(
+            url,
+            title,
+            "scrollbars=yes, " +
+            "width="+popupWidth+",height="+popupHeight+",top="+popupTop+",left="+popupLeft
+        );
+    };
+
+    let twitter = document.querySelector("[data-action='share-twitter']");
+    twitter.addEventListener('click', function (e){
+        e.preventDefault();
+        e.stopPropagation();
+        let url = encodeURIComponent(this.getAttribute('data-url'));
+        let text = encodeURIComponent(msg.usersNotLogged);
+        let share =
+            "https://twitter.com/intent/tweet?text=" + text +
+            "&via=Ngpictures"
+            + "&url=" + url;
+
+        popup(share, "Partager Sur Twitter");
+    });
+
+    let facebook = document.querySelector("[data-action='share-facebook']");
+    facebook.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        let url = encodeURIComponent(this.getAttribute('data-url'));
+        let share = "https://www.facebook.com/sharer.php?u="+url;
+        popup(share, "Partager Sur Facebook");
+    })
+}
+
 toggleMenuItem();
 toggleMobileMenuItem();
 relativeTimer();
+makeSticky('[data-sticky]');

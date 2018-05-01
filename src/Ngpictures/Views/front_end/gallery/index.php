@@ -1,4 +1,4 @@
-<ul class="tabs transparent shadow-2" style="margin-top: -16px;">
+<ul class="tabs shadow-2 sticky" style="margin-top: -14px;" data-sticky="true" data-sticky-offset="70">
     <div class="container row">
         <li class="tab">
             <a href="search?q=&tab=blog">
@@ -43,8 +43,8 @@
 <script type="text/javascript" src="/assets/js/app/activingScript.js" ></script>
 
 <script>
-var $active = false
-$("#gallery .gallery-item").on("click", function(e){
+var $active = false;
+$("#gallery .gallery-item").on("click", function(){
 
     var $item = $(this)
     var $details = $item.parent().nextAll(".gallery-details:first")
@@ -53,20 +53,20 @@ $("#gallery .gallery-item").on("click", function(e){
         return true;
     }
 
-    $(".gallery-item").removeClass("active")
-    $(".gallery-details").removeClass('jumbotron jumbotron-img dark')
-    $item.addClass("active")
+    $(".gallery-item").removeClass("active");
+    $(".gallery-details").removeClass('jumbotron jumbotron-img dark');
+    $item.addClass("active");
 
     $.ajax(
         {url: $item.parent().attr('data-show')}
     ).then(
         function($detailsInfo) {
 
-            $details.addClass('jumbotron jumbotron-img dark')
-            $details.append($detailsInfo).slideDown()
-            $work_details =  $details.find('.gallery-container-details')
+            $details.addClass('jumbotron jumbotron-img dark');
+            $details.append($detailsInfo).slideDown();
+            $work_details =  $details.find('.gallery-container-details');
 
-            var $del = $active
+            var $del = $active;
             if ($active) {
                 $active.slideUp(300, function() {
                     $del.remove()
@@ -86,17 +86,23 @@ $("#gallery .gallery-item").on("click", function(e){
             $active = $work_details;
             $active.find(".gallery-details-img").on("click", function() {
                 $(this).find('img').materialbox()
-            })
+            });
 
             scrollTo($active);
         },
         function() {
             return Materialize.toast("Impossibe de charge l'Image", 5000, "danger")
         }
-    )
+    );
 
     window.location.hash = $item.parent().attr('id')
 });
+
+var scrollTo = function(cible) {
+    window.setTimeout(function(){
+        $('html, boby').animate({scrollTop: cible.offset().top - 80 }, 750);
+    }, 300)
+}
 
 if (window.location.hash) {
     var $target = $(window.location.hash + " img.gallery-item");
@@ -106,10 +112,6 @@ if (window.location.hash) {
     }
 }
 
-var scrollTo = function(cible) {
-    window.setTimeout(function(){
-        $('html, boby').animate({scrollTop: cible.offset().top - 80 }, 750);
-    }, 300)
-}
+
 
 </script>

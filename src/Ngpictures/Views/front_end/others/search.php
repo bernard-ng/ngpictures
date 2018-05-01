@@ -1,4 +1,4 @@
-<ul class="tabs blue-grey dark-4 shadow-2" style="margin-top: -16px;">
+<ul class="tabs blue-grey dark-4 shadow-2 sticky" style="margin-top: -14px;" data-sticky="true" data-sticky-offset="70">
     <div class="container row">
         <li class="tab col s3">
             <a href="search?q=<?= $query ?>&tab=blog">
