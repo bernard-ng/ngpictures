@@ -12,6 +12,7 @@
   padding: 10px 20px;
   margin: 0;
   border-bottom: 1px solid $border-color;
+  color: $txt-light-color;
 
   &.dark {
     background-color: #1c1b1b;
@@ -62,8 +63,9 @@
 }
 
 .collection .collection-item.active {
-  background-color: $active-color;
-  color: #eafaf9;
+  background-color: rgba(255, 255, 255, 0.09);
+  border-left: 3px solid #ccc;
+  color: $txt-color;
 }
 
 .collection .collection-item.active .secondary-content {
@@ -103,6 +105,10 @@
 .secondary-content {
   float: right;
   color: $active-color;
+
+  &.normal{
+    color: $txt-color;
+  }
 }
 
 .collapsible .collection {

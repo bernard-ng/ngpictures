@@ -17,6 +17,7 @@ class PostsController extends Controller
         parent::__construct($app, $pageManager);
         $this->loadModel('posts');
         $this->loadModel('categories');
+        $this->callController('users')->restrict();
     }
 
     use StoryPostTrait;

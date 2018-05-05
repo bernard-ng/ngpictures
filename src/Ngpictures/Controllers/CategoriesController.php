@@ -20,7 +20,7 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = $this->categories->orderBy('title', 'ASC');
-
+        $this->app::turbolinksLocation('categories');
         $this->pageManager::setName('Toutes les catégories');
         $this->setLayout('default-simple');
         $this->viewRender("front_end/categories/index", compact('categories'));
@@ -32,15 +32,15 @@ class CategoriesController extends Controller
      * @param string $name
      * @param int $id
      */
-    public function show($name, $id)
+    public function show(string $name, int $id)
     {
         $category = $this->categories->find(intval($id));
 
         if ($category && $this->str::checkUserUrl($name, $category->title)) {
             $blog = $this->loadModel('blog')->findWith('categories_id', $category->id, false);
             $posts = $this->loadModel('posts')->findWith('categories_id', $category->id, false);
-            $gallery = $this->loadModel('gallery')->findWith('categories_id', $category->id, false);
 
+            $this->app::turbolinksLocation("categories/{$name}/{$id}");
             $this->pageManager::setName("Catégorie: {$category->title}");
             $this->setLayout('posts/default');
             $this->viewRender('front_end/categories/show', compact('category', 'blog', 'posts'));

@@ -15,7 +15,7 @@ class OnlineController extends Controller
         $this->loadModel('online');
     }
 
-    public function index($id)
+    public function index(int $id)
     {
         $now = date("U");
         $session_time = $now - 15;

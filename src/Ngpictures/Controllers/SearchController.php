@@ -44,6 +44,7 @@ class SearchController extends Controller
                 }
             }
 
+            $this->app::turbolinksLocation("/search/{$query}");
             $this->pageManager::setName("Recherches");
             $this->setLayout("search");
             $this->viewRender("front_end/others/search", compact("query", "posts", "blog"));

@@ -19,7 +19,7 @@
     </section>
     <section class="jumbotron dark col l12 s12 m12">
         <div class="container row">
-            <div class="row col l7 s12 m12">
+            <div class="row col l7 s12 m12 animated slideInLeft">
                 <h2 class="ui header">Nos photos</h2>
                 <div class="">
                     <p>
@@ -46,25 +46,22 @@
             </div>
 
             <div class="row col l5 s12 m12">
-                <div class="ui relaxed divided list">
-                    <?php if(isset($categories) && !empty($categories)): ?>
-                        <ul class="collection hoverable">
+                <div class="ui divided list animated slideInRight">
+                    <h2 class="ui header">Catégories</h2>
+                    <?php if (isset($categories) && !empty($categories)) : ?>
+                        <ul class="collection">
                             <?php foreach ($categories as $category) : ?>
-                                <li class="collection-item dark waves-effect">
+                                <li class="collection-item dark waves-effect col s12 <?= ($category->title == $article->category)? 'active' : '' ?>">
                                     <a href="<?= $category->url; ?>">
-                                        <div>
-                                            <span class="collection-item-title">
+                                        <div style="margin: 10px">
+                                            <div class="collection-item-title">
                                                 <?= $category->title; ?>
                                                 <span class="secondary-content"><i class="icon icon-right-open"></i></span>
-                                            </span>
-                                            <p><?= $category->description ?></p>
+                                            </div>
                                         </div>
                                     </a>
                                 </li>
                             <?php endforeach; ?>
-                            <li>
-                                <a href="/categories" class="btn btn-flat action blue-grey waves-effect">Voir Plus</a>
-                            </li>
                         </ul>
                     <?php endif; ?>
                 </div>

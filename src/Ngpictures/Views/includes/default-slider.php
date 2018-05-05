@@ -1,6 +1,6 @@
 <div class="slider">
     <ul class="slides">
-    <?php if(isset($photos) && !empty($photos)): ?>
+    <?php if (isset($photos) && !empty($photos)) : ?>
         <?php foreach ($photos as $photo) : ?>
             <li>
                 <img src="<?= $photo->thumbUrl; ?>">
@@ -12,7 +12,7 @@
                 <div class="bg"></div>
             </li>
         <?php endforeach; ?>
-        <?php else: ?>
+    <?php else : ?>
             <li>
                 <img src="/imgs/outils.jpeg">
                 <div class="caption center-align">
@@ -22,6 +22,6 @@
                 </div>
                 <div class="bg"></div>
             </li>
-        <?php endif; ?>
+    <?php endif; ?>
     </ul>
 </div>

@@ -1,24 +1,3 @@
-<ul class="tabs shadow-2 sticky" style="margin-top: -14px;" data-sticky="true" data-sticky-offset="70">
-    <div class="container row">
-        <li class="tab">
-            <a href="search?q=&tab=blog">
-                Toutes
-            </a>
-        </li>
-
-        <li class="tab">
-            <a href="search?q=$tab=posts">
-                Albums
-            </a>
-        </li>
-
-        <li class="tab">
-            <a href="search?q=&tab=gallery">
-                Categories
-            </a>
-        </li>
-    </div>
-</ul>
 <section class="section row container">
     <section id="gallery" class="gallery-container animated fast slideInLeft">
         <?php foreach ($photos as $key => $photo) :  ?>

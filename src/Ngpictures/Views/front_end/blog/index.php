@@ -37,16 +37,16 @@
                             </section>
                             <footer class="news-card-footer" id="articleOptions">
                                 <a data-action="like" class="news-card-footer-item <?= $a->isLike ?>" href="<?= $a->likeUrl ?>">
-                                   <?php if($a->isLike == 'active'): ?>
+                                    <?php if ($a->isLike == 'active') : ?>
                                        <i class="icon icon-heart red-txt"></i>
-                                   <?php else: ?>
+                                    <?php else : ?>
                                        <i class="icon icon-heart-empty"></i>
-                                   <?php endif; ?>
+                                    <?php endif; ?>
                                 </a>
                                 <a class="news-card-footer-item modal-trigger" href="#cmtAdd-<?= $a->id ?>" data-action="showComment">
-                                    <?php if ($a->commentsNumber > 0 ): ?>
+                                    <?php if ($a->commentsNumber > 0) : ?>
                                         <i class="icon icon-comment" ></i>&nbsp;
-                                    <?php else: ?>
+                                    <?php else : ?>
                                         <i class="icon icon-comment-empty" ></i>&nbsp;
                                     <?php endif; ?>
                                     <span><?= $a->commentsNumber ?></span>

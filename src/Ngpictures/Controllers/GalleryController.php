@@ -6,6 +6,12 @@ use Ngpictures\Managers\PageManager;
 
 class GalleryController extends Controller
 {
+
+    /**
+     * GalleryController constructor.
+     * @param Ngpictures $app
+     * @param PageManager $pageManager
+     */
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
@@ -22,6 +28,8 @@ class GalleryController extends Controller
     {
         $photo = $this->gallery->latest();
         $photos = $this->gallery->lastOnline();
+
+        $this->app::turbolinksLocation("gallery");
         $this->pageManager::setName('Galerie');
         $this->setLayout('posts/default');
         $this->viewRender('front_end/gallery/index', compact('photo', 'photos'));
@@ -38,6 +46,7 @@ class GalleryController extends Controller
     {
         $photo = $this->gallery->find(intval($id));
         if ($photo) {
+            $this->app::turbolinksLocation("gallery/{$id}");
             $this->viewRender('front_end/gallery/show', compact('photo'), false);
         } else {
             if ($this->isAjax()) {
@@ -57,6 +66,8 @@ class GalleryController extends Controller
     public function albums()
     {
         $albums = $this->loadModel('albums')->all();
+
+        $this->app::turbolinksLocation("gallery/albums");
         $this->pageManager::setName('albums');
         $this->setLayout('posts/default');
         $this->viewRender('front_end/gallery/albums', compact("albums"));
@@ -70,7 +81,7 @@ class GalleryController extends Controller
      */
     public function slider()
     {
-       if (isset($_GET['last_id']) && !empty($_GET['last_id'])) {
+        if (isset($_GET['last_id']) && !empty($_GET['last_id'])) {
             $lastId = $this->str::escape($_GET['last_id']);
 
             if ($this->gallery->find(intval($lastId))) {
@@ -83,11 +94,11 @@ class GalleryController extends Controller
                 $this->flash->set('danger', $this->msg['undefined_error']);
                 $this->app::redirect('/gallery');
             }
-       } else {
+        } else {
             $photos = $this->gallery->latest();
             $this->pageManager::setName('Diaporama');
             $this->setLayout('blank');
             $this->viewRender('front_end/gallery/slider', compact('photos'));
-       }
+        }
     }
 }

@@ -278,10 +278,10 @@ class AdminController extends Controller
 
         if (isset($_POST) && !empty($_POST)) {
             if (!empty($post->get('content')) && !empty($post->get('title')) && !empty($post->get('slug'))) {
-                $this->validator->setRule('title', 'requrired');
-                $this->validator->setRule('content', 'requrired');
-                $this->validator->setRule('slug', 'requrired');
-                $this->validator->isKebabCase('slug', 'alnum_dash');
+                $this->validator->setRule('title', 'required');
+                $this->validator->setRule('content', 'required');
+                $this->validator->setRule('slug', 'required');
+                $this->validator->setRule('slug', 'alpha_dash');
 
                 if ($this->validator->isValid()) {
                     $title = $this->str::escape($post->get('title'));
@@ -302,7 +302,7 @@ class AdminController extends Controller
 
         $this->pageManager::setName('Adm - blog.edit');
         $this->setLayout('admin/default');
-        $this->viewRender('back_end/blog/edit', compact('article', 'categories', 'post'. 'errors'));
+        $this->viewRender('back_end/blog/edit', compact('article', 'categories', 'post', 'errors'));
     }
 
 

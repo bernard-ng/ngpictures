@@ -14,9 +14,13 @@ class IdeasController extends Controller
         parent::__construct($app, $pageManager);
         $this->callController('users')->restrict();
         $this->loadModel('ideas');
+        $this->app::turbolinksLocation("ideas");
     }
 
 
+    /**
+     * getion d'idee
+     */
     public function index()
     {
         $post       =   new Collection($_POST);

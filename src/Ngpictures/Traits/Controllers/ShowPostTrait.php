@@ -17,16 +17,18 @@ trait ShowPostTrait
             $user       =   $this->loadModel('users');
             $article    =   $this->loadModel($this->table)->find(intval($id));
             $comments   =   $this->loadModel('comments')->findWith($this->table."_id", $id, false);
+            $categories =   $this->loadModel('categories')->orderBy('id', 'ASC');
 
 
             if ($article) {
                 if ($article->slug === $slug) {
                     $this->pageManager::setName("{$article->title}");
 
-                    $this->setLayout("posts/show");
+                    $this->app::turbolinksLocation("{$slug}-{$id}");
+                    $this->setLayout("show");
                     $this->viewRender(
                         "front_end/{$this->table}/show",
-                        compact("article", "comments", "user")
+                        compact("article", "comments", "user", "categories", "exif")
                     );
                 } else {
                     $this->flash->set("danger", $this->msg['posts_not_found']);

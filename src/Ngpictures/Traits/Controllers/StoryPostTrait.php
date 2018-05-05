@@ -18,6 +18,7 @@ trait StoryPostTrait
         $categories =   $this->loadModel('categories')->orderBy('title', 'ASC', 0, 5);
         $title      =   ucfirst($this->table);
 
+        $this->app::turbolinksLocation($this->table);
         $this->pageManager::setName(ucfirst($this->table));
         $this->pageManager::setMeta(['property' => 'og:url', 'content' => '//larytech.com/'.$this->table]);
 

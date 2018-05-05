@@ -11,12 +11,15 @@ class BugsController extends Controller
     /**
      * BugsController constructor.
      * oblige un user a se connecter pour effectuer l'action
+     * @param Ngpictures $app
+     * @param PageManager $pageManager
      */
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
         $this->callController('users')->restrict();
         $this->loadModel('bugs');
+        $this->app::turbolinksLocation("bugs");
     }
 
 

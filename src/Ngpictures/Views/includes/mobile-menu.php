@@ -51,7 +51,7 @@
 
     <li id="Ngpictures"><a href="/">Accueil <i class="icon icon-home"></i></a></li>
     <li id="Blog"><a href="/blog">Blog <i class="icon icon-quote-left"></i></a></li>
-    <?php if ($activeUser): ?>
+    <?php if ($activeUser) : ?>
         <li id="Communauté"><a href="/community">Communauté <i class="icon icon-users"></i></a></li>
         <li id="Posts"><a href="/posts">Actualités </a></li>
     <?php endif; ?>

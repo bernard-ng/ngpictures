@@ -14,6 +14,11 @@ class FollowingController extends Controller
     private $users_id = null;
 
 
+    /**
+     * FollowingController constructor.
+     * @param Ngpictures $app
+     * @param PageManager $pageManager
+     */
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
@@ -55,8 +60,6 @@ class FollowingController extends Controller
     /**
      * show followers
      *
-     * @param string $name
-     * @param integer $id
      * @param string $token
      * @return void
      */
@@ -79,6 +82,7 @@ class FollowingController extends Controller
                     $followers = $this->users->findList($followers_list);
                 }
 
+                $this->app::turbolinksLocation("my-followers/{$token}");
                 $this->pageManager::setName("Mes Abonnés");
                 $this->setLayout("posts/default");
                 $this->viewRender("front_end/users/account/followers", compact("followers"));
@@ -116,6 +120,7 @@ class FollowingController extends Controller
                 $followings_list    =   implode(", ", $followings_list);
                 $followings         =   empty($followings_list)? null : $this->users->findList($followings_list);
 
+                $this->app::turbolinksLocation("my-following/{$token}");
                 $this->pageManager::setName("Mes Abonnements");
                 $this->setLayout("posts/default");
                 $this->viewRender("front_end/users/account/following", compact("followings"));

@@ -16,7 +16,7 @@
                     <h3><?php echo $pageManager::getActivePage() ?></h3>
                 </span>
                 <span class="jumbotron-content col l6 m12 s12">
-                   <?php echo $pageManager::getDescription(); ?>
+                    <?php echo $pageManager::getDescription(); ?>
                 </span>
             </div>
         </div>

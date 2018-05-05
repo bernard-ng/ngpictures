@@ -1,28 +1,50 @@
-$(document).ready(function(){
-	$('.button-collapse').sideNav({
-		size: 250
-	});
-	$('.user-actions-sideNav').sideNav({
-		edge: 'right',
-		closeOnClick: true,
-		draggable: false,
-	});
+import * as M from "../materialize";
 
-	$("img.boxed").materialbox();
-	$('.collapsible').collapsible();
-	$('.carousel .big').carousel({fullWidth: true});
-    $('.carousel').carousel();
-	$('.slider').slider({
-		interval: 5000
-	});
-	$('.slider.fullsize').slider({
-		transition: 300,
-		interval: 5000
-	});
+document.addEventListener('DOMContentLoaded', function(){
 
-	$('.tool').tooltip();
-    $('.dropdown-button').dropdown();
-	$('.parallax').parallax();
+    M.AutoInit();
+
+    let buttonsCollapse = document.querySelectorAll('.button-collapse');
+    M.Sidenav.init(buttonsCollapse, {
+        size: 250
+    });
+
+    let collapsible = document.querySelectorAll('.collapsible');
+    M.Collapsible(collapsible);
+
+    let userActionSidenav = document.querySelectorAll('.user-actions-sideNav');
+    M.Sidenav.init(userActionSidenav, {
+        edge: 'right',
+        closeOnClick: true,
+        draggable: false
+    });
+
+	let imageBoxed = document.querySelectorAll('img.boxed');
+	M.Materialbox.init(imageBoxed);
+
+	let carouselBig = document.querySelectorAll('.carousel .big');
+	M.Carousel.init(carouselBig, {
+	    fullWidth: true
+    });
+
+	let carousel = document.querySelectorAll('.carousel');
+	M.Carousel.init(carousel);
+
+	let slider = document.querySelectorAll('.slider');
+	M.Slider.init(slider, {
+	    interval: 5000
+    });
+
+    let sliderFullsize = document.querySelectorAll('.slider');
+    M.slider.init(sliderFullsize, {
+        transition: 300,
+        interval: 5000
+    });
+
+    let parallax = document.querySelectorAll('.parallax');
+    M.Parallax.init(parallax);
+
+
 	$('.modal').modal({
         opacity: 0.5,
         dismissible: false,

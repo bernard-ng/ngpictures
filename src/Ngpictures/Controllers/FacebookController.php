@@ -1,6 +1,7 @@
 <?php
 namespace Ngpictures\Controllers;
 
+use Facebook\Exceptions\FacebookAuthenticationException;
 use Ng\Core\Managers\Collection;
 use Ngpictures\Entity\UsersEntity;
 
@@ -33,11 +34,15 @@ class FacebookController extends Controller
     public function connect()
     {
         $this->session;
-        $fb = new Facebook([
-            'app_id' => $this->app_id,
-            'app_secret' => $this->app_secret,
-            'default_graph_version' => $this->default_graph_version
-        ]);
+        try {
+            $fb = new Facebook([
+                'app_id' => $this->app_id,
+                'app_secret' => $this->app_secret,
+                'default_graph_version' => $this->default_graph_version
+            ]);
+        } catch (FacebookSDKException $e) {
+            $this->catch($e, $e->getMessage());
+        }
 
         $helper = $fb->getCanvasHelper();
         $permissions = ['email'];

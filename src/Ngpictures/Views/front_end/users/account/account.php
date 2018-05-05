@@ -99,7 +99,7 @@
             <?php endif; ?>
 
             </div>
-            <?php if($activeUser && $activeUser->id != $user->id): ?>
+            <?php if ($activeUser && $activeUser->id != $user->id) : ?>
                 <div class="hide-on-med-and-down profile-actions">
                     <a class="profile-actions  btn blue-grey dark-2 right" title="Suivre cette personne" href="<?= $user->followingUrl; ?>">
                         Suivre

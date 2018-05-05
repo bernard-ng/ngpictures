@@ -1,7 +1,6 @@
 <?php
 namespace Ng\Core\Managers;
 
-use Ng\Core\Managers\MessageManager;
 use Intervention\Image\Exception\NotReadableException;
 use Intervention\Image\ImageManager as InterventionImage;
 
@@ -64,9 +63,8 @@ abstract class ImageManager
 
         if (in_array($ext, self::$extensions) && in_array($type, $expected_type)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
 

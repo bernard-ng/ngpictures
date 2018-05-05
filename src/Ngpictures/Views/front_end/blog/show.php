@@ -1,63 +1,47 @@
-<div class="row container">
-    <?php include(APP."/Views/includes/sharer.php"); ?>
-    <div class="col 18 l8 s12">
-        <!-- ARTICLE -->
-            <article class="card ng-neg-top" id="<?= $article->id ?>">
-                <main class="ng-news-card-content">
-                    <main class="article-content">
-                        <h1 style="margin-top: 0 !important;text-transform: uppercase;font-size: 2.3em"><?= $article->title ?></h1>
-                        <p>
-                            <img src="<?= $article->thumbUrl;?>" alt="Article Image" title="<?= $article->title ?>" class="align-center" width="100%">
-                        </p>
-                        <?= $article->fullText ?>
-                        &nbsp;
-                    </main>
-                    <section id="articleInfo">
-                        <div class="ng-news-card-stat">
-                            <i class="icon icon-time"></i>&nbsp;
-                            <time id="date_created" data-time="<?= strtotime($article->date_created) ?>">
-                                <?= $article->time ?>
-                            </time>
-                        </div>
-                        <div class="ng-news-card-stat">
-                            <i class="icon icon-thumbs-up"></i>&nbsp;
-                            <small><a id="showLikes" href="<?= $article->likersUrl ?>"><?= $article->likes ?></a></small>
-                        </div>
-                         <div class="ng-news-card-stat">
-                            <i class="icon icon-thumbs-down"></i>&nbsp;
-                            <small><a id="showLikes" href="/dislikes/<?= $article->SI ?>"><?= $article->dislikes ?></a></small>
-                            <a id="showMentions" href="/likes/show/<?= $article->SI ?>"><i class="right icon icon-menu-down"></i></a>
-                        </div>
-                    </section>
-                </main>
-                <footer class="ng-news-card-footer" id="articleOptions">
-                    <a href="<?= $article->likeUrl ?>" id="likeBtn" class="ng-news-card-footer-item <?= $article->ML ?>">
-                        <i class="social social-heart"></i>&nbsp;J'aime
-                    </a>
-                    <a href="<?= $article->dislikeUrl ?>" id="dislikeBtn" class="ng-news-card-footer-item <?= $article->MD ?>">
-                        <i class="social social-heart-broken"></i>&nbsp;je n'aime pas
-                    </a>
-                    <a href="/share/<?= $article->SI ?>" id="shareBtn" class="ng-news-card-footer-item">
-                        <i class="icon icon-share"></i>&nbsp;partager
-                    </a>
-                </footer>
-            </article>
-            <?php include(APP."/Views/includes/comments.php"); ?>
-
-        <div class="col s12 hide-on-med-and-up" id="singleOptions-mobile">
-            <div class="card-panel"><button class="btn-floating waves-effect waves-light cyan darken-2">
-                <i class="icon icon-save"></i></button>
-            </div>
-            <div class="card-panel"><button class="btn-floating waves-effect waves-light cyan darken-2">
-                <i class="icon icon-tags"></i></button>
-            </div>
-            <div class="card-panel"><button class="btn-floating waves-effect waves-light cyan darken-2">
-                    <i class="icon icon-picture"></i></button>
-            </div>
-            <div class="card-panel"><button class="btn-floating waves-effect waves-light cyan darken-2">
-                    <i class="icon icon-user"></i></button>
+<section class="section container row">
+    <div class="col l8 m12 s12">
+        <img src="<?= $article->thumbUrl ?>" alt="" class="responsive-img materialboxed">
+        <h1 class="ui header"><?= $article->title ?></h1>
+        <?= $article->content; ?>
+    </div>
+    <div class="section col l4 m12 s12 ">
+        <div class="ui divided list animated slideInRight">
+            <?php if (isset($categories) && !empty($categories)) : ?>
+                <ul class="collection">
+                    <?php foreach ($categories as $category) : ?>
+                        <li class="collection-item dark waves-effect col s12 <?= ($category->title == $article->category)? 'active' : '' ?>">
+                            <a href="<?= $category->url; ?>">
+                                <div style="margin: 10px">
+                                    <div class="collection-item-title">
+                                        <?= $category->title; ?>
+                                        <span class="secondary-content"><i class="icon icon-right-open"></i></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
+<section class="jumbotron dark">
+    <div class="container row">
+        <?php include(APP."/Views/includes/comments.php"); ?>
+    </div>
+</section>
+<section class="section container">
+    <div class="ui divided items col l12 m12 s12 animated slideInLeft">
+        <h2 class="ui header">A propos de l'auteur</h2>
+        <div class="item">
+            <div class="image"><img src="<?= CDN."/imgs/team/bernard.jpg" ?>"></div>
+            <div class="content">
+                <span class="header"><?= $activeUser->name ?></span>
+                <div class="meta"><?= $activeUser->email ?></div>
+                <div class="description">
+                    <?= $activeUser->bio ?>
+                </div>
             </div>
         </div>
     </div>
-    <?php include(APP."/Views/includes/left-aside.php"); ?>
-</div>
+</section>

@@ -34,12 +34,12 @@
                         </div>
                     <?php endif; ?>
                     <main class="news-card-content">
-                        <?php if ($a->title !== null && $a->title !== ''): ?>
+                        <?php if ($a->title !== null && $a->title !== '') : ?>
                             <section class="news-card-title">
                                 <h2><?= $a->title ?>&nbsp;<small><?= $a->category ?></small></h2>
                             </section>
                         <?php endif; ?>
-                        <?php if ($a->content !== null && $a->content !== ''): ?>
+                        <?php if ($a->content !== null && $a->content !== '') : ?>
                             <section>
                                 <p><?= $a->snipet ?></p>
                                 <a href="<?= $a->url ?>" class="news-card-seemore right">Voir plus</a>
@@ -61,16 +61,16 @@
                     </main>
                     <footer class="news-card-footer" id="articleOptions">
                         <a data-action="like" class="news-card-footer-item <?= $a->isLike ?>" href="<?= $a->likeUrl ?>">
-                            <?php if ($a->isLike == 'active'): ?>
+                            <?php if ($a->isLike == 'active') : ?>
                                 <i class="icon icon-heart red-txt"></i>&nbsp;
-                            <?php else: ?>
+                            <?php else : ?>
                                 <i class="icon icon-heart-empty"></i>&nbsp;
                             <?php endif; ?>
                         </a>
                         <a class="news-card-footer-item modal-trigger" href="#cmtAdd-<?= $a->id ?>" data-action="showComment">
-                            <?php if ($a->commentsNumber > 0 ): ?>
+                            <?php if ($a->commentsNumber > 0) : ?>
                                 <i class="icon icon-comment" ></i>&nbsp;
-                            <?php else: ?>
+                            <?php else : ?>
                                 <i class="icon icon-comment-empty" ></i>&nbsp;
                             <?php endif; ?>
                             <span><?= $a->commentsNumber ?></span>
@@ -139,7 +139,7 @@
         </div>
         <div id="statusBar" class="feed-btn" data-ajax="posts">chargement</div>
     </section>
-    <?php foreach ($posts as $a): ?>
+    <?php foreach ($posts as $a) : ?>
         <div id="report-<?= $a->id ?>" class="modal dark">
             <div class="modal-content">
                 <span class="ui header">Signaler</span>

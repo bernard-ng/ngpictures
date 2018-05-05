@@ -4,7 +4,7 @@
             <?php foreach ($photos as $photo) : ?>
                 <li id="<?= $photo->id; ?>">
                     <img src="<?= $photo->thumbUrl; ?>">
-                    <?php if(!empty($photo->description)): ?>
+                    <?php if (!empty($photo->description)) : ?>
                         <div class="caption left-align">
                             <h4 class=" grey-txt txt-light-3"><?= strtoupper($photo->name ?? $photo->title); ?></h4>
                             <h6 class="grey-txt txt-light-3"><?= $photo->description ?></h6>

@@ -53,14 +53,13 @@ class CommentsController extends Controller
 
                 if ($this->isAjax()) {
                     echo $this->loadModel(
-                        $this->getAction($type))->find(intval($id)
-                    )->getCommentsNumber();
+                        $this->getAction($type)
+                    )->find(intval($id))->getCommentsNumber();
                     exit();
                 } else {
                     $this->flash->set('success', $this->msg['form_comment_submitted']);
                     $this->app::redirect(true);
                 }
-
             } else {
                 $this->isAjax() ?
                     $this->ajaxFail($this->msg['form_all_required']) :

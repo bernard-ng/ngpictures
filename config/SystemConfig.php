@@ -14,11 +14,11 @@ return [
 		'categorie' => "Photographie & Blog",
 		'lang' => "fr_FR",
 		'country' => "République Democratique du Congo",
-		'copyright' => '<a href="ngpictures.pe.hu">Bernard Ng</a>'
+		'copyright' => '<a href="http://ngpictures.pe.hu">Bernard Ng</a>'
 	],
 
 	"sys" => [
-		'debug' => false,
+		'debug' => true,
 		'cache' => false
 	]
 ];

@@ -1,6 +1,6 @@
 <div class="jumbotron dark row col l3 s12 m12 animated fast slideInRight">
         <ul class="collection dark outlined" data-collapsible="accordion">
-            <?php if(isset($verse) && !empty($verse)): ?>
+            <?php if (isset($verse) && !empty($verse)) : ?>
                 <li>
                     <div class="collapsible-header">God First</div>
                     <div class="collapsible-body">
