@@ -26,7 +26,7 @@ trait UserInfoTrait
      */
     public function getUsername()
     {
-        return $this->getUsersModel($this->user_id)->name;
+        return $this->getUsersModel($this->users_id)->name;
     }
 
 
@@ -36,7 +36,7 @@ trait UserInfoTrait
      */
     public function getUserAccountUrl()
     {
-        return $this->getUsersModel($this->user_id)->accountUrl;
+        return $this->getUsersModel($this->users_id)->accountUrl;
     }
 
 
@@ -47,7 +47,7 @@ trait UserInfoTrait
      */
     public function getUserAvatarUrl(): string
     {
-        return $this->getUsersModel($this->user_id)->avatarUrl;
+        return $this->getUsersModel($this->users_id)->avatarUrl;
     }
 
     /**
@@ -57,6 +57,6 @@ trait UserInfoTrait
      */
     public function getUserBio(): string
     {
-        return $this->getUsersModel($this->user_id)->bio;
+        return $this->getUsersModel($this->users_id)->bio;
     }
 }

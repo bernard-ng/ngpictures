@@ -1,3 +1,5 @@
+@import "../custom/bases/variables";
+
 /* Text Inputs + Textarea
    ========================================================================== */
 /* Style Placeholders */
@@ -33,7 +35,7 @@ textarea.mdz-textarea {
   height: 3rem;
   width: 100%;
   font-size: 1rem;
-  margin: 0 0 20px 0;
+  margin: 0 0 10px 0;
   padding: 0;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -482,6 +484,11 @@ textarea.mdz-textarea + label:after, .select-wrapper + label:after {
   -webkit-box-shadow: none;
           box-shadow: none;
   color: #444;
+
+  &.transparent {
+    background-color: transparent;
+    color: $txt-color;
+  }
 }
 
 .input-field input[type=search]:focus + label i,
@@ -517,7 +524,7 @@ textarea {
 textarea.mdz-textarea {
   overflow-y: hidden;
   /* prevents scroll bar flash */
-  padding: .8rem 0 1.6rem 0;
+  padding: .3rem 0 1.6rem 0;
   /* prevents text jump on Enter keypress */
   resize: none;
   min-height: 3rem;

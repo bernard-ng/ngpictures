@@ -14,6 +14,8 @@ class UsersController extends Controller
     /**
      * charge le model d'utilisateur
      * UsersController constructor.
+     * @param Ngpictures $app
+     * @param PageManager $pageManager
      */
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
@@ -27,13 +29,13 @@ class UsersController extends Controller
     ****************************************************************************/
     /**
      * confirmation d'un utilisateur
-     * @param $user_id
+     * @param $users_id
      * @param string $token
      */
-    public function confirm(int $user_id, string $token)
+    public function confirm(int $users_id, string $token)
     {
         $token  =   $this->str::escape($token);
-        $user   =   $this->users->isNotConfirmed(intval($user_id));
+        $user   =   $this->users->isNotConfirmed(intval($users_id));
 
         if ($user && $user->confirmation_token === $token) {
             $this->users->unsetConfirmationToken($user->id);
@@ -61,8 +63,8 @@ class UsersController extends Controller
 
             if (isset($_POST) and !empty($_POST)) {
                 if (!empty($post->get('password')) && !empty($post->get('password_confirm'))) {
-                    $this->validator = $this->validator;
-                    $this->validator->isMatch('password', 'password_confirm', $this->msg['users_bad_password']);
+                    $this->validator->setRule('password', ["min_length[8]", "must_match[password_confirm]"]);
+
                     if ($this->validator->isValid()) {
                         $password = $this->str::hashPassword($post->get('password'));
                         $this->users->resetPassword($password, $user->id);
@@ -114,6 +116,7 @@ class UsersController extends Controller
             }
         }
 
+        $this->app::turbolinksLocation("/forgot");
         $this->pageManager::setName('Mot de passe oublié');
         $this->setLayout('users/default');
         $this->viewRender('front_end/users/account/forgot', compact('post'));
@@ -134,8 +137,8 @@ class UsersController extends Controller
         $password   =   $this->str::hashPassword($password);
 
         $this->users->add($name, $email, $password, $token);
-        $user_id = $this->users->lastInsertId();
-        $link = SITE_NAME."/confirm/{$user_id}/{$token}";
+        $users_id = $this->users->lastInsertId();
+        $link = SITE_NAME."/confirm/{$users_id}/{$token}";
 
         (new Mailer())->accountConfirmation($link, $email);
         $this->flash->set('success', $this->msg['form_registration_submitted']);
@@ -175,9 +178,10 @@ class UsersController extends Controller
             }
         }
 
+        $this->app::turbolinksLocation("/sign");
         $this->pageManager::setName("Inscription");
         $this->setLayout('users/default');
-        $this->viewRender('front_end/users/sign', compact('post'));
+        $this->viewRender('front_end/users/sign', compact('post', 'errors'));
     }
 
 
@@ -209,6 +213,7 @@ class UsersController extends Controller
             $this->app::redirect(true);
         }
     }
+
 
     /**
      * permet de dire si un utilisateur est online
@@ -243,6 +248,7 @@ class UsersController extends Controller
      * permet de mettre a jour la connexion un utilisateur
      * et de definir son token csrf
      * @param UsersEntity $user
+     * @param string|null $msg
      */
     private function updateConnexion(UsersEntity $user, string $msg = null)
     {
@@ -278,13 +284,13 @@ class UsersController extends Controller
 
     /**
      * definit un remember token
-     * @param int $user_id
+     * @param int $users_id
      */
-    private function remember(int $user_id)
+    private function remember(int $users_id)
     {
         $remember_token = $this->str::cookieToken();
-        $this->users->setRememberToken($remember_token, $user_id);
-        $this->cookie->write(COOKIE_REMEMBER_KEY, "NG.23.{$user_id}.{$remember_token}");
+        $this->users->setRememberToken($remember_token, $users_id);
+        $this->cookie->write(COOKIE_REMEMBER_KEY, "NG.23.{$users_id}.{$remember_token}");
     }
 
 
@@ -320,23 +326,36 @@ class UsersController extends Controller
                                     $this->remember($user->id);
                                 }
 
+                                if ($this->isAjax()) {
+                                    $this->ajaxRedirect($user->accountUrl);
+                                }
+
                                 $this->flash->set('success', $this->msg['users_login_success']);
                                 $this->app::redirect($user->accountUrl);
                             } else {
-                                $this->flash->set('danger', $this->msg['users_bad_identifier']);
+                                $this->isAjax()?
+                                    $this->ajaxFail($this->msg['users_bad_identifier']) :
+                                    $this->flash->set('danger', $this->msg['users_bad_identifier']);
                             }
                         } else {
-                            $this->flash->set('warning', $this->msg['users_not_confirmed']);
+                            $this->isAjax()?
+                                $this->ajaxFail($this->msg['users_not_confirmed']) :
+                                $this->flash->set('warning', $this->msg['users_not_confirmed']);
                         }
                     } else {
-                        $this->flash->set('danger', $this->msg['users_bad_identifier']);
+                        $this->isAjax() ?
+                            $this->ajaxFail($this->msg['users_bad_identifier']) :
+                            $this->flash->set('danger', $this->msg['users_bad_identifier']);
                     }
                 } else {
                     $errors = new Collection($this->validator->getErrors());
-                    $this->flash->set('danger', $this->msg['form_multi_errors']);
+                    $this->isAjax() ?
+                        $this->ajaxFail(json_encode($errors->asArray()), 403) :
+                        $this->flash->set('danger', $this->msg['form_multi_errors']);
                 }
             }
 
+            $this->app::turbolinksLocation("/login");
             $this->pageManager::setName('Connexion');
             $this->setLayout('users/default');
             $this->viewRender('front_end/users/login', compact('post', 'errors'));
@@ -362,8 +381,8 @@ class UsersController extends Controller
     /**
      *  permet de generer le profile d'un utilisateur
      *  page de vue
-     * @param $username
-     *
+     * @param string $username
+     * @param int $id
      */
     public function account(string $username, $id)
     {
@@ -372,8 +391,9 @@ class UsersController extends Controller
 
             if ($user) {
                 $verse  =   $this->callController('verses')->index();
-                $posts  =   $this->loadModel('posts')->findWith('user_id', $user->id, false);
+                $posts  =   $this->loadModel('posts')->findWith('users_id', $user->id, false);
 
+                $this->app::turbolinksLocation($user->accountUrl);
                 $this->pageManager::setName($user->name);
                 $this->setLayout('users/account');
                 $this->viewRender('front_end/users/account/account', compact("verse", "user", "posts"));
@@ -443,12 +463,12 @@ class UsersController extends Controller
                 if ($isUploaded) {
                     $this->users->update($user->id, ['avatar' => "ngpictures-avatar-{$name}.jpg"]);
                     $user = $this->users->find($user->id);
-
                     $this->updateConnexion($user, $this->msg['users_edit_success']);
                     $this->app::redirect($user->accountUrl);
                 }
             }
 
+            $this->app::turbolinksLocation("/edit-profile/{$token}");
             $this->pageManager::setName('Edition du profile');
             $this->setLayout('users/edit');
             $this->viewRender('front_end/users/account/edit', compact('user', 'errors'));

@@ -1,8 +1,8 @@
 <div class="jumbotron dark row col l3 s12 m12 animated fast slideInRight">
-        <ul class="collapsible outlined" data-collapsible="accordion">
-            <?php if(isset($verse) && !empty($verse)): ?>
+        <ul class="collection dark outlined" data-collapsible="accordion">
+            <?php if (isset($verse) && !empty($verse)) : ?>
                 <li>
-                    <div class="collapsible-header active">God First</div>
+                    <div class="collapsible-header">God First</div>
                     <div class="collapsible-body">
                         <?= $verse->text; ?>
                         <br><br>
@@ -12,7 +12,7 @@
             <?php endif; ?>
             <?php if (isset($categories) && !empty($categories)) : ?>
                 <li>
-                    <div class="collapsible-header active">Catégories</div>
+                    <div class="collapsible-header">Catégories</div>
                     <div class="collapsible-body">
                         <div class="ui list">
                             <?php foreach ($categories as $category) : ?>
@@ -28,7 +28,7 @@
                 </li>
             <?php endif; ?>
             <li>
-                <div class="collapsible-header active">Albums</div>
+                <div class="collapsible-header">Albums</div>
                 <div class="collapsible-body">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores est dignissimos quod quas, quae excepturi tempora officia quibusdam eum fugit nemo id hic ratione blanditiis accusantium laudantium fugiat ipsa consequatur.
                 </div>

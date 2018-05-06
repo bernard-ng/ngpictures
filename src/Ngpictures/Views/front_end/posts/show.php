@@ -1,47 +1,47 @@
-<div class="parallax-container hide-on-small-and-down border-b">
-    <span class="ng-cover"></span>
-    <div class="parallax">
-        <img src="<?= $article->thumbUrl ?>" alt="Article Image" title="<?= $article->title ?>">
+<section class="section container row">
+    <div class="col l8 m12 s12">
+        <img src="<?= $article->thumbUrl ?>" alt="" class="responsive-img materialboxed">
+        <h1 class="ui header"><?= $article->title ?></h1>
+        <?= $article->content; ?>
     </div>
-</div>
-<div class="row container">
-    <!-- ==================== PAGE CONTAIN ============================================ -->
-    <div class="col m10 l10 offset-m1 offset-l1">
-        <!-- ARTICLE -->
-            <article class="card ng-neg-top" id="<?= $article->id ?>">
-
-                <main class="ng-news-card-content">
-                    <span class="ng-news-card-title">
-                        <h1><?= $article->title ?></h1>
-                    </span>
-                    <content class="article-content">
-                        <?= $article->content ?>
-                        &nbsp;
-                    </content>
-                    <section id="articleInfo">
-                        <div class="ng-news-card-stat">
-                            <i class="icon icon-user"></i>&nbsp;
-                            <small id="poster_info">par <a href="/account/"><?= $article->username ?></a></small>
-                        </div>
-                        <div class="ng-news-card-stat">
-                            <i class="icon icon-time"></i>&nbsp;
-                            <small id="date_created" data-timestamp="<?= strtotime($article->date_created) * 1000 ?>"><?= $article->date_created ?></small>
-                        </div>
-                        <div class="ng-news-card-stat">
-                            <i class="icon icon-thumbs-up"></i>&nbsp;
-                            <small><a id="showLikes" href="<?= $article->likersUrl ?>"><?= $article->likes ?></a></small>
-                        </div>
-                    </section>
-                </main>
-                <footer class="ng-news-card-footer" id="articleOptions">
-                    <a href="<?= $article->likeUrl ?>" id="likeBtn" class="ng-news-card-footer-item <?= $article->ML ?>">
-                        <i class="icon icon-thumbs-up"></i>&nbsp;J'aime
-                    </a>
-                    <a href="/share/<?= $article->SI ?>" id="shareBtn" class="ng-news-card-footer-item">
-                        <i class="icon icon-share"></i>&nbsp;partager
-                    </a>
-                </footer>
-            </article>
+    <div class="section col l4 m12 s12 ">
+        <div class="ui divided list animated slideInRight">
+            <?php if (isset($categories) && !empty($categories)) : ?>
+                <ul class="collection">
+                    <?php foreach ($categories as $category) : ?>
+                        <li class="collection-item dark waves-effect col s12 <?= ($category->title == $article->category)? 'active' : '' ?>">
+                            <a href="<?= $category->url; ?>">
+                                <div style="margin: 10px">
+                                    <div class="collection-item-title">
+                                        <?= $category->title; ?>
+                                        <span class="secondary-content"><i class="icon icon-right-open"></i></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
+<section class="jumbotron dark">
+    <div class="container row">
         <?php include(APP."/Views/includes/comments.php"); ?>
-
-</div>
+    </div>
+</section>
+<section class="section container">
+    <div class="ui divided items col l12 m12 s12 animated slideInLeft">
+        <h2 class="ui header">A propos de l'auteur</h2>
+        <div class="item">
+            <div class="image"><img src="<?= CDN."/imgs/team/bernard.jpg" ?>"></div>
+            <div class="content">
+                <span class="header"><?= $activeUser->name ?></span>
+                <div class="meta"><?= $activeUser->email ?></div>
+                <div class="description">
+                    <?= $activeUser->bio ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

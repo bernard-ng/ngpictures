@@ -278,18 +278,18 @@ class AdminController extends Controller
 
         if (isset($_POST) && !empty($_POST)) {
             if (!empty($post->get('content')) && !empty($post->get('title')) && !empty($post->get('slug'))) {
-                $this->validator->setRule('title', 'requrired');
-                $this->validator->setRule('content', 'requrired');
-                $this->validator->setRule('slug', 'requrired');
-                $this->validator->isKebabCase('slug', 'alnum_dash');
+                $this->validator->setRule('title', 'required');
+                $this->validator->setRule('content', 'required');
+                $this->validator->setRule('slug', 'required');
+                $this->validator->setRule('slug', 'alpha_dash');
 
                 if ($this->validator->isValid()) {
                     $title = $this->str::escape($post->get('title'));
                     $content = $post->get('content');
                     $slug = $this->str::escape($post->get('slug'));
-                    $category_id = (int)$post->get('category') ?? 1;
+                    $categories_id = (int)$post->get('category') ?? 1;
 
-                    $this->blog->update($id, compact('title', 'content', 'slug', 'category_id'));
+                    $this->blog->update($id, compact('title', 'content', 'slug', 'categories_id'));
                     $this->flash->set("success", $this->msg['post_edit_success']);
                     $this->app::redirect(ADMIN . "/blog");
                 } else {
@@ -302,7 +302,7 @@ class AdminController extends Controller
 
         $this->pageManager::setName('Adm - blog.edit');
         $this->setLayout('admin/default');
-        $this->viewRender('back_end/blog/edit', compact('article', 'categories', 'post'. 'errors'));
+        $this->viewRender('back_end/blog/edit', compact('article', 'categories', 'post', 'errors'));
     }
 
 
@@ -320,32 +320,30 @@ class AdminController extends Controller
 
         if (isset($_POST) && !empty($_POST)) {
             $this->validator->setRule('title', 'required');
-            $this->validator->setRule('content', 'requried');
-            $this->validator->setRule('category_id', 'numeric');
+            $this->validator->setRule('content', 'required');
 
             if ($this->validator->isValid()) {
-                $title          =   $this->str::escape($post->get('title'));
-                $content        =   $post->get('content');
-                $category_id    =   ($post->get('category') == 0) ? 1 : $post->get('category');
+                $title              =   $this->str::escape($post->get('title'));
+                $content            =   $post->get('content');
+                $categories_id      =   ($post->get('category') == 0) ? 1 : $post->get('category');
+
+                if ($post->get('slug') !== '') {
+                    $this->validator->setRule('slug', 'alnum_dash');
+                    if ($this->validator->isValid()) {
+                        $slug = $this->str::escape($post->get('slug'));
+                    }
+                } else {
+                    $slug = $this->str::slugify($title);
+                }
             } else {
                 $this->flash->set('danger', $this->msg['form_multi_errors']);
                 $errors = new Collection($this->validator->getErrors());
             }
 
-            if ($post->get('slug') !== '') {
-                $this->validator->setRule('slug', 'alnum_dash');
-                if ($this->validator->isValid()) {
-                    $slug = $this->str::escape($post->get('slug'));
-                }
-            } else {
-                $slug = $this->str::slugify($title);
-            }
-
-
             if (isset($_FILES) && !empty($_FILES)) {
                 if (!empty($file->get('thumb.name'))) {
                     if ($this->validator->isValid()) {
-                        $this->blog->create(compact('title', 'content', 'slug', 'category_id'));
+                        $this->blog->create(compact('title', 'content', 'slug', 'categories_id'));
 
                         $last_id        =   $this->blog->lastInsertId();
                         $isUploaded     =   ImageManager::upload($file, 'blog', "ngpictures-{$slug}-{$last_id}", 'article');
@@ -496,10 +494,10 @@ class AdminController extends Controller
 
             $tags           =   $this->str::escape($post->get('tags')) ?? null;
             $description    =   $this->str::escape($post->get('description')) ?? null;
-            $category_id    =   intval($post->get('category')) ?? 1;
+            $categories_id    =   intval($post->get('category')) ?? 1;
 
             if (!empty($file->get('thumb'))) {
-                $this->gallery->create(compact('name', 'description', 'tags', 'category_id'));
+                $this->gallery->create(compact('name', 'description', 'tags', 'categories_id'));
                 $last_id    =   $this->gallery->lastInsertId();
                 $isUploaded =   ImageManager::upload($file, 'gallery', "{$name}-{$last_id}", 'ratio');
 
@@ -542,9 +540,9 @@ class AdminController extends Controller
                 $name           =   $this->str::escape($post->get('name')) ?? $photo->name;
                 $tags           =   $this->str::escape($post->get('tags')) ?? $photo->tags;
                 $description    =   $this->str::escape($post->get('description')) ?? $photo->description;
-                $category_id    =   intval($post->get('category')) ?? 1;
+                $categories_id    =   intval($post->get('category')) ?? 1;
 
-                $this->gallery->update($id, compact('name', 'tags', 'description', 'category_id'));
+                $this->gallery->update($id, compact('name', 'tags', 'description', 'categories_id'));
                 $this->flash->set("success", $this->msg['post_edit_success']);
                 $this->app::redirect(ADMIN . "/gallery");
             }
@@ -812,8 +810,8 @@ class AdminController extends Controller
       */
     public function showLogs()
     {
-        $log = (is_file(ROOT."/system-logs"))
-            ? file_get_contents(ROOT."/system-logs")
+        $logs = (is_file(ROOT."/system.log"))
+            ? file_get_contents(ROOT."/system.log")
             : "file: system-log not found";
 
         $this->pageManager::setName('Adm - Logs');

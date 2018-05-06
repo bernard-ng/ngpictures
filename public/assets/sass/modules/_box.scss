@@ -1,3 +1,5 @@
+@import "../custom/bases/variables";
+
 .materialboxed {
   display: block;
   cursor: -webkit-zoom-in;
@@ -24,7 +26,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: #292929;
+  background-color: $bg-color;
   z-index: 1000;
   will-change: opacity;
 }
@@ -32,13 +34,13 @@
 .materialbox-caption {
   position: fixed;
   display: none;
-  color: #fff;
+  color: $txt-color;
   line-height: 50px;
   bottom: 0;
   left: 0;
   width: 100%;
   text-align: center;
-  padding: 0% 15%;
+  padding: 0 15%;
   height: 50px;
   z-index: 1000;
   -webkit-font-smoothing: antialiased;

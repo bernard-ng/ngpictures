@@ -9,9 +9,9 @@
 </head>
 <body>
 
-<div class="page-content" id="pageContent">
+<main class="page-content" id="pageContent" role="main">
     <?php echo $page_content; ?>
-</div>
+</main>
 <?php include(APP."/Views/includes/footer.php"); ?>
 <?php include(APP."/Views/includes/default-script.php"); ?>
 </body>

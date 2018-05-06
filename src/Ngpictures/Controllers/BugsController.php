@@ -11,12 +11,15 @@ class BugsController extends Controller
     /**
      * BugsController constructor.
      * oblige un user a se connecter pour effectuer l'action
+     * @param Ngpictures $app
+     * @param PageManager $pageManager
      */
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
         $this->callController('users')->restrict();
         $this->loadModel('bugs');
+        $this->app::turbolinksLocation("bugs");
     }
 
 
@@ -33,8 +36,8 @@ class BugsController extends Controller
 
             if ($this->validator->isValid()) {
                 $content = $this->str::escape($post->get('bugs'));
-                $user_id = $this->session->getValue('auth', 'id');
-                $this->loadModel('bugs')->create(compact('content', 'user_id'));
+                $users_id = $this->session->getValue('auth', 'id');
+                $this->loadModel('bugs')->create(compact('content', 'users_id'));
                 $this->flash->set('success', $this->msg['form_bug_submitted']);
                 $this->app::redirect("/home");
             } else {

@@ -5,11 +5,15 @@
                 <a href="/" class="brand-logo">
                     <img src="/imgs/logo-white.png" class="logo" alt="logo">
                 </a>
-                <a href="#" data-activates="mobile-menu" class="btn blue-grey dark-3 button-collapse">
-                    <i class="icon icon icon-th"></i>
+                <a href="/search?q="  class="action right">
+                    <i class="icon icon icon-search"></i>
                 </a>
-                <ul class="right hide-on-med-and-down">
-                    <span id="menu-item-active" data-isActive="<?= $pageManager::getActivePage() ?>"></span>
+                <a href="#" data-activates="mobile-menu" class="button-collapse left">
+                    <i class="icon icon icon-menu"></i>
+                </a>
+
+                <span id="menu-item-active" data-active="<?= $pageManager::getActivePage() ?>"></span>
+                <ul class="right hide-on-med-and-down links">
 
                     <li class="search">
                         <div class="search">
@@ -25,15 +29,13 @@
                         <li><a href="<?= ADMIN ?>"> <i class="icon icon-code"></i></a></li>
                     <?php endif; ?>
 
-                    <?php if ($activeUser) : ?>
-                        <li id="La Communauté"><a href="/community">Communauté</a></li>
-                    <?php endif; ?>
-
-                    <li id="blog"><a href="/blog"> Blog</a></li>
-                    <li id="posts"><a href="/posts"> Actualités</a></li>
-                    <li id="Gallerie"><a href="/gallery"> Gallerie</a></li>
+                    <li id="Ngpictures"><a href="/">Accueil</a></li>
+                    <li id="Blog"><a href="/blog"> Blog</a></li>
+                    <li id="Galerie"><a href="/gallery"> Galerie</a></li>
 
                     <?php if ($activeUser) : ?>
+                        <li id="Posts"><a href="/posts"> Actualités</a></li>
+                        <li id="Communauté"><a href="/community">Communauté</a></li>
                         <li class="user-actions">
                             <a href="#" class="user-actions-sideNav show-on-large" data-activates="user-actions">
                                 <img src="<?= $activeUser->avatarUrl; ?>" class="user" width="50" height="50">
@@ -67,39 +69,12 @@
             </li>
         <?php endif; ?>
 
-        <div class="user-action">
-            <?php if (!$activeUser) : ?>
-                <li>
-                    <a href="/sign" class="btn action blue-grey dark-3 waves-effect">Inscription</a>
-                    <a href="/login" class="btn action blue-grey dark-3 waves-effect">Connexion</a>
-                </li>
-            <?php else : ?>
-                <li>
-                    <a href="<?= $activeUser->postUrl; ?>" class="btn action blue-grey dark-3 waves-effect">Poster</a>
-                    <a href="<?= $activeUser->postsUrl; ?>" class="btn action blue-grey dark-3 waves-effect">Mes Publications</a>
-                </li>
-            <?php endif; ?>
-        </div>
+
         <?php if ($activeUser) : ?>
             <li><a href="<?= $activeUser->accountUrl; ?>">Profile <i class="icon icon-user"></i></a></li>
             <li><a href="<?= $activeUser->editUrl; ?>">Editer le Profile <i class="icon icon-cog-alt"></i></a></li>
             <li><a href="<?= $activeUser->followingUrl; ?>">Mes abonnements <i class="icon icon-users"></i></a></li>
             <li><a href="/logout">Déconnexion <i class="icon icon-off"></i></a></li>
         <?php endif; ?>
-        <li>
-            <ul class="collapsible collapsible-accordion">
-                <li>
-                    <a class="collapsible-header waves-effect">Plus</a>
-                    <div class="collapsible-body">
-                        <ul>
-                            <li><a href="/bugs">Signaler un Bug <i class="icon icon-comment-empty"></i></a></li>
-                            <li><a href="/ideas">Donner une idée <i class="icon icon-comment-empty"></i></a></li>
-                            <li><a href="/privacy-terms">Mentions légales <i class="icon icon-plus"></i></a></li>
-                            <li><a href="/about">A propos <i class="icon icon-star"></i></a></li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </li>
     </ul>
 </header>

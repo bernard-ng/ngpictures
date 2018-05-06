@@ -27,9 +27,9 @@ final class LogMessageManager
 [NG-PICTURES MESSAGES LOGS] \n\n";
 
 
-        $file = fopen(ROOT."/system-logs", "a+");
+        $file = fopen(ROOT."/system.log", "a+");
 
-        if (empty(file_get_contents(ROOT."/system-logs")) or file_get_contents(ROOT."/system-logs")[0] !== "#") {
+        if (empty(file_get_contents(ROOT."/system.log")) or file_get_contents(ROOT."/system.log")[0] !== "#") {
             fwrite($file, $header);
         }
 
@@ -46,7 +46,7 @@ final class LogMessageManager
      */
     public static function clear()
     {
-        $file = fopen(ROOT."/system-logs", "w");
+        $file = fopen(ROOT."/system.log", "w");
         fclose($file);
     }
 }

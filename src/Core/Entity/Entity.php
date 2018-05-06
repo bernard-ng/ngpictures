@@ -37,7 +37,7 @@ class Entity
         } else {
             $this->user = Ngpictures::getInstance()
                 ->getModel('users')
-                ->find($this->user_id ?? $this->id);
+                ->find($this->users_id ?? $this->id);
             return $this->user;
         }
     }

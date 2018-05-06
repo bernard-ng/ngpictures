@@ -1,3 +1,5 @@
+@import "custom/bases/variables";
+
 body {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -31,20 +33,10 @@ main {
   height: 100%;
 }
 
-/* This is needed for some mobile phones to display the Google Icon font properly */
-.material-icons {
-  text-rendering: optimizeLegibility;
-  -webkit-font-feature-settings: 'liga';
-          font-feature-settings: 'liga';
-}
-
-
 .scale-transition {
   -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.53, 0.01, 0.36, 1.63) !important;
   transition: -webkit-transform 0.3s cubic-bezier(0.53, 0.01, 0.36, 1.63) !important;
   -o-transition: transform 0.3s cubic-bezier(0.53, 0.01, 0.36, 1.63) !important;
-  transition: transform 0.3s cubic-bezier(0.53, 0.01, 0.36, 1.63) !important;
-  transition: transform 0.3s cubic-bezier(0.53, 0.01, 0.36, 1.63), -webkit-transform 0.3s cubic-bezier(0.53, 0.01, 0.36, 1.63) !important;
 }
 
 .scale-transition.scale-out {
@@ -54,8 +46,6 @@ main {
   -webkit-transition: -webkit-transform .2s !important;
   transition: -webkit-transform .2s !important;
   -o-transition: transform .2s !important;
-  transition: transform .2s !important;
-  transition: transform .2s, -webkit-transform .2s !important;
 }
 
 .scale-transition.scale-in {
@@ -70,7 +60,7 @@ main {
   z-index: 2000;
   background-color: transparent;
   border-radius: 2px;
-  color: #fff;
+  color: $txt-color;
   min-height: 36px;
   line-height: 120%;
   opacity: 0;
@@ -92,9 +82,9 @@ main {
   border-radius: 0 0 50% 50%;
   background-color: #323232;
   z-index: -1;
-  -webkit-transform-origin: 50% 0%;
-          -ms-transform-origin: 50% 0%;
-      transform-origin: 50% 0%;
+  -webkit-transform-origin: 50% 0;
+          -ms-transform-origin: 50% 0;
+      transform-origin: 50% 0;
   visibility: hidden;
 }
 
@@ -104,12 +94,12 @@ select:focus {
 
 button:focus {
   outline: none;
-  background-color: #2ab7a9;
+  background-color: $btn-focus-color;
 }
 
 label {
   font-size: 0.8rem;
-  color: #9e9e9e;
+  color: $txt-light-color;
 }
 
 .table-of-contents.fixed {
@@ -123,22 +113,21 @@ label {
 .table-of-contents a {
   display: inline-block;
   font-weight: 300;
-  color: #757575;
+  color: $txt-light-color;
   padding-left: 20px;
   height: 1.5rem;
   line-height: 1.5rem;
   letter-spacing: .4;
-  display: inline-block;
 }
 
 .table-of-contents a:hover {
-  color: #a8a8a8;
+  color: $txt-color;
   padding-left: 19px;
-  border-left: 1px solid #ee6e73;
+  border-left: 1px solid $active-color;
 }
 
 .table-of-contents a.active {
   font-weight: 500;
   padding-left: 18px;
-  border-left: 2px solid #ee6e73;
+  border-left: 2px solid $active-color;
 }

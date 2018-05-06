@@ -95,7 +95,7 @@ class Ngpictures
 
     /**
      * recupere une instance de validator
-     * @return ValidatorManager
+     * @return ValidationManager
      */
     public function getValidator(): ValidationManager
     {
@@ -143,6 +143,10 @@ class Ngpictures
     //****************************************************************************/
 
 
+    /**
+     * gestion d'exception
+     * @param $e
+     */
     public function exceptionHandler($e)
     {
         FlashMessageManager::getInstance()->set('danger', "Erreur !");
@@ -150,6 +154,12 @@ class Ngpictures
         self::redirect("/error-500");
     }
 
+    /**
+     * gestion d'erreur
+     * @param int $errno
+     * @param string $errstr
+     * @param string $errfile
+     */
     public function errorHandler(int $errno, string $errstr, string $errfile)
     {
         FlashMessageManager::getInstance()->set('danger', "Erreur !");
@@ -190,6 +200,7 @@ class Ngpictures
     /**
      * gestion de redirection
      * @param mixed $url
+     * @param bool $moved_permantly
      */
     public static function redirect($url = null, $moved_permantly = false)
     {
@@ -214,5 +225,15 @@ class Ngpictures
             }
             exit();
         }
+    }
+
+
+    /**
+     * gestion de turbolinks
+     * @param string $name nom de la routes, location
+     */
+    public static function turbolinksLocation(string $name)
+    {
+        header("Turbolinks-Location: {$name}");
     }
 }

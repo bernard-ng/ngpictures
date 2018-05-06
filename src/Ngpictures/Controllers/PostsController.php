@@ -17,6 +17,7 @@ class PostsController extends Controller
         parent::__construct($app, $pageManager);
         $this->loadModel('posts');
         $this->loadModel('categories');
+        $this->callController('users')->restrict();
     }
 
     use StoryPostTrait;
@@ -61,8 +62,8 @@ class PostsController extends Controller
                 $title          =   $this->str::escape($post->get('title'));
                 $content        =   $this->str::escape($post->get('content'));
                 $slug           =   $this->str::slugify($title);
-                $category_id    =   ($post->get('category') == 0) ? 1 : $post->get('category');
-                $user_id        =   intval($this->session->getValue(AUTH_KEY, 'id'));
+                $categories_id    =   ($post->get('category') == 0) ? 1 : $post->get('category');
+                $users_id        =   intval($this->session->getValue(AUTH_KEY, 'id'));
             } else {
                 $errors = new Collection($this->validator->getErrors());
                 $this->flash->set('danger', $this->msg['form_multi_errors']);
@@ -71,7 +72,7 @@ class PostsController extends Controller
             if (isset($_FILES) && !empty($_FILES)) {
                 if (!empty($file->get('thumb.name'))) {
                     if ($this->validator->isValid()) {
-                        $this->posts->create(compact('user_id', 'title', 'content', 'slug', 'category_id'));
+                        $this->posts->create(compact('users_id', 'title', 'content', 'slug', 'categories_id'));
 
                         $last_id    =   $this->posts->lastInsertId();
                         $isUploaded =   ImageManager::upload($file, 'posts', "ngpictures-{$slug}-{$last_id}", 'article');
@@ -120,9 +121,9 @@ class PostsController extends Controller
                     $title          =   $this->str::escape($post->get('title'));
                     $content        =   $this->str::escape($post->get('content'));
                     $slug           =   $this->str::slugify($title);
-                    $category_id    =   intval($post->get('category')) ?? 1;
+                    $categories_id    =   intval($post->get('category')) ?? 1;
 
-                    $this->posts->update($id, compact('title', 'content', 'slug', 'category_id'));
+                    $this->posts->update($id, compact('title', 'content', 'slug', 'categories_id'));
                     $this->flash->set("success", $this->msg['post_edit_success']);
                     $this->app::redirect("/account/post");
                 } else {
@@ -149,7 +150,7 @@ class PostsController extends Controller
         $post   =   $model->find(intval($post->get('id')));
 
         if ($this->session->read(TOKEN_KEY) == $token) {
-            if ($post && $post->user_id == $this->session->getValue(AUTH_KEY, 'id')) {
+            if ($post && $post->users_id == $this->session->getValue(AUTH_KEY, 'id')) {
                 $model->delete($post->id);
                 if ($this->isAjax()) {
                     exit();

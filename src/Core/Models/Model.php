@@ -210,6 +210,25 @@ class Model
 
 
     /**
+     * recupere les data superieur a l'id donne
+     *
+     * @param integer $lastId
+     * @param string $limit
+     * @return mixed
+     */
+    public function findGreater(int $lastId, string $limit)
+    {
+        return $this->query(
+            "SELECT * FROM {$this->table}
+            WHERE id < ? AND online = 1
+            ORDER BY id DESC
+            LIMIT {$limit}",
+            [$lastId]
+        );
+    }
+
+
+    /**
      * recupere un enregistrement suivant l'id et un autre champ
      * @param string $field
      * @param $value
@@ -230,8 +249,7 @@ class Model
     public function latest(int $from = 0, int $to = 4)
     {
         return $this->query(
-            "
-            SELECT {$this->table}.*, categories.title as category
+            "SELECT {$this->table}.*, categories.title as category
             FROM {$this->table}
             LEFT JOIN categories ON categories_id = categories.id
             WHERE online = 1 ORDER BY id DESC LIMIT {$from},{$to}",
@@ -249,8 +267,7 @@ class Model
     public function last()
     {
         return $this->query(
-            "
-            SELECT {$this->table}.*, categories.title as category
+            "SELECT {$this->table}.*, categories.title as category
             FROM {$this->table}
             LEFT JOIN categories ON categories_id = categories.id
             WHERE online = 1 ORDER BY id DESC",
@@ -268,8 +285,7 @@ class Model
     public function lastOnline()
     {
         return $this->query(
-            "
-            SELECT {$this->table}.*, categories.title as category
+            "SELECT {$this->table}.*, categories.title as category
             FROM {$this->table}
             LEFT JOIN categories ON categories_id = categories.id
             WHERE online = 1 ORDER BY id DESC ",
@@ -283,8 +299,7 @@ class Model
     public function lastOffline()
     {
         return $this->query(
-            "
-            SELECT {$this->table}.*, categories.title as category
+            "SELECT {$this->table}.*, categories.title as category
             FROM {$this->table}
             LEFT JOIN categories ON categories_id = categories.id
             WHERE online = 0 ORDER BY id DESC ",

@@ -1,3 +1,5 @@
+@import "../custom/bases/variables";
+
 .side-nav {
   position: fixed;
   width: 300px;
@@ -7,28 +9,19 @@
   -webkit-transform: translateX(-100%);
           -ms-transform: translateX(-100%);
       transform: translateX(-100%);
-  height: 100%;
   height: calc(100% + 60px);
   height: -moz-calc(100%);
   padding-bottom: 60px;
-  background-color: #fff;
   z-index: 999;
   overflow-y: auto;
   will-change: transform;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
-  -webkit-transform: translateX(-105%);
-          -ms-transform: translateX(-105%);
-      transform: translateX(-105%);
-
-  background-color: #263238 !important;
+  background-color: $nav-color;
 }
 
 .side-nav.right-aligned {
   right: 0;
-  -webkit-transform: translateX(105%);
-          -ms-transform: translateX(105%);
-      transform: translateX(105%);
   left: auto;
   -webkit-transform: translateX(100%);
           -ms-transform: translateX(100%);
@@ -42,12 +35,12 @@
 .side-nav li {
   float: none;
   line-height: 48px;
-  color: #ccc;
+  color: $txt-color;
 }
 
 .side-nav li.active {
   background-color: rgba(255, 255, 255, 0.09);
-  border-right: #ccc double 2px;
+  border-right: #ccc solid 2px;
 }
 
 .side-nav li > a {
@@ -148,7 +141,7 @@
   bottom: 0;
   left: 0;
   z-index: -1;
-  border-bottom: 5px solid #808a8f !important;
+  border-bottom: 5px solid $active-color !important;
   margin-bottom: -8px;
 }
 

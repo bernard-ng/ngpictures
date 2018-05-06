@@ -53,14 +53,14 @@ class UsersModel extends Model
     /**
      * verifiation du reset password token
      * @param string $token
-     * @param int $user_id
+     * @param int $users_id
      * @return mixed
      */
-    public function checkResetToken(string $token, int $user_id)
+    public function checkResetToken(string $token, int $users_id)
     {
         return $this->query(
             "SELECT * FROM users WHERE (reset_token = ? AND reset_at > DATE_SUB(NOW(), INTERVAL 120 MINUTE)) AND id = ? ",
-            [$token, $user_id],
+            [$token, $users_id],
             true,
             true
         );
@@ -70,13 +70,13 @@ class UsersModel extends Model
     /**
      * mise a jour du mot de passe
      * @param string $password
-     * @param int $user_id
+     * @param int $users_id
      */
-    public function resetPassword(string $password, int $user_id)
+    public function resetPassword(string $password, int $users_id)
     {
         $this->query(
             "UPDATE users SET password = ? , reset_token = NUll , reset_at = NULL WHERE id = ? ",
-            [$password, $user_id]
+            [$password, $users_id]
         );
     }
 
@@ -84,28 +84,28 @@ class UsersModel extends Model
     /**
      * creation du reset token
      * @param string $token
-     * @param int $user_id
+     * @param int $users_id
      * @return mixed
      */
-    public function setResetToken(string $token, int $user_id)
+    public function setResetToken(string $token, int $users_id)
     {
         return $this->query(
             "UPDATE {$this->table} SET reset_token = ? , reset_at = NOW() WHERE id = ?",
-            [$token,$user_id]
+            [$token,$users_id]
         );
     }
 
 
     /**
      * suppression du token de confirmation
-     * @param int $user_id
+     * @param int $users_id
      * @return mixed
      */
-    public function unsetConfirmationToken(int $user_id)
+    public function unsetConfirmationToken(int $users_id)
     {
         return $this->query(
             "UPDATE {$this->table} SET confirmation_token = NULL , confirmed_at = NOW() WHERE id = ?",
-            [$user_id]
+            [$users_id]
         );
     }
 
@@ -113,28 +113,28 @@ class UsersModel extends Model
     /**
      * creation du rememeber token pour les cookies
      * @param string $token
-     * @param int $user_id
+     * @param int $users_id
      * @return mixed
      */
-    public function setRememberToken(string $token, int $user_id)
+    public function setRememberToken(string $token, int $users_id)
     {
         return $this->query(
             "UPDATE {$this->table} SET remember_token = ? WHERE id = ?",
-            [$token, $user_id]
+            [$token, $users_id]
         );
     }
 
 
     /**
      * renvoi un utilisateur non confirmer
-     * @param int $user_id
+     * @param int $users_id
      * @return mixed
      */
-    public function isNotConfirmed(int $user_id)
+    public function isNotConfirmed(int $users_id)
     {
         return $this->query(
             "SELECT * FROM {$this->table} WHERE id = ? AND confirmed_at IS NULL",
-            [$user_id],
+            [$users_id],
             true,
             true
         );

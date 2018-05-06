@@ -26,7 +26,7 @@ trait PostEntityTrait
     {
         $category = StringManager::Slugify($this->category);
         $this->categoryUrl = "/categories";
-        $this->categoryUrl .= "/{$category}-{$this->category_id}";
+        $this->categoryUrl .= "/{$category}-{$this->categories_id}";
         return $this->categoryUrl;
     }
 
@@ -140,8 +140,7 @@ trait PostEntityTrait
     {
         $comments = Ngpictures::getInstance()->getModel('comments');
         $comments = $comments->getNumber($this->id, $this->action_type);
-        $words = ($comments > 1)? " commentaires" : " commentaire";
-        return $comments." {$words}";
+        return $comments;
     }
 
 
@@ -164,7 +163,7 @@ trait PostEntityTrait
     public function getSnipet(): string
     {
         $users = Ngpictures::getInstance()->getModel('users');
-        $content = StringManager::getSnipet(StringManager::truncateText($this->content, 600));
+        $content = StringManager::getSnipet(StringManager::truncateText($this->content, 150));
         return (StringManager::userMention($users, $content));
     }
 

@@ -11,7 +11,7 @@
 
                 <div class="col  l6 m6 s12">
                     <select name = "category">
-                        <option selected value="<?=  $article->category_id ?>"><?= $article->category ?></option>
+                        <option selected value="<?=  $article->categories_id ?>"><?= $article->category ?></option>
                         <?php foreach ($categories as $c) : ?>
                             <option value="<?= $c->id ?>"><?= $c->title ?></option>
                         <?php endforeach; ?>
@@ -29,5 +29,3 @@
         </div>
     </section>
 </main>
-
-

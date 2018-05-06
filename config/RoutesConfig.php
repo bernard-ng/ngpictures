@@ -41,8 +41,9 @@ $router->get("/categories/:name-:id", "categories#show", "categories.show");
 
 //gallery pages
 $router->get("/gallery","gallery","gallery.index");
-$router->get("/gallery/:id","gallery#show","gallery.show");
+$router->get("/gallery/slider", "gallery#slider", "gallery.slider");
 $router->get("/gallery/albums", "gallery#albums", "gallery.albums");
+$router->get("/gallery/:id","gallery#show","gallery.show");
 
 
 //likes
@@ -66,12 +67,13 @@ $router->get("/search", "search", "search.index");
 $router->get("/search/:q", "search", "search.index");
 
 //rss
-$router->get("/rss", "rss", "rss.index");
+$router->get("/feed", "rss", "rss.index");
 
 //contact
 $router->any("/ideas", "ideas", "ideas.index");
 $router->any("/bugs", "bugs", "bugs.index");
 $router->any("/contact", "contact", "contact.index");
+$router->get("/about", "static#about", "static.about");
 
 
 
