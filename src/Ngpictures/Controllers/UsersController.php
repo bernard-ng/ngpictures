@@ -327,8 +327,7 @@ class UsersController extends Controller
                                 }
 
                                 if ($this->isAjax()) {
-                                    echo $user->accountUrl;
-                                    exit();
+                                    $this->ajaxRedirect($user->accountUrl);
                                 }
 
                                 $this->flash->set('success', $this->msg['users_login_success']);

@@ -29,7 +29,8 @@ class Collection implements IteratorAggregate, ArrayAccess
      * renvmoi un tableau de base.
      * @return array
      */
-    public function asArray(): array {
+    public function asArray(): array
+    {
         return $this->items;
     }
 

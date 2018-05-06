@@ -35,6 +35,11 @@ class IdeasController extends Controller
 
                 $this->loadModel('ideas')->create(compact('content', 'users_id'));
                 $this->flash->set('success', $this->msg['form_idea_submitted']);
+
+                if ($this->isAjax()) {
+                    $this->ajaxRedirect('/');
+                }
+
                 $this->app::redirect("/");
             } else {
                 $errors = new Collection($this->validator->getErrors());

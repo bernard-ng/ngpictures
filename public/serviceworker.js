@@ -5,6 +5,9 @@ self.addEventListener('install', function(e) {
         caches.open('ngpictures').then(function(cache) {
             return cache.addAll([
                 '/assets/css/style.css',
+                '/assets/fonts/ngpictures-icons.css',
+                '/assets/icons/*',
+                '/assets/roboto/*',
                 '/assets/js/turbolinks.js',
                 '/assets/js/jquery.min.js',
                 '/assets/js/app/materialize.js',

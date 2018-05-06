@@ -44,6 +44,8 @@ class Controller
 
     /**
      * en cas d'erreur en ajax
+     * @param string $msg
+     * @param int|null $code
      */
     public function ajaxFail(string $msg, int $code = null)
     {
@@ -53,6 +55,17 @@ class Controller
             http_response_code($code);
         }
         echo $msg;
+        exit();
+    }
+
+
+    /**
+     * renvoi a ajax l'url de redirction
+     * @param string $url
+     */
+    protected function ajaxRedirect(string $url)
+    {
+        echo $url;
         exit();
     }
 }

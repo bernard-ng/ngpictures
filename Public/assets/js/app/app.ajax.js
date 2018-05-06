@@ -102,11 +102,11 @@ function setEventTrigger(element, eventName) {
 /**
  * cree un loader dans un element...
  */
-function setLoader(element){
-    element.classList.add("disabled");
-    element.innerText = '';
-    element.innerHtml = '';
-    element.innerText = "Chargement...";
+function setLoader(element)
+
+
+function invalidateField(element) {
+
 }
 
 
@@ -123,7 +123,6 @@ function removeLoader(element, text) {
 }
 
 
-// MAIN SCRIPTS
 //------------------------------------------------------------------------------------
 
 /**
@@ -423,7 +422,10 @@ function loadPictureInfo() {
 }
 
 
-
+/**
+ * login ajax
+ * @param element
+ */
 function login(element){
     let form = document.querySelector(element);
     if (form) {
@@ -439,6 +441,8 @@ function login(element){
             let password = form.querySelector("input[name='password']");
             name.nextElementSibling.innerText = "";
             password.nextElementSibling.innerText = "";
+            name.classList.remove('invalid');
+            password.classList.remove('invalid');
 
             if (getXhr()) {
                 let xhr = getXhr();
@@ -453,8 +457,14 @@ function login(element){
                         } else if (xhr.status === 403) {
                             removeLoader(submitBtn, 'Connexion');
                             let errors = JSON.parse(xhr.responseText);
-                            errors.name ? name.nextElementSibling.innerText = errors.name : null;
-                            errors.password ? password.nextElementSibling.innerText = errors.password : null;
+
+                            if (errors.name) {
+                                name.nextElementSibling.innerText = errors.name;
+                                name.classList.add('invalid');
+                            } else if (errors.password) {
+                                errors.password ? password.nextElementSibling.innerText = errors.password : null;
+                                password.classList.add('invalid');
+                            }
                         } else {
                             removeLoader(submitBtn, 'Connexion');
                             xhr.responseText ? setFlash('danger', xhr.responseText) : setFlash('danger', msg.undefinedError);
@@ -465,10 +475,67 @@ function login(element){
         });
     }
 }
-login("form[data-action='login']");
 
-// CALLS
+/**
+ * ideas ajax
+ * @param element
+ */
+function ideas(element) {
+    let form = document.querySelector(element);
+    if (form) {
+        let submitBtn = form.querySelector("button[type='submit']")
+        submitBtn.addEventListener('click', function(){
+            setLoader(this);
+        });
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            let textarea = this.querySelector('textarea#ideas');
+            textarea.nextElementSibling.innerText = "";
+            textarea.classList.remove('invalid');
+
+            if (getXhr()) {
+                let xhr = getXhr();
+                xhr.open('POST', this.getAttribute('action'), true);
+                xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+                xhr.send(new FormData(this));
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            removeLoader(submitBtn, 'Envoyer');
+                            Turbolinks.visit(window.location.origin + xhr.responseText);
+                        } else if (xhr.status === 403) {
+                            removeLoader(submitBtn, 'Envoyer');
+                            let errors = JSON.parse(xhr.responseText);
+                            if (errors.ideas) {
+                                textarea.nextElementSibling.innerText = errors.ideas;
+                                textarea.classList.add('invalid');
+                            }
+                        } else {
+                            removeLoader(submitBtn, 'Envoyer');
+                            xhr.responseText ? setFlash('danger', xhr.responseText) : setFlash('danger', msg.undefinedError);
+                        }
+                    }
+                }
+            }
+        });
+    }
+}
+
+
+/**
+ * bugs ajax
+ * @param element
+ */
+function bugs(element) {
+
+}
+
+
 //------------------------------------------------------------------------------------
+login("form[data-action='login']");
+ideas("form[data-action='ideas']");
 comments('#dataContainer');
 likes("#dataContainer");
 window.setInterval(loadVerses("#verses"), 5000);
