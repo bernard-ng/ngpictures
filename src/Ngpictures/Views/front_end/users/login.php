@@ -1,11 +1,11 @@
 <div class="row col l4">
     <div class="card-panel shadow-4" id="loginBox" style="margin-top: 20%;">
-        <form method="POST" action="">
+        <form method="POST" action="" data-action="login">
             <div class="row">
                 <div class="input-field col s12">
                     <label for="name">Pseudo ou adresse mail</label>
                     <input type="text" name="name" value="<?= htmlspecialchars($post->get('name')); ?>" class="validate <?= $errors->get('name')? 'invalid' : '' ?>">
-                    <span class="helper-text red-txt" style="padding-top: -20px;">
+                    <span class="helper-text red-txt" style="padding-top: -25px;">
                         <?= $errors->get('name') ?>
                     </span>
                 </div>
@@ -13,7 +13,7 @@
                 <div class="input-field col s12">
                     <label for="password">Mot de passe</label>
                     <input type="password" name="password" id="password" class="valiate <?= $errors->get('password')? 'invalid' : '' ?>">
-                    <span class="helper-text red-txt" style="padding-top: -20px;">
+                    <span class="helper-text red-txt" style="padding-top: -25px;">
                         <?= $errors->get('password'); ?>
                     </span>
                 </div>

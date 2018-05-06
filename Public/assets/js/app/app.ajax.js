@@ -1,5 +1,51 @@
-// HELPERS
-//------------------------------------------------------------------------------------
+/**
+ * le message d'erreur ou de success.
+ */
+const msg = {
+    success : "Action effectuée",
+    browserNotUpdate:       "Erreur, veuillez mettre à jour votre navigateur",
+    undefinedError:         "Aucune Connexion Internet",
+    deleteNotAllowed : "Vous n'avez pas le droit de suppression",
+    editNotAllowed : "Vous n'avez pas le droit d'édition",
+
+    formAllRequired : "Tous les champs doivent être compléter",
+    formMultiErrors : "Le formulaire a été mal rempli",
+    formFieldRequired : "Le champ doit être complété",
+    formBadSlug : 'Le slug ne doit contenir que des chiffres, des lettres et des tirés',
+    formIdeaSubmitted : "Ola, nous avons bien reçu votre idée",
+    formCommentSubmitted : "Votre commentaire a bien été posté",
+    formPostSubmitted : "Votre publication a bien été effectuée",
+    formBugSubmitted : "Nous avons bien reçu votre message et comptons régler le bug dans le plus bref délais",
+    formResetSubmitted : "Les instructions de rappel de mot de passe vous ont été envoyées par mail",
+    formRegistrationSubmitted : "Un email de confirmation de compte vous a été envoyé, veuillez le confirmer pour continuer",
+    formContactSubmitted : 'Nous avons bien reçu votre message et comptons vous répondre dans le plus bref délais',
+
+    filesNotImage : "Le fichier à télécharger doit être une image (jpg, jpeg, png, gif)",
+    filesNotUploaded : "Ooups, votre image n'a pas pu être télécharger",
+    filesNotDirectory : "Impossibe d'ouvrir le dossier demandé, veuillez réessayer",
+    filesDownloadFailed : "Ooups, une Erreur s'est produite lors du téléchargement",
+    filesNotFound : "La photo que vous désirer télécharger n'est plus disponible",
+
+    commentNotFound : "Ce commentaire n'éxiste pas ou plus",
+    commentDeleteSuccess : "Votre commentaire a bien été supprimé",
+    commentEditSuccess : "Votre commentaire a bien été édité",
+
+    usersNotfound : "Cet utilisateur n'a pas été trouvé",
+    usersLoginSuccess: "Vous êtes maintenant connecté",
+    usersNotLogged : "Connectez-vous pour continuer",
+    usersUnfollowingSuccess : "Vous ne suivez plus cet utilisateur",
+    usersFollowingSuccess : "Vous suivez cet utilisateur",
+};
+
+/**
+ * cree un toast de materializecss
+ * @param message
+ * @param type
+ */
+function setFlash(type, message) {
+    Materialize.toast(message, 4000, type);
+}
+
 
 /**
  * recupere une instance du xhr pour les req ajax.
@@ -32,16 +78,6 @@ function getXhr() {
 
 
 /**
- * cree un toast de materializecss
- * @param message
- * @param type
- */
-function setFlash(type, message) {
-    Materialize.toast(message, 4000, type);
-}
-
-
-/**
  * permet de simuler le declanchement d'un event.
  * @param element
  * @param eventName
@@ -67,11 +103,10 @@ function setEventTrigger(element, eventName) {
  * cree un loader dans un element...
  */
 function setLoader(element){
-    let loader = document.createElement("span");
-    loader.classList.add("loader");
+    element.classList.add("disabled");
     element.innerText = '';
     element.innerHtml = '';
-    element.appendChild(loader);
+    element.innerText = "Chargement...";
 }
 
 
@@ -81,22 +116,11 @@ function setLoader(element){
  * @param text
  */
 function removeLoader(element, text) {
-    let loader = element.querySelector("span.loader");
-    element.removeChild(loader);
+    element.classList.remove("disabled");
+    element.innerText = '';
+    element.innerHtml = '';
     element.innerText = text;
 }
-
-
-/**
- * le message d'erreur ou de success.
- */
-var msg = {
-    usersNotLogged:         "Connectez-vous pour continuer",
-    browserNotUpdate:       "Erreur, veuillez mettre à jour votre navigateur",
-    undefinedError:         "Aucune Connexion Internet",
-    formFieldRequired:      "Compléter le champ",
-    formCommentSubmitted:   "Commentaire Ajouté",
-};
 
 
 // MAIN SCRIPTS
@@ -399,6 +423,49 @@ function loadPictureInfo() {
 }
 
 
+
+function login(element){
+    let form = document.querySelector(element);
+    if (form) {
+        let submitBtn = form.querySelector("button[type='submit']")
+        submitBtn.addEventListener('click', function(){
+            setLoader(this);
+        });
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            let name = form.querySelector("input[name='name']");
+            let password = form.querySelector("input[name='password']");
+            name.nextElementSibling.innerText = "";
+            password.nextElementSibling.innerText = "";
+
+            if (getXhr()) {
+                let xhr = getXhr();
+                xhr.open('POST', this.getAttribute('action'), true);
+                xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+                xhr.send(new FormData(this));
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            removeLoader(submitBtn, 'Connexion');
+                            Turbolinks.visit(window.location.origin + xhr.responseText);
+                        } else if (xhr.status === 403) {
+                            removeLoader(submitBtn, 'Connexion');
+                            let errors = JSON.parse(xhr.responseText);
+                            errors.name ? name.nextElementSibling.innerText = errors.name : null;
+                            errors.password ? password.nextElementSibling.innerText = errors.password : null;
+                        } else {
+                            removeLoader(submitBtn, 'Connexion');
+                            xhr.responseText ? setFlash('danger', xhr.responseText) : setFlash('danger', msg.undefinedError);
+                        }
+                    }
+                }
+            }
+        });
+    }
+}
+login("form[data-action='login']");
 
 // CALLS
 //------------------------------------------------------------------------------------

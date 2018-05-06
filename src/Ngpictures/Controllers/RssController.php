@@ -46,18 +46,6 @@ class RssController extends Controller
                     ->appendTo($channel);
             }
 
-
-            if (!empty($feed)) {
-                if (fopen(WEBROOT."/feed.xml", "r+")) {
-                    $xml = fopen(WEBROOT."/feed.xml", "r+");
-                    fwrite($xml, $feed);
-                    fclose($xml);
-                } else {
-                    $this->flash->set('danger', $this->msg['undefined_error']);
-                    $this->app::redirect(true);
-                }
-            }
-
             $this->app::turbolinksLocation("/feed");
             header("Content-type: application/rss+xml");
             require WEBROOT."/feed.xml";

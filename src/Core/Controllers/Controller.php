@@ -45,9 +45,13 @@ class Controller
     /**
      * en cas d'erreur en ajax
      */
-    public function ajaxFail(string $msg)
+    public function ajaxFail(string $msg, int $code = null)
     {
-        header('HTTP/1.1 500 Internal Server Error');
+        if (is_null($code)) {
+            header('HTTP/1.1 500 Internal Server Error');
+        } else {
+            http_response_code($code);
+        }
         echo $msg;
         exit();
     }

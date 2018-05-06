@@ -326,20 +326,33 @@ class UsersController extends Controller
                                     $this->remember($user->id);
                                 }
 
+                                if ($this->isAjax()) {
+                                    echo $user->accountUrl;
+                                    exit();
+                                }
+
                                 $this->flash->set('success', $this->msg['users_login_success']);
                                 $this->app::redirect($user->accountUrl);
                             } else {
-                                $this->flash->set('danger', $this->msg['users_bad_identifier']);
+                                $this->isAjax()?
+                                    $this->ajaxFail($this->msg['users_bad_identifier']) :
+                                    $this->flash->set('danger', $this->msg['users_bad_identifier']);
                             }
                         } else {
-                            $this->flash->set('warning', $this->msg['users_not_confirmed']);
+                            $this->isAjax()?
+                                $this->ajaxFail($this->msg['users_not_confirmed']) :
+                                $this->flash->set('warning', $this->msg['users_not_confirmed']);
                         }
                     } else {
-                        $this->flash->set('danger', $this->msg['users_bad_identifier']);
+                        $this->isAjax() ?
+                            $this->ajaxFail($this->msg['users_bad_identifier']) :
+                            $this->flash->set('danger', $this->msg['users_bad_identifier']);
                     }
                 } else {
                     $errors = new Collection($this->validator->getErrors());
-                    $this->flash->set('danger', $this->msg['form_multi_errors']);
+                    $this->isAjax() ?
+                        $this->ajaxFail(json_encode($errors->asArray()), 403) :
+                        $this->flash->set('danger', $this->msg['form_multi_errors']);
                 }
             }
 

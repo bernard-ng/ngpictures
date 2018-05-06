@@ -26,6 +26,15 @@ class Collection implements IteratorAggregate, ArrayAccess
 
 
     /**
+     * renvmoi un tableau de base.
+     * @return array
+     */
+    public function asArray(): array {
+        return $this->items;
+    }
+
+
+    /**
      * permet de recupere la clef d'un tableau.
      *
      * @param mixed $key recupere la clef d'un tableau.
