@@ -133,7 +133,7 @@ $router->get(ADMIN."/users/ideas", "admin#ideas", "admin.ideas");
 /*****************************************************************************/
 $router->post("/ajax/posts", "ajax#posts", "ajax.posts");
 $router->post("/ajax/blog", "ajax#blog", "ajax.blog");
-$router->get("/ajax/verset", "ajax#verset", "ajax.verses");
+$router->get("/verses", "verses", "ajax.verses");
 
 
 //ERROR ROUTES

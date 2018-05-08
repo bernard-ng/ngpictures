@@ -1,7 +1,7 @@
 /**
  * le message d'erreur ou de success.
  */
-const msg = {
+msg = {
     success : "Action effectuée",
     browserNotUpdate:       "Erreur, veuillez mettre à jour votre navigateur",
     undefinedError:         "Aucune Connexion Internet",
@@ -78,6 +78,15 @@ function getXhr() {
 
 
 /**
+ * redirection en ajax
+ * @param url
+ */
+function redirect(url) {
+    Turbolinks.visit(window.location.origin + url);
+}
+
+
+/**
  * permet de simuler le declanchement d'un event.
  * @param element
  * @param eventName
@@ -102,11 +111,34 @@ function setEventTrigger(element, eventName) {
 /**
  * cree un loader dans un element...
  */
-function setLoader(element)
+function setLoader(element) {
+    element.classList.add("disabled");
+    element.innerText = '';
+    element.innerHtml = '';
+    element.innerText = 'Chargement...';
+}
+
+/**
+ * si un champ a des erreurs
+ * @param element
+ * @param msg
+ */
+function formDataInvalid(element, msg) {
+    element.classList.add('invalid');
+    element.nextElementSibling.innerText = '';
+    element.nextElementSibling.innerText = msg;
+}
 
 
-function invalidateField(element) {
-
+/**
+ * restore la validation des champs
+ * @param elements
+ */
+function resetValidation(elements) {
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].classList.remove('invalid');
+        elements[i].nextElementSibling.innerText = '';
+    }
 }
 
 
@@ -244,7 +276,10 @@ function likes(element) {
                                 if (xhr.status === 200) {
                                     showLikes.innerHTML = xhr.responseText;
                                 } else {
-                                    window.alert(xhr.responseText);
+                                    setFlash(
+                                        'danger',
+                                        xhr.responseText? xhr.responseText : msg.undefinedError
+                                    );
                                 }
                             }
                         }
@@ -267,22 +302,30 @@ function likes(element) {
 function loadVerses(element) {
     let verseContainer = document.querySelector(element);
     if (verseContainer) {
-        xhr = getXhr();
-        if (xhr) {
-            xhr.open('GET', '/ajax/verset', true);
+        let indicator = verseContainer.querySelector('.indicator');
+
+        if (getXhr()) {
+            let xhr = getXhr();
+            xhr.open('GET', verseContainer.getAttribute('data-ajax'), true);
             xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
             xhr.send();
 
+            indicator.classList.remove('active');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
-                        verseContainer.innerHTML = '';
-                        verseContainer.innerHTML = xhr.responseText;
+                        try {
+                            let verse = JSON.parse(xhr.responseText);
+                            verseContainer.querySelector("[data-content='txt']").innerHTML = verse.txt;
+                            verseContainer.querySelector("[data-content='ref']").innerHTML = verse.ref;
+                            indicator.classList.add('active');
+                        } catch (e) {
+                            return false;
+                        }
                     } else {
                         setFlash(
+                            'danger',
                             xhr.responseText? xhr.responseText : msg.undefinedError,
-                            5000,
-                            'danger'
                         );
                     }
                 }
@@ -426,7 +469,7 @@ function loadPictureInfo() {
  * login ajax
  * @param element
  */
-function login(element){
+function formLogin(element){
     let form = document.querySelector(element);
     if (form) {
         let submitBtn = form.querySelector("button[type='submit']")
@@ -439,10 +482,7 @@ function login(element){
 
             let name = form.querySelector("input[name='name']");
             let password = form.querySelector("input[name='password']");
-            name.nextElementSibling.innerText = "";
-            password.nextElementSibling.innerText = "";
-            name.classList.remove('invalid');
-            password.classList.remove('invalid');
+            resetValidation([name, password]);
 
             if (getXhr()) {
                 let xhr = getXhr();
@@ -453,17 +493,15 @@ function login(element){
                     if (xhr.readyState === 4) {
                         if (xhr.status === 200) {
                             removeLoader(submitBtn, 'Connexion');
-                            Turbolinks.visit(window.location.origin + xhr.responseText);
+                            redirect(xhr.responseText);
                         } else if (xhr.status === 403) {
                             removeLoader(submitBtn, 'Connexion');
                             let errors = JSON.parse(xhr.responseText);
 
                             if (errors.name) {
-                                name.nextElementSibling.innerText = errors.name;
-                                name.classList.add('invalid');
+                                formDataInvalid(name, errors.name);
                             } else if (errors.password) {
-                                errors.password ? password.nextElementSibling.innerText = errors.password : null;
-                                password.classList.add('invalid');
+                                formDataInvalid(password, errors.password);
                             }
                         } else {
                             removeLoader(submitBtn, 'Connexion');
@@ -476,11 +514,12 @@ function login(element){
     }
 }
 
+
 /**
- * ideas ajax
+ * ideas ajax et bug
  * @param element
  */
-function ideas(element) {
+function formGenericSubmit(element) {
     let form = document.querySelector(element);
     if (form) {
         let submitBtn = form.querySelector("button[type='submit']")
@@ -492,8 +531,7 @@ function ideas(element) {
             e.stopPropagation();
 
             let textarea = this.querySelector('textarea#ideas');
-            textarea.nextElementSibling.innerText = "";
-            textarea.classList.remove('invalid');
+            resetValidation([textarea]);
 
             if (getXhr()) {
                 let xhr = getXhr();
@@ -509,8 +547,7 @@ function ideas(element) {
                             removeLoader(submitBtn, 'Envoyer');
                             let errors = JSON.parse(xhr.responseText);
                             if (errors.ideas) {
-                                textarea.nextElementSibling.innerText = errors.ideas;
-                                textarea.classList.add('invalid');
+                                formDataInvalid(textarea, errors.ideas);
                             }
                         } else {
                             removeLoader(submitBtn, 'Envoyer');
@@ -523,19 +560,13 @@ function ideas(element) {
     }
 }
 
-
-/**
- * bugs ajax
- * @param element
- */
-function bugs(element) {
-
-}
-
-
 //------------------------------------------------------------------------------------
-login("form[data-action='login']");
-ideas("form[data-action='ideas']");
+formLogin("form[data-action='login']");
+formGenericSubmit("form[data-action='ideas']");
+formGenericSubmit("form[data-action='bugs']");
 comments('#dataContainer');
 likes("#dataContainer");
-window.setInterval(loadVerses("#verses"), 5000);
+
+window.setInterval(function () {
+    loadVerses("[data-action='verses']")
+}, 10000);

@@ -79,7 +79,7 @@
                     </div>
                 <?php endif; ?>
             </div>
-            <div id="statusBar" class="btn btn-flat blue-grey dark-2 action waves-effect" data-ajax="blog">chargement</div>
+            <div id="statusBar" class="btn btn-flat action waves-effect" data-ajax="blog">chargement...</div>
         </div>
     </section>
     <?php require(APP."/Views/includes/menu-aside.php"); ?>

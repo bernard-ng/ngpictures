@@ -12,9 +12,13 @@
 function toggleMenuItem() {
     let active = document.querySelector("#menu-item-active");
     if (active) {
-        let link = document.querySelector("ul.links").querySelector("li#"+ active.getAttribute('data-active'));
-        if (link) {
-            link.classList.add('active');
+        try {
+            let link = document.querySelector("ul.links").querySelector("li#"+ active.getAttribute('data-active'));
+            if (link) {
+                link.classList.add('active');
+            }
+        } catch (e) {
+            return false;
         }
     } else {
         return false;
@@ -28,9 +32,13 @@ function toggleMenuItem() {
 function toggleMobileMenuItem() {
     let active = document.querySelector("#menu-mobile-item-active");
     if (active) {
-        let link = document.querySelector("ul.mobile-links").querySelector("li#"+ active.getAttribute('data-active'));
-        if (link) {
-            link.classList.add('active');
+        try {
+            let link = document.querySelector("ul.mobile-links").querySelector("li#"+ active.getAttribute('data-active'));
+            if (link) {
+                link.classList.add('active');
+            }
+        } catch (e) {
+            return false;
         }
     } else {
         return false;

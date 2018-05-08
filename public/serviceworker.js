@@ -11,7 +11,7 @@ self.addEventListener('install', function(e) {
                 '/assets/js/turbolinks.js',
                 '/assets/js/jquery.min.js',
                 '/assets/js/app/materialize.js',
-                '/assets/js/app/activingScript.js',
+                '/assets/js/app/app.init.js',
                 '/assets/js/app/app.ajax.js',
                 '/assets/js/app/app.js',
             ]);

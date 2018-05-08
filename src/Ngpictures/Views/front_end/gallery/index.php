@@ -1,7 +1,7 @@
 <section class="section row container">
     <section id="gallery" class="gallery-container animated fast slideInLeft">
         <?php foreach ($photos as $key => $photo) :  ?>
-            <article class="col l3 s3 m3" data-show="<?= $photo->url; ?>" id="pic-<?= $photo->id ?>">
+            <article class="col l3 s3 m3" data-show="<?= $photo->url; ?>" id="<?= $photo->id ?>">
                 <img src="<?= $photo->smallthumbUrl ?>" class="gallery-item"/>
             </article>
             <?php if ($key % 4 === 0) : ?>
@@ -22,11 +22,11 @@
 <script type="text/javascript" src="/assets/js/app/activingScript.js" ></script>
 
 <script>
-var $active = false;
+let $active = false;
 $("#gallery .gallery-item").on("click", function(){
 
-    var $item = $(this)
-    var $details = $item.parent().nextAll(".gallery-details:first")
+    let $item = $(this)
+    let $details = $item.parent().nextAll(".gallery-details:first")
 
     if ($item.hasClass("active")) {
         return true;
@@ -36,16 +36,17 @@ $("#gallery .gallery-item").on("click", function(){
     $(".gallery-details").removeClass('jumbotron jumbotron-img dark');
     $item.addClass("active");
 
+
+    $details.addClass('jumbotron jumbotron-img dark').html("<span class='center-align'>Chargement...</span>");
     $.ajax(
         {url: $item.parent().attr('data-show')}
     ).then(
         function($detailsInfo) {
-
-            $details.addClass('jumbotron jumbotron-img dark');
+            $details.addClass('jumbotron jumbotron-img dark').html('');
             $details.append($detailsInfo).slideDown();
             $work_details =  $details.find('.gallery-container-details');
 
-            var $del = $active;
+            let $del = $active;
             if ($active) {
                 $active.slideUp(300, function() {
                     $del.remove()
@@ -53,7 +54,7 @@ $("#gallery .gallery-item").on("click", function(){
             }
 
             //animation
-            for (var i = 1; i <= 3; i++)
+            for (let i = 1; i <= 3; i++)
             {
                 $(".stagger" + i, $work_details).css({
                     opacity:0, marginLeft:-30
@@ -77,14 +78,14 @@ $("#gallery .gallery-item").on("click", function(){
     window.location.hash = $item.parent().attr('id')
 });
 
-var scrollTo = function(cible) {
+let scrollTo = function(cible) {
     window.setTimeout(function(){
-        $('html, boby').animate({scrollTop: cible.offset().top - 80 }, 750);
+        $('html, boby').animate({scrollTop: $(cible).offset().top - 80 }, 750);
     }, 300)
 }
 
 if (window.location.hash) {
-    var $target = $(window.location.hash + " img.gallery-item");
+    let $target = $(window.location.hash + " img.gallery-item");
     if ($target.length > 0) {
         $target.trigger('click')
         scrollTo($target)

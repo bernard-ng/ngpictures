@@ -20,13 +20,13 @@
         <div class="ui divided header">Statistiques</div>
         <div id="stat" class="col l12 m12 s12 statistic"></div>
     </div>
-    <div class="card teal dark-4 col l12 s12 m12">
+    <div class="card-panel teal dark-4 col l12 s12 m12">
         <div class="ui header">
             Les Derniers posts
             <span class="btn blue-grey dark-3 right"><?= count($site_posts) ?></span>
         </div>
         <div class="col l6 m12 s12 mb-30 shadow-2">
-            <table class="responsive-table bordered striped">
+            <table class=" bordered striped">
                 <thead>
                     <tr>
                         <th>id</th>
@@ -79,7 +79,7 @@
         </div>
 
         <div class="col l6 m12 s12 shadow-2 mb-10">
-            <table class="responsive-table bordered striped">
+            <table class=" bordered striped">
                 <thead>
                     <tr>
                         <th>id</th>

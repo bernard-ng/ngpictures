@@ -27,7 +27,7 @@ class CookieManager implements CookieInterface
      */
     public function write(string $name, string $value)
     {
-        setcookie($name, serialize($value), time() * 60 * 24 * 5);
+        setcookie($name, serialize($value), time() * 60 * 24 * 1);
     }
 
 

@@ -134,18 +134,7 @@ class LikesModel extends Model
         $isLiked = $this->isLiked($id, $type, $this->session->getValue(AUTH_KEY, 'id'));
         $likes =  $this->getLikes($id, $type);
         $liked = $likes - 1 ;
-
-        if ($isLiked && $likes > 2) {
-            return "Vous et {$liked} personnes aimez ça";
-        } elseif ($isLiked && $likes == 1) {
-            return "Vous aimez ça";
-        } elseif (!$isLiked && $likes >= 2) {
-            return "{$likes} personnes aiment ça";
-        } elseif (!$isLiked && $likes == 1) {
-            return "Une personne aime ça";
-        } else {
-            return "{$likes} j'aime";
-        }
+        return ($isLiked && $likes == 1)? "Vous aimez ça" : "{$likes} j'aime";
     }
 
 

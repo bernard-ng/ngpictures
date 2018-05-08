@@ -137,7 +137,7 @@
                 </div>
             <?php endif; ?>
         </div>
-        <div id="statusBar" class="feed-btn" data-ajax="posts">chargement</div>
+        <div id="statusBar" class="btn btn-flat action waves-effect" data-ajax="posts">chargement...</div>
     </section>
     <?php foreach ($posts as $a) : ?>
         <div id="report-<?= $a->id ?>" class="modal dark">

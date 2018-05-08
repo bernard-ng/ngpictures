@@ -19,7 +19,7 @@
     </section>
     <section class="jumbotron dark col l12 s12 m12">
         <div class="container row">
-            <div class="row col l7 s12 m12 animated slideInLeft">
+            <div class="row col l8 s12 m12 animated slideInLeft">
                 <h2 class="ui header">Nos photos</h2>
                 <div class="">
                     <p>
@@ -45,7 +45,7 @@
                 <?php endif; ?>
             </div>
 
-            <div class="row col l5 s12 m12">
+            <div class="row col l4 s12 m12">
                 <div class="ui divided list animated slideInRight">
                     <h2 class="ui header">Catégories</h2>
                     <?php if (isset($categories) && !empty($categories)) : ?>
