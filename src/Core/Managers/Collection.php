@@ -49,6 +49,16 @@ class Collection implements IteratorAggregate, ArrayAccess
 
 
     /**
+     * renvoi des donnee sure
+     * @param $key
+     * @return string
+     */
+    public function getSafe($key) {
+        return StringManager::escape($this->get($key));
+    }
+
+
+    /**
      * renvoi une valeur d'un tableau
      * @param array $indexes
      * @param $value

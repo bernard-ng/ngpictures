@@ -18,7 +18,8 @@
         <?php if (isset($categories) && !empty($categories)) : ?>
             <ul class="collection transparent">
                 <?php foreach ($categories as $category) : ?>
-                    <li class="collection-item waves-effect col s12 <?= ($category->title == $posts[0]->category)? 'active' : '' ?>">
+                    <?php $active_category = $posts[0]->category ?? 'art' ?>
+                    <li class="collection-item waves-effect col s12 <?= ($category->title == $active_category)? 'active' : '' ?>">
                         <a href="<?= $category->url; ?>">
                             <div style="margin: 10px">
                                 <div class="collection-item-title">

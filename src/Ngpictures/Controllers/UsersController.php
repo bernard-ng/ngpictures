@@ -159,6 +159,7 @@ class UsersController extends Controller
             $this->validator->setRule("email", 'valid_email');
             $this->validator->setRule("name", ["alpha_dash", "min_length[5]"]);
             $this->validator->setRule("password", ["min_length[8]", "must_match[password_confirm]"]);
+            $this->validator->setRule('password_confirm', ["min_length[8]","must_match[password]"]);
 
             if ($this->validator->isValid()) {
                 $this->validator->unique("name", $this->users, $this->msg['users_username_token']);

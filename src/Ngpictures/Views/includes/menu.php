@@ -14,8 +14,7 @@
 
                 <span id="menu-item-active" data-active="<?= $pageManager::getActivePage() ?>"></span>
                 <ul class="right hide-on-med-and-down links">
-
-                    <li class="search">
+                    <li class="search" style="margin-right: 10px">
                         <div class="search">
                             <form action="/search" method="get" class="ui icon input">
                                 <input name="q" type="text" placeholder="Recherches...">
@@ -24,7 +23,6 @@
                             </form>
                         </div>
                     </li>
-
                     <?php if ($activeUser && $activeUser->rank == "admin") : ?>
                         <li><a href="<?= ADMIN ?>"> <i class="icon icon-code"></i></a></li>
                     <?php endif; ?>
@@ -42,8 +40,8 @@
                             </a>
                         </li>
                     <?php else : ?>
-                        <li class="action"><a href="/sign" class="btn blue-grey waves-effect dark-3">Inscription</a></li>
-                        <li class="action"><a href="/login" class="btn blue-grey waves-effect dark-3">Connexion</a></li>
+                        <li class="action"><a href="/sign" class="btn waves-effect">Inscription</a></li>
+                        <li class="action"><a href="/login" class="btn waves-effect">Connexion</a></li>
                     <?php endif; ?>
                 </ul>
             </div>

@@ -1,42 +1,51 @@
-<div class="card-panel mt-30" id="signUpBox">
-    <div class="page-content mb-20">
-        <div class="section-title">Inscription</div>
-    </div>
-   <form method="POST" action="">
-        <div class="input-field">
-            <input type="text"  name="name" placeholder="pseudo (nom d'utilisateur)" id="name" value="<?= htmlspecialchars($post->get('name')); ?>">
-        </div>
+<div class="row col l4 m4 s12">
+    <div class="card-panel hoverable" id="signUpBox">
+        <form method="POST" action="">
+            <div class="row">
+                <div class="input-field col s12">
+                    <label for="name">pseudo (nom d'utilisateur)</label>
+                    <input type="text"  name="name" id="name" class="validate <?= $errors->get('name')? 'invalid' : '' ?>" value="<?= $post->getSafe('name') ?>">
+                    <span class="helper-text red-txt">
+                        <?= $errors->get('name') ?>
+                    </span>
+                </div>
 
-        <div class="input-field">
-            <input type="email"  name="email" placeholder="adresse mail" id="email" value="<?= htmlspecialchars($post->get('email')); ?>">
-        </div>
+                <div class="input-field col s12">
+                    <label for="email">adresse mail</label>
+                    <input type="text"  name="email" id="email" class="validate <?= $errors->get('email')? 'invalid' : '' ?>" value="<?= $post->getSafe('email') ?>">
+                    <span class="helper-text red-txt">
+                        <?= $errors->get('email') ?>
+                    </span>
+                </div>
 
-        <div class="input-field">
-            <input type="password" name="password" placeholder="nouveau mot de passe" id="password">
-        </div>
+                <div class="input-field col s12">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" name="password" id="password" class="validate <?= $errors->get('password')? 'invalid' : '' ?>">
+                    <span class="helper-text red-txt">
+                        <?= $errors->get('password') ?>
+                    </span>
+                </div>
 
-        <div class="input-field">
-            <input type="password"  name="password_confirm" placeholder="confirmez le mot de passe" id="password_confirm">
-        </div>
-
-        <div class="row">
-            <div class="col s12">
-                <p> En créant votre compte vous affirmez avoir lu et accepter nos
-                    <a href="/privacy">Conditions d'utilisation</a>
-                </p>
+                <div class="input-field col s12">
+                    <label for="password_confirm">Mot de passe (confirmer)</label>
+                    <input type="password"  name="password_confirm" id="password_confirm" class="<?= $errors->get('password_confirm')? 'invalid' : '' ?>">
+                    <span class="helper-text red-txt">
+                        <?= $errors->get('password_confirm') ?>
+                    </span>
+                </div>
             </div>
-            <br>
-            <div class="col s12" id="signOptions">
-                <button type="submit-sign" class="ng-btn waves-effect waves-light" id="sign" >Inscription</button>
-            </div>
-        </div>
-   </form>
-    <div class="page-content" style="color:#fff" >
-        <p>connectez-vous ou créez un compte rapidement en utlisant facebook, cela vous permettra
-        de recevoir des notifications et de rester synchro avec Nous</p>
-        <div class="mt-20" >
-            <a class="link-btn" href="facebook/connect/">Inscription avec facebook &nbsp;<i class="social social-facebook-1"></i></a>
-        </div>
-    </div>
 
+            <div class="row">
+                <div class="col s12">
+                    <p> En créant votre compte vous affirmez avoir lu et accepter nos
+                        <a href="/privacy">Conditions d'utilisation</a>
+                    </p>
+                </div>
+                <br>
+                <div class="col s12" id="signOptions">
+                    <button type="submit-sign" class="btn btn-flat" id="sign" >Inscription</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

@@ -44,10 +44,10 @@
 .btn-large[disabled],
 .btn-flat[disabled] {
   pointer-events: none;
-  background-color: #DFDFDF !important;
+  background-color: #504f4f !important;
   -webkit-box-shadow: none;
           box-shadow: none;
-  color: #9F9F9F !important;
+  color: $txt-color !important;
   cursor: default;
 }
 
@@ -65,8 +65,9 @@
 .btn-floating[disabled]:hover,
 .btn-large[disabled]:hover,
 .btn-flat[disabled]:hover {
-  background-color: #DFDFDF !important;
-  color: #9F9F9F !important;
+  background-color: #504f4f !important;
+  color: $txt-color !important;
+  cursor: not-allowed;
 }
 
 .btn, .btn-large,
@@ -293,12 +294,12 @@ button.btn-floating {
   width: 100%;
   -webkit-box-shadow: none;
           box-shadow: none;
-  background-color: transparent;
+  background-color: $btn-color;
   color: #fff;
   cursor: pointer;
-  -webkit-transition: background-color .2s;
-  -o-transition: background-color .2s;
-  transition: background-color .2s;
+  -webkit-transition: background-color linear .2s;
+  -o-transition: background-color linear .2s;
+  transition: background-color linear .2s;
 }
 
 .btn-flat:focus, .btn-flat:hover {
@@ -311,8 +312,8 @@ button.btn-floating {
 }
 
 .btn-flat.disabled {
-  background-color: transparent !important;
-  color: #b3b2b2 !important;
+  background-color: #757474 !important;
+  color: $txt-color !important;
   cursor: default;
 }
 
