@@ -1,5 +1,5 @@
 <section class="container row">
-    <section class="col row l8 m12 s12">
+    <section class="col row l9 m12 s12">
         <div class="transparent-form col l12 m12 s12">
             <h2 class="ui header">Rédaction</h2>
             <form action="" method="POST" enctype="multipart/form-data" data-action="upload">
@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <label for="content">Description</label>
-                        <textarea id="content" name="content" class="mdz-textarea validate <?= $errors->get('content')? 'invalid': '' ?>"><?= $post->getSafe('content') ?></textarea>
+                        <textarea id="content" name="content" class="mdz-textarea materialize-textarea validate <?= $errors->get('content')? 'invalid': '' ?>"><?= $post->getSafe('content') ?></textarea>
                         <span class="helper-text red-txt">
                         <?= $errors->get('content') ?>
                     </span>

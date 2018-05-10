@@ -77,6 +77,7 @@ function formFeedComments(element) {
     }
 }
 
+
 /**
  * envyoer est afficher
  * @param element
@@ -118,8 +119,6 @@ function likes(element) {
                         let xhr = getXhr();
                         xhr.open('GET', this.getAttribute('href'), true);
                         xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-                        xhr.send();
-
                         xhr.onreadystatechange = function () {
                             if (xhr.readyState === 4) {
                                 if (xhr.status === 200) {
@@ -131,7 +130,12 @@ function likes(element) {
                                     );
                                 }
                             }
-                        }
+                        };
+                        xhr.send();
+                        xhr.timeout = 10000;
+                        xhr.addEventListener('abort', function(){
+                            setFlash('warning', msg.undefinedError);
+                        });
                     }
                 } else {
                     setFlash('danger', msg.usersNotLogged);
@@ -149,38 +153,46 @@ function likes(element) {
  * @param element
  */
 function loadVerses(element) {
-    let verseContainer = document.querySelector(element);
-    if (verseContainer) {
-        let indicator = verseContainer.querySelector('.indicator');
+    window.setInterval(function(){
+        let verseContainer = document.querySelector(element);
+        if (verseContainer) {
+            let indicator = verseContainer.querySelector('.indicator');
 
-        if (getXhr()) {
-            let xhr = getXhr();
-            xhr.open('GET', verseContainer.getAttribute('data-ajax'), true);
-            xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-            xhr.send();
-
-            indicator.classList.remove('active');
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        try {
-                            let verse = JSON.parse(xhr.responseText);
-                            verseContainer.querySelector("[data-content='txt']").innerHTML = verse.txt;
-                            verseContainer.querySelector("[data-content='ref']").innerHTML = verse.ref;
-                            indicator.classList.add('active');
-                        } catch (e) {
-                            return false;
-                        }
-                    } else {
-                        setFlash(
-                            'danger',
-                            xhr.responseText? xhr.responseText : msg.undefinedError,
-                        );
-                    }
+            if (getXhr()) {
+                let xhr = getXhr();
+                if (indicator.classList.contains('active')) {
+                    indicator.classList.remove('active');
                 }
+                xhr.open('GET', verseContainer.getAttribute('data-ajax'), true);
+                xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            try {
+                                window.setTimeout(function(){
+                                    let verse = JSON.parse(xhr.responseText);
+                                    verseContainer.querySelector("[data-content='txt']").innerHTML = verse.txt;
+                                    verseContainer.querySelector("[data-content='ref']").innerHTML = verse.ref;
+                                    indicator.classList.add('active');
+                                },10000);
+                            } catch (e) {
+                                return false;
+                            }
+                        } else {
+                            setFlash(
+                                'danger',
+                                xhr.responseText? xhr.responseText : msg.undefinedError,
+                            );
+                        }
+                    }
+                };
+                xhr.timeout = 10000;
+                xhr.send();
             }
+        } else {
+            return false;
         }
-    }
+    },10000);
 }
 
 
@@ -386,7 +398,7 @@ function formGenericSubmit(element) {
             e.preventDefault();
             e.stopPropagation();
 
-            let textarea = this.querySelector('textarea#ideas');
+            let textarea = this.querySelector('textarea');
             resetValidation([textarea]);
 
             if (getXhr()) {
@@ -404,6 +416,8 @@ function formGenericSubmit(element) {
                             let errors = JSON.parse(xhr.responseText);
                             if (errors.ideas) {
                                 formDataInvalid(textarea, errors.ideas);
+                            } else if (errors.bugs) {
+                                formDataInvalid(textarea, errors.bugs);
                             }
                         } else {
                             removeLoader(submitBtn, 'Envoyer');

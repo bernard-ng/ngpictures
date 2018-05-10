@@ -25,7 +25,7 @@ msg = {
     filesNotDirectory : "Impossibe d'ouvrir le dossier demandé, veuillez réessayer",
     filesDownloadFailed : "Ooups, une Erreur s'est produite lors du téléchargement",
     filesNotFound : "La photo que vous désirer télécharger n'est plus disponible",
-    filesGreaterThanLimit: "L'image est trop grande, 10Mo maximum",
+    filesGreaterThanLimit: "L'image est trop grande, 6Mo maximum",
 
     commentNotFound : "Ce commentaire n'éxiste pas ou plus",
     commentDeleteSuccess : "Votre commentaire a bien été supprimé",

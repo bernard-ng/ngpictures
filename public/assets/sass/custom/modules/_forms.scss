@@ -15,7 +15,7 @@
   transition: all linear 0.3s;
 
   position: absolute;
-  top: 70px;
+  top: 89px;
   left: 50%;
   transform: translateY(-70px) translateX(-50%);
 }
@@ -47,6 +47,10 @@
   #loginBox, #signUpBox {
     width: 500px !important;
     height: auto;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateY(-70px) translateX(-50%);
   }
 }
 
@@ -54,6 +58,10 @@
   #loginBox, #signUpBox {
     width: 500px !important;
     height: auto;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateY(-70px) translateX(-50%);
   }
 }
 

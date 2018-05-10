@@ -274,7 +274,7 @@ function showImageBeforeUpload() {
             ext = ext[ext.length - 1].toLowerCase();
 
             if (admitExt.includes(ext, 0) && adminTypes.includes(type, 0)) {
-                if (file.size <= 5242880) {
+                if (file.size <= 6291456) {
                     getFile(file);
                 } else {
                     setFlash('danger',msg.filesGreaterThanLimit)

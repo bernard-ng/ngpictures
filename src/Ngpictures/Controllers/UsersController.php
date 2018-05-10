@@ -94,9 +94,12 @@ class UsersController extends Controller
     public function forgot()
     {
         $post = new Collection($_POST);
+        $errors = new Collection();
 
         if (isset($_POST) && !empty($_POST)) {
-            if (!empty($post->get('email'))) {
+            $this->validator->setRule('email', ['valid_email']);
+
+            if ($this->validator->isValid()) {
                 $email  =    $this->str::escape($post->get('email'));
                 $user   =    $this->users->findWith('email', $email);
 
@@ -107,19 +110,26 @@ class UsersController extends Controller
 
                     (new Mailer())->resetPassword($link, $email);
                     $this->flash->set('success', $this->msg['users_reset_success']);
-                    $this->app::redirect('/login');
+                    $this->isAjax()? $this->ajaxRedirect("/login") : $this->app::redirect('/login');
                 } else {
+                    if ($this->isAjax()) {
+                        $this->ajaxFail($this->msg['users_email_notFound']);
+                    }
+
                     $this->flash->set('danger', $this->msg['users_email_notFound']);
                 }
             } else {
-                $this->flash->set('danger', $this->msg['form_all_required']);
+                $errors = new Collection($this->validator->getErrors());
+                $this->isAjax() ?
+                    $this->ajaxFail(json_encode($errors->asArray()), 403) :
+                    $this->flash->set('danger', $this->msg['form_multi_errors']);
             }
         }
 
         $this->app::turbolinksLocation("/forgot");
         $this->pageManager::setName('Mot de passe oublié');
         $this->setLayout('users/default');
-        $this->viewRender('front_end/users/account/forgot', compact('post'));
+        $this->viewRender('front_end/users/account/forgot', compact('post', 'errors'));
     }
 
 

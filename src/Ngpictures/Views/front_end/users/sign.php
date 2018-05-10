@@ -36,13 +36,12 @@
             </div>
 
             <div class="row">
-                <div class="col s12">
+                <div class="input-field col s12">
                     <p> En créant votre compte vous affirmez avoir lu et accepter nos
                         <a href="/privacy">Conditions d'utilisation</a>
                     </p>
                 </div>
-                <br>
-                <div class="col s12" id="signOptions">
+                <div class="input-field col s12">
                     <button type="submit-sign" class="btn btn-flat" id="sign" >Inscription</button>
                 </div>
             </div>
