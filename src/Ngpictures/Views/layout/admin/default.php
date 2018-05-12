@@ -8,37 +8,23 @@
         <?php include(APP."/Views/includes/default-style.php"); ?>
         <link rel="stylesheet" type="tex/css" href="/assets/css/morris.css">
         <link rel="stylesheet" type="text/css" href="/assets/js/zoombox/zoombox.css">
-    </head>
-    <body>
-        <?php include(APP."/Views/includes/adm-mobile-menu.php"); ?>
-        <?php include(APP."/Views/includes/admin-menu.php"); ?>
-        <div class="jumbotron-small">
-            <div class="container row">
-                <span class="ui header">
-                    <h4> <?php echo $pageManager::getActivePage() ?> </h4>
-                </span>
-                <span class="jumbotron-content">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Dolore veniam incidunt earum optio temporibus illo doloribus eaque!
-                    Tenetur sunt, quaerat iste veniam suscipit obcaecati?
-                    At ducimus modi rerum praesentium placeat!
-                </span>
-            </div>
-        </div>
-
-        <div class="page-content" id="pageContent" data-ajax="true">
-            <?php echo $page_content; ?>
-        </div>
-        <?php include(APP."/Views/includes/footer.php"); ?>
-
         <script type="text/javascript" src="/assets/js/lib/jquery.min.js" ></script>
         <script type="text/javascript" src="/assets/js/app/materialize.js" ></script>
-        <script type="text/javascript" src="/assets/js/app/activingScript.js" ></script>
+        <script type="text/javascript" src="/assets/js/app/app.init.js" ></script>
+        <script type="text/javascript" src="/assets/js/app/app.ajax.js"></script>
         <script type="text/javascript" src="/assets/js/app/admin.ajax.js"></script>
         <script type="text/javascript" src="/assets/js/app/app.js" ></script>
         <script  type="text/javascript" src="/assets/js/lib/raphael.js"></script>
         <script  type="text/javascript" src="/assets/js/lib/morris.min.js"></script>
         <script type="text/javascript" src="/assets/js/tinymce/tinymce.min.js"></script>
+    </head>
+    <body>
+        <?php include(APP."/Views/includes/adm-mobile-menu.php"); ?>
+        <?php include(APP."/Views/includes/admin-menu.php"); ?>
+        <div class="page-content" id="pageContent" data-ajax="true">
+            <?php echo $page_content; ?>
+        </div>
+        <?php include(APP."/Views/includes/footer.php"); ?>
         <script  type="text/javascript">
             if (tinymce !== undefined) {
                 tinymce.init({
@@ -87,7 +73,7 @@
                 });
             }
 
-            if (Morris != undefined) {
+            if (Morris !== undefined) {
                 Morris.Donut({
                     element: 'stat2',
                     data: [
@@ -117,4 +103,4 @@
             </script>
     <?php include(APP."/Views/includes/flash.php"); ?>
     </body>
-    </html>
+</html>

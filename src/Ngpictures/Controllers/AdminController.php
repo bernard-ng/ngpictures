@@ -470,7 +470,7 @@ class AdminController extends Controller
      */
     public function gallery()
     {
-        $photos = $this->gallery->all();
+        $photos = $this->gallery->latest(0, 10);
         $photo = $this->gallery->latest();
         $this->pageManager::setName('Adm - gallery');
         $this->setLayout("admin/default");
@@ -536,7 +536,7 @@ class AdminController extends Controller
             $post       =   new Collection($data ?? $_POST);
             $categories =   $this->categories->orderBy('title', 'ASC');
 
-            if (!empty($post)) {
+            if (isset($_POST) && !empty($_POST)) {
                 $name           =   $this->str::escape($post->get('name')) ?? $photo->name;
                 $tags           =   $this->str::escape($post->get('tags')) ?? $photo->tags;
                 $description    =   $this->str::escape($post->get('description')) ?? $photo->description;
