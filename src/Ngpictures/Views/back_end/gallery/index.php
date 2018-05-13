@@ -27,10 +27,10 @@
                 <div class="section">
                     <a href="<?= ADMIN."/gallery/add" ?>" class="btn right"><i class="icon icon-plus" style="font-size: smaller !important;"></i></a>
 
-                    <span class="btn">Page : 1/1</span>
-                    <span class="btn">Total : <?= count($photos) ?></span>
-                    <a href="gallery/index/pre" class="btn"><i class="icon icon-left-open"></i></a>
-                    <a href="gallery/index/next" class="btn"><i class="icon icon-right-open"></i></a>
+                    <span class="btn">Page : <?= $currentPage ?>/<?= $totalPage ?></span>
+                    <span class="btn">Total : <?= $total ?></span>
+                    <a href="<?= ADMIN."/gallery?page={$prevPage}"?>" class="btn"><i class="icon icon-left-open"></i></a>
+                    <a href="<?= ADMIN."/gallery?page={$nextPage}"?>" class="btn"><i class="icon icon-right-open"></i></a>
                 </div>
 
                 <table class="card grey dark-4 bordered">
@@ -87,42 +87,19 @@
                     <?php else : ?>
                         <tr>
                             <td><b>0</b></td>
-                            <td>Aucun article pour l'instant</td>
+                            <td>Aucune photo pour l'instant</td>
                             <td>
                                 <button type="submit" class="btn btn-small waves-effect waves-light disabled">
-                                    <i class="icon icon-remove" style="font-size: smaller !important;"></i>
+                                    <i class="icon icon-cancel" style="font-size: smaller !important;"></i>
                                 </button>
                             </td>
+                            <td>n-a</td>
+                            <td><?= date('d M Y') ?></td>
                         </tr>
                     <?php endif; ?>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div id="stat" class="col card-panel grey dark-4 l12 m12 s12 statistic" style="padding: 20px;"></div>
     </section>
 </section>
-<script>
-    (function(){
-        if (Morris !== undefined) {
-            try {
-                Morris.Bar({
-                    element: 'stat',
-                    data: [
-                        {x: 'Photos', y: <?= count($photos) ?? 0 ?>, z: 4},
-                        {x: "Albums", y: 4},
-                        {x: "photos sur server", y: 49},
-                        {x: "Avatar", y: 34},
-                        {x: "Blog", y: 39},
-                        {x: "Post", y: 12}
-                    ],
-                    xkey: 'x',
-                    ykeys: ['y', 'z'],
-                    labels: ['confirmed', 'not confirmed']
-                });
-            } catch (e) {
-                return false;
-            }
-        }
-    })();
-</script>

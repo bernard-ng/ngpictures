@@ -5,9 +5,10 @@ public/assets/.sass-cache
 public/imgs/
 /public/i/
 /.idea/
+.idea
+.vscode
 /.vscode/
 /vendor/
 Desktop.ini
 composer.lock
 system.log
-/system.log

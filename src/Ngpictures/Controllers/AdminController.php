@@ -470,11 +470,32 @@ class AdminController extends Controller
      */
     public function gallery()
     {
-        $photos = $this->gallery->orderBy('date_created', 'DESC', 0, 10);
-        $photo = $this->gallery->latest();
+        $photo          =   $this->gallery->latest();
+        $photos         =   $this->gallery->orderBy('date_created', 'DESC', 0, 10);
+        $total          =   count($this->gallery->all());
+        $currentPage    =   1;
+        $totalPage      =   ceil($total / 10);
+
+        if (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0) {
+            $page = $this->str::escape($_GET['page']);
+            if ($page <= $totalPage) {
+                $currentPage = $page;
+                $photos = $this->gallery->orderBy('date_created', 'DESC', ($currentPage - 1) * 10, 10);
+            } else {
+                $this->flash->set('danger', "Page {$page} inéxistante");
+                $this->app::redirect(ADMIN."/gallery");
+            }
+        }
+
+        $prevPage = ($currentPage - 1 == 0)? 1 : $currentPage - 1;
+        $nextPage = ($currentPage + 1 > $totalPage)? $totalPage : $currentPage + 1;
+
         $this->pageManager::setName('Adm - gallery');
         $this->setLayout("admin/default");
-        $this->viewRender("back_end/gallery/index", compact('photos', 'photo'));
+        $this->viewRender(
+            "back_end/gallery/index",
+            compact('photos', 'photo', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
+        );
     }
 
 
