@@ -1,24 +1,24 @@
-<main class="container row">
-    <?php include(APP."/Views/includes/left-aside.php"); ?>
+<section class="section container row">
     <section class="col l9 m12 s12">
-        <div class="card">
-            <div class="page-title section-title">Ajout d'un album<i class="icon icon-pencil right"></i></div>
+        <h2 class="ui header">Ajouter un album<i class="icon icon-pencil right"></i></h2>
+        <form action="" method="POST" class="card-panel grey dark-4">
+            <div class="col l12 m12 s12">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" value="<?= $post->get('title') ?>">
+            </div>
 
-            <form action="" method="POST" class="ml-10 mr-10 mb-30">
-
-                <div class="col l12 m12 s12">
-                    <input type="text" id="title" name="title" placeholder="titre" value="<?= $post->get('title') ?>">
+            <div class="col l12 m12 s12">
+                <div class="input-field">
+                    <label for="contents">Description</label>
+                    <textarea id="contents" name="description" class="materialize-textarea"><?= $post->get('description') ?></textarea>
                 </div>
+            </div>
 
-                <div class="input-field col l12 m12 s12">
-                    <textarea id="content" name="description"><?= $post->get('description') ?></textarea>
-                </div>
-
-                <div class="submit-button">
-                    <button type="submit" class="ng-btn waves-effect waves-light">Publier&nbsp;<i class="icon icon-send"></i></button>
-                </div>
-            </form>
-        </div>
+            <div class="submit-buttons">
+                <button type="submit" class="btn btn-flat waves-effect">Envoyer</button>
+            </div>
+        </form>
     </section>
-</main>
+    <?php include(APP."/Views/includes/left-aside.php"); ?>
+</section>
 

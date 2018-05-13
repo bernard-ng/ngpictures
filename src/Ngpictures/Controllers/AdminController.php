@@ -2,10 +2,10 @@
 namespace Ngpictures\Controllers;
 
 use \Exception;
+use Ngpictures\Traits\Controllers\PaginationTrait;
 use \RuntimeException;
 use \DirectoryIterator;
 use Ngpictures\Ngpictures;
-use \UnexpectedValueException;
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\ImageManager;
 use Ng\Core\Managers\ConfigManager;
@@ -36,6 +36,8 @@ class AdminController extends Controller
         'categories',
         'albums'
     ];
+
+    use PaginationTrait;
 
 
     /**
@@ -473,22 +475,14 @@ class AdminController extends Controller
         $photo          =   $this->gallery->latest();
         $photos         =   $this->gallery->orderBy('date_created', 'DESC', 0, 10);
         $total          =   count($this->gallery->all());
-        $currentPage    =   1;
-        $totalPage      =   ceil($total / 10);
 
-        if (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0) {
-            $page = $this->str::escape($_GET['page']);
-            if ($page <= $totalPage) {
-                $currentPage = $page;
-                $photos = $this->gallery->orderBy('date_created', 'DESC', ($currentPage - 1) * 10, 10);
-            } else {
-                $this->flash->set('danger', "Page {$page} inéxistante");
-                $this->app::redirect(ADMIN."/gallery");
-            }
-        }
+        $pagination     = $this->setPagination($total, "gallery");
+        $currentPage    = $pagination['currentPage'];
+        $totalPage      = $pagination['totalPage'];
+        $prevPage       = $pagination['prevPage'];
+        $nextPage       = $pagination['nextPage'];
+        $photos         = $pagination['result'] ?? $photos;
 
-        $prevPage = ($currentPage - 1 == 0)? 1 : $currentPage - 1;
-        $nextPage = ($currentPage + 1 > $totalPage)? $totalPage : $currentPage + 1;
 
         $this->pageManager::setName('Adm - gallery');
         $this->setLayout("admin/default");
@@ -627,9 +621,21 @@ class AdminController extends Controller
     public function album()
     {
         $albums = $this->albums->all();
+        $total          =   count($this->albums->all());
+
+        $pagination     = $this->setPagination($total, "albums");
+        $currentPage    = $pagination['currentPage'];
+        $totalPage      = $pagination['totalPage'];
+        $prevPage       = $pagination['prevPage'];
+        $nextPage       = $pagination['nextPage'];
+        $albums         = $pagination['result'] ?? $albums;
+
         $this->pageManager::setName('admin gallery.album');
         $this->setLayout('admin/default');
-        $this->viewRender('back_end/gallery/albums', compact('albums'));
+        $this->viewRender(
+            'back_end/gallery/albums',
+            compact('albums', "currentPage", 'totalPage', 'prevPage', 'nextPage', 'total')
+        );
     }
 
 
@@ -652,7 +658,7 @@ class AdminController extends Controller
 
                 $this->albums->create(compact('title', 'description', 'slug'));
                 $this->flash->set('success', $this->msg['form_post_submitted']);
-                $this->app::redirect(ADMIN . "/gallery");
+                $this->app::redirect(ADMIN . "/gallery/albums");
             } else {
                 $this->flash->set('danger', $this->msg['form_multi_errors']);
                 $errors = $this->validator->getErrors();
@@ -687,7 +693,7 @@ class AdminController extends Controller
 
                     $this->albums->update($album->id, compact('title', 'description', 'slug'));
                     $this->flash->set('success', $this->msg['post_edit_success']);
-                    $this->app::redirect(ADMIN . "/gallery");
+                    $this->app::redirect(ADMIN . "/gallery/albums");
                 } else {
                     $this->flash->set('danger', $this->msg['form_multi_errors']);
                     $errors = $this->validator->getErrors();

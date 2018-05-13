@@ -32,7 +32,6 @@
                     <a href="<?= ADMIN."/gallery?page={$prevPage}"?>" class="btn"><i class="icon icon-left-open"></i></a>
                     <a href="<?= ADMIN."/gallery?page={$nextPage}"?>" class="btn"><i class="icon icon-right-open"></i></a>
                 </div>
-
                 <table class="card grey dark-4 bordered">
                     <thead>
                     <tr>
@@ -49,7 +48,7 @@
                             <tr>
                                 <td><b><?= $p->id ?></b></td>
                                 <td>
-                                    <img src="/uploads/gallery/thumbs/<?= $p->thumb ?>" width="60" height="60" class="materialboxed boxed">
+                                    <img src="<?= $p->smallThumbUrl ?>" width="60" height="60" class="materialboxed boxed">
                                 </td>
                                 <td>
                                     <form method="POST" action="<?= ADMIN."/delete" ?>" style="display: inline-block !important;">

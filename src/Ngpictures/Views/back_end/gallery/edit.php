@@ -1,6 +1,6 @@
 <section class="section container row">
     <section class="section col l9 m12 s12">
-        <h2 class="ui header">Editer une Photo</h2>
+        <h2 class="ui header">Editer photo : <?= $photo->name ?></h2>
         <form action="" method="POST" class="card-panel grey dark-4" enctype="multipart/form-data">
             <div class="col l12 m12 s12">
                 <div class="input-field">
