@@ -17,6 +17,7 @@
                     <article class="col l3 s3 m3" data-url="<?= $photo->url; ?>" id="<?= $photo->id ?>">
                         <img src="<?= $photo->smallthumbUrl ?>" class="gallery-item"/>
                     </article>
+                    <div class="col l12 gallery-details"></div>
                 <?php endforeach;?>
                 <div class="col l12 gallery-details"></div>
             </section>
@@ -64,7 +65,7 @@
                                             <i class="icon icon-plus-circled" style="font-size: smaller !important;"></i>
                                         </button>
                                     </a>
-                                    <a href="<?= ADMIN."/confirm/4/{$p->id}" ?>" title="retirer" id="confirm">
+                                    <a href="<?= ADMIN."/confirm/4/{$p->id}" ?>" id="confirm">
                                         <button class="btn btn-small blue-2 waves-effect waves-light">
                                             <?php if ($p->online) : ?>
                                                 <i class="icon icon-download" style="font-size: smaller !important;"></i>
@@ -102,20 +103,26 @@
     </section>
 </section>
 <script>
-    if (Morris !== undefined) {
-        Morris.Bar({
-            element: 'stat',
-            data: [
-                {x: 'Photos', y: <?= count($photos) ?? 0 ?>, z: 4},
-                {x: "Albums", y: 4},
-                {x: "photos sur server", y: 49},
-                {x: "Avatar", y: 34},
-                {x: "Blog", y: 39},
-                {x: "Post", y: 12}
-            ],
-            xkey: 'x',
-            ykeys: ['y', 'z'],
-            labels: ['confirmed', 'not confirmed']
-        });
-    }
+    (function(){
+        if (Morris !== undefined) {
+            try {
+                Morris.Bar({
+                    element: 'stat',
+                    data: [
+                        {x: 'Photos', y: <?= count($photos) ?? 0 ?>, z: 4},
+                        {x: "Albums", y: 4},
+                        {x: "photos sur server", y: 49},
+                        {x: "Avatar", y: 34},
+                        {x: "Blog", y: 39},
+                        {x: "Post", y: 12}
+                    ],
+                    xkey: 'x',
+                    ykeys: ['y', 'z'],
+                    labels: ['confirmed', 'not confirmed']
+                });
+            } catch (e) {
+                return false;
+            }
+        }
+    })();
 </script>

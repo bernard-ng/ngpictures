@@ -470,7 +470,7 @@ class AdminController extends Controller
      */
     public function gallery()
     {
-        $photos = $this->gallery->latest(0, 10);
+        $photos = $this->gallery->orderBy('date_created', 'DESC', 0, 10);
         $photo = $this->gallery->latest();
         $this->pageManager::setName('Adm - gallery');
         $this->setLayout("admin/default");
