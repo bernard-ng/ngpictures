@@ -6,8 +6,8 @@
                     <img src="<?= $photo->thumbUrl; ?>">
                     <?php if (!empty($photo->description)) : ?>
                         <div class="caption left-align">
-                            <h4 class=" grey-txt txt-light-3"><?= strtoupper($photo->name ?? $photo->title); ?></h4>
-                            <h6 class="grey-txt txt-light-3"><?= $photo->description ?></h6>
+                            <h2 class="ui header white-txt"><?= strtoupper($photo->name ?? $photo->title); ?></h2>
+                            <p class=""><?= $photo->description ?></p>
                         </div>
                     <div class="bg"></div>
                     <?php endif; ?>

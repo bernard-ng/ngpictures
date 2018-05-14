@@ -115,8 +115,8 @@ function setEventTrigger(element, eventName) {
 function setLoader(element) {
     element.classList.add("disabled");
     element.innerText = '';
-    element.innerHtml = '';
-    element.innerText = 'Chargement...';
+    element.innerHTML = '';
+    element.innerHTML = 'Chargement...';
 }
 
 /**
@@ -151,8 +151,8 @@ function resetValidation(elements) {
 function removeLoader(element, text) {
     element.classList.remove("disabled");
     element.innerText = '';
-    element.innerHtml = '';
-    element.innerText = text;
+    element.innerHTML = '';
+    element.innerHTML = text;
 }
 
 

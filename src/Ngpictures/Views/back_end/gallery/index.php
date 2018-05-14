@@ -51,7 +51,7 @@
                                     <img src="<?= $p->smallThumbUrl ?>" width="60" height="60" class="materialboxed boxed">
                                 </td>
                                 <td>
-                                    <form method="POST" action="<?= ADMIN."/delete" ?>" style="display: inline-block !important;">
+                                    <form method="POST" action="<?= ADMIN."/delete" ?>" style="display: inline-block !important;" data-action="ajax-delete">
                                         <input type="hidden" name="id" value="<?= $p->id?>" >
                                         <input type="hidden" name="type" value="4" >
                                         <button type="submit" class="btn waves-effect waves-light red" id="delete">

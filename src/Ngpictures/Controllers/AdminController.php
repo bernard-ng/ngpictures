@@ -75,6 +75,7 @@ class AdminController extends Controller
     {
         $posts         =  $this->posts->latest();
         $blog          =  $this->blog->latest();
+        $photo         =  $this->gallery->latest();
 
         $site_posts    = [count($this->blog->lastOnline()), count($this->blog->lastOffline())];
         $users_posts   = [count($this->posts->lastOnline()), count($this->posts->lastOffline())];
@@ -97,6 +98,7 @@ class AdminController extends Controller
             compact(
                 'posts',
                 'blog',
+                'photo',
                 'site_posts',
                 'users_posts',
                 'site_photos',
@@ -220,7 +222,7 @@ class AdminController extends Controller
                 $model->update($id, ['online' => 1]);
 
                 if ($this->isAjax()) {
-                    echo '<i class="icon icon-cloud-download" style="font-size: smaller !important;"></i>';
+                    echo '<i class="icon icon-download" style="font-size: smaller !important;"></i>';
                     exit;
                 }
 
@@ -230,7 +232,7 @@ class AdminController extends Controller
                 $model->update($id, ['online' => 0]);
 
                 if ($this->isAjax()) {
-                    echo '<i class="icon icon-cloud-upload" style="font-size: smaller !important;"></i>';
+                    echo '<i class="icon icon-upload" style="font-size: smaller !important;"></i>';
                     exit;
                 }
 
@@ -864,6 +866,7 @@ class AdminController extends Controller
      * envoyer les logs a l'admin par mail
      *
      * @return void
+     * @throws \Ng\Core\Exception\ConfigManagerException
      */
     public function sendLogs()
     {
