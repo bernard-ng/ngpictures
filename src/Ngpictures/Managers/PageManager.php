@@ -2,9 +2,8 @@
 namespace Ngpictures\Managers;
 
 use Ng\Core\Exception\ConfigManagerException;
-use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\ConfigManager;
-use Ng\Core\Managers\StringManager;
+
 
 class PageManager
 {
@@ -127,9 +126,9 @@ class PageManager
     }
 
 
-
     /**
      * Set the value of description
+     * @param string $description
      * @return void
      */
     public static function setDescription(string $description)

@@ -1,15 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: BERNQRD NG
- * Date: 05/05/2018
- * Time: 03:54
- */
-
 namespace Ngpictures\Controllers;
+
 
 class StaticController extends Controller
 {
+    /**
+     * la page d'about
+     */
     public function about()
     {
         $this->app::turbolinksLocation("/about");
@@ -17,4 +14,20 @@ class StaticController extends Controller
         $this->pageManager::setName("A Propos de nous");
         $this->viewRender('front_end/others/about');
     }
+
+
+    /**
+     * privacy terms
+     */
+    public function privacy()
+    {
+        $this->app::turbolinksLocation("/privacy");
+        $this->setLayout("posts/default");
+        $this->pageManager::setName("Politique d'utilisation");
+        $this->pageManager::setDescription(
+            'La présente clause a pour objet de définir les différents termes essentiels du contrat'
+        );
+        $this->viewRender("front_end/others/privacy");
+    }
+
 }

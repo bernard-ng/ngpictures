@@ -116,7 +116,14 @@ function setLoader(element) {
     element.classList.add("disabled");
     element.innerText = '';
     element.innerHTML = '';
-    element.innerHTML = 'Chargement...';
+    element.innerHTML =
+        '<div class="ng-progress-indeterminate">' +
+            '<span></span>' +
+            '<span></span>' +
+            '<span></span>' +
+            '<span></span>' +
+            '<span></span>' +
+        '</div>';
 }
 
 /**

@@ -28,7 +28,6 @@ function formFeedComments(element) {
                             let xhr = getXhr();
                             xhr.open('POST', this.getAttribute('action'), true);
                             xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-                            xhr.send(new FormData(this));
                             xhr.onreadystatechange = function () {
                                 if (xhr.readyState === 4) {
                                     if (xhr.status === 200) {
@@ -61,6 +60,10 @@ function formFeedComments(element) {
                                     }
                                 }
                             }
+                            closeBtn.addEventListener('click', function(){
+                                xhr.abort();
+                            });
+                            xhr.send(new FormData(this));
                         }
                     } else {
                         removeLoader(submitBtn,'Envoyer');
@@ -443,10 +446,20 @@ function formGenericSubmit(element) {
 
         $(".gallery-item").removeClass("active");
         $(".gallery-details").removeClass('jumbotron jumbotron-img dark');
+        $(".gallery-details").html("");
         $item.addClass("active");
 
+        $details.addClass('jumbotron jumbotron-img dark');
+        $details.html(
+            '<div class="ng-progress-indeterminate">' +
+                '<span></span>' +
+                '<span></span>' +
+                '<span></span>' +
+                '<span></span>' +
+                '<span></span>' +
+            '</div>'
+        );
 
-        $details.addClass('jumbotron jumbotron-img dark').html("<span class='center-align'>Chargement...</span>");
         $.ajax(
             {url: $item.parent().attr('data-url')}
         ).then(
@@ -497,14 +510,14 @@ function formGenericSubmit(element) {
     if (window.location.hash) {
         let $target = $(window.location.hash + " img.gallery-item");
         if ($target.length > 0) {
-            $target.trigger('click')
+            $target.trigger('click');
             scrollTo($target)
         }
     }
 })();
 
 //------------------------------------------------------------------------------------
-loadVerses("[data-action='verses']");
+//loadVerses("[data-action='verses']");
 formLogin("form[data-action='login']");
 formGenericSubmit("form[data-action='ideas']");
 formGenericSubmit("form[data-action='bugs']");
