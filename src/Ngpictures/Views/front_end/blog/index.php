@@ -1,4 +1,5 @@
 <section class="section container row">
+    <?php include(APP."/Views/includes/right-aside.php"); ?>
     <section class="section col nexted l6 m12 s12 animated fast slideInLeft">
         <div class="no-padding">
             <div class="ui divided items" id="dataContainer">
