@@ -4,7 +4,6 @@
 //Main Scripts
 //---------------------------------------------------------------------
 
-
 /**
  * premet de rendre un itme du menu active
  * @returns {boolean}

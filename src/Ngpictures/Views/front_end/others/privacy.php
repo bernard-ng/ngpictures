@@ -4,11 +4,11 @@
             <div>
                 <h2 class="ui header">Objet</h2>
 
-                <p  class="justify-align">Les présentes « conditions générales d'utilisation » ont pour objet l'encadrement juridique des modalités de mise à disposition des services du site <b>Ngpictures</b> et leur utilisation par « l'Utilisateur ».
+                <p  >Les présentes « conditions générales d'utilisation » ont pour objet l'encadrement juridique des modalités de mise à disposition des services du site <b>Ngpictures</b> et leur utilisation par « l'Utilisateur ».
                 Les conditions générales d'utilisation doivent être acceptées par tout Utilisateur souhaitant accéder au site. Elles constituent le contrat entre le site et l'Utilisateur.
                     L’accès au site par l’Utilisateur signifie son acceptation des présentes conditions générales d’utilisation.</p>
 
-                <ol  class="justify-align">
+                <ol  >
                     <li>
                         En cas de non-acceptation des conditions générales d'utilisation stipulées dans le présent contrat,
                         l'Utilisateur se doit de renoncer à l'accès des services proposés par le site.
@@ -22,9 +22,9 @@
 
                 <h2 class="ui header">Définitions</h2>
 
-                <p  class="justify-align">La présente clause a pour objet de définir les différents termes essentiels du contrat :</p>
+                <p  >La présente clause a pour objet de définir les différents termes essentiels du contrat :</p>
 
-                <ol  class="justify-align">
+                <ol  >
                     <li>Utilisateur : ce terme désigne toute personne qui utilise le site ou l'un des services proposés par le site.</li>
                     <li>Contenu utilisateur : ce sont les données transmises par l'Utilisateur au sein du site.</li>
                     <li>Membre : l'Utilisateur devient membre lorsqu'il est identifié sur le site.</li>
@@ -34,8 +34,8 @@
 
 
                 <h2 class="ui header">Accès aux services</h2>
-                <p  class="justify-align">Le site permet à l'Utilisateur un accès gratuit aux services suivants :</p>
-                <ol  class="justify-align">
+                <p  >Le site permet à l'Utilisateur un accès gratuit aux services suivants :</p>
+                <ol  >
                     <li>Téléchargement des photos</li>
                     <li>Mise en relation de personnes</li>
                     <li>Publication de commentaires</li>
@@ -43,7 +43,7 @@
                     <li>Publication de photo (Pour les membres, artistes et photographe)</li>
                 </ol>
 
-                <p  class="justify-align">Le site est accessible gratuitement en tout lieu à tout Utilisateur ayant un accès à Internet. Tous les frais supportés par l'Utilisateur pour accéder au service (matériel informatique, logiciels, connexion Internet, etc.) sont à sa charge.
+                <p  >Le site est accessible gratuitement en tout lieu à tout Utilisateur ayant un accès à Internet. Tous les frais supportés par l'Utilisateur pour accéder au service (matériel informatique, logiciels, connexion Internet, etc.) sont à sa charge.
                 Le site met en œuvre tous les moyens mis à sa disposition pour assurer un accès de qualité à ses services. L'obligation étant de moyens, le site ne s'engage pas à atteindre ce résultat.
                 Tout événement dû à un cas de force majeure ayant pour conséquence un dysfonctionnement du réseau ou du serveur n'engage pas la responsabilité de <b>Ngpictures</b>.
                 L'accès aux services du site peut à tout moment faire l'objet d'une interruption, d'une suspension, d'une modification sans préavis pour une maintenance ou pour tout autre cas.
@@ -53,7 +53,7 @@
 
 
                 <h2 class="ui header">Propriété intellectuelle</h2>
-                <p  class="justify-align">Les marques, logos, signes et tout autre contenu du site font l'objet d'une protection par le Code de la propriété intellectuelle et plus particulièrement par le droit d'auteur.
+                <p  >Les marques, logos, signes et tout autre contenu du site font l'objet d'une protection par le Code de la propriété intellectuelle et plus particulièrement par le droit d'auteur.
                 L'Utilisateur sollicite l'autorisation préalable du site pour toute reproduction, publication, copie des différents contenus.
                 L'Utilisateur s'engage à une utilisation des contenus du site dans un cadre strictement privé. Une utilisation des contenus à des fins commerciales est strictement interdite.
                 Tout contenu mis en ligne par l'Utilisateur est de sa seule responsabilité. L'Utilisateur s'engage à ne pas mettre en ligne de contenus pouvant porter atteinte aux intérêts de tierces personnes. Tout recours en justice engagé par un tiers lésé contre le site sera pris en charge par l'Utilisateur.
@@ -61,7 +61,7 @@
                 <br>
 
                 <h2 class="ui header">Responsabilité et force majeure</h2>
-                <p  class="justify-align">Les sources des informations diffusées sur le site sont réputées fiables. Toutefois, le site se réserve la faculté d'une non-garantie de la fiabilité des sources. Les informations données sur le site le sont à titre purement informatif. Ainsi, l'Utilisateur assume seul l'entière responsabilité de l'utilisation des informations et contenus du présent site.
+                <p  >Les sources des informations diffusées sur le site sont réputées fiables. Toutefois, le site se réserve la faculté d'une non-garantie de la fiabilité des sources. Les informations données sur le site le sont à titre purement informatif. Ainsi, l'Utilisateur assume seul l'entière responsabilité de l'utilisation des informations et contenus du présent site.
                 L'Utilisateur s'assure de garder son mot de passe secret. Toute divulgation du mot de passe, quelle que soit sa forme, est interdite.
                 L'Utilisateur assume les risques liés à l'utilisation de son identifiant et mot de passe. Le site décline toute responsabilité.
                 Tout usage du service par l'Utilisateur ayant directement ou indirectement pour conséquence des dommages doit faire l'objet d'une indemnisation au profit du site.
@@ -71,12 +71,12 @@
 
 
                 <h2 class="ui header">Évolution et Durée du contrat</h2>
-                <p  class="justify-align">Le site se réserve à tout moment le droit de modifier les clauses stipulées dans le présent contrat.
+                <p  >Le site se réserve à tout moment le droit de modifier les clauses stipulées dans le présent contrat.
                 La durée du présent contrat est indéterminée. Le contrat produit ses effets à l'égard de l'Utilisateur à compter de l'utilisation du service.</p>
 
                 <h2 class="ui header">Publication par l’Utilisateur</h2>
 
-                <p  class="justify-align">Le site permet aux membres de publier des photos et des articles ou autre œuvres personnelles en rapport avec la photographie.
+                <p  >Le site permet aux membres de publier des photos et des articles ou autre œuvres personnelles en rapport avec la photographie.
                     Dans ses publications, le membre s’engage à respecter les règles de la Netiquette et les règles de droit en vigueur.
                     Le site exerce une modération sur les publications et se réserve le droit de refuser leur mise en ligne, sans avoir à s’en justifier auprès du membre.
                 Le membre reste titulaire de l’intégralité de ses droits de propriété intellectuelle. Mais en publiant une publication sur le site,

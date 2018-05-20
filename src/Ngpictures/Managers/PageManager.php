@@ -4,7 +4,6 @@ namespace Ngpictures\Managers;
 use Ng\Core\Exception\ConfigManagerException;
 use Ng\Core\Managers\ConfigManager;
 
-
 class PageManager
 {
     /**

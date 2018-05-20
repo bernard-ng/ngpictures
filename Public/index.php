@@ -31,7 +31,7 @@ try {
  * si la configuration du debug est a "false" les erreur handler
  * sont active dans le cas contraire les erreurs sont afficher
  */
-if (!Ngpictures::getInstance()->hasDebug()) {
+if (Ngpictures::getInstance()->hasDebug()) {
     set_exception_handler([Ngpictures::getInstance(), "exceptionHandler"]);
     set_error_handler([Ngpictures::getInstance(), "errorHandler"]);
 }

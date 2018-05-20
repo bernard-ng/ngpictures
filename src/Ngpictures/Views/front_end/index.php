@@ -1,9 +1,9 @@
-<main>
+<section>
     <section class="section row container animated slideInUp">
-    <span class="row col l12 s12 m12">
-        <h2 class="ui header"> Derniers Articles</h2>
-    </span>
-    <?php foreach ($last as $a) : ?>
+        <span class="row col l12 s12 m12">
+            <h2 class="ui header"> Derniers Articles</h2>
+        </span>
+        <?php foreach ($last as $a) : ?>
         <div class="row nexted col s12 m3 l3">
             <article class="card hoverable blue-grey dark-4">
                 <div class="card-image">
@@ -15,7 +15,7 @@
                 </div>
             </article>
         </div>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
     </section>
     <section class="jumbotron dark col l12 s12 m12">
         <div class="container row">
@@ -51,7 +51,11 @@
                     <?php if (isset($categories) && !empty($categories)) : ?>
                         <ul class="collection">
                             <?php foreach ($categories as $category) : ?>
-                                <li class="collection-item dark waves-effect col s12 <?= ($category->title == $article->category)? 'active' : '' ?>">
+                                <?php if (isset($article) && !empty($article)) : ?>
+                                    <li class="collection-item dark waves-effect col s12 <?= ($category->title == $article->category)? 'active' : '' ?>">
+                                <?php else : ?>
+                                    <li class="collection-item dark waves-effect col s12">
+                                <?php endif; ?>
                                     <a href="<?= $category->url; ?>">
                                         <div style="margin: 10px">
                                             <div class="collection-item-title">
@@ -172,4 +176,4 @@
             <img src="<?= CDN."/imgs/map-2.jpg" ?>" alt="">
         </div>
     </div>
-</main>
+</section>

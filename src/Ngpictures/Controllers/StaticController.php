@@ -1,7 +1,6 @@
 <?php
 namespace Ngpictures\Controllers;
 
-
 class StaticController extends Controller
 {
     /**
@@ -29,5 +28,4 @@ class StaticController extends Controller
         );
         $this->viewRender("front_end/others/privacy");
     }
-
 }

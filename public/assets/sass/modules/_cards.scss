@@ -13,8 +13,9 @@
 
 .verse-panel {
   border-radius: 0;
-  padding: 5px;
+  padding: 1rem;
   position: relative;
+  border-bottom: 1px solid $border-color;
 
   & .indicator-container{
     height: 3px;
@@ -22,8 +23,7 @@
     width: 100%;
     background: rgba(255,255,255,0.2);
     position: absolute;
-    top: -15px;
-    left: 0; right: 0;
+    top: 0; left: 0; right: 0;
     & .indicator {
       position: absolute;
       top:0; left:0; right:0; bottom:0;

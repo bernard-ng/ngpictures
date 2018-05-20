@@ -1,6 +1,7 @@
 <?php
 namespace Ngpictures;
 
+use Ng\Core\Managers\CacheBustingManager;
 use Ng\Core\Managers\StringManager;
 use Ng\Core\Managers\CookieManager;
 use Ng\Core\Database\MysqlDatabase;
@@ -133,6 +134,18 @@ class Ngpictures
     }
 
 
+    /**
+     * @return CacheBustingManager
+     */
+    public function getCacheBusting()
+    {
+        return new CacheBustingManager();
+    }
+
+
+    /**
+     * @return MessageManager
+     */
     public function getMessageManager(): MessageManager
     {
         return new MessageManager();

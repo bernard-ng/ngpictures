@@ -130,7 +130,7 @@ class Router
      * lancement du routing
      * le router fait un trailing Slash cad si l'url
      * termine par un "/", il redirige vers l'url sans "/" a la fin
-     * @return bo
+     * @return bool
      * olean
      * @throws RouterException
      */
@@ -148,9 +148,10 @@ class Router
                     return $route->call();
                 }
             }
-            $this->app::getInstance()->getFlash()->set('warning', "404 Page Introuvable");
+
             $this->app::redirect("/error-404");
         }
+
         throw new RouterException("undefinied Request method");
     }
 }

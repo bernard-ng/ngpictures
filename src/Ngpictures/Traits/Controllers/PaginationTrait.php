@@ -3,7 +3,8 @@ namespace Ngpictures\Traits\Controllers;
 
 trait PaginationTrait
 {
-    public function setPagination(int $total, string $action) {
+    public function setPagination(int $total, string $action)
+    {
         $currentPage = 1;
         $totalPage = ceil($total / 10);
 

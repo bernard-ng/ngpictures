@@ -26,16 +26,16 @@
         </thead>
         <tbody>
         <?php foreach ($files as $file) : ?>
-            <?php if($file->getFilename() !== '.' && $file->getFilename() !== '..'): ?>
+            <?php if ($file->getFilename() !== '.' && $file->getFilename() !== '..') : ?>
                 <tr>
                     <td><?= $file->key() ?></td>
                     <td>
-                        <?php if($file->getFilename() === 'thumbs'): ?>
+                        <?php if ($file->getFilename() === 'thumbs') : ?>
                             <i class="icon icon-doc"></i>
-                        <?php else: ?>
-                            <?php if (is_dir(WEBROOT."/{$relative_dos}/thumbs")): ?>
+                        <?php else : ?>
+                            <?php if (is_dir(WEBROOT."/{$relative_dos}/thumbs")) : ?>
                                 <img src="<?= $relative_dos.'/thumbs/'.$file->getBasename() ?>" class="materialboxed" width="80">
-                            <?php else: ?>
+                            <?php else : ?>
                                 <img src="<?= $relative_dos.'/'.$file->getBasename() ?>" class="materialboxed" width="80">
                             <?php endif; ?>
                         <?php endif; ?>

@@ -53,7 +53,8 @@ class Collection implements IteratorAggregate, ArrayAccess
      * @param $key
      * @return string
      */
-    public function getSafe($key) {
+    public function getSafe($key)
+    {
         return StringManager::escape($this->get($key));
     }
 

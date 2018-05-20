@@ -2,6 +2,7 @@
 namespace Ngpictures\Entity;
 
 use Ng\Core\Entity\Entity;
+use Ng\Core\Managers\CacheBustingManager;
 use Ngpictures\Ngpictures;
 use Ng\Core\Managers\StringManager;
 use Ng\Core\Managers\SessionManager;
@@ -127,6 +128,7 @@ class UsersEntity extends Entity
     public function getAvatarUrl(): string
     {
         $this->avatarUrl = "/uploads/avatars/{$this->avatar}";
+        $this->avatarUrl = CacheBustingManager::get($this->avatarUrl);
         return $this->avatarUrl;
     }
 }

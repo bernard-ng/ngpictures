@@ -728,13 +728,18 @@ class AdminController extends Controller
 
         if (is_file($image)) {
             if (isset($_POST) and !empty($_POST)) {
-                $isWatermarked = ImageManager::watermark($filename, $post->get('logo'), $path[intval($type)]);
+                $isWatermarked = ImageManager::watermark(
+                    $filename,
+                    $post->get('watermark'),
+                    $path[intval($type)],
+                    $post->get('color')
+                );
 
                 if ($isWatermarked) {
                     $this->flash->set('success', $this->msg['success']);
                     $this->app::redirect(true);
                 } else {
-                    $this->flash->set('danger', $this->msg['undefined_error']);
+                    $this->flash->set('danger', "Watermark non effectué");
                     $this->app::redirect(true);
                 }
             }

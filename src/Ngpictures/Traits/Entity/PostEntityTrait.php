@@ -1,6 +1,7 @@
 <?php
 namespace Ngpictures\Traits\Entity;
 
+use Ng\Core\Managers\CacheBustingManager;
 use Ng\Core\Managers\StringManager;
 use Ngpictures\Ngpictures;
 
@@ -39,6 +40,7 @@ trait PostEntityTrait
     {
         $this->thumbUrl = "/uploads";
         $this->thumbUrl .= "/{$this->file_path}/{$this->thumb}";
+        $this->thumbUrl = CacheBustingManager::get($this->thumbUrl);
         return $this->thumbUrl;
     }
 
@@ -46,6 +48,7 @@ trait PostEntityTrait
     {
         $this->smallThumbUrl = "/uploads";
         $this->smallThumbUrl .= "/{$this->file_path}/thumbs/{$this->thumb}";
+        $this->smallThumbUrl = CacheBustingManager::get($this->smallThumbUrl);
         return $this->smallThumbUrl;
     }
 

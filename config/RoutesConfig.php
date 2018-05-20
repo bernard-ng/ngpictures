@@ -132,6 +132,6 @@ $router->get("/verses", "verses", "ajax.verses");
 
 //ERROR ROUTES
 /******************************************************************************/
-$router->get("/error-404","error#e404","app.found");
-$router->get("/error-500","error#e500","app.internal-server-error");
-$router->get("/error-403","error#e403","app.forbidden");
+$router->get("/error/notfound","error#e404","app.found");
+$router->get("/error/internal","error#e500","app.internal-server-error");
+$router->get("/error/forbidden","error#e403","app.forbidden");

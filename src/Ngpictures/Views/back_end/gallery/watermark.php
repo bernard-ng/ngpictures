@@ -21,7 +21,11 @@
                 <legend><strong>Ecrire un watermark</strong></legend>
                 <div class="input-field">
                     <label for="watermark">Watermark</label>
-                    <input type="text" name="watermark" id="watermark">
+                    <input type="text" name="watermark" id="watermark" value="#Ngpictures - www.larytech.com">
+                </div>
+                <div class="input-field">
+                    <label for="color"></label>
+                    <input type="color" name="color" id="color" value="#fff">
                 </div>
             </fieldset>
             <br>

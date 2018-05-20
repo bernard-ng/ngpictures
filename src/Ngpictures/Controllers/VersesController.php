@@ -1,7 +1,6 @@
 <?php
 namespace Ngpictures\Controllers;
 
-
 class VersesController extends Controller
 {
 
@@ -22,7 +21,7 @@ class VersesController extends Controller
             if ($this->isAjax()) {
                 $verse = [
                     "txt" => $verse->text,
-                    "ref" => implode(' ',explode('.', $verse->ref)),
+                    "ref" => implode(' ', explode('.', $verse->ref)),
                     "id" => $verse->id
                 ];
                 echo json_encode($verse);
