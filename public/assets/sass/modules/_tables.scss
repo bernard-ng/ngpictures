@@ -1,15 +1,17 @@
+@import "../custom/bases/variables";
 table, th, td {
   border: none;
 }
 
 table {
   width: 100%;
+  padding: 15px;
   display: table;
 }
 
 table.bordered > thead > tr,
 table.bordered > tbody > tr {
-  border-bottom: 1px solid #d0d0d0;
+  border-bottom: 1px solid $border-color;
 }
 
 table.striped > tbody > tr:nth-child(odd) {
@@ -39,7 +41,7 @@ thead {
 }
 
 td, th {
-  padding: 15px 5px;
+  padding: 5px !important;
   display: table-cell;
   text-align: left;
   vertical-align: middle;

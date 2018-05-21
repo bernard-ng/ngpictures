@@ -129,14 +129,15 @@ class ValidationManager
      *
      * @param string $field
      * @param mixed $table
+     * @param string $msg
      * @return void
      */
-    public function unique(string $field, $table)
+    public function unique(string $field, $table, string $msg)
     {
         $this->required($field);
         $unexpected = $table->findWith($field, $this->getValue($field));
         if ($unexpected) {
-            $this->errors[$field] = MessageManager::get('form_used_field');
+            $this->errors[$field] = $msg;
         }
         return;
     }
@@ -152,7 +153,7 @@ class ValidationManager
     private function min_length(string $field, int $min_length)
     {
         $this->required($field);
-        if (strlen($this->getValue($field)) < $min_length) {
+        if (mb_strlen($this->getValue($field)) < $min_length) {
             $this->errors[$field] = sprintf("le %s doit faire au moins %d caractères", $field, $min_length);
         }
         return;
@@ -243,8 +244,9 @@ class ValidationManager
     /**
      * Valid URL
      *
-     * @param string  $field
+     * @param string $field
      * @author CodeIngniter Framework
+     * @return bool
      */
     private function valid_url($field)
     {
@@ -271,7 +273,7 @@ class ValidationManager
         if (filter_var('http://'.$url, FILTER_VALIDATE_URL) !== false) {
             $this->errors[$field] = MessageManager::get("form_invalid_url");
         }
-        return;
+        return true;
     }
 
 

@@ -1,8 +1,10 @@
+@import "../bases/variables";
+
 .card-user {
     padding-top: 20px;
-    background-color: #100F0F !important;
+    background: transparent;
+    border: 1px solid $border-color;
     border-top-width: 0;
-    border-bottom-width: 2px;
     border-radius: 3px;
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -76,22 +78,6 @@
     background-color: #f8f8f8;
 }
 
-.card-user .card-comments .comments-collapse-toggle {
-    padding: 0;
-    margin: 0 20px 12px 20px;
-}
-
-.card-user .card-comments .comments-collapse-toggle a,
-.card-user .card-comments .comments-collapse-toggle span {
-    padding-right: 5px;
-    overflow: hidden;
-    font-size: 12px;
-    color: #999;
-    -o-text-overflow: ellipsis;
-       text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
 .card-comments .media-heading {
     font-size: 13px;
     font-weight: bold;
@@ -120,14 +106,6 @@
     width: 170px;
     height: 150px;
     background-color: #ffffff;
-}
-
-.card-user.people .card-top.green {
-    background-color: #53a93f;
-}
-
-.card-user.people .card-top.blue {
-    background-color: #427fed;
 }
 
 .card-user.people .card-info {
@@ -185,12 +163,11 @@
 .card-user.hovercard .cardheader {
     background-size: cover !important ;
     background-position: center !important;
-    background-position: left;
     background-attachment: fixed;
     height: 135px;
-    -webkit-filter: grayscale(100%) blur(1px);
-            filter: grayscale(100%) blur(1px);
-    border-bottom: 2px solid rgba(214, 224, 226, 0.508);
+    -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+    border-bottom: 5px solid $border-color;
 }
 
 .card-user.hovercard .avatar {
@@ -205,7 +182,12 @@
     max-width: 100px;
     max-height: 100px;
     border-radius: 50%;
-    border: 5px solid rgba(255,255,255,0.5);
+    border: 5px solid $border-color;
+    transition: all linear .2s;
+
+    &:hover {
+        border-color: rgba(255,255,255,0.5);
+    }
 }
 
 .card-user.hovercard .info {

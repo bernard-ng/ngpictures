@@ -1,135 +1,8 @@
 /**
- * le message d'erreur ou de success.
- */
-const msg = {
-    success : "Action effectuée",
-    browserNotUpdate:       "Erreur, veuillez mettre à jour votre navigateur",
-    undefinedError:         "Aucune Connexion Internet",
-    deleteNotAllowed : "Vous n'avez pas le droit de suppression",
-    editNotAllowed : "Vous n'avez pas le droit d'édition",
-
-    formAllRequired : "Tous les champs doivent être compléter",
-    formMultiErrors : "Le formulaire a été mal rempli",
-    formFieldRequired : "Le champ doit être complété",
-    formBadSlug : 'Le slug ne doit contenir que des chiffres, des lettres et des tirés',
-    formIdeaSubmitted : "Ola, nous avons bien reçu votre idée",
-    formCommentSubmitted : "Votre commentaire a bien été posté",
-    formPostSubmitted : "Votre publication a bien été effectuée",
-    formBugSubmitted : "Nous avons bien reçu votre message et comptons régler le bug dans le plus bref délais",
-    formResetSubmitted : "Les instructions de rappel de mot de passe vous ont été envoyées par mail",
-    formRegistrationSubmitted : "Un email de confirmation de compte vous a été envoyé, veuillez le confirmer pour continuer",
-    formContactSubmitted : 'Nous avons bien reçu votre message et comptons vous répondre dans le plus bref délais',
-
-    filesNotImage : "Le fichier à télécharger doit être une image (jpg, jpeg, png, gif)",
-    filesNotUploaded : "Ooups, votre image n'a pas pu être télécharger",
-    filesNotDirectory : "Impossibe d'ouvrir le dossier demandé, veuillez réessayer",
-    filesDownloadFailed : "Ooups, une Erreur s'est produite lors du téléchargement",
-    filesNotFound : "La photo que vous désirer télécharger n'est plus disponible",
-
-    commentNotFound : "Ce commentaire n'éxiste pas ou plus",
-    commentDeleteSuccess : "Votre commentaire a bien été supprimé",
-    commentEditSuccess : "Votre commentaire a bien été édité",
-
-    usersNotfound : "Cet utilisateur n'a pas été trouvé",
-    usersLoginSuccess: "Vous êtes maintenant connecté",
-    usersNotLogged : "Connectez-vous pour continuer",
-    usersUnfollowingSuccess : "Vous ne suivez plus cet utilisateur",
-    usersFollowingSuccess : "Vous suivez cet utilisateur",
-};
-
-/**
- * cree un toast de materializecss
- * @param message
- * @param type
- */
-function setFlash(type, message) {
-    Materialize.toast(message, 4000, type);
-}
-
-
-/**
- * recupere une instance du xhr pour les req ajax.
- * @returns {*}
- */
-function getXhr() {
-    let xhr;
-    if (window.XMLHttpRequest) {
-        xhr = new XMLHttpRequest();
-        if (xhr.overrideMimeType) {
-            xhr.overrideMimeType('text/xml');
-        }
-    } else if (window.ActiveXObject) {
-        try {
-            xhr = new ActiveXObject("Msxml2.XMLHTTP");
-        } catch (e) {
-            try {
-                xhr = new ActiveXObject("Microsoft.XMLHTTP");
-            } catch (e) {
-                setFlash('danger', msg.browserNotUpdate);
-            }
-        }
-    }
-
-    if (!xhr) {
-        return false;
-    }
-    return xhr;
-}
-
-
-/**
- * permet de simuler le declanchement d'un event.
- * @param element
- * @param eventName
- */
-function setEventTrigger(element, eventName) {
-    switch (eventName) {
-        case 'click':
-            element.click();
-            break;
-        case 'focus':
-            element.focus();
-            break;
-        default:
-            let event = document.createEvent('Event');
-            event.initEvent(eventName, false, true);
-            element.dispatchEvent(event);
-            break;
-    }
-}
-
-
-/**
- * cree un loader dans un element...
- */
-function setLoader(element)
-
-
-function invalidateField(element) {
-
-}
-
-
-/**
- * remove un loader dans un element et remplace par le text
- * @param element
- * @param text
- */
-function removeLoader(element, text) {
-    element.classList.remove("disabled");
-    element.innerText = '';
-    element.innerHtml = '';
-    element.innerText = text;
-}
-
-
-//------------------------------------------------------------------------------------
-
-/**
  * envoyer un commentaire en ajax
  * @param element
  */
-function comments(element) {
+function formFeedComments(element) {
     let postContainer       =   document.querySelector(element);
     let activeUser          =   document.querySelector("meta[active-user]");
     if (postContainer) {
@@ -155,7 +28,6 @@ function comments(element) {
                             let xhr = getXhr();
                             xhr.open('POST', this.getAttribute('action'), true);
                             xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-                            xhr.send(new FormData(this));
                             xhr.onreadystatechange = function () {
                                 if (xhr.readyState === 4) {
                                     if (xhr.status === 200) {
@@ -188,6 +60,10 @@ function comments(element) {
                                     }
                                 }
                             }
+                            closeBtn.addEventListener('click', function(){
+                                xhr.abort();
+                            });
+                            xhr.send(new FormData(this));
                         }
                     } else {
                         removeLoader(submitBtn,'Envoyer');
@@ -202,6 +78,15 @@ function comments(element) {
             });
         }
     }
+}
+
+
+/**
+ * envyoer est afficher
+ * @param element
+ */
+function formShowComments(element) {
+
 }
 
 
@@ -237,17 +122,23 @@ function likes(element) {
                         let xhr = getXhr();
                         xhr.open('GET', this.getAttribute('href'), true);
                         xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-                        xhr.send();
-
                         xhr.onreadystatechange = function () {
                             if (xhr.readyState === 4) {
                                 if (xhr.status === 200) {
                                     showLikes.innerHTML = xhr.responseText;
                                 } else {
-                                    window.alert(xhr.responseText);
+                                    setFlash(
+                                        'danger',
+                                        xhr.responseText? xhr.responseText : msg.undefinedError
+                                    );
                                 }
                             }
-                        }
+                        };
+                        xhr.send();
+                        xhr.timeout = 10000;
+                        xhr.addEventListener('abort', function(){
+                            setFlash('warning', msg.undefinedError);
+                        });
                     }
                 } else {
                     setFlash('danger', msg.usersNotLogged);
@@ -265,30 +156,46 @@ function likes(element) {
  * @param element
  */
 function loadVerses(element) {
-    let verseContainer = document.querySelector(element);
-    if (verseContainer) {
-        xhr = getXhr();
-        if (xhr) {
-            xhr.open('GET', '/ajax/verset', true);
-            xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-            xhr.send();
+    window.setInterval(function(){
+        let verseContainer = document.querySelector(element);
+        if (verseContainer) {
+            let indicator = verseContainer.querySelector('.indicator');
 
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        verseContainer.innerHTML = '';
-                        verseContainer.innerHTML = xhr.responseText;
-                    } else {
-                        setFlash(
-                            xhr.responseText? xhr.responseText : msg.undefinedError,
-                            5000,
-                            'danger'
-                        );
-                    }
+            if (getXhr()) {
+                let xhr = getXhr();
+                if (indicator.classList.contains('active')) {
+                    indicator.classList.remove('active');
                 }
+                xhr.open('GET', verseContainer.getAttribute('data-ajax'), true);
+                xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            try {
+                                window.setTimeout(function(){
+                                    let verse = JSON.parse(xhr.responseText);
+                                    verseContainer.querySelector("[data-content='txt']").innerHTML = verse.txt;
+                                    verseContainer.querySelector("[data-content='ref']").innerHTML = verse.ref;
+                                    indicator.classList.add('active');
+                                },10000);
+                            } catch (e) {
+                                return false;
+                            }
+                        } else {
+                            setFlash(
+                                'danger',
+                                xhr.responseText? xhr.responseText : msg.undefinedError,
+                            );
+                        }
+                    }
+                };
+                xhr.timeout = 10000;
+                xhr.send();
             }
+        } else {
+            return false;
         }
-    }
+    },10000);
 }
 
 
@@ -426,7 +333,7 @@ function loadPictureInfo() {
  * login ajax
  * @param element
  */
-function login(element){
+function formLogin(element){
     let form = document.querySelector(element);
     if (form) {
         let submitBtn = form.querySelector("button[type='submit']")
@@ -439,10 +346,7 @@ function login(element){
 
             let name = form.querySelector("input[name='name']");
             let password = form.querySelector("input[name='password']");
-            name.nextElementSibling.innerText = "";
-            password.nextElementSibling.innerText = "";
-            name.classList.remove('invalid');
-            password.classList.remove('invalid');
+            resetValidation([name, password]);
 
             if (getXhr()) {
                 let xhr = getXhr();
@@ -453,17 +357,15 @@ function login(element){
                     if (xhr.readyState === 4) {
                         if (xhr.status === 200) {
                             removeLoader(submitBtn, 'Connexion');
-                            Turbolinks.visit(window.location.origin + xhr.responseText);
+                            redirect(xhr.responseText);
                         } else if (xhr.status === 403) {
                             removeLoader(submitBtn, 'Connexion');
                             let errors = JSON.parse(xhr.responseText);
 
                             if (errors.name) {
-                                name.nextElementSibling.innerText = errors.name;
-                                name.classList.add('invalid');
+                                formDataInvalid(name, errors.name);
                             } else if (errors.password) {
-                                errors.password ? password.nextElementSibling.innerText = errors.password : null;
-                                password.classList.add('invalid');
+                                formDataInvalid(password, errors.password);
                             }
                         } else {
                             removeLoader(submitBtn, 'Connexion');
@@ -476,11 +378,19 @@ function login(element){
     }
 }
 
+
 /**
- * ideas ajax
+ * sign up ajax
  * @param element
  */
-function ideas(element) {
+function formSign(element){}
+
+
+/**
+ * ideas ajax et bug
+ * @param element
+ */
+function formGenericSubmit(element) {
     let form = document.querySelector(element);
     if (form) {
         let submitBtn = form.querySelector("button[type='submit']")
@@ -491,9 +401,8 @@ function ideas(element) {
             e.preventDefault();
             e.stopPropagation();
 
-            let textarea = this.querySelector('textarea#ideas');
-            textarea.nextElementSibling.innerText = "";
-            textarea.classList.remove('invalid');
+            let textarea = this.querySelector('textarea');
+            resetValidation([textarea]);
 
             if (getXhr()) {
                 let xhr = getXhr();
@@ -509,8 +418,9 @@ function ideas(element) {
                             removeLoader(submitBtn, 'Envoyer');
                             let errors = JSON.parse(xhr.responseText);
                             if (errors.ideas) {
-                                textarea.nextElementSibling.innerText = errors.ideas;
-                                textarea.classList.add('invalid');
+                                formDataInvalid(textarea, errors.ideas);
+                            } else if (errors.bugs) {
+                                formDataInvalid(textarea, errors.bugs);
                             }
                         } else {
                             removeLoader(submitBtn, 'Envoyer');
@@ -523,19 +433,93 @@ function ideas(element) {
     }
 }
 
+(function(){
+    let $active = false;
+    $("#gallery .gallery-item").on("click", function(){
 
-/**
- * bugs ajax
- * @param element
- */
-function bugs(element) {
+        let $item = $(this);
+        let $details = $item.parent().nextAll(".gallery-details:first")
 
-}
+        if ($item.hasClass("active")) {
+            return true;
+        }
 
+        $(".gallery-item").removeClass("active");
+        $(".gallery-details").removeClass('jumbotron jumbotron-img dark');
+        $(".gallery-details").html("");
+        $item.addClass("active");
+
+        $details.addClass('jumbotron jumbotron-img dark');
+        $details.html(
+            '<div class="ng-progress-indeterminate">' +
+                '<span></span>' +
+                '<span></span>' +
+                '<span></span>' +
+                '<span></span>' +
+                '<span></span>' +
+            '</div>'
+        );
+
+        $.ajax(
+            {url: $item.parent().attr('data-url')}
+        ).then(
+            function($detailsInfo) {
+                $detailsInfo = $detailsInfo.substring($detailsInfo.indexOf('}') + 1, $detailsInfo.length + 1);
+                $details.addClass('jumbotron jumbotron-img dark').html('');
+                $details.append($detailsInfo).slideDown();
+                $work_details =  $details.find('.gallery-container-details');
+
+                let $del = $active;
+                if ($active) {
+                    $active.slideUp(300, function() {
+                        $del.remove()
+                    })
+                }
+
+                //animation
+                for (let i = 1; i <= 3; i++)
+                {
+                    $(".stagger" + i, $work_details).css({
+                        opacity:0, marginLeft:-30
+                    }).delay(300 + 100 * i).animate({
+                        opacity:1, marginLeft: 0
+                    })
+                }
+
+                $active = $work_details;
+                $active.find(".gallery-details-img").on("click", function() {
+                    $(this).find('img').materialbox()
+                });
+
+                scrollTo($active);
+            },
+            function() {
+                return Materialize.toast("Impossibe de charge l'Image", 5000, "danger")
+            }
+        );
+
+        window.location.hash = $item.parent().attr('id')
+    });
+
+    let scrollTo = function(cible) {
+        window.setTimeout(function(){
+            $('html, boby').animate({scrollTop: $(cible).offset().top - 80 }, 750);
+        }, 300)
+    }
+
+    if (window.location.hash) {
+        let $target = $(window.location.hash + " img.gallery-item");
+        if ($target.length > 0) {
+            $target.trigger('click');
+            scrollTo($target)
+        }
+    }
+})();
 
 //------------------------------------------------------------------------------------
-login("form[data-action='login']");
-ideas("form[data-action='ideas']");
-comments('#dataContainer');
+//loadVerses("[data-action='verses']");
+formLogin("form[data-action='login']");
+formGenericSubmit("form[data-action='ideas']");
+formGenericSubmit("form[data-action='bugs']");
+formFeedComments('#dataContainer');
 likes("#dataContainer");
-window.setInterval(loadVerses("#verses"), 5000);

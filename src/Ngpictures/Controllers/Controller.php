@@ -39,6 +39,7 @@ class Controller extends SuperController
         $this->cookie           =   $this->app->getCookie();
         $this->session          =   $this->app->getSession();
         $this->validator        =   $this->app->getValidator();
+        $this->cacheBusting     =   $this->app->getCacheBusting();
     }
 
 

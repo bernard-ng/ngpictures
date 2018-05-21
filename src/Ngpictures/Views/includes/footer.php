@@ -27,7 +27,7 @@
         <div class="ui horizontal bulleted list">
             <a class="item" href="/bugs">Un bug ?</a>
             <a class="item" href="/ideas">Votre avis</a>
-            <a href="/privacy-terms" class="item">Mentions légales</a>
+            <a href="/privacy" class="item">Politiques d'utilisation</a>
             <a class="item" href="/contact">Contact</a>
         </div>
         </section>

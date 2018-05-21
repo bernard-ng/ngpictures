@@ -1,15 +1,20 @@
-<section class="content-header jumbotron">
-    <h1>Erreur 500</h1>
-</section>
-
-<section class="content">
-    <div class="error-page">
-        <h1 class="headline text-red"><span class="icon icon-exclamation-sign"></span></h1>
-        <div class="error-content">
-            <h3>Ooups! une erreur s'est produite lors du traitement</h3>
-            <p>
-              Il peut s'agir d'une erreur interne du serveur, si cela se reproduit veuillez nous le signaler <a href="\plus\problemes.php">ici</a> ou vous pouvez revenir à <a href="/home.php">l'accueil</a> 
-            </p>
-        </div>
-    </div>
-</section>
+<div class="slider fullscreen">
+    <ul class="slides">
+        <li id="reset">
+            <img src="/imgs/outils.jpeg">
+            <div class="caption center-align">
+                <h3 class="ng-heading">Erreur Interne</h3>
+                <h6 class="light grey-text text-lighten-3">
+                    Il peut s'agir d'une erreur interne du serveur, si cela se reproduit veuillez nous le signaler
+                    <a href="\bugs">ici</a> ou vous pouvez revenir à l'accueil
+                </h6>
+            </div>
+            <div class="bg"></div>
+        </li>
+    </ul>
+</div>
+<div class="fixed-action-btn">
+    <a href="/" class="btn-floating btn-large waves-effect shadow-4">
+        <i class="icon icon-home"></i>
+    </a>
+</div>

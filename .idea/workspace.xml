@@ -1,55 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4862a466-f72e-41f7-87e3-2b36a8216ed9" name="Default" comment="finissage du backend">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Public/assets/js/app/app.ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/Public/assets/js/app/app.ajax.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/serviceworker.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/serviceworker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Controllers/Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Managers/Collection.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Managers/Collection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Managers/ImageManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Managers/ImageManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Router/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Router/Router.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/BugsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/BugsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/CategoriesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/CategoriesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/CommentsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/CommentsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/CommunityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/CommunityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/ContactController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/ContactController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/DownloadController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/DownloadController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/ErrorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/ErrorController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/FacebookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/FacebookController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/FollowingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/FollowingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/GalleryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/GalleryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/IdeasController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/IdeasController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/OnlineController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/OnlineController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/PostsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/PostsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/RssController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/RssController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/SearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/SearchController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/StaticController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/StaticController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/UsersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Managers/PageManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Managers/PageManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Ngpictures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Ngpictures.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Traits/Controllers/ShowPostTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Traits/Controllers/ShowPostTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Traits/Controllers/StoryPostTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Traits/Controllers/StoryPostTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/blog/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/blog/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/blog/show.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/blog/show.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/community/community.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/community/community.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/slider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/slider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/ideas.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/ideas.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/posts/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/posts/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/posts/show.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/posts/show.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/users/account/account.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/users/account/account.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/comments.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/comments.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/default-script.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/default-script.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/default-slider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/default-slider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/menu-aside.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/menu-aside.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/mobile-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/mobile-menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/layout/posts/default.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/layout/posts/default.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/layout/show.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/layout/show.php" afterDir="false" />
-    </list>
+    <list default="true" id="4862a466-f72e-41f7-87e3-2b36a8216ed9" name="Default" comment="set timeout in verse ajax req" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -95,74 +47,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="app.ajax.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/assets/js/app/app.ajax.js">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/blog/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="473">
-              <caret line="540" column="48" selection-start-line="540" selection-start-column="48" selection-end-line="540" selection-end-column="48" />
-              <folding>
-                <element signature="e#0#45#0" />
-                <element signature="e#58#2179#0" />
-                <element signature="n#!!doc;n#setFlash#0" />
-                <element signature="n#!!block;n#setFlash#0" />
-                <element signature="n#!!doc;n#getXhr#0" />
-                <element signature="n#!!block;n#getXhr#0" />
-                <element signature="n#!!doc;n#setEventTrigger#0" />
-                <element signature="n#!!block;n#setEventTrigger#0" />
-                <element signature="n#!!doc;n#setLoader#0" />
-                <element signature="n#!!doc;n#removeLoader#0" />
-                <element signature="n#!!block;n#removeLoader#0" />
-                <element signature="n#!!doc;n#comments#0" />
-                <element signature="n#!!block;n#comments#0" />
-                <element signature="n#!!doc;n#likes#0" />
-                <element signature="n#!!block;n#likes#0" />
-                <element signature="n#!!doc;n#loadVerses#0" />
-                <element signature="n#!!block;n#loadVerses#0" />
-                <element signature="n#!!doc;n#loadPosts#0" />
-                <element signature="n#!!block;n#loadPosts#0" />
-                <element signature="n#!!doc;n#loadPictureInfo#0" />
-                <element signature="n#!!block;n#loadPictureInfo#0" />
-                <element signature="n#!!doc;n#login#0" />
-                <element signature="n#!!block;n#login#0" />
-                <element signature="n#!!doc;n#ideas#0" />
-                <element signature="n#!!doc;n#bugs#0" />
-              </folding>
+            <state relative-caret-position="262">
+              <caret line="64" column="72" selection-start-line="64" selection-start-column="72" selection-end-line="64" selection-end-column="72" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="default-script.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/includes/default-script.php">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/posts/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="12" lean-forward="true" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LikesController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Ngpictures/Controllers/LikesController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/back_end/blog/add.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="26" column="43" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="serviceworker.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/serviceworker.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="35" lean-forward="true" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+            <state relative-caret-position="236">
+              <caret line="121" column="74" selection-start-line="121" selection-start-column="74" selection-end-line="121" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -178,41 +76,38 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>!== undefined || null</find>
-      <find>##</find>
-      <find>ng-news</find>
-      <find>col</find>
-      <find>bottom-sheet</find>
-      <find>background-color</find>
-      <find>overlay</find>
-      <find>mdz-textarea</find>
-      <find>Materialize.toast</find>
-      <find>trigger(c</find>
-      <find>modal-overlay</find>
-      <find>/* 2 */</find>
-      <find>/* 3 */</find>
-      <find>#ee6e73</find>
-      <find>rgba(204, 204, 204, 0.207</find>
-      <find>r)</find>
-      <find>#ccc</find>
-      <find>focus</find>
-      <find>&lt;?= $query ?&gt;</find>
-      <find>z-index</find>
-      <find>static</find>
-      <find>#1e70bf</find>
-      <find>background</find>
-      <find>logout</find>
-      <find>\</find>
-      <find>turbolinksLocation(&quot;</find>
-      <find>account</find>
-      <find>function a</find>
       <find>var</find>
-      <find>data-turbolinks-eval=&quot;true&quot;</find>
+      <find>#1e70bf</find>
+      <find>#cc</find>
+      <find>#ccc</find>
+      <find>''</find>
+      <find>rgba(204, 204, 204, 0.816)</find>
+      <find>style=&quot;padding-top: -25px;&quot;</find>
+      <find>sign</find>
+      <find>login</find>
+      <find>disabled</find>
+      <find>forgot</find>
+      <find>$post</find>
+      <find>select</find>
+      <find>gallery</find>
+      <find>&lt;i class=&quot;icon icon-refresh rotate&quot; style=&quot;font-size: smaller !important;&quot;&gt;&lt;/i&gt;</find>
+      <find>confirm</find>
+      <find>cloud-</find>
+      <find>ng-news</find>
+      <find>ng-progress-indeterminate</find>
+      <find>privacy-terms</find>
+      <find>ng-legend</find>
+      <find>#Ngpictures</find>
+      <find>$a</find>
+      <find>class=&quot;justify-align&quot;</find>
+      <find>mdz-textarea</find>
+      <find>verses-panel</find>
+      <find>action</find>
+      <find>li.action</find>
+      <find>Water</find>
+      <find>/*</find>
     </findStrings>
     <replaceStrings>
-      <replace>lastByCategory</replace>
-      <replace>/confirm/</replace>
-      <replace>findWithCategory</replace>
       <replace>main</replace>
       <replace>get</replace>
       <replace>admin</replace>
@@ -226,15 +121,23 @@
       <replace>#ccc</replace>
       <replace>|| null</replace>
       <replace>all .3s linear</replace>
-      <replace>news</replace>
       <replace>setFlash</replace>
       <replace>setEventTrigger</replace>
       <replace>$border-color</replace>
       <replace>r</replace>
-      <replace>$txt-color</replace>
       <replace>relative</replace>
-      <replace>$active-color</replace>
+      <replace>formDataInvalid</replace>
       <replace>let</replace>
+      <replace>-color</replace>
+      <replace>$txt-color</replace>
+      <replace>$active-color</replace>
+      <replace>chargement...</replace>
+      <replace>icon-cancel</replace>
+      <replace>news</replace>
+      <replace>h2</replace>
+      <replace>Ngpictures</replace>
+      <replace>$photo</replace>
+      <replace>materialize-textarea</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -253,57 +156,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Ngpictures/Views/includes/favicon.php" />
-        <option value="$PROJECT_DIR$/public/manifest.json" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/PostsController.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Ngpictures.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/CommunityController.php" />
+        <option value="$PROJECT_DIR$/public/assets/js/app/app.init.js" />
+        <option value="$PROJECT_DIR$/public/assets/js/app/app.ajax.js" />
+        <option value="$PROJECT_DIR$/public/assets/sass/custom/modules/_modules.scss" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/contact.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/includes/menu.php" />
+        <option value="$PROJECT_DIR$/config/SystemConfig.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/StaticController.php" />
         <option value="$PROJECT_DIR$/src/Ngpictures/Managers/PageManager.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Traits/Controllers/StoryPostTrait.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Traits/Controllers/ShowPostTrait.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/BugsController.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/CategoriesController.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/ContactController.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/DownloadController.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/ErrorController.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/FacebookController.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/FollowingController.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/GalleryController.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/HomeController.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/OnlineController.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/SearchController.php" />
-        <option value="$PROJECT_DIR$/vendor/suin/php-rss-writer/src/Suin/RSSWriter/Item.php" />
-        <option value="$PROJECT_DIR$/vendor/suin/php-rss-writer/src/Suin/RSSWriter/Channel.php" />
-        <option value="$PROJECT_DIR$/public/feed.xml" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/includes/footer.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/show.php" />
         <option value="$PROJECT_DIR$/src/Core/Router/Router.php" />
         <option value="$PROJECT_DIR$/public/index.php" />
-        <option value="$PROJECT_DIR$/config/SystemConfig.php" />
-        <option value="$PROJECT_DIR$/public/assets/sass/bases/_fonts.scss" />
-        <option value="$PROJECT_DIR$/public/assets/sass/bases/_typography.scss" />
-        <option value="$PROJECT_DIR$/public/assets/sass/custom/modules/_headers.scss" />
-        <option value="$PROJECT_DIR$/public/service-worker.js" />
         <option value="$PROJECT_DIR$/config/RoutesConfig.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/StaticController.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/about.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/contact.php" />
-        <option value="$PROJECT_DIR$/public/cache-polyfill.js" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/index.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/community/community.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/ErrorController.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/error/404.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/error/500.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/layout/blank.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/layout/default.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/layout/default-simple.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/layout/modal.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/layout/search.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/layout/show.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/layout/posts/default.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/layout/posts/show.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/privacy.php" />
+        <option value="$PROJECT_DIR$/public/assets/js/app/app.js" />
         <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/index.php" />
-        <option value="$PROJECT_DIR$/public/assets/js/app/activingScript.js" />
-        <option value="$PROJECT_DIR$/public/assets/js/materialize.js" />
-        <option value="$PROJECT_DIR$/public/assets/js/app/materialize.js" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/RssController.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Managers/MessageManager.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/users/login.php" />
-        <option value="$PROJECT_DIR$/src/Core/Managers/Collection.php" />
-        <option value="$PROJECT_DIR$/src/Core/Controllers/Controller.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/UsersController.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/ideas.php" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/IdeasController.php" />
-        <option value="$PROJECT_DIR$/public/assets/js/app/app.ajax.js" />
-        <option value="$PROJECT_DIR$/src/Ngpictures/Views/includes/default-script.php" />
-        <option value="$PROJECT_DIR$/public/serviceworker.js" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/index.php" />
+        <option value="$PROJECT_DIR$/public/assets/sass/modules/_cards.scss" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/includes/menu-aside.php" />
+        <option value="$PROJECT_DIR$/public/assets/sass/modules/_navbar.scss" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/includes/right-aside.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/AdminController.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/watermark.php" />
+        <option value="$PROJECT_DIR$/src/Core/Managers/ImageManager.php" />
+        <option value="$PROJECT_DIR$/config/DatabaseConfig.php" />
+        <option value="$PROJECT_DIR$/public/assets/sass/custom/modules/_card.scss" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/community/community.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/includes/left-aside.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/posts/show.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/includes/comments.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Controllers/Controller.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Ngpictures.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Entity/UsersEntity.php" />
+        <option value="$PROJECT_DIR$/src/Core/Managers/CacheBustingManager.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Traits/Entity/PostEntityTrait.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Entity/CommentsEntity.php" />
+        <option value="$PROJECT_DIR$/public/.htaccess" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Entity/GalleryEntity.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/blog/index.php" />
+        <option value="$PROJECT_DIR$/src/Ngpictures/Views/front_end/posts/index.php" />
       </list>
     </option>
   </component>
@@ -337,7 +240,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -345,38 +247,22 @@
               <item name="ng-pictures" type="b2602c69:ProjectViewProjectNode" />
               <item name="ng-pictures" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
-            <path>
-              <item name="ng-pictures" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-pictures" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ng-pictures" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-pictures" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ng-pictures" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ng-pictures" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="fonts" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="AndroidView" />
       <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="des&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/default-script.php&#10;serv&#9;FILE&#9;file://D:/sites/ng-pictures/public/serviceworker.js&#10;add&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/back_end/blog/add.php&#10;likesC&#9;null&#9;null&#10;scri&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/default-script.php&#10;login.php&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/users/login.php&#10;ideas.p&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/others/ideas.php&#10;ideas&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/back_end/users/ideas.php&#10;UserC&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Controllers/UsersController.php&#10;ideasC&#9;null&#9;null&#10;usersController&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Controllers/UsersController.php&#10;messageM&#9;null&#9;null&#10;keymap&#9;ACTION&#9;Help.KeymapReference&#10;rssCon&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Controllers/RssController.php&#10;defaul&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/default-script.php&#10;sc&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/default-script.php&#10;gallery/index&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/gallery/index.php&#10;gallery&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Controllers/GalleryController.php&#10;community&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/community/community.php&#10;default&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/default-script.php&#10;index&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/index.php&#10;layout/&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/layout&#10;contact&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/others/contact.php&#10;abou&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/others/about.php&#10;routesC&#9;FILE&#9;file://D:/sites/ng-pictures/config/RoutesConfig.php&#10;userC&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Controllers/UsersController.php&#10;default-sc&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/default-script.php&#10;typo&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/bases/_typography.scss&#10;fonts&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/bases/_fonts.scss&#10;index.php&#9;FILE&#9;file://D:/sites/ng-pictures/public/index.php&#10;router&#9;null&#9;null&#10;logM&#9;null&#9;null&#10;blogE&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Entity/BlogEntity.php&#10;pageM&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Managers/PageManager.php&#10;usersC&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Controllers/UsersController.php&#10;ngpictures&#9;null&#9;null&#10;UsersC&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Controllers/UsersController.php&#10;routes&#9;FILE&#9;file://D:/sites/ng-pictures/config/RoutesConfig.php&#10;logout&#9;null&#9;null&#10;postC&#9;null&#9;null&#10;includes/&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes&#10;style.php&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/default-style.php&#10;app.aj&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/app/app.ajax.js&#10;UsersCon&#9;null&#9;null&#10;homeC&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Controllers/HomeController.php&#10;ImageManager&#9;null&#9;null&#10;validation&#9;null&#9;null&#10;Admin&#9;null&#9;null&#10;nav&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/modules/_navbar.scss&#10;front_end/ind&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/index.php" />
+    <property name="SearchEverywhereHistoryKey" value="posts/index.php&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/posts/index.php&#10;blog/index&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/blog/index.php&#10;galler&#9;null&#9;null&#10;comme&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Entity/CommentsEntity.php&#10;controller&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Controllers/Controller.php&#10;blog/&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/blog&#10;posts/show&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/posts/show.php&#10;commu&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/community/community.php&#10;commun&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/community/community.php&#10;posts/index&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/posts/index.php&#10;watermark.php&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/back_end/gallery/watermark.php&#10;adminC&#9;null&#9;null&#10;navbar&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/modules/_navbar.scss&#10;coll&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/modules/_collection.scss&#10;card&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/custom/modules/_card.scss&#10;menu&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/menu-aside.php&#10;right&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/right-aside.php&#10;menu.&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/custom/modules/_menu.scss&#10;nav&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/modules/_side-nav.scss&#10;gallery/&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/gallery&#10;left-&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/left-aside.php&#10;utili&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/bases/_utility.scss&#10;users&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/back_end/users&#10;front_end/index&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/index.php&#10;app.js&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/app/app.js&#10;privacy&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/others/privacy.php&#10;blank.php&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/layout/blank.php&#10;Router&#9;null&#9;null&#10;RoutesC&#9;FILE&#9;file://D:/sites/ng-pictures/config/RoutesConfig.php&#10;ErrorC&#9;null&#9;null&#10;posts/in&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/posts/index.php&#10;footer.php&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/includes/footer.php&#10;pageManager&#9;null&#9;null&#10;-na&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/modules/_side-nav.scss&#10;menu.s&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/custom/modules/_menu.scss&#10;app.aj&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/app/app.ajax.js&#10;app.init&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/app/app.init.js&#10;Ad&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Controllers/AdminController.php&#10;backend/gallery/i&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/back_end/gallery/index.php&#10;back_end/gallery/in&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/back_end/gallery/index.php&#10;admin.&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/app/admin.ajax.js&#10;back_end/gallery/index&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/back_end/gallery/index.php&#10;AdminContro&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Controllers/AdminController.php&#10;form&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/modules/_forms.scss&#10;posts/add&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/front_end/users/posts/add.php&#10;app.a&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/js/app/app.ajax.js&#10;admin/defa&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/layout/admin/default.php&#10;tables&#9;FILE&#9;file://D:/sites/ng-pictures/public/assets/sass/modules/_tables.scss&#10;edit&#9;FILE&#9;file://D:/sites/ng-pictures/src/Ngpictures/Views/back_end/gallery/edit.php&#10;galleryController&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="jsx.switch.disabled" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
@@ -515,11 +401,22 @@
       <workItem from="1525208230300" duration="28524000" />
       <workItem from="1525456927187" duration="249000" />
       <workItem from="1525457209089" duration="33012000" />
+      <workItem from="1525726042237" duration="10010000" />
+      <workItem from="1525804901263" duration="22760000" />
+      <workItem from="1525887241541" duration="278000" />
+      <workItem from="1525973179598" duration="2726000" />
+      <workItem from="1525976195648" duration="38000" />
+      <workItem from="1526061003784" duration="66000" />
+      <workItem from="1526139975999" duration="17618000" />
+      <workItem from="1526241852814" duration="26945000" />
+      <workItem from="1526541858369" duration="12572000" />
+      <workItem from="1526745783918" duration="21630000" />
+      <workItem from="1526838261771" duration="11829000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="417711000" />
+    <option name="totallyTimeSpent" value="553950000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -532,53 +429,41 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
+      <window_info content_ui="combo" id="Project" order="7" sideWeight="0.42079207" visible="true" weight="0.22768533" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.32838285" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.89438945" />
-      <window_info anchor="bottom" id="Database Changes" order="2" show_stripe_button="false" />
-      <window_info id="Version Control" order="6" weight="0.0892587" />
-      <window_info anchor="bottom" id="Run" order="5" />
-      <window_info anchor="right" x="22" y="304" width="1322" height="199" id="Terminal" order="13" weight="0.73373675" />
-      <window_info active="true" content_ui="combo" id="Project" order="7" visible="true" weight="0.26626325" />
       <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.89438945" />
       <window_info anchor="right" id="Database" order="10" weight="0.4969743" />
-      <window_info anchor="bottom" id="Find" order="4" weight="0.32838285" />
-      <window_info id="Structure" order="0" side_tool="true" weight="0.24962178" />
+      <window_info anchor="bottom" id="Database Changes" order="2" show_stripe_button="false" />
+      <window_info id="Version Control" order="6" weight="0.408472" />
+      <window_info anchor="bottom" id="Run" order="5" />
+      <window_info id="Structure" order="0" sideWeight="0.5792079" side_tool="true" weight="0.2246596" />
+      <window_info anchor="right" x="22" y="304" width="1322" height="199" id="Terminal" order="11" weight="0.5219365" />
       <window_info id="Favorites" order="5" side_tool="true" weight="0.32980332" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.4" />
       <window_info id="Designer" order="1" />
       <window_info anchor="bottom" id="Database Console" order="0" weight="0.32838285" />
       <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="bottom" id="Run" order="5" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Commander" order="1" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="UI Designer" order="4" />
-      <window_info id="Favorites" order="5" side_tool="true" weight="0.32980332" />
-      <window_info anchor="right" x="22" y="304" width="1322" height="199" id="Terminal" order="12" weight="0.73373675" />
-      <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
+      <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.32838285" />
       <window_info anchor="right" id="Dynamic Properties" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.89438945" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.0" />
       <window_info anchor="right" x="0" y="0" width="295" height="544" id="Documentation" order="0" side_tool="true" weight="0.0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="7" visible="true" weight="0.26626325" />
       <window_info anchor="bottom" id="PHP-CGI Server" order="12" />
-      <window_info anchor="bottom" id="Database Changes" order="2" show_stripe_button="false" />
-      <window_info id="Version Control" order="6" weight="0.0892587" />
       <window_info anchor="right" id="Maven Projects" order="9" />
+      <window_info anchor="bottom" id="Find" order="4" weight="0.32838285" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
-      <window_info anchor="right" id="Database" order="11" weight="0.4969743" />
       <window_info anchor="bottom" id="Message" order="3" />
-      <window_info anchor="bottom" id="TODO" order="7" weight="0.32838285" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info id="Structure" order="0" side_tool="true" weight="0.24962178" />
-      <window_info anchor="bottom" id="Debug" order="6" weight="0.4" />
     </layout>
     <layout-to-restore>
       <window_info id="Designer" order="1" />
@@ -590,29 +475,30 @@
       <window_info id="Capture Tool" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" weight="0.32980332" />
-      <window_info anchor="right" x="22" y="304" width="1322" height="199" id="Terminal" order="11" weight="0.7420575" />
+      <window_info anchor="right" x="22" y="304" width="1322" height="199" id="Terminal" order="11" weight="0.5219365" />
       <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="right" id="Dynamic Properties" order="6" />
+      <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.32838285" />
+      <window_info anchor="right" id="Commander" order="1" weight="0.4" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.89438945" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.0" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.0" />
       <window_info anchor="right" x="0" y="0" width="295" height="544" id="Documentation" order="0" side_tool="true" weight="0.0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="right" id="Commander" order="1" weight="0.4" />
       <window_info id="Image Layers" order="2" />
-      <window_info anchor="bottom" id="PHP-CGI Server" order="12" />
+      <window_info anchor="bottom" id="PHP-CGI Server" order="13" />
       <window_info anchor="bottom" id="Database Changes" order="2" show_stripe_button="false" />
-      <window_info id="Version Control" order="6" weight="0.0892587" />
+      <window_info id="Version Control" order="6" weight="0.408472" />
       <window_info anchor="right" id="Maven Projects" order="9" />
-      <window_info content_ui="combo" id="Project" order="7" visible="true" weight="0.25869894" />
+      <window_info anchor="bottom" id="Find" order="4" weight="0.32838285" />
+      <window_info content_ui="combo" id="Project" order="7" sideWeight="0.42079207" visible="true" weight="0.22768533" />
       <window_info anchor="right" id="Database" order="10" weight="0.4969743" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.32838285" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info id="Structure" order="0" side_tool="true" weight="0.24962178" />
+      <window_info anchor="right" id="Dynamic Properties" order="6" />
+      <window_info id="Structure" order="0" sideWeight="0.5792079" side_tool="true" weight="0.2246596" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="4" weight="0.3290938" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.4" />
     </layout-to-restore>
   </component>
@@ -654,368 +540,338 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="31" />
+      <option name="time" value="36" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Controllers/PostsController.php">
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Controllers/ErrorController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+        <state relative-caret-position="408">
+          <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/squizlabs/php_codesniffer/src/Standards/Squiz/Tests/Commenting/FunctionCommentUnitTest.inc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-371">
-          <caret line="312" column="9" selection-start-line="312" selection-start-column="9" selection-end-line="312" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/SystemConfig.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="33" selection-start-line="33" selection-end-line="36" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Core/Router/Router.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="150" column="55" selection-start-line="150" selection-start-column="55" selection-end-line="150" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Controllers/SearchController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/sass/bases/_fonts.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="30" column="63" selection-start-line="30" selection-start-column="63" selection-end-line="30" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/sass/bases/_typography.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="32" column="43" selection-start-line="32" selection-start-column="43" selection-end-line="32" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/sass/custom/modules/_headers.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="153" lean-forward="true" selection-start-line="153" selection-end-line="153" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/manifest.json">
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/layout/posts/default.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
-          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Controllers/BugsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="21" column="47" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/RoutesConfig.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="75" column="36" selection-start-line="75" selection-start-column="36" selection-end-line="75" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Controllers/StaticController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/about.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="18" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/contact.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="40" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/layout/posts/show.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-224" />
+        <state relative-caret-position="238">
+          <caret line="14" column="57" lean-forward="true" selection-start-line="14" selection-start-column="57" selection-end-line="14" selection-end-column="57" />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/index.php">
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/layout/show.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="174" column="7" selection-start-line="174" selection-start-column="7" selection-end-line="174" selection-end-column="7" />
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/layout/search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/layout/modal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/layout/default-simple.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/layout/default.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/layout/blank.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Controllers/GalleryController.php">
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/error/500.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="69" column="57" lean-forward="true" selection-start-line="69" selection-start-column="57" selection-end-line="69" selection-end-column="57" />
+        <state relative-caret-position="85">
+          <caret line="5" column="53" selection-start-line="5" selection-start-column="53" selection-end-line="5" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/error/404.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/privacy.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="78" column="41" selection-start-line="78" selection-start-column="41" selection-end-line="78" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/js/app/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/sass/bases/_utility.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-89" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/sass/custom/modules/_menu.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="27" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="18" lean-forward="true" selection-start-line="20" selection-start-column="12" selection-end-line="27" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/back_end/users/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="28" column="52" selection-start-line="28" selection-start-column="52" selection-end-line="28" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/includes/right-aside.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="32" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/includes/menu-aside.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/sass/modules/_navbar.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="163" column="25" selection-start-line="163" selection-start-column="25" selection-end-line="163" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/sass/modules/_cards.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="25" column="10" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Gd/Font.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3893" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/watermark.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="23" column="108" selection-start-line="23" selection-start-column="108" selection-end-line="23" selection-end-column="108" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Core/Managers/ImageManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="168" column="57" lean-forward="true" selection-start-line="168" selection-start-column="57" selection-end-line="168" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Controllers/AdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="744" column="13" selection-start-line="744" selection-start-column="13" selection-end-line="744" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database-dev.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="461" column="44" lean-forward="true" selection-start-line="461" selection-start-column="44" selection-end-line="461" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/DatabaseConfig.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/posts/show.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="30" lean-forward="true" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/community/community.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="36" selection-start-column="36" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/js/materialize.min.js" />
-    <entry file="file://$PROJECT_DIR$/public/assets/js/jquery.min.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/js/app/activingScript.js">
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/includes/comments.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="422">
-          <caret line="36" column="42" lean-forward="true" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="42" />
+          <caret line="41" column="54" selection-start-line="41" selection-start-column="54" selection-end-line="41" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/js/lib/jquery.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/js/lib/masonry.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/js/lib/raphael.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/js/lib/morris.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/js/lib/turbolinks.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/js/materialize.js">
+    <entry file="file://$PROJECT_DIR$/public/assets/sass/custom/modules/_card.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
+          <caret line="187" column="13" selection-start-line="187" selection-start-column="13" selection-end-line="187" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/js/app/materialize.js">
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/includes/left-aside.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        <state>
+          <caret column="47" selection-start-column="47" selection-end-column="47" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/phpcs.xml">
+    <entry file="file://$PROJECT_DIR$/src/Core/Managers/ConfigManager.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/cache-polyfill.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/feed.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Controllers/RssController.php">
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Ngpictures.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="403">
+          <caret line="142" column="5" lean-forward="true" selection-start-line="142" selection-start-column="5" selection-end-line="142" selection-end-column="5" />
           <folding>
-            <element signature="e#41#67#0#PHP" expanded="true" />
-            <element signature="e#231#396#0#PHP" />
-            <element signature="e#402#1921#0#PHP" />
+            <element signature="e#29#70#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Managers/MessageManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="742">
-          <caret line="63" column="9" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/406802c2-8903-42e2-91bb-0c3640cd6f56/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Core/Managers/Collection.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="4541" column="4" selection-start-line="4541" selection-start-column="4" selection-end-line="4541" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Core/Controllers/Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-326">
-          <caret line="25" column="31" lean-forward="true" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Ngpictures/Controllers/Controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+        <state relative-caret-position="380">
+          <caret line="41" column="58" lean-forward="true" selection-start-line="41" selection-start-column="58" selection-end-line="41" selection-end-column="58" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Controllers/UsersController.php">
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/SPL/SPL_c1.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-84">
-          <caret line="339" column="32" lean-forward="true" selection-start-line="339" selection-start-column="32" selection-end-line="339" selection-end-column="32" />
+        <state relative-caret-position="-25624">
+          <caret line="584" column="24" selection-start-line="584" selection-start-column="24" selection-end-line="584" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/back_end/users/ideas.php">
+    <entry file="file://$PROJECT_DIR$/public/cache-polyfill.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/users/login.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/Managers/CacheBustingManager.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="27" selection-start-line="15" selection-start-column="19" selection-end-line="17" selection-end-column="27" />
+        <state relative-caret-position="442">
+          <caret line="31" column="25" lean-forward="true" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/ideas.php">
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Entity/UsersEntity.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2159">
+          <caret line="131" column="32" lean-forward="true" selection-start-line="131" selection-start-column="32" selection-end-line="131" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Entity/BugsEntity.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Entity/CategoriesEntity.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/imgs/.picasa.ini">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <caret line="11" column="43" lean-forward="true" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Controllers/IdeasController.php">
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Entity/CommentsEntity.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
+        <state relative-caret-position="422">
+          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/js/app/app.ajax.js">
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Traits/Entity/PostEntityTrait.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="540" column="48" selection-start-line="540" selection-start-column="48" selection-end-line="540" selection-end-column="48" />
+        <state relative-caret-position="286">
+          <caret line="173" column="7" lean-forward="true" selection-start-line="173" selection-start-column="7" selection-end-line="173" selection-end-column="7" />
           <folding>
-            <element signature="e#0#45#0" />
-            <element signature="e#58#2179#0" />
-            <element signature="n#!!doc;n#setFlash#0" />
-            <element signature="n#!!block;n#setFlash#0" />
-            <element signature="n#!!doc;n#getXhr#0" />
-            <element signature="n#!!block;n#getXhr#0" />
-            <element signature="n#!!doc;n#setEventTrigger#0" />
-            <element signature="n#!!block;n#setEventTrigger#0" />
-            <element signature="n#!!doc;n#setLoader#0" />
-            <element signature="n#!!doc;n#removeLoader#0" />
-            <element signature="n#!!block;n#removeLoader#0" />
-            <element signature="n#!!doc;n#comments#0" />
-            <element signature="n#!!block;n#comments#0" />
-            <element signature="n#!!doc;n#likes#0" />
-            <element signature="n#!!block;n#likes#0" />
-            <element signature="n#!!doc;n#loadVerses#0" />
-            <element signature="n#!!block;n#loadVerses#0" />
-            <element signature="n#!!doc;n#loadPosts#0" />
-            <element signature="n#!!block;n#loadPosts#0" />
-            <element signature="n#!!doc;n#loadPictureInfo#0" />
-            <element signature="n#!!block;n#loadPictureInfo#0" />
-            <element signature="n#!!doc;n#login#0" />
-            <element signature="n#!!block;n#login#0" />
-            <element signature="n#!!doc;n#ideas#0" />
-            <element signature="n#!!doc;n#bugs#0" />
+            <element signature="e#43#84#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Controllers/LikesController.php">
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Entity/BlogEntity.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+        <state relative-caret-position="187">
+          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/back_end/blog/add.php">
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Entity/GalleryEntity.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="26" column="43" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
+        <state relative-caret-position="266">
+          <caret line="30" column="68" selection-start-line="30" selection-start-column="68" selection-end-line="30" selection-end-column="68" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es2016.array.include.d.ts">
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/back_end/blog/index.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/blog/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
+        <state relative-caret-position="262">
+          <caret line="64" column="72" selection-start-line="64" selection-start-column="72" selection-end-line="64" selection-end-column="72" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/includes/default-script.php">
+    <entry file="file://$PROJECT_DIR$/src/Ngpictures/Views/front_end/posts/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="12" lean-forward="true" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/serviceworker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="35" lean-forward="true" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+        <state relative-caret-position="236">
+          <caret line="121" column="74" selection-start-line="121" selection-start-column="74" selection-end-line="121" selection-end-column="74" />
         </state>
       </provider>
     </entry>

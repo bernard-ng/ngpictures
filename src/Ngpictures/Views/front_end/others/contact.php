@@ -1,4 +1,4 @@
-<section class="section row container">
+ <section class="section row container">
     <div class="col l8 jumbotron dark">
         <form action="">
             <div class="input-field">
@@ -8,13 +8,13 @@
         </form>
     </div>
    <div class="col l4">
-       <center style="text-align: center;">
+       <div style="text-align: center;">
            <div class="fb-page" data-href="https://www.facebook.com/ngpictures23/" data-tabs="messages" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
                <blockquote cite="https://www.facebook.com/ngpictures23/" class="fb-xfbml-parse-ignore">
                    <a href="https://www.facebook.com/ngpictures23/">Ngpictures</a>
                </blockquote>
            </div>
-       </center>
+       </div>
    </div>
 
 

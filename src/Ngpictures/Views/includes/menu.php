@@ -14,8 +14,7 @@
 
                 <span id="menu-item-active" data-active="<?= $pageManager::getActivePage() ?>"></span>
                 <ul class="right hide-on-med-and-down links">
-
-                    <li class="search">
+                    <li class="search" style="margin-right: 10px">
                         <div class="search">
                             <form action="/search" method="get" class="ui icon input">
                                 <input name="q" type="text" placeholder="Recherches...">
@@ -24,26 +23,25 @@
                             </form>
                         </div>
                     </li>
-
                     <?php if ($activeUser && $activeUser->rank == "admin") : ?>
                         <li><a href="<?= ADMIN ?>"> <i class="icon icon-code"></i></a></li>
                     <?php endif; ?>
 
-                    <li id="Ngpictures"><a href="/">Accueil</a></li>
-                    <li id="Blog"><a href="/blog"> Blog</a></li>
-                    <li id="Galerie"><a href="/gallery"> Galerie</a></li>
+                    <li id="Ngpictures" class="waves-effect"><a href="/">Accueil</a></li>
+                    <li id="Blog" class="waves-effect"><a href="/blog"> Blog</a></li>
+                    <li id="Galerie" class="waves-effect"><a href="/gallery"> Galerie</a></li>
 
                     <?php if ($activeUser) : ?>
-                        <li id="Posts"><a href="/posts"> Actualités</a></li>
-                        <li id="Communauté"><a href="/community">Communauté</a></li>
+                        <li id="Posts" class="waves-effect"><a href="/posts"> Actualités</a></li>
+                        <li id="Communauté" class="waves-effect"><a href="/community">Communauté</a></li>
                         <li class="user-actions">
-                            <a href="#" class="user-actions-sideNav show-on-large" data-activates="user-actions">
+                            <a href="#" class="user-actions-sideNav show-profile show-on-large" data-activates="user-actions">
                                 <img src="<?= $activeUser->avatarUrl; ?>" class="user" width="50" height="50">
                             </a>
                         </li>
                     <?php else : ?>
-                        <li class="action"><a href="/sign" class="btn blue-grey waves-effect dark-3">Inscription</a></li>
-                        <li class="action"><a href="/login" class="btn blue-grey waves-effect dark-3">Connexion</a></li>
+                        <li class="action" class="waves-effect"><a href="/sign" class="btn waves-effect">Inscription</a></li>
+                        <li class="action" class="waves-effect"><a href="/login" class="btn waves-effect">Connexion</a></li>
                     <?php endif; ?>
                 </ul>
             </div>

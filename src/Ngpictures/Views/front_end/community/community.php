@@ -1,9 +1,9 @@
- <section class="section row col l12 m12 s12 animated fastg slideInRight">
+<section class="section col l6 m12 s12 animated slideInLeft">
     <div class="container row">
         <?php if (isset($users) && !empty($users)) : ?>
             <?php foreach ($users as $user) : ?>
                 <div class="row nexted col l3 m6 s12">
-                    <div class="card-user card hovercard hoverable">
+                    <div class="card-user card transparent hovercard hoverable">
                         <div class="cardheader" style="background: url('<?= $user->avatarUrl ?>')"></div>
                         <div class="avatar">
                             <a href="<?= $user->accountUrl ?>">
@@ -14,7 +14,7 @@
                             <div class="title">
                                 <a href="<?= $user->accountUrl ?>"><?= $user->name ?></a>
                             </div>
-                            <div class="desc"><?= $user->bio ?></div>
+                            <div class="desc truncate"><?= $user->bio ?></div>
                             <div class="ui tiny horizontal divided list">
                                 <div class="item">
                                     <div class="content">
@@ -41,15 +41,17 @@
                     </div>
                 </div>
             <?php endforeach; ?>
+        <?php else: ?>
+            <div class="col offset-l3 l6 m12 s12">
+                <div class="section center-align">
+                    <h2 class="icon icon-user-times red-txt center-align"></h2>
+                    <h2 class="ui header divided center"> Aucun Membres pour l'instant</h2>
+                    <p>
+                        le site ne présente actuellement aucun membre disponible, ces derniers n'ont peut être pas encore
+                        confirmer leur comptes, veuillez revenir plus tard.
+                    </p>
+                </div>
+            </div>
         <?php endif; ?>
     </div>
 </section>
-
-   <!--  <nav class="nav z-depth-2">
-        <div class="nav-wrapper">
-            <ul>
-                <li><a href="<? // $activeUser->followersUrl; ?>">Mes abonnés</a></li>
-                <li><a href="<? // $activeUser->followingsUrl; ?>">Mes abonnements</a></li>
-            </ul>
-        </div>
-    </nav> -->

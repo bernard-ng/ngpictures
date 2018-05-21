@@ -98,8 +98,9 @@ class PostsController extends Controller
             }
         }
 
+        $this->setLayout('posts/default');
         $this->pageManager::setName("Publication");
-        $this->viewRender("front_end/users/posts/add", compact('post', 'categories'));
+        $this->viewRender("front_end/users/posts/add", compact('post', 'categories', 'errors'));
     }
 
 

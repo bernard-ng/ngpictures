@@ -1,0 +1,85 @@
+@import "../bases/variables";
+
+#loginBox, #signUpBox {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  margin-top: 10%;
+  padding: 25px !important;
+  color: $txt-color;
+  width: 100% !important;
+  height: auto;
+  -webkit-transition: all linear 0.3s;
+  -moz-transition: all linear 0.3s;
+  -ms-transition: all linear 0.3s;
+  -o-transition: all linear 0.3s;
+  transition: all linear 0.3s;
+
+  position: absolute;
+  top: 89px;
+  left: 50%;
+  transform: translateY(-70px) translateX(-50%);
+}
+
+.transparent-form {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  padding: 15px 10px 15px !important;
+  color: $txt-color;
+  width: 100% !important;
+  height: auto;
+  -webkit-transition: all linear 0.3s;
+  -moz-transition: all linear 0.3s;
+  -ms-transition: all linear 0.3s;
+  -o-transition: all linear 0.3s;
+  transition: all linear 0.3s;
+
+  input {
+    color: $txt-color !important;
+    padding-left: 10px;
+  }
+
+  label {
+    color: $txt-light-color;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  #loginBox, #signUpBox {
+    width: 500px !important;
+    height: auto;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateY(-70px) translateX(-50%);
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  #loginBox, #signUpBox {
+    width: 500px !important;
+    height: auto;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateY(-70px) translateX(-50%);
+  }
+}
+
+#loginBox a.forgot,
+#signUpBox a.forgot {
+  color: $txt-light-color;
+  float: right !important
+}
+
+#loginBox a.forgot:hover, #signUpBox a.forgot:hover {
+  text-decoration: underline
+}
+
+#loginBox label, #signUpBox label {
+  color: $txt-light-color;
+}
+
+#loginBox input, #signUpBox input {
+  color: $txt-color !important;
+  padding-left: 10px;
+}

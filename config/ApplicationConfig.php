@@ -13,7 +13,7 @@ define("UPLOAD", WEBROOT."/uploads");
 /********************************************/
 define("SITE_NAME", "http://127.0.0.1");
 define("CDN", ""); // define('CDN', "http://ngpictures.pe.hu/cdn");
-define("ADMIN", "/ad");
+define("ADMIN", "/admin");
 define("AUTH_KEY", "auth");
 define("FLASH_MESSAGE_KEY", "flash");
 define("TOKEN_KEY", "token");

@@ -2,10 +2,10 @@
 namespace Ngpictures\Controllers;
 
 use \Exception;
+use Ngpictures\Traits\Controllers\PaginationTrait;
 use \RuntimeException;
 use \DirectoryIterator;
 use Ngpictures\Ngpictures;
-use \UnexpectedValueException;
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\ImageManager;
 use Ng\Core\Managers\ConfigManager;
@@ -36,6 +36,8 @@ class AdminController extends Controller
         'categories',
         'albums'
     ];
+
+    use PaginationTrait;
 
 
     /**
@@ -73,6 +75,7 @@ class AdminController extends Controller
     {
         $posts         =  $this->posts->latest();
         $blog          =  $this->blog->latest();
+        $photo         =  $this->gallery->latest();
 
         $site_posts    = [count($this->blog->lastOnline()), count($this->blog->lastOffline())];
         $users_posts   = [count($this->posts->lastOnline()), count($this->posts->lastOffline())];
@@ -95,6 +98,7 @@ class AdminController extends Controller
             compact(
                 'posts',
                 'blog',
+                'photo',
                 'site_posts',
                 'users_posts',
                 'site_photos',
@@ -218,7 +222,7 @@ class AdminController extends Controller
                 $model->update($id, ['online' => 1]);
 
                 if ($this->isAjax()) {
-                    echo '<i class="icon icon-cloud-download" style="font-size: smaller !important;"></i>';
+                    echo '<i class="icon icon-download" style="font-size: smaller !important;"></i>';
                     exit;
                 }
 
@@ -228,7 +232,7 @@ class AdminController extends Controller
                 $model->update($id, ['online' => 0]);
 
                 if ($this->isAjax()) {
-                    echo '<i class="icon icon-cloud-upload" style="font-size: smaller !important;"></i>';
+                    echo '<i class="icon icon-upload" style="font-size: smaller !important;"></i>';
                     exit;
                 }
 
@@ -470,11 +474,24 @@ class AdminController extends Controller
      */
     public function gallery()
     {
-        $photos = $this->gallery->all();
-        $photo = $this->gallery->latest();
+        $photo          =   $this->gallery->latest();
+        $photos         =   $this->gallery->orderBy('date_created', 'DESC', 0, 10);
+        $total          =   count($this->gallery->all());
+
+        $pagination     = $this->setPagination($total, "gallery");
+        $currentPage    = $pagination['currentPage'];
+        $totalPage      = $pagination['totalPage'];
+        $prevPage       = $pagination['prevPage'];
+        $nextPage       = $pagination['nextPage'];
+        $photos         = $pagination['result'] ?? $photos;
+
+
         $this->pageManager::setName('Adm - gallery');
         $this->setLayout("admin/default");
-        $this->viewRender("back_end/gallery/index", compact('photos', 'photo'));
+        $this->viewRender(
+            "back_end/gallery/index",
+            compact('photos', 'photo', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
+        );
     }
 
 
@@ -536,7 +553,7 @@ class AdminController extends Controller
             $post       =   new Collection($data ?? $_POST);
             $categories =   $this->categories->orderBy('title', 'ASC');
 
-            if (!empty($post)) {
+            if (isset($_POST) && !empty($_POST)) {
                 $name           =   $this->str::escape($post->get('name')) ?? $photo->name;
                 $tags           =   $this->str::escape($post->get('tags')) ?? $photo->tags;
                 $description    =   $this->str::escape($post->get('description')) ?? $photo->description;
@@ -606,9 +623,21 @@ class AdminController extends Controller
     public function album()
     {
         $albums = $this->albums->all();
+        $total          =   count($this->albums->all());
+
+        $pagination     = $this->setPagination($total, "albums");
+        $currentPage    = $pagination['currentPage'];
+        $totalPage      = $pagination['totalPage'];
+        $prevPage       = $pagination['prevPage'];
+        $nextPage       = $pagination['nextPage'];
+        $albums         = $pagination['result'] ?? $albums;
+
         $this->pageManager::setName('admin gallery.album');
         $this->setLayout('admin/default');
-        $this->viewRender('back_end/gallery/albums', compact('albums'));
+        $this->viewRender(
+            'back_end/gallery/albums',
+            compact('albums', "currentPage", 'totalPage', 'prevPage', 'nextPage', 'total')
+        );
     }
 
 
@@ -631,7 +660,7 @@ class AdminController extends Controller
 
                 $this->albums->create(compact('title', 'description', 'slug'));
                 $this->flash->set('success', $this->msg['form_post_submitted']);
-                $this->app::redirect(ADMIN . "/gallery");
+                $this->app::redirect(ADMIN . "/gallery/albums");
             } else {
                 $this->flash->set('danger', $this->msg['form_multi_errors']);
                 $errors = $this->validator->getErrors();
@@ -666,7 +695,7 @@ class AdminController extends Controller
 
                     $this->albums->update($album->id, compact('title', 'description', 'slug'));
                     $this->flash->set('success', $this->msg['post_edit_success']);
-                    $this->app::redirect(ADMIN . "/gallery");
+                    $this->app::redirect(ADMIN . "/gallery/albums");
                 } else {
                     $this->flash->set('danger', $this->msg['form_multi_errors']);
                     $errors = $this->validator->getErrors();
@@ -699,13 +728,18 @@ class AdminController extends Controller
 
         if (is_file($image)) {
             if (isset($_POST) and !empty($_POST)) {
-                $isWatermarked = ImageManager::watermark($filename, $post->get('logo'), $path[intval($type)]);
+                $isWatermarked = ImageManager::watermark(
+                    $filename,
+                    $post->get('watermark'),
+                    $path[intval($type)],
+                    $post->get('color')
+                );
 
                 if ($isWatermarked) {
                     $this->flash->set('success', $this->msg['success']);
                     $this->app::redirect(true);
                 } else {
-                    $this->flash->set('danger', $this->msg['undefined_error']);
+                    $this->flash->set('danger', "Watermark non effectué");
                     $this->app::redirect(true);
                 }
             }
@@ -837,6 +871,7 @@ class AdminController extends Controller
      * envoyer les logs a l'admin par mail
      *
      * @return void
+     * @throws \Ng\Core\Exception\ConfigManagerException
      */
     public function sendLogs()
     {

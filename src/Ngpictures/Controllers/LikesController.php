@@ -10,6 +10,11 @@ class LikesController extends Controller
 
     use TypesActionTrait;
 
+    /**
+     * LikesController constructor.
+     * @param Ngpictures $app
+     * @param PageManager $pageManager
+     */
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
@@ -64,7 +69,7 @@ class LikesController extends Controller
      */
     public function show(string $type, string $slug, int $id)
     {
-        $post = $this->loadModel($this->getType($type))->find(intval($id));
+        $post = $this->loadModel($this->getAction($type))->find(intval($id));
 
         if ($post && $post->slug === $slug) {
             $likes      =   $this->loadModel('likes');

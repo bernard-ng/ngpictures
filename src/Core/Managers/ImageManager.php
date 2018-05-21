@@ -141,18 +141,49 @@ abstract class ImageManager
      * ajout d'un logo sur les images
      *
      * @param string $filename
-     * @param string $logo
+     * @param string $text
      * @param string $type
-     * @return void
+     * @param string $color
+     * @return bool
      */
-    public static function watermark(string $filename, string $logo, string $type)
+    public static function watermark(string $filename, string $text, string $type, string $color)
+    {
+        $flash = new FlashMessageManager(SessionManager::getInstance());
+        $police = realpath(WEBROOT."/assets/fonts/Quantify.ttf");
+        $manager = new InterventionImage();
+
+        try {
+            $manager->make(self::$path[$type]."/{$filename}")
+                ->text(
+                    $text,
+                    20,
+                    20,
+                    function ($font) use ($police, $color) {
+                        $font->file($police);
+                        $font->size(24);
+                        $font->color($color);
+                        $font->align('left');
+                        $font->valign("middle");
+                    }
+                )
+                ->save(self::$path[$type]."/{$filename}")
+                ->destroy();
+
+            return true;
+        } catch (NotReadableException $e) {
+            $flash->set('danger', MessageManager::get('files_not_image'));
+            return false;
+        }
+    }
+
+
+    public static function logoWatermark(string $filename, string $logo, string $type)
     {
         $flash = new FlashMessageManager(SessionManager::getInstance());
         $manager = new InterventionImage();
 
         try {
-            $logo = $manager
-                ->make(WEBROOT."/imgs/logo/{$logo}.png");
+            $logo = $manager->make(WEBROOT."/imgs/logo/{$logo}.png");
         } catch (NotReadableException $e) {
             $flash->set('danger', 'logo '. MessageManager::get('files_not_image'));
             return false;
@@ -168,6 +199,8 @@ abstract class ImageManager
                 $manager
                     ->save(self::$path[$type]."/{$filename}")
                     ->destroy();
+
+                return true;
             }
         } catch (NotReadableException $e) {
             $flash->set('danger', 'image '. MessageManager::get('files_not_image'));

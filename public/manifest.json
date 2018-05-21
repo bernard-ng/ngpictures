@@ -9,6 +9,7 @@
   "display": "standalone",
   "orientation": "portrait",
   "description": "Galerie, Entreprise d'art photographique et mini résaux social où vous pouvez voir et partager vos propres photos",
+  "gcm_sender_id": "103953800507",
 
   "icons": [
       {

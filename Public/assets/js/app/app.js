@@ -4,7 +4,6 @@
 //Main Scripts
 //---------------------------------------------------------------------
 
-
 /**
  * premet de rendre un itme du menu active
  * @returns {boolean}
@@ -12,9 +11,13 @@
 function toggleMenuItem() {
     let active = document.querySelector("#menu-item-active");
     if (active) {
-        let link = document.querySelector("ul.links").querySelector("li#"+ active.getAttribute('data-active'));
-        if (link) {
-            link.classList.add('active');
+        try {
+            let link = document.querySelector("ul.links").querySelector("li#"+ active.getAttribute('data-active'));
+            if (link) {
+                link.classList.add('active');
+            }
+        } catch (e) {
+            return false;
         }
     } else {
         return false;
@@ -28,9 +31,14 @@ function toggleMenuItem() {
 function toggleMobileMenuItem() {
     let active = document.querySelector("#menu-mobile-item-active");
     if (active) {
-        let link = document.querySelector("ul.mobile-links").querySelector("li#"+ active.getAttribute('data-active'));
-        if (link) {
-            link.classList.add('active');
+        try {
+            let link = document.querySelector("ul.mobile-links").querySelector("li#"+ active.getAttribute('data-active'));
+            if (link) {
+                link.classList.add('active');
+            }
+        } catch (e) {
+            return false;
+
         }
     } else {
         return false;
@@ -233,6 +241,50 @@ function share() {
 }
 
 
+/**
+ * affiche l'image a uploader avant l'upload
+ */
+function showImageBeforeUpload() {
+    let form = document.querySelector("[data-action='upload']");
+    if (form) {
+        let input = form.querySelector("input[type='file']");
+        let showContainer = document.querySelector("[data-action='show-uploaded-file']");
+        let admitExt = ['jpg', 'jpeg', 'png', 'gif'];
+        let adminTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
+
+        let getFile = function(files) {
+            let reader = new FileReader();
+            reader.readAsDataURL(files);
+            reader.addEventListener('load', function() {
+                let tag = document.createElement('img');
+                tag.classList.add('responsive-img');
+                tag.src = this.result;
+                showContainer.innerHTML = "";
+                showContainer.appendChild(tag);
+            });
+        };
+
+        input.addEventListener('change', function() {
+            let files = this.files;
+            let file = files[0];
+            let ext = file.name.split('.');
+            let type = file.type;
+
+            ext = ext[ext.length - 1].toLowerCase();
+
+            if (admitExt.includes(ext, 0) && adminTypes.includes(type, 0)) {
+                if (file.size <= 6291456) {
+                    getFile(file);
+                } else {
+                    setFlash('danger',msg.filesGreaterThanLimit)
+                }
+            } else {
+                setFlash("danger", msg.filesNotImage);
+            }
+        });
+    }
+}
+
 //CALL
 //----------------------------------------------------------------------
 toggleMenuItem();
@@ -240,3 +292,4 @@ toggleMobileMenuItem();
 relativeTimer();
 makeSticky('[data-sticky]');
 share();
+showImageBeforeUpload();

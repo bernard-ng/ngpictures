@@ -152,46 +152,49 @@ nav ul li {
 nav ul li.active {
   background-color: rgba(255, 255, 255, 0.09);
   height: 64px;
-  border-bottom: #ccc double 2px;
+  border-bottom: #ccc solid 3px;
 }
-
-nav ul li:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-  height: 64px;
-}
-
 
 
 nav ul li.user-actions {
 
   & img {
   border-radius: 100%;
-  border: 2px solid #ccc;
+  border: 3px solid rgba(255,255,255,0.4);
   width: 50px; height: 50px;
   line-height: 64px;
   vertical-align: middle;
   -webkit-transition: all ease-in .1s;
   -o-transition: all ease-in .1s;
   transition: all ease-in .1s;
+
+    &:hover {
+      border-color: #ccc;
+    }
   }
 
 }
 
 nav ul li.search:hover,
 nav ul li.action:hover {
-  background-color: transparent !important;
   background: transparent !important;
 }
 
 nav ul li.action a.btn {
-  margin-left: 0px;
-  margin-right: 7px;
+  margin-left: 0;
+  margin-right: 0;
   text-transform: capitalize !important;
   -webkit-transition: all .3s linear;
   -o-transition: all .3s linear;
   transition: all .3s linear;
 
 }
+
+nav ul li.action a.btn:first-child  {
+    margin-left: 14px !important;
+}
+
+
 
 nav ul li.action a.btn:hover {
   background-color: $active-color !important;
