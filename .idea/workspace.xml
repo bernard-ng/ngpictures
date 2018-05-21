@@ -1,184 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4862a466-f72e-41f7-87e3-2b36a8216ed9" name="Default" comment="set timeout in verse ajax req">
-      <change beforePath="$PROJECT_DIR$/.idea/ngpictures.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ngpictures.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Public/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/Public/.htaccess" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Public/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Public/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Public/assets/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/Public/assets/css/style.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Public/assets/js/app/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/Public/assets/js/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Public/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/RoutesConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/RoutesConfig.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/custom/modules/_card.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/custom/modules/_card.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/modules/_cards.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/modules/_cards.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/sass/modules/_navbar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/sass/modules/_navbar.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Controllers/Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Database/Database.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Database/Database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Database/MysqlDatabase.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Database/MysqlDatabase.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Entity/Entity.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Entity/Entity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Exception/ConfigManagerException.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Exception/ConfigManagerException.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Exception/RouterException.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Exception/RouterException.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Interfaces/CookieInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Interfaces/CookieInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Interfaces/SessionInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Interfaces/SessionInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Managers/Collection.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Managers/Collection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Managers/ConfigManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Managers/ConfigManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Managers/CookieManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Managers/CookieManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Managers/FlashMessageManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Managers/FlashMessageManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Managers/ImageManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Managers/ImageManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Managers/LogMessageManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Managers/LogMessageManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Managers/Mailer/Mailer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Managers/Mailer/Mailer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Managers/Mailer/templates/confirmation-mail-template.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Managers/Mailer/templates/confirmation-mail-template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Managers/Mailer/templates/reset-mail-template.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Managers/Mailer/templates/reset-mail-template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Managers/MessageManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Managers/MessageManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Managers/SessionManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Managers/SessionManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Managers/SitemapManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Managers/SitemapManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Managers/StringManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Managers/StringManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Managers/ValidationManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Managers/ValidationManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Models/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Models/Model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Router/Route.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Router/Route.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Router/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Router/Router.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Core/Traits/SingletonTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Traits/SingletonTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/APIController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/APIController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/AjaxController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/AjaxController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/BlogController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/BlogController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/BugsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/BugsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/CategoriesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/CategoriesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/CommentsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/CommentsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/CommunityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/CommunityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/ContactController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/ContactController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/DownloadController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/DownloadController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/ErrorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/ErrorController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/FacebookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/FacebookController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/FollowingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/FollowingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/GalleryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/GalleryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/IdeasController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/IdeasController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/LikesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/LikesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/OnlineController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/OnlineController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/PostsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/PostsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/RssController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/RssController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/SearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/SearchController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/StaticController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/StaticController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/UsersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Controllers/VersesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Controllers/VersesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Entity/AlbumsEntity.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Entity/AlbumsEntity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Entity/BlogEntity.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Entity/BlogEntity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Entity/BugsEntity.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Entity/BugsEntity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Entity/CategoriesEntity.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Entity/CategoriesEntity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Entity/CommentsEntity.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Entity/CommentsEntity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Entity/FollowingsEntity.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Entity/FollowingsEntity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Entity/GalleryEntity.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Entity/GalleryEntity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Entity/IdeasEntity.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Entity/IdeasEntity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Entity/OnlineEntity.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Entity/OnlineEntity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Entity/PostsEntity.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Entity/PostsEntity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Entity/UsersEntity.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Entity/UsersEntity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Entity/VersesEntity.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Entity/VersesEntity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Exception/APIControllerException.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Exception/APIControllerException.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Managers/API/NgpicturesAPI.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Managers/API/NgpicturesAPI.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Managers/API/NgpicturesClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Managers/API/NgpicturesClient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Managers/MessageManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Managers/MessageManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Managers/PageManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Managers/PageManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Models/AlbumsModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Models/AlbumsModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Models/BlogModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Models/BlogModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Models/BugsModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Models/BugsModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Models/CategoriesModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Models/CategoriesModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Models/CommentsModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Models/CommentsModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Models/FollowingModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Models/FollowingModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Models/GalleryModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Models/GalleryModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Models/IdeasModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Models/IdeasModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Models/LikesModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Models/LikesModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Models/OnlineModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Models/OnlineModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Models/PostsModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Models/PostsModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Models/UsersModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Models/UsersModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Models/VersesModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Models/VersesModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Ngpictures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Ngpictures.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Traits/Controllers/PaginationTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Traits/Controllers/PaginationTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Traits/Controllers/ShowPostTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Traits/Controllers/ShowPostTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Traits/Controllers/StoryPostTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Traits/Controllers/StoryPostTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Traits/Entity/PostEntityTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Traits/Entity/PostEntityTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Traits/Entity/UserInfoTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Traits/Entity/UserInfoTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Traits/Models/FindQueryTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Traits/Models/FindQueryTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Traits/Models/LastQueryTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Traits/Models/LastQueryTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Traits/Models/SearchQueryTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Traits/Models/SearchQueryTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Traits/Util/SingletonTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Traits/Util/SingletonTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Traits/Util/TypesActionTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Traits/Util/TypesActionTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/ajax/blog/cards.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/ajax/blog/cards.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/ajax/posts/cards.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/ajax/posts/cards.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/ajax/verset.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/ajax/verset.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/blog/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/blog/add.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/blog/categories.add.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/blog/categories.add.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/blog/categories.edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/blog/categories.edit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/blog/categories.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/blog/categories.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/blog/edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/blog/edit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/blog/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/blog/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/add.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/albums.add.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/albums.add.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/albums.edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/albums.edit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/albums.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/albums.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/edit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/file-browser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/file-browser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/media-browser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/media-browser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/watermark.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/gallery/watermark.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/logs.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/logs.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/pages/pages.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/pages/pages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/posts/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/posts/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/users/bugs.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/users/bugs.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/users/ideas.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/users/ideas.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/users/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/back_end/users/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/blog/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/blog/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/blog/show.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/blog/show.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/categories/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/categories/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/categories/show.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/categories/show.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/community/community.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/community/community.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/error/404.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/error/404.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/error/500.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/error/500.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/albums.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/albums.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/show.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/show.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/slider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/gallery/slider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/privacy.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/privacy.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/search.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/others/search.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/posts/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/posts/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/posts/likers.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/posts/likers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/posts/show.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/posts/show.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/users/account/account.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/users/account/account.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/users/account/edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/users/account/edit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/users/account/followers.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/users/account/followers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/users/account/following.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/users/account/following.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/users/posts/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/users/posts/add.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/users/posts/edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/users/posts/edit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/users/posts/posts.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/front_end/users/posts/posts.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/adm-mobile-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/adm-mobile-menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/comments.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/comments.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/default-slider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/default-slider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/flash.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/flash.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/left-aside.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/left-aside.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/menu-aside.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/menu-aside.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/mobile-menu-aside.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/mobile-menu-aside.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/mobile-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/mobile-menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/includes/right-aside.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/includes/right-aside.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/layout/admin/default.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/layout/admin/default.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/layout/blank.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/layout/blank.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/layout/default-simple.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/layout/default-simple.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/layout/default.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/layout/default.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/layout/modal.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/layout/modal.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/layout/posts/default.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/layout/posts/default.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/layout/posts/show.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/layout/posts/show.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/layout/search.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/layout/search.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/layout/show.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/layout/show.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/layout/users/account.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/layout/users/account.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/layout/users/default.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/layout/users/default.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/layout/users/edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/layout/users/edit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ngpictures/Views/layout/users/media-browser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ngpictures/Views/layout/users/media-browser.php" afterDir="false" />
-    </list>
+    <list default="true" id="4862a466-f72e-41f7-87e3-2b36a8216ed9" name="Default" comment="set timeout in verse ajax req" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -588,12 +411,12 @@
       <workItem from="1526241852814" duration="26945000" />
       <workItem from="1526541858369" duration="12572000" />
       <workItem from="1526745783918" duration="21630000" />
-      <workItem from="1526838261771" duration="11493000" />
+      <workItem from="1526838261771" duration="11829000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="553614000" />
+    <option name="totallyTimeSpent" value="553950000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -606,9 +429,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="7" sideWeight="0.42079207" visible="true" weight="0.22768533" />
+      <window_info content_ui="combo" id="Project" order="7" sideWeight="0.42079207" visible="true" weight="0.22768533" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.32838285" />
       <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.89438945" />
