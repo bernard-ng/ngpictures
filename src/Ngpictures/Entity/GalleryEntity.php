@@ -2,6 +2,7 @@
 namespace Ngpictures\Entity;
 
 use Ng\Core\Entity\Entity;
+use Ng\Core\Managers\CacheBustingManager;
 use Ngpictures\Traits\Entity\PostEntityTrait;
 
 class GalleryEntity extends Entity
@@ -27,6 +28,7 @@ class GalleryEntity extends Entity
     {
         $this->thumbUrl = "/uploads";
         $this->thumbUrl .= "/{$this->file_path}/{$this->thumb}";
+        $this->thumbUrl = CacheBustingManager::get($this->thumbUrl);
         return $this->thumbUrl;
     }
 

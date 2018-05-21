@@ -104,7 +104,7 @@ class Mailer
                 $mail->Body    =  "Voici le fichier log de ngpictures du ". date("d m Y");
                 $mail->AltBody  =   "Voici le fichier log de ngpictures du ". date("d m Y");
 
-                $mail->addAttachment(ROOT."/system-logs");
+                $mail->addAttachment(ROOT."/system.log");
                 $mail->send();
             } catch (Exception $e) {
                 echo 'Message could not be sent. Mailer Error: '. $mail->ErrorInfo;

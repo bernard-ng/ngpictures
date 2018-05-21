@@ -67,11 +67,22 @@ class ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'S' => 
+        array (
+            'Suin\\RSSWriter' => 
+            array (
+                0 => __DIR__ . '/..' . '/suin/php-rss-writer/src',
+            ),
+        ),
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }

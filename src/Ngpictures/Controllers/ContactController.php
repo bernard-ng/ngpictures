@@ -10,7 +10,7 @@ class ContactController extends Controller
     public function index()
     {
         $post = new Collection($_POST);
-        $errors = new Collection([]);
+        $errors = new Collection();
 
         if (!empty($_POST) && isset($_POST)) {
             if ($this->session->read(AUTH_KEY)) {
@@ -21,11 +21,7 @@ class ContactController extends Controller
                     $name = $this->session->getValue(AUTH_KEY, 'name');
                     $message = $this->str::escape($post->get('message'));
 
-                    try {
-                        (new Mailer())->contact($name, $email, $message);
-                    } catch (Exception $e) {
-                        $this->flash->set("danger", $this->msg['undefined_error']);
-                    }
+                    (new Mailer())->contact($name, $email, $message);
                 } else {
                     $errors = new Collection($this->validator->getErrors());
                 }
@@ -39,11 +35,7 @@ class ContactController extends Controller
                     $name = $this->str::escape($post->get('name'));
                     $message = $this->str::escape($post->get('message'));
 
-                    try {
-                        (new Mailer())->contact($name, $email, $message);
-                    } catch (Exception $e) {
-                        $this->flash->set("danger", $this->msg['undefined_error']);
-                    }
+                    (new Mailer())->contact($name, $email, $message);
                 } else {
                     $errors = new Collection($this->validator->getErrors());
                     $this->flash->set("danger", $this->msg['form_multi_errors']);
@@ -51,6 +43,7 @@ class ContactController extends Controller
             }
         }
 
+        $this->app::turbolinksLocation("contact");
         $this->pageManager::setName("Contact");
         $this->setLayout("posts/default");
         $this->viewRender("front_end/others/contact", compact("post", "errors"));

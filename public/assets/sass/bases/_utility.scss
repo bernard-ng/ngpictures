@@ -2,6 +2,15 @@
   display: none !important;
 }
 
+.fixed {
+  position: fixed !important;
+  top: 0;
+}
+
+.sticky {
+  z-index: 996 !important;
+}
+
 .left-align {
   text-align: left;
 }
@@ -26,8 +35,7 @@
   float: right !important;
 }
 
-.no-select, input[type=range],
-input[type=range] + .thumb {
+.no-select, input[type=range], input[type=range] + .thumb {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;

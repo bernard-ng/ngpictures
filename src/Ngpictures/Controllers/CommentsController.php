@@ -15,12 +15,14 @@ class CommentsController extends Controller
      * CommentsController constructor.
      * oblige un user a se connecter avant de faire une action
      * si il est connecter alors on set son id dans l'instance;
+     * @param Ngpictures $app
+     * @param PageManager $pageManager
      */
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
         $this->callController('users')->restrict();
-        $this->user_id = intval($this->session->getValue(AUTH_KEY, 'id'));
+        $this->users_id = intval($this->session->getValue(AUTH_KEY, 'id'));
     }
 
 
@@ -32,29 +34,43 @@ class CommentsController extends Controller
      */
     public function index($type, $slug, $id)
     {
-        $comments = $this->loadModel('comments');
-        $post = new Collection($_POST);
-        $publication = $this->loadModel($this->getType($type))->find(intval($id));
+        $post           =   new Collection($_POST);
+        $comments       =   $this->loadModel('comments');
+        $publication    =   $this->loadModel($this->getAction($type))->find(intval($id));
 
         if ($publication && $publication->slug === $slug) {
-            $comment = $this->str::escape($post->get('comment'));
-            if (!empty($comment)) {
+            $this->validator->setRule('comment', 'required');
+
+            if ($this->validator->isValid()) {
+                $comment = $this->str::escape($post->get('comment'));
                 $comments->create(
                     [
-                        'user_id' => $this->user_id,
+                        'users_id' => $this->users_id,
                         $this->getType($type) => $publication->id,
                         'comment' => $comment
                     ]
                 );
-                $this->flash->set('success', $this->msg['form_comment_submitted']);
-                $this->app::redirect(true);
+
+                if ($this->isAjax()) {
+                    echo $this->loadModel(
+                        $this->getAction($type)
+                    )->find(intval($id))->getCommentsNumber();
+                    exit();
+                } else {
+                    $this->flash->set('success', $this->msg['form_comment_submitted']);
+                    $this->app::redirect(true);
+                }
             } else {
-                $this->flash->set('danger', $this->msg['form_all_required']);
-                $this->app::redirect(true);
+                $this->isAjax() ?
+                    $this->ajaxFail($this->msg['form_all_required']) :
+                    $this->flash->set('danger', $this->msg['form_all_required']);
+                    $this->app::redirect(true);
             }
         } else {
-            $this->flash->set('warning', $this->msg['comment_not_found']);
-            $this->app::redirect(true);
+            $this->isAjax()?
+                $this->ajaxFail($this->msg['comment_not_found']) :
+                $this->flash->set('warning', $this->msg['comment_not_found']);
+                $this->app::redirect(true);
         }
     }
 
@@ -68,12 +84,12 @@ class CommentsController extends Controller
      */
     public function delete($id, $token)
     {
-        $comments = $this->loadModel('comments');
-        $comment = $comments->find(intval($id));
+        $comments   =   $this->loadModel('comments');
+        $comment    =   $comments->find(intval($id));
 
         if ($token == $this->session->read(TOKEN_KEY)) {
             if ($comment) {
-                if ($comment->user_id == $this->user_id) {
+                if ($comment->users_id == $this->users_id) {
                     $comments->delete($id);
                     $this->flash->set('success', $this->msg['comment_delete_success']);
                     $this->app::redirect(true);
@@ -100,18 +116,26 @@ class CommentsController extends Controller
     public function edit($id, $token)
     {
         if ($token == $this->session->read(TOKEN_KEY)) {
-            $comments = $this->loadModel('comments');
-            $comment = $comments->find(intval($id));
-            $post = new Collection($_POST);
+            $comments   =   $this->loadModel('comments');
+            $comment    =   $comments->find(intval($id));
+            $post       =   new Collection($_POST);
 
             if ($comment) {
-                if ($comment->user_id == $this->user_id) {
-                    $text = $this->str::escape($post->get('comment_edit'));
-                    $comments->update($comment->id, ['comment' => $text]);
-                    $this->flash->set('success', $this->msg['comment_edit_success']);
-                    $this->app::redirect(true);
+                if ($comment->users_id == $this->users_id) {
+                    $this->validator->setRule('comment', 'required');
+
+                    if ($this->validator->isValid()) {
+                        $text = $this->str::escape($post->get('comment_edit'));
+                        $comments->update($comment->id, ['comment' => $text]);
+
+                        $this->flash->set('success', $this->msg['comment_edit_success']);
+                        $this->app::redirect(true);
+                    } else {
+                        $this->flash->set('danger', $this->msg['form_all_required']);
+                        $this->app::redirect(true);
+                    }
                 } else {
-                    $this->flash->set('danger', $this->msg['dit_not_allowed']);
+                    $this->flash->set('danger', $this->msg['edit_not_allowed']);
                     $this->app::redirect(true);
                 }
             } else {

@@ -2,6 +2,7 @@
 namespace Ngpictures\Entity;
 
 use Ng\Core\Entity\Entity;
+use Ng\Core\Managers\CacheBustingManager;
 use Ngpictures\Ngpictures;
 use Ng\Core\Managers\StringManager;
 use Ng\Core\Managers\SessionManager;
@@ -51,8 +52,7 @@ class UsersEntity extends Entity
      */
     public function getEditUrl(): string
     {
-        $this->editUrl = "/u/edit/";
-        $this->editUrl .= StringManager::slugify($this->name)."-{$this->id}/";
+        $this->editUrl = "/edit-profile/";
         $this->editUrl .= Ngpictures::getInstance()->getSession()->read(TOKEN_KEY);
         return $this->editUrl;
     }
@@ -64,8 +64,7 @@ class UsersEntity extends Entity
      */
     public function getFollowersUrl(): string
     {
-        $this->followersUrl = "/u/followers/";
-        $this->followersUrl .= StringManager::slugify($this->name)."-{$this->id}/";
+        $this->followersUrl = "/my-followers/";
         $this->followersUrl .= Ngpictures::getInstance()->getSession()->read(TOKEN_KEY);
         return $this->followersUrl;
     }
@@ -78,8 +77,7 @@ class UsersEntity extends Entity
      */
     public function getFollowingsUrl(): string
     {
-        $this->followingsUrl = "/u/following/";
-        $this->followingsUrl .= StringManager::slugify($this->name)."-{$this->id}/";
+        $this->followingsUrl = "/my-following/";
         $this->followingsUrl .= Ngpictures::getInstance()->getSession()->read(TOKEN_KEY);
         return $this->followingsUrl;
     }
@@ -92,8 +90,7 @@ class UsersEntity extends Entity
      */
     public function getPostsUrl(): string
     {
-        $this->postsUrl = "/u/posts/";
-        $this->postsUrl .= StringManager::slugify($this->name)."-{$this->id}/";
+        $this->postsUrl = "/my-posts/";
         $this->postsUrl .= Ngpictures::getInstance()->getSession()->read(TOKEN_KEY);
         return $this->postsUrl;
     }
@@ -106,7 +103,7 @@ class UsersEntity extends Entity
      */
     public function getAddPostUrl(): string
     {
-        $this->addPostsUrl = "/u/post/";
+        $this->addPostsUrl = "/submit-photo/";
         return $this->addPostsUrl;
     }
 
@@ -118,7 +115,7 @@ class UsersEntity extends Entity
      */
     public function getDeletePostsUrl(): string
     {
-        $this->deletePostsUrl = "/u/post/delete/";
+        $this->deletePostsUrl = "/delete-post/";
         $this->deletePostsUrl .= Ngpictures::getInstance()->getSession()->read(TOKEN_KEY);
         return $this->deletePostUrl;
     }
@@ -131,6 +128,7 @@ class UsersEntity extends Entity
     public function getAvatarUrl(): string
     {
         $this->avatarUrl = "/uploads/avatars/{$this->avatar}";
+        $this->avatarUrl = CacheBustingManager::get($this->avatarUrl);
         return $this->avatarUrl;
     }
 }

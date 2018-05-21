@@ -11,15 +11,20 @@ class FollowingController extends Controller
      * l'id du user qui va suivre une autr personne
      * @var int|null
      */
-    private $user_id = null;
+    private $users_id = null;
 
 
+    /**
+     * FollowingController constructor.
+     * @param Ngpictures $app
+     * @param PageManager $pageManager
+     */
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
         $this->callController('users')->restrict();
         $this->loadModel(['users', 'following']);
-        $this->user_id = intval($this->session->getValue(AUTH_KEY, 'id'));
+        $this->users_id = intval($this->session->getValue(AUTH_KEY, 'id'));
     }
 
 
@@ -36,13 +41,13 @@ class FollowingController extends Controller
         $user = $this->loadModel('users')->find(intval($id));
 
         if ($user) {
-            if ($model->isFollowed($user->id, $this->user_id)) {
-                $model->remove($user->id, $this->user_id);
+            if ($model->isFollowed($user->id, $this->users_id)) {
+                $model->remove($user->id, $this->users_id);
                 $this->flash->set("success", $this->msg['users_unfollowing_success']);
                 $this->app::redirect(true);
             }
 
-            $model->add($user->id, $this->user_id);
+            $model->add($user->id, $this->users_id);
             $this->flash->set("success", $this->msg['users_following_success']);
             $this->app::redirect(true);
         } else {
@@ -55,15 +60,13 @@ class FollowingController extends Controller
     /**
      * show followers
      *
-     * @param string $name
-     * @param integer $id
      * @param string $token
      * @return void
      */
-    public function showFollowers(string $name, int $id, string $token)
+    public function showFollowers(string $token)
     {
         if ($this->session->read(TOKEN_KEY) == $token) {
-            $user =  $this->users->find(intval($id));
+            $user = $this->session->read(AUTH_KEY);
             if ($user) {
                 $followers = $this->following->findWith('followed_id', $user->id, false);
                 $followers_list = [];
@@ -79,6 +82,7 @@ class FollowingController extends Controller
                     $followers = $this->users->findList($followers_list);
                 }
 
+                $this->app::turbolinksLocation("my-followers/{$token}");
                 $this->pageManager::setName("Mes Abonnés");
                 $this->setLayout("posts/default");
                 $this->viewRender("front_end/users/account/followers", compact("followers"));
@@ -101,21 +105,22 @@ class FollowingController extends Controller
      * @param string $token
      * @return void
      */
-    public function showFollowing(string $name, int $id, string $token)
+    public function showFollowing(string $token)
     {
         if ($this->session->read(TOKEN_KEY) == $token) {
-            $user =  $this->users->find(intval($id));
+            $user =  $this->session->read(AUTH_KEY);
             if ($user) {
-                $followings = $this->following->findWith('follower_id', $user->id, false);
-                $followings_list = [];
+                $followings         =   $this->following->findWith('follower_id', $user->id, false);
+                $followings_list    =   [];
 
                 foreach ($followings as $following) {
                     $followings_list[] = $following['followed_id'];
                 }
 
-                $followings_list = implode(", ", $followings_list);
-                $followoings = empty($followings_list)? null : $this->users->findList($followings_list);
+                $followings_list    =   implode(", ", $followings_list);
+                $followings         =   empty($followings_list)? null : $this->users->findList($followings_list);
 
+                $this->app::turbolinksLocation("my-following/{$token}");
                 $this->pageManager::setName("Mes Abonnements");
                 $this->setLayout("posts/default");
                 $this->viewRender("front_end/users/account/following", compact("followings"));

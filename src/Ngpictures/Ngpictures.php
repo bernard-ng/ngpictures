@@ -1,6 +1,7 @@
 <?php
 namespace Ngpictures;
 
+use Ng\Core\Managers\CacheBustingManager;
 use Ng\Core\Managers\StringManager;
 use Ng\Core\Managers\CookieManager;
 use Ng\Core\Database\MysqlDatabase;
@@ -95,7 +96,7 @@ class Ngpictures
 
     /**
      * recupere une instance de validator
-     * @return ValidatorManager
+     * @return ValidationManager
      */
     public function getValidator(): ValidationManager
     {
@@ -133,6 +134,18 @@ class Ngpictures
     }
 
 
+    /**
+     * @return CacheBustingManager
+     */
+    public function getCacheBusting()
+    {
+        return new CacheBustingManager();
+    }
+
+
+    /**
+     * @return MessageManager
+     */
     public function getMessageManager(): MessageManager
     {
         return new MessageManager();
@@ -143,6 +156,10 @@ class Ngpictures
     //****************************************************************************/
 
 
+    /**
+     * gestion d'exception
+     * @param $e
+     */
     public function exceptionHandler($e)
     {
         FlashMessageManager::getInstance()->set('danger', "Erreur !");
@@ -150,6 +167,12 @@ class Ngpictures
         self::redirect("/error-500");
     }
 
+    /**
+     * gestion d'erreur
+     * @param int $errno
+     * @param string $errstr
+     * @param string $errfile
+     */
     public function errorHandler(int $errno, string $errstr, string $errfile)
     {
         FlashMessageManager::getInstance()->set('danger', "Erreur !");
@@ -190,20 +213,40 @@ class Ngpictures
     /**
      * gestion de redirection
      * @param mixed $url
+     * @param bool $moved_permantly
      */
-    public static function redirect($url = null)
+    public static function redirect($url = null, $moved_permantly = false)
     {
         if (is_bool($url)) {
             if (!empty($_SERVER['HTTP_REFERER'])) {
                 header("location:{$_SERVER['HTTP_REFERER']}");
+                if ($moved_permantly) {
+                    header("HTTP/1.1 301 Moved Permanently");
+                }
                 exit();
             } else {
                 header('location:/home');
+                if ($moved_permantly) {
+                    header("HTTP/1.1 301 Moved Permanently");
+                }
                 exit();
             }
         } else {
             is_null($url)? header('location:/home') : header("location:{$url}");
+            if ($moved_permantly) {
+                header("HTTP/1.1 301 Moved Permanently");
+            }
             exit();
         }
+    }
+
+
+    /**
+     * gestion de turbolinks
+     * @param string $name nom de la routes, location
+     */
+    public static function turbolinksLocation(string $name)
+    {
+        header("Turbolinks-Location: {$name}");
     }
 }

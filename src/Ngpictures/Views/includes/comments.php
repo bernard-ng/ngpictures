@@ -1,83 +1,53 @@
-<div id="comments" class="card-panel row comments-card">
-    <div class="col l12 m12 s12">
-        <span class="section-title"><i class="social social-comment"></i> Commentaire </span>
-        
+<div id="comments" class="card-panel transparent row">
+    <h2 class="ui header">Commentaires</h2>
+    <?php include(APP."/Views/includes/right-aside.php"); ?>
+    <div class="col l6 m12 s12">
         <form method="POST" action="<?= $article->commentUrl; ?>">
-            <div class="default-form">
-                <textarea placeholder="Votre commentaire..." name="comment" id="comment"></textarea>
+            <div class="input-field">
+                <label for="comment">Commentaire</label>
+                <textarea name="comment" id="comment" class="materialize-textarea"></textarea>
             </div>
-            <button type="submit" class="ng-btn"> Envoyer</button>
+            <button type="submit" class="btn btn-flat"> Envoyer</button>
         </form>
-        
-        <div class="mt-30">
-            <span class="section-title"><i class="social social-chat"></i> Les commentaires </span>
-            <span class="badge new"><?= count($comments) ?></span>
-        </div>
-        
-        <ul class="collection" id="commentContainer">
-            <?php if (!empty($comments)) : ?>
-                <?php foreach ($comments as $c) : ?>
-                    <li class="collection-item avatar" id="<?= $c->id ?>">
-                        <img src="<?= $user->find($c->user_id)->avatarUrl ?>" class="circle">
-                        <span class="title">
-                            <a href="<?= $user->find($c->user_id)->accountUrl; ?>">
-                                    <?= $c->username; ?>
-                            </a>
-                        </span>
-                        <?= $c->comment ?>
-                        <p><time  class="secondary-content-b" data-time="<?= strtotime($c->date_created) ?>"><?= $c->time ?></time></p>   
-                    
-                        <?php if ($activeUser && $activeUser->id == $c->user_id) : ?>
-                            <a href="#cmtDel-<?= $c->id ?>" class="secondary-content modal-trigger">
-                                <i class="icon icon-trash"></i>
-                            </a>
-                            <a href="#cmtEdit-<?= $c->id ?>" class="secondary-content mr-20 modal-trigger">
-                                <i class="icon icon-edit"></i>
-                            </a>
 
-                            <div id="cmtDel-<?= $c->id ?>" class="modal">
-                                <div class="modal-content">
-                                    <span class="section-title-b mb-20">Supprimer</span>
-                                    <p>Voulez vous vraiment supprimer ce commentaire ?</p>
+        <ul class="section" id="commentContainer">
+            <?php if(isset($comments) && !empty($comments)): ?>
+                <div class="ui comments">
+                    <?php foreach ($comments as $c): ?>
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="<?= $user->find($c->users_id)->avatarUrl ?>">
+                            </a>
+                            <div class="content">
+                                <a class="author"><?= $user->find($c->users_id)->name ?></a>
+                                <div class="metadata">
+                                    <time class="date" data-time="<?= strtotime($c->date_created) ?>"><?= $c->time ?></time>
                                 </div>
-                                <div class="modal-footer">
-                                    <a href="<?= $c->deleteUrl ?>" class="modal-action btn primary-b">
-                                        Oui
-                                    </a>
-                                    <button id="cmtDel-<?= $c->id ?>" class="modal-action modal-close btn-flat">
-                                        Annuler
-                                    </button>
+                                <div class="text">
+                                    <?= $c->comment ?>
                                 </div>
-                            </div>
-                            <div id="cmtEdit-<?= $c->id ?>" class="modal">
-                                <div class="modal-content">
-                                    <span class="section-title-b mb-20">Editer</span>
-                                    <form action="<?= $c->editUrl ?>" method="POST">
-                                        <div class="input-field">
-                                            <textarea class="materialize-textarea" name="comment_edit"><?= $c->comment ?></textarea>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="modal-action btn primary-b">ok</button>
-                                            <button id="cmtEdit-<?= $c->id ?>" type="reset" class="modal-action modal-close btn-flat">
-                                                Annuler
-                                            </button>
-                                        </div>
-                                    </form>
+                                <div class="actions">
+                                    <a href="/watchout/comments/<?= $c->id ?>">Signaler</a>
+                                    <?php if($activeUser && $c->users_id == $activeUser->id): ?>
+                                        <a href="#cmtDelete-<?= $c->id ?>" class="">Supprimer</a>
+                                        <a href="#cmtEdit-<?= $c->id ?>" class="">Editer</a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
-                        <?php endif; ?>
-                    </li>
-                <?php endforeach; ?>
-            <?php else : ?>
-                <li class="collection-item avatar">
-                    <img src="/imgs/ngpic-2.png" alt="" class="circle">
-                    <span class="title"><b>Ngpictures</b></span>
-                    <p>aucun commentaire, soyez la première personne à réagir</p>
-                </li>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <div class="section center-align">
+                    <h2 class="icon icon-comment-empty red-txt center-align"></h2>
+                    <h2 class="ui header divided center"> Aucun commentaire pour l'instant</h2>
+                    <p>
+                        le site ne présente actuellement aucun commentaire disponible pour cette publication, soyez la première
+                        personne à partager votre commentaire.
+                    </p>
+                </div>
             <?php endif; ?>
         </ul>
-        <?php if (count($comments) > 3) : ?>
-            <div class="feed-btn waves-effect waves-light hoverable" id="comments" data-type="3">Voir tout</div>
-        <?php endif; ?>
     </div>
+    <?php include(APP."/Views/includes/menu-aside.php"); ?>
 </div>

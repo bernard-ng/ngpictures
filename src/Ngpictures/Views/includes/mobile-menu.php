@@ -1,4 +1,5 @@
-<ul class="side-nav" id="mobile-menu">
+<span id="menu-mobile-item-active" data-active="<?= $pageManager::getActivePage() ?>"></span>
+<ul class="side-nav mobile-links" id="mobile-menu">
     <?php if ($activeUser) : ?>
         <li>
             <div class="user-view">
@@ -18,19 +19,14 @@
         </li>
     <?php endif; ?>
 
-    <div class="user-action">
-        <?php if (!$activeUser) : ?>
+    <?php if (!$activeUser) : ?>
+        <div class="user-action">
             <li>
-                <a href="/sign" class="btn action blue-grey dark-3 waves-effect">Inscription</a>
-                <a href="/login" class="btn action blue-grey dark-3 waves-effect">Connexion</a>
+                <a href="/sign" class="btn waves-effect">Inscription</a>
+                <a href="/login" class="btn waves-effect">Connexion</a>
             </li>
-        <?php else : ?>
-            <li>
-                <a href="<?= $activeUser->postUrl; ?>" class="btn action blue-grey dark-3 waves-effect">Poster</a>
-                <a href="<?= $activeUser->postsUrl; ?>" class="btn action blue-grey dark-3 waves-effect">Mes Publications</a>
-            </li>
-        <?php endif; ?>
-    </div>
+        </div>
+    <?php endif; ?>
     <?php if ($activeUser) : ?>
         <li>
             <ul class="collapsible collapsible-accordion">
@@ -50,27 +46,14 @@
     <?php endif; ?>
 
     <?php if ($activeUser && $activeUser->rank == "admin") : ?>
-        <li><a href="<?= ADMIN ?>">Administration <i class="icon icon-code"></i></a></li>
+        <li><a href="<?= ADMIN ?>">Administration <i class="icon icon-code right"></i></a></li>
     <?php endif; ?>
 
-
-    <li><a href="/blog">Blog <i class="icon icon-quote-left"></i></a></li>
-    <li><a href="/posts">Actualités </a></li>
-    <li ><a href="/community">Communauté <i class="icon icon-users"></i></a></li>
-    <li><a href="/gallery">Gallerie <i class="icon icon-picture"></i></a></li>
-    <li>
-        <ul class="collapsible collapsible-accordion">
-            <li>
-                <a class="collapsible-header waves-effect">Plus</a>
-                <div class="collapsible-body">
-                    <ul>
-                        <li><a href="/bugs">Signaler un Bug <i class="icon icon-comment-empty"></i></a></li>
-                        <li><a href="/ideas">Donner une idée <i class="icon icon-comment-empty"></i></a></li>
-                        <li><a href="/privacy-terms">Mentions légales <i class="icon icon-plus"></i></a></li>
-                        <li><a href="/about">A propos <i class="icon icon-star"></i></a></li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    </li>
+    <li id="Ngpictures"><a href="/">Accueil <i class="icon icon-home"></i></a></li>
+    <li id="Blog"><a href="/blog">Blog <i class="icon icon-quote-left"></i></a></li>
+    <?php if ($activeUser) : ?>
+        <li id="Communauté"><a href="/community">Communauté <i class="icon icon-users"></i></a></li>
+        <li id="Posts"><a href="/posts">Actualités </a></li>
+    <?php endif; ?>
+    <li id="Galerie"><a href="/gallery">Galerie <i class="icon icon-picture"></i></a></li>
 </ul>

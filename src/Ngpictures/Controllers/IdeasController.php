@@ -14,30 +14,42 @@ class IdeasController extends Controller
         parent::__construct($app, $pageManager);
         $this->callController('users')->restrict();
         $this->loadModel('ideas');
+        $this->app::turbolinksLocation("ideas");
     }
 
 
+    /**
+     * getion d'idee
+     */
     public function index()
     {
-        $post = new Collection($_POST);
-        $errors = [];
+        $post       =   new Collection($_POST);
+        $errors     =   new Collection();
 
         if (isset($_POST) && !empty($_POST)) {
             $this->validator->setRule('ideas', 'required');
 
             if ($this->validator->isValid()) {
-                $content = $this->str::escape($post->get('ideas'));
-                $user_id = $this->session->getValue(AUTH_KEY, 'id');
+                $content    =   $this->str::escape($post->get('ideas'));
+                $users_id    =    $this->session->getValue(AUTH_KEY, 'id');
 
-                $this->loadModel('ideas')->create(compact('content', 'user_id'));
+                $this->loadModel('ideas')->create(compact('content', 'users_id'));
                 $this->flash->set('success', $this->msg['form_idea_submitted']);
+
+                if ($this->isAjax()) {
+                    $this->ajaxRedirect('/');
+                }
+
                 $this->app::redirect("/");
             } else {
-                $errors = $this->validator->getErrors();
-                $this->flash->set('danger', $this->msg['form_field_required']);
+                $errors = new Collection($this->validator->getErrors());
+                $this->isAjax() ?
+                    $this->ajaxFail(json_encode($errors->asArray()), 403) :
+                    $this->flash->set('danger', $this->msg['form_field_required']);
             }
         }
 
+        $this->app::turbolinksLocation("/ideas");
         $this->pageManager::setName("Donner une idée");
         $this->setLayout('users/default');
         $this->viewRender('front_end/others/ideas', compact('post', "errors"));

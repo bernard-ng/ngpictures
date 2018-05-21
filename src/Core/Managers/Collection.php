@@ -19,9 +19,19 @@ class Collection implements IteratorAggregate, ArrayAccess
      * Collection constructor.
      * @param array $items
      */
-    public function __construct(array $items)
+    public function __construct(array $items = [])
     {
         $this->items = $items;
+    }
+
+
+    /**
+     * renvmoi un tableau de base.
+     * @return array
+     */
+    public function asArray(): array
+    {
+        return $this->items;
     }
 
 
@@ -35,6 +45,17 @@ class Collection implements IteratorAggregate, ArrayAccess
     {
         $index = explode(".", $key);
         return $this->getValue($index, $this->items);
+    }
+
+
+    /**
+     * renvoi des donnee sure
+     * @param $key
+     * @return string
+     */
+    public function getSafe($key)
+    {
+        return StringManager::escape($this->get($key));
     }
 
 

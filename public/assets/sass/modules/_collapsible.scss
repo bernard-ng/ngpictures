@@ -1,7 +1,9 @@
+@import "../custom/bases/variables";
+
 .collapsible {
-  border-top: 2px solid rgba(204, 204, 204, 0.207);
-  border-right: 2px solid rgba(204, 204, 204, 0.207);;
-  border-left: 2px solid rgba(204, 204, 204, 0.207);;
+  border-top: 2px solid $border-color;
+  border-right: 2px solid $border-color;
+  border-left: 2px solid $border-color;
   margin: 0.5rem 0 1rem 0;
 }
 
@@ -14,7 +16,7 @@
   line-height: 1.5;
   padding: 1rem;
   background-color: transparent;
-  border-bottom: 1px solid rgba(204, 204, 204, 0.207);
+  border-bottom: 1px solid $border-color;
   text-transform: capitalize;
   font-size: 1em;
   color: rgba(204, 204, 204, 0.816);
@@ -30,11 +32,11 @@
 
 .collapsible-body {
   display: none;
-  border-bottom: 1px solid rgba(204, 204, 204, 0.207);;
+  border-bottom: 1px solid $border-color;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 1rem;
-  color: #ccc;
+  color: $txt-color;
 }
 
 .side-nav .collapsible,

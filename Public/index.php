@@ -12,15 +12,6 @@ define("ROOT", dirname(__DIR__));
 require(ROOT."/config/ApplicationConfig.php");
 require(ROOT."/vendor/autoload.php");
 
-/**
- * error handlers.
- * si la configuration du debug est a "false" les erreur handler
- * sont active dans le cas contraire les erreurs sont afficher
- */
-if (!Ngpictures::getInstance()->hasDebug()) {
-    set_exception_handler([Ngpictures::getInstance(), "exceptionHandler"]);
-    set_error_handler([Ngpictures::getInstance(), "errorHandler"]);
-}
 
 /**
  * initialisation router et application
@@ -32,4 +23,15 @@ try {
     $router->run();
 } catch (RouterException $e) {
     Ngpictures::redirect("/error-500");
+}
+
+
+/**
+ * error handlers.
+ * si la configuration du debug est a "false" les erreur handler
+ * sont active dans le cas contraire les erreurs sont afficher
+ */
+if (Ngpictures::getInstance()->hasDebug()) {
+    set_exception_handler([Ngpictures::getInstance(), "exceptionHandler"]);
+    set_error_handler([Ngpictures::getInstance(), "errorHandler"]);
 }

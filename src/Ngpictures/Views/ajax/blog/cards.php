@@ -2,7 +2,7 @@
 
 if (!empty($result)) :
     foreach ($result as $a) :
-        echo' 
+        echo'
     <article class="card" id="'.$a->id.'">
         <header class="card-image">
             <div class="ng-article-img">
@@ -11,7 +11,7 @@ if (!empty($result)) :
         </header>
         <section class="ng-news-card-content">
             <section class="ng-news-card-title">';
-        if ($a->category_id !== null) :
+        if ($a->categories_id !== null) :
             echo '<a href="'.$a->categoryUrl.'"><i class="icon icon-tags"></i></a>';
         endif;
                 echo'
@@ -19,7 +19,7 @@ if (!empty($result)) :
             </section>
             <main>
                 <p>
-                    '.$a->snipet.' 
+                    '.$a->snipet.'
                 </p>
                 <a href="'.$a->url.'" class="ng-news-card-seemore right">Voir plus</a>
             </main>

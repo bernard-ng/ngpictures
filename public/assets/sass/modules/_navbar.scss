@@ -1,6 +1,8 @@
+@import "../custom/bases/variables";
+
 nav {
   color: #fff;
-  background-color: #263238;
+  background-color: $nav-color;
   width: 100%;
   height: 56px;
   line-height: 56px;
@@ -25,13 +27,17 @@ nav a {
   color: #fff;
 }
 
+nav a.action, i.action {
+  line-height: 56px;
+  margin: 0 18px;
+}
+
 nav i,
 nav [class^="mdi-"], nav [class*="mdi-"],
 nav i.material-icons {
   display: block;
   font-size: 24px;
   height: 56px;
-  line-height: 56px;
 }
 
 nav .nav-wrapper {
@@ -41,6 +47,10 @@ nav .nav-wrapper {
 
 @media only screen and (min-width: 993px) {
   nav a.button-collapse {
+    display: none;
+  }
+
+  nav a.action, i.action {
     display: none;
   }
 }
@@ -67,10 +77,10 @@ nav .brand-logo {
 }
 
 nav .brand-logo img {
-  height: 60px !important;
+  height: 55px !important;
   display: inline-block;
   line-height: 100%;
-  margin: auto 0;
+  margin: 4px auto;
 }
 
 nav .brand-logo.center {
@@ -102,9 +112,10 @@ nav .brand-logo.center {
   }
 
   nav .brand-logo img {
-    height: 54px !important;
+    height: 45px !important;
     display: inline-block;
     line-height: 100%;
+    margin: 3px auto;
   }
 }
 
@@ -141,40 +152,37 @@ nav ul li {
 nav ul li.active {
   background-color: rgba(255, 255, 255, 0.09);
   height: 64px;
-  border-bottom: #ccc double 2px;
+  border-bottom: #ccc solid 3px;
 }
-
-nav ul li:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-  height: 64px;
-}
-
 
 
 nav ul li.user-actions {
 
   & img {
   border-radius: 100%;
-  border: 2px solid #ccc;
+  border: 3px solid rgba(255,255,255,0.4);
   width: 50px; height: 50px;
   line-height: 64px;
   vertical-align: middle;
   -webkit-transition: all ease-in .1s;
   -o-transition: all ease-in .1s;
   transition: all ease-in .1s;
+
+    &:hover {
+      border-color: #ccc;
+    }
   }
 
 }
 
 nav ul li.search:hover,
 nav ul li.action:hover {
-  background-color: transparent !important;
   background: transparent !important;
 }
 
 nav ul li.action a.btn {
-  margin-left: 0px;
-  margin-right: 7px;
+  margin-left: 0;
+  margin-right: 0;
   text-transform: capitalize !important;
   -webkit-transition: all .3s linear;
   -o-transition: all .3s linear;
@@ -182,8 +190,14 @@ nav ul li.action a.btn {
 
 }
 
+nav ul li.action a.btn:first-child  {
+    margin-left: 14px !important;
+}
+
+
+
 nav ul li.action a.btn:hover {
-  background-color: #1565C0 !important;
+  background-color: $active-color !important;
   -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
           box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -268,7 +282,7 @@ nav .input-field label.active i {
   position: fixed;
 }
 
-@media only screen and (min-width: 601px) {
+@media only screen and (min-width: 993px) {
   nav.nav-extended .nav-wrapper {
     min-height: 64px;
   }

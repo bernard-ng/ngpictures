@@ -1,3 +1,5 @@
+@import "../custom/bases/variables";
+
 .valign-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -14,13 +16,13 @@
 .divider {
   height: 1px;
   overflow: hidden;
-  background-color: #e0e0e0;
+  background-color: $border-color;
 }
 
 blockquote {
   margin: 20px 0;
   padding-left: 1.5rem;
-  border-left: 5px solid #ee6e73;
+  border-left: 5px solid $active-color;
 }
 
 i {
@@ -53,12 +55,10 @@ i.large {
   font-size: 6rem;
 }
 
-img.responsive-img,
-video.responsive-video {
+img.responsive-img, video.responsive-video {
   max-width: 100%;
   height: auto;
 }
-
 
 .pin-top, .pin-bottom {
   position: relative;

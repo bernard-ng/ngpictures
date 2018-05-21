@@ -1,35 +1,39 @@
-<div class="jumbotron dark row col l3 s12 m12 animated fast slideInRight">
-        <ul class="collapsible outlined" data-collapsible="accordion">
-            <li>
-                <div class="collapsible-header active">God First</div>
-                <div class="collapsible-body">
-                    <?= $verse->text; ?>
-                    <br><br>
-                    <?= $verse->ref; ?>
-                </div>
-            </li>
-            <?php if (isset($categories) && !empty($categories)) : ?>
-                <li>
-                    <div class="collapsible-header active">Catégories</div>
-                    <div class="collapsible-body">
-                        <div class="ui list">
-                            <?php foreach ($categories as $category) : ?>
-                            <div class="item">
-                                <i class="icon icon-tag"></i>
-                                <a href="<?= $category->url; ?>" class="content grey-txt">
-                                    <?= $category->title ?? $categories->name; ?>
-                                </a>
-                            </div>
-                            <?php endforeach; ?>
-                        </div>
+<?php if (!empty($verses) || !empty($categories)) : ?>
+    <aside class="row col l3 s12 fast slideInRight">
+        <div class="card grey dark-4">
+            <?php if (isset($verse) && !empty($verse)) : ?>
+                <div class="verse-panel transparent" data-action="verses" data-ajax="/verses">
+                    <div class="indicator-container">
+                        <div class="indicator active"></div>
                     </div>
-                </li>
-            <?php endif; ?>
-            <li>
-                <div class="collapsible-header active">Albums</div>
-                <div class="collapsible-body">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores est dignissimos quod quas, quae excepturi tempora officia quibusdam eum fugit nemo id hic ratione blanditiis accusantium laudantium fugiat ipsa consequatur.
+                    <h2 class="ui header">God First</h2>
+                    <div class="txt" data-content="txt">
+                        <?= $verse->text; ?>
+                    </div>
+                    <div class="ref" data-content="ref">
+                        <?= $verse->reference; ?>
+                    </div>
                 </div>
-            </li>
-        </ul>
-    </div>
+            <?php endif; ?>
+            <div class="ui divided list animated slideInRight">
+                <?php if (isset($categories) && !empty($categories)) : ?>
+                    <ul class="collection transparent">
+                        <?php foreach ($categories as $category) : ?>
+                            <?php $active_category = $posts[0]->category ?? 'art' ?>
+                            <li class="collection-item waves-effect col s12 <?= ($category->title == $active_category)? 'active' : '' ?>">
+                                <a href="<?= $category->url; ?>">
+                                    <div style="margin: 10px">
+                                        <div class="collection-item-title">
+                                            <?= $category->title; ?>
+                                            <span class="secondary-content"><i class="icon icon-right-open"></i></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+            </div>
+        </div>
+    </aside>
+<?php endif; ?>

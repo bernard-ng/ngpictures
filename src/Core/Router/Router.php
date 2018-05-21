@@ -130,7 +130,9 @@ class Router
      * lancement du routing
      * le router fait un trailing Slash cad si l'url
      * termine par un "/", il redirige vers l'url sans "/" a la fin
-     * @return boolean
+     * @return bool
+     * olean
+     * @throws RouterException
      */
     public function run()
     {
@@ -138,7 +140,7 @@ class Router
             // trailingSlash
             if (strlen($this->url) > 1 && strripos($this->url, "/") === strlen($this->url) - 1) {
                 $url = substr($this->url, 0, -1);
-                $this->app::redirect("/{$url}");
+                $this->app::redirect("/{$url}", true);
             }
 
             foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
@@ -146,8 +148,10 @@ class Router
                     return $route->call();
                 }
             }
+
             $this->app::redirect("/error-404");
         }
+
         throw new RouterException("undefinied Request method");
     }
 }

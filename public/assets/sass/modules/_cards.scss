@@ -1,30 +1,112 @@
+@import "../custom/bases/variables";
+
 .card-panel {
   -webkit-transition: -webkit-box-shadow .25s;
   transition: -webkit-box-shadow .25s;
   -o-transition: box-shadow .25s;
-  transition: box-shadow .25s;
-  transition: box-shadow .25s, -webkit-box-shadow .25s;
-  padding: 24px;
+  
+  padding: 15px;
   margin: 0.5rem 0 1rem 0;
   border-radius: 2px;
   background-color: #fff;
+}
+
+.verse-panel {
+  border-radius: 0;
+  padding: 1rem;
+  position: relative;
+  border-bottom: 1px solid $border-color;
+
+  & .indicator-container{
+    height: 3px;
+    box-shadow: inset 1px 1px 1px $border-color;
+    width: 100%;
+    background: rgba(255,255,255,0.2);
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    & .indicator {
+      position: absolute;
+      top:0; left:0; right:0; bottom:0;
+      width : 0;
+      background: $txt-color;
+      transition: width linear 0.3s;
+      will-change: width;
+
+      &.active {
+        animation-name: progress;
+        animation-delay: 0.3s;
+        animation-timing-function: linear;
+        animation-duration: 59s;
+      }
+    }
+  }
+
+  h2 {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .txt {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: $txt-color;
+  }
+
+  .ref {
+    animation-name: verse-alert;
+    animation-iteration-count: infinite;
+    animation-delay: 0.3s;
+    animation-timing-function: linear;
+    word-spacing: 1px;
+    font-weight: 700;
+    padding-bottom: 10px;
+  }
+}
+
+@-webkit-keyframes verse-alert {
+
+  0%{ word-spacing: 1px;  }
+  25%{ word-spacing: 2px; }
+  50%{ word-spacing: 5px; }
+  75%{ word-spacing: 2px; }
+  100%{ word-spacing: 1px; }
+
+}
+
+@keyframes verse-alert {
+
+  0%{ word-spacing: 1px;  }
+  25%{ word-spacing: 2px; }
+  50%{ word-spacing: 5px; }
+  75%{ word-spacing: 2px; }
+  100%{ word-spacing: 1px; }
+
+}
+
+@keyframes progress {
+  0% { width: 0; }
+  100% {width: 100%;}
+}
+
+@-webkit-keyframes progress {
+  0% { width: 0; }
+  100% {width: 100%;}
 }
 
 .card {
   position: relative;
   margin: 0.5rem 0 1rem 0;
-  background-color: #fff;
+  background-color: rgb(255, 255, 255);
   -webkit-transition: -webkit-box-shadow .25s;
   transition: -webkit-box-shadow .25s;
   -o-transition: box-shadow .25s;
-  transition: box-shadow .25s;
-  transition: box-shadow .25s, -webkit-box-shadow .25s;
   border-radius: 2px;
 }
 
 .card .card-title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 300;
+  text-transform: capitalize;
 }
 
 .card .card-title.activator {
@@ -57,7 +139,7 @@
 }
 
 .card.small {
-  height: 300px;
+  height: 270px;
 }
 
 .card.medium {
@@ -144,12 +226,13 @@
   bottom: 0;
   left: 0;
   max-width: 100%;
-  padding: 24px;
+  padding: 15px;
 }
 
 .card .card-content {
-  padding: 24px;
+  padding: 15px;
   border-radius: 0 0 2px 2px;
+  height: auto;
 }
 
 .card .card-content p {
@@ -179,7 +262,7 @@
 }
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
-  color: #ffab40;
+  color: $active-color;
   margin-right: 24px;
   -webkit-transition: color .3s ease;
   -o-transition: color .3s ease;
@@ -188,13 +271,13 @@
 }
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
-  color: #ffd8a6;
+  color: $active-hover-color;
 }
 
 .card .card-reveal {
-  padding: 24px;
+  padding: 15px;
   position: absolute;
-  background-color: #fff;
+  background-color: rgba(0,0,0,0.8);
   width: 100%;
   overflow-y: auto;
   left: 0;
@@ -207,4 +290,5 @@
 .card .card-reveal .card-title {
   cursor: pointer;
   display: block;
+  padding-bottom: 10px;
 }

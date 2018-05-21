@@ -1,56 +1,35 @@
-<div class="col l3 no-padding hide-on-med-and-down">
-    <div class="card ">
-        <div class="card-image">
-            <img src="/imgs/wdp.png">
+<aside class="row col l3 s12 fast slideInRight">
+    <div class="verse-panel transparent" data-action="verses" data-ajax="/verses">
+        <div class="indicator-container">
+            <div class="indicator active"></div>
         </div>
-        <div class="ng-contain">
-            <section class="description">
-                <blockquote>
-                    We make design and photography wonderful.
-                    want to like or have something wonderful ?
-                    you are at the right place.
-                </blockquote>
-            </section>
-        </div>
-        <div class="aside-imgs">
-            <div class="previous-imgs row" id="previousImgs">
-                <span class="col l4 m4 s4">
-                    <img src="/imgs/team/bernard.jpg" alt="preso" title="Bernard - photographer" class="circle z-depth-1">
-                </span>
-                <span class="col l4 m4 s4">
-                    <img src="/imgs/team/gael.jpg" alt="preso" title="Gaël - marketing" class="circle z-depth-1">
-                </span>
-                <span class="col l4 m4 s4">
-                    <img src="/imgs/team/rapha.jpg" alt="preso" title="rapha - designer" class="circle z-depth-1">
-                </span>
+        <?php if (isset($verse) && !empty($verse)) : ?>
+            <h2 class="ui header">God First</h2>
+            <div class="txt" data-content="txt">
+                <?= $verse->text; ?>
             </div>
-        </div>
-    </div>
-    <div class="card" id="sticky" data-offset="45">
-        <div class="card-image">
-            <img src="/imgs/ngpic.jpg">
-        </div>
-        <div class="ng-contain">
-            <section class="description">
-                <blockquote>
-                    The deep shooting, is not about what you see
-                    is about what you feel, when looking at a picture.
-                </blockquote>
-            </section>
-        </div>
-        <div class="aside-imgs">
-            <div class="previous-imgs row" id="previousImgs">
-                <span class="col l4 m4 s4">
-                    <img src="/imgs/team/balloy.jpg" alt="preso" title="Balloy fane" class="circle z-depth-1">
-                </span>
-                <span class="col l4 m4 s4">
-                    <img src="/imgs/team/precylia.jpg" alt="preso" title="precylia felo" class="circle z-depth-1">
-                </span>
-                <span class="col l4 m4 s4">
-                    <img src="/imgs/team/grey.jpg" alt="preso" title="gretta mpunga" class="circle z-depth-1">
-                </span>
+            <div class="ref" data-content="ref">
+                <?= $verse->reference; ?>
             </div>
-        </div>
+        <?php endif; ?>
     </div>
-</div>
-
+    <div class="ui divided list animated slideInRight">
+        <?php if (isset($categories) && !empty($categories)) : ?>
+            <ul class="collection transparent">
+                <?php foreach ($categories as $category) : ?>
+                    <?php $active_category = $posts[0]->category ?? 'art' ?>
+                    <li class="collection-item waves-effect col s12 <?= ($category->title == $active_category)? 'active' : '' ?>">
+                        <a href="<?= $category->url; ?>">
+                            <div style="margin: 10px">
+                                <div class="collection-item-title">
+                                    <?= $category->title; ?>
+                                    <span class="secondary-content"><i class="icon icon-right-open"></i></span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+    </div>
+</aside>

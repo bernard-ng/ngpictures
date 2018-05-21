@@ -39,7 +39,7 @@ if (!empty($result)) :
         echo '
         <main class="ng-news-card-content">
             <section class="ng-news-card-title">';
-        if ($a->category_id !== null) :
+        if ($a->categories_id !== null) :
             echo '<a href="'.$a->categoryUrl.'"><i class="icon icon-tags"></i></a>';
         endif;
                 echo '
@@ -62,7 +62,7 @@ if (!empty($result)) :
                         '.$a->commentsNumber.'
                     </small>
                 </div>
-                
+
                 <div id="cmtAdd-'.$a->id.'" class="modal">
                     <div class="modal-content">
                         <span class="section-title-b mb-20">Commenter</span>
@@ -79,7 +79,7 @@ if (!empty($result)) :
                         </form>
                     </div>
                 </div>
-                
+
                 <div class="ng-news-card-stat">
                     <i class="icon icon-time"></i>&nbsp;
                     <small>

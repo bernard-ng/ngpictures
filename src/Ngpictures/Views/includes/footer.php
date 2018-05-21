@@ -1,57 +1,43 @@
 <!-- =================  FOOTER   ====================== -->
 <?php if ($activeUser) :?>
     <div class="fixed-action-btn toolbar">
-        <a class="btn-floating btn-large blue-grey dark-2 action">
-            <i class="icon icon-th"></i>
+        <a class="btn-floating btn-large blue-grey dark-4 shadow-4">
+            <i class="icon icon-menu"></i>
         </a>
         <ul>
-            <li class="waves-effect waves-light"><a href="/account/post"><i class="icon icon-pencil"></i></a></li>
-            <li class="waves-effect waves-light"><a href="<?= $activeUser->editUrl; ?>"><i class="icon icon-edit"></i></a></li>
-            <li class="waves-effect waves-light"><a href="<?= $activeUser->friendsUrl; ?>"><i class="icon icon-user"></i></a></li>
+            <li class="waves-effect"><a href="/submit-photo"><i class="icon icon-plus"></i></a></li>
+            <li class="waves-effect"><a href="<?= $activeUser->editUrl; ?>"><i class="icon icon-cog"></i></a></li>
+            <li class="waves-effect"><a href="<?= $activeUser->followersUrl; ?>"><i class="icon icon-users"></i></a></li>
         </ul>
     </div>
 <?php endif; ?>
 
 <footer class="page-footer jumbotron dark shadow-2">
     <div class="row container">
-        <section class="col l6 m4 s12">
-        <h5 class="white-text page-footer-title">A propos</h5>
-        <p class="grey-text text-lighten-4 page-footer-text">
-       Ngpictures est une galerie d'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens le site vous propose une fonctionnalité incroyable, "godfirst" : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l'avance.
+        <section class="col l12 m12 s12">
+        <h2 class="ui header">
+            A propos
+        </h2>
+        <p class="grey-txt">
+       Ngpictures est une galerie d'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos,
+       lire et écrire vos posts sur les sujets qui vous intéresses,
+       étant chrétiens l'application vous propose une fonctionnalité incroyable,
+       <a href="/godfirst">godfirst</a> : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l'avance.
         </p>
+        <div class="ui horizontal bulleted list">
+            <a class="item" href="/bugs">Un bug ?</a>
+            <a class="item" href="/ideas">Votre avis</a>
+            <a href="/privacy" class="item">Politiques d'utilisation</a>
+            <a class="item" href="/contact">Contact</a>
+        </div>
         </section>
-        <section class="col l3 m4 s6">
-            <h5 class="white-tex page-footer-title">Plus</h5>
-            <ul>
-                <li><a class="white-text page-footer-text" href="/ideas">
-                    <i class="icon icon-chevron-right"></i> Donner une idée</a>
-                </li>
-                <li><a class="white-text page-footer-text" href="/bugs">
-                    <i class="icon icon-chevron-right"></i> Signaler un problème</a>
-                </li>
-                <li><a class="white-text page-footer-text" href="/terms">
-                    <i class="icon icon-chevron-right"></i> Conditions générales</a>
-                </li>
-            </ul>
-        </section>
-        <section class="col l3 m4 s6">
-            <h5 class="white-txt page-footer-title">Résaux sociaux</h5>
-            <ul>
-                <li><a class="white-text page-footer-text" href="https://www.Facebook.com/wonderfulDP" target="_blank">
-                    <i class="social social-facebook-1"></i>&nbsp;Facebook</a>
-                </li>
-                <li><a class="white-text page-footer-text" href="https://www.instagram.com/ngpictures_23" target="_blank">
-                    <i class="social social-instagram"></i>&nbsp;Instagram</a></li>
-                <li><a class="white-text page-footer-text" href="https://www.pexels.com/ngpictures_23" target="_blank">
-                    <i class="social social-instagram-2"></i>&nbsp;Pexels</a>
-                </li>
-            </ul>
-        </section>
-
     </div>
     <div class="footer-copyright black">
-        <div class="container">
-            <span class="right page-footer-text">Developped by <a href="http://ngpictures.pe.hu" target="_blank">Bernard ng</a>&nbsp;</span>
+        <div class="container row">
+            <span class="right">Copyrights &copy; <?= date('Y') ?></span>
+            <span >
+                With <i class="icon icon-heart red-txt"></i> by <a href="http://ngpictures.pe.hu" target="_blank">Bernard ng</a>
+            </span>
         </div>
     </div>
 </footer>

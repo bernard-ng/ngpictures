@@ -1,22 +1,4 @@
-/*!
- * # Semantic UI 2.3.0 - Item
- * http://github.com/semantic-org/semantic-ui/
- *
- *
- * Released under the MIT license
- * http://opensource.org/licenses/MIT
- *
- */
-
-
-/*******************************
-            Standard
-*******************************/
-
-
-/*--------------
-      Item
----------------*/
+@import "../bases/variables";
 
 .ui.items > .item {
     display: -webkit-box;
@@ -36,15 +18,11 @@
     -o-transition: box-shadow 0.1s ease;
     transition: box-shadow 0.1s ease;
     transition: box-shadow 0.1s ease, -webkit-box-shadow 0.1s ease;
-    z-index: '';
+    z-index: 100;
   }
   .ui.items > .item a {
     cursor: pointer;
   }
-
-  /*--------------
-        Items
-  ---------------*/
 
   .ui.items {
     margin: 1.5em 0em;
@@ -55,10 +33,6 @@
   .ui.items:last-child {
     margin-bottom: 0em !important;
   }
-
-  /*--------------
-        Item
-  ---------------*/
 
   .ui.items > .item:after {
     display: block;
@@ -75,10 +49,6 @@
     margin-bottom: 0em;
   }
 
-  /*--------------
-       Images
-  ---------------*/
-
   .ui.items > .item > .image {
     position: relative;
     -webkit-box-flex: 0;
@@ -88,7 +58,7 @@
     float: none;
     margin: 0em;
     padding: 0em;
-    max-height: '';
+    max-height: 200px;
     -ms-flex-item-align: top;
         align-self: top;
   }
@@ -102,10 +72,6 @@
   .ui.items > .item > .image:only-child > img {
     border-radius: 0rem;
   }
-
-  /*--------------
-       Content
-  ---------------*/
 
   .ui.items > .item > .content {
     display: block;
@@ -142,17 +108,13 @@
     display: inline-block;
     margin: -0.21425em 0em 0em;
     font-weight: bold;
-    color: #ccc;
+    color: $txt-color;
   }
 
   /* Default Header Size */
   .ui.items > .item > .content > .header:not(.ui) {
     font-size: 1.28571429em;
   }
-
-  /*--------------
-       Floated
-  ---------------*/
 
   .ui.items > .item [class*="left floated"] {
     float: left;
@@ -161,37 +123,13 @@
     float: right;
   }
 
-  /*--------------
-    Content Image
-  ---------------*/
-
-  .ui.items > .item .content img {
-    -ms-flex-item-align: middle;
-        align-self: middle;
-    width: '';
-  }
-  .ui.items > .item img.avatar,
-  .ui.items > .item .avatar img {
-    width: '';
-    height: '';
-    border-radius: 500rem;
-  }
-
-  /*--------------
-     Description
-  ---------------*/
-
   .ui.items > .item > .content > .description {
     margin-top: 0.6em;
     max-width: auto;
     font-size: 1em;
     line-height: 1.4285em;
-    color: rgba(204, 204, 204, 0.816);
+    color: $txt-light-color;
   }
-
-  /*--------------
-      Paragraph
-  ---------------*/
 
   .ui.items > .item > .content p {
     margin: 0em 0em 0.5em;
@@ -200,16 +138,12 @@
     margin-bottom: 0em;
   }
 
-  /*--------------
-        Meta
-  ---------------*/
-
   .ui.items > .item .meta {
     margin: 0.5em 0em 0.5em;
     font-size: 0.75em;
     text-transform: uppercase;
     line-height: 1em;
-    color: rgba(204, 204, 204, 0.816);
+    color: $txt-light-color;
   }
   .ui.items > .item .meta * {
     margin-right: 0.3em;
@@ -222,84 +156,31 @@
     margin-left: 0.3em;
   }
 
-  /*--------------
-        Links
-  ---------------*/
-
-
-  /* Generic */
   .ui.items > .item > .content a:not(.ui) {
-    color: '';
+    color: $active-color;
     -webkit-transition: color 0.1s ease;
     -o-transition: color 0.1s ease;
     transition: color 0.1s ease;
   }
   .ui.items > .item > .content a:not(.ui):hover {
-    color: '';
+    color: $active-color;
   }
 
   /* Header */
   .ui.items > .item > .content > a.header {
-    color: #ccc;
+    color: $txt-color;
   }
   .ui.items > .item > .content > a.header:hover {
-    color: #1e70bf;
+    color: $active-color;
   }
 
   /* Meta */
   .ui.items > .item .meta > a:not(.ui) {
-    color: #ccc;
+    color: $txt-color;
   }
   .ui.items > .item .meta > a:not(.ui):hover {
-    color: #ccc;
+    color: $txt-color;
   }
-
-  /*--------------
-       Labels
-  ---------------*/
-
-
-  /*-----Star----- */
-
-
-  /* Icon */
-  .ui.items > .item > .content .favorite.icon {
-    cursor: pointer;
-    opacity: 0.75;
-    -webkit-transition: color 0.1s ease;
-    -o-transition: color 0.1s ease;
-    transition: color 0.1s ease;
-  }
-  .ui.items > .item > .content .favorite.icon:hover {
-    opacity: 1;
-    color: #FFB70A;
-  }
-  .ui.items > .item > .content .active.favorite.icon {
-    color: #FFE623;
-  }
-
-  /*-----Like----- */
-
-
-  /* Icon */
-  .ui.items > .item > .content .like.icon {
-    cursor: pointer;
-    opacity: 0.75;
-    -webkit-transition: color 0.1s ease;
-    -o-transition: color 0.1s ease;
-    transition: color 0.1s ease;
-  }
-  .ui.items > .item > .content .like.icon:hover {
-    opacity: 1;
-    color: #FF2733;
-  }
-  .ui.items > .item > .content .active.like.icon {
-    color: #FF2733;
-  }
-
-  /*----------------
-    Extra Content
-  -----------------*/
 
   .ui.items > .item .extra {
     display: block;
@@ -333,13 +214,6 @@
     visibility: hidden;
   }
 
-
-  /*******************************
-            Responsive
-  *******************************/
-
-
-  /* Default Image Width */
   .ui.items > .item > .image:not(.ui) {
     width: 175px;
   }
@@ -366,6 +240,7 @@
           -ms-flex-direction: column;
               flex-direction: column;
       margin: 2em 0em;
+      text-align: center;
     }
     .ui.items:not(.unstackable) > .item > .image {
       display: block;
@@ -377,22 +252,13 @@
       max-width: 100% !important;
       width: auto !important;
       max-height: 250px !important;
+      border-radius: 100%;
     }
     .ui.items:not(.unstackable) > .item > .image + .content {
       display: block;
       padding: 1.5em 0em 0em;
     }
   }
-
-
-  /*******************************
-             Variations
-  *******************************/
-
-
-  /*-------------------
-         Aligned
-  --------------------*/
 
   .ui.items > .item > .image + [class*="top aligned"].content {
     -ms-flex-item-align: start;
@@ -407,10 +273,6 @@
         align-self: flex-end;
   }
 
-  /*--------------
-       Relaxed
-  ---------------*/
-
   .ui.relaxed.items > .item {
     margin: 1.5em 0em;
   }
@@ -418,12 +280,8 @@
     margin: 2em 0em;
   }
 
-  /*-------------------
-        Divided
-  --------------------*/
-
   .ui.divided.items > .item {
-    border-top: 1px solid rgba(204, 204, 204, 0.166);
+    border-top: 1px solid $border-color;
     margin: 0em;
     padding: 1em 0em;
   }
@@ -447,30 +305,18 @@
     padding: 2em 0em;
   }
 
-  /*-------------------
-          Link
-  --------------------*/
-
   .ui.items a.item:hover,
   .ui.link.items > .item:hover {
     cursor: pointer;
   }
   .ui.items a.item:hover .content .header,
   .ui.link.items > .item:hover .content .header {
-    color: #1e70bf;
+    color: $active-color;
   }
-
-  /*--------------
-        Size
-  ---------------*/
 
   .ui.items > .item {
     font-size: 1em;
   }
-
-  /*---------------
-     Unstackable
-  ----------------*/
 
   @media only screen and (max-width: 767px) {
     .ui.unstackable.items > .item > .image,
@@ -478,14 +324,3 @@
       width: 125px !important;
     }
   }
-
-
-  /*******************************
-           Theme Overrides
-  *******************************/
-
-
-
-  /*******************************
-      User Variable Overrides
-  *******************************/

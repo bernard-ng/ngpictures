@@ -3,7 +3,6 @@ namespace Ngpictures\Models;
 
 use Ng\Core\Database\MysqlDatabase;
 use Ng\Core\Models\Model;
-use Ng\Core\Managers\Collection;
 use Ngpictures\Ngpictures;
 use Ngpictures\Traits\Util\TypesActionTrait;
 
@@ -34,14 +33,14 @@ class LikesModel extends Model
      * ajoute un like
      * @param int $id
      * @param int $type
-     * @param $user_id
+     * @param $users_id
      * @return mixed
      */
-    public function add(int $id, int $type, $user_id)
+    public function add(int $id, int $type, $users_id)
     {
         return $this->query(
-            "INSERT INTO {$this->table}(user_id,{$this->getType($type)},date_created) VALUES(?,?,NOW())",
-            [$user_id,$id]
+            "INSERT INTO {$this->table}(users_id,{$this->getType($type)},date_created) VALUES(?,?,NOW())",
+            [$users_id,$id]
         );
     }
 
@@ -50,14 +49,14 @@ class LikesModel extends Model
      * retire un like
      * @param int $id
      * @param int $type
-     * @param $user_id
+     * @param $users_id
      * @return mixed
      */
-    public function remove(int $id, int $type, $user_id)
+    public function remove(int $id, int $type, $users_id)
     {
         return $this->query(
-            "DELETE FROM {$this->table} WHERE {$this->getType($type)} = ? AND user_id = ? ",
-            [$id,$user_id],
+            "DELETE FROM {$this->table} WHERE {$this->getType($type)} = ? AND users_id = ? ",
+            [$id,$users_id],
             true,
             true
         );
@@ -74,7 +73,7 @@ class LikesModel extends Model
     public function getLikes(int $id, int $type): int
     {
         return $this->query(
-            "SELECT id,user_id FROM {$this->table} WHERE {$this->getType($type)} = {$id}",
+            "SELECT id,users_id FROM {$this->table} WHERE {$this->getType($type)} = {$id}",
             [$id],
             true,
             false,
@@ -93,7 +92,7 @@ class LikesModel extends Model
     public function getLikers(int $id, int $type)
     {
         return $this->query(
-            "SELECT user_id FROM {$this->table} WHERE {$this->getType($type)} = {$id}",
+            "SELECT users_id FROM {$this->table} WHERE {$this->getType($type)} = {$id}",
             [$id],
             true,
             false,
@@ -107,15 +106,15 @@ class LikesModel extends Model
      *
      * @param integer $id
      * @param integer $t
-     * @param int|null $user_id
+     * @param int|null $users_id
      * @return boolean
      */
-    public function isLiked(int $id, int $t, $user_id = null): bool
+    public function isLiked(int $id, int $t, $users_id = null): bool
     {
         $req = $this->query(
 
-            "SELECT * FROM {$this->table} WHERE {$this->getType($t)} = ? AND user_id = ? ",
-            [$id,$user_id],
+            "SELECT * FROM {$this->table} WHERE {$this->getType($t)} = ? AND users_id = ? ",
+            [$id,$users_id],
             true,
             true
         );
@@ -135,18 +134,7 @@ class LikesModel extends Model
         $isLiked = $this->isLiked($id, $type, $this->session->getValue(AUTH_KEY, 'id'));
         $likes =  $this->getLikes($id, $type);
         $liked = $likes - 1 ;
-
-        if ($isLiked && $likes > 2) {
-            return "Vous et {$liked} personnes aimez ça";
-        } elseif ($isLiked && $likes == 1) {
-            return "Vous aimez ça";
-        } elseif (!$isLiked && $likes >= 2) {
-            return "{$likes} personnes aiment ça";
-        } elseif (!$isLiked && $likes == 1) {
-            return "Une personne aime ça";
-        } else {
-            return "{$likes} j'aime";
-        }
+        return ($isLiked && $likes == 1)? "Vous aimez ça" : "{$likes} j'aime";
     }
 
 

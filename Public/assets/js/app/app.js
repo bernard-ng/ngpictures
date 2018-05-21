@@ -1,201 +1,295 @@
-/*
- * This is my javascript code for ngpictures project,
- * as you know I am a beginner so hope you gonna make perfect this code et gonna my logic
- * all annimation and smart effect are here, ajax gonna be in app.ajax.js
- *
- *
- * PS: I'm a french speaker so if my english is broken , just understand...
- * @author Bernard ng;
+
+
+
+//Main Scripts
+//---------------------------------------------------------------------
+
+/**
+ * premet de rendre un itme du menu active
+ * @returns {boolean}
  */
-$(document).ready(function(){
+function toggleMenuItem() {
+    let active = document.querySelector("#menu-item-active");
+    if (active) {
+        try {
+            let link = document.querySelector("ul.links").querySelector("li#"+ active.getAttribute('data-active'));
+            if (link) {
+                link.classList.add('active');
+            }
+        } catch (e) {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
 
-    //shim pour le scrollY
-    var scrollY = function(){
-        var supportPageOffset = window.PageYOffset !== undefined ;
-        var isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
-        return y = supportPageOffset ? window.PageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop
-    };
+/**
+ * premet de rendre un item du menu mobile active
+ * @returns {boolean}
+ */
+function toggleMobileMenuItem() {
+    let active = document.querySelector("#menu-mobile-item-active");
+    if (active) {
+        try {
+            let link = document.querySelector("ul.mobile-links").querySelector("li#"+ active.getAttribute('data-active'));
+            if (link) {
+                link.classList.add('active');
+            }
+        } catch (e) {
+            return false;
+
+        }
+    } else {
+        return false;
+    }
+}
 
 
-    //bar de progression pour la galerie
-    (function(){
-        var progressBar = {
-        countImg : 0,
-        loadedImg: 0,
+/**
+ * cree un timer relatif pour les dates
+ */
+function relativeTimer(){
+    if (document.querySelectorAll('time[data-time]') ) {
+        if (NodeList.prototype.forEach === undefined) {
+            NodeList.prototype.forEach = function (callback) {
+                [].forEach.call(this, callback);
+            }
+        }
 
-        init : function(){
-                var that = this;
-                var imgs = $('a img.galery-item');
-                that.countImg = imgs.length;
+        let terms = [
+            {time: 10, divide: 1, text: "%d secondes"},
+            {time: 45, divide: 1, text: "moins d'une minute"},
+            {time: 90, divide: 60, text: "environ une minute"},
+            {time: 45 * 60, divide: 60, text: "%d minutes"},
+            {time: 90 * 60, divide: 60 * 60 , text: "environ une heure"},
+            {time: 24 * 60 * 60 , divide: 60 * 60 , text: "%d heures"},
+            {time: 42 * 60 * 60 , divide: 24 * 60 * 60 , text: "environ un jour"},
+            {time: 30 * 24 * 60 * 60, divide: 24 * 60 * 60 , text: "%d jours"},
+            {time: 42 * 24 * 60 * 60 , divide: 24 * 60 * 60 * 30, text: "environ un mois"},
+            {time: 365 * 24 * 60 * 60, divide: 24 * 60 * 60 * 30, text: "%d mois"},
+            {time: 365 * 1.5 * 24 * 60 * 60 , divide: 24 * 60 * 60 * 365, text: "environ un an"},
+            {time: Infinity, divide: 24 * 60 * 60 * 365 , text: "%d ans"}
+        ];
 
-                //on cree la bare de progression
-                var $progressBarContainer = $('<div/>').attr('id','progress-bar-container');
-                var $progressBar = $('<div/>').attr('id','progress-bar');
-                $progressBarContainer.append($progressBar).appendTo('#menu');
+        document.querySelectorAll('time[data-time]').forEach(function(node) {
+            function setText(){
+                let seconds = Math.floor((new Date()).getTime()/1000 - parseInt(node.getAttribute('data-time'), 10));
+                let prefix = seconds > 0 ? 'Il y a ' : 'Dans ' ;
+                let term;
+                seconds = Math.abs(seconds);
 
-                //le fake container histoir de compter mm les image charger du cache.
-                var $fakeContainer = $('<div/>').attr('id','fakeImgContainer');
-                $fakeContainer.appendTo($('body'));
-
-                //on parcours le element en le ajoutant au fake
-                imgs.each(function(){
-                    $img =  $('<img/>').attr('src', $(this).attr('src'));
-                    $img.on('load error', function(){
-                            that.loadedImg++;
-                            that.update();
-                        });
-
-                    $fakeContainer.append($img);
-                });
-
-            },
-
-            update : function(){
-                $('#progress-bar').stop().animate({
-                    'width' : (progressBar.loadedImg / progressBar.countImg) * 100 + '%'
-                }, 300, 'linear', function(){
-                    if (progressBar.loadedImg === progressBar.countImg) {
-                        setTimeout(function(){
-                            $('#progress-bar-container').stop().animate({
-                                'opacity' : 0
-                            }, 500, 'linear', function(){
-                                $('#progress-bar-container').remove();
-                                $('#fakeImgContainer').remove();
-                            })
-                        }, 500)
+                for (term of terms) {
+                    if (seconds < term.time) {
+                        break;
                     }
-                });
-            }
-        };
-
-        if ($('#galery') !== undefined) {
-            progressBar.init();
-        }
-    })();
-
-    //Navbar animation
-    (function(){
-        $window = $(window);
-        $window.scroll(function(){
-            if($window.scrollTop() > 20){
-                $("#menu").addClass('shrink');
-            }else{
-                $("#menu").removeClass('shrink');
-            }
-        })
-    })();
-
-    //rendre active un item du menu
-    (function(){
-        $activeLink = $('#menu-item-active').attr('data-isActive');
-        if ($activeLink !== undefined) {
-            $link = $('ul.links').find("li#" + $activeLink);
-            $link.addClass('active');
-        }
-    })();
-
-    (function(){
-        class Tooltip {
-
-            static bind(selector) {
-                document.querySelectorAll(selector).forEach(element => new Tooltip(element));
-            }
-
-            constructor(element) {
-                this.element = element;
-                this.title = element.getAttribute('title');
-                this.tooltip = null;
-                this.element.addEventListener('mouseover', this.mouseOver.bind(this));
-                this.element.addEventListener('mouseout', this.mouseOut.bind(this));
-            }
-
-            mouseOver() {
-               var tooltip = this.create();
-               var width = this.tooltip.offsetWidth;
-               var height = this.tooltip.offsetHeight;
-               var left = this.element.offsetWidth / 2 - width / 2 + this.element.getBoundingClientRect().left + document.documentElement.scrollLeft;
-               var top = this.element.getBoundingClientRect().top - height -15 + document.documentElement.scrollTop;
-               tooltip.style.left = left + "px";
-               tooltip.style.top = top + "px";
-               tooltip.classList.add('visible');
-
-            }
-
-            mouseOut() {
-                if (this.tooltip !== null) {
-                    this.tooltip.classList.remove('visible');
-                    this.tooltip.addEventListener('transitionend', function(){
-                        document.body.removeChild(this.tooltip);
-                        this.tooltip = null
-                    })
                 }
-            }
-            create() {
-                if (this.tooltip === null) {
-                    var tooltip = document.createElement('div');
-                    tooltip.innerHTML = this.title;
-                    tooltip.classList.add('tooltip');
-                    document.body.appendChild(tooltip);
-                    this.tooltip = tooltip;
-                    return tooltip
-                }
-                return this.tooltip
-            }
-        }
 
-        Tooltip.bind('[title]');
-        Tooltip.bind('[data-tooltip');
-    })();
+                node.innerHTML = prefix + term.text.replace('%d', Math.round(seconds/term.divide));
 
-
-    // timer relatif
-    (function(){
-        if (document.querySelectorAll('time[data-time') !== undefined) {
-            if (NodeList.prototype.forEach === undefined) {
-                NodeList.prototype.forEach = function (callback) {
-                    [].forEach.call(this, callback)
-                }
-            }
-
-            var terms = [
-                {time: 10, divide: 1, text: "%d secondes"},
-                {time: 45, divide: 1, text: "moins d'une minute"},
-                {time: 90, divide: 60, text: "environ une minute"},
-                {time: 45 * 60, divide: 60, text: "%d minutes"},
-                {time: 90 * 60, divide: 60 * 60 , text: "environ une heure"},
-                {time: 24 * 60 * 60 , divide: 60 * 60 , text: "%d heures"},
-                {time: 42 * 60 * 60 , divide: 24 * 60 * 60 , text: "environ un jour"},
-                {time: 30 * 24 * 60 * 60, divide: 24 * 60 * 60 , text: "%d jours"},
-                {time: 42 * 24 * 60 * 60 , divide: 24 * 60 * 60 * 30, text: "environ un mois"},
-                {time: 365 * 24 * 60 * 60, divide: 24 * 60 * 60 * 30, text: "%d mois"},
-                {time: 365 * 1.5 * 24 * 60 * 60 , divide: 24 * 60 * 60 * 365, text: "environ un an"},
-                {time: Infinity, divide: 24 * 60 * 60 * 365 , text: "%d ans"}
-            ];
-
-            document.querySelectorAll('time[data-time]').forEach(function(node) {
-                function setText(){
-                    var seconds = Math.floor((new Date()).getTime()/1000 - parseInt(node.dataset.time, 10));
-                    var prefix = seconds > 0 ? 'Il y a ' : 'Dans ' ;
-                    var term = null;
-                    seconds = Math.abs(seconds);
-
-                    for (term of terms) { if (seconds < term.time) { break }}
-                    node.innerHTML = prefix + term.text.replace('%d', Math.round(seconds/term.divide));
-
-                    var nextTick = seconds % term.divide;
-                    if ( nextTick === 0) {
-                        nextTick = term.divide
-                    }
+                let nextTick = seconds % term.divide;
+                if (nextTick === 0) {
+                    nextTick = term.divide;
                 }
 
                 window.setTimeout(function(){
                     if (node.parentNode){
-                        window.requestAnimationFrame ?  window.requestAnimationFrame(setText) : setText()
+                        window.requestAnimationFrame ? window.requestAnimationFrame(setText) : setText();
                     }
-                },  1000);
+                },  nextTick);
+            }
+            setText();
+        });
+    } else {
+        return false;
+    }
+}
 
-                setText();
-            })
-        }
-    })();
-});
+/**
+ * rend un element sticky
+ * @param selector
+ */
+function makeSticky(selector) {
+    /**
+     * return le nombre de scroll en Y
+     * @returns {number}
+     */
+    let scrollY = function () {
+        let supportPageOffset   = window.pageXOffset !== undefined;
+        let isCSS1Compat        = ((document.compatMode || "") === "CSS1Compat");
+        return supportPageOffset ? window.pageYOffset :
+            isCSS1Compat? document.documentElement.scrollTop : document.body.scrollTop;
+    };
+
+    let elements = document.querySelectorAll(selector);
+    for (let i = 0; i < elements.length; i++) {
+        (function(element){
+            let boundingRect = element.getBoundingClientRect();
+            let top          = boundingRect.top + scrollY();
+            let offset       = parseInt(element.getAttribute('data-sticky-offset') || 0, 10);
+            let constraint      = element.getAttribute('data-sticky-constraint')?
+                document.querySelector(element.getAttribute('data-sticky-constraint')) : document.body;
+            let constraintRect = constraint.getBoundingClientRect();
+            let constraintBottom = constraintRect.top + scrollY() + constraintRect.height - offset - boundingRect.height;
+
+            let fakeElement             =   document.createElement('div');
+            fakeElement.style.width     =   boundingRect.width + "px";
+            fakeElement.style.height    =   boundingRect.height + "px";
+
+            let onScrollSticky = function () {
+                if (scrollY() > constraintBottom && element.style.position !== 'absolute') {
+                    element.style.position  = 'absolute';
+                    element.style.bottom    = '0';
+                    element.style.top       = 'auto';
+                } else if (scrollY() > top - offset && scrollY() < constraintBottom && element.style.position !== 'fixed') {
+                    element.style.position = 'fixed';
+                    element.style.top   = offset + "px";
+                    element.style.bottom       = 'auto';
+                    element.style.width = boundingRect.width + "px";
+                    element.parentNode.insertBefore(fakeElement, element);
+                } else if (scrollY() < top - offset && element.style.position !== 'static') {
+                    element.style.position = "static";
+                    if(element.parentNode.contains(fakeElement))  {
+                        element.parentNode.removeChild(fakeElement);
+                    }
+                }
+            };
+
+            let onResizeSticky = function () {
+                element.style.width = "auto";
+                element.style.position = "static";
+                fakeElement.style.display = 'none';
+                boundingRect = element.getBoundingClientRect();
+                top          = boundingRect.top + scrollY();
+
+                constraintRect = constraint.getBoundingClientRect();
+                constraintBottom = constraintRect.top + scrollY() + constraintRect.height - offset - boundingRect.height;
+
+                fakeElement.style.width     =   boundingRect.width + "px";
+                fakeElement.style.height    =   boundingRect.height + "px";
+                fakeElement.style.display   =   "block";
+                onScrollSticky();
+            };
+
+            window.addEventListener('scroll', onScrollSticky);
+            window.addEventListener('resize', onResizeSticky);
+        })(elements[i]);
+    }
+}
+
+
+/**
+ * les bouttons de partages sur les social network
+ */
+function share() {
+    let sharePopup = function (url, title) {
+        let windowTop = window.screenTop || window.screenY;
+        let windowLeft = window.screenLeft || window.screenX;
+        let windowWidth = window.innerWidth || document.documentElement.clientWidth;
+        let windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        let popupWidth = 640;
+        let popupHeight = 320;
+        let popupLeft = (windowLeft + windowWidth / 2) - popupWidth / 2;
+        let popupTop = (windowTop + windowHeight / 2) - popupHeight / 2;
+
+        window.open(
+            url,
+            title,
+            "scrollbars=yes, " +
+            "width="+popupWidth+",height="+popupHeight+",top="+popupTop+",left="+popupLeft
+        ).focus();
+        return true;
+    };
+
+    let twitter = document.querySelector("[data-action='share-twitter']");
+    if (twitter) {
+        twitter.addEventListener('click', function (e){
+            e.preventDefault();
+            e.stopPropagation();
+            let url = encodeURIComponent(this.getAttribute('data-url'));
+            let text = encodeURIComponent(msg.usersNotLogged);
+            let share =
+                "https://twitter.com/intent/tweet?text=" + text +
+                "&via=Ngpictures"
+                + "&url=" + url;
+
+            sharePopup(share, "Partager Sur Twitter");
+        });
+    }
+
+    let facebook = document.querySelector("[data-action='share-facebook']");
+    if (facebook) {
+        facebook.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            let url = encodeURIComponent(this.getAttribute('data-url'));
+            let share = "https://www.facebook.com/sharer.php?u="+url;
+            sharePopup(share, "Partager Sur Facebook");
+        });
+    }
+
+    let googlePlus = document.querySelector("[data-action='share-google-plus']");
+    if (googlePlus) {
+        googlePlus.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            let url = encodeURIComponent(this.getAttribute('data-url'));
+            let share = "https://plus.google.com/share?url="+url;
+            sharePopup(share, "Partager Sur Google+");
+        });
+    }
+}
+
+
+/**
+ * affiche l'image a uploader avant l'upload
+ */
+function showImageBeforeUpload() {
+    let form = document.querySelector("[data-action='upload']");
+    if (form) {
+        let input = form.querySelector("input[type='file']");
+        let showContainer = document.querySelector("[data-action='show-uploaded-file']");
+        let admitExt = ['jpg', 'jpeg', 'png', 'gif'];
+        let adminTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
+
+        let getFile = function(files) {
+            let reader = new FileReader();
+            reader.readAsDataURL(files);
+            reader.addEventListener('load', function() {
+                let tag = document.createElement('img');
+                tag.classList.add('responsive-img');
+                tag.src = this.result;
+                showContainer.innerHTML = "";
+                showContainer.appendChild(tag);
+            });
+        };
+
+        input.addEventListener('change', function() {
+            let files = this.files;
+            let file = files[0];
+            let ext = file.name.split('.');
+            let type = file.type;
+
+            ext = ext[ext.length - 1].toLowerCase();
+
+            if (admitExt.includes(ext, 0) && adminTypes.includes(type, 0)) {
+                if (file.size <= 6291456) {
+                    getFile(file);
+                } else {
+                    setFlash('danger',msg.filesGreaterThanLimit)
+                }
+            } else {
+                setFlash("danger", msg.filesNotImage);
+            }
+        });
+    }
+}
+
+//CALL
+//----------------------------------------------------------------------
+toggleMenuItem();
+toggleMobileMenuItem();
+relativeTimer();
+makeSticky('[data-sticky]');
+share();
+showImageBeforeUpload();

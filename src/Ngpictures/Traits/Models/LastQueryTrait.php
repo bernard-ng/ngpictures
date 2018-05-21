@@ -28,9 +28,9 @@ trait LastQueryTrait
     {
         return $this->query(
             "
-            SELECT {$this->table}.*, categories.title as category 
-            FROM {$this->table} 
-            LEFT JOIN categories ON category_id = categories.id
+            SELECT {$this->table}.*, categories.title as category
+            FROM {$this->table}
+            LEFT JOIN categories ON categories_id = categories.id
             WHERE {$this->table}.online = 1
             ORDER BY id DESC LIMIT {$from},{$to}",
             null,

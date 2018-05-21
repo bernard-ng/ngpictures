@@ -1,19 +1,24 @@
-<div class="card-panel z-depth-4  mt-30" id="loginBox" >
-    <div class="page-content mb-20">
-        <span class="section-title">Mot de passe oublié</span>
+<div class="card-panel z-depth-4 " id="loginBox" >
+    <div class="row">
+        <h2 class="ui header">Mot de passe oublié</h2>
         <p>
             Veuillez renseigner l'adresse mail avec laquelle vous vous étiez inscrit,
-            si vous l'aviez fait avec facebook, essayez de vous connecter avec facebook
+            afin d'obtenir les instruction de rappelle de mot de passe.
         </p>
-
     </div>
-    <form method="POST" action="">
-        <input type="email" id="email" name="email" placeholder="adresse mail" value="<?= $post->get('email') ?>" >
-
-        <div class="row">
-            <div class="col s12" id="connectOptions">
-                <button type="submit" class="btn action-btn waves-effect waves-light" id="connect">confirmer</button>
+    <div class="row">
+        <form method="POST" action="/forgot" data-action="forgot">
+            <div class="input-field col s12">
+                <label for="email">Votre adresse mail...</label>
+                <input type="email" id="email" name="email" class="validate <?= $errors->get('email')? 'invalid' : '' ?>" value="<?= $post->get('email') ?>" >
+                <span class="helper-text red-txt">
+                    <?= $errors->get('email'); ?>
+                </span>
             </div>
-        </div>
-    </form>
+
+            <div class="col s12">
+                <button type="submit" class="btn btn-flat waves-effect">Envoyer</button>
+            </div>
+        </form>
+    </div>
 </div>

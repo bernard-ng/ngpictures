@@ -2,10 +2,10 @@
 namespace Ngpictures\Controllers;
 
 use \Exception;
+use Ngpictures\Traits\Controllers\PaginationTrait;
 use \RuntimeException;
 use \DirectoryIterator;
 use Ngpictures\Ngpictures;
-use \UnexpectedValueException;
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\ImageManager;
 use Ng\Core\Managers\ConfigManager;
@@ -36,6 +36,8 @@ class AdminController extends Controller
         'categories',
         'albums'
     ];
+
+    use PaginationTrait;
 
 
     /**
@@ -71,43 +73,32 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $posts = $this->posts->latest();
-        $blog = $this->blog->latest();
+        $posts         =  $this->posts->latest();
+        $blog          =  $this->blog->latest();
+        $photo         =  $this->gallery->latest();
 
-        $site_posts = [
-            count($this->blog->lastOnline()),
-            count($this->blog->lastOffline())
-        ];
-        $users_posts = [
-            count($this->posts->lastOnline()),
-            count($this->posts->lastOffline())
-        ];
-        $site_photos = [
-            count($this->gallery->lastOnline()),
-            count($this->gallery->lastOffline())
-        ];
-        $users = [
-            count($this->users->lastConfirmed()),
-            count($this->users->lastNotConfirmed())
-        ];
+        $site_posts    = [count($this->blog->lastOnline()), count($this->blog->lastOffline())];
+        $users_posts   = [count($this->posts->lastOnline()), count($this->posts->lastOffline())];
+        $site_photos   = [count($this->gallery->lastOnline()), count($this->gallery->lastOffline())];
+        $users         = [count($this->users->lastConfirmed()), count($this->users->lastNotConfirmed())];
 
-        $disk_space = disk_free_space(CORE) * 100 / disk_total_space(CORE);
-        $used_space = 100 - ceil($disk_space);
-        $total_space = ceil($disk_space);
+        $disk_space    = disk_free_space(CORE) * 100 / disk_total_space(CORE);
+        $used_space    = 100 - ceil($disk_space);
+        $total_space   = ceil($disk_space);
 
-        $users_online = count($this->loadModel('online')->all());
-        $site_categories = count($this->loadModel('categories')->all());
-        $site_bugs = count($this->loadModel('bugs')->all());
-        $site_ideas = count($this->loadModel('ideas')->all());
+        $site_bugs          =   count($this->loadModel('bugs')->all());
+        $site_ideas         =   count($this->loadModel('ideas')->all());
+        $users_online       =   count($this->loadModel('online')->all());
+        $site_categories    =   count($this->loadModel('categories')->all());
 
         $this->pageManager::setName('admin');
-
         $this->setLayout('admin/default');
         $this->viewRender(
             'back_end/index',
             compact(
                 'posts',
                 'blog',
+                'photo',
                 'site_posts',
                 'users_posts',
                 'site_photos',
@@ -134,8 +125,8 @@ class AdminController extends Controller
         $post = new Collection($data ?? $_POST);
 
         if ($post->get('id') && $post->get('type')) {
-            $model = $this->loadModel($this->getType($post->get('type')));
-            $result = $model->find(intval($post->get('id')));
+            $model      =    $this->loadModel($this->getType($post->get('type')));
+            $result     =    $model->find(intval($post->get('id')));
 
             if ($result) {
                 $model->delete($post->get('id'));
@@ -231,7 +222,7 @@ class AdminController extends Controller
                 $model->update($id, ['online' => 1]);
 
                 if ($this->isAjax()) {
-                    echo '<i class="icon icon-cloud-download" style="font-size: smaller !important;"></i>';
+                    echo '<i class="icon icon-download" style="font-size: smaller !important;"></i>';
                     exit;
                 }
 
@@ -241,7 +232,7 @@ class AdminController extends Controller
                 $model->update($id, ['online' => 0]);
 
                 if ($this->isAjax()) {
-                    echo '<i class="icon icon-cloud-upload" style="font-size: smaller !important;"></i>';
+                    echo '<i class="icon icon-upload" style="font-size: smaller !important;"></i>';
                     exit;
                 }
 
@@ -267,8 +258,8 @@ class AdminController extends Controller
      */
     public function blog()
     {
-        $posts = $this->blog->orderBy('id', 'DESC');
-        $article = $this->blog->last();
+        $posts      =   $this->blog->orderBy('id', 'DESC');
+        $article    =   $this->blog->last();
         $this->pageManager::setName('Adm - blog');
         $this->setLayout("admin/default");
         $this->viewRender("back_end/blog/index", compact("posts", "article"));
@@ -284,25 +275,25 @@ class AdminController extends Controller
      */
     public function edit(int $id, $data = null)
     {
-        $article = $this->blog->find(intval($id));
-        $categories = $this->categories->orderBy('title', 'ASC');
-        $errors = [];
         $post = new Collection($data ?? $_POST);
+        $errors         =   new Collection();
+        $article        =   $this->blog->find(intval($id));
+        $categories     =   $this->categories->orderBy('title', 'ASC');
 
         if (isset($_POST) && !empty($_POST)) {
             if (!empty($post->get('content')) && !empty($post->get('title')) && !empty($post->get('slug'))) {
-                $this->validator->setRule('title', 'requrired');
-                $this->validator->setRule('content', 'requrired');
-                $this->validator->setRule('slug', 'requrired');
-                $this->validator->isKebabCase('slug', 'alnum_dash');
+                $this->validator->setRule('title', 'required');
+                $this->validator->setRule('content', 'required');
+                $this->validator->setRule('slug', 'required');
+                $this->validator->setRule('slug', 'alpha_dash');
 
                 if ($this->validator->isValid()) {
                     $title = $this->str::escape($post->get('title'));
                     $content = $post->get('content');
                     $slug = $this->str::escape($post->get('slug'));
-                    $category_id = (int)$post->get('category') ?? 1;
+                    $categories_id = (int)$post->get('category') ?? 1;
 
-                    $this->blog->update($id, compact('title', 'content', 'slug', 'category_id'));
+                    $this->blog->update($id, compact('title', 'content', 'slug', 'categories_id'));
                     $this->flash->set("success", $this->msg['post_edit_success']);
                     $this->app::redirect(ADMIN . "/blog");
                 } else {
@@ -315,7 +306,7 @@ class AdminController extends Controller
 
         $this->pageManager::setName('Adm - blog.edit');
         $this->setLayout('admin/default');
-        $this->viewRender('back_end/blog/edit', compact('article', 'categories', 'post'. 'errors'));
+        $this->viewRender('back_end/blog/edit', compact('article', 'categories', 'post', 'errors'));
     }
 
 
@@ -326,43 +317,40 @@ class AdminController extends Controller
      */
     public function add()
     {
-        $post = new Collection($_POST);
-        $file = new Collection($_FILES);
-        $categories = $this->categories->orderBy('title', 'ASC');
-        $post_errors = [];
-        $file_errors = [];
+        $post           =   new Collection($_POST);
+        $file           =   new Collection($_FILES);
+        $errors         =   new Collection();
+        $categories     =   $this->categories->orderBy('title', 'ASC');
 
         if (isset($_POST) && !empty($_POST)) {
             $this->validator->setRule('title', 'required');
-            $this->validator->setRule('content', 'requried');
-            $this->validator->setRule('category_id', 'numeric');
+            $this->validator->setRule('content', 'required');
 
             if ($this->validator->isValid()) {
-                $title = $this->str::escape($post->get('title'));
-                $content = $post->get('content');
-                $category_id = ($post->get('category') == 0) ? 1 : $post->get('category');
-            } else {
-                $this->flash->set('danger', $this->msg['form_multi_errors']);
-                $post_errors = $this->validator->getErrors();
-            }
+                $title              =   $this->str::escape($post->get('title'));
+                $content            =   $post->get('content');
+                $categories_id      =   ($post->get('category') == 0) ? 1 : $post->get('category');
 
-            if ($post->get('slug') !== '') {
-                $this->validator->setRule('slug', 'alnum_dash');
-                if ($this->validator->isValid()) {
-                    $slug = $this->str::escape($post->get('slug'));
+                if ($post->get('slug') !== '') {
+                    $this->validator->setRule('slug', 'alnum_dash');
+                    if ($this->validator->isValid()) {
+                        $slug = $this->str::escape($post->get('slug'));
+                    }
+                } else {
+                    $slug = $this->str::slugify($title);
                 }
             } else {
-                $slug = $this->str::slugify($title);
+                $this->flash->set('danger', $this->msg['form_multi_errors']);
+                $errors = new Collection($this->validator->getErrors());
             }
-
 
             if (isset($_FILES) && !empty($_FILES)) {
                 if (!empty($file->get('thumb.name'))) {
                     if ($this->validator->isValid()) {
-                        $this->blog->create(compact('title', 'content', 'slug', 'category_id'));
+                        $this->blog->create(compact('title', 'content', 'slug', 'categories_id'));
 
-                        $last_id = $this->blog->lastInsertId();
-                        $isUploaded = ImageManager::upload($file, 'blog', "ngpictures-{$slug}-{$last_id}", 'article');
+                        $last_id        =   $this->blog->lastInsertId();
+                        $isUploaded     =   ImageManager::upload($file, 'blog', "ngpictures-{$slug}-{$last_id}", 'article');
 
                         if ($isUploaded) {
                             ImageManager::upload($file, 'blog-thumbs', "ngpictures-{$slug}-{$last_id}", 'small');
@@ -375,7 +363,7 @@ class AdminController extends Controller
                         }
                     } else {
                         $this->flash->set("danger", $this->msg['form_multi_errors']);
-                        $file_errors = $this->validator->getErrors();
+                        $errors = new Collection($this->validator->getErrors());
                     }
                 } else {
                     $this->flash->set('danger', $this->msg['post_requries_picture']);
@@ -385,7 +373,7 @@ class AdminController extends Controller
 
         $this->pageManager::setName('Adm - blog.add');
         $this->setLayout('admin/default');
-        $this->viewRender('back_end/blog/add', compact('post', 'categories', 'post_errors', 'file_errors'));
+        $this->viewRender('back_end/blog/add', compact('post', 'categories', 'errors'));
     }
 
 
@@ -408,17 +396,17 @@ class AdminController extends Controller
      */
     public function addCategory()
     {
-        $post = new Collection($_POST);
-        $errors = [];
+        $post       =   new Collection($_POST);
+        $errors     =   new Collection();
 
         if (isset($_POST) && !empty($_POST)) {
             $this->validator->setRule('title', 'required');
             $this->validator->setRule('description', 'required');
 
             if ($this->validor->isValid()) {
-                $title = $this->str::escape($post->get('title'));
-                $description = $post->get('description');
-                $slug = $this->str::slugify($title);
+                $title          =   $this->str::escape($post->get('title'));
+                $slug           =   $this->str::slugify($title);
+                $description    =   $post->get('description');
                 $this->categories->create(compact('title', 'description', 'slug'));
 
                 $this->flash->set('success', $this->msg['form_post_submitted']);
@@ -442,8 +430,9 @@ class AdminController extends Controller
      */
     public function editCategory($id)
     {
-        $post = new Collection($_POST);
-        $category = $this->categories->find(intval($id));
+        $post       =   new Collection($_POST);
+        $errors     =   new Collection();
+        $category   =   $this->categories->find(intval($id));
 
         if ($category) {
             if (isset($_POST) && !empty($_POST)) {
@@ -451,16 +440,16 @@ class AdminController extends Controller
                 $this->validator->setRule('description', 'required');
 
                 if ($this->validator->isValid()) {
-                    $title = $this->str::escape($post->get('title')) ?? $category->title;
-                    $description = $post->get('description') ?? $category->description;
-                    $slug = $this->str::slugify($title);
+                    $title          =   $this->str::escape($post->get('title')) ?? $category->title;
+                    $slug           =   $this->str::slugify($title);
+                    $description    =   $post->get('description') ?? $category->description;
 
                     $this->categories->update($category->id, compact('title', 'description', 'slug'));
                     $this->flash->set('success', $this->msg['post_edit_success']);
                     $this->app::redirect(ADMIN . "/blog/categories");
                 } else {
                     $this->flash->set("danger", $this->msg['form_multi_errors']);
-                    $errors = $this->validator->getErrors();
+                    $errors = new Collection($this->validator->getErrors());
                 }
             }
 
@@ -485,11 +474,24 @@ class AdminController extends Controller
      */
     public function gallery()
     {
-        $photos = $this->gallery->all();
-        $photo = $this->gallery->latest();
+        $photo          =   $this->gallery->latest();
+        $photos         =   $this->gallery->orderBy('date_created', 'DESC', 0, 10);
+        $total          =   count($this->gallery->all());
+
+        $pagination     = $this->setPagination($total, "gallery");
+        $currentPage    = $pagination['currentPage'];
+        $totalPage      = $pagination['totalPage'];
+        $prevPage       = $pagination['prevPage'];
+        $nextPage       = $pagination['nextPage'];
+        $photos         = $pagination['result'] ?? $photos;
+
+
         $this->pageManager::setName('Adm - gallery');
         $this->setLayout("admin/default");
-        $this->viewRender("back_end/gallery/index", compact('photos', 'photo'));
+        $this->viewRender(
+            "back_end/gallery/index",
+            compact('photos', 'photo', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
+        );
     }
 
 
@@ -498,21 +500,21 @@ class AdminController extends Controller
      */
     public function addGallery()
     {
-        $post = new Collection($_POST);
-        $file = new Collection($_FILES);
-        $categories = $this->categories->orderBy('title', 'ASC');
+        $post           =   new Collection($_POST);
+        $file           =   new Collection($_FILES);
+        $categories     =   $this->categories->orderBy('title', 'ASC');
 
         if (!empty($_FILES)) {
             $name = (empty($post->get('name')))
                 ? strtolower(uniqid("ngpictures-"))
                 : $this->str::escape($post->get('name'));
 
-            $description    =   $this->str::escape($post->get('description')) ?? null;
             $tags           =   $this->str::escape($post->get('tags')) ?? null;
-            $category_id    =   intval($post->get('category')) ?? 1;
+            $description    =   $this->str::escape($post->get('description')) ?? null;
+            $categories_id    =   intval($post->get('category')) ?? 1;
 
             if (!empty($file->get('thumb'))) {
-                $this->gallery->create(compact('name', 'description', 'tags', 'category_id'));
+                $this->gallery->create(compact('name', 'description', 'tags', 'categories_id'));
                 $last_id    =   $this->gallery->lastInsertId();
                 $isUploaded =   ImageManager::upload($file, 'gallery', "{$name}-{$last_id}", 'ratio');
 
@@ -551,13 +553,13 @@ class AdminController extends Controller
             $post       =   new Collection($data ?? $_POST);
             $categories =   $this->categories->orderBy('title', 'ASC');
 
-            if (!empty($post)) {
+            if (isset($_POST) && !empty($_POST)) {
                 $name           =   $this->str::escape($post->get('name')) ?? $photo->name;
                 $tags           =   $this->str::escape($post->get('tags')) ?? $photo->tags;
                 $description    =   $this->str::escape($post->get('description')) ?? $photo->description;
-                $category_id    =   intval($post->get('category')) ?? 1;
+                $categories_id    =   intval($post->get('category')) ?? 1;
 
-                $this->gallery->update($id, compact('name', 'tags', 'description', 'category_id'));
+                $this->gallery->update($id, compact('name', 'tags', 'description', 'categories_id'));
                 $this->flash->set("success", $this->msg['post_edit_success']);
                 $this->app::redirect(ADMIN . "/gallery");
             }
@@ -621,9 +623,21 @@ class AdminController extends Controller
     public function album()
     {
         $albums = $this->albums->all();
+        $total          =   count($this->albums->all());
+
+        $pagination     = $this->setPagination($total, "albums");
+        $currentPage    = $pagination['currentPage'];
+        $totalPage      = $pagination['totalPage'];
+        $prevPage       = $pagination['prevPage'];
+        $nextPage       = $pagination['nextPage'];
+        $albums         = $pagination['result'] ?? $albums;
+
         $this->pageManager::setName('admin gallery.album');
         $this->setLayout('admin/default');
-        $this->viewRender('back_end/gallery/albums', compact('albums'));
+        $this->viewRender(
+            'back_end/gallery/albums',
+            compact('albums', "currentPage", 'totalPage', 'prevPage', 'nextPage', 'total')
+        );
     }
 
 
@@ -646,7 +660,7 @@ class AdminController extends Controller
 
                 $this->albums->create(compact('title', 'description', 'slug'));
                 $this->flash->set('success', $this->msg['form_post_submitted']);
-                $this->app::redirect(ADMIN . "/gallery");
+                $this->app::redirect(ADMIN . "/gallery/albums");
             } else {
                 $this->flash->set('danger', $this->msg['form_multi_errors']);
                 $errors = $this->validator->getErrors();
@@ -681,7 +695,7 @@ class AdminController extends Controller
 
                     $this->albums->update($album->id, compact('title', 'description', 'slug'));
                     $this->flash->set('success', $this->msg['post_edit_success']);
-                    $this->app::redirect(ADMIN . "/gallery");
+                    $this->app::redirect(ADMIN . "/gallery/albums");
                 } else {
                     $this->flash->set('danger', $this->msg['form_multi_errors']);
                     $errors = $this->validator->getErrors();
@@ -714,13 +728,18 @@ class AdminController extends Controller
 
         if (is_file($image)) {
             if (isset($_POST) and !empty($_POST)) {
-                $isWatermarked = ImageManager::watermark($filename, $post->get('logo'), $path[intval($type)]);
+                $isWatermarked = ImageManager::watermark(
+                    $filename,
+                    $post->get('watermark'),
+                    $path[intval($type)],
+                    $post->get('color')
+                );
 
                 if ($isWatermarked) {
                     $this->flash->set('success', $this->msg['success']);
                     $this->app::redirect(true);
                 } else {
-                    $this->flash->set('danger', $this->msg['undefined_error']);
+                    $this->flash->set('danger', "Watermark non effectué");
                     $this->app::redirect(true);
                 }
             }
@@ -825,8 +844,8 @@ class AdminController extends Controller
       */
     public function showLogs()
     {
-        $log = (is_file(ROOT."/system-logs"))
-            ? file_get_contents(ROOT."/system-logs")
+        $logs = (is_file(ROOT."/system.log"))
+            ? file_get_contents(ROOT."/system.log")
             : "file: system-log not found";
 
         $this->pageManager::setName('Adm - Logs');
@@ -852,6 +871,7 @@ class AdminController extends Controller
      * envoyer les logs a l'admin par mail
      *
      * @return void
+     * @throws \Ng\Core\Exception\ConfigManagerException
      */
     public function sendLogs()
     {

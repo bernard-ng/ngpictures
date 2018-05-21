@@ -10,34 +10,44 @@ class LikesController extends Controller
 
     use TypesActionTrait;
 
+    /**
+     * LikesController constructor.
+     * @param Ngpictures $app
+     * @param PageManager $pageManager
+     */
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
         $this->callController('users')->restrict();
-        $this->user_id = intval($this->session->getValue(AUTH_KEY, 'id'));
+        $this->users_id = intval($this->session->getValue(AUTH_KEY, 'id'));
     }
 
 
     /**
-     * like system
-     *
      * @param string $type
      * @param string $slug
-     * @param integer $id
-     * @return void
+     * @param int $id
      */
     public function index(string $type, string $slug, int $id)
     {
-        $like = $this->loadModel('likes');
-        $post = $this->loadModel($this->getType($type))->find(intval($id));
+        $like   =   $this->loadModel('likes');
+        $post   =   $this->loadModel($this->getAction($type))->find(intval($id));
 
         if ($post && $post->slug === $slug) {
-            if ($like->isLiked($post->id, $type, $this->user_id)) {
-                $like->remove($post->id, $type, $this->user_id);
-                echo ($this->isAjax()) ? $post->likes : $this->app::redirect(true);
+            if ($like->isLiked($post->id, $type, $this->users_id)) {
+                $like->remove($post->id, $type, $this->users_id);
+                if ($this->isAjax()) {
+                    echo $post->likes;
+                } else {
+                    $this->app::redirect(true);
+                }
             } else {
-                $like->add($post->id, $type, $this->user_id);
-                echo ($this->isAjax()) ? $post->likes : $this->app::redirect(true);
+                $like->add($post->id, $type, $this->users_id);
+                if ($this->isAjax()) {
+                    echo $post->likes;
+                } else {
+                    $this->app::redirect(true);
+                }
             }
         } else {
             if ($this->isAjax()) {
@@ -59,15 +69,15 @@ class LikesController extends Controller
      */
     public function show(string $type, string $slug, int $id)
     {
-        $post = $this->loadModel($this->getType($type))->find(intval($id));
+        $post = $this->loadModel($this->getAction($type))->find(intval($id));
 
         if ($post && $post->slug === $slug) {
-            $likes = $this->loadModel('likes');
-            $likers = $likes->getLikers($id, $type);
+            $likes      =   $this->loadModel('likes');
+            $likers     =   $likes->getLikers($id, $type);
 
             $likers_list = [];
             foreach ($likers as $liker) {
-                $likers_list[] = $liker['user_id'];
+                $likers_list[] = $liker['users_id'];
             }
 
             $likers_list = implode(", ", $likers_list);

@@ -1,4 +1,4 @@
-<table class="bordered striped">
+<table class="bordered grey dark-4">
     <thead>
         <tr>
             <th>id</th>
@@ -24,28 +24,23 @@
 <script type="text/javascript" src="/assets/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" src="/assets/js/tinymce/tinymce_popup.js"></script>
 <script type="text/javascript">
+    let FileBrowserDialogue = {
+        init : function () {},
+        mySubmit : function (URL) {
+            let win = tinyMCEPopup.getWindowArg("window");
+            win.document.getElementById(tinyMCEPopup.getWindowArg("input")).value = URL;
 
- var FileBrowserDialogue = {
-    init : function () {},
-    mySubmit : function (URL) {
-        var win = tinyMCEPopup.getWindowArg("window");
-        win.document.getElementById(tinyMCEPopup.getWindowArg("input")).value = URL;
+            if (typeof(win.ImageDialog) !== "undefined") {
+                if (win.ImageDialog.getImageData) {
+                    win.ImageDialog.getImageData();
+                }
 
-        if (typeof(win.ImageDialog) != "undefined") {
-            if (win.ImageDialog.getImageData)
-                win.ImageDialog.getImageData();
-
-            if (win.ImageDialog.showPreviewImage)
-                win.ImageDialog.showPreviewImage(URL);
+                if (win.ImageDialog.showPreviewImage) {
+                    win.ImageDialog.showPreviewImage(URL);
+                }
+            }
+            tinyMCEPopup.close();
         }
-        tinyMCEPopup.close();
-    }
-}
-
-tinyMCEPopup.onInit.add(FileBrowserDialogue.init, FileBrowserDialogue);
-   
-
-
-
-
+    };
+    tinyMCEPopup.onInit.add(FileBrowserDialogue.init, FileBrowserDialogue);
 </script>

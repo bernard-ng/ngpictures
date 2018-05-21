@@ -1,17 +1,22 @@
+@import "../custom/bases/variables";
+
 .collection {
   margin: 0.5rem 0 1rem 0;
-  border: 1px solid #e0e0e0;
   border-radius: 2px;
   overflow: hidden;
   position: relative;
 }
 
 .collection .collection-item {
-  background-color: #fff;
   line-height: 1.5rem;
   padding: 10px 20px;
   margin: 0;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid $border-color;
+  color: $txt-light-color;
+
+  &.dark {
+    background-color: #1c1b1b;
+  }
 }
 
 .collection .collection-item.avatar {
@@ -34,7 +39,7 @@
 .collection .collection-item.avatar i.circle {
   font-size: 18px;
   line-height: 42px;
-  color: #fff;
+  color: $txt-color;
   background-color: #999;
   text-align: center;
 }
@@ -58,12 +63,13 @@
 }
 
 .collection .collection-item.active {
-  background-color: #26a69a;
-  color: #eafaf9;
+  background-color: rgba(255, 255, 255, 0.09);
+  border-left: 3px solid #ccc;
+  color: $txt-color;
 }
 
 .collection .collection-item.active .secondary-content {
-  color: #fff;
+  color: $txt-color;
 }
 
 .collection a.collection-item {
@@ -71,7 +77,11 @@
   -webkit-transition: .25s;
   -o-transition: .25s;
   transition: .25s;
-  color: #26a69a;
+  color: $active-color;
+}
+
+.collection-item a {
+  color:  $txt-color;
 }
 
 .collection a.collection-item:not(.active):hover {
@@ -79,7 +89,7 @@
 }
 
 .collection.with-header .collection-header {
-  background-color: #fff;
+  background-color: $txt-color;
   border-bottom: 1px solid #e0e0e0;
   padding: 10px 20px;
 }
@@ -94,7 +104,11 @@
 
 .secondary-content {
   float: right;
-  color: #26a69a;
+  color: $active-color;
+
+  &.normal{
+    color: $txt-color;
+  }
 }
 
 .collapsible .collection {

@@ -14,6 +14,8 @@ class UsersController extends Controller
     /**
      * charge le model d'utilisateur
      * UsersController constructor.
+     * @param Ngpictures $app
+     * @param PageManager $pageManager
      */
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
@@ -27,13 +29,13 @@ class UsersController extends Controller
     ****************************************************************************/
     /**
      * confirmation d'un utilisateur
-     * @param $user_id
+     * @param $users_id
      * @param string $token
      */
-    public function confirm(int $user_id, string $token)
+    public function confirm(int $users_id, string $token)
     {
-        $token = $this->str::escape($token);
-        $user = $this->users->isNotConfirmed(intval($user_id));
+        $token  =   $this->str::escape($token);
+        $user   =   $this->users->isNotConfirmed(intval($users_id));
 
         if ($user && $user->confirmation_token === $token) {
             $this->users->unsetConfirmationToken($user->id);
@@ -53,17 +55,17 @@ class UsersController extends Controller
      */
     public function reset($id, string $token)
     {
-        $user = $this->users->find(intval($id));
-        $token = $this->str::escape($token);
+        $user   =   $this->users->find(intval($id));
+        $token  =   $this->str::escape($token);
 
         if ($user && $user->reset_token == $token) {
             $post = new Collection($_POST);
 
             if (isset($_POST) and !empty($_POST)) {
                 if (!empty($post->get('password')) && !empty($post->get('password_confirm'))) {
-                    $validator = $this->validator;
-                    $validator->isMatch('password', 'password_confirm', $this->msg['users_bad_password']);
-                    if ($validator->isValid()) {
+                    $this->validator->setRule('password', ["min_length[8]", "must_match[password_confirm]"]);
+
+                    if ($this->validator->isValid()) {
                         $password = $this->str::hashPassword($post->get('password'));
                         $this->users->resetPassword($password, $user->id);
 
@@ -92,31 +94,42 @@ class UsersController extends Controller
     public function forgot()
     {
         $post = new Collection($_POST);
+        $errors = new Collection();
 
         if (isset($_POST) && !empty($_POST)) {
-            if (!empty($post->get('email'))) {
-                $email = $this->str::escape($post->get('email'));
-                $user = $this->users->findWith('email', $email);
+            $this->validator->setRule('email', ['valid_email']);
+
+            if ($this->validator->isValid()) {
+                $email  =    $this->str::escape($post->get('email'));
+                $user   =    $this->users->findWith('email', $email);
 
                 if ($user && $user->confirmed_at != null) {
                     $this->users->setResetToken($this->str::setToken(60), $user->id);
-                    $user = $this->users->find($user->id);
-                    $link = SITE_NAME."/reset/{$user->id}/{$user->reset_token}";
+                    $user   =   $this->users->find($user->id);
+                    $link   =   SITE_NAME."/reset/{$user->id}/{$user->reset_token}";
 
                     (new Mailer())->resetPassword($link, $email);
                     $this->flash->set('success', $this->msg['users_reset_success']);
-                    $this->app::redirect('/login');
+                    $this->isAjax()? $this->ajaxRedirect("/login") : $this->app::redirect('/login');
                 } else {
+                    if ($this->isAjax()) {
+                        $this->ajaxFail($this->msg['users_email_notFound']);
+                    }
+
                     $this->flash->set('danger', $this->msg['users_email_notFound']);
                 }
             } else {
-                $this->flash->set('danger', $this->msg['form_all_required']);
+                $errors = new Collection($this->validator->getErrors());
+                $this->isAjax() ?
+                    $this->ajaxFail(json_encode($errors->asArray()), 403) :
+                    $this->flash->set('danger', $this->msg['form_multi_errors']);
             }
         }
 
+        $this->app::turbolinksLocation("/forgot");
         $this->pageManager::setName('Mot de passe oublié');
         $this->setLayout('users/default');
-        $this->viewRender('front_end/users/account/forgot', compact('post'));
+        $this->viewRender('front_end/users/account/forgot', compact('post', 'errors'));
     }
 
 
@@ -128,14 +141,14 @@ class UsersController extends Controller
      */
     private function register(string $name, string $email, string $password)
     {
-        $password = $this->str::hashPassword($password);
-        $name = $this->str::escape($name);
-        $email = $this->str::escape($email);
-        $token = $this->str::setToken(60);
-        $this->users->add($name, $email, $password, $token);
+        $name       =   $this->str::escape($name);
+        $email      =   $this->str::escape($email);
+        $token      =   $this->str::setToken(60);
+        $password   =   $this->str::hashPassword($password);
 
-        $user_id = $this->users->lastInsertId();
-        $link = SITE_NAME."/confirm/{$user_id}/{$token}";
+        $this->users->add($name, $email, $password, $token);
+        $users_id = $this->users->lastInsertId();
+        $link = SITE_NAME."/confirm/{$users_id}/{$token}";
 
         (new Mailer())->accountConfirmation($link, $email);
         $this->flash->set('success', $this->msg['form_registration_submitted']);
@@ -149,34 +162,37 @@ class UsersController extends Controller
      */
     public function sign()
     {
-        $post = new Collection($_POST);
+        $post       =   new Collection($_POST);
+        $errors     =   new Collection();
 
         if (isset($_POST) && !empty($_POST)) {
-            $validator = $this->validator;
-            $validator->iskebabCase("name");
-            if ($validator->isValid()) {
-                $validator->isUnique("name", $this->users, $this->msg['users_username_token']);
-            }
+            $this->validator->setRule("email", 'valid_email');
+            $this->validator->setRule("name", ["alpha_dash", "min_length[5]"]);
+            $this->validator->setRule("password", ["min_length[8]", "must_match[password_confirm]"]);
+            $this->validator->setRule('password_confirm', ["min_length[8]","must_match[password]"]);
 
-            $validator->isEmail("email");
-            if ($validator->isValid()) {
-                $validator->isUnique("email", $this->users, $this->msg['users_mail_token']);
-            }
-            $validator->isGreaterThan("password", 8, $this->msg['users_short_password']);
-            $validator->isMatch("password", "password_confirm", $this->msg['users_bad_password']);
+            if ($this->validator->isValid()) {
+                $this->validator->unique("name", $this->users, $this->msg['users_username_token']);
+                $this->validator->unique("email", $this->users, $this->msg['users_mail_token']);
 
-            if ($validator->isValid()) {
-                $this->register($post->get('name'), $post->get('email'), $post->get('password'));
-                $this->flash->set('success', $this->msg['users_registration_success']);
-                $this->app::redirect("/login");
+                if ($this->validator->isValid()) {
+                    $this->register($post->get('name'), $post->get('email'), $post->get('password'));
+                    $this->flash->set('success', $this->msg['users_registration_success']);
+                    $this->app::redirect("/login");
+                } else {
+                    $errors = new Collection($this->validator->getErrors());
+                    $this->flash->set("danger", $this->msg['form_multi_errors']);
+                }
             } else {
-                var_dump($this->validator->getErrors());
+                $errors = new Collection($this->validator->getErrors());
+                $this->flash->set("danger", $this->msg['form_multi_errors']);
             }
         }
 
+        $this->app::turbolinksLocation("/sign");
         $this->pageManager::setName("Inscription");
         $this->setLayout('users/default');
-        $this->viewRender('front_end/users/sign', compact('post'));
+        $this->viewRender('front_end/users/sign', compact('post', 'errors'));
     }
 
 
@@ -209,6 +225,7 @@ class UsersController extends Controller
         }
     }
 
+
     /**
      * permet de dire si un utilisateur est online
      * @return bool|mixed|null
@@ -239,6 +256,20 @@ class UsersController extends Controller
 
 
     /**
+     * permet de mettre a jour la connexion un utilisateur
+     * et de definir son token csrf
+     * @param UsersEntity $user
+     * @param string|null $msg
+     */
+    private function updateConnexion(UsersEntity $user, string $msg = null)
+    {
+        $this->session->write(AUTH_KEY, $user);
+        $this->session->write(TOKEN_KEY, $this->str::setToken(10));
+        $this->flash->set('success', $msg ?? $this->msg['users_edit_success']);
+    }
+
+
+    /**
      * permet de connecter un utilisateur a partir d'un cookie
      */
     public function cookieConnect()
@@ -264,13 +295,13 @@ class UsersController extends Controller
 
     /**
      * definit un remember token
-     * @param int $user_id
+     * @param int $users_id
      */
-    private function remember(int $user_id)
+    private function remember(int $users_id)
     {
         $remember_token = $this->str::cookieToken();
-        $this->users->setRememberToken($remember_token, $user_id);
-        $this->cookie->write(COOKIE_REMEMBER_KEY, "NG.23.{$user_id}.{$remember_token}");
+        $this->users->setRememberToken($remember_token, $users_id);
+        $this->cookie->write(COOKIE_REMEMBER_KEY, "NG.23.{$users_id}.{$remember_token}");
     }
 
 
@@ -281,18 +312,22 @@ class UsersController extends Controller
     public function login()
     {
         $this->cookieConnect();
-        $post = new Collection($_POST);
+        $post       =   new Collection($_POST);
+        $errors     =   new Collection();
 
         if ($this->isLogged()) {
             $this->flash->set('warning', $this->msg['users_already_connected']);
             $this->app::redirect($this->isLogged()->accountUrl);
         } else {
             if (isset($_POST) && !empty($_POST)) {
-                $password = $post->get('password');
-                $name = $this->str::escape($post->get('name'));
-                $remember = intval($post->get('remember'));
+                $this->validator->setRule('name', 'required');
+                $this->validator->setRule('password', 'required');
 
-                if ($post->has('password') && $post->has('name')) {
+                if ($this->validator->isValid()) {
+                    $name       =   $this->str::escape($post->get('name'));
+                    $remember   =   intval($post->get('remember'));
+                    $password   =   $post->get('password');
+
                     $user  = $this->users->findAlternative(['name','email'], $name);
                     if ($user) {
                         if ($user->confirmed_at !== null) {
@@ -302,23 +337,39 @@ class UsersController extends Controller
                                     $this->remember($user->id);
                                 }
 
+                                if ($this->isAjax()) {
+                                    $this->ajaxRedirect($user->accountUrl);
+                                }
+
                                 $this->flash->set('success', $this->msg['users_login_success']);
                                 $this->app::redirect($user->accountUrl);
                             } else {
-                                $this->flash->set('danger', $this->msg['users_bad_identifier']);
+                                $this->isAjax()?
+                                    $this->ajaxFail($this->msg['users_bad_identifier']) :
+                                    $this->flash->set('danger', $this->msg['users_bad_identifier']);
                             }
                         } else {
-                            $this->flash->set('warning', $this->msg['users_not_confirmed']);
+                            $this->isAjax()?
+                                $this->ajaxFail($this->msg['users_not_confirmed']) :
+                                $this->flash->set('warning', $this->msg['users_not_confirmed']);
                         }
                     } else {
-                        $this->flash->set('danger', $this->msg['users_bad_identifier']);
+                        $this->isAjax() ?
+                            $this->ajaxFail($this->msg['users_bad_identifier']) :
+                            $this->flash->set('danger', $this->msg['users_bad_identifier']);
                     }
+                } else {
+                    $errors = new Collection($this->validator->getErrors());
+                    $this->isAjax() ?
+                        $this->ajaxFail(json_encode($errors->asArray()), 403) :
+                        $this->flash->set('danger', $this->msg['form_multi_errors']);
                 }
             }
 
+            $this->app::turbolinksLocation("/login");
             $this->pageManager::setName('Connexion');
             $this->setLayout('users/default');
-            $this->viewRender('front_end/users/login', compact('post'));
+            $this->viewRender('front_end/users/login', compact('post', 'errors'));
         }
     }
 
@@ -341,19 +392,19 @@ class UsersController extends Controller
     /**
      *  permet de generer le profile d'un utilisateur
      *  page de vue
-     * @param $username
-     * @param $id
+     * @param string $username
+     * @param int $id
      */
-    public function account($username, $id)
+    public function account(string $username, $id)
     {
-        if (!empty($username) && !empty($id)) {
+        if (!empty($username)) {
             $user = $this->users->find(intval($id));
 
+            if ($user) {
+                $verse  =   $this->callController('verses')->index();
+                $posts  =   $this->loadModel('posts')->findWith('users_id', $user->id, false);
 
-            if ($user && $this->str::checkUserUrl($username, $user->name) == true) {
-                $verse = $this->callController('verses')->index();
-                $posts = $this->loadModel('posts')->findWith('user_id', $user->id, false);
-
+                $this->app::turbolinksLocation($user->accountUrl);
                 $this->pageManager::setName($user->name);
                 $this->setLayout('users/account');
                 $this->viewRender('front_end/users/account/account', compact("verse", "user", "posts"));
@@ -370,76 +421,68 @@ class UsersController extends Controller
 
     /**
      * permet de generer la page d'edition d'un utilisateur
-     * @param string $username
-     * @param $id
      * @param string $token
      */
-    public function edit(string $username, int $id, string $token)
+    public function edit(string $token)
     {
+        $this->restrict();
         if ($token === $this->session->read(TOKEN_KEY)) {
-            $user = $this->users->find(intval($id));
+            $user       =   $this->session->read(AUTH_KEY);
+            $post       =   new Collection($_POST);
+            $file       =   new Collection($_FILES);
+            $errors     =   new Collection();
 
-            if ($user && $this->str::checkUserUrl($username, $user->name) == true) {
-                $post = new Collection($_POST);
-                $file = new Collection($_FILES);
+            if (isset($_POST) && !empty($_POST)) {
+                $this->validator->setRule('name', ['required','apha_dash', 'min_length[3]']);
+                $this->validator->setRule('email', ['required', 'valid_email']);
+                //$this->validator->setRule('phone', 'numeric');
+                //$this->validator->setRule('website', 'valid_url');
 
-                if (isset($_POST) && !empty($_POST)) {
-                    $bio = $this->str::escape($post->get('bio')) ?? $user->bio;
-
-                    if ($post->get('name') && $post->get('name') !== $user->name) {
-                        $this->validator->isKebabCase('name');
-                        if ($this->validator->isValid()) {
-                            $this->validator->isUnique('name', $this->users, $this->msg['users_username_token']);
-                            $name = $this->str::escape($post->get('name'));
-                        }
-                    } else {
-                        $name = $user->name;
-                    }
-
-                    if ($post->get('email') && $post->get('email') !== $user->email) {
-                        $this->validator->isEmail('email');
-                        if ($this->validator->isValid()) {
-                            $this->validator->isUnique('email', $this->users, $this->msg['users_mail_token']);
-                            $email = $this->str::escape($post->get('email'));
-                        }
-                    }
-
-                    if ($post->get('phone') && $post->get('phone') !== $user->phone) {
-                        $this->validator->isUnique('phone', $this->users, $this->msg['users_phone_token']);
-                        $phone = $this->str::escape($post->get('phone'));
-                    } else {
-                        $phone = $user->phone;
+                if ($this->validator->isValid()) {
+                    if ($post->get('name') !== $user->name) {
+                        $this->validator->unique('name', $this->users, $this->msg['users_username_token']);
+                    } elseif ($post->get('email') !== $user->email) {
+                        $this->validator->unique('email', $this->users, $this->msg['users_email_token']);
+                    } elseif ($post->get('phone') !== $user->phone) {
+                        $this->validator->unique('phone', $this->users, $this->msg['users_phone_token']);
                     }
 
                     if ($this->validator->isValid()) {
+                        $name       =    $this->str::escape($post->get('name'));
+                        $email      =    $this->str::escape($post->get('email'));
+                        $bio        =    $this->str::escape($post->get('bio'))      ??  null;
+                        $phone      =    $this->str::escape($post->get('phone'))    ??  null;
+                        //$website    =    $this->str::escape($post->get('website'))  ??  null;
+
                         $this->users->update($user->id, compact('name', 'email', 'phone', 'bio'));
                         $user = $this->users->find($user->id);
 
-                        $this->session->write(AUTH_KEY, $user); // updating active user is session
-                        $this->flash->set('success', $this->msg['users_edit_success']);
+                        $this->updateConnexion($user, $this->msg['users_edit_success']);
                         $this->app::redirect($user->accountUrl);
+                    } else {
+                        $errors = new Collection($this->validator->getErrors());
+                        $this->flash->set('danger', $this->msg['form_multi_errors']);
                     }
-                } elseif (!empty($file->get('thumb'))) {
-                    $name = "{$user->name}-{$id}";
-                    $isUploaded = ImageManager::upload($file, 'avatars', "ngpictures-{$name}", 'medium');
-
-                    if ($isUploaded) {
-                        $this->users->update($user->id, ['avatar' => "ngpictures-{$name}.jpg"]);
-                        $user = $this->users->find($user->id);
-
-                        $this->session->write(AUTH_KEY, $user); // updating active user is session
-                        $this->flash->set('success', $this->msg['users_edit_success']);
-                        $this->app::redirect($user->accountUrl);
-                    }
+                } else {
+                    $errors = new Collection($this->validator->getErrors());
+                    $this->flash->set('danger', $this->msg['form_multi_errors']);
                 }
+            } elseif (!empty($file->get('thumb'))) {
+                $name           =   $user->id;
+                $isUploaded     =   ImageManager::upload($file, 'avatars', "ngpictures-avatar-{$name}", 'medium');
 
-                $this->pageManager::setName('Edition du profile');
-                $this->setLayout('users/edit');
-                $this->viewRender('front_end/users/account/edit', compact('user'));
-            } else {
-                $this->flash->set('danger', $this->msg['undefined_error']);
-                $this->app::redirect(true);
+                if ($isUploaded) {
+                    $this->users->update($user->id, ['avatar' => "ngpictures-avatar-{$name}.jpg"]);
+                    $user = $this->users->find($user->id);
+                    $this->updateConnexion($user, $this->msg['users_edit_success']);
+                    $this->app::redirect($user->accountUrl);
+                }
             }
+
+            $this->app::turbolinksLocation("/edit-profile/{$token}");
+            $this->pageManager::setName('Edition du profile');
+            $this->setLayout('users/edit');
+            $this->viewRender('front_end/users/account/edit', compact('user', 'errors'));
         } else {
             $this->flash->set('danger', $this->msg['undefined_error']);
             $this->app::redirect(true);
