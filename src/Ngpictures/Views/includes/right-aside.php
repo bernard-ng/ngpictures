@@ -2,29 +2,29 @@
     <div class="card grey dark-4">
         <ul class="collapsible" data-collapsible="expandable" >
             <li class="active">
-                <div class="collapsible-header active">Un shooting ? </div>
+                <div class="collapsible-header active">
+                    <h2 class="ui header">Shooting</h2>
+                </div>
                 <div class="collapsible-body">
+                <img src="/imgs/shooting.jpeg" alt="" style="margin-top: -10px; margin-left: -10px; width: 108%">
             <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+            consequat.</span>
                 </div>
             </li>
             <li class="">
-                <div class="collapsible-header">Reservation</div>
-                <div class="collapsible-body">
-            <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+                <div class="collapsible-header">
+                    <h2 class="ui header">Réservation</h2>
                 </div>
+                <div class="collapsible-body">
+                <img src="/imgs/reservation.jpg" alt="" style="margin-top: -10px; margin-left: -10px; width: 108%">
+                <a href="/booking" class="btn btn-flat" style="margin-left: -10px; width: 108%">Réservation</a>
             </li>
             <li>
-                <div class="collapsible-header">Autres services</div>
+                <div class="collapsible-header">
+                    <h2 class="ui header">Photographes</h2>
+                </div>
                 <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
             </li>
         </ul>

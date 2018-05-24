@@ -37,6 +37,10 @@
           box-sizing: border-box;
   padding: 1rem;
   color: $txt-color;
+
+  & img {
+    padding: 0 !important;
+  }
 }
 
 .side-nav .collapsible,
