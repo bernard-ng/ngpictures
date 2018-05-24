@@ -17,7 +17,7 @@ trait ShowPostTrait
             $user       =   $this->loadModel('users');
             $article    =   $this->loadModel($this->table)->find(intval($id));
             $comments   =   $this->loadModel('comments')->findWith($this->table."_id", $id, false);
-            $categories =   $this->loadModel('categories')->orderBy('id', 'ASC');
+            $categories =   $this->loadModel('categories')->all();
 
 
             if ($article) {
@@ -28,15 +28,15 @@ trait ShowPostTrait
                     $this->setLayout("show");
                     $this->viewRender(
                         "front_end/{$this->table}/show",
-                        compact("article", "comments", "user", "categories", "exif")
+                        compact("article", "comments", "user", "categories")
                     );
                 } else {
                     $this->flash->set("danger", $this->msg['posts_not_found']);
-                    $this->app::redirect("/error-404");
+                    $this->app::redirect("error/not-found");
                 }
             } else {
                 $this->flash->set("danger", $this->msg['posts_not_found']);
-                $this->app::redirect("/error-404");
+                $this->app::redirect("error/not-found");
             }
         } else {
             $this->flash->set("danger", $this->msg['undefined_error']);

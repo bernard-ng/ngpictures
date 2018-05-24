@@ -1,5 +1,6 @@
 <section class="container row">
-    <section class="col row l9 m12 s12">
+    <?php include(APP."/Views/includes/right-aside.php"); ?>
+    <section class="col row l6 m12 s12">
         <div class="transparent-form col l12 m12 s12">
             <h2 class="ui header">Rédaction</h2>
             <form action="" method="POST" enctype="multipart/form-data" data-action="upload">

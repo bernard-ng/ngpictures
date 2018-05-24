@@ -178,6 +178,6 @@ trait PostEntityTrait
     public function getFullText(): string
     {
         $users = Ngpictures::getInstance()->getModel('users');
-        return StringManager::userMention($users, $this->content);
+        return nl2br(StringManager::userMention($users, $this->content));
     }
 }

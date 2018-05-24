@@ -12,8 +12,8 @@
             proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
                 </div>
             </li>
-            <li class="active">
-                <div class="collapsible-header active">Reservation</div>
+            <li class="">
+                <div class="collapsible-header">Reservation</div>
                 <div class="collapsible-body">
             <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,

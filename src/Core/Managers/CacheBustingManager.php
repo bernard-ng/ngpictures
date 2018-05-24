@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: BERNQRD NG
- * Date: 20/05/2018
- * Time: 22:50
- */
-
 namespace Ng\Core\Managers;
 
 
@@ -13,6 +6,7 @@ class CacheBustingManager
 {
 
     /**
+     * invalidation du cache navigateur
      * @param string $filename
      * @return string
      */
@@ -26,8 +20,7 @@ class CacheBustingManager
             $tag = strtolower(md5($last_edit));
             $basedir = str_replace("/{$name}.{$extension}", '', $filename);
 
-            $cached = "{$basedir}/{$name}_{$tag}.{$extension}";
-            return $cached;
+            return "{$basedir}/{$name}_{$tag}.{$extension}";
         }
         return $filename;
     }

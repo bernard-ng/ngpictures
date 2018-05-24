@@ -19,7 +19,8 @@
     </section>
     <section class="jumbotron dark col l12 s12 m12">
         <div class="container row">
-            <div class="row col l8 s12 m12 animated slideInLeft">
+            <?php include(APP . "/Views/includes/right-aside.php"); ?>
+            <div class="row col l6 s12 m12 animated slideInLeft">
                 <h2 class="ui header">Nos photos</h2>
                 <div class="">
                     <p>
@@ -45,7 +46,7 @@
                 <?php endif; ?>
             </div>
 
-            <div class="row col l4 s12 m12">
+            <div class="row col l3 s12 m12">
                 <div class="ui divided list animated slideInRight">
                     <h2 class="ui header">Catégories</h2>
                     <?php if (isset($categories) && !empty($categories)) : ?>
