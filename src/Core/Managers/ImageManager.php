@@ -69,6 +69,32 @@ abstract class ImageManager
 
 
     /**
+     * recupere les donnees exif d'une image et retourne un json
+     * pour permettre le stockage dans la base de donnee
+     *
+     * @param Collection $file
+     * @return string|null
+     */
+    public static function getExif(Collection $file)
+    {
+        try {
+            $image = (new InterventionImage())->make($file->get('thumb.tmp_name'));
+            return  json_encode([
+                'ISOSpeedRatings'    => $image->exif('ISOSpeedRatings') ?? null,
+                'Flash'              => $image->exif('Flash') ?? null,
+                'Model'              => $image->exif('Model') ?? null,
+                'ExposureTime'       => $image->exif('ExposureTime') ?? null,
+                'FocalLength'        => $image->exif('FocalLength') ?? null,
+                'ResolutionUnit'     => $image->exif('ResolutionUnit') ?? null,
+                'COMPUTED'           => $image->exif('COMPUTED') ?? null
+            ]);
+        } catch(NotReadableException $e) {
+            return null;
+        }
+    }
+
+
+    /**
      * redimention et telecharge un fichier (une image precisement)
      * @param Collection $file
      * @param string $path
@@ -90,6 +116,8 @@ abstract class ImageManager
 
                     try {
                         $image = $manager->make($file->get('thumb.tmp_name'));
+                        $exif = json_encode($image->exif());
+
                     } catch (NotReadableException $e) {
                         $flash->set('danger', MessageManager::get('files_not_image'));
                         return false;

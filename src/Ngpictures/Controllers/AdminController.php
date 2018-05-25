@@ -354,7 +354,16 @@ class AdminController extends Controller
 
                         if ($isUploaded) {
                             ImageManager::upload($file, 'blog-thumbs', "ngpictures-{$slug}-{$last_id}", 'small');
-                            $this->blog->update($last_id, ['thumb' => "ngpictures-{$slug}-{$last_id}.jpg"]);
+                            $exif = ImageManager::getExif($file);
+
+                            $this->blog->update(
+                                $last_id,
+                                [
+                                    'thumb' => "ngpictures-{$slug}-{$last_id}.jpg",
+                                    'exif' => $exif
+                                ]
+                            );
+
                             $this->flash->set('success', $this->msg['form_post_submitted']);
                             $this->app::redirect(ADMIN . "/blog");
                         } else {
@@ -520,8 +529,16 @@ class AdminController extends Controller
 
                 if ($isUploaded) {
                     ImageManager::upload($file, 'gallery-thumbs', "{$name}-{$last_id}", 'small');
+                    $exif = ImageManager::getExif($file);
 
-                    $this->gallery->update($last_id, ["thumb" => "{$name}-{$last_id}.jpg"]);
+                    $this->gallery->update(
+                        $last_id,
+                        [
+                            "thumb" => "{$name}-{$last_id}.jpg",
+                            'exif' => $exif,
+                        ]
+                    );
+
                     $this->flash->set('success', $this->msg['form_post_submitted']);
                     $this->app::redirect(ADMIN . "/gallery");
                 } else {

@@ -11,4 +11,8 @@ class BlogEntity extends Entity
     private $action_url = "blog";
 
     use PostEntityTrait;
+
+    public function getExifData() {
+        return (is_null($this->exif))? null : json_decode($this->exif);
+    }
 }
