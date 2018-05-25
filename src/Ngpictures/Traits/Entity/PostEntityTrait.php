@@ -163,7 +163,7 @@ trait PostEntityTrait
      * et verifie les mentions des users
      * @return string
      */
-    public function getSnipet(): string
+    public function getSnipet()
     {
         $users = Ngpictures::getInstance()->getModel('users');
         $content = StringManager::getSnipet(StringManager::truncateText($this->content, 150));
@@ -175,7 +175,7 @@ trait PostEntityTrait
      * renvoi le text complet et verifie les mentions des users
      * @return string
      */
-    public function getFullText(): string
+    public function getFullText()
     {
         $users = Ngpictures::getInstance()->getModel('users');
         return nl2br(StringManager::userMention($users, $this->content));
