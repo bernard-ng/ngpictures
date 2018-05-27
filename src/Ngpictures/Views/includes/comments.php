@@ -1,5 +1,5 @@
-<div id="comments" class="card-panel transparent row">
-    <h2 class="ui header">Commentaires</h2>
+<div id="comments" class="section container row">
+
     <?php include(APP."/Views/includes/right-aside.php"); ?>
     <div class="col l6 m12 s12">
         <form method="POST" action="<?= $article->commentUrl; ?>">

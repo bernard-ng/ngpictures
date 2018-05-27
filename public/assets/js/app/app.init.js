@@ -186,7 +186,12 @@ $(document).ready(function(){
     });
 
     $('.tool').tooltip();
-    $('.dropdown-button').dropdown();
+    $('.dropdown-button').dropdown({
+        hover: false,
+        gutter: 5,
+        belowOrigin: false,
+        alignment: 'right'
+    });
     $('.parallax').parallax();
     $('.modal').modal({
         opacity: 0.5,

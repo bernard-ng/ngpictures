@@ -120,7 +120,7 @@ class Router
     private function url(string $name, array $params = [])
     {
         if (!isset($this->namedRoute[$name])) {
-            $this->app::redirect("error/not-found");
+            $this->app::redirect("/error/not-found");
         }
         return $this->namedRoute[$name]->getUrl($params);
     }
@@ -149,7 +149,7 @@ class Router
                 }
             }
 
-            $this->app::redirect("error/not-found");
+            $this->app::redirect("/error/not-found");
         }
 
         throw new RouterException("undefinied Request method");

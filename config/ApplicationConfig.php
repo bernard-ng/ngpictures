@@ -11,7 +11,7 @@ define("UPLOAD", WEBROOT."/uploads");
 
 //APPLICATION KEYS
 /********************************************/
-define("SITE_NAME", "http://127.0.0.1");
+define("SITE_NAME", "http://127.1.1.1");
 define("CDN", ""); // define('CDN', "http://ngpictures.pe.hu/cdn");
 define("ADMIN", "/admin");
 define("AUTH_KEY", "auth");

@@ -5,11 +5,46 @@
             <?php if (!empty($posts)) : ?>
                 <?php foreach ($posts as $a) : ?>
                     <article class="card" id="<?= $a->id ?>" style="background: #100F0F">
-                        <header class="card-image news-card-image">
+                        <header class="news-card-header">
+                            <span class="news-card-image-profil"></span>
+                            <p class="news-card-header-title"></p>
+                            <?php if ($a->thumb !== null) : ?>
+                                <a href="#" class="dropdown-button news-card-header-icon" data-activates="options-list-<?= $a->id ?>">
+                                    <i class="icon icon-menu"></i>
+                                </a>
+                                <ul id="options-list-<?= $a->id ?>" class="dropdown-content grey dark-4">
+                                    <li>
+                                        <a href="<?= $a->categoryUrl ?>">
+                                            <i class="icon icon-tag"></i>
+                                            Catégories
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-action="report" class="news-card-header-icon modal-trigger" href="#report-<?= $a->id ?>">
+                                            <i class="icon icon-attention"></i>
+                                            Signaler
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-action="save" href="<?= $a->saveUrl ?>">
+                                            <i class="icon icon-bookmark-empty"></i>
+                                            Enregistrer
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-action="download" href="<?= $a->downloadUrl ?>">
+                                            <i class="icon icon-download"></i>
+                                            Télécharger
+                                        </a>
+                                    </li>
+                                </ul>
+                            <?php endif; ?>
+                        </header>
+                        <div class="card-image news-card-image">
                             <a href="<?= $a->url ?>" class="waves-effect">
                                 <img src="<?= $a->thumbUrl ?>" alt="<?= $a->title ?>">
                             </a>
-                        </header>
+                        </div>
                         <section class="news-card-content">
                             <section class="news-card-title">
                                 <h2><?= $a->title ?>&nbsp;<small><?= $a->category ?></small></h2>
@@ -80,6 +115,7 @@
                     <span></span>
                     <span></span>
                 </div>
+                <br>
             <?php else : ?>
                 <div class="section center-align">
                     <h2 class="icon icon-inbox red-txt center-align"></h2>

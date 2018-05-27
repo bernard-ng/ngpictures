@@ -66,12 +66,13 @@ $router->get("/search/:q", "search", "search.index");
 //rss
 $router->get("/feed", "rss", "rss.index");
 
-//contact
+//others
 $router->any("/ideas", "ideas", "ideas.index");
 $router->any("/bugs", "bugs", "bugs.index");
 $router->any("/contact", "contact", "contact.index");
 $router->get("/about", "static#about", "static.about");
 $router->get("/privacy", "static#privacy", "static.privacy");
+$router->get("/booking", 'booking', 'reservation');
 
 
 

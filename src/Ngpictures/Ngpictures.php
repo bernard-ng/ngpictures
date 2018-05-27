@@ -164,7 +164,7 @@ class Ngpictures
     {
         FlashMessageManager::getInstance()->set('danger', "Erreur !");
         LogMessageManager::register($e->getFile(), $e->getMessage());
-        self::redirect("error/internal");
+        self::redirect("/error/internal");
     }
 
     /**
@@ -177,7 +177,7 @@ class Ngpictures
     {
         FlashMessageManager::getInstance()->set('danger', "Erreur !");
         LogMessageManager::register($errfile, $errstr);
-        self::redirect("error/internal");
+        self::redirect("/error/internal");
     }
 
 
@@ -191,7 +191,7 @@ class Ngpictures
             $settings = new ConfigManager(ROOT."/config/SystemConfig.php");
             return $settings->get('sys.debug');
         } catch (ConfigManagerException $e) {
-            self::redirect("error/internal");
+            self::redirect("/error/internal");
         }
     }
 
@@ -205,7 +205,7 @@ class Ngpictures
             $settings = new ConfigManager(ROOT."/config/SystemConfig.php");
             return $settings->get('sys.cache');
         } catch (ConfigManagerException $e) {
-            self::redirect("error/internal");
+            self::redirect("/error/internal");
         }
     }
 

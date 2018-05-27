@@ -22,7 +22,7 @@ try {
     require(ROOT."/config/RoutesConfig.php");
     $router->run();
 } catch (RouterException $e) {
-    Ngpictures::redirect("error/internal");
+    Ngpictures::redirect("/error/internal");
 }
 
 

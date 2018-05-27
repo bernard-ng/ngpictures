@@ -14,15 +14,35 @@
                             </p>
 
                             <?php if ($a->thumb !== null) : ?>
-                                <a href="<?= $a->categoryUrl ?>" class="news-card-header-icon">
-                                    <i class="icon icon-tag"></i>
+                                <a href="#" class="dropdown-button news-card-header-icon" data-activates="options-list-<?= $a->id ?>">
+                                    <i class="icon icon-menu"></i>
                                 </a>
-                                <a data-action="report" class="news-card-header-icon modal-trigger" href="#report-<?= $a->id ?>">
-                                    <i class="icon icon-megaphone"></i>
-                                </a>
-                                <a data-action="download" class="news-card-header-icon" href="<?= $a->downloadUrl ?>">
-                                    <i class="icon icon icon-download"></i>
-                                </a>
+                                <ul id="options-list-<?= $a->id ?>" class="dropdown-content grey dark-4">
+                                    <li>
+                                        <a href="<?= $a->categoryUrl ?>">
+                                            <i class="icon icon-tag"></i>
+                                            Catégories
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-action="report" class="news-card-header-icon modal-trigger" href="#report-<?= $a->id ?>">
+                                            <i class="icon icon-attention"></i>
+                                            Signaler
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-action="save" href="<?= $a->saveUrl ?>">
+                                            <i class="icon icon-bookmark-empty"></i>
+                                            Enregistrer
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-action="download" href="<?= $a->downloadUrl ?>">
+                                            <i class="icon icon-download"></i>
+                                            Télécharger
+                                        </a>
+                                    </li>
+                                </ul>
                             <?php endif; ?>
                         </header>
                         <?php if ($a->thumb !== null) : ?>
@@ -136,6 +156,7 @@
                     <span></span>
                     <span></span>
                 </div>
+                <br>
             <?php else : ?>
                 <div class="section center-align">
                     <h2 class="icon icon-inbox red-txt center-align"></h2>
@@ -152,15 +173,19 @@
         <?php foreach ($posts as $a) : ?>
             <div id="report-<?= $a->id ?>" class="modal grey dark-4">
                 <div class="modal-content">
-                    <span class="ui header">Signaler</span>
-                    <p>Aidez nous à garder notre application sereine, que trouvez de mal à cette publication ?</p>
-                    <form action="<?= $a->commentUrl ?>" method="POST" data-action="comment">
-                        <div class="input-field">
-                            <textarea class="materialize-textarea" name="comment" data-length="255"></textarea>
-                        </div>
-                        <div class="modal-footer dark comment">
+                    <p>Choissez un motif pour le signalement de cette publication</p>
+                    <form action="<?= $a->watchoutUrl ?>" method="POST" data-action="watchout">
+                            <p>
+                                <input type="checkbox" class="filled-in" name="indesirable" id="indesirable">
+                                <label for="indesirable">Contenu indésirable</label>
+                            </p>
+                            <p>
+                                <input type="checkbox" class="filled-in" name="inappropriate" id="inappropriate">
+                                <label for="inappropriate">Contenu inapproprié</label>
+                            </p>
+                        <div class="modal-footer transparent comment">
                             <button type="submit" class="modal-action btn blue-grey dark-2 waves-effect">
-                                <span class="loader"></span> tk
+                                Envoyer
                             </button>
                             <button id="cmtAdd-<?= $a->id ?>" type="reset" class="btn btn-small transparent waves-effect modal-action modal-close">
                                 Annuler

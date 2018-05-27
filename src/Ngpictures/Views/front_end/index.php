@@ -46,6 +46,8 @@
                             <?= $article->title ?>
                         </span>
                     </div>
+                <?php else: ?>
+                    <img src="/imgs/shooting.jpeg" class="responsive-img" alt="ngpictures shooting banner">
                 <?php endif; ?>
             </div>
             <?php include(APP."/Views/includes/menu-aside.php"); ?>

@@ -23,7 +23,7 @@ class CommunityController extends Controller
     {
         $users = $this->users->all();
 
-        $this->app::turbolinksLocation('community');
+        $this->app::turbolinksLocation('/community');
         $this->pageManager::setName("Communauté");
         $this->setLayout("posts/default");
         $this->viewRender("front_end/community/community", compact('users'));

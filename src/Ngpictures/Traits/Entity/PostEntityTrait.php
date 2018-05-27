@@ -180,4 +180,14 @@ trait PostEntityTrait
         $users = Ngpictures::getInstance()->getModel('users');
         return nl2br(StringManager::userMention($users, $this->content));
     }
+
+    /**
+     * recupere les donnees exif d'une image
+     *
+     * @return string|null
+     */
+    public function getExifData()
+    {
+        return (is_null($this->exif)) ? null : json_decode($this->exif);
+    }
 }

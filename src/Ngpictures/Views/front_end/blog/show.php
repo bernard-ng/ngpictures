@@ -1,6 +1,6 @@
 <section class="section container row">
-    <div class="col l8 m12 s12 animated slideInLeft">
-        <img src="<?= $article->thumbUrl ?>" alt="" class="responsive-img">
+    <div class="col l8 m12 s12">
+        <img src="<?= $article->thumbUrl ?>" alt="" class="responsive-img materialboxed">
         <h1 class="ui header"><?= $article->title ?></h1>
         <?= $article->content; ?>
     </div>
@@ -36,23 +36,22 @@
     </div>
 </section>
 <section class="jumbotron dark">
-    <div class="container row">
-        <?php include(APP."/Views/includes/comments.php"); ?>
-    </div>
+    <?php include(APP . "/Views/includes/comments.php"); ?>
 </section>
-<section class="section container">
-    <div class="ui divided items col l12 m12 s12 animated slideInLeft">
-        <h2 class="ui header">A propos de l'auteur</h2>
-        <div class="item">
-            <div class="image"><img src="<?= CDN."/imgs/team/balloy.jpg" ?>"></div>
-            <div class="content">
-                <span class="header">Naomi Balloy</span>
-                <div class="meta">Directrice de publication</div>
-                <div class="description">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Delectus maxime porro voluptas beatae repudiandae
-                    consectetur at ipsa. Aliquam, consectetur a itaque possimus,
-                     ab, ex quae quia vitae sint voluptas vel!
+<section class="section row">
+    <div class="container">
+        <div class="ui items col l12 m12 s12 animated slideInLeft">
+            <div class="item">
+                <div class="image"><img src="<?= CDN . "/imgs/team/balloy.jpg" ?>"></div>
+                <div class="content">
+                    <span class="header">Naomi Balloy</span>
+                    <div class="meta">Directrice de publication</div>
+                    <div class="description">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                        Delectus maxime porro voluptas beatae repudiandae
+                        consectetur at ipsa. Aliquam, consectetur a itaque possimus,
+                        ab, ex quae quia vitae sint voluptas vel!
+                    </div>
                 </div>
             </div>
         </div>

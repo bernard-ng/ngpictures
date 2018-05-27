@@ -158,10 +158,16 @@ class AdminController extends Controller
             $post = new Collection($_POST);
             if (!empty($post->get('name')) && !empty($post->get('dir'))) {
                 $dir = str_replace('/uploads/', UPLOAD.'/', $post->get('dir'));
+                $tdir = str_replace('/uplads/thumbs/', UPLOAD.'/', $post->get('dir'));
+
                 if (is_dir($dir)) {
                     $file = $dir.'/'.$post->get('name');
-                    if (is_file($file)) {
+                    $thumb = $tdir.'/'.$post->get('name');
+
+                    if (is_file($file) || is_file($thumb)) {
                         unlink($file);
+                        unlink($thumb);
+
                         $this->flash->set('success', $this->msg['post_delete_success']);
                         $this->app::redirect(true);
                     } else {
@@ -514,9 +520,9 @@ class AdminController extends Controller
         $categories     =   $this->categories->orderBy('title', 'ASC');
 
         if (!empty($_FILES)) {
-            $name = (empty($post->get('name')))
-                ? strtolower(uniqid("ngpictures-"))
-                : $this->str::escape($post->get('name'));
+            $name = (empty($post->get('name'))) ?
+                strtolower(uniqid("ngpictures-")) :
+                $this->str::sulgify($this->str::escape($post->get('name')));
 
             $tags           =   $this->str::escape($post->get('tags')) ?? null;
             $description    =   $this->str::escape($post->get('description')) ?? null;
