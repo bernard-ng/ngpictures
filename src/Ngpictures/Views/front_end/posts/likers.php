@@ -1,18 +1,42 @@
 <div class="container row">
-    <?php include(APP."/Views/includes/left-aside.php"); ?>
+    <?php include(APP."/Views/includes/right-aside.php"); ?>
     <?php foreach ($likers as $liker) : ?>
-        <div class="col l3 m6 s12">
-            <div class="card verse-panel">
-                <div class="card-content ng-contain">
-                    <img src="<?= $liker->avatarUrl ?>" width="100%" height="auto" alt="Photo de Profile">
-                    <span class="card-title"><?= $liker->name ?></span>
-                    <p><?= $liker->bio ?></p>
-                    <a href="<?= $liker->followingUrl ?>"><span class="btn"><i class="icon icon-plus"></i></span></a>
-
+        <div class="row nexted col l3 m6 s12">
+            <div class="card-user card transparent hovercard hoverable">
+                <div class="cardheader" style="background: url('<?= $liker->avatarUrl ?>')"></div>
+                <div class="avatar">
+                    <a href="<?= $liker->accountUrl ?>">
+                        <img alt="" src="<?= $liker->avatarUrl ?>">
+                    </a>
                 </div>
-                <div class="card-action">
-                    <a href="<?= $liker->accountUrl ?>">Voir</a>
+                <div class="info">
+                    <div class="title">
+                        <a href="<?= $liker->accountUrl ?>"><?= $liker->name ?></a>
+                    </div>
+                    <div class="desc truncate"><?= $liker->bio ?></div>
+                    <div class="ui tiny horizontal divided list">
+                        <div class="item">
+                            <div class="content">
+                                <div class="header">1,35k&nbsp;Posts</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="content">
+                                <div class="header">4,9k&nbsp;Abonnés</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="content">
+                                <div class="header">12&nbsp;Abonnement</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <?php if ($liker->id != $activeUser->id) : ?>
+                    <a href="<?= $liker->followingUrl ?>" class="btn btn-flat action blue-grey dark-1">
+                        <?= $liker->isFollowed ? "Se désabonner" : "S'abonner" ?>
+                    </a>
+                <?php endif; ?>
             </div>
         </div>
     <?php endforeach; ?>

@@ -81,11 +81,17 @@ class LikesController extends Controller
             }
 
             $likers_list = implode(", ", $likers_list);
-            $likers = $this->loadModel('users')->findList($likers_list);
+            if (!empty($likers_list)) {
+                $likers = $this->loadModel('users')->findList($likers_list);
 
-            $this->pageManager::setName("Mentions j'aime");
-            $this->setLayout("posts/default");
-            $this->viewRender("front_end/posts/likers", compact("likers"));
+                $this->app::turbolinksLocation("/likes/show/{$type}/{$slug}-{$id}");
+                $this->pageManager::setName("Mentions j'aime");
+                $this->setLayout("posts/default");
+                $this->viewRender("front_end/posts/likers", compact("likers"));
+            } else {
+                $this->flash->set('danger', $this->msg['post_not_liked']);
+                $this->app::redirect(true);
+            }
         }
     }
 }

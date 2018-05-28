@@ -17,9 +17,8 @@
                     <li class="search" style="margin-right: 10px">
                         <div class="search">
                             <form action="/search" method="get" class="ui icon input">
-                                <input name="q" type="text" placeholder="Recherches...">
-                                <i class="icon icon-search"></i>
-                                <input type="submit" value="send">
+                                <input name="q" type="text" placeholder="Recherches..." required>
+                                <i class="icon icon-search prefix"></i>
                             </form>
                         </div>
                     </li>

@@ -15,7 +15,7 @@
 
                             <?php if ($a->thumb !== null) : ?>
                                 <a href="#" class="dropdown-button news-card-header-icon" data-activates="options-list-<?= $a->id ?>">
-                                    <i class="icon icon-menu"></i>
+                                    <i class="icon icon-down-open"></i>
                                 </a>
                                 <ul id="options-list-<?= $a->id ?>" class="dropdown-content grey dark-4">
                                     <li>
@@ -32,8 +32,14 @@
                                     </li>
                                     <li>
                                         <a data-action="save" href="<?= $a->saveUrl ?>">
-                                            <i class="icon icon-bookmark-empty"></i>
-                                            Enregistrer
+                                            <?php if($a->isSaved): ?>
+                                                <i class="icon icon-bookmark"></i>
+                                                Rétirer des Enr.
+                                            <?php else: ?>
+                                                <i class="icon icon-bookmark-empty"></i>
+                                                Enregistrer
+                                            <?php endif; ?>
+
                                         </a>
                                     </li>
                                     <li>
@@ -69,14 +75,14 @@
 
                             <section id="articleInfo">
                                 <div class="news-card-stat">
-                                <i class="icon icon-thumbs-up"></i>
-                                    <small>
-                                    <a data-action="showLikes" href="<?= $a->showLikesUrl ?>"><?= $a->likes ?></a>
-                                    </small>
-                                </div>
-                                <div class="news-card-stat">
                                     <i class="icon icon-calendar"></i>
                                     <time data-time="<?= strtotime($a->date_created) ?>"><?= $a->time ?></time>
+                                </div>
+                                <div class="news-card-stat">
+                                <i class="icon icon-thumbs-up"></i>
+                                    <small>
+                                    <a data-action="showLikes" href="<?= $a->LikersUrl; ?>"><?= $a->likes ?></a>
+                                    </small>
                                 </div>
                             </section>
                         </main>

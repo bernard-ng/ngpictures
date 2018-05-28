@@ -19,6 +19,7 @@ $router->get("/:user-:id", "users#account", "users.account");
 $router->get("/my-posts/:token", "posts#showPosts", "posts.show-post");
 $router->get("/my-followers/:token", "following#showFollowers", "users.show-followers");
 $router->get("/my-following/:token", "following#showFollowing", "users.show-following");
+$router->get('/my-saves/:token', 'saves#add', 'saves.index');
 $router->post("/delete-post/:token", "posts#delete", "posts.delete");
 
 
@@ -73,6 +74,7 @@ $router->any("/contact", "contact", "contact.index");
 $router->get("/about", "static#about", "static.about");
 $router->get("/privacy", "static#privacy", "static.privacy");
 $router->get("/booking", 'booking', 'reservation');
+$router->get('/saves/:type/:slug-:id', 'saves#add', 'saves.add');
 
 
 

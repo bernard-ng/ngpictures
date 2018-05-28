@@ -1,7 +1,7 @@
 <section class="section container row">
     <?php include(APP."/Views/includes/right-aside.php"); ?>
     <?php if(isset($categories) && !empty($categories)): ?>
-        <div class="col l9 m12 s12">
+        <div class="col nexted l9 m12 s12">
             <?php foreach ($categories as $c) : ?>
                 <div class="col nexted l3 m4 s12">
                     <div class="card" style="background-color: #100F0F">
@@ -9,15 +9,16 @@
                             <a href="<?= $c->url ?>" class="waves-effect">
                             <?php foreach ($thumbs as $key => $value) : ?>
                                     <?php if ($key == $c->id) : ?>
-                                        <img src="<?= $value ?>" alt="" class="responsive-img">
+                                        <img src="<?= $value ?>" alt="<?= $c->title ?>" class="responsive-img">
                                     <?php endif; ?>
                             <?php endforeach; ?>
                             </a>
                         </div>
                         <div class="card-content">
                             <span class="card-title ui header">
-                                <?= $c->title ?>  <span class="badge new right"><?= $nb[$c->id] ?></span>
+                                <?= $c->title ?>
                             </span>
+                             <?= $nb[$c->id] ?> publication<?= $nb[$c->id] > 1 ? 's' : '' ?>
                         </div>
                     </div>
                 </div>

@@ -19,6 +19,14 @@ trait PostEntityTrait
     }
 
 
+    public function getSaveUrl(): string
+    {
+        $this->saveUrl = "saves/{$this->action_type}";
+        $this->saveUrl .= "/{$this->slug}-{$this->id}";
+        return $this->saveUrl;
+    }
+
+
     /**
      * lien vers la categorie de la publication
      * @return string
@@ -155,6 +163,17 @@ trait PostEntityTrait
     {
         $likes = Ngpictures::getInstance()->getModel('likes');
         return $likes->isMentionnedLike($this->id, $this->action_type);
+    }
+
+
+    /**
+     * renvoi vrai is on a dja saved la publication
+     * @return string
+     */
+    public function getIsSaved(): string
+    {
+        $saves = Ngpictures::getInstance()->getModel('saves');
+        return $saves->isSaved($this->id, $this->action_type);
     }
 
 
