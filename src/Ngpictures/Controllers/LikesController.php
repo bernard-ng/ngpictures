@@ -89,7 +89,7 @@ class LikesController extends Controller
                 $this->setLayout("posts/default");
                 $this->viewRender("front_end/posts/likers", compact("likers"));
             } else {
-                $this->flash->set('danger', $this->msg['post_not_liked']);
+                $this->flash->set('info', $this->msg['post_not_liked']);
                 $this->app::redirect(true);
             }
         }
