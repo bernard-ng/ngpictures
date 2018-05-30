@@ -1,8 +1,7 @@
 <section class="container row">
     <?php include(APP."/Views/includes/right-aside.php"); ?>
     <section class="col row l6 m12 s12">
-        <div class="transparent-form col l12 m12 s12">
-            <h2 class="ui header">Rédaction</h2>
+        <div class="grey dark-4 col l12 m12 s12">
             <form action="" method="POST" enctype="multipart/form-data" data-action="upload">
                 <div class="row">
                     <div class="input-field col s12">

@@ -516,8 +516,112 @@ function formGenericSubmit(element) {
     }
 })();
 
+
+/**
+ * save posts
+ * @param element
+ * @returns {boolean}
+ */
+function savePost(element) {
+    let saveBtn = document.querySelectorAll(element);
+    if (typeof saveBtn !== 'undefined') {
+        for(let i = 0; i < saveBtn.length; i++) {
+            saveBtn[i].addEventListener('click', function(e){
+                e.preventDefault();
+                e.stopPropagation();
+
+                let that = this;
+                let icon = that.firstElementChild;
+
+                if(icon.classList.contains('blue-txt')) {
+                    icon.classList.remove('icon-bookmark', 'blue-txt');
+                    icon.classList.add('icon-bookmark-empty');
+                } else {
+                    icon.classList.remove('icon-bookmark-empty');
+                    icon.classList.add('icon-bookmark', 'blue-txt');
+                }
+
+
+                if (getXhr()) {
+                    let xhr = getXhr();
+                    xhr.open('GET', this.getAttribute('href'));
+                    xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+                    xhr.onreadystatechange = function() {
+                        if(xhr.readyState === 4) {
+                            if(xhr.status === 200) {
+                                if (xhr.responseText === 'true') {
+                                    that.innerHTML = "<i class='icon icon-bookmark blue-txt'></i>"
+                                    setFlash('success', msg.postSaved);
+                                    return true;
+                                } else {
+                                    that.innerHTML = "<i class='icon icon-bookmark-empty'></i>"
+                                    setFlash('success', msg.postRemoveSave);
+                                    return true;
+                                }
+                            } else {
+                                setFlash('danger', xhr.responseText? xhr.responseText : msg.undefinedError);
+                                return false;
+                            }
+                        }
+                    };
+                    xhr.send();
+                } else {
+                    return false;
+                }
+            });
+        }
+    } else {
+        return false;
+    }
+}
+
+
+/**
+ * telechargement et incrementation
+ * @param element
+ * @returns {boolean}
+ */
+function downloadFile(element) {
+    let downloadBtn = document.querySelectorAll(element);
+    if (typeof downloadBtn !== 'undefined') {
+        for(let i = 0; i < downloadBtn.length; i++) {
+            downloadBtn[i].addEventListener('click', function(e){
+                e.preventDefault();
+                e.stopPropagation();
+
+                let downloadLink = this.getAttribute('href');
+                let that = this;
+
+                if (getXhr()) {
+                    let xhr = getXhr();
+                    xhr.open('GET', downloadLink);
+                    xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+                    xhr.onreadystatechange = function() {
+                        if(xhr.readyState === 4) {
+                            if(xhr.status === 200) {
+                                that.innerHTML = "<span>" + xhr.responseText + "&nbsp;<i class='icon icon-download'></i>";
+                                window.location = downloadLink + "?option=once";
+                                return true;
+                            } else {
+                                setFlash('danger', xhr.responseText? xhr.responseText : msg.undefinedError);
+                                return false;
+                            }
+                        }
+                    };
+                    xhr.send();
+                }
+            })
+        }
+    } else {
+        return false;
+    }
+
+}
+
 //------------------------------------------------------------------------------------
 //loadVerses("[data-action='verses']");
+savePost("[data-action='save']");
+downloadFile("[data-action='download']");
 formLogin("form[data-action='login']");
 formGenericSubmit("form[data-action='ideas']");
 formGenericSubmit("form[data-action='bugs']");

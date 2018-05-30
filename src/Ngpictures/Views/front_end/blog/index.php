@@ -9,6 +9,17 @@
                             <span class="news-card-image-profil"></span>
                             <p class="news-card-header-title"></p>
                             <?php if ($a->thumb !== null) : ?>
+                                <a data-action="download" href="<?= $a->downloadUrl ?>" class="news-card-header-icon">
+                                    <span><?= $a->downloads ?><span>&nbsp;<i class="icon icon-download"></i>
+                                </a>
+                                <a data-action="save" href="<?= $a->saveUrl ?>" class="news-card-header-icon">
+                                    <?php if($a->isSaved): ?>
+                                        <i class="icon icon-bookmark blue-txt"></i>
+                                    <?php else: ?>
+                                        <i class="icon icon-bookmark-empty"></i>
+                                    <?php endif; ?>
+
+                                </a>
                                 <a href="#" class="dropdown-button news-card-header-icon" data-activates="options-list-<?= $a->id ?>">
                                     <i class="icon icon-down-open"></i>
                                 </a>
@@ -23,24 +34,6 @@
                                         <a data-action="report" class="news-card-header-icon modal-trigger" href="#report-<?= $a->id ?>">
                                             <i class="icon icon-attention"></i>
                                             Signaler
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-action="save" href="<?= $a->saveUrl ?>">
-                                            <?php if($a->isSaved): ?>
-                                                <i class="icon icon-bookmark"></i>
-                                                Rétirer des Enr.
-                                            <?php else: ?>
-                                                <i class="icon icon-bookmark-empty"></i>
-                                                Enregistrer
-                                            <?php endif; ?>
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-action="download" href="<?= $a->downloadUrl ?>">
-                                            <i class="icon icon-download"></i>
-                                            Télécharger
                                         </a>
                                     </li>
                                 </ul>
@@ -108,6 +101,37 @@
                                 </form>
                             </div>
                         </div>
+                        <div id="share-<?= $a->id ?>" class="modal grey dark-4 bottom-sheet">
+                            <div class="modal-content">
+                                <div class="col l12 m12 s12">
+                                    <div class="col l3 m3 s3">
+                                        <button class="btn btn-flat waves-effect hoverable" style="background: #4c67a1" data-action="share-facebook" data-url="<?= $a->url ?>">
+                                            <i class="icon icon-facebook"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col l3 m3 s3">
+                                        <button class="btn btn-flat waves-effect hoverable" style="background: #55acee" data-action="share-twitter" data-url="<?= $a->url ?>">
+                                            <i class="icon icon-twitter"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col l3 m3 s3">
+                                        <button class="btn btn-flat waves-effect hoverable" style="background: #d23f31" data-action="share-google-plus" data-url="<?= $a->url ?>">
+                                            <i class="icon icon-googleplus-rect"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col l3 m3 s3">
+                                        <button class="btn btn-flat waves-effect hoverable" style="background: #11a84d" data-action="share-whatsapp" data-url="<?= $a->url ?>">
+                                            <i class="icon icon-whatsapp"></i>
+                                        </button>
+                                    </div>
+                                    <div class="modal-footer col s12 grey dark-4" style="margin-top: 10px;">
+                                        <button class="btn transparent shadow-0 modal-action modal-close">
+                                            Annuler
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </article>
                 <?php endforeach ; ?>
                 <div id="statusBar" class="btn ng-progress-indeterminate disabled" data-ajax="blog">
@@ -130,5 +154,32 @@
             <?php endif; ?>
         </div>
     </section>
+    <?php if (isset($posts) && !empty($posts)) : ?>
+        <?php foreach ($posts as $a) : ?>
+            <div id="report-<?= $a->id ?>" class="modal grey dark-4">
+                <div class="modal-content">
+                    <p>Choissez un motif pour le signalement de cette publication</p>
+                    <form action="<?= $a->watchoutUrl ?>" method="POST" data-action="watchout">
+                        <p>
+                            <input type="checkbox" class="filled-in" name="indesirable" id="indesirable">
+                            <label for="indesirable">Contenu indésirable</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="filled-in" name="inappropriate" id="inappropriate">
+                            <label for="inappropriate">Contenu inapproprié</label>
+                        </p>
+                        <div class="modal-footer transparent comment">
+                            <button type="submit" class="modal-action btn blue-grey dark-2 waves-effect">
+                                Envoyer
+                            </button>
+                            <button id="cmtAdd-<?= $a->id ?>" type="reset" class="btn btn-small transparent waves-effect modal-action modal-close">
+                                Annuler
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
     <?php require(APP."/Views/includes/menu-aside.php"); ?>
 </section>

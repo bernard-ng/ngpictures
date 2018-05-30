@@ -48,12 +48,20 @@ class SavesController extends controller
                     $this->getType($type) => $post->id
                 ]);
 
+                if($this->isAjax()) {
+                    $post = $this->loadModel($this->getAction($type))->find($post->id);
+                    echo ($post->isSaved)? 'true' : 'false';
+                    exit();
+                }
+
                 $this->flash->set('success', $this->msg['post_saved']);
                 $this->app::redirect(true);
             }
         } else {
-            $this->flash->set('danger', $this->msg['post_not_found']);
-            $this->app::redirect(true);
+            ($this->isAjax())?
+                $this->ajaxFail($this->msg['post_not_found']) :
+                $this->flash->set('danger', $this->msg['post_not_found']);
+                $this->app::redirect(true);
         }
     }
 

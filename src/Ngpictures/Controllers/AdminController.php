@@ -381,7 +381,7 @@ class AdminController extends Controller
                         $errors = new Collection($this->validator->getErrors());
                     }
                 } else {
-                    $this->flash->set('danger', $this->msg['post_requries_picture']);
+                    $this->flash->set('danger', $this->msg['post_requires_picture']);
                 }
             }
         }

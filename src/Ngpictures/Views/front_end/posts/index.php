@@ -14,6 +14,16 @@
                             </p>
 
                             <?php if ($a->thumb !== null) : ?>
+                                <a data-action="download" href="<?= $a->downloadUrl ?>" class="news-card-header-icon">
+                                    <span><?= $a->downloads ?><span>&nbsp;<i class="icon icon-download"></i>
+                                </a>
+                                <a data-action="save" href="<?= $a->saveUrl ?>" class="news-card-header-icon">
+                                    <?php if($a->isSaved): ?>
+                                        <i class="icon icon-bookmark blue-txt"></i>
+                                    <?php else: ?>
+                                        <i class="icon icon-bookmark-empty"></i>
+                                    <?php endif; ?>
+                                </a>
                                 <a href="#" class="dropdown-button news-card-header-icon" data-activates="options-list-<?= $a->id ?>">
                                     <i class="icon icon-down-open"></i>
                                 </a>
@@ -28,24 +38,6 @@
                                         <a data-action="report" class="news-card-header-icon modal-trigger" href="#report-<?= $a->id ?>">
                                             <i class="icon icon-attention"></i>
                                             Signaler
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-action="save" href="<?= $a->saveUrl ?>">
-                                            <?php if($a->isSaved): ?>
-                                                <i class="icon icon-bookmark"></i>
-                                                Rétirer des Enr.
-                                            <?php else: ?>
-                                                <i class="icon icon-bookmark-empty"></i>
-                                                Enregistrer
-                                            <?php endif; ?>
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-action="download" href="<?= $a->downloadUrl ?>">
-                                            <i class="icon icon-download"></i>
-                                            Télécharger
                                         </a>
                                     </li>
                                 </ul>

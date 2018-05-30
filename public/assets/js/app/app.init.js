@@ -36,6 +36,9 @@ msg = {
     usersNotLogged : "Connectez-vous pour continuer",
     usersUnfollowingSuccess : "Vous ne suivez plus cet utilisateur",
     usersFollowingSuccess : "Vous suivez cet utilisateur",
+
+    postSaved: "Publication ajoutée aux enregistrements",
+    postRemoveSave: "Publication Rétirée des enregistrerments"
 };
 
 /**

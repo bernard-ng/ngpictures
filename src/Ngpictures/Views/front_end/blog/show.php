@@ -8,10 +8,22 @@
         <div class="ui divided list animated slideInRight">
             <ul class="collection grey dark-4 shadow-1">
                 <li class="collection-item">
-                    ISO  <span class="right"><?= $article->exifData->ISOSpeedRatings ?? 'Indéfini' ?></span>
+                    ISO  <span class="right">
+                        <?php if(is_array($article->exifData->ISOSpeedRatings)): ?>
+                            <?= $article->exifData->ISOSpeedRatings[0] ?? 'Indéfini' ?>
+                        <?php else: ?>
+                            <?= $article->exifData->ISOSpeedRatings ?? 'Indéfini' ?>
+                        <?php endif; ?>
+                    </span>
                 </li>
                 <li class="collection-item">
-                    Flash  <span class="right"><?= $article->exifData->Flash ?? 'Indéfini' ?></span>
+                    Flash  <span class="right">
+                        <?php if(is_array($article->exifData->Flash)): ?>
+                            <?= $article->exifData->Flash[0] ?? 'Indéfini' ?>
+                        <?php else: ?>
+                            <?= $article->exifData->Flash ?? 'Indéfini' ?>
+                        <?php endif; ?>
+                    </span>
                 </li>
                 <li class="collection-item">
                     Camera  <span class="right"><?= $article->exifData->Model ?? 'Indéfini' ?></span>

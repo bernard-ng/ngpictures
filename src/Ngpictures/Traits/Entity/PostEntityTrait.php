@@ -81,6 +81,12 @@ trait PostEntityTrait
     }
 
 
+    public function getDownloads(): string
+    {
+        return (string) $this->downloads;
+    }
+
+
     /**
      * lien pour aimer une publication
      * @return string
