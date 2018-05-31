@@ -8,6 +8,6 @@ class MapsController extends Controller
     public function show()
     {
         $this->setLayout('blank-default');
-        $this->viewRender('front_end/others/map');
+        $this->viewRender('front_end/others/maps');
     }
 }

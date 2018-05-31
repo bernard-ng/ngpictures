@@ -215,4 +215,12 @@ trait PostEntityTrait
     {
         return (is_null($this->exif)) ? null : json_decode($this->exif);
     }
+
+
+    public function getLocationUrl()
+    {
+        $this->locationUrl = "/maps";
+        $this->locationUrl .= "?location={$this->SI}";
+        return $this->locationUrl;
+    }
 }
