@@ -166,6 +166,7 @@ function removeLoader(element, text) {
 }
 
 
+//lancement des librarie extrene, jquery, materialize, etc...
 $(document).ready(function(){
     $('.button-collapse').sideNav({
         size: 250
@@ -188,7 +189,11 @@ $(document).ready(function(){
         interval: 5000
     });
 
-    $('.tool').tooltip();
+    $('.tool').tooltip({
+        position: 'top',
+        delay: 50,
+
+    });
     $('.dropdown-button').dropdown({
         hover: false,
         gutter: 5,

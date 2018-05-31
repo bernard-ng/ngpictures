@@ -524,6 +524,7 @@ function formGenericSubmit(element) {
  */
 function savePost(element) {
     let saveBtn = document.querySelectorAll(element);
+    let activeUser = document.querySelector("meta[active-user]");
     if (typeof saveBtn !== 'undefined') {
         for(let i = 0; i < saveBtn.length; i++) {
             saveBtn[i].addEventListener('click', function(e){
@@ -533,39 +534,43 @@ function savePost(element) {
                 let that = this;
                 let icon = that.firstElementChild;
 
-                if(icon.classList.contains('blue-txt')) {
-                    icon.classList.remove('icon-bookmark', 'blue-txt');
-                    icon.classList.add('icon-bookmark-empty');
-                } else {
-                    icon.classList.remove('icon-bookmark-empty');
-                    icon.classList.add('icon-bookmark', 'blue-txt');
-                }
+                if(activeUser) {
+                    if(icon.classList.contains('blue-txt')) {
+                        icon.classList.remove('icon-bookmark', 'blue-txt');
+                        icon.classList.add('icon-bookmark-empty');
+                    } else {
+                        icon.classList.remove('icon-bookmark-empty');
+                        icon.classList.add('icon-bookmark', 'blue-txt');
+                    }
 
-
-                if (getXhr()) {
-                    let xhr = getXhr();
-                    xhr.open('GET', this.getAttribute('href'));
-                    xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-                    xhr.onreadystatechange = function() {
-                        if(xhr.readyState === 4) {
-                            if(xhr.status === 200) {
-                                if (xhr.responseText === 'true') {
-                                    that.innerHTML = "<i class='icon icon-bookmark blue-txt'></i>"
-                                    setFlash('success', msg.postSaved);
-                                    return true;
+                    if (getXhr()) {
+                        let xhr = getXhr();
+                        xhr.open('GET', this.getAttribute('href'));
+                        xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+                        xhr.onreadystatechange = function() {
+                            if(xhr.readyState === 4) {
+                                if(xhr.status === 200) {
+                                    if (xhr.responseText === 'true') {
+                                        that.innerHTML = "<i class='icon icon-bookmark blue-txt'></i>"
+                                        setFlash('success', msg.postSaved);
+                                        return true;
+                                    } else {
+                                        that.innerHTML = "<i class='icon icon-bookmark-empty'></i>"
+                                        setFlash('success', msg.postRemoveSave);
+                                        return true;
+                                    }
                                 } else {
-                                    that.innerHTML = "<i class='icon icon-bookmark-empty'></i>"
-                                    setFlash('success', msg.postRemoveSave);
-                                    return true;
+                                    setFlash('danger', xhr.responseText? xhr.responseText : msg.undefinedError);
+                                    return false;
                                 }
-                            } else {
-                                setFlash('danger', xhr.responseText? xhr.responseText : msg.undefinedError);
-                                return false;
                             }
-                        }
-                    };
-                    xhr.send();
+                        };
+                        xhr.send();
+                    } else {
+                        return false;
+                    }
                 } else {
+                    setFlash('danger', msg.usersNotLogged);
                     return false;
                 }
             });

@@ -19,3 +19,8 @@ define("FLASH_MESSAGE_KEY", "flash");
 define("TOKEN_KEY", "token");
 define("CAPTCHA_KEY", "captcha");
 define("COOKIE_REMEMBER_KEY", "remember");
+
+
+//APPLICATION API KEYS
+//***************************************************************
+define("MAPS_API_KEY", "AIzaSyBGKrzWSCBr0PROSEO0knD5vBrNsiW-7zU");

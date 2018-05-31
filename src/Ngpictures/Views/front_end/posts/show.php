@@ -38,6 +38,28 @@
 <section class="jumbotron dark">
     <?php include(APP . "/Views/includes/comments.php"); ?>
 </section>
+<section class="jumbotron parallax-container col l12 s12 m12" style="margin-top: -20px; margin-bottom: 20px;>
+    <div class="row container">
+        <div class="col l12 m12 s12 row">
+            <div class="col l4 m4 s12 center-align">
+                <span class="stats-value"><?= $article->downloads ?></span>
+                <span class="stats-label">Téléchargement</span>
+            </div>
+            <div class="col l4 m4 s12 center-align">
+                <span class="stats-value">3,457</span>
+                <span class="stats-label">Enregistrement</span>
+            </div>
+            <div class="col l4 m4 s12 center-align">
+                <span class="stats-value">12k</span>
+                <span class="stats-label">Mention j'aime</span>
+            </div>
+        </div>
+    </div>
+    <div class="parallax">
+        <img src="<?= $article->thumbUrl ?>" alt="<?= $article->title?>" title="<?= $article->title?>" class="bw">
+    </div>
+    <div class="bg"></div>
+</section>
 <section class="section row">
     <div class="container">
         <div class="ui items col l12 m12 s12 animated slideInLeft">

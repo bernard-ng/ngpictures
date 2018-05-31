@@ -26,6 +26,10 @@
                 </div>
 
                 <div class="row">
+                    <span class="col s12">
+                        <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
+                        <label for="filled-in-box">Location</label>
+                    </span>
                     <div class="input-field col s12">
                         <label for="content">Description</label>
                         <textarea id="content" name="content" class="mdz-textarea materialize-textarea validate <?= $errors->get('content')? 'invalid': '' ?>"><?= $post->getSafe('content') ?></textarea>

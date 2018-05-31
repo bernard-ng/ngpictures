@@ -17,7 +17,7 @@
                                 <a data-action="download" href="<?= $a->downloadUrl ?>" class="news-card-header-icon">
                                     <span><?= $a->downloads ?><span>&nbsp;<i class="icon icon-download"></i>
                                 </a>
-                                <a data-action="save" href="<?= $a->saveUrl ?>" class="news-card-header-icon">
+                                <a data-action="save" href="<?= $a->saveUrl ?>" class="news-card-header-icon" data-tooltip="Enregister">
                                     <?php if($a->isSaved): ?>
                                         <i class="icon icon-bookmark blue-txt"></i>
                                     <?php else: ?>
@@ -34,6 +34,14 @@
                                             Catégories
                                         </a>
                                     </li>
+                                    <?php if($a->location): ?>
+                                    <li>
+                                        <a data-action="location" href="<?= $a->locationUrl ?>" class="news-card-header-icon">
+                                            <i class="icon icon-location"></i>
+                                            Localisation
+                                        </a>
+                                    </li>
+                                    <?php endif; ?>
                                     <li>
                                         <a data-action="report" class="news-card-header-icon modal-trigger" href="#report-<?= $a->id ?>">
                                             <i class="icon icon-attention"></i>
