@@ -1,3 +1,5 @@
+@import "../custom/bases/variables";
+
 .slider {
   position: relative;
   height: auto !important;
@@ -66,7 +68,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  border-bottom: 2px solid #ccc !important;
+  border-bottom: 5px solid $border-color !important;
 }
 
 .slider .slides li img {
@@ -78,7 +80,7 @@
 }
 
 .slider .slides li .caption {
-  color: #ccc;
+  color: $txt-color;
   font-family: 'Roboto', sans-serif;
   position: absolute;
   display: inherit;
@@ -89,8 +91,9 @@
   z-index: 5 !important;
 }
 
-.slider .slides li .caption h3 {
-  font-weight: 700;
+.slider .slides li .caption h2 {
+  font-family: "Mechanic", "Roboto", sans-serif !important;
+  font-weight: 500;
   letter-spacing: 2px;
   text-shadow: 2px 1px rgba(0,0,0,0.4);
 }
@@ -130,5 +133,5 @@
 }
 
 .slider .indicators .indicator-item.active {
-  background-color: #1565C0;
+  background-color: $active-color;
 }

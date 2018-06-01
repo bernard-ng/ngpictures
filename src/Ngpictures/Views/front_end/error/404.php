@@ -3,7 +3,7 @@
         <li id="reset">
             <img src="/imgs/outils.jpeg">
             <div class="caption center-align">
-                <h3 class="ng-heading">Page Introuvable</h3>
+                <h2 class="ng-heading">Page Introuvable</h2>
                 <h6 class="light grey-text txt-light-3">
                     L'URL demandée n'a pas pu être trouvée.
                     Si vous avez tapé l'URL à la main,

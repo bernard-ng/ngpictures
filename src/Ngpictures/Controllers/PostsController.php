@@ -58,8 +58,6 @@ class PostsController extends Controller
             $this->validator->setRule('title', 'required');
             $this->validator->setRule('content', 'required');
 
-            var_dump($post->get('localisation')); die();
-
             if ($this->validator->isValid()) {
                 $title          =   $this->str::escape($post->get('title'));
                 $content        =   $this->str::escape($post->get('content'));

@@ -522,19 +522,20 @@ class AdminController extends Controller
         if (!empty($_FILES)) {
             $name = (empty($post->get('name'))) ?
                 strtolower(uniqid("ngpictures-")) :
-                $this->str::sulgify($this->str::escape($post->get('name')));
+                $this->str::escape($post->get('name'));
 
             $tags           =   $this->str::escape($post->get('tags')) ?? null;
             $description    =   $this->str::escape($post->get('description')) ?? null;
             $categories_id    =   intval($post->get('category')) ?? 1;
+            $slug = $this->str::slugify($name);
 
             if (!empty($file->get('thumb'))) {
-                $this->gallery->create(compact('name', 'description', 'tags', 'categories_id'));
+                $this->gallery->create(compact('name', 'slug', 'description', 'tags', 'categories_id'));
                 $last_id    =   $this->gallery->lastInsertId();
-                $isUploaded =   ImageManager::upload($file, 'gallery', "{$name}-{$last_id}", 'ratio');
+                $isUploaded =   ImageManager::upload($file, 'gallery', "{$slug}-{$last_id}", 'ratio');
 
                 if ($isUploaded) {
-                    ImageManager::upload($file, 'gallery-thumbs', "{$name}-{$last_id}", 'small');
+                    ImageManager::upload($file, 'gallery-thumbs', "{$slug}-{$last_id}", 'small');
                     $exif = ImageManager::getExif($file);
 
                     $this->gallery->update(

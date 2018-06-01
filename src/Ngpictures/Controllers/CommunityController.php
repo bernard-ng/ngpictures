@@ -25,6 +25,10 @@ class CommunityController extends Controller
 
         $this->app::turbolinksLocation('/community');
         $this->pageManager::setName("Communauté");
+        $this->pageManager::setDescription(
+            "Rétrouvez la communauté de ngpictures, vos amis, les artistes et les passionnés
+            de la photographie"
+        );
         $this->setLayout("posts/default");
         $this->viewRender("front_end/community/community", compact('users'));
     }

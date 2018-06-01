@@ -41,15 +41,15 @@
 <section class="jumbotron parallax-container col l12 s12 m12" style="margin-top: -20px; margin-bottom: 20px;>
     <div class="row container">
         <div class="col l12 m12 s12 row">
-            <div class="col l4 m4 s12 center-align">
+            <div class="col l4 m4 s12 center-align pb10">
                 <span class="stats-value"><?= $article->downloads ?></span>
                 <span class="stats-label">Téléchargement</span>
             </div>
-            <div class="col l4 m4 s12 center-align">
+            <div class="col l4 m4 s12 center-align pb10">
                 <span class="stats-value">3,457</span>
                 <span class="stats-label">Enregistrement</span>
             </div>
-            <div class="col l4 m4 s12 center-align">
+            <div class="col l4 m4 s12 center-align pb10">
                 <span class="stats-value">12k</span>
                 <span class="stats-label">Mention j'aime</span>
             </div>

@@ -15,7 +15,7 @@ class GalleryEntity extends Entity
 
     public function getUrl()
     {
-        $this->url = "/gallery#{$this->id}";
+        $this->url = "/gallery/{$this->id}";
         return $this->url;
     }
 

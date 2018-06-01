@@ -42,7 +42,10 @@ class CategoriesController extends Controller
         }
 
         $this->app::turbolinksLocation('/categories');
-        $this->pageManager::setName('Toutes les catégories');
+        $this->pageManager::setName('Les catégories');
+        $this->pageManager::setDescription(
+            "Rétrouvez facilement une photo en cliquant sur une catégorie"
+        );
         $this->setLayout('posts/default');
         $this->viewRender("front_end/categories/index", compact('categories', 'thumbs', 'nb'));
     }

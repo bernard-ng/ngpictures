@@ -1,3 +1,5 @@
+@import "variables";
+
 .jumbotron {
     display: block;
     width: 100%;
@@ -29,13 +31,9 @@
     height: auto;
     position: relative;
     padding: 0.75em !important;
-    background: url("/imgs/bgjumbo.jpeg");
     background-size: cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-bottom: 2px solid #ccc;
-    margin-bottom: 1em;
+    background: url("/imgs/bgjumbo.jpeg") no-repeat fixed center;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
 
     & .jumbotron-content {
         display: block;
@@ -43,9 +41,10 @@
     }
 
     & .title h3{
+        font-family: Mechanic, sans-serif !Important;
         padding-left: 10px;
         margin-top: 10px;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
         font-weight: 500 !important;
         text-transform: capitalize !important;
     }
@@ -55,18 +54,15 @@
 .jumbotron-user {
     width: 100%;
     position: absolute;
-    background-color: #100f0f;
-    background-image: url(/imgs/bgjumbo.jpeg);
     background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
+    background: #100f0f url("/imgs/bgjumbo.jpeg") fixed bottom;
     top: 40px; left: 0; right: 0;
     padding-top: 20px;
     height: auto;
     border-bottom: 2px solid #ccc;
     color: #ccc;
-    z-index: 20000px;
-    }
+    z-index: 990;
+}
 
     .user-avatar {
         width: 180px;
