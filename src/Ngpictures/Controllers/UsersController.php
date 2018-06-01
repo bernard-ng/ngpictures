@@ -7,6 +7,7 @@ use Ngpictures\Managers\PageManager;
 use Ng\Core\Managers\Mailer\Mailer;
 use Ngpictures\Entity\UsersEntity;
 use Ngpictures\Ngpictures;
+use ReCaptcha\ReCaptcha;
 
 class UsersController extends Controller
 {
@@ -172,16 +173,29 @@ class UsersController extends Controller
             $this->validator->setRule('password_confirm', ["min_length[8]","must_match[password]"]);
 
             if ($this->validator->isValid()) {
-                $this->validator->unique("name", $this->users, $this->msg['users_username_token']);
-                $this->validator->unique("email", $this->users, $this->msg['users_mail_token']);
+                if($post->get('g-recaptcha-response')) {
+                    $recaptchaResponse = (new ReCaptcha(RECAPTCH_API_KEY))
+                        ->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 
-                if ($this->validator->isValid()) {
-                    $this->register($post->get('name'), $post->get('email'), $post->get('password'));
-                    $this->flash->set('success', $this->msg['users_registration_success']);
-                    $this->app::redirect("/login");
+                    if($recaptchaResponse->isSuccess()) {
+                        $this->validator->unique("name", $this->users, $this->msg['users_username_token']);
+                        $this->validator->unique("email", $this->users, $this->msg['users_mail_token']);
+
+                        if ($this->validator->isValid()) {
+                            $this->register($post->get('name'), $post->get('email'), $post->get('password'));
+                            $this->flash->set('success', $this->msg['users_registration_success']);
+                            $this->app::redirect("/login");
+                        } else {
+                            $errors = new Collection($this->validator->getErrors());
+                            $this->flash->set("danger", $this->msg['form_multi_errors']);
+                        }
+                    } else {
+                        $errors = new Collection($this->validator->getErrors());
+                        $this->flash->set("danger", $this->msg['form_captcha_failed']);
+                    }
                 } else {
                     $errors = new Collection($this->validator->getErrors());
-                    $this->flash->set("danger", $this->msg['form_multi_errors']);
+                    $this->flash->set("danger", $this->msg['form_captcha_not_set']);
                 }
             } else {
                 $errors = new Collection($this->validator->getErrors());

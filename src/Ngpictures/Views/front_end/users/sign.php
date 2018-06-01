@@ -33,6 +33,10 @@
                         <?= $errors->get('password_confirm') ?>
                     </span>
                 </div>
+
+                <div class="input-field col s12">
+                    <div class="g-recaptcha" data-sitekey="6LfUxlwUAAAAABl24HJ4H8wRcMGVm4aqxfob9IKb"></div>
+                </div>
             </div>
 
             <div class="row">

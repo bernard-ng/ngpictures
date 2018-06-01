@@ -51,6 +51,8 @@ class MessageManager implements ArrayAccess
         "form_reset_submitted" => "Les instructions de rappel de mot de passe vous ont été envoyées par mail",
         "form_registration_submitted" => "Un email de confirmation de compte vous a été envoyé, veuillez le confirmer pour continuer",
         'form_contact_submitted' => 'Nous avons bien reçu votre message et comptons vous répondre dans le plus bref délais',
+        'form_captcha_not_set' => "Confirmer que vous n'êtes pas un robot",
+        'form_captcha_failed' => 'La validation du captcha a échoué, veuillez réessayer',
 
 
         //FILES

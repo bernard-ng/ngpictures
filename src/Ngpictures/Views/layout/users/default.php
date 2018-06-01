@@ -6,6 +6,7 @@
         <?php include(APP."/Views/includes/default-meta.php"); ?>
         <?php include(APP."/Views/includes/favicon.php"); ?>
         <?php include(APP."/Views/includes/default-style.php"); ?>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
     <body id="particles-container">
         <?php include(APP."/Views/includes/mobile-menu.php"); ?>

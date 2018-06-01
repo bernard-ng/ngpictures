@@ -24,3 +24,5 @@ define("COOKIE_REMEMBER_KEY", "remember");
 //APPLICATION API KEYS
 //***************************************************************
 define("MAPS_API_KEY", "AIzaSyBGKrzWSCBr0PROSEO0knD5vBrNsiW-7zU");
+define("RECAPTCHA_SITE_KEY", "6LfUxlwUAAAAABl24HJ4H8wRcMGVm4aqxfob9IKb");
+define("RECAPTCH_API_KEY", "6LfUxlwUAAAAAFq_8arOgt2Px_mqKHUQNURiOn4A");
