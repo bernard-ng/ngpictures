@@ -3,7 +3,7 @@
         <li id="reset">
             <img src="/imgs/outils.jpeg">
             <div class="caption center-align">
-                <h3 class="ng-heading">Erreur Interne</h3>
+                <h2 class="ng-heading">Erreur Interne</h2>
                 <h6 class="light grey-text text-lighten-3">
                     Il peut s'agir d'une erreur interne du serveur, si cela se reproduit veuillez nous le signaler
                     <a href="\bugs">ici</a> ou vous pouvez revenir à l'accueil

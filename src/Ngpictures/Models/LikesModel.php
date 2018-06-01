@@ -6,6 +6,9 @@ use Ng\Core\Models\Model;
 use Ngpictures\Ngpictures;
 use Ngpictures\Traits\Util\TypesActionTrait;
 
+/**
+ * @property \Ng\Core\Managers\SessionManager session
+ */
 class LikesModel extends Model
 {
     /**

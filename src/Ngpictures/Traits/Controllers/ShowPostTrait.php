@@ -17,26 +17,27 @@ trait ShowPostTrait
             $user       =   $this->loadModel('users');
             $article    =   $this->loadModel($this->table)->find(intval($id));
             $comments   =   $this->loadModel('comments')->findWith($this->table."_id", $id, false);
-            $categories =   $this->loadModel('categories')->orderBy('id', 'ASC');
+            $categories =   $this->loadModel('categories')->orderBy('title', 'ASC', 0, 5);
 
 
             if ($article) {
                 if ($article->slug === $slug) {
+                    $author = $this->loadModel('users')->find($article->users_id);
                     $this->pageManager::setName("{$article->title}");
 
-                    $this->app::turbolinksLocation("{$slug}-{$id}");
+                    $this->app::turbolinksLocation("/{$this->table}/{$slug}-{$id}");
                     $this->setLayout("show");
                     $this->viewRender(
                         "front_end/{$this->table}/show",
-                        compact("article", "comments", "user", "categories", "exif")
+                        compact("article", "comments", "user", "categories", "author")
                     );
                 } else {
                     $this->flash->set("danger", $this->msg['posts_not_found']);
-                    $this->app::redirect("/error-404");
+                    $this->app::redirect("/error/not-found");
                 }
             } else {
                 $this->flash->set("danger", $this->msg['posts_not_found']);
-                $this->app::redirect("/error-404");
+                $this->app::redirect("/error/not-found");
             }
         } else {
             $this->flash->set("danger", $this->msg['undefined_error']);

@@ -14,15 +14,41 @@
                             </p>
 
                             <?php if ($a->thumb !== null) : ?>
-                                <a href="<?= $a->categoryUrl ?>" class="news-card-header-icon">
-                                    <i class="icon icon-tag"></i>
+                                <a data-action="download" href="<?= $a->downloadUrl ?>" class="news-card-header-icon">
+                                    <span><?= $a->downloads ?><span>&nbsp;<i class="icon icon-download"></i>
                                 </a>
-                                <a data-action="report" class="news-card-header-icon modal-trigger" href="#report-<?= $a->id ?>">
-                                    <i class="icon icon-megaphone"></i>
+                                <a data-action="save" href="<?= $a->saveUrl ?>" class="news-card-header-icon" data-tooltip="Enregister">
+                                    <?php if($a->isSaved): ?>
+                                        <i class="icon icon-bookmark blue-txt"></i>
+                                    <?php else: ?>
+                                        <i class="icon icon-bookmark-empty"></i>
+                                    <?php endif; ?>
                                 </a>
-                                <a data-action="download" class="news-card-header-icon" href="<?= $a->downloadUrl ?>">
-                                    <i class="icon icon icon-download"></i>
+                                <a href="#" class="dropdown-button news-card-header-icon" data-activates="options-list-<?= $a->id ?>">
+                                    <i class="icon icon-down-open"></i>
                                 </a>
+                                <ul id="options-list-<?= $a->id ?>" class="dropdown-content grey dark-4">
+                                    <li>
+                                        <a href="<?= $a->categoryUrl ?>">
+                                            <i class="icon icon-tag"></i>
+                                            Catégories
+                                        </a>
+                                    </li>
+                                    <?php if($a->location): ?>
+                                    <li>
+                                        <a data-action="location" href="<?= $a->locationUrl ?>" class="news-card-header-icon">
+                                            <i class="icon icon-location"></i>
+                                            Localisation
+                                        </a>
+                                    </li>
+                                    <?php endif; ?>
+                                    <li>
+                                        <a data-action="report" class="news-card-header-icon modal-trigger" href="#report-<?= $a->id ?>">
+                                            <i class="icon icon-attention"></i>
+                                            Signaler
+                                        </a>
+                                    </li>
+                                </ul>
                             <?php endif; ?>
                         </header>
                         <?php if ($a->thumb !== null) : ?>
@@ -49,14 +75,14 @@
 
                             <section id="articleInfo">
                                 <div class="news-card-stat">
-                                <i class="icon icon-thumbs-up"></i>
-                                    <small>
-                                    <a data-action="showLikes" href="<?= $a->showLikesUrl ?>"><?= $a->likes ?></a>
-                                    </small>
-                                </div>
-                                <div class="news-card-stat">
                                     <i class="icon icon-calendar"></i>
                                     <time data-time="<?= strtotime($a->date_created) ?>"><?= $a->time ?></time>
+                                </div>
+                                <div class="news-card-stat">
+                                <i class="icon icon-thumbs-up"></i>
+                                    <small>
+                                    <a data-action="showLikes" href="<?= $a->LikersUrl; ?>"><?= $a->likes ?></a>
+                                    </small>
                                 </div>
                             </section>
                         </main>
@@ -136,6 +162,7 @@
                     <span></span>
                     <span></span>
                 </div>
+                <br>
             <?php else : ?>
                 <div class="section center-align">
                     <h2 class="icon icon-inbox red-txt center-align"></h2>
@@ -152,15 +179,19 @@
         <?php foreach ($posts as $a) : ?>
             <div id="report-<?= $a->id ?>" class="modal grey dark-4">
                 <div class="modal-content">
-                    <span class="ui header">Signaler</span>
-                    <p>Aidez nous à garder notre application sereine, que trouvez de mal à cette publication ?</p>
-                    <form action="<?= $a->commentUrl ?>" method="POST" data-action="comment">
-                        <div class="input-field">
-                            <textarea class="materialize-textarea" name="comment" data-length="255"></textarea>
-                        </div>
-                        <div class="modal-footer dark comment">
+                    <p>Choissez un motif pour le signalement de cette publication</p>
+                    <form action="<?= $a->watchoutUrl ?>" method="POST" data-action="watchout">
+                            <p>
+                                <input type="checkbox" class="filled-in" name="indesirable" id="indesirable">
+                                <label for="indesirable">Contenu indésirable</label>
+                            </p>
+                            <p>
+                                <input type="checkbox" class="filled-in" name="inappropriate" id="inappropriate">
+                                <label for="inappropriate">Contenu inapproprié</label>
+                            </p>
+                        <div class="modal-footer transparent comment">
                             <button type="submit" class="modal-action btn blue-grey dark-2 waves-effect">
-                                <span class="loader"></span> tk
+                                Envoyer
                             </button>
                             <button id="cmtAdd-<?= $a->id ?>" type="reset" class="btn btn-small transparent waves-effect modal-action modal-close">
                                 Annuler

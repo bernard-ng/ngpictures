@@ -5,11 +5,53 @@
             <?php if (!empty($posts)) : ?>
                 <?php foreach ($posts as $a) : ?>
                     <article class="card" id="<?= $a->id ?>" style="background: #100F0F">
-                        <header class="card-image news-card-image">
+                        <header class="news-card-header">
+                            <span class="news-card-image-profil"></span>
+                            <p class="news-card-header-title"></p>
+                            <?php if ($a->thumb !== null) : ?>
+                                <a data-action="download" href="<?= $a->downloadUrl ?>" class="news-card-header-icon">
+                                    <span><?= $a->downloads ?><span>&nbsp;<i class="icon icon-download"></i>
+                                </a>
+                                <a data-action="save" href="<?= $a->saveUrl ?>" class="news-card-header-icon">
+                                    <?php if($a->isSaved): ?>
+                                        <i class="icon icon-bookmark blue-txt"></i>
+                                    <?php else: ?>
+                                        <i class="icon icon-bookmark-empty"></i>
+                                    <?php endif; ?>
+
+                                </a>
+                                <a href="#" class="dropdown-button news-card-header-icon" data-activates="options-list-<?= $a->id ?>">
+                                    <i class="icon icon-down-open"></i>
+                                </a>
+                                <ul id="options-list-<?= $a->id ?>" class="dropdown-content grey dark-4">
+                                    <li>
+                                        <a href="<?= $a->categoryUrl ?>">
+                                            <i class="icon icon-tag"></i>
+                                            Catégories
+                                        </a>
+                                    </li>
+                                    <?php if($a->location): ?>
+                                        <li>
+                                            <a data-action="location" href="<?= $a->locationUrl ?>" class="news-card-header-icon">
+                                                <i class="icon icon-location"></i>
+                                                Localisation
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+                                    <li>
+                                        <a data-action="report" class="news-card-header-icon modal-trigger" href="#report-<?= $a->id ?>">
+                                            <i class="icon icon-attention"></i>
+                                            Signaler
+                                        </a>
+                                    </li>
+                                </ul>
+                            <?php endif; ?>
+                        </header>
+                        <div class="card-image news-card-image">
                             <a href="<?= $a->url ?>" class="waves-effect">
                                 <img src="<?= $a->thumbUrl ?>" alt="<?= $a->title ?>">
                             </a>
-                        </header>
+                        </div>
                         <section class="news-card-content">
                             <section class="news-card-title">
                                 <h2><?= $a->title ?>&nbsp;<small><?= $a->category ?></small></h2>
@@ -21,10 +63,6 @@
                                 <a href="<?= $a->url ?>" class="news-card-seemore right">Voir plus</a>
                             </main>
                             <footer id="articleInfo">
-                                <div class="news-card-stat">
-                                    <i class="icon icon-download"></i>&nbsp;
-                                    <a href="<?= $a->downloadUrl ?>" title="Télécharger la photo">Télécharger</a>
-                                </div>
                                 <div class="news-card-stat">
                                     <i class="icon icon-calendar"></i>&nbsp;
                                     <time id="date_created" data-time="<?= strtotime($a->date_created) ?>"><?= $a->time ?></time>
@@ -71,6 +109,37 @@
                                 </form>
                             </div>
                         </div>
+                        <div id="share-<?= $a->id ?>" class="modal grey dark-4 bottom-sheet">
+                            <div class="modal-content">
+                                <div class="col l12 m12 s12">
+                                    <div class="col l3 m3 s3">
+                                        <button class="btn btn-flat waves-effect hoverable" style="background: #4c67a1" data-action="share-facebook" data-url="<?= $a->url ?>">
+                                            <i class="icon icon-facebook"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col l3 m3 s3">
+                                        <button class="btn btn-flat waves-effect hoverable" style="background: #55acee" data-action="share-twitter" data-url="<?= $a->url ?>">
+                                            <i class="icon icon-twitter"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col l3 m3 s3">
+                                        <button class="btn btn-flat waves-effect hoverable" style="background: #d23f31" data-action="share-google-plus" data-url="<?= $a->url ?>">
+                                            <i class="icon icon-googleplus-rect"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col l3 m3 s3">
+                                        <button class="btn btn-flat waves-effect hoverable" style="background: #11a84d" data-action="share-whatsapp" data-url="<?= $a->url ?>">
+                                            <i class="icon icon-whatsapp"></i>
+                                        </button>
+                                    </div>
+                                    <div class="modal-footer col s12 grey dark-4" style="margin-top: 10px;">
+                                        <button class="btn transparent shadow-0 modal-action modal-close">
+                                            Annuler
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </article>
                 <?php endforeach ; ?>
                 <div id="statusBar" class="btn ng-progress-indeterminate disabled" data-ajax="blog">
@@ -80,6 +149,7 @@
                     <span></span>
                     <span></span>
                 </div>
+                <br>
             <?php else : ?>
                 <div class="section center-align">
                     <h2 class="icon icon-inbox red-txt center-align"></h2>
@@ -92,5 +162,32 @@
             <?php endif; ?>
         </div>
     </section>
+    <?php if (isset($posts) && !empty($posts)) : ?>
+        <?php foreach ($posts as $a) : ?>
+            <div id="report-<?= $a->id ?>" class="modal grey dark-4">
+                <div class="modal-content">
+                    <p>Choissez un motif pour le signalement de cette publication</p>
+                    <form action="<?= $a->watchoutUrl ?>" method="POST" data-action="watchout">
+                        <p>
+                            <input type="checkbox" class="filled-in" name="indesirable" id="indesirable">
+                            <label for="indesirable">Contenu indésirable</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="filled-in" name="inappropriate" id="inappropriate">
+                            <label for="inappropriate">Contenu inapproprié</label>
+                        </p>
+                        <div class="modal-footer transparent comment">
+                            <button type="submit" class="modal-action btn blue-grey dark-2 waves-effect">
+                                Envoyer
+                            </button>
+                            <button id="cmtAdd-<?= $a->id ?>" type="reset" class="btn btn-small transparent waves-effect modal-action modal-close">
+                                Annuler
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
     <?php require(APP."/Views/includes/menu-aside.php"); ?>
 </section>

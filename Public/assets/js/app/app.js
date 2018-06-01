@@ -1,6 +1,3 @@
-
-
-
 //Main Scripts
 //---------------------------------------------------------------------
 
@@ -24,6 +21,7 @@ function toggleMenuItem() {
     }
 }
 
+
 /**
  * premet de rendre un item du menu mobile active
  * @returns {boolean}
@@ -32,7 +30,9 @@ function toggleMobileMenuItem() {
     let active = document.querySelector("#menu-mobile-item-active");
     if (active) {
         try {
-            let link = document.querySelector("ul.mobile-links").querySelector("li#"+ active.getAttribute('data-active'));
+            let link = document
+                    .querySelector("ul.mobile-links")
+                    .querySelector("li#"+ active.getAttribute('data-active'));
             if (link) {
                 link.classList.add('active');
             }
@@ -49,8 +49,8 @@ function toggleMobileMenuItem() {
 /**
  * cree un timer relatif pour les dates
  */
-function relativeTimer(){
-    if (document.querySelectorAll('time[data-time]') ) {
+function relativeTimer(element){
+    if (document.querySelectorAll(element) ) {
         if (NodeList.prototype.forEach === undefined) {
             NodeList.prototype.forEach = function (callback) {
                 [].forEach.call(this, callback);
@@ -207,7 +207,7 @@ function share() {
             e.preventDefault();
             e.stopPropagation();
             let url = encodeURIComponent(this.getAttribute('data-url'));
-            let text = encodeURIComponent(msg.usersNotLogged);
+            let text = "Du nouveau sur Ngpictures !!!";
             let share =
                 "https://twitter.com/intent/tweet?text=" + text +
                 "&via=Ngpictures"
@@ -244,8 +244,8 @@ function share() {
 /**
  * affiche l'image a uploader avant l'upload
  */
-function showImageBeforeUpload() {
-    let form = document.querySelector("[data-action='upload']");
+function showImageBeforeUpload(element) {
+    let form = document.querySelector(element);
     if (form) {
         let input = form.querySelector("input[type='file']");
         let showContainer = document.querySelector("[data-action='show-uploaded-file']");
@@ -265,12 +265,9 @@ function showImageBeforeUpload() {
         };
 
         input.addEventListener('change', function() {
-            let files = this.files;
-            let file = files[0];
-            let ext = file.name.split('.');
+            let file = this.files[0];
+            let ext = file.name.substr(file.name.lastIndexOf('.') + 1).toLowerCase();
             let type = file.type;
-
-            ext = ext[ext.length - 1].toLowerCase();
 
             if (admitExt.includes(ext, 0) && adminTypes.includes(type, 0)) {
                 if (file.size <= 6291456) {
@@ -289,7 +286,7 @@ function showImageBeforeUpload() {
 //----------------------------------------------------------------------
 toggleMenuItem();
 toggleMobileMenuItem();
-relativeTimer();
+relativeTimer('time[data-time]');
 makeSticky('[data-sticky]');
 share();
-showImageBeforeUpload();
+showImageBeforeUpload("[data-action='upload']");

@@ -19,12 +19,14 @@ class VersesController extends Controller
             $verse = $this->verses->find($id);
 
             if ($this->isAjax()) {
-                $verse = [
-                    "txt" => $verse->text,
-                    "ref" => implode(' ', explode('.', $verse->ref)),
-                    "id" => $verse->id
-                ];
-                echo json_encode($verse);
+                if (isset($_GET['option']) && !empty($_GET['option'])) {
+                    $verse = [
+                        "txt" => $verse->text,
+                        "ref" => implode(' ', explode('.', $verse->ref)),
+                        "id" => $verse->id
+                    ];
+                    echo json_encode($verse);
+                }
             }
             return $verse;
         }

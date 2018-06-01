@@ -15,12 +15,14 @@ trait SearchQueryTrait
      */
     public function search(string $query, string $option = "begin")
     {
-        $query = addslashes(htmlentities($query));
+        $query      =   addslashes(htmlentities($query));
+        $title      =   ($this->table == 'gallery')? 'name' : 'title';
+        $content    =   ($this->table == 'gallery')? 'description' : 'content';
 
         switch ($option) {
             case "begin":
                 return $this->query(
-                    "SELECT * FROM {$this->table} WHERE title LIKE ? ",
+                    "SELECT * FROM {$this->table} WHERE {$title} LIKE ? ",
                     ["{$query}%"],
                     true,
                     false
@@ -29,7 +31,7 @@ trait SearchQueryTrait
 
             case "end":
                 return $this->query(
-                    "SELECT * FROM {$this->table} WHERE title LIKE ? ",
+                    "SELECT * FROM {$this->table} WHERE {$title} LIKE ? ",
                     ["%{$query}"],
                     true,
                     false
@@ -38,7 +40,7 @@ trait SearchQueryTrait
 
             case "within":
                 return $this->query(
-                    "SELECT * FROM {$this->table} WHERE title LIKE ?",
+                    "SELECT * FROM {$this->table} WHERE {$title} LIKE ?",
                     ["%{$query}%"],
                     true,
                     false
@@ -47,7 +49,7 @@ trait SearchQueryTrait
 
             case "concat":
                 return $this->query(
-                    "SELECT * FROM {$this->table} WHERE CONCAT(title,content) LIKE ? ",
+                    "SELECT * FROM {$this->table} WHERE CONCAT({$title},{$content}) LIKE ? ",
                     ["%{$query}%"],
                     true,
                     false

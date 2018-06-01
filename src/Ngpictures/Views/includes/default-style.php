@@ -1,4 +1,5 @@
-<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+<?php require(CORE."/Helpers/CacheBusting.php"); ?>
+<link rel="stylesheet" type="text/css" href="<?= CacheBusting("/assets/css/style.css") ?>">
 <style type="text/css">
     .turbolinks-progress-bar {
         position: fixed;
@@ -12,7 +13,7 @@
         transform: translate3d(0, 0, 0);
     }
 </style>
-<script type="text/javascript" src="/assets/js/lib/turbolinks.js"></script>
+<script type="text/javascript" src="<?= CacheBusting("/assets/js/lib/turbolinks.js") ?>"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110487894-1"></script>
 <script>
 	window.dataLayer = window.dataLayer || [];

@@ -35,6 +35,15 @@
   float: right !important;
 }
 
+.bw {
+  filter: grayscale(100%) !important;
+  opacity: 0.3;
+}
+
+.pb10 {
+  padding-bottom: 10px !important;
+}
+
 .no-select, input[type=range], input[type=range] + .thumb {
   -webkit-user-select: none;
      -moz-user-select: none;

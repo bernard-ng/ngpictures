@@ -31,6 +31,9 @@
                                 </a>
                             </li>
                         <?php endforeach; ?>
+                        <li class="collection-item waves-effect">
+                                <a href="/categories">Toutes les Catégories</a>
+                            </li>
                     </ul>
                 <?php endif; ?>
             </div>

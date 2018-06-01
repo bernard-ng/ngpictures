@@ -19,6 +19,14 @@ trait PostEntityTrait
     }
 
 
+    public function getSaveUrl(): string
+    {
+        $this->saveUrl = "saves/{$this->action_type}";
+        $this->saveUrl .= "/{$this->slug}-{$this->id}";
+        return $this->saveUrl;
+    }
+
+
     /**
      * lien vers la categorie de la publication
      * @return string
@@ -70,6 +78,12 @@ trait PostEntityTrait
         $this->downloadUrl = "/download";
         $this->downloadUrl .= "/{$this->action_type}/{$this->thumb}";
         return $this->downloadUrl;
+    }
+
+
+    public function getDownloads(): string
+    {
+        return (string) $this->downloads;
     }
 
 
@@ -159,11 +173,22 @@ trait PostEntityTrait
 
 
     /**
+     * renvoi vrai is on a dja saved la publication
+     * @return string
+     */
+    public function getIsSaved(): string
+    {
+        $saves = Ngpictures::getInstance()->getModel('saves');
+        return $saves->isSaved($this->id, $this->action_type);
+    }
+
+
+    /**
      * renvoi une partie de la publication, on truncate le text
      * et verifie les mentions des users
      * @return string
      */
-    public function getSnipet(): string
+    public function getSnipet()
     {
         $users = Ngpictures::getInstance()->getModel('users');
         $content = StringManager::getSnipet(StringManager::truncateText($this->content, 150));
@@ -175,9 +200,27 @@ trait PostEntityTrait
      * renvoi le text complet et verifie les mentions des users
      * @return string
      */
-    public function getFullText(): string
+    public function getFullText()
     {
         $users = Ngpictures::getInstance()->getModel('users');
-        return StringManager::userMention($users, $this->content);
+        return nl2br(StringManager::userMention($users, $this->content));
+    }
+
+    /**
+     * recupere les donnees exif d'une image
+     *
+     * @return string|null
+     */
+    public function getExifData()
+    {
+        return (is_null($this->exif)) ? null : json_decode($this->exif);
+    }
+
+
+    public function getLocationUrl()
+    {
+        $this->locationUrl = "/maps";
+        $this->locationUrl .= "?location={$this->SI}";
+        return $this->locationUrl;
     }
 }

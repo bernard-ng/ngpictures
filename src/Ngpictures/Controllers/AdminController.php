@@ -158,10 +158,16 @@ class AdminController extends Controller
             $post = new Collection($_POST);
             if (!empty($post->get('name')) && !empty($post->get('dir'))) {
                 $dir = str_replace('/uploads/', UPLOAD.'/', $post->get('dir'));
+                $tdir = str_replace('/uplads/thumbs/', UPLOAD.'/', $post->get('dir'));
+
                 if (is_dir($dir)) {
                     $file = $dir.'/'.$post->get('name');
-                    if (is_file($file)) {
+                    $thumb = $tdir.'/'.$post->get('name');
+
+                    if (is_file($file) || is_file($thumb)) {
                         unlink($file);
+                        unlink($thumb);
+
                         $this->flash->set('success', $this->msg['post_delete_success']);
                         $this->app::redirect(true);
                     } else {
@@ -354,7 +360,16 @@ class AdminController extends Controller
 
                         if ($isUploaded) {
                             ImageManager::upload($file, 'blog-thumbs', "ngpictures-{$slug}-{$last_id}", 'small');
-                            $this->blog->update($last_id, ['thumb' => "ngpictures-{$slug}-{$last_id}.jpg"]);
+                            $exif = ImageManager::getExif($file);
+
+                            $this->blog->update(
+                                $last_id,
+                                [
+                                    'thumb' => "ngpictures-{$slug}-{$last_id}.jpg",
+                                    'exif' => $exif
+                                ]
+                            );
+
                             $this->flash->set('success', $this->msg['form_post_submitted']);
                             $this->app::redirect(ADMIN . "/blog");
                         } else {
@@ -366,7 +381,7 @@ class AdminController extends Controller
                         $errors = new Collection($this->validator->getErrors());
                     }
                 } else {
-                    $this->flash->set('danger', $this->msg['post_requries_picture']);
+                    $this->flash->set('danger', $this->msg['post_requires_picture']);
                 }
             }
         }
@@ -505,23 +520,32 @@ class AdminController extends Controller
         $categories     =   $this->categories->orderBy('title', 'ASC');
 
         if (!empty($_FILES)) {
-            $name = (empty($post->get('name')))
-                ? strtolower(uniqid("ngpictures-"))
-                : $this->str::escape($post->get('name'));
+            $name = (empty($post->get('name'))) ?
+                strtolower(uniqid("ngpictures-")) :
+                $this->str::escape($post->get('name'));
 
             $tags           =   $this->str::escape($post->get('tags')) ?? null;
             $description    =   $this->str::escape($post->get('description')) ?? null;
             $categories_id    =   intval($post->get('category')) ?? 1;
+            $slug = $this->str::slugify($name);
 
             if (!empty($file->get('thumb'))) {
-                $this->gallery->create(compact('name', 'description', 'tags', 'categories_id'));
+                $this->gallery->create(compact('name', 'slug', 'description', 'tags', 'categories_id'));
                 $last_id    =   $this->gallery->lastInsertId();
-                $isUploaded =   ImageManager::upload($file, 'gallery', "{$name}-{$last_id}", 'ratio');
+                $isUploaded =   ImageManager::upload($file, 'gallery', "{$slug}-{$last_id}", 'ratio');
 
                 if ($isUploaded) {
-                    ImageManager::upload($file, 'gallery-thumbs', "{$name}-{$last_id}", 'small');
+                    ImageManager::upload($file, 'gallery-thumbs', "{$slug}-{$last_id}", 'small');
+                    $exif = ImageManager::getExif($file);
 
-                    $this->gallery->update($last_id, ["thumb" => "{$name}-{$last_id}.jpg"]);
+                    $this->gallery->update(
+                        $last_id,
+                        [
+                            "thumb" => "{$name}-{$last_id}.jpg",
+                            'exif' => $exif,
+                        ]
+                    );
+
                     $this->flash->set('success', $this->msg['form_post_submitted']);
                     $this->app::redirect(ADMIN . "/gallery");
                 } else {

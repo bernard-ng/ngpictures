@@ -39,7 +39,7 @@ class StringManager
      * @param int $maxChar
      * @return string
      */
-    public static function truncateText(string $text, int $maxChar = 155): string
+    public static function truncateText($text, int $maxChar = 155)
     {
         if (strlen($text) > $maxChar) {
              $text = substr($text, 0, $maxChar);
@@ -99,7 +99,7 @@ class StringManager
      * @param string $string
      * @return string
      */
-    public static function getSnipet(string $string): string
+    public static function getSnipet($string)
     {
         $snipet = preg_replace('#<p>|</p>#', '', $string);
         $snipet = preg_replace('#<h1>|<h2>|<h3>|<h4>|<h5>|</h1>|</h2>|</h3>|</h4>|</h5>#', '', $snipet);

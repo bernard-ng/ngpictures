@@ -11,15 +11,19 @@
                 </div>
                 <div class="card-reveal">
                     <span class="card-title"><?= $a->title; ?><i class="icon icon-cancel right"></i></span>
-                    <?= $a->snipet; ?>
+                    <div class="truncate">
+                        <?= $a->snipet; ?>
+                    </div>
+                    <a href="<?= $a->url ?>" class="btn btn-flat">Voir plus</a>
                 </div>
             </article>
         </div>
-        <?php endforeach; ?>
+    <?php endforeach; ?>
     </section>
     <section class="jumbotron dark col l12 s12 m12">
         <div class="container row">
-            <div class="row col l8 s12 m12 animated slideInLeft">
+            <?php include(APP . "/Views/includes/right-aside.php"); ?>
+            <div class="row col l6 s12 m12 animated slideInLeft">
                 <h2 class="ui header">Nos photos</h2>
                 <div class="">
                     <p>
@@ -42,34 +46,11 @@
                             <?= $article->title ?>
                         </span>
                     </div>
+                <?php else: ?>
+                    <img src="/imgs/shooting.jpeg" class="responsive-img" alt="ngpictures shooting banner">
                 <?php endif; ?>
             </div>
-
-            <div class="row col l4 s12 m12">
-                <div class="ui divided list animated slideInRight">
-                    <h2 class="ui header">Catégories</h2>
-                    <?php if (isset($categories) && !empty($categories)) : ?>
-                        <ul class="collection">
-                            <?php foreach ($categories as $category) : ?>
-                                <?php if (isset($article) && !empty($article)) : ?>
-                                    <li class="collection-item dark waves-effect col s12 <?= ($category->title == $article->category)? 'active' : '' ?>">
-                                <?php else : ?>
-                                    <li class="collection-item dark waves-effect col s12">
-                                <?php endif; ?>
-                                    <a href="<?= $category->url; ?>">
-                                        <div style="margin: 10px">
-                                            <div class="collection-item-title">
-                                                <?= $category->title; ?>
-                                                <span class="secondary-content"><i class="icon icon-right-open"></i></span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php endif; ?>
-                </div>
-            </div>
+            <?php include(APP."/Views/includes/menu-aside.php"); ?>
         </div>
     </section>
     <section class="section col l12 m12 s12">

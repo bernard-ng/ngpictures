@@ -1,5 +1,6 @@
 <section class="container row">
-    <div class="col l9 m12 s12">
+<?php include(APP . "/Views/includes/right-aside.php"); ?>
+    <div class="col l6 m12 s12">
         <div class="section">
             <div>
                 <h2 class="ui header">Objet</h2>

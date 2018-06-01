@@ -21,11 +21,12 @@ class StaticController extends Controller
     public function privacy()
     {
         $this->app::turbolinksLocation("/privacy");
+        $categories = $this->loadModel('categories')->orderBy('title', 'ASC', 0, 5);
         $this->setLayout("posts/default");
         $this->pageManager::setName("Politique d'utilisation");
         $this->pageManager::setDescription(
             'La présente clause a pour objet de définir les différents termes essentiels du contrat'
         );
-        $this->viewRender("front_end/others/privacy");
+        $this->viewRender("front_end/others/privacy", compact('categories'));
     }
 }

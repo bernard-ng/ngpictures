@@ -19,6 +19,7 @@ $router->get("/:user-:id", "users#account", "users.account");
 $router->get("/my-posts/:token", "posts#showPosts", "posts.show-post");
 $router->get("/my-followers/:token", "following#showFollowers", "users.show-followers");
 $router->get("/my-following/:token", "following#showFollowing", "users.show-following");
+$router->get('/my-saves/:token', 'saves#add', 'saves.index');
 $router->post("/delete-post/:token", "posts#delete", "posts.delete");
 
 
@@ -66,12 +67,15 @@ $router->get("/search/:q", "search", "search.index");
 //rss
 $router->get("/feed", "rss", "rss.index");
 
-//contact
+//others
 $router->any("/ideas", "ideas", "ideas.index");
 $router->any("/bugs", "bugs", "bugs.index");
 $router->any("/contact", "contact", "contact.index");
 $router->get("/about", "static#about", "static.about");
 $router->get("/privacy", "static#privacy", "static.privacy");
+$router->get("/booking", 'booking', 'reservation');
+$router->get('/saves/:type/:slug-:id', 'saves#add', 'saves.add');
+$router->get("/maps", 'maps#show', 'maps.show');
 
 
 
@@ -132,6 +136,6 @@ $router->get("/verses", "verses", "ajax.verses");
 
 //ERROR ROUTES
 /******************************************************************************/
-$router->get("/error/notfound","error#e404","app.found");
+$router->get("/error/not-found","error#e404","app.found");
 $router->get("/error/internal","error#e500","app.internal-server-error");
 $router->get("/error/forbidden","error#e403","app.forbidden");

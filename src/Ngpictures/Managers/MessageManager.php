@@ -33,6 +33,9 @@ class MessageManager implements ArrayAccess
         'post_online_success' => "Votre publication est désormais publique",
         'post_already_online' => "Votre publication est déjà publique",
         'post_offline_success' => "Votre publication est désormais privée",
+        'post_not_liked' => "Aucune mention j'aime pour cette publication",
+        'post_remove_save' => "Publication Rétirée des enregistrerments",
+        'post_saved' => "Publication ajoutée aux enregistrements",
 
 
         //FORM

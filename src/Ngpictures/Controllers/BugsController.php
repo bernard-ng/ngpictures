@@ -19,7 +19,7 @@ class BugsController extends Controller
         parent::__construct($app, $pageManager);
         $this->callController('users')->restrict();
         $this->loadModel('bugs');
-        $this->app::turbolinksLocation("bugs");
+        $this->app::turbolinksLocation("/bugs");
     }
 
 

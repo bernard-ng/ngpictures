@@ -23,7 +23,7 @@ class HomeController extends Controller
         $last           =   $this->blog->latest(1, 4);
         $photos         =   $this->gallery->latest();
         $article        =   $this->blog->last();
-        $categories     =   $this->categories->orderBy('id', 'ASC');
+        $categories     =   $this->loadModel('categories')->orderBy('title', 'DESC', 0, 5);
 
         $this->app::turbolinksLocation("/");
         $this->pageManager::setName('Ngpictures');

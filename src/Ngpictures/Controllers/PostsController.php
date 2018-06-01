@@ -62,12 +62,13 @@ class PostsController extends Controller
                 $title          =   $this->str::escape($post->get('title'));
                 $content        =   $this->str::escape($post->get('content'));
                 $slug           =   $this->str::slugify($title);
-                $categories_id    =   ($post->get('category') == 0) ? 1 : $post->get('category');
-                $users_id        =   intval($this->session->getValue(AUTH_KEY, 'id'));
+                $categories_id  =   ($post->get('category') == 0) ? 1 : $post->get('category');
+                $users_id       =   intval($this->session->getValue(AUTH_KEY, 'id'));
             } else {
                 $errors = new Collection($this->validator->getErrors());
                 $this->flash->set('danger', $this->msg['form_multi_errors']);
             }
+
 
             if (isset($_FILES) && !empty($_FILES)) {
                 if (!empty($file->get('thumb.name'))) {
@@ -79,7 +80,17 @@ class PostsController extends Controller
 
                         if ($isUploaded) {
                             ImageManager::upload($file, 'posts-thumbs', "ngpictures-{$slug}-{$last_id}", 'medium');
-                            $this->posts->update($last_id, ['thumb' => "ngpictures-{$slug}-{$last_id}.jpg"]);
+                            $exif = ImageManager::getExif($file);
+
+                            $this->posts->update(
+                                $last_id,
+                                [
+                                    'thumb' => "ngpictures-{$slug}-{$last_id}.jpg",
+                                    'exif' => $exif
+                                ]
+                            );
+
+
                             $this->flash->set('success', $this->msg['form_post_submitted']);
                             $this->app::redirect("/posts");
                         } else {

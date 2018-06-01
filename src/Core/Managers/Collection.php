@@ -36,6 +36,22 @@ class Collection implements IteratorAggregate, ArrayAccess
 
 
     /**
+     * renvoi une liste de donne des entites de la base de donne.
+     * cree une list d'id des entity de publication...
+     */
+    public function asList(string $glue = ', '): string
+    {
+        $array = [];
+        foreach($this->items as $item) {
+            if (is_object($item)) {
+                $array[] = $item->id;
+            }
+        }
+        return implode($glue, $list);
+    }
+
+
+    /**
      * permet de recupere la clef d'un tableau.
      *
      * @param mixed $key recupere la clef d'un tableau.

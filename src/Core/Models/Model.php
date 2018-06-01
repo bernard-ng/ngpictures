@@ -196,15 +196,13 @@ class Model
      * de resultat.
      *
      * @param string $list
-     * @return void
+     * @return mixed
      */
     public function findList(string $list)
     {
         return $this->query(
             "SELECT * FROM {$this->table} WHERE id IN ({$list}) ",
-            null,
-            true,
-            false
+            null
         );
     }
 

@@ -6,7 +6,7 @@
                     <img src="<?= $photo->thumbUrl; ?>">
                     <?php if (!empty($photo->description)) : ?>
                         <div class="caption left-align">
-                            <h2 class="ui header white-txt"><?= strtoupper($photo->name ?? $photo->title); ?></h2>
+                            <h2 class="ui header white-txt"><?= ucfirst($photo->name ?? $photo->title); ?></h2>
                             <p class=""><?= $photo->description ?></p>
                         </div>
                     <div class="bg"></div>
@@ -23,7 +23,7 @@
             <li id="reset">
                 <img src="/imgs/outils.jpeg">
                 <div class="caption center-align">
-                    <h3 class="ng-heading">DEEP SHOOTING</h3>
+                    <h2 class="">Deep Shooting</h2>
                     <h6 class="light grey-text text-lighten-3">Aucune photo disponible pour l'instant</h6>
                 </div>
                 <div class="bg"></div>

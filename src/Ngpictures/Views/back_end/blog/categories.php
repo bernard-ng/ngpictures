@@ -1,6 +1,5 @@
 <section class="row container">
-    <?php include(APP."/Views/includes/left-aside.php"); ?>
-    <main class="col s12 m12 l9">
+    <section class="col s12 m12 l9">
         <div class="card-panel">
             <div class="section-title mb-20 mt-20 ml-10">
                 <i class="icon icon-tag"></i>&nbsp;Les Catégories
@@ -45,5 +44,6 @@
                 </tbody>
             </table>
         </div>
-    </main>
+    </section>
+    <?php include(APP . "/Views/includes/menu-aside.php"); ?>
 </section>

@@ -1,6 +1,10 @@
 <?php
 namespace Ngpictures\Controllers;
 
+use Ng\Core\Managers\StringManager;
+use Ngpictures\Ngpictures;
+use Ngpictures\Traits\Util\TypesActionTrait;
+
 class DownloadController extends Controller
 {
 
@@ -12,14 +16,17 @@ class DownloadController extends Controller
         1 => UPLOAD."/posts/",
         UPLOAD."/gallery/",
         UPLOAD."/blog/",
-        UPLOAD."/client/"
     ];
+
+
+    use TypesActionTrait;
 
 
     /**
     * permet de telecharger un fichier a partir de son type et de son nom, c'est
     * specifique a notre application. on envoit des headers particulier pour forcer
     * le telechargement.
+     * si on a l'option once. on telecharge just sans incrementer le compteur
      * @param int $type
      * @param string $file_name
     */
@@ -30,39 +37,51 @@ class DownloadController extends Controller
             $file_name  =   $this->str::escape($file_name);
             $file       =   self::$path[$type].$file_name;
 
-            if (file_exists($file)) {
-                header('Content-Type: application/octet-stream');
-                header('Content-Transfer-Encoding: Binary');
-                header('Content-Disposition: attachement; filename="'.basename($file).'"');
-                echo readfile($file);
-                exit();
+            $posts = $this->loadModel($this->getAction($type));
+            $post = $posts->findWith('thumb', $file_name);
+
+            if ($post) {
+                if (file_exists($file)) {
+                    if(isset($_GET['option']) && !empty($_GET['option'])) {
+                        $this->download($file);
+                    } else {
+                        $downloads = (int) $post->downloads + 1;
+                        $posts->update($post->id, compact('downloads'));
+
+                        if($this->isAjax()) {
+                            $post = $posts->find($post->id);
+                            echo (int) $post->downloads;
+                            exit();
+                        }
+
+                        $this->download($file);
+                    }
+                } else {
+                    ($this->isAjax()) ?
+                        $this->ajaxFail($this->msg['files_not_found']) :
+                        $this->flash->set('danger', $this->msg['files_not_found']);
+                        $this->app::redirect(true);
+                }
             } else {
-                $this->flash->set('danger', $this->msg['files_not_found']);
-                $this->app::redirect(true);
+                ($this->isAjax()) ?
+                    $this->ajaxFail($this->msg['files_download_failed']) :
+                    $this->flash->set('danger', $this->msg['files_download_failed']);
+                    $this->app::redirect(true);
             }
-        } else {
-            $this->flash->set('danger', $this->msg['files_download_failed']);
-            $this->app::redirect(true);
         }
     }
 
 
     /**
-     * information sur le telechargement
-     *
-     * @param integer $type
-     * @param string $file_name
-     * @param string $namespace
-     * @return void
+     * telecharge un fichier
+     * @param $file
      */
-    public function show(int $type, string $file_name)
+    private function download($file)
     {
-        $type       =   intval($type);
-        $file_name  =   $this->str::escape($file_name);
-        $file       =   self::$path[$type].$file_name;
-
-        $this->pageManager::setName("Télécharger");
-        $this->setLayout("posts/default");
-        $this->viewRender("front_end/others/download");
+        header('Content-Type: application/octet-stream');
+        header('Content-Transfer-Encoding: Binary');
+        header('Content-Disposition: attachement; filename="'.basename($file).'"');
+        echo readfile($file);
+        exit();
     }
 }

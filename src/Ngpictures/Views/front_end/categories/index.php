@@ -1,32 +1,39 @@
- <?php include(APP."/Views/includes/mobile-menu.php"); ?>
- <div class="jumbotron">
-    <?php include(APP."/Views/includes/menu.php"); ?>
-    <div class="container row">
-        <span class="jumbotron-title">
-            <i class="icon icon-tags"></i> Catégories
-        </span>
-        <span class="jumbotron-content">
-           les cates  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        </span>
-    </div>
-</div>
-
-<div class="container row">
-    <?php include(APP."/Views/includes/left-aside.php"); ?>
-    <?php foreach ($categories as $c) : ?>
-        <div class="col l3 m6 s12">
-            <div class="card verse-panel">
-                <div class="card-content ng-contain">
-                    <span class="card-title"><?= $c->title ?>  <span class="badge new right">123</span></span>
-                    <p>
-                        <?= $c->description ?>
-                    </p>
+<section class="section container row">
+    <?php include(APP."/Views/includes/right-aside.php"); ?>
+    <?php if(isset($categories) && !empty($categories)): ?>
+        <div class="col nexted l9 m12 s12">
+            <?php foreach ($categories as $c) : ?>
+                <div class="col nexted l3 m4 s12">
+                    <div class="card" style="background-color: #100F0F">
+                        <div class="card-image">
+                            <a href="<?= $c->url ?>" class="waves-effect">
+                            <?php foreach ($thumbs as $key => $value) : ?>
+                                    <?php if ($key == $c->id) : ?>
+                                        <img src="<?= $value ?>" alt="<?= $c->title ?>" class="responsive-img">
+                                    <?php endif; ?>
+                            <?php endforeach; ?>
+                            </a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title ui header">
+                                <?= $c->title ?>
+                            </span>
+                             <?= $nb[$c->id] ?> publication<?= $nb[$c->id] > 1 ? 's' : '' ?>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-action">
-                    <a href="<?= $c->url ?>">Voir</a>
-                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php else: ?>
+        <div class="col l9 m12 s12 animated slideInRight">
+            <div class="section center-align">
+                <h2 class="icon icon-tag red-txt center-align"></h2>
+                <h2 class="ui header divided center"> Aucune publication pour l'instant</h2>
+                <p>
+                    cette Catégorie ne présente actuellement aucune publication disponible, les publications sont peut être en évaluation,
+                    ceci pourrait prendre du temps, veuillez revenir plus tard
+                </p>
             </div>
         </div>
-    <?php endforeach; ?>
-</div>
+    <?php endif; ?>
+</section>

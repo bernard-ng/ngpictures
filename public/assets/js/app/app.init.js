@@ -36,6 +36,9 @@ msg = {
     usersNotLogged : "Connectez-vous pour continuer",
     usersUnfollowingSuccess : "Vous ne suivez plus cet utilisateur",
     usersFollowingSuccess : "Vous suivez cet utilisateur",
+
+    postSaved: "Publication ajoutée aux enregistrements",
+    postRemoveSave: "Publication Rétirée des enregistrerments"
 };
 
 /**
@@ -163,6 +166,7 @@ function removeLoader(element, text) {
 }
 
 
+//lancement des librarie extrene, jquery, materialize, etc...
 $(document).ready(function(){
     $('.button-collapse').sideNav({
         size: 250
@@ -185,8 +189,17 @@ $(document).ready(function(){
         interval: 5000
     });
 
-    $('.tool').tooltip();
-    $('.dropdown-button').dropdown();
+    $('.tool').tooltip({
+        position: 'top',
+        delay: 50,
+
+    });
+    $('.dropdown-button').dropdown({
+        hover: false,
+        gutter: 5,
+        belowOrigin: false,
+        alignment: 'right'
+    });
     $('.parallax').parallax();
     $('.modal').modal({
         opacity: 0.5,

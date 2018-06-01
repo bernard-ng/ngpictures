@@ -29,7 +29,7 @@ class GalleryController extends Controller
         $photo = $this->gallery->latest();
         $photos = $this->gallery->lastOnline();
 
-        $this->app::turbolinksLocation("gallery");
+        $this->app::turbolinksLocation("/gallery");
         $this->pageManager::setName('Galerie');
         $this->setLayout('posts/default');
         $this->viewRender('front_end/gallery/index', compact('photo', 'photos'));
@@ -46,7 +46,7 @@ class GalleryController extends Controller
     {
         $photo = $this->gallery->find(intval($id));
         if ($photo) {
-            $this->app::turbolinksLocation("gallery/{$id}");
+            $this->app::turbolinksLocation("/gallery/{$id}");
             $this->viewRender('front_end/gallery/show', compact('photo'), false);
         } else {
             if ($this->isAjax()) {
@@ -67,7 +67,7 @@ class GalleryController extends Controller
     {
         $albums = $this->loadModel('albums')->all();
 
-        $this->app::turbolinksLocation("gallery/albums");
+        $this->app::turbolinksLocation("/gallery/albums");
         $this->pageManager::setName('albums');
         $this->setLayout('posts/default');
         $this->viewRender('front_end/gallery/albums', compact("albums"));

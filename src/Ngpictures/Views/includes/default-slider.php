@@ -5,7 +5,7 @@
             <li>
                 <img src="<?= $photo->thumbUrl; ?>">
                 <div class="caption center-align">
-                    <h3 class="ng-heading">DEEP SHOOTING</h3>
+                    <h2 class="title">Deep Shooting</h2>
                     <h6 class="light grey-text text-lighten-3">
                     Découvrez la version 2.0 de ngpictures et toutes les nouvelles fonctionnalités.</h6>
                 </div>
@@ -16,7 +16,7 @@
             <li>
                 <img src="/imgs/outils.jpeg">
                 <div class="caption center-align">
-                    <h3 class="ng-heading">DEEP SHOOTING</h3>
+                    <h2 class="title">Deep Shooting</h2>
                     <h6 class="light grey-text text-lighten-3">
                     Découvrez la version 2.0 de ngpictures et toutes les nouvelles fonctionnalités.</h6>
                 </div>
