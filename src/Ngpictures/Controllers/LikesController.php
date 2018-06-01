@@ -1,6 +1,7 @@
 <?php
 namespace Ngpictures\Controllers;
 
+use Ng\Core\Managers\Collection;
 use Ngpictures\Traits\Util\TypesActionTrait;
 use Ngpictures\Ngpictures;
 use Ngpictures\Managers\PageManager;
@@ -9,6 +10,7 @@ class LikesController extends Controller
 {
 
     use TypesActionTrait;
+    private $user;
 
     /**
      * LikesController constructor.
@@ -18,8 +20,8 @@ class LikesController extends Controller
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
-        $this->callController('users')->restrict();
-        $this->users_id = intval($this->session->getValue(AUTH_KEY, 'id'));
+        $this->authService->restrict();
+        $this->user = $this->authService->isLogged();
     }
 
 
@@ -34,15 +36,15 @@ class LikesController extends Controller
         $post   =   $this->loadModel($this->getAction($type))->find(intval($id));
 
         if ($post && $post->slug === $slug) {
-            if ($like->isLiked($post->id, $type, $this->users_id)) {
-                $like->remove($post->id, $type, $this->users_id);
+            if ($like->isLiked($post->id, $type, $this->user->id)) {
+                $like->remove($post->id, $type, $this->user->id);
                 if ($this->isAjax()) {
                     echo $post->likes;
                 } else {
                     $this->app::redirect(true);
                 }
             } else {
-                $like->add($post->id, $type, $this->users_id);
+                $like->add($post->id, $type, $this->user->id);
                 if ($this->isAjax()) {
                     echo $post->likes;
                 } else {
@@ -51,9 +53,9 @@ class LikesController extends Controller
             }
         } else {
             if ($this->isAjax()) {
-                $this->ajaxFail($this->msg['undefined_error']);
+                $this->ajaxFail($this->msg['post_not_found']);
             }
-            $this->flash->set("danger", $this->msg['undefined_error']);
+            $this->flash->set("danger", $this->msg['post_not_found']);
             $this->app::redirect(true);
         }
     }
@@ -73,16 +75,10 @@ class LikesController extends Controller
 
         if ($post && $post->slug === $slug) {
             $likes      =   $this->loadModel('likes');
-            $likers     =   $likes->getLikers($id, $type);
+            $likers     =  (new Collection($likes->getLikers($id, $type)))->asList();
 
-            $likers_list = [];
-            foreach ($likers as $liker) {
-                $likers_list[] = $liker['users_id'];
-            }
-
-            $likers_list = implode(", ", $likers_list);
-            if (!empty($likers_list)) {
-                $likers = $this->loadModel('users')->findList($likers_list);
+            if (!empty($likers)) {
+                $likers = $this->loadModel('users')->findList($likers);
 
                 $this->app::turbolinksLocation("/likes/show/{$type}/{$slug}-{$id}");
                 $this->pageManager::setName("Mentions j'aime");

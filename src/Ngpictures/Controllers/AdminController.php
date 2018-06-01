@@ -57,11 +57,13 @@ class AdminController extends Controller
      * n'index pas la page au resultat de recherche
      * et charge tout les models dont a besion
      * AdminController constructor.
+     * @param Ngpictures $app
+     * @param PageManager $pageManager
      */
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
-        $this->callController('users')->isAdmin();
+        $this->authService->isAdmin();
 
         $this->pageManager::setMeta(['name' => 'robots', 'content' => 'noindex']);
         $this->loadModel(['users', 'posts', 'blog', 'gallery', 'ideas', 'bugs', 'categories', 'verses', 'albums']);
