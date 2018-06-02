@@ -211,9 +211,9 @@ $(document).ready(function(){
     $('.ul-tabs').tabs();
     $('select').material_select();
 
-    if (typeof ParticlesJS !== "undefined") {
-        particlesJS("particles-container",
-            {
+    if (typeof particlesJS !== "undefined") {
+        try {
+            particlesJS("particles-container", {
                 "particles": {
                     "number": {
                         "value": 100,
@@ -263,7 +263,7 @@ $(document).ready(function(){
                     "line_linked": {
                         "enable": true,
                         "distance": 160.3412060865523,
-                        "color": "#cccccc",
+                        "color": "#4c4c4c",
                         "opacity": 0.4890406785639845,
                         "width": 1
                     },
@@ -323,6 +323,9 @@ $(document).ready(function(){
                 },
                 "retina_detect": true
             });
+        } catch (e) {
+            return false;
+        }
     }
 
 });
