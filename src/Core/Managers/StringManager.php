@@ -66,7 +66,7 @@ class StringManager
         $text = preg_replace('#-+#', '-', $text);
         $text = strtolower($text);
         if (empty($text)) {
-            return 'n-a';
+            return 'sans-titre';
         }
         return $text;
     }

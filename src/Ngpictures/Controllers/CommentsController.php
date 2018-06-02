@@ -10,6 +10,7 @@ class CommentsController extends Controller
 {
 
     use TypesActionTrait;
+    private $user;
 
     /**
      * CommentsController constructor.
@@ -21,8 +22,9 @@ class CommentsController extends Controller
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
-        $this->callController('users')->restrict();
-        $this->users_id = intval($this->session->getValue(AUTH_KEY, 'id'));
+        $this->authService->restrict();
+        $this->user = $this->authService->isLogged();
+        $this->loadModel('comments');
     }
 
 
@@ -45,16 +47,14 @@ class CommentsController extends Controller
                 $comment = $this->str::escape($post->get('comment'));
                 $comments->create(
                     [
-                        'users_id' => $this->users_id,
+                        'users_id' => $this->user->id,
                         $this->getType($type) => $publication->id,
                         'comment' => $comment
                     ]
                 );
 
                 if ($this->isAjax()) {
-                    echo $this->loadModel(
-                        $this->getAction($type)
-                    )->find(intval($id))->getCommentsNumber();
+                    echo $this->loadModel($this->getAction($type))->find(intval($id))->getCommentsNumber();
                     exit();
                 } else {
                     $this->flash->set('success', $this->msg['form_comment_submitted']);
@@ -84,13 +84,12 @@ class CommentsController extends Controller
      */
     public function delete($id, $token)
     {
-        $comments   =   $this->loadModel('comments');
-        $comment    =   $comments->find(intval($id));
+        $comment    =   $this->comments->find(intval($id));
 
-        if ($token == $this->session->read(TOKEN_KEY)) {
+        if ($token == $this->authService->getToken()) {
             if ($comment) {
-                if ($comment->users_id == $this->users_id) {
-                    $comments->delete($id);
+                if ($comment->users_id == $this->user->id) {
+                    $this->comments->delete($id);
                     $this->flash->set('success', $this->msg['comment_delete_success']);
                     $this->app::redirect(true);
                 } else {
@@ -116,17 +115,16 @@ class CommentsController extends Controller
     public function edit($id, $token)
     {
         if ($token == $this->session->read(TOKEN_KEY)) {
-            $comments   =   $this->loadModel('comments');
-            $comment    =   $comments->find(intval($id));
+            $comment    =   $this->comments->find(intval($id));
             $post       =   new Collection($_POST);
 
             if ($comment) {
-                if ($comment->users_id == $this->users_id) {
+                if ($comment->users_id == $this->user->id) {
                     $this->validator->setRule('comment', 'required');
 
                     if ($this->validator->isValid()) {
                         $text = $this->str::escape($post->get('comment_edit'));
-                        $comments->update($comment->id, ['comment' => $text]);
+                        $this->comments->update($comment->id, ['comment' => $text]);
 
                         $this->flash->set('success', $this->msg['comment_edit_success']);
                         $this->app::redirect(true);

@@ -4,7 +4,11 @@ namespace Ngpictures\Controllers;
 use Ngpictures\Ngpictures;
 use Ngpictures\Managers\PageManager;
 use Ng\Core\Controllers\Controller as SuperController;
+use Ngpictures\Services\Auth\DatabaseAuthService;
 
+/**
+ * @property DatabaseAuthService authService
+ */
 class Controller extends SuperController
 {
     protected $app;
@@ -17,6 +21,7 @@ class Controller extends SuperController
     protected $viewPath;
     protected $validator;
     protected $pageManager;
+    protected $cacheBusting;
 
 
     /**
@@ -40,6 +45,7 @@ class Controller extends SuperController
         $this->session          =   $this->app->getSession();
         $this->validator        =   $this->app->getValidator();
         $this->cacheBusting     =   $this->app->getCacheBusting();
+        $this->authService = new DatabaseAuthService($this->app, $this->loadModel('users'));
     }
 
 
@@ -58,7 +64,7 @@ class Controller extends SuperController
         $variables['sessionManager']        =   $this->session;
         $variables['flashMessageManager']   =   $this->flash;
 
-        if (!empty($this->session->read(AUTH_KEY))) {
+        if ($this->authService->isLogged()) {
             $variables['activeUser']        =   $this->session->read(AUTH_KEY);
             $variables['securityToken']     =   $this->session->read(TOKEN_KEY);
 

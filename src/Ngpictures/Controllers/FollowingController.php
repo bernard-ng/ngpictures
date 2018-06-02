@@ -7,11 +7,7 @@ use Ngpictures\Managers\PageManager;
 class FollowingController extends Controller
 {
 
-    /**
-     * l'id du user qui va suivre une autr personne
-     * @var int|null
-     */
-    private $users_id = null;
+    private $user;
 
 
     /**
@@ -22,9 +18,9 @@ class FollowingController extends Controller
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
-        $this->callController('users')->restrict();
+        $this->authService->restrict();
+        $this->user = $this->authService->isLogged();
         $this->loadModel(['users', 'following']);
-        $this->users_id = intval($this->session->getValue(AUTH_KEY, 'id'));
     }
 
 
@@ -41,13 +37,13 @@ class FollowingController extends Controller
         $user = $this->loadModel('users')->find(intval($id));
 
         if ($user) {
-            if ($model->isFollowed($user->id, $this->users_id)) {
-                $model->remove($user->id, $this->users_id);
+            if ($model->isFollowed($user->id, $this->user->id)) {
+                $model->remove($user->id, $this->user->id);
                 $this->flash->set("success", $this->msg['users_unfollowing_success']);
                 $this->app::redirect(true);
             }
 
-            $model->add($user->id, $this->users_id);
+            $model->add($user->id, $this->user->id);
             $this->flash->set("success", $this->msg['users_following_success']);
             $this->app::redirect(true);
         } else {

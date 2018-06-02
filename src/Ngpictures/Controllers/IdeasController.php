@@ -12,7 +12,7 @@ class IdeasController extends Controller
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
-        $this->callController('users')->restrict();
+        $this->authService->restrict();
         $this->loadModel('ideas');
         $this->app::turbolinksLocation("/ideas");
     }

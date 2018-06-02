@@ -36,8 +36,20 @@ class Collection implements IteratorAggregate, ArrayAccess
 
 
     /**
+     * encode le tableau en json.
+     * @return string
+     */
+    public function asJson(): string
+    {
+        return json_encode($this->items);
+    }
+
+
+    /**
      * renvoi une liste de donne des entites de la base de donne.
      * cree une list d'id des entity de publication...
+     * @param string $glue
+     * @return string
      */
     public function asList(string $glue = ', '): string
     {
@@ -47,7 +59,7 @@ class Collection implements IteratorAggregate, ArrayAccess
                 $array[] = $item->id;
             }
         }
-        return implode($glue, $list);
+        return implode($glue, $this->items);
     }
 
 

@@ -24,9 +24,13 @@ class HomeController extends Controller
         $photos         =   $this->gallery->latest();
         $article        =   $this->blog->last();
         $categories     =   $this->loadModel('categories')->orderBy('title', 'DESC', 0, 5);
+        $sliderTitle    =   ["Deep Shooting", "See the beauty", "Discover More", "Share feelings"];
 
         $this->app::turbolinksLocation("/");
         $this->pageManager::setName('Ngpictures');
-        $this->viewRender("front_end/index", compact('last', 'article', 'photos', 'categories'));
+        $this->viewRender(
+            "front_end/index",
+            compact('last', 'article', 'photos', 'categories', 'sliderTitle')
+        );
     }
 }

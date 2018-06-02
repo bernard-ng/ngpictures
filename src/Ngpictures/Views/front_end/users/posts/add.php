@@ -1,4 +1,4 @@
-<section class="container row">
+<section class="section container row">
     <?php include(APP."/Views/includes/right-aside.php"); ?>
     <section class="col row l6 m12 s12">
         <div class="grey dark-4 col l12 m12 s12">

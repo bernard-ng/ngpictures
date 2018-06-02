@@ -83,50 +83,6 @@ $router->get("/maps", 'maps#show', 'maps.show');
 $router->get("/facebook/connect", "facebook#connect", "facebook.connect");
 
 
-//BACK-END ROUTES
-/***************************************************************************/
-$router->get(ADMIN,"admin","admin.index");
-
-//logs
-$router->get(ADMIN."/logs","admin#showLogs","admin.logs");
-$router->get(ADMIN."/logs/delete", "admin#deleteLogs", "admin.deleteLogs");
-$router->get(ADMIN."/logs/send", "admin#sendLogs", "admin.sendLogs");
-
-//pages
-$router->get(ADMIN."/pages", "admin#showPages", "admin.showPages");
-$router->any(ADMIN."/pages/:name", "admin#editPages", "admin.editPages");
-
-
-//posts and blog pages
-$router->any(ADMIN."/blog/edit/:id","admin#edit", "admin.blog-edit");
-$router->any(ADMIN."/blog/add","admin#add", "admin.blog-add");
-$router->any(ADMIN."/blog/categories/add", "admin#addCategory", "admin.categories-add");
-$router->any(ADMIN."/blog/categories/edit/:id", "admin#editCategory", "admin.categories-edit");
-$router->get(ADMIN."/blog","admin#blog", "admin.blog");
-$router->get(ADMIN."/blog/categories", "admin#categories", "admin.categories");
-$router->get(ADMIN."/confirm/:t/:id","admin#confirm","admin.confirm");
-$router->get(ADMIN."/posts","admin#posts","admin.posts");
-$router->post(ADMIN."/delete","admin#delete","admin.delete");
-
-//gallery pages
-$router->any(ADMIN."/gallery/add","admin#addGallery","admin.gallery-add");
-$router->any(ADMIN."/gallery/edit/:id","admin#editGallery","admin.gallery-edit");
-$router->any(ADMIN."/gallery/albums/edit/:id", "admin#editAlbum", "admin.album-edit");
-$router->any(ADMIN."/gallery/albums/add", "admin#addAlbum", "admin.album-add");
-$router->any(ADMIN."/gallery/watermark/:type/:filename", "admin#watermark", "admin.watermarker");
-$router->get(ADMIN."/gallery","admin#gallery","admin.gallery");
-$router->get(ADMIN."/gallery/albums", "admin#album", "admin.gallery.album");
-$router->get(ADMIN."/media-browser", "admin#mediaBrowser", "admin.gallery-mediaBrowser");
-$router->get(ADMIN."/file-browser/:dirname", "admin#fileBrowser", "admin.fileBrowser");
-$router->post(ADMIN."/deleteFile", "admin#deleteFile", "admin.gallery-deletefile");
-
-//users pages
-$router->get(ADMIN."/users","admin#users","admin.users");
-$router->get(ADMIN."/users/permissions/:id", "admin#permissions", "admin.permissions");
-$router->get(ADMIN."/users/bugs", "admin#bugs", "admin.bugs");
-$router->get(ADMIN."/users/ideas", "admin#ideas", "admin.ideas");
-
-
 // AJAX ROUTES
 /*****************************************************************************/
 $router->post("/ajax/posts", "ajax#posts", "ajax.posts");

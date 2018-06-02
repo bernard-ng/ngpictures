@@ -68,7 +68,7 @@ class Router
     /**
      * registration de route en GET et POST
      * @param string $path
-     * @param callalbe|string $controller
+     * @param callable|string $controller
      * @param string $name
      * @return Route
      */
@@ -115,7 +115,7 @@ class Router
      * lance le router apartir du nom d'une route
      * @param string $name
      * @param array $params
-     * @return void
+     * @return mixed
      */
     private function url(string $name, array $params = [])
     {

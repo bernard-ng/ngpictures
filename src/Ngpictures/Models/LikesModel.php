@@ -76,7 +76,7 @@ class LikesModel extends Model
     public function getLikes(int $id, int $type): int
     {
         return $this->query(
-            "SELECT id,users_id FROM {$this->table} WHERE {$this->getType($type)} = {$id}",
+            "SELECT users_id FROM {$this->table} WHERE {$this->getType($type)} = {$id}",
             [$id],
             true,
             false,
@@ -90,7 +90,7 @@ class LikesModel extends Model
      *
      * @param integer $id
      * @param integer $type
-     * @return void
+     * @return mixed
      */
     public function getLikers(int $id, int $type)
     {
