@@ -1,11 +1,11 @@
 <div class="slider">
     <ul class="slides">
     <?php if (isset($photos) && !empty($photos)) : ?>
-        <?php foreach ($photos as $photo) : ?>
+        <?php foreach ($photos as $key => $photo) : ?>
             <li>
                 <img src="<?= $photo->thumbUrl; ?>">
                 <div class="caption center-align">
-                    <h2 class="title">Deep Shooting</h2>
+                    <h2 class="title"><?= $sliderTitle[$key] ?></h2>
                     <h6 class="light grey-text text-lighten-3">
                     Découvrez la version 2.0 de ngpictures et toutes les nouvelles fonctionnalités.</h6>
                 </div>

@@ -43,6 +43,7 @@ class Route
      * Route constructor
      * @param string $path
      * @param callable|string $controller
+     * @param Ngpictures $app
      */
     public function __construct(string $path, $controller, Ngpictures $app)
     {
@@ -69,7 +70,7 @@ class Route
      * verifi si une url correspond a une route
      *
      * @param string $url
-     * @return void
+     * @return bool
      */
     public function match(string $url)
     {
@@ -118,7 +119,7 @@ class Route
 
     /**
      * execute la callable correspondant a la route.
-     * @return void
+     * @return mixed
      */
     public function call()
     {

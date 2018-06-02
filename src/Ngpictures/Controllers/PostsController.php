@@ -54,8 +54,8 @@ class PostsController extends Controller
 
         if (isset($_POST) && !empty($_POST)) {
 
-            $title          =   $this->str::escape($post->get('title') ?? "post");
-            $content        =   $this->str::escape($post->get('content') ?? "{{description}}");
+            $title          =   $this->str::escape($post->get('title'));
+            $content        =   $this->str::escape($post->get('content'));
             $slug           =   $this->str::slugify($title);
             $categories_id  =   (intval($post->get('category')) == 0) ? 1 : intval($post->get('category'));
             $users_id       =   $this->authService->isLogged()->id;

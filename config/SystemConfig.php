@@ -18,7 +18,7 @@ return [
 	],
 
 	"sys" => [
-		'debug' => true,
+		'debug' => false,
 		'cache' => false
 	]
 ];

@@ -19,7 +19,8 @@ require(ROOT."/vendor/autoload.php");
  */
 try {
     $router = new Router($_GET['url'] ?? $_SERVER['REQUEST_URI'], Ngpictures::getInstance());
-    require(ROOT."/config/RoutesConfig.php");
+    require(ROOT."/config/Routes/FrontendRoutes.php");
+    require(ROOT."/config/Routes/BackendRoutes.php");
     $router->run();
 } catch (RouterException $e) {
     Ngpictures::redirect("/error/internal");
