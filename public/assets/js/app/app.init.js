@@ -180,7 +180,11 @@ $(document).ready(function(){
     $("img.boxed").materialbox();
     $('.collapsible').collapsible();
     $('.carousel .big').carousel({fullWidth: true});
-    $('.carousel').carousel();
+    $('.carousel').carousel({
+        dist: -20,
+        indicators: true,
+        noWrap: false
+    });
     $('.slider').slider({
         interval: 5000
     });

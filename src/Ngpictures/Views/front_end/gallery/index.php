@@ -1,4 +1,15 @@
-<section class="section row container">
+<section class="section jumbotron dark hide-on-med-and-up">
+    <div class="container animated slideInRight">
+        <div class="carousel small">
+            <?php foreach($photos as $photo): ?>
+                <a href="<?= $photo->url ?>" class="carousel-item">
+                    <img src="<?= $photo->smallThumbUrl ?>" alt="<?= $photo->name ?>">
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<section class="section container row">
     <?php if (isset($photos) && !empty($photos)) : ?>
         <section id="gallery" class="gallery-container animated fast slideInLeft">
             <?php foreach ($photos as $key => $photo) :  ?>
