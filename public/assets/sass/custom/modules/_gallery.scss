@@ -1,17 +1,30 @@
+@import "../bases/variables";
+
 .gallery {
-    &-details {
-        display: none;
-    }
+  display: grid;
+  transition: all linear 0.3s;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 5px;
+  grid-auto-flow: row dense;
 
-    &-container {
-        & img {
-            cursor: pointer !important;
-        }
+  .gallery-item {
+    cursor: pointer;
+    
+    &-img {
+      
     }
-}
+    
+    &-body {
+      display: none;
+      grid-column: span 4;
+      overflow: hidden;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      padding: 10px !important;
 
-#gallery {
-    -webkit-transition: all linear 0.3s;
-    -o-transition: all linear 0.3s;
-    transition: all linear 0.3s;
+      &.active {
+        display: block;
+      }
+    }
+  }
 }
