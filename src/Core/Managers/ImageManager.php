@@ -177,7 +177,7 @@ abstract class ImageManager
     public static function watermark(string $filename, string $text, string $type, string $color)
     {
         $flash = new FlashMessageManager(SessionManager::getInstance());
-        $police = realpath(WEBROOT."/assets/fonts/Quantify.ttf");
+        $police = realpath(WEBROOT."/assets/fonts/Mechanic.ttf");
         $manager = new InterventionImage();
 
         try {

@@ -117,7 +117,7 @@ class AdminController extends Controller
 
             if ($result) {
                 $model->delete($post->get('id'));
-                $this->flash->set('danger', $msg ?? $this->msg['post_delete_success']);
+                $this->flash->set('success', $msg ?? $this->msg['post_delete_success']);
                 $this->app::redirect(true);
             } else {
                 if ($this->isAjax()) {

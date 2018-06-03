@@ -254,77 +254,76 @@ function loadPosts(element) {
 /**
  * charge les information d'une image  en ajax
  */
-function loadPictureInfo() {
-    let active = false;
+function loadPictureInfo(element) {
+    let gallery = document.querySelector(element);
+    let activeContent = null;
+    let activeItem = null;
 
-    document.querySelector("#gallery .gallery-item").addEventListener('click', function(e){
-       e.stopPropagation();
+    let slideDown = function (element) {
+        let height = element.offsetHeight;
+        element.style.height = "0px";
+        element.style.transitionDuration = '.5s';
+        element.offsetHeight; // force du repaint
+        element.style.height = height + "px";
 
-       let item = this;
-       let details = item.nextElementSibling.querySelectorAll(".gallery-details:frist");
-
-       if (item.classList.contains('active')) {
-           return true;
-       }
-
-       let galleryItem = document.querySelectorAll('.gallery-item');
-       let galleryDetails = document.querySelectorAll('.gallery-details');
-       for(let i = 0; i < galleryItem.length; i++) {
-           galleryItem[i].classList.remove('active');
-       }
-
-       for(let i = 0; i < galleryDetails.length; i++) {
-           galleryDetails.classList.remove('jumbotron', 'jumbotron-img', 'dark');
-       }
-
-       item.classList.add('active');
-
-       if (getXhr()) {
-           let xhr = getXhr();
-           xhr.open('GET', item.parentElement.getAttribute('data-show'), true);
-           xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-           xhr.send();
-           xhr.onreadystatechange = function () {
-               if (xhr.readState() === 4) {
-                   if  (xhr.status === 200) {
-                       details.classList.add('jumbotron', 'jumbotron-img', 'dark');
-                       details.appendChild(xhr.responseText);
-                       let workDetails = details.querySelector('.gallery-container-details');
-
-                       let toDelete = active;
-                       if (active) {
-                           document.removeChild(toDelete);
-                       }
-
-                       active = workDetails;
-                       active.querySelector(".gallery-details-img").addEventListener("click", function(e) {
-                           e.stopPropagation();
-                           this.getElementsByTagName('img')[0].materialbox()
-                       });
-                       scrollTo(active);
-                   } else {
-                       setFlash('danger', xhr.responseText? xhr.responseText : msg.undefinedError);
-                   }
-               }
-           }
-       }
-
-        window.location.hash = item.parentElement.getAttribute('id');
-    });
-
-    let scrollTo = function(cible) {
-        window.setTimeout(function(){
-            document.body.scrollTop = cible.getBoundingClientRect().top - 80;
-            document.querySelector('html').scrollTop = cible.getBoundingClientRect.top - 80;
-        }, 300)
+        window.setTimeout(function() {
+            element.style.height = null
+        }, 500);
     };
 
-    if (window.location.hash) {
-        let target = document.querySelector(window.location.hash + "img.gallery-item");
-        if (target.length > 0) {
-            setEventTrigger(target, 'click');
-            scrollTo($target);
+    let slideUp = function (element) {
+        let height = element.offsetHeight;
+        element.style.height = height + "px";
+        element.offsetHeight; // force du repaint
+        element.style.height = "0px";
+
+        window.setTimeout(function() {
+            element.parentNode.removeChild(element);
+        }, 500);
+    };
+
+    let scrollTo = function(target, offset = 0) {
+        window.scrollTo({
+            behavior: "smooth",
+            left: 0,
+            top: target.offsetTop - offset
+        });
+    };
+
+    let show = function(item){
+        let offset = 0;
+        if (activeContent !== null) {
+            slideUp(activeContent);
+            if (activeContent.offsetTop < item.offsetTop) {
+                offset = activeContent.offsetHeight;
+            }
         }
+
+        if (activeItem === item) {
+            activeItem = null;
+            activeContent = null;
+        } else {
+            let body = item.querySelector("[data-action='gallery-item-body']").cloneNode(true);
+            body.classList.add('active');
+            item.after(body);
+            slideDown(body);
+            scrollTo(item, offset);
+            activeContent = body;
+            activeItem = item;
+        }
+    };
+
+    if (typeof gallery !== 'undefined') {
+        let items = Array.prototype.slice.call(gallery.querySelectorAll("[data-action='gallery-item']"));
+        items.forEach((item) => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                show(item);
+            })
+        });
+    } else {
+        return false;
     }
 }
 
@@ -432,89 +431,6 @@ function formGenericSubmit(element) {
         });
     }
 }
-
-(function(){
-    let $active = false;
-    $("#gallery .gallery-item").on("click", function(){
-
-        let $item = $(this);
-        let $details = $item.parent().nextAll(".gallery-details:first")
-
-        if ($item.hasClass("active")) {
-            return true;
-        }
-
-        $(".gallery-item").removeClass("active");
-        $(".gallery-details").removeClass('jumbotron jumbotron-img dark');
-        $(".gallery-details").html("");
-        $item.addClass("active");
-
-        $details.addClass('jumbotron jumbotron-img dark');
-        $details.html(
-            '<div class="ng-progress-indeterminate">' +
-                '<span></span>' +
-                '<span></span>' +
-                '<span></span>' +
-                '<span></span>' +
-                '<span></span>' +
-            '</div>'
-        );
-
-        $.ajax(
-            {url: $item.parent().attr('data-url')}
-        ).then(
-            function($detailsInfo) {
-                $detailsInfo = $detailsInfo.substring($detailsInfo.indexOf('}') + 1, $detailsInfo.length + 1);
-                $details.addClass('jumbotron jumbotron-img dark').html('');
-                $details.append($detailsInfo).slideDown();
-                $work_details =  $details.find('.gallery-container-details');
-
-                let $del = $active;
-                if ($active) {
-                    $active.slideUp(300, function() {
-                        $del.remove()
-                    })
-                }
-
-                //animation
-                for (let i = 1; i <= 3; i++)
-                {
-                    $(".stagger" + i, $work_details).css({
-                        opacity:0, marginLeft:-30
-                    }).delay(300 + 100 * i).animate({
-                        opacity:1, marginLeft: 0
-                    })
-                }
-
-                $active = $work_details;
-                $active.find(".gallery-details-img").on("click", function() {
-                    $(this).find('img').materialbox()
-                });
-
-                scrollTo($active);
-            },
-            function() {
-                return Materialize.toast("Impossibe de charge l'Image", 5000, "danger")
-            }
-        );
-
-        window.location.hash = $item.parent().attr('id')
-    });
-
-    let scrollTo = function(cible) {
-        window.setTimeout(function(){
-            $('html, boby').animate({scrollTop: $(cible).offset().top - 80 }, 750);
-        }, 300)
-    }
-
-    if (window.location.hash) {
-        let $target = $(window.location.hash + " img.gallery-item");
-        if ($target.length > 0) {
-            $target.trigger('click');
-            scrollTo($target)
-        }
-    }
-})();
 
 
 /**
@@ -632,3 +548,4 @@ formGenericSubmit("form[data-action='ideas']");
 formGenericSubmit("form[data-action='bugs']");
 formFeedComments('#dataContainer');
 likes("#dataContainer");
+loadPictureInfo("[data-action='gallery']");
