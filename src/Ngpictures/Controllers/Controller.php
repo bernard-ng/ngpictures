@@ -46,6 +46,10 @@ class Controller extends SuperController
         $this->validator        =   $this->app->getValidator();
         $this->cacheBusting     =   $this->app->getCacheBusting();
         $this->authService = new DatabaseAuthService($this->app, $this->loadModel('users'));
+
+        if(!$this->authService->isLogged()) {
+            $this->authService->cookieConnect();
+        }
     }
 
 

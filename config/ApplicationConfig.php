@@ -18,7 +18,7 @@ define("AUTH_KEY", "auth");
 define("FLASH_MESSAGE_KEY", "flash");
 define("TOKEN_KEY", "token");
 define("CAPTCHA_KEY", "captcha");
-define("COOKIE_REMEMBER_KEY", "remember");
+define("COOKIE_REMEMBER_KEY", "NGPICTURES-REMEMBER");
 
 
 //APPLICATION API KEYS

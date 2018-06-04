@@ -179,9 +179,8 @@ $(document).ready(function(){
 
     $("img.boxed").materialbox();
     $('.collapsible').collapsible();
-    $('.carousel .big').carousel({fullWidth: true});
     $('.carousel').carousel({
-        dist: -20,
+        dist: 0,
         indicators: true,
         noWrap: false
     });

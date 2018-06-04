@@ -33,7 +33,7 @@
     padding: 0.75em !important;
     background-size: cover;
     background: url("/imgs/bgjumbo.jpeg") no-repeat fixed center;
-    border-bottom: 2px solid rgba(255,255,255,0.2);
+    border-bottom: 5px solid rgba(255,255,255,0.2);
 
     & .jumbotron-content {
         display: block;
@@ -52,16 +52,8 @@
 
 
 .jumbotron-user {
-    width: 100%;
-    position: absolute;
-    background-size: cover;
-    background: #100f0f url("/imgs/bgjumbo.jpeg") fixed bottom;
-    top: 40px; left: 0; right: 0;
-    padding-top: 20px;
-    height: auto;
-    border-bottom: 2px solid #ccc;
-    color: #ccc;
-    z-index: 990;
+    @extend .jumbotron-small;
+    min-height: 300px;
 }
 
     .user-avatar {
