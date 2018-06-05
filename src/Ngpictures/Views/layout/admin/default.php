@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
     <head>
         <title><?php echo $pageManager::getName() ?></title>
-        <?php require(APP."/Views/includes/default-meta.php"); ?>
-        <?php include(APP."/Views/includes/favicon.php"); ?>
-        <?php include(APP."/Views/includes/default-style.php"); ?>
+        <?php require(APP . "/Views/includes/default-meta.twig"); ?>
+        <?php include(APP . "/Views/includes/favicon.twig"); ?>
+        <?php include(APP . "/Views/includes/default-style.twig"); ?>
         <link rel="stylesheet" type="tex/css" href="/assets/css/morris.css">
         <link rel="stylesheet" type="text/css" href="/assets/js/zoombox/zoombox.css">
         <script type="text/javascript" src="/assets/js/lib/jquery.min.js" ></script>
@@ -19,8 +19,8 @@
         <script type="text/javascript" src="/assets/js/tinymce/tinymce.min.js"></script>
     </head>
     <body>
-        <?php include(APP."/Views/includes/adm-mobile-menu.php"); ?>
-        <?php include(APP."/Views/includes/admin-menu.php"); ?>
+        <?php include(APP . "/Views/includes/adm-mobile-menu.twig"); ?>
+        <?php include(APP . "/Views/includes/admin-menu.twig"); ?>
         <div class="page-content" id="pageContent" data-ajax="true">
             <?php echo $page_content; ?>
         </div>
@@ -74,7 +74,7 @@
                 }
             })()
         </script>
-        <?php include(APP."/Views/includes/footer.php"); ?>
-        <?php include(APP."/Views/includes/flash.php"); ?>
+        <?php include(APP . "/Views/includes/footer.twig"); ?>
+        <?php include(APP . "/Views/includes/flash.twig"); ?>
     </body>
 </html>

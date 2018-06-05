@@ -1,16 +1,15 @@
-<!-- =================  FOOTER   ====================== -->
-<?php if ($activeUser) :?>
+{% if activeUser %}
     <div class="fixed-action-btn toolbar">
         <a class="btn-floating btn-large blue-grey dark-4 shadow-4">
             <i class="icon icon-menu"></i>
         </a>
         <ul>
             <li class="waves-effect"><a href="/submit-photo"><i class="icon icon-plus"></i></a></li>
-            <li class="waves-effect"><a href="<?= $activeUser->editUrl; ?>"><i class="icon icon-cog"></i></a></li>
-            <li class="waves-effect"><a href="<?= $activeUser->followersUrl; ?>"><i class="icon icon-users"></i></a></li>
+            <li class="waves-effect"><a href="{{ activeUser.editUrl }}"><i class="icon icon-cog"></i></a></li>
+            <li class="waves-effect"><a href="{{ activeUser.followersUrl }}"><i class="icon icon-users"></i></a></li>
         </ul>
     </div>
-<?php endif; ?>
+{% endif %}
 
 <footer class="page-footer jumbotron dark shadow-2">
     <div class="row container">
@@ -34,7 +33,7 @@
     </div>
     <div class="footer-copyright black">
         <div class="container row">
-            <span class="right">Copyrights &copy; <?= date('Y') ?></span>
+            <span class="right">Copyrights &copy; {{ 'now'|date('Y') }}</span>
             <span >
                 With <i class="icon icon-heart red-txt"></i> by <a href="http://ngpictures.pe.hu" target="_blank">Bernard ng</a>
             </span>

@@ -48,7 +48,7 @@
     </div>
 </section>
 <section class="jumbotron dark row">
-    <?php include(APP . "/Views/includes/comments.php"); ?>
+    <?php include(APP . "/Views/includes/comments.twig"); ?>
 </section>
 <section class="jumbotron parallax-container col l12 s12 m12" style="margin-top: -20px; margin-bottom: 20px;">
     <div class="row container">

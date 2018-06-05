@@ -7,7 +7,7 @@
             </ul>
         </div>
     </nav>
-    <?php include(APP."/Views/includes/left-aside.php"); ?>
+    <?php include(APP . "/Views/includes/left-aside.twig"); ?>
     <?php if (isset($followers) && !empty($followers)) : ?>
         <?php foreach ($followers as $follower) : ?>
             <div class="col l3 m6 s12">

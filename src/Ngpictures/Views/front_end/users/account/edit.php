@@ -1,5 +1,5 @@
 <main class="container row">
-    <?php include(APP."/Views/includes/left-aside.php"); ?>
+    <?php include(APP . "/Views/includes/left-aside.twig"); ?>
     <section class="col l9 m12 s12">
         <div class="card col l12 m12 s12">
             <div class="page-title section-title">Edition <i class="icon icon-pencil right"></i></div>

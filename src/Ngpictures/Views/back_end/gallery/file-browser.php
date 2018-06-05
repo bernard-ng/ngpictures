@@ -1,4 +1,4 @@
-<?php include(APP."/Views/includes/admin-menu.php"); ?>
+<?php include(APP . "/Views/includes/admin-menu.twig"); ?>
 <nav class="nav z-depth-3">
     <div class="nav-wrapper">
         <ul>

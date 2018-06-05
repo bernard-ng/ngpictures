@@ -33,6 +33,7 @@ class Controller extends SuperController
      */
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
+        parent::__construct();
         $this->app              =   $app;
         $this->layout           =   'default';
         $this->viewPath         =   APP."/Views/";

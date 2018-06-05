@@ -45,5 +45,5 @@
             </table>
         </div>
     </section>
-    <?php include(APP . "/Views/includes/menu-aside.php"); ?>
+    <?php include(APP . "/Views/includes/menu-aside.twig"); ?>
 </section>

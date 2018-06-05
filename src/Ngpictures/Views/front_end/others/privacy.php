@@ -1,5 +1,5 @@
 <section class="container row">
-<?php include(APP . "/Views/includes/right-aside.php"); ?>
+<?php include(APP . "/Views/includes/right-aside.twig"); ?>
     <div class="col l6 m12 s12">
         <div class="section">
             <div>
@@ -87,5 +87,5 @@
             </div>
         </div>
     </div>
-    <?php include(APP."/Views/includes/menu-aside.php"); ?>
+    <?php include(APP . "/Views/includes/menu-aside.twig"); ?>
 </section>

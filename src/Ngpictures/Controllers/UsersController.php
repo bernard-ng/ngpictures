@@ -234,7 +234,6 @@ class UsersController extends Controller
 
             $this->app::turbolinksLocation("/login");
             $this->pageManager::setName('Connexion');
-            $this->setLayout('users/default');
             $this->viewRender('front_end/users/login', compact('post', 'errors'));
         }
     }

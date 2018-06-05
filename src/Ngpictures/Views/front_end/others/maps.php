@@ -4,7 +4,7 @@
         <title>Localisation | Ngpictures</title>
         <meta name="viewport" content="initial-scale=1.0">
         <meta charset="utf-8">
-        <?php include(APP."/Views/includes/default-style.php"); ?>
+        <?php include(APP . "/Views/includes/default-style.twig"); ?>
         <style>
         #map {
             width: 100%;

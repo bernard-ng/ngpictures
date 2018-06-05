@@ -1,5 +1,5 @@
 <div class="container row">
-    <?php include(APP."/Views/includes/left-aside.php"); ?>
+    <?php include(APP . "/Views/includes/left-aside.twig"); ?>
     <?php if (isset($files) && !empty($files)) : ?>
         <?php foreach ($files as $file) : ?>
             <?php if ($file->getBaseName() != '.' && $file->getBaseName() != '.') : ?>

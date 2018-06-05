@@ -12,7 +12,7 @@
                     <i class="icon icon icon-menu"></i>
                 </a>
 
-                <span id="menu-item-active" data-active="<?= $pageManager::getActivePage() ?>"></span>
+                <span id="menu-item-active" data-active="{{ pageManager.getActivePage }}"></span>
                 <ul class="right hide-on-med-and-down links">
                     <li class="search" style="margin-right: 10px">
                         <div class="search">
@@ -22,56 +22,57 @@
                             </form>
                         </div>
                     </li>
-                    <?php if ($activeUser && $activeUser->rank == "admin") : ?>
-                        <li><a href="<?= ADMIN ?>"> <i class="icon icon-code"></i></a></li>
-                    <?php endif; ?>
+
+                    {% if activeUser.rank == 'admin' %}
+                        <li><a href="{{ constant('ADMIN') }}"> <i class="icon icon-code"></i></a></li>
+                    {% endif %}
 
                     <li id="Ngpictures" class="waves-effect"><a href="/">Accueil</a></li>
                     <li id="Blog" class="waves-effect"><a href="/blog"> Blog</a></li>
                     <li id="Galerie" class="waves-effect"><a href="/gallery"> Galerie</a></li>
 
-                    <?php if ($activeUser) : ?>
+                    {% if activeUser %}
                         <li id="Posts" class="waves-effect"><a href="/posts"> Actualités</a></li>
                         <li id="Communauté" class="waves-effect"><a href="/community">Communauté</a></li>
                         <li class="user-actions">
                             <a href="#" class="user-actions-sideNav show-profile show-on-large" data-activates="user-actions">
-                                <img src="<?= $activeUser->avatarUrl; ?>" class="user" width="50" height="50">
+                                <img src="{{ activeUser.avatarUrl }}" class="user" width="50" height="50">
                             </a>
                         </li>
-                    <?php else : ?>
+                    {% else %}
                         <li class="action" class="waves-effect"><a href="/sign" class="btn waves-effect">Inscription</a></li>
                         <li class="action" class="waves-effect"><a href="/login" class="btn waves-effect">Connexion</a></li>
-                    <?php endif; ?>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
     </div>
     <ul class="side-nav" id="user-actions">
-        <?php if ($activeUser) : ?>
+        {% if activeUser %}
             <li>
                 <div class="user-view">
                     <div class="background">
                         <img src="/imgs/bgjumbo.jpeg" alt="bg">
                     </div>
-                    <a href="<?= $activeUser->accountUrl; ?>"><img src="<?= $activeUser->avatarUrl; ?>" alt="bg2" class="circle"></a>
-                    <span class="white-txt name"><?= $activeUser->name; ?></span>
-                    <span class="email"><?= $activeUser->email; ?></span>
+                    <a href="<{{ activeUser.accoutUrl }}"><img src="{{ activeUser.avatarUrl }}" alt="bg2" class="circle"></a>
+                    <span class="white-txt name">{{ activeUser.name }}</span>
+                    <span class="email">{{ activeUser.email }}</span>
                 </div>
             </li>
-        <?php else : ?>
+        {% else %}
             <li class="logo" style="margin: 20px 20px 30px 20px;">
                 <a href="/" class="brand-logo" id="logo-container">
                     <img src="/imgs/logo-white.png" alt="" width="100%" height="auto">
                 </a>
             </li>
-        <?php endif; ?>
+        {% endif %}
 
 
-        <?php if ($activeUser) : ?>
-            <li><a href="<?= $activeUser->accountUrl; ?>">Profile <i class="icon icon-user"></i></a></li>
-            <li><a href="<?= $activeUser->editUrl; ?>">Editer le Profile <i class="icon icon-cog-alt"></i></a></li>
-            <li><a href="<?= $activeUser->followingUrl; ?>">Mes abonnements <i class="icon icon-users"></i></a></li>
+        {% if activeUser %}
+            <li><a href="{{ activeUser.accoutUrl }}">Profile <i class="icon icon-user"></i></a></li>
+            <li><a href="{{ activeUser.editUrl }}">Editer le Profile <i class="icon icon-cog-alt"></i></a></li>
+            <li><a href="{{ activeUser.followersUrl }}">Mes abonnements <i class="icon icon-users"></i></a></li>
             <li><a href="/logout">Déconnexion <i class="icon icon-off"></i></a></li>
-        <?php endif; ?>
+        {% endif %}
     </ul>
 </header>

@@ -1,5 +1,5 @@
 <section class="section container row">
-    <?php include(APP."/Views/includes/right-aside.php"); ?>
+    <?php include(APP . "/Views/includes/right-aside.twig"); ?>
     <?php if(isset($categories) && !empty($categories)): ?>
         <div class="col nexted l9 m12 s12">
             <?php foreach ($categories as $c) : ?>

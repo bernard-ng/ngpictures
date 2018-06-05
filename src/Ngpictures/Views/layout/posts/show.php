@@ -3,16 +3,16 @@
 <?php include(APP."/Views/includes/ngpictures-watermark.txt"); ?>
     <head>
         <title><?php echo $pageManager::getName() ?></title>
-        <?php require(APP."/Views/includes/default-meta.php"); ?>
+        <?php require(APP . "/Views/includes/default-meta.twig"); ?>
         <meta name="canonical" content="<?php echo $article->Url ?>">
 
-        <?php include(APP."/Views/includes/favicon.php"); ?>
-        <?php include(APP."/Views/includes/default-style.php"); ?>
+        <?php include(APP . "/Views/includes/favicon.twig"); ?>
+        <?php include(APP . "/Views/includes/default-style.twig"); ?>
         <link rel="stylesheet" type="text/css" href="/assets/js/zoombox/zoombox.css">
     </head>
     </head>
     <body>
-        <?php include(APP."/Views/includes/menu.php"); ?>
+        <?php include(APP . "/Views/includes/menu.twig"); ?>
          <div class="jumbotron-small">
             <span class="ng-cover"></span>
             <div class="container row">
@@ -33,8 +33,8 @@
         <div class="page-content" id="pageContent" data-ajax="true">
             <?php echo $page_content; ?>
         </div>
-        <?php include(APP."/Views/includes/footer.php"); ?>
-        <?php include(APP."/Views/includes/default-script.php"); ?>
-        <?php include(APP."/Views/includes/flash.php"); ?>
+        <?php include(APP . "/Views/includes/footer.twig"); ?>
+        <?php include(APP . "/Views/includes/default-script.twig"); ?>
+        <?php include(APP . "/Views/includes/flash.twig"); ?>
     </body>
 </html>

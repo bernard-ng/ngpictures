@@ -1,5 +1,5 @@
 <section class="section row container">
-    <?php include(APP."/Views/includes/right-aside.php"); ?>
+    <?php include(APP . "/Views/includes/right-aside.twig"); ?>
     <section class="col l6 m12 s12 nexted  animated fast slideInLeft">
         <div id="dataContainer">
             <?php if (!empty($posts)) : ?>
@@ -202,5 +202,5 @@
             </div>
         <?php endforeach; ?>
     <?php endif; ?>
-<?php include(APP."/Views/includes/menu-aside.php"); ?>
+<?php include(APP . "/Views/includes/menu-aside.twig"); ?>
 </section>

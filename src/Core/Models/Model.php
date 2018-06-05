@@ -62,7 +62,7 @@ class Model
      * @param bool $one if true FETCH else FETCHALL
      * @param bool $rowCount if true retrun the PDO::rowCount()
      * @return mixed
-     **/
+     */
     public function query(
         string $statement,
         array $data = null,
@@ -217,10 +217,7 @@ class Model
     public function findGreater(int $lastId, string $limit)
     {
         return $this->query(
-            "SELECT * FROM {$this->table}
-            WHERE id < ? AND online = 1
-            ORDER BY id DESC
-            LIMIT {$limit}",
+            "SELECT * FROM {$this->table} WHERE id < ? AND online = 1 ORDER BY id DESC LIMIT {$limit}",
             [$lastId]
         );
     }

@@ -1,5 +1,5 @@
 <div class="container row">
-    <?php include(APP."/Views/includes/right-aside.php"); ?>
+    <?php include(APP . "/Views/includes/right-aside.twig"); ?>
     <?php foreach ($likers as $liker) : ?>
         <div class="row nexted col l3 m6 s12">
             <div class="card-user card transparent hovercard hoverable">

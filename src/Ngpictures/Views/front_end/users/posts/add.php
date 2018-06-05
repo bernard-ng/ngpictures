@@ -1,5 +1,5 @@
 <section class="section container row">
-    <?php include(APP."/Views/includes/right-aside.php"); ?>
+    <?php include(APP . "/Views/includes/right-aside.twig"); ?>
     <section class="col row l6 m12 s12">
         <div class="grey dark-4 col l12 m12 s12">
             <form action="" method="POST" enctype="multipart/form-data" data-action="upload">
@@ -45,5 +45,5 @@
             </form>
         </div>
     </section>
-    <?php include(APP."/Views/includes/menu-aside.php"); ?>
+    <?php include(APP . "/Views/includes/menu-aside.twig"); ?>
 </section>

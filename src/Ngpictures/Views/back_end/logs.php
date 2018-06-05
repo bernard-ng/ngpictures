@@ -1,5 +1,5 @@
 <div class="container row">
-    <?php include(APP."/Views/includes/left-aside.php"); ?>
+    <?php include(APP . "/Views/includes/left-aside.twig"); ?>
     <div class="col l9 s12 m12">
         <nav class="nav z-depth-2" style="margin-bottom: -5px;">
             <div class="nav-wrapper">

@@ -51,6 +51,6 @@
             </div>
         </form>
     </section>
-    <?php include(APP."/Views/includes/left-aside.php"); ?>
+    <?php include(APP . "/Views/includes/left-aside.twig"); ?>
 </section>
 

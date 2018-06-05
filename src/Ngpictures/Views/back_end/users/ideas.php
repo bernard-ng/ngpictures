@@ -1,5 +1,5 @@
 <section class="row container">
-    <?php include(APP."/Views/includes/left-aside.php"); ?>
+    <?php include(APP . "/Views/includes/left-aside.twig"); ?>
     <main class="col l9">
         <div class="card no-padding col l12" id="ideas">
             <nav class="nav col l12 z-depth-2 mb-20">
