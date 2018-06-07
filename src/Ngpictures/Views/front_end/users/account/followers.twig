@@ -1,0 +1,33 @@
+{% extends 'layout/posts/default.twig' %}
+
+{% block content %}
+    <div class="container row">
+        <nav class="nav z-depth-2">
+            <div class="nav-wrapper">
+                <ul>
+                    <li><a href="{{ activeUser.followersUrl }}">Mes abonnés</a></li>
+                    <li><a href="{{ activeUser.followingsUrl }}">Mes abonnements</a></li>
+                </ul>
+            </div>
+        </nav>
+        {% include 'includes/left-aside.twig' %}
+        {% for f in followers %}
+            <div class="col l3 m6 s12">
+                <div class="card verse-panel">
+                    <div class="card-content ng-contain">
+                        <img src="{{ f.avatarUrl }}" width="100%" height="auto" alt="Photo de Profile">
+                        <span class="card-title">{{ f.name }}</span>
+                        <p>{{ f.bio }}</p>
+
+                        <a href="{{ f.followingUrl }}" class="ng-btn mt-20">
+                            {{ (f.isFollowed)? "s'abonner" : 'désabonner' }}
+                        </a>
+                    </div>
+                    <div class="card-action">
+                        <a href="{{ f.accountUrl }}">Voir</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

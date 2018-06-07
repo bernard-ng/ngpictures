@@ -1,0 +1,22 @@
+{% extends 'layout/users/default.twig' %}
+{% import 'includes/form.twig' as form %}
+
+{% block content %}
+    <div class="card-panel z-depth-4" id="loginBox" >
+        <div class="row">
+            <h2 class="ui header">Changer le mot de passe</h2>
+        </div>
+        <div class="row">
+            <form method="POST" action="">
+                {{ form.input('password', 'Nouveau mot de passe', 'password', errors.get('password')) }}
+                {{ form.input('password_confirm', 'Mot de passe (confirmer)', 'password', errors.get('password_confirm')) }}
+
+                <div class="row">
+                    <div class="col s12" id="connectOptions">
+                        <button type="submit" class="btn btn-flat waves-effect">Confirmer</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

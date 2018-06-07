@@ -46,30 +46,32 @@ class UsersController extends Controller
     {
         $user   =   $this->users->find(intval($users_id));
         $token  =   $this->str::escape($token);
+        $errors =   new Collection();
 
         if ($user && $user->reset_token == $token) {
             $post = new Collection($_POST);
 
             if (isset($_POST) and !empty($_POST)) {
-                if (!empty($post->get('password')) && !empty($post->get('password_confirm'))) {
-                    $this->validator->setRule('password', ["min_length[8]", "must_match[password_confirm]"]);
+                $this->validator->setRule('password', ["must_match[password_confirm]", "min_length[6]"]);
+                $this->validator->setRule('password_confirm', ["must_match[password]", "min_length[6]"]);
 
-                    if ($this->validator->isValid()) {
-                        $password = $this->str::hashPassword($post->get('password'));
-                        $this->users->resetPassword($password, $user->id);
+                if ($this->validator->isValid()) {
+                    $password = $this->str::hashPassword($post->get('password'));
+                    $this->users->resetPassword($password, $user->id);
 
-                        $this->flash->set('success', $this->msg['users_reset_success']);
-                        $this->authService->connect($user);
-                        $this->app::redirect($user->accountUrl);
-                    }
+                    $this->flash->set('success', $this->msg['users_reset_success']);
+                    $this->authService->reConnect($user);
+                    $this->app::redirect($user->accountUrl);
                 } else {
-                    $this->flash->set('danger', $this->msg['form_all_required']);
+                    $errors = new Collection($this->validator->getErrors());
+                    $this->isAjax() ?
+                        $this->ajaxFail($errors->asJson(), 403) :
+                        $this->flash->set('danger', $this->msg['form_multi_errors']);
                 }
             }
 
             $this->pageManager::setName("Rénitialisation du mot de passe");
-            $this->setLayout('users/default');
-            $this->viewRender('front_end/users/account/reset', compact('post'));
+            $this->viewRender('front_end/users/account/reset', compact('post','errors'));
         } else {
             $this->flash->set('danger', $this->msg['undefined_error']);
             $this->app::redirect(true);
@@ -130,7 +132,7 @@ class UsersController extends Controller
         $errors     =   new Collection();
 
         if (isset($_POST) && !empty($_POST)) {
-            $this->validator->setRule("email", 'required', 'valid_email');
+            $this->validator->setRule("email", 'valid_email', 'required');
             $this->validator->setRule("name", ['required', "alpha_dash", "min_length[3]"]);
             $this->validator->setRule("password", ['required', "must_match[password_confirm]", "min_length[6]"]);
             $this->validator->setRule('password_confirm', ['required', "must_match[password]", "min_length[6]"]);
@@ -348,9 +350,8 @@ class UsersController extends Controller
                 }
             }
 
-            $this->app::turbolinksLocation("/edit-profile/{$token}");
-            $this->pageManager::setName('Edition du profile');
-            $this->setLayout('users/edit');
+            $this->app::turbolinksLocation("/settings/{$token}");
+            $this->pageManager::setName('Paramètres');
             $this->viewRender('front_end/users/account/edit', compact('user', 'errors'));
         } else {
             $this->flash->set('danger', $this->msg['undefined_error']);

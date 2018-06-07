@@ -19,7 +19,7 @@ class SearchController extends Controller
     public function index()
     {
         if (isset($_GET['q']) && !empty($_GET['q'])) {
-            $query = $this->str::escape($_GET['q']);
+            $query = trim($this->str::escape($_GET['q']));
 
             $posts = $this->posts->search($query, "begin");
             $blog = $this->blog->search($query, "begin");
@@ -36,7 +36,6 @@ class SearchController extends Controller
                 }
             }
 
-            //recherches dans les posts des users
             while (empty($posts)) {
                 $posts = $this->posts->search($query, "end");
                 $posts = $this->posts->search($query, "within");
@@ -47,7 +46,6 @@ class SearchController extends Controller
                 }
             }
 
-            //recherches dans le blog
             while (empty($blog)) {
                 $blog = $this->blog->search($query, "end");
                 $blog = $this->blog->search($query, "within");
@@ -58,13 +56,15 @@ class SearchController extends Controller
                 }
             }
 
-            $this->app::turbolinksLocation("/search/{$query}");
+            $this->app::turbolinksLocation("/search?q={$query}");
             $this->pageManager::setName("Recherches");
             $this->setLayout("search");
             $this->viewRender("front_end/others/search", compact("query", "posts", "blog", "gallery"));
         } else {
-            $this->flash->set("danger", $this->msg['form_field_required']);
-            $this->app::redirect(true);
+            $this->app::turbolinksLocation("/search");
+            $this->pageManager::setName("Recherches");
+            $this->setLayout("search");
+            $this->viewRender("front_end/others/search");
         }
     }
 }

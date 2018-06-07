@@ -1,11 +1,10 @@
+{% import 'includes/form.twig' as form %}
+
 <div id="comments" class="section container row">
     {% include "includes/right-aside.twig" %}
     <div class="col l6 m12 s12">
-        <form method="POST" action="<?= $article->commentUrl; ?>">
-            <div class="input-field">
-                <label for="comment">Commentaire</label>
-                <textarea name="comment" id="comment" class="materialize-textarea"></textarea>
-            </div>
+        <form method="POST" action="{{ article.commentUrl }}">
+            {{ form.textarea('comment','Commentaire', errors.get('comment'), post.get('comment')) }}
             <button type="submit" class="btn btn-flat"> Envoyer</button>
         </form>
 
@@ -18,7 +17,7 @@
                                 <img src="{{ user.find(c.users_id).avatarUrl }}">
                             </a>
                             <div class="content">
-                                <a class="author">{{ user.find(c.users_id).name }}></a>
+                                <a class="author">{{ user.find(c.users_id).name }}</a>
                                 <div class="metadata">
                                     <time class="date" data-time="{{ c.date_created | date("U") }}">{{ c.time }}</time>
                                 </div>
@@ -41,11 +40,11 @@
                     <h2 class="icon icon-comment-empty red-txt center-align"></h2>
                     <h2 class="ui header divided center"> Aucun commentaire pour l'instant</h2>
                     <p>
-                        le site ne présente actuellement aucun commentaire disponible pour cette publication, soyez la première
+                        le site ne présente actuellement aucun commentaire pour cette publication, soyez la première
                         personne à partager votre commentaire.
                     </p>
                 </div>
-            <?php endif; ?>
+            {% endif %}
         </ul>
     </div>
     {% include "includes/menu-aside.twig" %}

@@ -1,0 +1,29 @@
+{% extends 'layout/users/account.twig' %}
+
+{% block content %}
+    <div class="jumbotron-user">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab deleniti earum minima? Ab eveniet fugit ipsa nobis quaerat quod repellendus soluta velit voluptatibus. Cum doloribus iure, nam porro provident quasi!
+    </div>
+    <section class="section jumbotron dark row">
+        <div class="container">
+            <div class="carousel small">
+                {% for p in posts %}
+                    <a href="{{ p.url }}" class="carousel-item">
+                        <img src="{{ p.smallThumbUrl }}" title="{{ p.name }}" alt="{{ p.name }}">
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        <div class="gallery gallery-container">
+            {% for p in posts %}
+                <article class="gallery-item" id="{{ p.id }}">
+                    <a href="{{ p.url }}">
+                        <img src="{{ p.smallThumbUrl }}" class="responsive-img" title="{{ p.name }}" alt="{{ p.name }}">
+                    </a>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

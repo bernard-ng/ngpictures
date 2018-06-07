@@ -1,0 +1,32 @@
+{% extends 'layout/posts/default.twig' %}
+{% import 'includes/form.twig' as form %}
+
+{% block content %}
+    <section class="section row">
+        <div class="container">
+            {% include 'includes/right-aside.twig' %}
+            <section class="col l6 m12 s12">
+                <div class="grey dark-4 col l12 m12 s12">
+                    <form action="" method="POST" enctype="multipart/form-data" data-action="upload">
+                        <div class="row">
+                            <div data-action="show-uploaded-file">
+                                <img src="{{ a.thumbUrl }}" alt="{{ a.title }}" title="{{ a.title }}">
+                            </div>
+                            {{ form.input('title','Titre', 'text', errors.get('title'), post.get('title')) }}
+                            {{ form.inputFile('Ajouter une photo') }}
+                            <span class="row col s12">
+                                <input type="checkbox" class="filled-in" id="filled-in-box" />
+                                <label for="filled-in-box">Location</label>
+                            </span>
+                            {{ form.textarea('content','Description', errors.get('content'), post.get('content')) }}
+                            <div class="submit-button col s12">
+                                <button type="submit" class="btn btn-flat waves-effect">Editer</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            {% include 'includes/menu-aside.twig' %}
+        </div>
+    </section>
+{% endblock %}
