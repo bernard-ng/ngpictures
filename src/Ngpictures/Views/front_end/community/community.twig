@@ -35,10 +35,14 @@
                             </div>
                         </div>
 
-                        {% if user.id != activeUser.id %}
-                            <a href="{{ user.followingUrl }}" class="btn btn-flat action blue-grey dark-1">
-                                {{ user.isFollowed ? "se désabonner" : "s'abonner" }}
+                        {% if u.id != activeUser.id %}
+                            <a href="{{ u.followingUrl }}" class="btn btn-flat">
+                                {{ u.isFollowed ? "Se désabonner" : "S'abonner" }}
                             </a>
+                        {% else %}
+                            <button class="btn btn-flat disabled">
+                                Se désabonner
+                            </button>
                         {% endif %}
                     </div>
                 </div>

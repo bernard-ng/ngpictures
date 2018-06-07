@@ -1,30 +1,33 @@
-<section class="section container row">
-    {% include "includes/right-aside.twig" %}
-    <?php if(isset($categories) && !empty($categories)): ?>
-        <div class="col nexted l9 m12 s12">
-            <?php foreach ($categories as $c) : ?>
+{% extends 'layout/posts/default.twig' %}
+
+{% block content %}
+    <section class="section container row">
+        {% include "includes/right-aside.twig" %}
+        {% if categories %}
+            <div class="col nexted l9 m12 s12">
+                {% for c in categories %}
                 <div class="col nexted l3 m4 s12">
                     <div class="card" style="background-color: #100F0F">
                         <div class="card-image">
-                            <a href="<?= $c->url ?>" class="waves-effect">
-                            <?php foreach ($thumbs as $key => $value) : ?>
-                                    <?php if ($key == $c->id) : ?>
-                                        <img src="<?= $value ?>" alt="<?= $c->title ?>" class="responsive-img">
-                                    <?php endif; ?>
-                            <?php endforeach; ?>
+                            <a href="{{ c.url }}" class="waves-effect">
+                                {% for key, thumb in thumbs %}
+                                    {% if c.id == key %}
+                                    <img src="{{ thumb }}" alt="{{ c.title }}" title="{{ c.title }}" class="responsive-img">
+                                    {% endif %}
+                                {% endfor %}
                             </a>
                         </div>
                         <div class="card-content">
-                            <span class="card-title ui header">
-                                <?= $c->title ?>
-                            </span>
-                             <?= $nb[$c->id] ?> publication<?= $nb[$c->id] > 1 ? 's' : '' ?>
+                                <span class="card-title ui header truncate">
+                                    {{ c.title }}
+                                </span>
+                            {{ nb[c.id] }} publication{{ nb[c.id] > 1 ? 's' : '' }}
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
-        </div>
-    <?php else: ?>
+                {% endfor %}
+            </div>
+        {% else %}
         <div class="col l9 m12 s12 animated slideInRight">
             <div class="section center-align">
                 <h2 class="icon icon-tag red-txt center-align"></h2>
@@ -35,5 +38,6 @@
                 </p>
             </div>
         </div>
-    <?php endif; ?>
-</section>
+        {% endif %}
+    </section>
+{% endblock %}
