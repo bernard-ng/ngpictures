@@ -145,7 +145,7 @@ class AdminController extends Controller
             $post = new Collection($_POST);
             if (!empty($post->get('name')) && !empty($post->get('dir'))) {
                 $dir = str_replace('/uploads/', UPLOAD.'/', $post->get('dir'));
-                $tdir = str_replace('/uplads/thumbs/', UPLOAD.'/', $post->get('dir'));
+                $tdir = str_replace('/uploads/thumbs/', UPLOAD.'/', $post->get('dir'));
 
                 if (is_dir($dir)) {
                     $file = $dir.'/'.$post->get('name');

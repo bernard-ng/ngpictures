@@ -1,0 +1,21 @@
+{% extends 'layout/admin/default.twig' %}
+
+
+{% block content %}
+    <div class="container row">
+        {% for file in files %}
+            {% if file.getBaseName != '.' and file.getBaseName != '..' and file.getExtension == 'html'%}
+                <div class="col l3 m6 s12">
+                    <div class="card grey dark-3 verse-panel">
+                        <div class="card-content ng-contain">
+                            <span class="card-title">{{ file.getBaseName }}</span></span>
+                        </div>
+                        <div class="card-action">
+                            <a href="{{ constant('ADMIN') ~ "/pages/" ~ file.getBaseName }}">Editer</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

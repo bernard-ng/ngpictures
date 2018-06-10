@@ -6,10 +6,14 @@
         {% include "includes/default-meta.twig" %}
         {% include "includes/favicon.twig" %}
         {% include "includes/default-style.twig" %}
+        <script type="text/javascript" src="/assets/js/tinymce/tinymce.min.js"></script>
+        <script type="text/javascript" src="/assets/js/tinymce/tinymce_popup.js"></script>
     </head>
     <body>
         <main class="page-content" id="pageContent" role="main">
             {% block content %}{% endblock %}
         </main>
+        {% include 'includes/default-script.twig' %}
+        {% include 'includes/flash.twig' %}
     </body>
 </html>

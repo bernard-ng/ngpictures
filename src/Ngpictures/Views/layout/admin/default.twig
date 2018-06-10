@@ -1,29 +1,28 @@
 <!DOCTYPE HTML>
-<?php include(APP."/Views/includes/ngpictures-watermark.txt"); ?>
+{% include 'includes/ngpictures-watermark.txt' %}
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
     <head>
-        <title><?php echo $pageManager::getName() ?></title>
-        <?php require(APP . "/Views/includes/default-meta.twig"); ?>
-        <?php include(APP . "/Views/includes/favicon.twig"); ?>
-        <?php include(APP . "/Views/includes/default-style.twig"); ?>
+        <title>{{ pageManager.getName }}</title>
+        {% include 'includes/default-meta.twig' %}
+        {% include 'includes/favicon.twig' %}
+        {% include 'includes/default-style.twig' %}
         <link rel="stylesheet" type="tex/css" href="/assets/css/morris.css">
-        <link rel="stylesheet" type="text/css" href="/assets/js/zoombox/zoombox.css">
-        <script type="text/javascript" src="/assets/js/lib/jquery.min.js" ></script>
-        <script type="text/javascript" src="/assets/js/app/materialize.js" ></script>
-        <script type="text/javascript" src="/assets/js/app/app.init.js" ></script>
-        <script type="text/javascript" src="/assets/js/app/app.ajax.js"></script>
-        <script type="text/javascript" src="/assets/js/app/admin.ajax.js"></script>
-        <script type="text/javascript" src="/assets/js/app/app.js" ></script>
-        <script  type="text/javascript" src="/assets/js/lib/raphael.js"></script>
-        <script  type="text/javascript" src="/assets/js/lib/morris.min.js"></script>
+        <script type="text/javascript" src="/assets/js/lib/jquery.min.js"></script>
+        <script type="text/javascript" src="/assets/js/lib/raphael.js"></script>
+        <script type="text/javascript" src="/assets/js/lib/morris.min.js"></script>
         <script type="text/javascript" src="/assets/js/tinymce/tinymce.min.js"></script>
     </head>
     <body>
-        <?php include(APP . "/Views/includes/adm-mobile-menu.twig"); ?>
-        <?php include(APP . "/Views/includes/admin-menu.twig"); ?>
-        <div class="page-content" id="pageContent" data-ajax="true">
-            <?php echo $page_content; ?>
-        </div>
+        {% include 'includes/adm-mobile-menu.twig' %}
+        {% include 'includes/admin-menu.twig' %}
+        <main class="page-content" id="pageContent" data-ajax="true">
+           {% block content %}{% endblock %}
+        </main>
+        <script type="text/javascript" src="/assets/js/app/materialize.js"></script>
+        <script type="text/javascript" src="/assets/js/app/app.init.js"></script>
+        <script type="text/javascript" src="/assets/js/app/app.ajax.js"></script>
+        <script type="text/javascript" src="/assets/js/app/admin.ajax.js"></script>
+        <script type="text/javascript" src="/assets/js/app/app.js"></script>
         <script>
             (function(){
                 if (tinymce !== 'undefined') {
@@ -35,7 +34,7 @@
                         height: 400,
                         file_browser_callback :  function (field_name, url, type, win) {
                             tinyMCE.activeEditor.windowManager.open({
-                                file : "<?= ADMIN."/media-browser" ?>",
+                                file : "{{ constant('ADMIN') ~ '/media-browser' }}",
                                 title : 'Photo picker',
                                 width : 500,
                                 height: 500,
@@ -74,7 +73,7 @@
                 }
             })()
         </script>
-        <?php include(APP . "/Views/includes/footer.twig"); ?>
-        <?php include(APP . "/Views/includes/flash.twig"); ?>
+        {% include 'includes/footer.twig' %}
+        {% include 'includes/flash.twig' %}
     </body>
 </html>

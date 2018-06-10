@@ -13,7 +13,7 @@ function formFeedComments(element) {
                 setLoader(this);
             });
 
-            posts[i].querySelector("form").addEventListener('submit', function(e){
+            posts[i].querySelector("form").addEventListener('submxhr.setRequestHeader(\'X-Requested-With\', \'xmlhttprequest\');it', function(e){
                 e.preventDefault();
                 e.stopPropagation();
 
@@ -27,7 +27,7 @@ function formFeedComments(element) {
                         if (getXhr()) {
                             let xhr = getXhr();
                             xhr.open('POST', this.getAttribute('action'), true);
-                            xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+
                             xhr.onreadystatechange = function () {
                                 if (xhr.readyState === 4) {
                                     if (xhr.status === 200) {
@@ -256,72 +256,76 @@ function loadPosts(element) {
  */
 function loadPictureInfo(element) {
     let gallery = document.querySelector(element);
-    let activeContent = null;
-    let activeItem = null;
+    if (gallery) {
+        let activeContent = null;
+        let activeItem = null;
 
-    let slideDown = function (element) {
-        let height = element.offsetHeight;
-        element.style.height = "0px";
-        element.style.transitionDuration = '.5s';
-        element.offsetHeight; // force du repaint
-        element.style.height = height + "px";
+        let slideDown = function (element) {
+            let height = element.offsetHeight;
+            element.style.height = "0px";
+            element.style.transitionDuration = '.5s';
+            element.offsetHeight; // force du repaint
+            element.style.height = height + "px";
 
-        window.setTimeout(function() {
-            element.style.height = null
-        }, 500);
-    };
+            window.setTimeout(function() {
+                element.style.height = null
+            }, 500);
+        };
 
-    let slideUp = function (element) {
-        let height = element.offsetHeight;
-        element.style.height = height + "px";
-        element.offsetHeight; // force du repaint
-        element.style.height = "0px";
+        let slideUp = function (element) {
+            let height = element.offsetHeight;
+            element.style.height = height + "px";
+            element.offsetHeight; // force du repaint
+            element.style.height = "0px";
 
-        window.setTimeout(function() {
-            element.parentNode.removeChild(element);
-        }, 500);
-    };
+            window.setTimeout(function() {
+                element.parentNode.removeChild(element);
+            }, 500);
+        };
 
-    let scrollTo = function(target, offset = 0) {
-        window.scrollTo({
-            behavior: "smooth",
-            left: 0,
-            top: target.offsetTop - offset
-        });
-    };
+        let scrollTo = function(target, offset = 0) {
+            window.scrollTo({
+                behavior: "smooth",
+                left: 0,
+                top: target.offsetTop - offset
+            });
+        };
 
-    let show = function(item){
-        let offset = 0;
-        if (activeContent !== null) {
-            slideUp(activeContent);
-            if (activeContent.offsetTop < item.offsetTop) {
-                offset = activeContent.offsetHeight;
+        let show = function(item){
+            let offset = 0;
+            if (activeContent !== null) {
+                slideUp(activeContent);
+                if (activeContent.offsetTop < item.offsetTop) {
+                    offset = activeContent.offsetHeight;
+                }
             }
-        }
 
-        if (activeItem === item) {
-            activeItem = null;
-            activeContent = null;
+            if (activeItem === item) {
+                activeItem = null;
+                activeContent = null;
+            } else {
+                let body = item.querySelector("[data-action='gallery-item-body']").cloneNode(true);
+                body.classList.add('active');
+                item.after(body);
+                slideDown(body);
+                scrollTo(item, offset);
+                activeContent = body;
+                activeItem = item;
+            }
+        };
+
+        if (typeof gallery !== 'undefined') {
+            let items = Array.prototype.slice.call(gallery.querySelectorAll("[data-action='gallery-item']"));
+            items.forEach((item) => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    show(item);
+                })
+            });
         } else {
-            let body = item.querySelector("[data-action='gallery-item-body']").cloneNode(true);
-            body.classList.add('active');
-            item.after(body);
-            slideDown(body);
-            scrollTo(item, offset);
-            activeContent = body;
-            activeItem = item;
+            return false;
         }
-    };
-
-    if (typeof gallery !== 'undefined') {
-        let items = Array.prototype.slice.call(gallery.querySelectorAll("[data-action='gallery-item']"));
-        items.forEach((item) => {
-            item.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                show(item);
-            })
-        });
     } else {
         return false;
     }
