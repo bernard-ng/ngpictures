@@ -1,0 +1,7 @@
+{% if flashMessageManager.has %}
+    {% for type, message in flashMessageManager.get %}
+        <script>
+            Materialize.toast("{{ message }}", 5000, "{{ type }}");
+        </script>
+    {% endfor %}
+{% endif %}

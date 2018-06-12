@@ -14,12 +14,13 @@ abstract class MessageManager
         //**************************************************************************************/
         'files_not_image'           =>  'Le fichier téléchargé doit être une image (jpg, jpeg, git, png)',
         'files_not_uploaded'        =>  'Une erreur est survenu lors du téléchargement de l\'image',
-        'files_too_big'             =>  'Votre image est trop grande, elle ne doit pas dépasser 10 Mo',
+        'files_too_big'             =>  'Votre image est trop grande, elle ne doit pas dépasser 6 Mo',
 
 
         //VALIDATOR
         //***************************************************************************************
         "form_invalid_username"     =>  "Votre pseudo n'est pas valide",
+        "form_invalid_username_num" => "Votre pseudo doit contenir au moins une lettre",
         "form_invalid_email"        =>  "Cet adresse mail n'est pas valide",
         "form_invalid_password"     =>  "les deux mdp ne correspondent pas",
         "form_invalid_data"         =>  "donnée invalide",

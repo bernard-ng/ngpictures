@@ -1,0 +1,78 @@
+<header>
+    <div class="navbar-fixed">
+        <nav class="shadow-3">
+            <div class="nav-wrapper container " id="menu">
+                <a href="/" class="brand-logo">
+                    <img src="/imgs/logo-white.png" class="logo" alt="logo">
+                </a>
+                <a href="/search?q="  class="action right">
+                    <i class="icon icon icon-search"></i>
+                </a>
+                <a href="#" data-activates="mobile-menu" class="button-collapse left">
+                    <i class="icon icon icon-menu"></i>
+                </a>
+
+                <span id="menu-item-active" data-active="{{ pageManager.getActivePage }}"></span>
+                <ul class="right hide-on-med-and-down links">
+                    <li class="search" style="margin-right: 10px">
+                        <div class="search">
+                            <form action="/search" method="get" class="ui icon input">
+                                <input name="q" type="text" placeholder="Recherches..." required>
+                                <i class="icon icon-search prefix"></i>
+                            </form>
+                        </div>
+                    </li>
+
+                    {% if activeUser.rank == 'admin' %}
+                        <li><a href="{{ constant('ADMIN') }}"> <i class="icon icon-code"></i></a></li>
+                    {% endif %}
+
+                    <li id="Ngpictures" class="waves-effect"><a href="/">Accueil</a></li>
+                    <li id="Blog" class="waves-effect"><a href="/blog"> Blog</a></li>
+                    <li id="Galerie" class="waves-effect"><a href="/gallery"> Galerie</a></li>
+
+                    {% if activeUser %}
+                        <li id="Posts" class="waves-effect"><a href="/posts"> Actualités</a></li>
+                        <li id="Communauté" class="waves-effect"><a href="/community">Communauté</a></li>
+                        <li class="user-actions">
+                            <a href="#" class="user-actions-sideNav show-profile show-on-large" data-activates="user-actions">
+                                <img src="{{ activeUser.avatarUrl }}" class="user" width="50" height="50">
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="action" class="waves-effect"><a href="/sign" class="btn waves-effect">Inscription</a></li>
+                        <li class="action" class="waves-effect"><a href="/login" class="btn waves-effect">Connexion</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <ul class="side-nav" id="user-actions">
+        {% if activeUser %}
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                        <img src="/imgs/bgjumbo.jpeg" alt="bg">
+                    </div>
+                    <a href="{{ activeUser.accountUrl }}"><img src="{{ activeUser.avatarUrl }}" alt="bg2" class="circle"></a>
+                    <span class="white-txt name">{{ activeUser.name }}</span>
+                    <span class="email">{{ activeUser.email }}</span>
+                </div>
+            </li>
+        {% else %}
+            <li class="logo" style="margin: 20px 20px 30px 20px;">
+                <a href="/" class="brand-logo" id="logo-container">
+                    <img src="/imgs/logo-white.png" alt="" width="100%" height="auto">
+                </a>
+            </li>
+        {% endif %}
+
+
+        {% if activeUser %}
+            <li><a href="{{ activeUser.accountUrl }}">Profile <i class="icon icon-user"></i></a></li>
+            <li><a href="{{ activeUser.editUrl }}">Editer le Profile <i class="icon icon-cog-alt"></i></a></li>
+            <li><a href="{{ activeUser.followersUrl }}">Mes abonnements <i class="icon icon-users"></i></a></li>
+            <li><a href="/logout">Déconnexion <i class="icon icon-off"></i></a></li>
+        {% endif %}
+    </ul>
+</header>

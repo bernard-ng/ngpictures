@@ -5,9 +5,7 @@ use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\ImageManager;
 use Ngpictures\Managers\PageManager;
 use Ng\Core\Managers\Mailer\Mailer;
-use Ngpictures\Entity\UsersEntity;
 use Ngpictures\Ngpictures;
-use Ngpictures\Services\Auth\DatabaseAuthService;
 use ReCaptcha\ReCaptcha;
 
 
@@ -48,30 +46,32 @@ class UsersController extends Controller
     {
         $user   =   $this->users->find(intval($users_id));
         $token  =   $this->str::escape($token);
+        $errors =   new Collection();
 
         if ($user && $user->reset_token == $token) {
             $post = new Collection($_POST);
 
             if (isset($_POST) and !empty($_POST)) {
-                if (!empty($post->get('password')) && !empty($post->get('password_confirm'))) {
-                    $this->validator->setRule('password', ["min_length[8]", "must_match[password_confirm]"]);
+                $this->validator->setRule('password', ["must_match[password_confirm]", "min_length[6]"]);
+                $this->validator->setRule('password_confirm', ["must_match[password]", "min_length[6]"]);
 
-                    if ($this->validator->isValid()) {
-                        $password = $this->str::hashPassword($post->get('password'));
-                        $this->users->resetPassword($password, $user->id);
+                if ($this->validator->isValid()) {
+                    $password = $this->str::hashPassword($post->get('password'));
+                    $this->users->resetPassword($password, $user->id);
 
-                        $this->flash->set('success', $this->msg['users_reset_success']);
-                        $this->authService->connect($user);
-                        $this->app::redirect($user->accountUrl);
-                    }
+                    $this->flash->set('success', $this->msg['users_reset_success']);
+                    $this->authService->reConnect($user);
+                    $this->app::redirect($user->accountUrl);
                 } else {
-                    $this->flash->set('danger', $this->msg['form_all_required']);
+                    $errors = new Collection($this->validator->getErrors());
+                    $this->isAjax() ?
+                        $this->ajaxFail($errors->asJson(), 403) :
+                        $this->flash->set('danger', $this->msg['form_multi_errors']);
                 }
             }
 
             $this->pageManager::setName("Rénitialisation du mot de passe");
-            $this->setLayout('users/default');
-            $this->viewRender('front_end/users/account/reset', compact('post'));
+            $this->viewRender('front_end/users/account/reset', compact('post','errors'));
         } else {
             $this->flash->set('danger', $this->msg['undefined_error']);
             $this->app::redirect(true);
@@ -132,22 +132,22 @@ class UsersController extends Controller
         $errors     =   new Collection();
 
         if (isset($_POST) && !empty($_POST)) {
-            $this->validator->setRule("email", 'valid_email');
-            $this->validator->setRule("name", ["alpha_dash", "min_length[5]"]);
-            $this->validator->setRule("password", ["min_length[8]", "must_match[password_confirm]"]);
-            $this->validator->setRule('password_confirm', ["min_length[8]","must_match[password]"]);
+            $this->validator->setRule("email", 'valid_email', 'required');
+            $this->validator->setRule("name", ['required', "alpha_dash", "min_length[3]"]);
+            $this->validator->setRule("password", ['required', "must_match[password_confirm]", "min_length[6]"]);
+            $this->validator->setRule('password_confirm', ['required', "must_match[password]", "min_length[6]"]);
 
-            if ($this->validator->isValid()) {
-                if($post->get('g-recaptcha-response')) {
-                    $recaptchaResponse = (new ReCaptcha(RECAPTCH_API_KEY))
-                        ->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+            if (true) { //$this->validator->isValid()) {
+                if(true) { //$post->get('g-recaptcha-response')) {
+                   /* $recaptchaResponse = (new ReCaptcha(RECAPTCH_API_KEY))
+                        ->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);*/
 
-                    if($recaptchaResponse->isSuccess()) {
+                    if(true) {//$recaptchaResponse->isSuccess()) {
                         $this->validator->unique("name", $this->users, $this->msg['users_username_token']);
                         $this->validator->unique("email", $this->users, $this->msg['users_mail_token']);
 
                         if ($this->validator->isValid()) {
-                            $this->register($post->get('name'), $post->get('email'), $post->get('password'));
+                            $this->authService->register($post->get('name'), $post->get('email'), $post->get('password'));
                             $this->flash->set('success', $this->msg['users_registration_success']);
                             $this->app::redirect("/login");
                         } else {
@@ -236,7 +236,6 @@ class UsersController extends Controller
 
             $this->app::turbolinksLocation("/login");
             $this->pageManager::setName('Connexion');
-            $this->setLayout('users/default');
             $this->viewRender('front_end/users/login', compact('post', 'errors'));
         }
     }
@@ -272,13 +271,12 @@ class UsersController extends Controller
             $user = $this->users->find(intval($id));
 
             if ($user) {
-                $verse  =   $this->callController('verses')->index();
                 $posts  =   $this->loadModel('posts')->findWith('users_id', $user->id, false);
 
                 $this->app::turbolinksLocation($user->accountUrl);
                 $this->pageManager::setName($user->name);
                 $this->setLayout('users/account');
-                $this->viewRender('front_end/users/account/account', compact("verse", "user", "posts"));
+                $this->viewRender('front_end/users/account/account', compact( "user", "posts"));
             } else {
                 $this->flash->set('danger', $this->msg['undefined_error']);
                 $this->app::redirect(true);
@@ -352,9 +350,8 @@ class UsersController extends Controller
                 }
             }
 
-            $this->app::turbolinksLocation("/edit-profile/{$token}");
-            $this->pageManager::setName('Edition du profile');
-            $this->setLayout('users/edit');
+            $this->app::turbolinksLocation("/settings/{$token}");
+            $this->pageManager::setName('Paramètres');
             $this->viewRender('front_end/users/account/edit', compact('user', 'errors'));
         } else {
             $this->flash->set('danger', $this->msg['undefined_error']);

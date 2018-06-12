@@ -52,6 +52,18 @@ class SavesModel extends Model
     }
 
 
+    public function getSaves(int $id, int $type): string
+    {
+        return $this->query(
+            "SELECT users_id FROM {$this->table} WHERE {$this->getType($type)} = {$id}",
+            [$id],
+            true,
+            false,
+            true
+        );
+    }
+
+
     /**
      * les publication saved dans le blog
      * @param integer $user_id

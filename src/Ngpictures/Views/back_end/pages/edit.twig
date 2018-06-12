@@ -1,0 +1,25 @@
+{% extends 'layout/admin/default.twig' %}
+{% import 'includes/form.twig' as form %}
+
+{% block content %}
+    <section class="container row">
+        <section class="col l12 m12 s12">
+            <div class="card">
+                <div class="page-title section-title">Edition :
+                   {{ file_name }}
+                    <i class="icon icon-pencil right"></i>
+                </div>
+
+                <form action="#" method="POST">
+
+                    {{ form.textarea('content','content',errors.get('content'), post.get('content') ?? file_content) }}
+
+                    <div class="submit-button">
+                        <button type="submit" class="ng-btn waves-effect waves-light">Modifier&nbsp;<i class="icon icon-send"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </section>
+{% endblock %}

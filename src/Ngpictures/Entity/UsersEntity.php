@@ -52,7 +52,7 @@ class UsersEntity extends Entity
      */
     public function getEditUrl(): string
     {
-        $this->editUrl = "/edit-profile/";
+        $this->editUrl = "/settings/";
         $this->editUrl .= Ngpictures::getInstance()->getSession()->read(TOKEN_KEY);
         return $this->editUrl;
     }

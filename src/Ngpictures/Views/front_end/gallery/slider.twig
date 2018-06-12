@@ -1,0 +1,47 @@
+{% extends 'layout/blank.twig' %}
+
+
+{% block content %}
+    <div class="slider fullscreen">
+        <ul class="slides">
+            {% if photos %}
+                {% for p in photos %}
+                    <li id="{{ p.id }}">
+                        <img src="{{ p.thumbUrl }}">
+                        {% if p.description %}
+                            <div class="caption left-align">
+                                <h2 class="ui header white-txt">{{ p.name ?? p.title | upper }}</h2>
+                                <p class="">{{ p.description }}</p>
+                            </div>
+                            <div class="bg"></div>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                <div class="fixed-action-btn">
+                    <a href="/gallery/slider?last_id={{ lastId }}" class="btn-floating btn-large blue-grey dark-2 waves-effect shadow-4">
+                        <i class="icon icon-fast-fw"></i>
+                    </a>
+                </div>
+            {% else %}
+                <li id="reset">
+                    <img src="/imgs/outils.jpeg">
+                    <div class="caption center-align">
+                        <h2 class="">Deep Shooting</h2>
+                        <h6 class="light grey-text text-lighten-3">Aucune photo disponible pour l'instant</h6>
+                    </div>
+                    <div class="bg"></div>
+                </li>
+                <div class="fixed-action-btn">
+                    <a href="/gallery/slider" class="btn-floating btn-large blue-grey dark-2 waves-effect shadow-4">
+                        <i class="icon icon-retweet"></i>
+                    </a>
+                </div>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="fixed-action-btn second">
+        <a href="/gallery" class="btn-floating btn-large blue dark-2 waves-effect shadow-4">
+            <i class="icon icon-th-large"></i>
+        </a>
+    </div>
+{% endblock %}

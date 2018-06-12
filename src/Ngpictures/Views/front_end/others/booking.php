@@ -1,4 +1,4 @@
-<?php include(APP . "/Views/includes/menu.php"); ?>
+<?php include(APP . "/Views/includes/menu.twig"); ?>
 <section class="section container row">
     <h2 class="ui header" style="margin-top: 20px">
         <strong>Mois de <?= $current_month ?></strong>

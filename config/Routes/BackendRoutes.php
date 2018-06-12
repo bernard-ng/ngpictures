@@ -23,7 +23,7 @@ $router->get(ADMIN."/blog","admin\blog", "admin.blog");
 $router->get(ADMIN."/blog/categories", "admin\categories", "admin.categories");
 $router->get(ADMIN."/confirm/:t/:id","admin#confirm","admin.confirm");
 $router->get(ADMIN."/posts","admin\posts","admin.posts");
-$router->post(ADMIN."/delete","admin\delete","admin.delete");
+$router->post(ADMIN."/delete","admin#delete","admin.delete");
 
 //gallery pages
 $router->any(ADMIN."/gallery/add","admin\gallery#add","admin.gallery-add");

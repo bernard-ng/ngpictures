@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" >
+    {% include "includes/ngpictures-watermark.txt" %}
+    <head>
+        <title>{{ pageManager.getName }}</title>
+        {% include "includes/default-meta.twig" %}
+        {% include "includes/favicon.twig" %}
+        {% include "includes/default-style.twig" %}
+    </head>
+    <body>
+        {% include "includes/menu.twig" %}
+        {% include "includes/mobile-menu.twig" %}
+        <div class="jumbotron-small">
+            <div class="container row">
+                <span class="ui header title col l12 m12 s12">
+                    <h3>{{ pageManager.getActivePage }}</h3>
+                </span>
+                <span class="jumbotron-content col l6 m12 s12">
+                    {{ pageManager.getDescription }}
+                </span>
+            </div>
+        </div>
+
+        <main class="page-content" id="pageContent" role="main">
+            {% block content %}{% endblock %}
+        </main>
+
+        {% include "includes/footer.twig" %}
+        {% include "includes/default-script.twig" %}
+        {% include "includes/flash.twig" %}
+    </body>
+</html>

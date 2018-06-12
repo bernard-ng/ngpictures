@@ -1,30 +1,34 @@
 <?php
 namespace Ng\Core\Controllers;
 
+use Ng\Core\Renderer\TwigRenderer;
+
+
 class Controller
 {
     protected $viewPath;
     protected $layout;
+    protected $renderer;
+
+
+    public function __construct()
+    {
+        $this->renderer = new TwigRenderer();
+    }
 
 
     /**
      * rendu de la vue
      * @param string $view
      * @param array $variables
-     * @param boolean $layout
+     * @return mixed
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
-    public function viewRender(string $view, array $variables = [], bool $layout = true)
+    public function viewRender(string $view, array $variables = [])
     {
-        ob_start();
-        extract($variables);
-        require("{$this->viewPath}{$view}.php");
-        $page_content = ob_get_clean();
-
-        if ($layout === true) {
-            require("{$this->viewPath}layout/{$this->layout}.php");
-        } else {
-            echo $page_content;
-        }
+        return $this->renderer->render($view, $variables);
     }
 
 

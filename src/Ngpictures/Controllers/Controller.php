@@ -33,6 +33,7 @@ class Controller extends SuperController
      */
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
+        parent::__construct();
         $this->app              =   $app;
         $this->layout           =   'default';
         $this->viewPath         =   APP."/Views/";
@@ -46,6 +47,10 @@ class Controller extends SuperController
         $this->validator        =   $this->app->getValidator();
         $this->cacheBusting     =   $this->app->getCacheBusting();
         $this->authService = new DatabaseAuthService($this->app, $this->loadModel('users'));
+
+        if(!$this->authService->isLogged()) {
+            $this->authService->cookieConnect();
+        }
     }
 
 

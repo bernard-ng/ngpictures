@@ -1,7 +1,6 @@
 <?php
 namespace Ngpictures\Traits\Controllers;
 
-use Ngpictures\Managers\PageManager;
 
 trait StoryPostTrait
 {
@@ -21,8 +20,6 @@ trait StoryPostTrait
         $this->app::turbolinksLocation("/".$this->table);
         $this->pageManager::setName(ucfirst($this->table));
         $this->pageManager::setMeta(['property' => 'og:url', 'content' => '//larytech.com/'.$this->table]);
-
-        $this->setLayout("posts/default");
         $this->viewRender("front_end/{$title}/index", compact("posts", "categories", 'last'));
     }
 }

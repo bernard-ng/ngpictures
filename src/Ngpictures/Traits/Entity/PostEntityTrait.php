@@ -148,6 +148,20 @@ trait PostEntityTrait
     }
 
 
+    public function getNbLikes(): string
+    {
+        $likes = Ngpictures::getInstance()->getModel('likes');
+        return $likes->getLikes($this->id, $this->action_type);
+    }
+
+
+    public function getSaves(): string
+    {
+        $saves = Ngpictures::getInstance()->getModel('saves');
+        return $saves->getSaves($this->id, $this->action_type);
+    }
+
+
     /**
      * renvoi le woridins de commentaire
      *

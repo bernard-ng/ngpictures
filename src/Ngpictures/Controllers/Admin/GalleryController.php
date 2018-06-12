@@ -79,7 +79,7 @@ class GalleryController extends AdminController
                     $this->gallery->update(
                         $last_id,
                         [
-                            "thumb" => "{$name}-{$last_id}.jpg",
+                            "thumb" => "{$slug}-{$last_id}.jpg",
                             'exif' => $exif,
                         ]
                     );

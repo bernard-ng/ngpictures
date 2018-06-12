@@ -10,7 +10,7 @@ $router->any("/login", "users#login", "users.login");
 $router->any("/forgot", "users#forgot", "users.forgot");
 $router->any("/reset/:id/:token", "users#reset", "users.reset");
 $router->any("/sign", "users#sign", "users.sign");
-$router->any("/edit-profile/:token", "users#edit", "users.edit");
+$router->any("/settings/:token", "users#edit", "users.edit");
 $router->any("/edit-post/:id/:token", "posts#edit", "posts.edit-article");
 $router->any("/submit-photo", "posts#add", "posts.add");
 $router->get("/confirm/:id/:token", "users#confirm", "users.confirmation");

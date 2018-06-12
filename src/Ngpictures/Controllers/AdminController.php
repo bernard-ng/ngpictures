@@ -117,7 +117,7 @@ class AdminController extends Controller
 
             if ($result) {
                 $model->delete($post->get('id'));
-                $this->flash->set('danger', $msg ?? $this->msg['post_delete_success']);
+                $this->flash->set('success', $msg ?? $this->msg['post_delete_success']);
                 $this->app::redirect(true);
             } else {
                 if ($this->isAjax()) {
@@ -145,7 +145,7 @@ class AdminController extends Controller
             $post = new Collection($_POST);
             if (!empty($post->get('name')) && !empty($post->get('dir'))) {
                 $dir = str_replace('/uploads/', UPLOAD.'/', $post->get('dir'));
-                $tdir = str_replace('/uplads/thumbs/', UPLOAD.'/', $post->get('dir'));
+                $tdir = str_replace('/uploads/thumbs/', UPLOAD.'/', $post->get('dir'));
 
                 if (is_dir($dir)) {
                     $file = $dir.'/'.$post->get('name');

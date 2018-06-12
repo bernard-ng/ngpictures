@@ -28,13 +28,8 @@ class MysqlDatabase extends Database
      * @param string $db_user
      * @param string $db_pass
      */
-    public function __construct(
-        string $db_name,
-        string $db_host = "127.0.0.1",
-        string $db_user = "root",
-        string $db_pass = ""
-    ) {
-
+    public function __construct(string $db_name, string $db_host, string $db_user, string $db_pass)
+    {
         $this->db_name = $db_name;
         $this->db_host = $db_host;
         $this->db_user = $db_user;

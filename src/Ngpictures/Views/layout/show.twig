@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" >
+    {% include "includes/ngpictures-watermark.txt" %}
+    <head>
+        <title>{{ pageManager.getName }}</title>
+        {% include "includes/default-meta.twig" %}
+        {% include "includes/favicon.twig" %}
+        {% include "includes/default-style.twig" %}
+    </head>
+    <body>
+        {% include "includes/menu.twig" %}
+        {% include "includes/mobile-menu.twig" %}
+
+        <main class="page-content" id="pageContent" role="main">
+            {% block content %}{% endblock %}
+        </main>
+
+        {% include "includes/footer.twig" %}
+        {% include "includes/default-script.twig" %}
+        {% include "includes/flash.twig" %}
+    </body>
+</html>

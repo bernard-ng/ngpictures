@@ -113,12 +113,13 @@ class ValidationManager
     /**
      * le champ ne doit pas etre vide
      * @param string $field
-     * @return boolean
+     * @return void
      */
     private function required(string $field)
     {
         if ($this->getValue($field) === '' && trim($this->getValue($field) === '')) {
             $this->errors[$field] = MessageManager::get('form_empty_field');
+            return;
         }
         return;
     }
@@ -138,6 +139,7 @@ class ValidationManager
         $unexpected = $table->findWith($field, $this->getValue($field));
         if ($unexpected) {
             $this->errors[$field] = $msg;
+            return;
         }
         return;
     }
@@ -155,6 +157,7 @@ class ValidationManager
         $this->required($field);
         if (mb_strlen($this->getValue($field)) < $min_length) {
             $this->errors[$field] = sprintf("le %s doit faire au moins %d caractères", $field, $min_length);
+            return;
         }
         return;
     }
@@ -173,6 +176,7 @@ class ValidationManager
         if ($this->getValue($field) !== $this->getValue($expected_match)) {
             $this->errors[$field]           =   MessageManager::get("form_invalid_password");
             $this->errors[$expected_match]  =   MessageManager::get('form_invalid_password');
+            return;
         }
         return;
     }
@@ -182,13 +186,14 @@ class ValidationManager
      * le champ doit etre alpha
      *
      * @param string $field
-     * @return boolean
+     * @return void
      */
     private function alpha(string $field)
     {
         $this->required($field);
         if (ctype_alpha($this->getValue($field))) {
             $this->errors[$field] = MessageManager::get('form_invalid_alpha');
+            return;
         }
         return;
     }
@@ -205,6 +210,7 @@ class ValidationManager
         $this->required($field);
         if (ctype_alnum($this->getValue($field))) {
             $this->errors[$field] = MessageManager::get("form_invalid_alnum");
+            return;
         }
         return;
     }
@@ -221,6 +227,7 @@ class ValidationManager
         $this->required($field);
         if (!preg_match('/^[a-z0-9-]+$/i', $this->getValue($field))) {
             $this->errors[$field] = MessageManager::get("form_invalid_username");
+            return;
         }
         return;
     }
@@ -236,6 +243,7 @@ class ValidationManager
     {
         if (!preg_match('/^[\-+]?[0-9-]+$/', $field)) {
             $this->errors[$field] = MessageManager::get("form_invalid_data");
+            return;
         }
         return;
     }
@@ -297,6 +305,7 @@ class ValidationManager
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $this->errors[$field] = MessageManager::get("form_invalid_email");
+            return;
         }
         return;
     }
