@@ -44,7 +44,7 @@ class CategoriesController extends AdminController
             $this->validator->setRule('title', 'required');
             $this->validator->setRule('description', 'required');
 
-            if ($this->validor->isValid()) {
+            if ($this->validator->isValid()) {
                 $title          =   $this->str::escape($post->get('title'));
                 $slug           =   $this->str::slugify($title);
                 $description    =   $post->get('description');
