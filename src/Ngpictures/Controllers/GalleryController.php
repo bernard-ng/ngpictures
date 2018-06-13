@@ -32,7 +32,7 @@ class GalleryController extends Controller
         $this->app::turbolinksLocation("/gallery");
         $this->pageManager::setName('Galerie');
         $this->setLayout('posts/default');
-        $this->viewRender('front_end/gallery/index', compact('photo', 'photos'));
+        $this->viewRender('frontend/gallery/index', compact('photo', 'photos'));
     }
 
 
@@ -47,7 +47,7 @@ class GalleryController extends Controller
         $photo = $this->gallery->find(intval($id));
         if ($photo) {
             $this->app::turbolinksLocation("/gallery/{$id}");
-            $this->viewRender('front_end/gallery/show', compact('photo'), false);
+            $this->viewRender('frontend/gallery/show', compact('photo'), false);
         } else {
             if ($this->isAjax()) {
                 $this->ajaxFail($this->msg['post_not_found']);
@@ -70,7 +70,7 @@ class GalleryController extends Controller
         $this->app::turbolinksLocation("/gallery/albums");
         $this->pageManager::setName('albums');
         $this->setLayout('posts/default');
-        $this->viewRender('front_end/gallery/albums', compact("albums"));
+        $this->viewRender('frontend/gallery/albums', compact("albums"));
     }
 
 
@@ -89,7 +89,7 @@ class GalleryController extends Controller
 
                 $this->pageManager::setName('Diaporama');
                 $this->setLayout('blank');
-                $this->viewRender('front_end/gallery/slider', compact('photos'));
+                $this->viewRender('frontend/gallery/slider', compact('photos'));
             } else {
                 $this->flash->set('danger', $this->msg['undefined_error']);
                 $this->app::redirect('/gallery');
@@ -98,7 +98,7 @@ class GalleryController extends Controller
             $photos = $this->gallery->latest();
             $this->pageManager::setName('Diaporama');
             $this->setLayout('blank');
-            $this->viewRender('front_end/gallery/slider', compact('photos'));
+            $this->viewRender('frontend/gallery/slider', compact('photos'));
         }
     }
 }

@@ -29,7 +29,7 @@ class BlogController extends AdminController
         $article    =   $this->blog->last();
         $this->pageManager::setName('Adm - blog');
         $this->setLayout("admin/default");
-        $this->viewRender("back_end/blog/index", compact("posts", "article"));
+        $this->viewRender("backend/blog/index", compact("posts", "article"));
     }
 
 
@@ -73,7 +73,7 @@ class BlogController extends AdminController
 
         $this->pageManager::setName('Adm - blog.edit');
         $this->setLayout('admin/default');
-        $this->viewRender('back_end/blog/edit', compact('article', 'categories', 'post', 'errors'));
+        $this->viewRender('backend/blog/edit', compact('article', 'categories', 'post', 'errors'));
     }
 
 
@@ -149,6 +149,6 @@ class BlogController extends AdminController
 
         $this->pageManager::setName('Adm - blog.add');
         $this->setLayout('admin/default');
-        $this->viewRender('back_end/blog/add', compact('post', 'categories', 'errors'));
+        $this->viewRender('backend/blog/add', compact('post', 'categories', 'errors'));
     }
 }

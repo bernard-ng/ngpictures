@@ -2,9 +2,11 @@
 namespace Ngpictures\Controllers;
 
 use Ngpictures\Ngpictures;
+use Ng\Core\Managers\Event\Emitter;
 use Ngpictures\Managers\PageManager;
-use Ng\Core\Controllers\Controller as SuperController;
 use Ngpictures\Services\Auth\DatabaseAuthService;
+use Ng\Core\Controllers\Controller as SuperController;
+use Ngpictures\Services\Notification\NotificationService;
 
 /**
  * @property DatabaseAuthService authService
@@ -17,6 +19,7 @@ class Controller extends SuperController
     protected $flash;
     protected $cookie;
     protected $layout;
+    protected $emitter;
     protected $session;
     protected $viewPath;
     protected $validator;
@@ -46,7 +49,8 @@ class Controller extends SuperController
         $this->session          =   $this->app->getSession();
         $this->validator        =   $this->app->getValidator();
         $this->cacheBusting     =   $this->app->getCacheBusting();
-        $this->authService = new DatabaseAuthService($this->app, $this->loadModel('users'));
+        $this->authService      =   new DatabaseAuthService($this->app, $this->loadModel('users'));
+        $this->notificationService   =   new NotificationService($this->app);
 
         if(!$this->authService->isLogged()) {
             $this->authService->cookieConnect();

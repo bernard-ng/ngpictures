@@ -45,6 +45,8 @@ class LikesController extends Controller
                 }
             } else {
                 $like->add($post->id, $type, $this->user->id);
+                $this->notificationService->notify(2, [$post, $this->user->id]);
+
                 if ($this->isAjax()) {
                     echo $post->likes;
                 } else {
@@ -83,7 +85,7 @@ class LikesController extends Controller
                 $this->app::turbolinksLocation("/likes/show/{$type}/{$slug}-{$id}");
                 $this->pageManager::setName("Mentions j'aime");
                 $this->setLayout("posts/default");
-                $this->viewRender("front_end/posts/likers", compact("likers"));
+                $this->viewRender("frontend/posts/likers", compact("likers"));
             } else {
                 $this->flash->set('info', $this->msg['post_not_liked']);
                 $this->app::redirect(true);

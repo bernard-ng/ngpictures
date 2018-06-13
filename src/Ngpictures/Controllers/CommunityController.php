@@ -30,6 +30,6 @@ class CommunityController extends Controller
             de la photographie"
         );
         $this->setLayout("posts/default");
-        $this->viewRender("front_end/community/community", compact('users'));
+        $this->viewRender("frontend/community/community", compact('users'));
     }
 }

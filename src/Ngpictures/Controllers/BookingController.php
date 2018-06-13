@@ -43,7 +43,7 @@ class BookingController extends Controller
 
         $this->setLayout('blank');
         $this->pageManager::setName('Réservation');
-        $this->viewRender('front_end/others/booking', compact(
+        $this->viewRender('frontend/others/booking', compact(
             'current_month',
             'nextMonth',
             'nextYear',

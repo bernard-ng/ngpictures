@@ -22,7 +22,7 @@ class LogsController extends AdminController
 
         $this->pageManager::setName('Adm - Logs');
         $this->setLayout("admin/default");
-        $this->viewRender('back_end/logs', compact('logs'));
+        $this->viewRender('backend/logs', compact('logs'));
     }
 
 

@@ -20,6 +20,6 @@ trait StoryPostTrait
         $this->app::turbolinksLocation("/".$this->table);
         $this->pageManager::setName(ucfirst($this->table));
         $this->pageManager::setMeta(['property' => 'og:url', 'content' => '//larytech.com/'.$this->table]);
-        $this->viewRender("front_end/{$title}/index", compact("posts", "categories", 'last'));
+        $this->viewRender("frontend/{$title}/index", compact("posts", "categories", 'last'));
     }
 }

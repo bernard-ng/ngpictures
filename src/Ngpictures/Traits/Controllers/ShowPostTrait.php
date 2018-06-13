@@ -28,7 +28,7 @@ trait ShowPostTrait
                     $this->app::turbolinksLocation("/{$this->table}/{$slug}-{$id}");
                     $this->setLayout("show");
                     $this->viewRender(
-                        "front_end/{$this->table}/show",
+                        "frontend/{$this->table}/show",
                         compact("article", "comments", "user", "categories", "author")
                     );
                 } else {

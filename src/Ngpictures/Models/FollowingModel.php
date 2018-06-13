@@ -63,14 +63,33 @@ class FollowingModel extends Model
      */
     public function isFollowed(int $id, $users_id = null): bool
     {
-        $req = $this->query(
+        return boolval($req = $this->query(
             "SELECT id FROM {$this->table} WHERE followed_id = ? AND follower_id = ? ",
             [$id,$users_id],
             true,
             true
-        );
-        return ($req)? true : false;
+        ));
     }
+
+
+    /**
+     * recupere tout les followers
+     *
+     * @param integer $users_id
+     * @return void
+     */
+    public function getFollowers(int $users_id)
+    {
+        return $this->query(
+            "SELECT {$this->table}.follower_id, {$this->table}.followed_id , users.*
+            FROM {$this->table}
+            LEFT JOIN {$this->table}.follower_id = users.id
+            WHERE (
+                SELECT {$this->table}.follower_id WHERE {$this->table}.followed_id = ?
+            )"
+        );
+    }
+
 
 
     /**

@@ -46,6 +46,6 @@ class ContactController extends Controller
         $this->app::turbolinksLocation("/contact");
         $this->pageManager::setName("Contact");
         $this->setLayout("posts/default");
-        $this->viewRender("front_end/others/contact", compact("post", "errors"));
+        $this->viewRender("frontend/others/contact", compact("post", "errors"));
     }
 }
