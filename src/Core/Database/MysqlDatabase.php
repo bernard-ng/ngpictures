@@ -2,9 +2,10 @@
 namespace Ng\Core\Database;
 
 use \PDO;
-use Ngpictures\Ngpictures;
-use \PDOException;
 use \Exception;
+use \PDOException;
+use Ngpictures\Ngpictures;
+use Ng\Core\Managers\LogMessageManager;
 
 class MysqlDatabase extends Database
 {
@@ -55,7 +56,8 @@ class MysqlDatabase extends Database
                 $PDO->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
                 $this->PDO = $PDO;
             } catch (PDOException $e) {
-                die($e->getMessage());
+                LogMessageManager::register(__class__, $e);
+                return null;
             }
         }
         return $this->PDO;
@@ -95,7 +97,8 @@ class MysqlDatabase extends Database
             }
             return $result;
         } catch (PDOException $e) {
-            die($e->getMessage());
+            LogMessageManager::register(__class__, $e);
+            return null;
         }
     }
 
@@ -135,7 +138,8 @@ class MysqlDatabase extends Database
             }
             return $result;
         } catch (PDOException $e) {
-            die($e->getMessage());
+            LogMessageManager::register(__class__, $e);
+            return null;
         }
     }
 

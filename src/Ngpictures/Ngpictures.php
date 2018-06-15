@@ -55,7 +55,8 @@ class Ngpictures
             }
             return self::$db_instance;
         } catch (ConfigManagerException $e) {
-            die($e->getMessage());
+            LogMessageManager::register(__class__, $e);
+            return null;
         }
     }
 
@@ -162,8 +163,9 @@ class Ngpictures
      */
     public function exceptionHandler($e)
     {
-        FlashMessageManager::getInstance()->set('danger', "Erreur !");
-        LogMessageManager::register($e->getFile(), $e->getMessage());
+        FlashMessageManager::getInstance()->set('danger', "Oups une erreur est survenue !");
+        LogMessageManager::register(__CLASS__, $e);
+        http_response_code(500);
         self::redirect("/error/internal");
     }
 
@@ -175,8 +177,9 @@ class Ngpictures
      */
     public function errorHandler(int $errno, string $errstr, string $errfile)
     {
-        FlashMessageManager::getInstance()->set('danger', "Erreur !");
+        FlashMessageManager::getInstance()->set('danger', "Oups une erreur est survenue !");
         LogMessageManager::register($errfile, $errstr);
+        http_response_code(500);
         self::redirect("/error/internal");
     }
 
@@ -191,6 +194,7 @@ class Ngpictures
             $settings = new ConfigManager(ROOT."/config/SystemConfig.php");
             return $settings->get('sys.debug');
         } catch (ConfigManagerException $e) {
+            LogMessageManager::register(__class__, $e);
             self::redirect("/error/internal");
         }
     }
@@ -205,6 +209,7 @@ class Ngpictures
             $settings = new ConfigManager(ROOT."/config/SystemConfig.php");
             return $settings->get('sys.cache');
         } catch (ConfigManagerException $e) {
+            LogMessageManager::register(__class__, $e);
             self::redirect("/error/internal");
         }
     }

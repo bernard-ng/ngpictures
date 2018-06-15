@@ -24,10 +24,22 @@ class CategoriesController extends AdminController
      */
     public function index()
     {
-        $categories = $this->categories->all();
+        $categories = $this->categories->orderBy('title', 'DESC', 0, 10);
+        $total = count($this->categories->all());
+
+        $pagination = $this->setPagination($total, "categories");
+        $currentPage = $pagination['currentPage'];
+        $totalPage = $pagination['totalPage'];
+        $prevPage = $pagination['prevPage'];
+        $nextPage = $pagination['nextPage'];
+        $categories = $pagination['result'] ?? $categories;
+
         $this->pageManager::setName('admin categories');
         $this->setLayout('admin/default');
-        $this->viewRender('backend/blog/categories', compact('categories'));
+        $this->viewRender(
+            'backend/blog/categories',
+            compact('categories', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
+        );
     }
 
 

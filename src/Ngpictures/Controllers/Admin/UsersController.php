@@ -28,11 +28,22 @@ class UsersController extends AdminController
      */
     public function index()
     {
-        $users = $this->users->all();
-        $user = $this->users->last();
+        $users = $this->users->orderBy('id', 'DESC', 0, 10);
+        $total = count($this->users->all());
+
+        $pagination = $this->setPagination($total, "users");
+        $currentPage = $pagination['currentPage'];
+        $totalPage = $pagination['totalPage'];
+        $prevPage = $pagination['prevPage'];
+        $nextPage = $pagination['nextPage'];
+        $users = $pagination['result'] ?? $users;
+
         $this->pageManager::setName("Adm - users");
         $this->setLayout("admin/default");
-        $this->viewRender("backend/users/index", compact('users', 'user', 'bugs', 'ideas'));
+        $this->viewRender(
+            "backend/users/index",
+            compact('users', 'bugs', 'ideas', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
+        );
     }
 
 
@@ -65,10 +76,23 @@ class UsersController extends AdminController
      */
     public function bugs()
     {
-        $bugs = $this->bugs->all();
+        $bugs = $this->bugs->orderBy('id', 'DESC', 0, 10);
+        $total = count($this->bugs->all());
+
+        $pagination = $this->setPagination($total, "bugs");
+        $currentPage = $pagination['currentPage'];
+        $totalPage = $pagination['totalPage'];
+        $prevPage = $pagination['prevPage'];
+        $nextPage = $pagination['nextPage'];
+        $bugs = $pagination['result'] ?? $bugs;
+
+
         $this->pageManager::setName('Adm - bugs');
         $this->setLayout('admin/default');
-        $this->viewRender('backend/users/bugs', compact('bugs'));
+        $this->viewRender(
+            'backend/users/bugs',
+            compact('bugs', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
+        );
     }
 
 
@@ -77,9 +101,21 @@ class UsersController extends AdminController
      */
     public function ideas()
     {
-        $ideas = $this->ideas->all();
+        $ideas = $this->ideas->orderBy('id', 'DESC', 0, 10);
+        $total = count($this->ideas->all());
+
+        $pagination = $this->setPagination($total, "ideas");
+        $currentPage = $pagination['currentPage'];
+        $totalPage = $pagination['totalPage'];
+        $prevPage = $pagination['prevPage'];
+        $nextPage = $pagination['nextPage'];
+        $ideas = $pagination['result'] ?? $ideas;
+
         $this->pageManager::setName('Adm - ideas');
         $this->setLayout('admin/default');
-        $this->viewRender('backend/users/ideas', compact('ideas'));
+        $this->viewRender(
+            'backend/users/ideas',
+            compact('ideas', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
+        );
     }
 }

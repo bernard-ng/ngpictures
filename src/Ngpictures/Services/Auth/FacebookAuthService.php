@@ -15,16 +15,9 @@ class FacebookAuthService extends AuthService
 
     private function catch($e, string $msg)
     {
-        if ($this->app::hasDebug()) {
-            echo "<pre>";
-            echo "{$msg}";
-            print_r($e);
-            echo "</pre>";
-            exit;
-        } else {
-            $this->flash->set('danger', $this->msg['undefined_error']);
-            $this->app::redirect(true);
-        }
+        LogMessageManager::register(__class__, $e);
+        $this->flash->set('danger', $this->msg['undefined_error']);
+        $this->app::redirect(true);
     }
 
     /**

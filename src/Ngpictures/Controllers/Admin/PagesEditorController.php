@@ -23,6 +23,7 @@ class PagesEditorController extends AdminController
         try {
             $files = new DirectoryIterator($path);
         } catch (Exception $e) {
+            LogMessageManager::register(__class__, $e);
             $this->flash->set('danger', $this->msg['undefined_error']);
             $this->app::redirect(true);
         }

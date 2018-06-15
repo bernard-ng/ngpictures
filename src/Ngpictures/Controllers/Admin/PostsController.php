@@ -26,10 +26,22 @@ class PostsController extends AdminController
 
     public function index()
     {
-        $posts = $this->posts->orderBy('id', 'DESC');
-        $article = $this->posts->last();
+        $posts = $this->posts->orderBy('id', 'DESC', 0, 10);
+        $total = count($this->posts->all());
+
+        $pagination = $this->setPagination($total, "posts");
+        $currentPage = $pagination['currentPage'];
+        $totalPage = $pagination['totalPage'];
+        $prevPage = $pagination['prevPage'];
+        $nextPage = $pagination['nextPage'];
+        $posts = $pagination['result'] ?? $posts;
+
+
         $this->pageManager::setName('Adm - posts');
         $this->setLayout("Admin/default");
-        $this->viewRender("backend/posts/index", compact("posts", "article"));
+        $this->viewRender(
+            "backend/posts/index",
+            compact("posts", 'total', "totalPage", "currentPage", "prevPage", "nextPage")
+        );
     }
 }

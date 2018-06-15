@@ -25,11 +25,23 @@ class BlogController extends AdminController
      */
     public function index()
     {
-        $posts      =   $this->blog->orderBy('id', 'DESC');
-        $article    =   $this->blog->last();
+        $posts      =   $this->blog->orderBy('id', 'DESC', 0, 10);
+        $total      = count($this->blog->all());
+
+        $pagination = $this->setPagination($total, "blog");
+        $currentPage = $pagination['currentPage'];
+        $totalPage = $pagination['totalPage'];
+        $prevPage = $pagination['prevPage'];
+        $nextPage = $pagination['nextPage'];
+        $posts = $pagination['result'] ?? $posts;
+
+
         $this->pageManager::setName('Adm - blog');
         $this->setLayout("admin/default");
-        $this->viewRender("backend/blog/index", compact("posts", "article"));
+        $this->viewRender(
+            "backend/blog/index",
+            compact("posts", 'total', "totalPage", "currentPage", "prevPage", "nextPage")
+        );
     }
 
 

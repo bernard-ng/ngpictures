@@ -89,6 +89,7 @@ abstract class ImageManager
                 'COMPUTED'           => $image->exif('COMPUTED') ?? null
             ]);
         } catch(NotReadableException $e) {
+            LogMessageManager::register(__class__, $e);
             return null;
         }
     }
@@ -116,15 +117,9 @@ abstract class ImageManager
 
                     try {
                         $image = $manager->make($file->get('thumb.tmp_name'));
-                        $exif = json_encode($image->exif());
 
-                    } catch (NotReadableException $e) {
-                        $flash->set('danger', MessageManager::get('files_not_image'));
-                        return false;
-                    }
-
-                    switch ($format) :
-                        case 'ratio':
+                        switch ($format) :
+                            case 'ratio':
                             $image->resize(self::$format[$format], null, function ($c) {
                                 $c->aspectRatio();
                             });
@@ -139,17 +134,26 @@ abstract class ImageManager
                                 $c->upsize();
                             });
                             break;
-                        case 'medium '|| 'large':
+                        case 'medium ' || 'large':
                             $image->fit(self::$format[$format], self::$format[$format]);
-                    endswitch;
+                        endswitch;
 
-                    $image
-                        ->orientate()
-                        ->interlace(true)
-                        ->save("{$path}/{$name}.jpg")
-                        ->destroy();
+                        $image
+                            ->orientate()
+                            ->interlace(true)
+                            ->save("{$path}/{$name}.jpg")
+                            ->destroy();
 
-                    return true;
+                        return true;
+                    } catch (NotReadableException $e ) {
+                        LogMessageManager::register(__class__, $e);
+                        $flash->set('danger', MessageManager::get('files_not_image'));
+                        return false;
+                    } catch (Exception $e) {
+                        LogMessageManager::register(__class__, $e);
+                        $flash->set('danger', MessageManager::get('undefined_error'));
+                        return false;
+                    }
                 } else {
                     $flash->set('danger', MessageManager::get('files_too_big'));
                     return false;
@@ -199,6 +203,7 @@ abstract class ImageManager
 
             return true;
         } catch (NotReadableException $e) {
+            LogMessageManager::register(__class__, $e);
             $flash->set('danger', MessageManager::get('files_not_image'));
             return false;
         }
@@ -213,6 +218,7 @@ abstract class ImageManager
         try {
             $logo = $manager->make(WEBROOT."/imgs/logo/{$logo}.png");
         } catch (NotReadableException $e) {
+            LogMessageManager::register(__class__, $e);
             $flash->set('danger', 'logo '. MessageManager::get('files_not_image'));
             return false;
         }
@@ -231,6 +237,7 @@ abstract class ImageManager
                 return true;
             }
         } catch (NotReadableException $e) {
+            LogMessageManager::register(__class__, $e);
             $flash->set('danger', 'image '. MessageManager::get('files_not_image'));
             return false;
         }

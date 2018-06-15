@@ -2,22 +2,13 @@
         AUTHOR         :    Bernard-ng
         PROJECT        :    NG-PICTURES
         LINK           :    https://larytech.com
-        BUILT AT       :    15-Jun-2018  14:44:47
+        BUILT AT       :    15-Jun-2018  21:23:56
 **************************************************************
 [NG-PICTURES MESSAGES LOGS] 
 
-* Ng\Core\Managers\Mailer\Mailer
-	=> 15-Jun 14:44 : Message could not be sent. Mailer Error: Could not instantiate mail function.  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 15-Jun 21:23 : SQLSTATE[42S22]: Column not found: 1054 Champ 'date_created' inconnu dans order clause  
 
-* Ng\Core\Managers\Mailer\Mailer
-	=> 15-Jun 14:47 : Message could not be sent. Mailer Error: Could not instantiate mail function.  
-
-* Ng\Core\Managers\Mailer\Mailer
-	=> 15-Jun 14:51 : Message could not be sent. Mailer Error: Could not instantiate mail function.  
-
-* Ng\Core\Managers\Mailer\Mailer
-	=> 15-Jun 14:51 : Message could not be sent. Mailer Error: Could not instantiate mail function.  
-
-* Ng\Core\Managers\Mailer\Mailer
-	=> 15-Jun 14:53 : Message could not be sent. Mailer Error: Could not instantiate mail function.  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 15-Jun 21:23 : SQLSTATE[42S22]: Column not found: 1054 Champ 'date_created' inconnu dans order clause  
 

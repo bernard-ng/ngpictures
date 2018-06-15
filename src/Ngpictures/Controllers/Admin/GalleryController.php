@@ -163,12 +163,9 @@ class GalleryController extends AdminController
         try {
             $files = new DirectoryIterator($dos);
         } catch (Exception  $e) {
-            if ($this->app::hasDebug()) {
-                die($e->getMessage());
-            } else {
-                $this->flash->set('danger', $this->msg['undefined_error']);
-                $this->app::redirect(true);
-            }
+            LogMessageManager::register(__class__, $e);
+            $this->flash->set('danger', $this->msg['undefined_error']);
+            $this->app::redirect(true);
         }
 
         $this->pageManager::setName('admin file-browser');

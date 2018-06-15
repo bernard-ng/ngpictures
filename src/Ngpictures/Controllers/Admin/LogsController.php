@@ -55,6 +55,7 @@ class LogsController extends AdminController
             $this->flash->set("success", $this->msg['success']);
             $this->app::redirect(true);
         } catch (RuntimeException $e) {
+            LogMessageManager::register(__class__, $e);
             $this->flash->set('danger', $this->msg['undefined_error']);
             $this->app::redirect(true);
         }

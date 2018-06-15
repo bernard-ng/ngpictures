@@ -26,8 +26,8 @@ class AlbumsController extends AdminController
      */
     public function index()
     {
-        $albums = $this->albums->all();
-        $total          =   count($this->albums->all());
+        $albums         = $this->albums->orderBy('id', 'DESC', 0, 10);
+        $total          = count($this->albums->all());
 
         $pagination     = $this->setPagination($total, "albums");
         $currentPage    = $pagination['currentPage'];

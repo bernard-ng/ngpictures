@@ -75,6 +75,7 @@ class PageManager
             $config = new ConfigManager(ROOT."/config/SystemConfig.php");
             self::$pageTitle = $name . " | " . $config->get('site.name');
         } catch (ConfigManagerException $e) {
+            LogMessageManager::register(__class__, $e);
             self::$pageTitle = $name . " | Ngpictures";
         }
         return self::getName();
