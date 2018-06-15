@@ -13,7 +13,7 @@ function formFeedComments(element) {
                 setLoader(this);
             });
 
-            posts[i].querySelector("form").addEventListener('submxhr.setRequestHeader(\'X-Requested-With\', \'xmlhttprequest\');it', function(e){
+            posts[i].querySelector("form").addEventListener('submit', function(e){
                 e.preventDefault();
                 e.stopPropagation();
 
@@ -27,7 +27,7 @@ function formFeedComments(element) {
                         if (getXhr()) {
                             let xhr = getXhr();
                             xhr.open('POST', this.getAttribute('action'), true);
-
+                            xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
                             xhr.onreadystatechange = function () {
                                 if (xhr.readyState === 4) {
                                     if (xhr.status === 200) {

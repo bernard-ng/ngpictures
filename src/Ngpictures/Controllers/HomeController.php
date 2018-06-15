@@ -29,7 +29,7 @@ class HomeController extends Controller
         $this->app::turbolinksLocation("/");
         $this->pageManager::setName('Ngpictures');
         $this->viewRender(
-            "front_end/index",
+            "frontend/index",
             compact('last', 'article', 'photos', 'categories', 'sliderTitle')
         );
     }

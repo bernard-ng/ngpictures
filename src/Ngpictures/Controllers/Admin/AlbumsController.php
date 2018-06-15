@@ -39,7 +39,7 @@ class AlbumsController extends AdminController
         $this->pageManager::setName('admin gallery.album');
         $this->setLayout('admin/default');
         $this->viewRender(
-            'back_end/gallery/albums',
+            'backend/gallery/albums',
             compact('albums', "currentPage", 'totalPage', 'prevPage', 'nextPage', 'total')
         );
     }
@@ -74,7 +74,7 @@ class AlbumsController extends AdminController
 
         $this->pageManager::setName('admin album.add');
         $this->setLayout('admin/default');
-        $this->viewRender('back_end/gallery/albums.add', compact('post', 'errors'));
+        $this->viewRender('backend/gallery/albums.add', compact('post', 'errors'));
     }
 
 
@@ -110,7 +110,7 @@ class AlbumsController extends AdminController
 
             $this->pageManager::setName('admin album.edit');
             $this->setLayout('admin/default');
-            $this->viewRender('back_end/gallery/albums.edit', compact('post', 'album', 'errors'));
+            $this->viewRender('backend/gallery/albums.edit', compact('post', 'album', 'errors'));
         } else {
             $this->flash->set('danger', $this->msg['undefined_error']);
             $this->app::redirect(true);

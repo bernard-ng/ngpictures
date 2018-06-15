@@ -13,39 +13,27 @@ class ContactController extends Controller
         $errors = new Collection();
 
         if (!empty($_POST) && isset($_POST)) {
-            if ($this->session->read(AUTH_KEY)) {
-                $this->validator->setRule('message', 'required');
 
-                if ($this->validator->isValid()) {
-                    $email = $this->session->getValue(AUTH_KEY, 'email');
-                    $name = $this->session->getValue(AUTH_KEY, 'name');
-                    $message = $this->str::escape($post->get('message'));
+            $this->validator->setRule('name', 'required');
+            $this->validator->setRule('email', 'valid_email');
+            $this->validator->setRule('message', 'required');
 
-                    (new Mailer())->contact($name, $email, $message);
-                } else {
-                    $errors = new Collection($this->validator->getErrors());
-                }
+            if ($this->validator->isValid()) {
+                $email      = $this->str::escape($post->get('email'));
+                $name       = $this->str::escape($post->get('name'));
+                $message    = $this->str::escape($post->get('message'));
+
+                (new Mailer())->contact($name, $email, $message);
+                $this->flash->set('success', $this->msg['form_contact_submitted']);
             } else {
-                $this->validator->setRule('email', 'valid_email');
-                $this->validator->setRule('name', 'required');
-                $this->validator->setRule('message', 'required');
-
-                if ($this->validator->isValid()) {
-                    $email = $this->str::escape($post->get('email'));
-                    $name = $this->str::escape($post->get('name'));
-                    $message = $this->str::escape($post->get('message'));
-
-                    (new Mailer())->contact($name, $email, $message);
-                } else {
-                    $errors = new Collection($this->validator->getErrors());
-                    $this->flash->set("danger", $this->msg['form_multi_errors']);
-                }
+                $errors = new Collection($this->validator->getErrors());
+                $this->flash->set("danger", $this->msg['form_multi_errors']);
             }
         }
 
         $this->app::turbolinksLocation("/contact");
         $this->pageManager::setName("Contact");
         $this->setLayout("posts/default");
-        $this->viewRender("front_end/others/contact", compact("post", "errors"));
+        $this->viewRender("frontend/others/contact", compact("post", "errors"));
     }
 }

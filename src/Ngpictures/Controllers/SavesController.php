@@ -90,7 +90,7 @@ class SavesController extends controller
 
             $this->pageManager::setName('Mes Enregistrements');
             $this->app::turbolinksLocation("my-saves/{$token}");
-            $this->viewRender('front_end/others/saves', compact('blog','gallery',  'posts'));
+            $this->viewRender('frontend/others/saves', compact('blog','gallery',  'posts'));
         } else {
             $this->flash->set('danger', $this->msg['users_forbidden']);
             $this->app::redirect(true);

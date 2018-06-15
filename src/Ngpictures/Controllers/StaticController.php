@@ -11,7 +11,7 @@ class StaticController extends Controller
         $this->app::turbolinksLocation("/about");
         $this->setLayout("posts/default");
         $this->pageManager::setName("A Propos de nous");
-        $this->viewRender('front_end/others/about');
+        $this->viewRender('frontend/others/about');
     }
 
 
@@ -27,6 +27,6 @@ class StaticController extends Controller
         $this->pageManager::setDescription(
             'La présente clause a pour objet de définir les différents termes essentiels du contrat'
         );
-        $this->viewRender("front_end/others/privacy", compact('categories'));
+        $this->viewRender("frontend/others/privacy", compact('categories'));
     }
 }

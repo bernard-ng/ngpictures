@@ -81,7 +81,7 @@ class AdminController extends Controller
         $this->pageManager::setName('admin');
         $this->setLayout('admin/default');
         $this->viewRender(
-            'back_end/index',
+            'backend/index',
             compact(
                 'posts',
                 'blog',

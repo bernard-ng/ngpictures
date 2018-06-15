@@ -431,12 +431,12 @@ INSERT INTO `posts` (`id`, `title`, `content`, `users_id`, `date_created`, `thum
 (113, 'new post', 'We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.\r\n', 5, '2018-03-06 21:00:16', 'ngpictures-new-post-113.jpg', 'new-post', '12', 1),
 (115, 'Bienvenue sur Ngpictures', 'Bienvenue sur Ngpictures', 5, '2018-03-06 21:01:55', 'ngpictures-bienvenue-sur-ngpictures-115.jpg', 'bienvenue-sur-ngpictures', '2', 1),
 (116, 'Bienvenue', 'Bienvenue sur NgpicturesBienvenue sur NgpicturesBienvenue sur NgpicturesBienvenue sur Ngpictures', 5, '2018-03-06 21:05:01', 'ngpictures-bienvenue-116.jpg', 'bienvenue', '2', 1),
-(117, 'front_end/others/download', 'front_end/others/download', 5, '2018-03-06 21:52:29', 'ngpictures-front-end-others-download-117.jpg', 'front-end-others-download', '1', 1),
-(118, 'front_end/others/download', 'front_end/others/download', 5, '2018-03-06 22:19:30', 'ngpictures-front-end-others-download-118.jpg', 'front-end-others-download', '2', 1),
-(119, 'front_end/others/download', 'front_end/others/download', 5, '2018-03-06 22:20:05', 'ngpictures-front-end-others-download-119.jpg', 'front-end-others-download', '2', 0),
-(120, 'front_end/others/download', 'front_end/others/download', 5, '2018-03-06 22:20:36', 'ngpictures-front-end-others-download-120.jpg', 'front-end-others-download', '2', 1),
-(121, 'front_end/others/download', 'front_end/others/download', 5, '2018-03-06 22:21:34', 'ngpictures-front-end-others-download-121.jpg', 'front-end-others-download', '2', 1),
-(122, 'download', 'front_end/others/download', 5, '2018-03-06 22:25:45', 'ngpictures-download-122.jpg', 'download', '2', 1),
+(117, 'frontend/others/download', 'frontend/others/download', 5, '2018-03-06 21:52:29', 'ngpictures-front-end-others-download-117.jpg', 'front-end-others-download', '1', 1),
+(118, 'frontend/others/download', 'frontend/others/download', 5, '2018-03-06 22:19:30', 'ngpictures-front-end-others-download-118.jpg', 'front-end-others-download', '2', 1),
+(119, 'frontend/others/download', 'frontend/others/download', 5, '2018-03-06 22:20:05', 'ngpictures-front-end-others-download-119.jpg', 'front-end-others-download', '2', 0),
+(120, 'frontend/others/download', 'frontend/others/download', 5, '2018-03-06 22:20:36', 'ngpictures-front-end-others-download-120.jpg', 'front-end-others-download', '2', 1),
+(121, 'frontend/others/download', 'frontend/others/download', 5, '2018-03-06 22:21:34', 'ngpictures-front-end-others-download-121.jpg', 'front-end-others-download', '2', 1),
+(122, 'download', 'frontend/others/download', 5, '2018-03-06 22:25:45', 'ngpictures-download-122.jpg', 'download', '2', 1),
 (123, 'miss ng', 'We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.', 17, '2018-04-05 14:32:01', 'ngpictures-miss-ng-123.jpg', 'miss-ng', '4', 1),
 (127, 'new post', 'We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.', 5, '2018-04-06 19:56:22', 'ngpictures-new-post-127.jpg', 'new-post', '1', 1);
 

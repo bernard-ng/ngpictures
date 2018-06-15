@@ -11,6 +11,7 @@ $router->any("/forgot", "users#forgot", "users.forgot");
 $router->any("/reset/:id/:token", "users#reset", "users.reset");
 $router->any("/sign", "users#sign", "users.sign");
 $router->any("/settings/:token", "users#edit", "users.edit");
+$router->get("/notifications/:id/:token", "nofications", "notification.index");
 $router->any("/edit-post/:id/:token", "posts#edit", "posts.edit-article");
 $router->any("/submit-photo", "posts#add", "posts.add");
 $router->get("/confirm/:id/:token", "users#confirm", "users.confirmation");
@@ -21,6 +22,7 @@ $router->get("/my-followers/:token", "following#showFollowers", "users.show-foll
 $router->get("/my-following/:token", "following#showFollowing", "users.show-following");
 $router->get('/my-saves/:token', 'saves#add', 'saves.index');
 $router->post("/delete-post/:token", "posts#delete", "posts.delete");
+$router->post("/notifications/:id/:token", "nofications#delete", "notification.index");
 
 
 //community pages

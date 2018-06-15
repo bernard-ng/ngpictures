@@ -8,6 +8,16 @@
     </div>
 {% endmacro %}
 
+{% macro smallInput(name, label, type, error, value) %}
+    <div class="input-field col l6 m6 s12">
+        <label for="{{ name }}">{{ label }}</label>
+        <input type="{{ type }}" name="{{ name }}" id="{{ name }}" class="validate {{ error ? 'invalid' : ''}}" value="{{ value | escape }}">
+        <span class="helper-text red-txt">
+            {{ error }}
+        </span>
+    </div>
+{% endmacro %}
+
 {% macro textarea(name, label, error, value) %}
     <div class="input-field col s12">
         <label for="{{ name }}">{{ label }}</label>

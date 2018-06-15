@@ -27,7 +27,7 @@ class CategoriesController extends AdminController
         $categories = $this->categories->all();
         $this->pageManager::setName('admin categories');
         $this->setLayout('admin/default');
-        $this->viewRender('back_end/blog/categories', compact('categories'));
+        $this->viewRender('backend/blog/categories', compact('categories'));
     }
 
 
@@ -44,7 +44,7 @@ class CategoriesController extends AdminController
             $this->validator->setRule('title', 'required');
             $this->validator->setRule('description', 'required');
 
-            if ($this->validor->isValid()) {
+            if ($this->validator->isValid()) {
                 $title          =   $this->str::escape($post->get('title'));
                 $slug           =   $this->str::slugify($title);
                 $description    =   $post->get('description');
@@ -60,7 +60,7 @@ class CategoriesController extends AdminController
 
         $this->pageManager::setName('admin categories.add');
         $this->setLayout('admin/default');
-        $this->viewRender('back_end/blog/categories.add', compact('post', 'errors'));
+        $this->viewRender('backend/blog/categories.add', compact('post', 'errors'));
     }
 
 
@@ -96,7 +96,7 @@ class CategoriesController extends AdminController
 
             $this->pageManager::setName('admin categories.edit');
             $this->setLayout('admin/default');
-            $this->viewRender('back_end/blog/categories.edit', compact('post', 'category', 'errors'));
+            $this->viewRender('backend/blog/categories.edit', compact('post', 'category', 'errors'));
         } else {
             $this->flash->set('danger', $this->msg['undefined_error']);
             $this->app::redirect(true);

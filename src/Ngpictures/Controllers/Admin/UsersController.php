@@ -32,7 +32,7 @@ class UsersController extends AdminController
         $user = $this->users->last();
         $this->pageManager::setName("Adm - users");
         $this->setLayout("admin/default");
-        $this->viewRender("back_end/users/index", compact('users', 'user', 'bugs', 'ideas'));
+        $this->viewRender("backend/users/index", compact('users', 'user', 'bugs', 'ideas'));
     }
 
 
@@ -68,7 +68,7 @@ class UsersController extends AdminController
         $bugs = $this->bugs->all();
         $this->pageManager::setName('Adm - bugs');
         $this->setLayout('admin/default');
-        $this->viewRender('back_end/users/bugs', compact('bugs'));
+        $this->viewRender('backend/users/bugs', compact('bugs'));
     }
 
 
@@ -80,6 +80,6 @@ class UsersController extends AdminController
         $ideas = $this->ideas->all();
         $this->pageManager::setName('Adm - ideas');
         $this->setLayout('admin/default');
-        $this->viewRender('back_end/users/ideas', compact('ideas'));
+        $this->viewRender('backend/users/ideas', compact('ideas'));
     }
 }

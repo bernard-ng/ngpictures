@@ -42,7 +42,7 @@ class GalleryController extends AdminController
         $this->pageManager::setName('Adm - gallery');
         $this->setLayout("admin/default");
         $this->viewRender(
-            "back_end/gallery/index",
+            "backend/gallery/index",
             compact('photos', 'photo', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
         );
     }
@@ -98,7 +98,7 @@ class GalleryController extends AdminController
 
         $this->pageManager::setName('Adm - gallery.add');
         $this->setLayout("admin/default");
-        $this->viewRender("back_end/gallery/add", compact('post', 'categories'));
+        $this->viewRender("backend/gallery/add", compact('post', 'categories'));
     }
 
 
@@ -128,7 +128,7 @@ class GalleryController extends AdminController
 
             $this->pageManager::setName('Adm - gallery.edit');
             $this->setLayout("admin/default");
-            $this->viewRender("back_end/gallery/edit", compact('photo', 'categories'));
+            $this->viewRender("backend/gallery/edit", compact('photo', 'categories'));
         } else {
             $this->flash->set('danger', $this->msg['post_not_found']);
             $this->app::redirect(true);
@@ -146,7 +146,7 @@ class GalleryController extends AdminController
         $images = $this->gallery->all();
         $this->pageManager::setName('admin media-browser');
         $this->setLayout('modal');
-        $this->viewRender('back_end/gallery/media-browser', compact('images'));
+        $this->viewRender('backend/gallery/media-browser', compact('images'));
     }
 
 
@@ -173,7 +173,7 @@ class GalleryController extends AdminController
 
         $this->pageManager::setName('admin file-browser');
         $this->setLayout('modal');
-        $this->viewRender('back_end/gallery/file-browser', compact('files', 'relative_dos'));
+        $this->viewRender('backend/gallery/file-browser', compact('files', 'relative_dos'));
     }
 
 
@@ -210,7 +210,7 @@ class GalleryController extends AdminController
 
             $this->pageManager::setName('adm - watermarker');
             $this->setLayout("admin/default");
-            $this->viewRender("back_end/gallery/watermark", ['image' => "/uploads/$path[$type]/{$filename}"]);
+            $this->viewRender("backend/gallery/watermark", ['image' => "/uploads/$path[$type]/{$filename}"]);
         } else {
             $this->flash->set('danger', $this->msg['files_not_image']);
             $this->app::redirect(true);

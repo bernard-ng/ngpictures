@@ -21,6 +21,8 @@ class FollowingController extends Controller
         $this->authService->restrict();
         $this->user = $this->authService->isLogged();
         $this->loadModel(['users', 'following']);
+
+        var_dump($this->following->getFollowers(5)); die();
     }
 
 
@@ -81,7 +83,7 @@ class FollowingController extends Controller
                 $this->app::turbolinksLocation("/my-followers/{$token}");
                 $this->pageManager::setName("Mes Abonnés");
                 $this->setLayout("posts/default");
-                $this->viewRender("front_end/users/account/followers", compact("followers"));
+                $this->viewRender("frontend/users/account/followers", compact("followers"));
             } else {
                 $this->flash->set('danger', $this->msg['undefined_error']);
                 $this->app::redirect(true);
@@ -119,7 +121,7 @@ class FollowingController extends Controller
                 $this->app::turbolinksLocation("/my-following/{$token}");
                 $this->pageManager::setName("Mes Abonnements");
                 $this->setLayout("posts/default");
-                $this->viewRender("front_end/users/account/following", compact("followings"));
+                $this->viewRender("frontend/users/account/following", compact("followings"));
             } else {
                 $this->flash->set('danger', $this->msg['undefined_error']);
                 $this->app::redirect(true);

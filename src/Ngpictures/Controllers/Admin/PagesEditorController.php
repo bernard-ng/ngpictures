@@ -18,7 +18,7 @@ class PagesEditorController extends AdminController
      */
     public function show()
     {
-        $path = APP."/Views/front_end/static/";
+        $path = APP."/Views/frontend/static/";
 
         try {
             $files = new DirectoryIterator($path);
@@ -29,7 +29,7 @@ class PagesEditorController extends AdminController
 
         $this->pageManager::setName("Adm - Les Pages");
         $this->setLayout('admin/default');
-        $this->viewRender("back_end/pages/pages", compact('files'));
+        $this->viewRender("backend/pages/pages", compact('files'));
     }
 
 
@@ -41,7 +41,7 @@ class PagesEditorController extends AdminController
      */
     public function edit(string $page_name)
     {
-        $file_url = APP."/Views/front_end/static/{$page_name}";
+        $file_url = APP."/Views/frontend/static/{$page_name}";
         $file_name = $page_name;
 
         if (is_file($file_url)) {
@@ -57,7 +57,7 @@ class PagesEditorController extends AdminController
 
             $this->setLayout("admin/default");
             $this->pageManager::setName("Adm - Modifier une page");
-            $this->viewRender("back_end/pages/edit", compact('file_content', 'file_name', 'post'));
+            $this->viewRender("backend/pages/edit", compact('file_content', 'file_name', 'post'));
         } else {
             $this->flash->set('danger', $this->msg['undefined_error']);
             $this->app::redirect(true);

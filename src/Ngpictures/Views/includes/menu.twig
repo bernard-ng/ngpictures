@@ -66,12 +66,10 @@
                 </a>
             </li>
         {% endif %}
-
-
         {% if activeUser %}
             <li><a href="{{ activeUser.accountUrl }}">Profile <i class="icon icon-user"></i></a></li>
-            <li><a href="{{ activeUser.editUrl }}">Editer le Profile <i class="icon icon-cog-alt"></i></a></li>
-            <li><a href="{{ activeUser.followersUrl }}">Mes abonnements <i class="icon icon-users"></i></a></li>
+            <li><a href="{{ activeUser.editUrl }}">Paramètres <i class="icon icon-cog-alt"></i></a></li>
+            <li><a href="{{ activeUser.followingsUrl }}">Mes abonnements <i class="icon icon-users"></i></a></li>
             <li><a href="/logout">Déconnexion <i class="icon icon-off"></i></a></li>
         {% endif %}
     </ul>

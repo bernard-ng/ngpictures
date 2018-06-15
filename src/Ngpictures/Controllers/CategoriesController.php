@@ -47,7 +47,7 @@ class CategoriesController extends Controller
             "Rétrouvez facilement une photo en cliquant sur une catégorie"
         );
         $this->setLayout('posts/default');
-        $this->viewRender("front_end/categories/index", compact('categories', 'thumbs', 'nb'));
+        $this->viewRender("frontend/categories/index", compact('categories', 'thumbs', 'nb'));
     }
 
 
@@ -68,7 +68,7 @@ class CategoriesController extends Controller
             $this->app::turbolinksLocation("/categories/{$name}-{$id}");
             $this->pageManager::setName("{$category->title}");
             $this->setLayout('posts/default');
-            $this->viewRender('front_end/categories/show', compact('category', 'blog', 'posts', 'gallery'));
+            $this->viewRender('frontend/categories/show', compact('category', 'blog', 'posts', 'gallery'));
         } else {
             $this->flash->set('danger', $this->msg['category_not_found']);
             $this->app::redirect('/categories');

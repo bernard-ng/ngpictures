@@ -30,6 +30,6 @@ class PostsController extends AdminController
         $article = $this->posts->last();
         $this->pageManager::setName('Adm - posts');
         $this->setLayout("Admin/default");
-        $this->viewRender("back_end/posts/index", compact("posts", "article"));
+        $this->viewRender("backend/posts/index", compact("posts", "article"));
     }
 }

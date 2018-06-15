@@ -71,7 +71,7 @@ class UsersController extends Controller
             }
 
             $this->pageManager::setName("Rénitialisation du mot de passe");
-            $this->viewRender('front_end/users/account/reset', compact('post','errors'));
+            $this->viewRender('frontend/users/account/reset', compact('post','errors'));
         } else {
             $this->flash->set('danger', $this->msg['undefined_error']);
             $this->app::redirect(true);
@@ -100,7 +100,7 @@ class UsersController extends Controller
                     $link   =   SITE_NAME."/reset/{$user->id}/{$user->reset_token}";
 
                     (new Mailer())->resetPassword($link, $email);
-                    $this->flash->set('success', $this->msg['users_reset_success']);
+                    $this->flash->set('success', $this->msg['form_reset_submitted']);
                     $this->isAjax()? $this->ajaxRedirect("/login") : $this->app::redirect('/login');
                 } else {
                     $this->isAjax()?
@@ -118,7 +118,7 @@ class UsersController extends Controller
         $this->app::turbolinksLocation("/forgot");
         $this->pageManager::setName('Mot de passe oublié');
         $this->setLayout('users/default');
-        $this->viewRender('front_end/users/account/forgot', compact('post', 'errors'));
+        $this->viewRender('frontend/users/account/forgot', compact('post', 'errors'));
     }
 
 
@@ -137,12 +137,12 @@ class UsersController extends Controller
             $this->validator->setRule("password", ['required', "must_match[password_confirm]", "min_length[6]"]);
             $this->validator->setRule('password_confirm', ['required', "must_match[password]", "min_length[6]"]);
 
-            if (true) { //$this->validator->isValid()) {
-                if(true) { //$post->get('g-recaptcha-response')) {
-                   /* $recaptchaResponse = (new ReCaptcha(RECAPTCH_API_KEY))
-                        ->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);*/
+            if ($this->validator->isValid()) {
+                if($post->get('g-recaptcha-response')) {
+                   $recaptchaResponse = (new ReCaptcha(RECAPTCH_API_KEY))
+                        ->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 
-                    if(true) {//$recaptchaResponse->isSuccess()) {
+                    if($recaptchaResponse->isSuccess()) {
                         $this->validator->unique("name", $this->users, $this->msg['users_username_token']);
                         $this->validator->unique("email", $this->users, $this->msg['users_mail_token']);
 
@@ -171,7 +171,7 @@ class UsersController extends Controller
         $this->app::turbolinksLocation("/sign");
         $this->pageManager::setName("Inscription");
         $this->setLayout('users/default');
-        $this->viewRender('front_end/users/sign', compact('post', 'errors'));
+        $this->viewRender('frontend/users/sign', compact('post', 'errors'));
     }
 
 
@@ -236,7 +236,7 @@ class UsersController extends Controller
 
             $this->app::turbolinksLocation("/login");
             $this->pageManager::setName('Connexion');
-            $this->viewRender('front_end/users/login', compact('post', 'errors'));
+            $this->viewRender('frontend/users/login', compact('post', 'errors'));
         }
     }
 
@@ -276,7 +276,7 @@ class UsersController extends Controller
                 $this->app::turbolinksLocation($user->accountUrl);
                 $this->pageManager::setName($user->name);
                 $this->setLayout('users/account');
-                $this->viewRender('front_end/users/account/account', compact( "user", "posts"));
+                $this->viewRender('frontend/users/account/account', compact( "user", "posts"));
             } else {
                 $this->flash->set('danger', $this->msg['undefined_error']);
                 $this->app::redirect(true);
@@ -352,7 +352,7 @@ class UsersController extends Controller
 
             $this->app::turbolinksLocation("/settings/{$token}");
             $this->pageManager::setName('Paramètres');
-            $this->viewRender('front_end/users/account/edit', compact('user', 'errors'));
+            $this->viewRender('frontend/users/account/edit', compact('user', 'errors'));
         } else {
             $this->flash->set('danger', $this->msg['undefined_error']);
             $this->app::redirect(true);
