@@ -4,7 +4,7 @@ sales.
  j'upload les photo sur le site, mais je les block, avec un code ou un qrcode.
  quand une personne nous paie, on l'envoi le qrcode pour debloquer ses photo sur notre site.
 
- les albums qui seront payant. 
+ les albums qui seront payant.
  donc j'aurrai une page index qui va lister tout les albums, acheter ou pas.
  une page show, qui aurra le formulaire de deblockage, et les different information telle que le nombre de photo
  pour qui elles ont ete prise, quand, et ou...
@@ -16,3 +16,9 @@ sales.
 
  une api pour trouver les photographes et des studios photos. on va utiliser un fournisseur de carte et geolocaliser
  les differents user avec un compte photographe.
+
+
+ **** followingController bug
+ **** notification system a finir.
+ **** reservation system a finir
+ ***    map localisation a finir.

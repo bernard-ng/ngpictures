@@ -88,17 +88,19 @@
                 </div>
             </div>
             <div class="parallax">
-                <img src="{{ article.thumbUrl }}" alt="{{ article.title}}" title="{{ article.title}}" class="bw">
+                <img src="/imgs/outils.jpeg" alt="{{ article.title}}" title="{{ article.title}}" class="bw">
             </div>
         </section>
         <section class="section col l12 m12 s12">
             <div class="row container">
             <span class="row col l12 s12 m12">
-                <h2 class="ui header">Les Héros dans l'ombre</h2>
+                <h2 class="ui header">Notre équipe</h2>
             </span>
                 <div class="ui divided items col l6 m12 s12 animated slideInLeft">
                     <div class="item">
-                        <div class="image"><img src="/imgs/team/bernard.jpg"></div>
+                        <div class="image">
+                            <img src="{{ cacheBusting('/imgs/team/bernard.jpg') }}">
+                        </div>
                         <div class="content">
                             <a href="http://ngpictures.pe.hu" target="_blank" class="header">Bernard Ngandu</a>
                             <div class="meta">Fondateur - Photographe</div>
@@ -107,21 +109,7 @@
                                     J'ai toujours voulu partager ma passion pour la photographie avec le reste du monde,
                                     voilà qu'aujourd'hui cela est possible grâce à #ngpictures,
                                     je me suis intéressé à la photographie car elle m'a permis de m'exprimer sans l'usage des mots.
-                                    ngpictures n'est pas seulement mon moyen d'expression mais le votre aussi.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="image"><img src="/imgs/team/gael.jpg"></div>
-                        <div class="content">
-                            <a class="header">Gael Balo</a>
-                            <div class="meta">Directeur de Markerting</div>
-                            <div class="description">
-                                <p>
-                                    Depuis un temps j'ai eu des initiatives diverses pour faire la différence avec les autres.
-                                    Et #ngpictures est tombé à pique, voilà pourquoi je me suis facilement rallié à la vision
-                                    de #ngpictures et être ainsi son directeur de marketing.
+                                    ansi #ngpictures est notre moyen d'expression à tous.
                                 </p>
                             </div>
                         </div>
@@ -129,26 +117,16 @@
                 </div>
                 <div class="ui divided items col l6 m12 s12 animated slideInRight">
                     <div class="item">
-                        <div class="image"><img src="/imgs/team/balloy.jpg"></div>
-                        <div class="content">
-                            <span class="header">Balloy Fane</span>
-                            <div class="meta">Directrice de Publication</div>
-                            <div class="description">
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Eum quidem
-                                </p>
-                            </div>
+                        <div class="image">
+                            <img src="{{ cacheBusting('/imgs/team/gael.jpg') }}">
                         </div>
-                    </div>
-                    <div class="item">
-                        <div class="image"><img src="/imgs/team/grey.jpg"></div>
                         <div class="content">
-                            <span class="header">Gretta Mpunga</span>
-                            <div class="meta">shooting model</div>
+                            <a class="header">Gaël Balo</a>
+                            <div class="meta">Markerting - Photographe</div>
                             <div class="description">
                                 <p>
-                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
+                                    Depuis un temps j'ai eu des initiatives diverses pour faire la différence avec les autres. Et #ngpictures est tombé à pique,
+                                    voilà pourquoi je me suis facilement rallié à la vision de #ngpictures et être ainsi son directeur de marketing.
                                 </p>
                             </div>
                         </div>
@@ -195,7 +173,7 @@
                 </div>
             </div>
             <div class="parallax">
-                <img src="/imgs/map-2.jpg" alt="">
+                <img src="/imgs/outils.jpeg" alt="{{ article.title}}" title="{{ article.title}}" class="bw">
             </div>
         </section>
     </section>

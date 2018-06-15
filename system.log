@@ -12,3 +12,13 @@
 * D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
 		=> 15-Jun 21:23 : SQLSTATE[42S22]: Column not found: 1054 Champ 'date_created' inconnu dans order clause  
 
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 15-Jun 22:44 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de '.id
+            WHERE (
+                SELECT following.follower_id WHERE fol' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 15-Jun 22:44 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de '.id
+            WHERE (
+                SELECT following.follower_id WHERE fol' à la ligne 3  
+

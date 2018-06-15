@@ -1,52 +1,72 @@
+{% extends 'layout/admin/default.twig' %} {% block content %}
+<nav class="nav shadow-2">
+    <div class="container">
+        <div class="nav-wrapper">
+            <ul>
+                <li>
+                    <a href="{{ constant('ADMIN')~" /blog/add "  }}">Article</a>
+                </li>
+                <li>
+                    <a href="{{ constant('ADMIN')~" /gallery/add " }}">Photo</a>
+                </li>
+                <li>
+                    <a href="{{ constant('ADMIN')~" /gallery/albums/add " }}">Albums</a>
+                </li>
+                <li>
+                    <a href="{{ constant('ADMIN')~" /blog/categories/add " }}">Catégorie</a>
+                </li>
+                <li class="right">
+                    <a href="{{ constant('ADMIN') ~ '/users/bugs' }}">Bugs</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <section class="row container">
-    <?php include(APP . "/Views/includes/left-aside.twig"); ?>
-    <main class="col l9">
-        <div class="card no-padding col l12" id="ideas">
-            <nav class="nav col l12 z-depth-2 mb-20">
-                <div class="nav-wrapper">
-                    <ul>
-                        <li><a href="<?= ADMIN."/file-browser/pictures/"  ?>">Photos membres</a></li>
-                        <li><a href="<?= ADMIN."/file-browser/avatars/" ?>">Avatars membres</a></li>
-                        <li class="right"><a href="<?= ADMIN."/users/bugs" ?>"> Bugs </a></li>
-                </div>
-            </nav>
-            <section class="ng-news-card-content">
-                <section class="ng-news-card-title">
-                    <h2>ideas</h2>
-                </section>
-                <main>
-                    ideas given by users
-                </main>
-            </section>
-            <table class="card responsive-table bordered striped">
+    <section class="col s12 m12 l9">
+        <div class="card-panel grey dark-4">
+            <div class="section">
+                <span class="btn">Page : {{ currentPage }}/{{ totalPage }}</span>
+                <span class="btn">Total : {{ total }}</span>
+
+                <a href="{{ constant('ADMIN') ~ " /users/bugs?page=" ~ prevPage }}" class="btn">
+                    <i class="icon icon-left-open"></i>
+                </a>
+                <a href="{{ constant('ADMIN') ~ " /users/bugs?page=" ~ nextPage }}" class="btn">
+                    <i class="icon icon-right-open"></i>
+                </a>
+            </div>
+
+            <table class="card bordered grey dark-4">
                 <thead>
-                <tr>
-                    <th>id</th>
-                    <th>content</th>
-                    <th>action</th>
-                </tr>
+                    <tr>
+                        <th>id</th>
+                        <th>users_id</th>
+                        <th>content</th>
+                        <th>action</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <?php if (!empty($ideas)) : ?>
-                    <?php foreach ($ideas as $idea) : ?>
-                        <tr>
-                            <td><b><?= $idea->id ?></b></td>
-                            <td>
-                                <?= $idea->content ?>
-                            </td>
-                            <td>
-                                <form method="POST" action="<?= ADMIN."/delete" ?>" style="display: inline-block !important;">
-                                    <input type="hidden" name="id" value="<?= $idea->id?>" >
-                                    <input type="hidden" name="type" value="6" >
-                                    <button type="submit" class="btn btn-small waves-effect waves-light red" id="delete">
-                                        <i class="icon icon-remove" style="font-size: smaller !important;"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+                    {% for i in ideas %}
+                    <tr>
+                        <td><b>{{ i.id }}</b></td>
+                        <td>{{ i.users_id }}</td>
+                        <td>{{ i.content }}</td>
+                        <td>
+                            <form method="POST" action="{{ constant('ADMIN') ~ '/delete' }}" style="display: inline-block !important;">
+                                <input type="hidden" name="id" value="{{ i.id }}">
+                                <input type="hidden" name="type" value="6">
+                                <button type="submit" class="btn btn-small waves-effect waves-light red" id="delete">
+                                    <i class="icon icon-cancel" style="font-size: smaller !important;"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
-    </main>
+    </section>
+    {% include 'includes/menu-aside.twig' %}
+</section>
+{% endblock %}
