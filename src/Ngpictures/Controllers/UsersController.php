@@ -100,7 +100,7 @@ class UsersController extends Controller
                     $link   =   SITE_NAME."/reset/{$user->id}/{$user->reset_token}";
 
                     (new Mailer())->resetPassword($link, $email);
-                    $this->flash->set('success', $this->msg['users_reset_success']);
+                    $this->flash->set('success', $this->msg['form_reset_submitted']);
                     $this->isAjax()? $this->ajaxRedirect("/login") : $this->app::redirect('/login');
                 } else {
                     $this->isAjax()?
@@ -137,12 +137,12 @@ class UsersController extends Controller
             $this->validator->setRule("password", ['required', "must_match[password_confirm]", "min_length[6]"]);
             $this->validator->setRule('password_confirm', ['required', "must_match[password]", "min_length[6]"]);
 
-            if (true) { //$this->validator->isValid()) {
-                if(true) { //$post->get('g-recaptcha-response')) {
-                   /* $recaptchaResponse = (new ReCaptcha(RECAPTCH_API_KEY))
-                        ->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);*/
+            if ($this->validator->isValid()) {
+                if($post->get('g-recaptcha-response')) {
+                   $recaptchaResponse = (new ReCaptcha(RECAPTCH_API_KEY))
+                        ->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 
-                    if(true) {//$recaptchaResponse->isSuccess()) {
+                    if($recaptchaResponse->isSuccess()) {
                         $this->validator->unique("name", $this->users, $this->msg['users_username_token']);
                         $this->validator->unique("email", $this->users, $this->msg['users_mail_token']);
 

@@ -1,16 +1,29 @@
 {% extends 'layout/posts/default.twig' %}
+{% import 'includes/form.twig' as form %}
 
 {% block content %}
     <section class="section row container">
-        <div class="col l8 jumbotron dark">
-            <form action="">
-                <div class="input-field">
-                    <label for="msg">Message</label>
-                    <textarea name="msg" id="msg" class="mdz-textarea"></textarea>
+        {% include 'includes/right-aside.twig' %}
+        <div class="col l7">
+            <h2 class="ui header">Nos services</h2>
+            <p>
+                l'ombre et la lumière surgissent de presque nul part,
+                évanescentes elles apparaissent et disparaissent au gré du temps,
+                elles sont par définition insaisissables et impalpables.
+            </p>
+            <form action="" method="POST" class="card-panel grey dark-4" enctype="multipart/form-data" data-action="upload">
+
+                {{ form.smallInput('name','Votre nom', 'text', errors.get('name'), post.get('name') ?? activeUser.name) }}
+                {{ form.smallInput('email', 'Votre email', 'email', errors.get('email'), post.get('email') ?? activeUser.email) }}
+                {{ form.textarea('message', 'message', errors.get('message'), post.get('message')) }}
+
+                <div class="submit-button">
+                    <button type="submit" class="btn btn-flat waves-effect">Envoyer<i class="icon icon-send"></i>
+                    </button>
                 </div>
             </form>
         </div>
-        <div class="col l4">
+        <div class="col l2 hide-on-small-and-down">
             <div style="text-align: center;">
                 <div class="fb-page" data-href="https://www.facebook.com/ngpictures23/" data-tabs="messages" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
                     <blockquote cite="https://www.facebook.com/ngpictures23/" class="fb-xfbml-parse-ignore">
@@ -19,17 +32,40 @@
                 </div>
             </div>
         </div>
-
-
-
-        <div id="fb-root"></div>
     </section>
-    <script>(function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.0&appId=518552818524133&autoLogAppEvents=1';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
+    <section class="jumbotron parallax-container col l12 s12 m12" style="margin-bottom: 0px;">
+        <div class="row container">
+            <div class="col l12 m12 s12 row">
+                <div class="col l4 m4 s12 center-align pb10">
+                    <span class="stats-value">
+                        <i class="icon icon-location"></i>
+                    </span>
+                    <span class="stats-label">Trouver des photographes</span>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure perspiciatis voluptatum commodi, inventore
+                        sint debitis, aut veniam corrupti necessitatibus at placeat tenetur dolor error reprehenderit illo voluptatem
+                        laboriosam, officiis ea.</p>
+                </div>
+                <div class="col l4 m4 s12 center-align pb10">
+                    <span class="stats-value">
+                        <i class="icon icon-camera"></i>
+                    </span>
+                    <span class="stats-label">Shooting professionnel</span>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt, dicta expedita totam adipisci rem
+                        amet dolorum excepturi tempora, molestiae repudiandae enim consectetur. Nam laudantium facere voluptatum
+                        rem quam aspernatur?</p>
+                </div>
+                <div class="col l4 m4 s12 center-align pb10">
+                    <span class="stats-value">
+                        <i class="icon icon-heart"></i>
+                    </span>
+                    <span class="stats-label">Publier vos Photos</span>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum provident ea voluptatibus a facilis, alias ratione
+                        vitae molestiae quam earum perspiciatis eius, quidem modi quae eos harum doloribus, iste quod.</p>
+                </div>
+            </div>
+        </div>
+        <div class="parallax">
+            <img src="imgs/outils.jpeg" alt="ngpictures-outils" title="ngpictures-outils" class="bw">
+        </div>
+    </section>
 {% endblock %}

@@ -1,0 +1,23 @@
+#*************************************************************
+        AUTHOR         :    Bernard-ng
+        PROJECT        :    NG-PICTURES
+        LINK           :    https://larytech.com
+        BUILT AT       :    15-Jun-2018  14:44:47
+**************************************************************
+[NG-PICTURES MESSAGES LOGS] 
+
+* Ng\Core\Managers\Mailer\Mailer
+	=> 15-Jun 14:44 : Message could not be sent. Mailer Error: Could not instantiate mail function.  
+
+* Ng\Core\Managers\Mailer\Mailer
+	=> 15-Jun 14:47 : Message could not be sent. Mailer Error: Could not instantiate mail function.  
+
+* Ng\Core\Managers\Mailer\Mailer
+	=> 15-Jun 14:51 : Message could not be sent. Mailer Error: Could not instantiate mail function.  
+
+* Ng\Core\Managers\Mailer\Mailer
+	=> 15-Jun 14:51 : Message could not be sent. Mailer Error: Could not instantiate mail function.  
+
+* Ng\Core\Managers\Mailer\Mailer
+	=> 15-Jun 14:53 : Message could not be sent. Mailer Error: Could not instantiate mail function.  
+

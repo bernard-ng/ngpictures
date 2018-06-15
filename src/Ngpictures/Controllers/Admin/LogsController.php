@@ -20,6 +20,7 @@ class LogsController extends AdminController
             ? file_get_contents(ROOT."/system.log")
             : "file: system-log not found";
 
+        $this->app::turbolinksLocation(ADMIN.'/logs');
         $this->pageManager::setName('Adm - Logs');
         $this->setLayout("admin/default");
         $this->viewRender('backend/logs', compact('logs'));

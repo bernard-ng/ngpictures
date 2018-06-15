@@ -1,10 +1,12 @@
 <?php
 namespace Ng\Core\Managers\Mailer;
 
-use \InvalidArgumentException;
 use Ngpictures\Ngpictures;
+use \InvalidArgumentException;
+use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use Ng\Core\Managers\ConfigManager;
+use Ng\Core\Managers\LogMessageManager;
 
 class Mailer
 {
@@ -28,6 +30,7 @@ class Mailer
         $message = ob_get_clean();
 
         try {
+            $mail->smtpConnect();
             $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
             $mail->addAddress($email);
             $mail->addReplyTo('ngpictures@larytech.com', 'Information');
@@ -62,6 +65,7 @@ class Mailer
             $message = ob_get_clean();
 
             try {
+                $mail->smtpConnect();
                 $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
                 $mail->addAddress($email);
                 $mail->addReplyTo('ngpictures@larytech.com', 'Information');
@@ -73,7 +77,8 @@ class Mailer
 
                 $mail->send();
             } catch (Exception $e) {
-                echo 'Message could not be sent. Mailer Error: '. $mail->ErrorInfo;
+                LogMessageManager::register(__CLASS__, 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo);
+                return false;
             }
         } else {
             throw new InvalidArgumentException("email invalide");
@@ -107,7 +112,8 @@ class Mailer
                 $mail->addAttachment(ROOT."/system.log");
                 $mail->send();
             } catch (Exception $e) {
-                echo 'Message could not be sent. Mailer Error: '. $mail->ErrorInfo;
+                LogMessageManager::register(__CLASS__, 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo);
+                return false;
             }
         } else {
             throw new InvalidArgumentException("email invalide");
@@ -121,14 +127,14 @@ class Mailer
      * @param string $name
      * @param string $email
      * @param string $message
-     * @throws Exception if message could be sent
+     * @throws Exception if message couldn't be sent
      * @throws InvalidArgumentException if email is invalid
      * @return void
      */
     public function contact(string $name, string $email, string $message)
     {
-        if (fliter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $mail = PHPMailer();
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $mail = new PHPMailer(true);
 
             try {
                 $mail->setFrom($email, $name);
@@ -140,7 +146,8 @@ class Mailer
                 $mail->AltBody =  $message;
                 $mail->send();
             } catch (Exception $e) {
-                echo 'Message could not be sent. Mailer Error: '. $mail->ErrorInfo;
+                LogMessageManager::register(__CLASS__, 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo);
+                return false;
             }
         } else {
             throw new InvalidArgumentException("email invalide");
