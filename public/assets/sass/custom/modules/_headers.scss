@@ -14,15 +14,6 @@
     margin-bottom: 0em;
   }
 
-  .ui.header .sub.header {
-    display: block;
-    font-weight: 300;
-    padding: 0em;
-    margin: 0em;
-    font-size: 1rem;
-    line-height: 1.2em;
-    color: rgb(187, 186, 186);
-  }
 
   .ui.header > .icon {
     display: table-cell;
@@ -32,49 +23,10 @@
     vertical-align: middle;
   }
 
-  /* With Text Node */
   .ui.header .icon:only-child {
     display: inline-block;
     padding: 0em;
     margin-right: 0.75rem;
-  }
-
-
-  .ui.header > .image:not(.icon),
-  .ui.header > img {
-    display: inline-block;
-    margin-top: 0.14285714em;
-    width: 2.5em;
-    height: auto;
-    vertical-align: middle;
-  }
-  .ui.header > .image:not(.icon):only-child,
-  .ui.header > img:only-child {
-    margin-right: 0.75rem;
-  }
-
-
-  .ui.header .content {
-    display: inline-block;
-    vertical-align: top;
-  }
-
-  .ui.header > img + .content,
-  .ui.header > .image + .content {
-    padding-left: 0.75rem;
-    vertical-align: middle;
-  }
-
-  .ui.header > .icon + .content {
-    padding-left: 0.75rem;
-    display: table-cell;
-    vertical-align: middle;
-  }
-
-  .ui.header .ui.label {
-    font-size: '';
-    margin-left: 0.5rem;
-    vertical-align: middle;
   }
 
   .ui.header + p {
@@ -97,55 +49,9 @@
     font-size: 1rem;
   }
 
-  /* Sub Header */
-  h1.ui.header .sub.header {
-    font-size: 1.14285714rem;
-  }
-  h2.ui.header .sub.header {
-    font-size: 1.14285714rem;
-  }
-  h3.ui.header .sub.header {
-    font-size: 1rem;
-  }
-  h4.ui.header .sub.header {
-    font-size: 1rem;
-  }
-  h5.ui.header .sub.header {
-    font-size: 0.92857143rem;
-  }
-
-  .ui.disabled.header {
-    opacity: 0.45;
-  }
-
-  .ui.left.aligned.header {
-    text-align: left;
-  }
-  .ui.right.aligned.header {
-    text-align: right;
-  }
-  .ui.centered.header,
-  .ui.center.aligned.header {
-    text-align: center;
-  }
-  .ui.justified.header {
-    text-align: justify;
-  }
-  .ui.justified.header:after {
-    display: inline-block;
-    content: '';
-    width: 100%;
-  }
-
   .ui.dividing.header {
     padding-bottom: 0.21428571rem;
     border-bottom: 1px solid $border-color;
-  }
-  .ui.dividing.header .sub.header {
-    padding-bottom: 0.21428571rem;
-  }
-  .ui.dividing.header .icon {
-    margin-bottom: 0em;
   }
 
   .ui.header:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {

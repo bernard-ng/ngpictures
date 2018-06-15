@@ -76,7 +76,7 @@
                                 </footer>
                             </section>
                             <footer class="news-card-footer" id="articleOptions">
-                                <a data-action="like" class="news-card-footer-item <?= $a->isLike ?>" href="{{ a.likeUrl }}">
+                                <a data-action="like" class="news-card-footer-item {{ a.isLike }}" href="{{ a.likeUrl }}">
                                     {% if a.isLike == 'active' %}
                                         <i class="icon icon-heart red-txt"></i>
                                     {% else %}

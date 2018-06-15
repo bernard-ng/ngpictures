@@ -111,7 +111,7 @@
     color: $txt-color;
   }
 
-  /* Default Header Size */
+  // Default Header Size
   .ui.items > .item > .content > .header:not(.ui) {
     font-size: 1.28571429em;
   }
@@ -166,7 +166,7 @@
     color: $active-color;
   }
 
-  /* Header */
+  // Header
   .ui.items > .item > .content > a.header {
     color: $txt-color;
   }
@@ -174,7 +174,7 @@
     color: $active-color;
   }
 
-  /* Meta */
+  // Meta
   .ui.items > .item .meta > a:not(.ui) {
     color: $txt-color;
   }
@@ -218,7 +218,6 @@
     width: 175px;
   }
 
-  /* Tablet Only */
   @media only screen and (min-width: 768px) and (max-width: 991px) {
     .ui.items > .item {
       margin: 1em 0em;
@@ -232,7 +231,6 @@
     }
   }
 
-  /* Mobile Only */
   @media only screen and (max-width: 767px) {
     .ui.items:not(.unstackable) > .item {
       -webkit-box-orient: vertical;
@@ -295,7 +293,6 @@
     padding-bottom: 0em !important;
   }
 
-  /* Relaxed Divided */
   .ui.relaxed.divided.items > .item {
     margin: 0em;
     padding: 1.5em 0em;

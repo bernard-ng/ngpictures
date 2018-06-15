@@ -2,6 +2,8 @@
 
 .gallery {
   display: grid;
+  -webkit-transition: all linear 0.3s;
+  -o-transition: all linear 0.3s;
   transition: all linear 0.3s;
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 5px;
@@ -9,11 +11,6 @@
 
   .gallery-item {
     cursor: pointer;
-    
-    &-img {
-      
-    }
-    
     &-body {
       display: none;
       grid-column: span 4;

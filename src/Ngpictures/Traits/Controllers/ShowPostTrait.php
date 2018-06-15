@@ -32,11 +32,11 @@ trait ShowPostTrait
                         compact("article", "comments", "user", "categories", "author")
                     );
                 } else {
-                    $this->flash->set("danger", $this->msg['posts_not_found']);
+                    $this->flash->set("danger", $this->msg['post_not_found']);
                     $this->app::redirect("/error/not-found");
                 }
             } else {
-                $this->flash->set("danger", $this->msg['posts_not_found']);
+                $this->flash->set("danger", $this->msg['post_not_found']);
                 $this->app::redirect("/error/not-found");
             }
         } else {
