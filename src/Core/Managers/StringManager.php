@@ -131,7 +131,7 @@ class StringManager
      * @param $text
      * @return string
      */
-    public static function userMention(UsersModel $users, $text): string
+    public static function userMention(UsersModel $users, $text)
     {
         return preg_replace_callback(
             "#@([A-Za-z0-9-_]+)#",
@@ -143,6 +143,23 @@ class StringManager
                 return $matches[0];
             },
             $text
+        );
+    }
+
+
+    /**
+     * recupere les htags dans une publications
+     *
+     * @param string $text
+     * @return string
+     */
+    public static function htag($text)
+    {
+        return preg_replace_callback(
+            "~#([A-Za-z0-9_]+)~",
+            function ($matches) {
+                return "<a href='/htag/{$matches[1]}'>{$matches[0]}</a>";
+            }, $text
         );
     }
 

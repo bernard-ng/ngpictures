@@ -20,8 +20,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $last           =   $this->blog->latest(1, 4);
-        $photos         =   $this->gallery->latest();
+        $last           =   $this->gallery->latest();
         $article        =   $this->blog->last();
         $categories     =   $this->loadModel('categories')->orderBy('title', 'DESC', 0, 5);
         $sliderTitle    =   ["Deep Shooting", "See the beauty", "Discover More", "Share feelings"];
@@ -30,7 +29,7 @@ class HomeController extends Controller
         $this->pageManager::setName('Ngpictures');
         $this->viewRender(
             "frontend/index",
-            compact('last', 'article', 'photos', 'categories', 'sliderTitle')
+            compact('last', 'article', 'categories', 'sliderTitle')
         );
     }
 }

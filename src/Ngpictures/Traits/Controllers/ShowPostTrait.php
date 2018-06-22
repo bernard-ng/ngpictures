@@ -22,6 +22,7 @@ trait ShowPostTrait
 
             if ($article) {
                 if ($article->slug === $slug) {
+                    $similars = $this->loadModel($this->table)->findSimilars($article->id);
                     $author = $this->loadModel('users')->find($article->users_id);
                     $this->pageManager::setName("{$article->title}");
 
@@ -29,14 +30,16 @@ trait ShowPostTrait
                     $this->setLayout("show");
                     $this->viewRender(
                         "frontend/{$this->table}/show",
-                        compact("article", "comments", "user", "categories", "author")
+                        compact("article", "comments", "user", "categories", "author", "similars")
                     );
                 } else {
                     $this->flash->set("danger", $this->msg['post_not_found']);
+                    http_response_code(404);
                     $this->app::redirect("/error/not-found");
                 }
             } else {
                 $this->flash->set("danger", $this->msg['post_not_found']);
+                http_response_code(404);
                 $this->app::redirect("/error/not-found");
             }
         } else {

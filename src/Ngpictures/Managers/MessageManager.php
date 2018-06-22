@@ -36,6 +36,7 @@ class MessageManager implements ArrayAccess
         'post_not_liked' => "Aucune mention j'aime pour cette publication",
         'post_remove_save' => "Publication Rétirée des enregistrerments",
         'post_saved' => "Publication ajoutée aux enregistrements",
+        "post_htag_empty" => "Aucune publication pour ce Htag",
 
 
         //FORM

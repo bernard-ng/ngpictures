@@ -54,6 +54,7 @@
 .jumbotron-user {
     @extend .jumbotron-small;
     min-height: 300px;
+    height: auto !important;
 }
 
     .user-avatar {
@@ -86,40 +87,4 @@
     display: block;
     color: #100f0f !important;
     padding: 10px;
-}
-
-.calendar__table {
-    width: 100%;
-    height: calc(100vh - 170px) !important;
-}
-
-.calendar__table td {
-    padding: 10px;
-    border: 1px solid $border-color;
-    vertical-align: top;
-    width: 14.29%;
-    height: 20%;
-}
-
-.calendar__table--6weeks td {
-    height: 16.66%;
-}
-
-.calendar__weekday {
-    font-weight: bold;
-    color: $active-color;
-    text-transform: uppercase;
-}
-
-.calendar__day {
-    font-size: 1.3em;
-}
-
-.calendar__event {
-    font-size: small;
-}
-
-.calendar__othermonth .calendar__day {
-    font-weight: 100;
-    color: rgba(204, 204, 204, 0.385);
 }

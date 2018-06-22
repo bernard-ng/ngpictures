@@ -1,0 +1,63 @@
+{% extends 'layout/posts/default.twig' %}
+
+{% block content %}
+    <section class="section container row">
+        {% for b in blog %}
+            <div class="row nexted col s12 m3 l3">
+                <article class="card post-titled grey dark-4">
+                    <div class="card-image waves-effect">
+                        <a href="{{ b.url }}">
+                            <img src="{{ b.smallThumbUrl }}" alt="{{ b.title }}" title="{{ b.title }}">
+                        </a>
+                    </div>
+                    {% if b.title %}
+                    <span class="post-description truncate">
+                        {{ b.title }}
+                    </span>
+                    {% endif %}
+                </article>
+            </div>
+        {% endfor %}
+
+        {% for g in gallery  %}
+            <div class="row nexted col s12 m3 l3">
+                <article class="card post-titled grey dark-4">
+                    <div class="card-image waves-effect">
+                        <a href="{{ g.url }}">
+                            <img src="{{ g.smallThumbUrl }}" alt="{{ g.name }}" title="{{ g.name }}">
+                        </a>
+                    </div>
+                    {% if g.name %}
+                    <span class="post-description truncate">
+                        {{ g.name }}
+                    </span>
+                    {% endif %}
+                </article>
+            </div>
+        {% endfor %}
+
+        {% for p in posts  %}
+            <div class="row nexted col s12 m3 l3">
+                <article class="card post-titled grey dark-4">
+                    <div class="card-image waves-effect">
+                        <a href="{{ p.url }}">
+                            <img src="{{ p.smallThumbUrl }}" alt="{{ p.title }}" title="{{ p.title }}">
+                        </a>
+                    </div>
+                    {% if p.title %}
+                        <span class="post-description truncate">
+                            {{ p.title }}
+                        </span>
+                    {% endif %}
+                </article>
+            </div>
+        {% endfor %}
+    </section>
+    {% if posts or blog or gallery %}
+        <section class="section row">
+            <div class="container">
+                {% include 'includes/search-pagination.twig' %}
+            </div>
+        </section>
+    {% endif %}
+{% endblock %}

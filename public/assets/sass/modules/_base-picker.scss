@@ -1,3 +1,5 @@
+@import '../custom/bases/variables';
+
 .picker {
   font-size: 16px;
   text-align: left;
@@ -19,7 +21,7 @@
 
 
 .picker__input.picker__input--active {
-  border-color: #0089ec;
+  border-color: $active-color;
 }
 
 
@@ -321,11 +323,11 @@
 .picker__day--selected,
 .picker__day--selected:hover,
 .picker--focused .picker__day--selected {
-  border-radius: 50%;
+  border-radius: 3px;
   -webkit-transform: scale(0.75);
           -ms-transform: scale(0.75);
       transform: scale(0.75);
-  background: #0089ec;
+  background: $active-color;
   color: #ffffff;
 }
 
@@ -429,7 +431,7 @@
 
 .picker__date-display {
   text-align: left;
-  background-color: #26a69a;
+  background-color: $nav-color;
   color: #fff;
   padding: 18px;
   font-weight: 300;
@@ -511,7 +513,7 @@
 }
 
 .picker__day.picker__day--today {
-  color: #26a69a;
+  color: $nav-color;
 }
 
 .picker__day.picker__day--today.picker__day--selected {
@@ -525,11 +527,11 @@
 .picker__day--selected,
 .picker__day--selected:hover,
 .picker--focused .picker__day--selected {
-  border-radius: 50%;
+  border-radius: 3px;
   -webkit-transform: scale(0.9);
           -ms-transform: scale(0.9);
       transform: scale(0.9);
-  background-color: #26a69a;
+  background-color: $nav-color;
   color: #ffffff;
 }
 
@@ -542,12 +544,18 @@
 .picker__footer {
   text-align: right;
   padding: 5px 10px;
+  & .btn-flat {
+    background: transparent !important;
+    width: auto !important;
+    color: #000 !important;
+    font-weight: 700 !important;
+  }
 }
 
 .picker__close, .picker__today, .picker__clear {
   font-size: 1.1rem;
   padding: 0 1rem;
-  color: #26a69a;
+  color: $nav-color;
 }
 
 .picker__clear {
@@ -752,7 +760,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 
 .clockpicker-plate {
   background-color: #eee;
-  border-radius: 50%;
+  border-radius: 3px;
   width: 270px;
   height: 270px;
   overflow: visible;
@@ -780,7 +788,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 }
 
 .clockpicker-tick {
-  border-radius: 50%;
+  border-radius: 3px;
   color: rgba(0, 0, 0, 0.87);
   line-height: 40px;
   text-align: center;
@@ -832,20 +840,20 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 
 .clockpicker-canvas-bearing {
   stroke: none;
-  fill: #26a69a;
+  fill: $nav-color;
 }
 
 .clockpicker-canvas-bg {
   stroke: none;
-  fill: #26a69a;
+  fill: $nav-color;
 }
 
 .clockpicker-canvas-bg-trans {
-  fill: #26a69a;
+  fill: $nav-color;
 }
 
 .clockpicker-canvas line {
-  stroke: #26a69a;
+  stroke: $nav-color;
   stroke-width: 4;
   stroke-linecap: round;
 }

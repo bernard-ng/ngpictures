@@ -1,12 +1,10 @@
-{% extends 'layout/show.twig' %}
-
-{% block content %}
+{% extends 'layout/show.twig' %} {% block content %}
 <section class="section jumbotron dark">
     <div class="container row">
         <div class="col l9 m12 s12 pb10">
             <img src="{{ article.thumbUrl }}" alt="{{ article.title }}" title="{{ article.title }}" class="responsive-img materialboxed">
             <h1 class="ui header">{{ article.title }}</h1>
-            {{ article.content }}
+            {{ article.content | snipet }}
         </div>
         <div class="section col l3 m12 s12 ">
             <div class="ui divided list animated slideInRight">
@@ -47,7 +45,7 @@
 <section class="">
     {% include 'includes/comments.twig' %}
 </section>
-<section class="jumbotron parallax-container col l12 s12 m12" style="margin-top: -30px; margin-bottom: 0px;">
+<section class="jumbotron parallax-container col l12 s12 m12" style="margin-bottom: 20px;">
     <div class="row container">
         <div class="col l12 m12 s12 row">
             <div class="col l4 m4 s12 center-align pb10">
@@ -69,7 +67,21 @@
     </div>
     <div class="bg"></div>
 </section>
-<div class="fixed-action-btn second">
+<section class="section">
+    <div class="row container pb10">
+        <span class="col l12 s12 m12">
+            <h2 class="ui header">Voir aussi</h2>
+        </span>
+        <div class="carousel small">
+            {% for p in similars %}
+            <a href="{{ p.url }}" class="carousel-item">
+                <img src="{{ p.smallThumbUrl }}" title="{{ p.title }}" alt="{{ p.title }}">
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<div class="fixed-action-btn {{ activeUser ? 'second' : '' }}">
     <a class="btn-floating btn-large blue shadow-4" href="{{ article.downloadUrl }}">
         <i class="icon icon-download"></i>
     </a>

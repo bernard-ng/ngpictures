@@ -1,6 +1,6 @@
 <header>
     <div class="navbar-fixed">
-        <nav class="shadow-3">
+        <nav class="shadow-3 transparent" data-action="menu">
             <div class="nav-wrapper container " id="menu">
                 <a href="/" class="brand-logo">
                     <img src="/imgs/logo-white.png" class="logo" alt="logo">
@@ -17,8 +17,10 @@
                     <li class="search" style="margin-right: 10px">
                         <div class="search">
                             <form action="/search" method="get" class="ui icon input">
-                                <input name="q" type="text" placeholder="Recherches..." required>
-                                <i class="icon icon-search prefix"></i>
+                                <div class="input-field">
+                                    <i class="icon icon-search prefix"></i>
+                                    <input name="q" type="text" placeholder="Recherches..." required>
+                                </div>
                             </form>
                         </div>
                     </li>
@@ -30,10 +32,17 @@
                     <li id="Ngpictures" class="waves-effect"><a href="/">Accueil</a></li>
                     <li id="Blog" class="waves-effect"><a href="/blog"> Blog</a></li>
                     <li id="Galerie" class="waves-effect"><a href="/gallery"> Galerie</a></li>
+                    {% if activeUser %}
+                        <li id="Posts" class="waves-effect">
+                            <a href="/posts"> Actualités</a>
+                        </li>
+                    {% endif %}
+
+                    <li id="service" class="waves-effect">
+                        <a href="#" class="services-slideNav" data-activates="services-actions">Services & autres</a>
+                    </li>
 
                     {% if activeUser %}
-                        <li id="Posts" class="waves-effect"><a href="/posts"> Actualités</a></li>
-                        <li id="Communauté" class="waves-effect"><a href="/community">Communauté</a></li>
                         <li class="user-actions">
                             <a href="#" class="user-actions-sideNav show-profile show-on-large" data-activates="user-actions">
                                 <img src="{{ activeUser.avatarUrl }}" class="user" width="50" height="50">
@@ -59,18 +68,36 @@
                     <span class="email">{{ activeUser.email }}</span>
                 </div>
             </li>
-        {% else %}
-            <li class="logo" style="margin: 20px 20px 30px 20px;">
-                <a href="/" class="brand-logo" id="logo-container">
-                    <img src="/imgs/logo-white.png" alt="" width="100%" height="auto">
-                </a>
-            </li>
-        {% endif %}
-        {% if activeUser %}
             <li><a href="{{ activeUser.accountUrl }}">Profile <i class="icon icon-user"></i></a></li>
             <li><a href="{{ activeUser.editUrl }}">Paramètres <i class="icon icon-cog-alt"></i></a></li>
-            <li><a href="{{ activeUser.followingsUrl }}">Mes abonnements <i class="icon icon-users"></i></a></li>
+            <li>
+                <a href="{{ activeUser.notificationsUrl }}">
+                    Notifications <i class="icon icon-bell"></i>
+                    <span class="right">[nb]&nbsp;</span>
+                </a>
+            </li>
             <li><a href="/logout">Déconnexion <i class="icon icon-off"></i></a></li>
         {% endif %}
+    </ul>
+    <ul class="side-nav" id="services-actions">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="/imgs/bgjumbo.jpeg" alt="bg">
+                </div>
+                <h2 class="ui header mechanic">Deep Shooting</h2>
+                <span class="white-txt name">Notre adresse mail</span>
+                <span class="email">ngpictures@larytech.com</span>
+            </div>
+        </li>
+        <li><a href="/categories">Catégories des photos <i class="icon icon-tags"></i></a></li>
+        {% if activeUser %}
+            <li><a href="/community">La Communauté <i class="icon icon-users"></i></a></li>
+        {% endif %}
+        <li><a href="/maps/photographers">Trouver des photographes <i class="icon icon-location"></i></a></li>
+        <li><a href="/photographers">Compte photographe <i class="icon icon-camera"></i></a></li>
+        <li><a href="/contact">Nous contacter <i class="icon icon-mail"></i></a></li>
+        <li><a href="/booking">Réservations <i class="icon icon-calendar"></i></a></a></li>
+        <li><a href="/publicities">Publicités <i class="icon icon-megaphone"></i></a></li>
     </ul>
 </header>

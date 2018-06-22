@@ -1,29 +1,194 @@
 {% extends 'layout/users/account.twig' %}
 
 {% block content %}
+    <style>
+        .jumbotron-user-avatar {
+            width: 10rem;
+            height: 10rem;
+            border-radius: 100%;
+            overflow: hidden;
+            border: 5px solid rgba(255,255,255,0.2);
+            position: absolute;
+            top: 20px; left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .jumbotron-user-name {
+            position: absolute;
+            top: calc(10rem + 40px); left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .jumbotron-user-stats {
+            position: absolute;
+            top: calc(10rem + 80px); left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .jumbotron-user-avatar img {
+            width: 100%;
+            height: 100%;
+
+        }
+
+    </style>
     <div class="jumbotron-user">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab deleniti earum minima? Ab eveniet fugit ipsa nobis quaerat quod repellendus soluta velit voluptatibus. Cum doloribus iure, nam porro provident quasi!
-    </div>
-    <section class="section jumbotron dark row">
-        <div class="container">
-            <div class="carousel small">
-                {% for p in posts %}
-                    <a href="{{ p.url }}" class="carousel-item">
-                        <img src="{{ p.smallThumbUrl }}" title="{{ p.name }}" alt="{{ p.name }}">
-                    </a>
-                {% endfor %}
+        <div class="jumbotron-user-profil align-center">
+            <div class="jumbotron-user-avatar hoverable">
+                <img src="{{ user.avatarUrl}}" alt="{{ user.name }}">
+            </div>
+            <div class="jumbotron-user-name center">
+                <h1 class="ui header">{{ user.name }}</h1>
+            </div>
+            <div class="jumbotron-user-stats center ui  horizontal divided list">
+                <div class="item">
+                    <div class="content">
+                        <div class="header">1,35k&nbsp;Posts</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="content">
+                        <div class="header">4,9k&nbsp;Abonnés</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="content">
+                        <div class="header">12&nbsp;Abonnement</div>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
-    <section class="container">
-        <div class="gallery gallery-container">
-            {% for p in posts %}
-                <article class="gallery-item" id="{{ p.id }}">
-                    <a href="{{ p.url }}">
-                        <img src="{{ p.smallThumbUrl }}" class="responsive-img" title="{{ p.name }}" alt="{{ p.name }}">
-                    </a>
-                </article>
-            {% endfor %}
+    </div>
+
+    <div class>
+        <div class="row col s12">
+            <ul class="tabs transparent shadow-3">
+                <li class="tab col s4"><a href="#about">A propos</a></li>
+                <li class="tab col s4"><a href="#photos" class="active">Photos</a></li>
+                <li class="tab col s4"><a href="#collection">Collections</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <section class="section" id='about'>
+        <div class="row container">
+            <span class="col l12 s12 m12">
+                <h2 class="ui header">Bio</h2>
+            </span>
+            <p class="col l12 s12 m12">
+                {{ user.bio | nl2br }}
+            </p>
+        </div>
+
+        {% if user.rank == 'photographer' %}
+            <div class="row container">
+                <span class="col l12 s12 m12">
+                    <h2 class="ui header">Contacts</h2>
+                </span>
+                <p class="col l12 s12 m12">
+                    <ol>
+                        <li><i class="icon icon-mail"></i>&nbsp; Email :  {{ user.email }}</li>
+                        <li><i class="icon icon-user"></i>&nbsp; Mobile : {{ user.phone }}</li>
+                        <li><i class="icon icon-location"></i>&nbsp; Location : <a href="{{ user.location}}">voir</a> </li>
+                    </ol>
+                </p>
+            </div>
+        {% endif %}
+
+        <div class="row container">
+            <span class="col l12 s12 m12">
+                <h2 class="ui header">Infos</h2>
+            </span>
+            <p class="col l12 s12 m12">
+                {{ user.name }} est membre de ngpictures depuis le {{ user.confirmed_at | date('d  M Y') }},
+                a publié [user.posts] photos
+                , suivi par [user.followers] personnes. <br>
+                abonné à [user.followings] personnes, a aimé [user.likedPostNumber], posté [user.commentsPostNumber] commentaires.
+            </p>
         </div>
     </section>
+
+    <div id="photos">
+        {% if posts %}
+            <section class="section jumbotron dark">
+                <div class="row container pb10">
+                    <span class="col l12 s12 m12">
+                        <h2 class="ui header">Photos récentes</h2>
+                    </span>
+                    <div class="carousel small">
+                        {% for p in posts %}
+                            <a href="{{ p.url }}" class="carousel-item">
+                                <img src="{{ p.smallThumbUrl }}" title="{{ p.name }}" alt="{{ p.name }}">
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+        {% if posts %}
+            <section class="section">
+                <div class="row container">
+                    <span class="col l12 s12 m12">
+                        <h2 class="ui header">Toutes les photos</h2>
+                    </span>
+                </div>
+                <div class="row container">
+                    <div class="gallery gallery-container">
+                        {% for p in posts %}
+                            <article class="gallery-item" id="{{ p.id }}">
+                                <a href="{{ p.url }}">
+                                    <img src="{{ p.smallThumbUrl }}" class="responsive-img" title="{{ p.name }}" alt="{{ p.name }}">
+                                </a>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        {% else %}
+            <div class="section jumbotron dark row center-align">
+                <h2 class="icon icon-inbox red-txt center-align"></h2>
+                <span class="col l12 s12 m12">
+                    <h2 class="ui header divided center"> Aucune publication pour l'instant</h2>
+                </span>
+                <p class="col l8 offset-l2 s12 m12">
+                    {{ user.name }} ne présente actuellement aucune publication disponible, les publications sont peut être en évaluation ou privées,
+                    ceci pourrait prendre du temps, veuillez revenir plus tard
+                </p>
+            </div>
+        {% endif %}
+    </div>
+
+    <div id="collection">
+          {% if collections %}
+            <section class="section">
+                <div class="row container">
+                    <span class="col l12 s12 m12">
+                        <h2 class="ui header">Toutes les photos</h2>
+                    </span>
+                </div>
+                <div class="row container">
+                    <div class="gallery gallery-container">
+                        {% for p in posts %}
+                            <article class="gallery-item" id="{{ p.id }}">
+                                <a href="{{ p.url }}">
+                                    <img src="{{ p.smallThumbUrl }}" class="responsive-img" title="{{ p.name }}" alt="{{ p.name }}">
+                                </a>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        {% else %}
+            <div class="section jumbotron dark row center-align">
+                <h2 class="icon icon-inbox red-txt center-align"></h2>
+                <span class="col l12 s12 m12">
+                    <h2 class="ui header divided center"> Aucune photo enregistrée</h2>
+                </span>
+                <p class="col l8 offset-l2 s12 m12">
+                    {{ user.name }} ne présente actuellement aucune publication enregistrée disponible, les publications sont peut être en évaluation ou privées,
+                    ceci pourrait prendre du temps, veuillez revenir plus tard
+                </p>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

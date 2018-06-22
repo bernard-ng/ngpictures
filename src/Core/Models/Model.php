@@ -192,6 +192,44 @@ class Model
 
 
     /**
+     * recupere une publication grace aux htags
+     *
+     * @param string $tag
+     * @return mixed
+     */
+    public function findwithTag(string $tag)
+    {
+        return $this->query(
+            "SELECT * FROM {$this->table} WHERE content LIKE ?",
+            ["%{$tag}%"]
+        );
+    }
+
+
+    /**
+     * recupere les publication similaire
+     * @todo ameliorer cette methode.
+     *
+     * @param integer $id
+     * @return void
+     */
+    public function findSimilars(int $id)
+    {
+        return $this->query(
+            "SELECT *
+            FROM {$this->table}
+            WHERE (categories_id = (
+                SELECT categories_id
+                FROM {$this->table}
+                WHERE id = ?
+            ) AND id <> ? ) AND online = 1
+            ORDER BY RAND() LIMIT 5 ",
+            [$id, $id]
+        );
+    }
+
+
+    /**
      * query les donnes par rapport a une liste
      * de resultat.
      *

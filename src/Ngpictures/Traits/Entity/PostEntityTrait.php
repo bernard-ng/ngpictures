@@ -206,7 +206,8 @@ trait PostEntityTrait
     {
         $users = Ngpictures::getInstance()->getModel('users');
         $content = StringManager::getSnipet(StringManager::truncateText($this->content, 150));
-        return (StringManager::userMention($users, $content));
+        $text = StringManager::userMention($users, strip_tags($content));
+        return StringManager::htag($text);
     }
 
 
@@ -217,7 +218,8 @@ trait PostEntityTrait
     public function getFullText()
     {
         $users = Ngpictures::getInstance()->getModel('users');
-        return nl2br(StringManager::userMention($users, $this->content));
+        $text = StringManager::userMention($users, strip_tags($this->content));
+        return nl2br(StringManager::htag($text));
     }
 
     /**

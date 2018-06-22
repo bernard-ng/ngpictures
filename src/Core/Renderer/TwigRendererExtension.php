@@ -16,6 +16,14 @@ class TwigRendererExtension extends \Twig_Extension
     }
 
 
+    public function getFilters()
+    {
+        return [
+            new \Twig_Filter('snipet', [$this, 'snipet'], ['is_safe' => ['html']])
+        ];
+    }
+
+
     /**
      * cache busting for twig
      *
@@ -26,4 +34,18 @@ class TwigRendererExtension extends \Twig_Extension
     {
         return CacheBustingManager::get($filename);
     }
+
+
+    /**
+     * permet de ne pas echaper l'html
+     *
+     * @param [type] $text
+     * @return string
+     */
+    public function snipet($text)
+    {
+        return $text;
+    }
+
+
 }

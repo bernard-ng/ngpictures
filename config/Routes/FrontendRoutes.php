@@ -78,6 +78,7 @@ $router->get("/privacy", "static#privacy", "static.privacy");
 $router->get("/booking", 'booking', 'reservation');
 $router->get('/saves/:type/:slug-:id', 'saves#add', 'saves.add');
 $router->get("/maps", 'maps#show', 'maps.show');
+$router->get("/htag/:tag", 'htag', 'htag.index');
 
 
 

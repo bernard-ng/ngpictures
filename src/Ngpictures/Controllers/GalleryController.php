@@ -42,7 +42,7 @@ class GalleryController extends Controller
      * @param integer $id
      * @return void
      */
-    public function show(int $id)
+    public function show($id)
     {
         $photo = $this->gallery->find(intval($id));
         if ($photo) {

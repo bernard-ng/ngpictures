@@ -176,6 +176,11 @@ $(document).ready(function(){
         closeOnClick: true,
         draggable: false,
     });
+    $('.services-slideNav').sideNav({
+         edge: 'right',
+         closeOnClick: true,
+         draggable: false,
+     });
 
     $("img.boxed").materialbox();
     $('.collapsible').collapsible();
@@ -211,8 +216,28 @@ $(document).ready(function(){
         inDuration: 150,
         preventScrolling: false
     });
-    $('.ul-tabs').tabs();
+    $('.tabs').tabs();
     $('select').material_select();
+    $('.datepicker').pickadate({
+        selectMonths: false,
+        selectYears: false,
+        today: "Aujourd'hui",
+        clear: "Effacer",
+        close: "ok",
+        container: 'body',
+        closeOnSelect: false,
+    });
+    $('.timepicker').pickatime({
+        default: 'now',
+        fromnow: 0,
+        twelvehour: true,
+        donetext: 'Ok',
+        cleartext: 'Effacer',
+        canceltext: 'Annuler',
+        container: 'body',
+        autoclose: false,
+        ampmclickable: true,
+    });
 
     if (typeof particlesJS !== "undefined") {
         try {

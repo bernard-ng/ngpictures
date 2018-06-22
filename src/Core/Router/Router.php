@@ -120,6 +120,7 @@ class Router
     private function url(string $name, array $params = [])
     {
         if (!isset($this->namedRoute[$name])) {
+            http_response_code(404);
             $this->app::redirect("/error/not-found");
         }
         return $this->namedRoute[$name]->getUrl($params);
@@ -149,6 +150,7 @@ class Router
                 }
             }
 
+            http_response_code(404);
             $this->app::redirect("/error/not-found");
         }
 

@@ -7,6 +7,9 @@ nav {
   height: 56px;
   line-height: 56px;
   overflow: hidden;
+  -webkit-transition: all linear .3s;
+  -o-transition: all linear .3s;
+  transition: all linear .3s;
 }
 
 nav.nav-extended {

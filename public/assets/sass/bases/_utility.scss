@@ -36,7 +36,8 @@
 }
 
 .bw {
-  filter: grayscale(100%) !important;
+  -webkit-filter: grayscale(100%) !important;
+          filter: grayscale(100%) !important;
   opacity: 0.3;
 }
 
@@ -67,6 +68,11 @@
   overflow: hidden;
   -o-text-overflow: ellipsis;
      text-overflow: ellipsis;
+}
+
+.mechanic {
+  font-family: Mechanic, Roboto, sans-serif !important;
+  font-weight: 400 !important;
 }
 
 .no-padding {

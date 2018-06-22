@@ -1,6 +1,7 @@
 <?php
 namespace Ng\Core\Managers;
 
+use Throwable;
 use Intervention\Image\Exception\NotReadableException;
 use Intervention\Image\ImageManager as InterventionImage;
 
