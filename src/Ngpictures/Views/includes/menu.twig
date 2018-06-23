@@ -61,7 +61,7 @@
             <li>
                 <div class="user-view">
                     <div class="background">
-                        <img src="/imgs/bgjumbo.jpeg" alt="bg">
+                        <img src="{{ cacheBusting('/imgs/bgjumbo.jpg') }}" alt="bg">
                     </div>
                     <a href="{{ activeUser.accountUrl }}"><img src="{{ activeUser.avatarUrl }}" alt="bg2" class="circle"></a>
                     <span class="white-txt name">{{ activeUser.name }}</span>
@@ -83,7 +83,7 @@
         <li>
             <div class="user-view">
                 <div class="background">
-                    <img src="/imgs/bgjumbo.jpeg" alt="bg">
+                    <img src="{{ cacheBusting('/imgs/bgjumbo.jpg') }}" alt="bg">
                 </div>
                 <h2 class="ui header mechanic">Deep Shooting</h2>
                 <span class="white-txt name">Notre adresse mail</span>

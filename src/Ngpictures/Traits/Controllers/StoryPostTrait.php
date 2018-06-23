@@ -13,7 +13,7 @@ trait StoryPostTrait
     public function index()
     {
         $last       =   $this->loadModel('gallery')->latest(1, 3);
-        $posts      =   $this->loadModel($this->table)->latest();
+        $posts      =   $this->loadModel($this->table)->all();
         $categories =   $this->loadModel('categories')->orderBy('title', 'ASC', 0, 5);
         $title      =   ucfirst($this->table);
 

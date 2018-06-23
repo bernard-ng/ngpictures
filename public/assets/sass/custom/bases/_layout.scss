@@ -31,8 +31,8 @@
     height: auto;
     position: relative;
     padding: 0.75em !important;
-    background-size: cover;
-    background: url("/imgs/bgjumbo.jpeg") no-repeat fixed center;
+    background: url("/imgs/bgjumbo.jpg") no-repeat fixed center !important;
+    background-size: cover !important;
     border-bottom: 5px solid rgba(255,255,255,0.2);
 
     & .jumbotron-content {
@@ -41,7 +41,7 @@
     }
 
     & .title h3{
-        font-family: Mechanic, sans-serif !Important;
+        font-family: Mechanic, sans-serif !important;
         padding-left: 10px;
         margin-top: 10px;
         margin-bottom: 10px;

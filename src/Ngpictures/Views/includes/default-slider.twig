@@ -2,7 +2,7 @@
     <ul class="slides">
         {% for title in sliderTitle  %}
             <li>
-                <img src="{{ article.thumbUrl }}">
+                <img src="{{ cacheBusting('/imgs/slider.jpg') }}">
                 <div class="caption center-align">
                     <h2 class="title">{{ title }}</h2>
                     <h6 class="light grey-text text-lighten-3">

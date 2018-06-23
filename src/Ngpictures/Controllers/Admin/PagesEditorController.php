@@ -30,11 +30,14 @@ class PagesEditorController extends AdminController
         }
 
         if (isset($_POST) && !empty($_POST)) {
-            if (!isset($_FILES) && empty($_FILES)) {
+            if (isset($_FILES) && !empty($_FILES)) {
+                $file = new Collection($_FILES);
+                $post = new Collection($_POST);
 
-                $isUploaded = ImageManager::upload($file, WEBROOT . '/imgs', $post->get('thumb-for'), 'article');
+                $isUploaded = ImageManager::updateStatic($file, $post->get('thumb-for'));
                 if ($isUploaded) {
-
+                    $this->flash->set('success', $this->msg['success']);
+                    $this->app::redirect(true);
                 } else {
                     $this->flash->set('danger', $this->msg['files_not_uploaded']);
                     $this->app::redirect(true);

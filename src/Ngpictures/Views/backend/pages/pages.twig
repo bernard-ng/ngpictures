@@ -5,16 +5,16 @@
     <div class="section container row">
          <section class="section col l9 m12 s12">
             <h2 class="ui header">Photo Statiques</h2>
-            <form action="" method="POST" class="card-panel col s12 grey dark-4" enctype="multipart/form-data" data-action="upload">
-                <input type="hidden" name="thumb-for" value="jumbotron">
+            <form action="" method="POST" class="card-panel col s12 grey dark-4" enctype="multipart/form-data">
+                <input type="hidden" name="thumb-for" value="bgjumbo">
                 {{ form.inputFile("bg-jumbotron") }}
             </form>
-            <form action="" method="POST" class="card-panel col s12 grey dark-4" enctype="multipart/form-data" data-action="upload">
+            <form action="" method="POST" class="card-panel col s12 grey dark-4" enctype="multipart/form-data">
                 <input type="hidden" name="thumb-for" value="slider">
                 {{ form.inputFile("slider-img") }}
             </form>
-            <form action="" method="POST" class="card-panel col s12 grey dark-4" enctype="multipart/form-data" data-action="upload">
-                <input type="hidden" name="thumb-for" value="user">
+            <form action="" method="POST" class="card-panel col s12 grey dark-4" enctype="multipart/form-data">
+                <input type="hidden" name="thumb-for" value="bguser">
                 {{ form.inputFile("bg-user") }}
             </form>
         </section>

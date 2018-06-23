@@ -171,10 +171,62 @@ abstract class ImageManager
     }
 
 
-    public static function updateStatic(string $filename)
+    public static function updateStatic(Collection $file, string $name)
     {
         $flash = new FlashMessageManager(SessionManager::getInstance());
 
+        if (!empty($file->get('thumb.tmp_name'))) {
+            $path = self::$path['imgs'];
+            if (self::checkFile($file->get('thumb.name'), $file->get('thumb.type'))) {
+                $manager = new InterventionImage();
+                $sizes = getimagesize($file->get('thumb.tmp_name'));
+
+                try {
+                    $image = $manager->make($file->get('thumb.tmp_name'));
+                    if ($name != 'slider') {
+                        $bg = $manager
+                            ->make(WEBROOT . '/imgs/bg.png')
+                            ->resize($sizes[0] * 2, $sizes[1] * 2);
+                        $image->resize(1400, null, function ($c) {
+                            $c->aspectRatio();
+                        });
+
+                        $image
+                            ->orientate()
+                            ->interlace(true)
+                            ->insert($bg, 'bottom-right', 0, 0)
+                            ->save("{$path}/{$name}.jpg")
+                            ->destroy();
+                    } else {
+                        $image->resize(1400, null, function ($c) {
+                            $c->aspectRatio();
+                        });
+
+                        $image
+                            ->orientate()
+                            ->interlace(true)
+                            ->save("{$path}/{$name}.jpg")
+                            ->destroy();
+                    }
+
+                    return true;
+                } catch (NotReadableException $e) {
+                    LogMessageManager::register(__class__, $e);
+                    $flash->set('danger', MessageManager::get('files_not_image'));
+                    return false;
+                } catch (Exception $e) {
+                    LogMessageManager::register(__class__, $e);
+                    $flash->set('danger', MessageManager::get('undefined_error'));
+                    return false;
+                }
+            } else {
+                $flash->set('danger', MessageManager::get('files_not_image'));
+                return false;
+            }
+        } else {
+            $flash->set('danger', MessageManager::get('files_not_uploaded'));
+            return false;
+        }
     }
 
 

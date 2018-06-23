@@ -4,7 +4,7 @@
         <li>
             <div class="user-view">
                 <div class="background">
-                    <img src="/imgs/bgjumbo.jpeg" alt="bg">
+                    <img src="{{ cacheBusting('/imgs/bgjumbo.jpg') }}" alt="bg">
                 </div>
                 <a href="{{ activeUser.accountUrl }}">
                     <img src="{{ activeUser.avatarUrl }}" alt="bg2" class="circle">
