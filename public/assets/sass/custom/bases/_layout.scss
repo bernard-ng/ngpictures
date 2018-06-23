@@ -53,9 +53,50 @@
 
 .jumbotron-user {
     @extend .jumbotron-small;
+    background-attachment: fixed;
     min-height: 300px;
     height: auto !important;
+
+    .jumbotron-user-avatar {
+        width: 10rem;
+        height: 10rem;
+        border-radius: 100%;
+        overflow: hidden;
+        border: 5px solid rgba(255, 255, 255, 0.2);
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+    }
+
+    .jumbotron-user-name {
+        position: absolute;
+        top: calc(10rem + 40px);
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+    }
+
+    .jumbotron-user-stats {
+        position: absolute;
+        top: calc(10rem + 80px);
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+    }
+
+    .jumbotron-user-avatar img {
+        width: 100%;
+        height: 100%;
+    }
+
 }
+
+
 
     .user-avatar {
         width: 180px;

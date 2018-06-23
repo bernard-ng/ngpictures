@@ -109,7 +109,7 @@ class PageManager
             }
 
             $data_meta = implode(' ', $array_meta);
-            echo "<meta {$data_meta} >";
+            echo "<meta {$data_meta} > \n";
         }
     }
 

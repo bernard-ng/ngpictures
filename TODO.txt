@@ -29,3 +29,4 @@ sales.
 ***     changer dans la gallery aussi "ngpictues-ekdjfdk" - "ngpictues-photos"
 ***     page d'edition d'article pour les users.
 ***     ameliorer pages de recherche
+***     vider les erreurs de validation lorsque on saisie

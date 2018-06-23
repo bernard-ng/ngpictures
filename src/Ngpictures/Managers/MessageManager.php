@@ -37,6 +37,7 @@ class MessageManager implements ArrayAccess
         'post_remove_save' => "Publication Rétirée des enregistrerments",
         'post_saved' => "Publication ajoutée aux enregistrements",
         "post_htag_empty" => "Aucune publication pour ce Htag",
+        "post_img_required" => "Veuillez choisir une photo",
 
 
         //FORM

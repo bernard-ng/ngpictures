@@ -10,7 +10,7 @@ $router->get(ADMIN."/logs/delete", "admin\logs#clear", "admin.deleteLogs");
 $router->get(ADMIN."/logs/send", "admin\logs#send", "admin.sendLogs");
 
 //pages
-$router->get(ADMIN."/pages", "admin\pagesEditor#show", "admin.showPages");
+$router->any(ADMIN."/pages", "admin\pagesEditor#show", "admin.showPages");
 $router->any(ADMIN."/pages/:name", "admin\pagesEditor#edit", "admin.editPages");
 
 

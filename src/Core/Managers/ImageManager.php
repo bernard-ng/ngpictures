@@ -21,7 +21,8 @@ abstract class ImageManager
         'gallery' => UPLOAD.'/gallery',
         'gallery-thumbs' => UPLOAD.'/gallery/thumbs',
 
-        'avatars' => UPLOAD.'/avatars'
+        'avatars' => UPLOAD.'/avatars',
+        'imgs' => WEBROOT. '/imgs'
     ];
 
 
@@ -167,6 +168,13 @@ abstract class ImageManager
             $flash->set('danger', MessageManager::get('files_not_uploaded'));
             return false;
         }
+    }
+
+
+    public static function updateStatic(string $filename)
+    {
+        $flash = new FlashMessageManager(SessionManager::getInstance());
+
     }
 
 

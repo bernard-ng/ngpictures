@@ -2,9 +2,10 @@
 namespace Ngpictures\Controllers\Admin;
 
 
-use DirectoryIterator;
 use Exception;
+use DirectoryIterator;
 use Ng\Core\Managers\Collection;
+use Ng\Core\Managers\ImageManager;
 use Ngpictures\Controllers\AdminController;
 
 
@@ -28,6 +29,24 @@ class PagesEditorController extends AdminController
             $this->app::redirect(true);
         }
 
+        if (isset($_POST) && !empty($_POST)) {
+            if (!isset($_FILES) && empty($_FILES)) {
+
+                $isUploaded = ImageManager::upload($file, WEBROOT . '/imgs', $post->get('thumb-for'), 'article');
+                if ($isUploaded) {
+
+                } else {
+                    $this->flash->set('danger', $this->msg['files_not_uploaded']);
+                    $this->app::redirect(true);
+                }
+
+            } else {
+                $this->flash->set('danger', $this->msg['post_img_required']);
+                $this->app::redirect(true);
+            }
+        }
+
+        $this->app::turbolinksLocation(ADMIN . "/pages");
         $this->pageManager::setName("Adm - Les Pages");
         $this->setLayout('admin/default');
         $this->viewRender("backend/pages/pages", compact('files'));

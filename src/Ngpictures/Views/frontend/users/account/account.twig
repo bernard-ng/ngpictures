@@ -1,61 +1,13 @@
 {% extends 'layout/users/account.twig' %}
 
 {% block content %}
-    <style>
-        .jumbotron-user-avatar {
-            width: 10rem;
-            height: 10rem;
-            border-radius: 100%;
-            overflow: hidden;
-            border: 5px solid rgba(255,255,255,0.2);
-            position: absolute;
-            top: 20px; left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .jumbotron-user-name {
-            position: absolute;
-            top: calc(10rem + 40px); left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .jumbotron-user-stats {
-            position: absolute;
-            top: calc(10rem + 80px); left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .jumbotron-user-avatar img {
-            width: 100%;
-            height: 100%;
-
-        }
-
-    </style>
-    <div class="jumbotron-user">
+    <div class="jumbotron-user" style="background: url('/imgs/outils.jpeg')">
         <div class="jumbotron-user-profil align-center">
             <div class="jumbotron-user-avatar hoverable">
                 <img src="{{ user.avatarUrl}}" alt="{{ user.name }}">
             </div>
             <div class="jumbotron-user-name center">
                 <h1 class="ui header">{{ user.name }}</h1>
-            </div>
-            <div class="jumbotron-user-stats center ui  horizontal divided list">
-                <div class="item">
-                    <div class="content">
-                        <div class="header">1,35k&nbsp;Posts</div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="content">
-                        <div class="header">4,9k&nbsp;Abonnés</div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="content">
-                        <div class="header">12&nbsp;Abonnement</div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

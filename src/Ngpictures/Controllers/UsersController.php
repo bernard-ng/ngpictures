@@ -274,7 +274,7 @@ class UsersController extends Controller
                 $posts  =   $this->loadModel('posts')->findWith('users_id', $user->id, false);
 
                 $this->app::turbolinksLocation($user->accountUrl);
-                $this->pageManager::setName($user->name);
+                $this->pageManager::setName("Profile de " . $user->name);
                 $this->setLayout('users/account');
                 $this->viewRender('frontend/users/account/account', compact( "user", "posts"));
             } else {
