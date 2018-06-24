@@ -14,16 +14,33 @@ trait PostEntityTrait
     public function getUrl(): string
     {
         $this->url = "/{$this->action_url}";
-        $this->url .= "/{$this->slug}-{$this->id}";
+        $this->url .= "/{$this->SI}";
         return $this->url;
     }
 
 
+    /**
+     * url d'enregistrement
+     *
+     * @return string
+     */
     public function getSaveUrl(): string
     {
         $this->saveUrl = "saves/{$this->action_type}";
-        $this->saveUrl .= "/{$this->slug}-{$this->id}";
+        $this->saveUrl .= "/{$this->SI}";
         return $this->saveUrl;
+    }
+
+
+    /**
+     * url de signalement
+     * @return string
+     */
+    public function getReportUrl(): string
+    {
+        $this->reportUrl = "report/{$this->action_type}";
+        $this->reportUrl .= "/{$this->SI}";
+        return $this->reportUrl;
     }
 
 
@@ -95,7 +112,7 @@ trait PostEntityTrait
     {
         $this->likeUrl = "/likes";
         $this->likeUrl .= "/{$this->action_type}";
-        $this->likeUrl .= "/{$this->slug}-{$this->id}";
+        $this->likeUrl .= "/{$this->SI}";
         return $this->likeUrl;
     }
 
@@ -109,7 +126,7 @@ trait PostEntityTrait
     {
         $this->likersUrl = "/likes/show";
         $this->likersUrl .= "/{$this->action_type}";
-        $this->likersUrl .= "/{$this->slug}-{$this->id}";
+        $this->likersUrl .= "/{$this->SI}";
         return $this->likersUrl;
     }
 
@@ -122,7 +139,7 @@ trait PostEntityTrait
     {
         $this->commentUrl = "/comments";
         $this->commentUrl .= "/{$this->action_type}";
-        $this->commentUrl .= "/{$this->slug}-{$this->id}";
+        $this->commentUrl .= "/{$this->SI}";
         return $this->commentUrl;
     }
 

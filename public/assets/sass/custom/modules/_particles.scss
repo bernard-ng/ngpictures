@@ -29,7 +29,8 @@ canvas {
       position: absolute;
         display: inline-block;
         opacity: 0;
-        animation: dots 4s infinite;
+        -webkit-animation: dots 4s infinite;
+                animation: dots 4s infinite;
         top: 40%;
         width: 5px; height: 5px;
         &:after {
@@ -44,7 +45,8 @@ canvas {
 
     @for $i from 1 through 5 {
         span:nth-child(#{$i}) {
-            animation-delay: $i * 0.5s;
+            -webkit-animation-delay: $i * 0.5s;
+                    animation-delay: $i * 0.5s;
             &:after {
                 left: $i * -2px;
             }
@@ -52,12 +54,10 @@ canvas {
     }
 }
 
-@keyframes dots {
+@-webkit-keyframes dots {
     0%, 20% {
         left: 0;
         -webkit-animation-timing-function: ease-out;
-        -moz-animation-timing-function: ease-out;
-        -o-animation-timing-function: ease-out;
         animation-timing-function: ease-out;
         opacity: 0;
     }
@@ -69,16 +69,42 @@ canvas {
     35% {
         left: 45%;
         -webkit-animation-timing-function: linear;
-        -moz-animation-timing-function: linear;
-        -o-animation-timing-function: linear;
         animation-timing-function: linear;
     }
 
     65% {
         left: 55%;
         -webkit-animation-timing-function: ease-in;
-        -moz-animation-timing-function: ease-in;
-        -o-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+    }
+
+    80%, 100% {
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+@keyframes dots {
+    0%, 20% {
+        left: 0;
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+        opacity: 0;
+    }
+
+    25%, 75% {
+        opacity: 1;
+    }
+
+    35% {
+        left: 45%;
+        -webkit-animation-timing-function: linear;
+        animation-timing-function: linear;
+    }
+
+    65% {
+        left: 55%;
+        -webkit-animation-timing-function: ease-in;
         animation-timing-function: ease-in;
     }
 

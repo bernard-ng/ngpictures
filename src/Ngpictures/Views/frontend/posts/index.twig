@@ -46,7 +46,7 @@
                                     </li>
                                 {% endif %}
                                 <li>
-                                    <a data-action="report" class="news-card-header-icon modal-trigger" href="#report-{{ a.id }}">
+                                    <a data-action="report" class="news-card-header-icon modal-trigger" href="{{ a.reportUrl }}">
                                         <i class="icon icon-attention"></i>
                                         Signaler
                                     </a>
@@ -158,7 +158,7 @@
                     </div>
                 </article>
                 {% endfor %}
-                    <div id="statusBar" class="btn ng-progress-indeterminate disabled" data-ajax="blog">
+                    <div id="statusBar" class="mtb ng-progress-indeterminate disabled" data-ajax="posts">
                         <span></span>
                         <span></span>
                         <span></span>
