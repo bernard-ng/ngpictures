@@ -64,45 +64,18 @@ class SavesModel extends Model
     }
 
 
-    /**
-     * les publication saved dans le blog
-     * @param integer $user_id
-     * @return mixed
-     */
-    public function getBlog(int $user_id)
-    {
-        return $this->query(
-            "SELECT blog_id FROM {$this->table} WHERE users_id = ?",
-            [$user_id]
-        );
-    }
-
 
     /**
-     * les publication saved dans la gallery
+     * recupere les id des publication enregistree
      *
+     * @param string $type
      * @param integer $user_id
-     * @return mixed
+     * @return void
      */
-    public function getGallery(int $user_id)
+    public function get(string $type, int $user_id)
     {
         return $this->query(
-            "SELECT gallery_id FROM {$this->table} WHERE users_id = ?",
-            [$user_id]
-        );
-    }
-
-
-    /**
-     * les publication saved dans les posts
-     *
-     * @param integer $user_id
-     * @return mixed
-     */
-    public function getPosts(int $user_id)
-    {
-        return $this->query(
-            "SELECT posts_id FROM {$this->table} WHERE users_id = ?",
+            "SELECT * FROM {$this->table} WHERE users_id = ? AND {$type} IS NOT NULL",
             [$user_id]
         );
     }

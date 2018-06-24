@@ -11,3 +11,111 @@
             WHERE (
                 SELECT following.follower_id WHERE fol' à la ligne 3  
 
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:11 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' , , , , , , , , , , )' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:11 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' , , , , , , , , , , )' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:11 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' , , , , , , , , , , )' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:12 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' , , , , , , , , , , )' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:12 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' , , , , , , , , , , )' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:12 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' , , , , , , , , , , )' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:19 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' , , , , , , , , , , )' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:19 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' , , , , , , , , , , )' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:19 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' , , , , , , , , , , )' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:19 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' , , , , , , , , , , )' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:19 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' , , , , , , , , , , )' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:19 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' , , , , , , , , , , )' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:24 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' 218, 206, 205, 204, , , 246, 245, 235, 232, 231)' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:24 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' , , , , , , , , , , )' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:24 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' , , , , , , , , , , )' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:24 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' 218, 206, 205, 204, , , 246, 245, 235, 232, 231)' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:24 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' , , , , , , , , , , )' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:24 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' , , , , , , , , , , )' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:24 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' 218, 206, 205, 204, , , 246, 245, 235, 232, 231)' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:24 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' , , , , , , , , , , )' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:24 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ' , , , , , , , , , , )' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:25 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:25 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:25 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:25 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:25 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:25 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:26 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:29 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:36 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:36 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:37 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:37 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:37 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:38 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Jun 14:38 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+

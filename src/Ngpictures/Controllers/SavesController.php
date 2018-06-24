@@ -70,30 +70,19 @@ class SavesController extends controller
     /**
      * affiche les publication saved d'un user
      *
-     * @param string $token
+     * @param int $user_id
      * @return void
      */
-    public function show(string $token)
+    public function show(int $user_id): array
     {
-        $token = $this->str::escape($token);
+        $blog_list = (new Collection($this->saves->get('blog_id', $user_id)))->asList(', ', 'blog_id');
+        $posts_list = (new Collection($this->saves->get('posts_id', $user_id)))->asList(', ', 'posts_id');
+        $gallery_list = (new Collection($this->saves->get('gallery_id', $user_id)))->asList(', ', 'gallery_id');
 
-        if ($token == $this->session->read(TOKEN_KEY)) {
-            $user = $this->session->read(AUTH_KEY);
+        $blog = $this->loadModel('blog')->findList($blog_list);
+        $gallery = $this->loadModel('gallery')->findList($gallery_list);
+        $posts = $this->loadModel('posts')->findList($posts_list);
 
-            $blog_list = (new Collection($this->saves->getBlog($user->id)))->asList();
-            $posts_list = (new Collection($this->saves->getPosts($user->id)))->asList();
-            $gallery_list = (new Collection($this->saves->getGallery($user->id)))->asList();
-
-            $blog = $this->loadModel('blog')->findList($blog_list);
-            $gallery = $this->loadModel('gallery')->findList($gallery_list);
-            $posts = $this->loadModel('posts')->findList($posts_list);
-
-            $this->pageManager::setName('Mes Enregistrements');
-            $this->app::turbolinksLocation("my-saves/{$token}");
-            $this->viewRender('frontend/others/saves', compact('blog','gallery',  'posts'));
-        } else {
-            $this->flash->set('danger', $this->msg['users_forbidden']);
-            $this->app::redirect(true);
-        }
+        return compact('blog', 'gallery', 'posts');
     }
 }

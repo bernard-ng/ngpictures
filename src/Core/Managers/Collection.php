@@ -51,13 +51,17 @@ class Collection implements IteratorAggregate, ArrayAccess
      * @param string $glue
      * @return string
      */
-    public function asList(string $glue = ', '): string
+    public function asList(string $glue = ', ', $rule = null): string
     {
         $list = [];
         foreach($this->items as $item) {
 
             if (is_object($item)) {
-                $list[] = $item->id;
+                if (is_null($rule)) {
+                    $list[] = $item->id;
+                } else {
+                    $list[] = $item->$rule;
+                }
             } else {
                 $list[] = $item[0];
             }

@@ -111,23 +111,62 @@
     </div>
 
     <div id="collection">
-          {% if collections %}
+          {% if collection %}
             <section class="section">
                 <div class="row container">
                     <span class="col l12 s12 m12">
-                        <h2 class="ui header">Toutes les photos</h2>
+                        <h2 class="ui header">la Collection</h2>
                     </span>
                 </div>
                 <div class="row container">
-                    <div class="gallery gallery-container">
-                        {% for p in posts %}
-                            <article class="gallery-item" id="{{ p.id }}">
-                                <a href="{{ p.url }}">
-                                    <img src="{{ p.smallThumbUrl }}" class="responsive-img" title="{{ p.name }}" alt="{{ p.name }}">
-                                </a>
+                    {% for p in collection.blog  %}
+                        <div class="row nexted col s12 m3 l3">
+                            <article class="card post-titled grey dark-4">
+                                <div class="card-image waves-effect">
+                                    <a href="{{ p.url }}">
+                                        <img src="{{ p.smallThumbUrl }}" alt="{{ p.title }}" title="{{ p.title }}">
+                                    </a>
+                                </div>
+                                {% if p.title %}
+                                    <span class="post-description truncate">
+                                        {{ p.title }}
+                                    </span>
+                                {% endif %}
                             </article>
-                        {% endfor %}
-                    </div>
+                        </div>
+                    {% endfor %}
+                    {% for p in collection.gallery  %}
+                        <div class="row nexted col s12 m3 l3">
+                            <article class="card post-titled grey dark-4">
+                                <div class="card-image waves-effect">
+                                    <a href="{{ p.url }}">
+                                        <img src="{{ p.smallThumbUrl }}" alt="{{ p.title }}" title="{{ p.title }}">
+                                    </a>
+                                </div>
+                                {% if p.title %}
+                                    <span class="post-description truncate">
+                                        {{ p.title }}
+                                    </span>
+                                {% endif %}
+                            </article>
+                        </div>
+                    {% endfor %}
+                    {% for p in collection.posts  %}
+                        <div class="row nexted col s12 m3 l3">
+                            <article class="card post-titled grey dark-4">
+                                <div class="card-image waves-effect">
+                                    <a href="{{ p.url }}">
+                                        <img src="{{ p.smallThumbUrl }}" alt="{{ p.title }}" title="{{ p.title }}">
+                                    </a>
+                                </div>
+                                {% if p.title %}
+                                    <span class="post-description truncate">
+                                        {{ p.title }}
+                                    </span>
+                                {% endif %}
+                            </article>
+                        </div>
+                    {% endfor %}
                 </div>
             </section>
         {% else %}

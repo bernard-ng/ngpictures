@@ -271,12 +271,15 @@ class UsersController extends Controller
             $user = $this->users->find(intval($id));
 
             if ($user) {
-                $posts  =   $this->loadModel('posts')->findWith('users_id', $user->id, false);
+                $this->loadModel('saves');
+
+                $posts      =     $this->loadModel('posts')->findWith('users_id', $user->id, false);
+                $collection =     $this->callController('saves')->show($user->id);
 
                 $this->app::turbolinksLocation($user->accountUrl);
                 $this->pageManager::setName("Profile de " . $user->name);
                 $this->setLayout('users/account');
-                $this->viewRender('frontend/users/account/account', compact( "user", "posts"));
+                $this->viewRender('frontend/users/account/account', compact( "user", "posts", "collection"));
             } else {
                 $this->flash->set('danger', $this->msg['undefined_error']);
                 $this->app::redirect(true);
