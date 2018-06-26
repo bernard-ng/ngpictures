@@ -4,9 +4,13 @@ namespace Ngpictures\Traits\Entity;
 use Ng\Core\Managers\CacheBustingManager;
 use Ng\Core\Managers\StringManager;
 use Ngpictures\Ngpictures;
+use Ngpictures\Traits\Util\ResolverTrait;
 
 trait PostEntityTrait
 {
+
+    use ResolverTrait;
+
     /**
      * lien vers la publication
      * @return string
@@ -160,21 +164,21 @@ trait PostEntityTrait
      */
     public function getLikes(): string
     {
-        $likes = Ngpictures::getInstance()->getModel('likes');
+        $likes = Ngpictures::getDic()->get($this->model('likes'));
         return $likes->getLikeSentence($this->id, $this->action_type);
     }
 
 
     public function getNbLikes(): string
     {
-        $likes = Ngpictures::getInstance()->getModel('likes');
+        $likes = Ngpictures::getDic()->get($this->model('likes'));
         return $likes->getLikes($this->id, $this->action_type);
     }
 
 
     public function getSaves(): string
     {
-        $saves = Ngpictures::getInstance()->getModel('saves');
+        $saves = Ngpictures::getDic()->get($this->model('saves'));
         return $saves->getSaves($this->id, $this->action_type);
     }
 
@@ -186,7 +190,7 @@ trait PostEntityTrait
      */
     public function getCommentsNumber(): string
     {
-        $comments = Ngpictures::getInstance()->getModel('comments');
+        $comments = Ngpictures::getDic()->get($this->model('comments'));
         $comments = $comments->getNumber($this->id, $this->action_type);
         return $comments;
     }
@@ -198,7 +202,7 @@ trait PostEntityTrait
      */
     public function getIsLike(): string
     {
-        $likes = Ngpictures::getInstance()->getModel('likes');
+        $likes = Ngpictures::getDic()->get($this->model('likes'));
         return $likes->isMentionnedLike($this->id, $this->action_type);
     }
 
@@ -209,7 +213,7 @@ trait PostEntityTrait
      */
     public function getIsSaved(): string
     {
-        $saves = Ngpictures::getInstance()->getModel('saves');
+        $saves = Ngpictures::getDic()->get($this->model('saves'));
         return $saves->isSaved($this->id, $this->action_type);
     }
 
@@ -221,7 +225,7 @@ trait PostEntityTrait
      */
     public function getSnipet()
     {
-        $users = Ngpictures::getInstance()->getModel('users');
+        $users = Ngpictures::getDic()->get($this->model('users'));
         $content = StringManager::getSnipet(StringManager::truncateText($this->content, 150));
         $text = StringManager::userMention($users, strip_tags($content));
         return StringManager::htag($text);
@@ -234,7 +238,7 @@ trait PostEntityTrait
      */
     public function getFullText()
     {
-        $users = Ngpictures::getInstance()->getModel('users');
+        $users = Ngpictures::getDic()->get($this->model('users'));
         $text = StringManager::userMention($users, strip_tags($this->content));
         return nl2br(StringManager::htag($text));
     }

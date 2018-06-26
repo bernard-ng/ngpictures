@@ -1,156 +1,74 @@
 <?php
 namespace Ngpictures;
 
-use Ng\Core\Managers\CacheBustingManager;
-use Ng\Core\Managers\StringManager;
-use Ng\Core\Managers\CookieManager;
-use Ng\Core\Database\MysqlDatabase;
-use Ng\Core\Managers\ConfigManager;
-use Ng\Core\Managers\SessionManager;
-use Ngpictures\Managers\PageManager;
-use Ng\Core\Managers\LogMessageManager;
-use Ngpictures\Managers\MessageManager;
-use Ng\Core\Managers\ValidationManager;
-use Ng\Core\Managers\FlashMessageManager;
-use Ngpictures\Traits\Util\SingletonTrait;
-use Ng\Core\Exception\ConfigManagerException;
+use Psr\Container\ContainerInterface;
+use Ng\Core\Router\Router;
+
 
 class Ngpictures
 {
 
-    /* base de donnee */
-    private static $db_instance;
-
-
-    use SingletonTrait;
-
-
-    //FACTORING
-    //****************************************************************************
+    /**
+     * le container
+     * @var ContainerInterface
+     */
+    public $container;
 
 
     /**
-     * initalise ou recupere la connexion a la base de donnee
-     *
-     *
-     * on recupere la configuration dans un fichier se situant la racine
-     * on failt a l'appel a Config qui va mettre la configuration dans la
-     * variable setting sous form d'objet.
-     * et on passe a Mysqldatabase la config et lui initialise un PDO
-     *
-     * @return MysqlDatabase
-     **/
-    private function getDb(): MysqlDatabase
+     * le container, redefini pour permettre autre class
+     * d'avoir access au DIC sans instancie celui-ci et instancie l'application.
+     * @todo ameliorer ceci et trouver une solution.
+     * @var ContainerInterface
+     */
+    public static $dic;
+
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+        self::$dic      =   $container;
+    }
+
+
+    /**
+     * initialisation router et application
+     * registration des routes dans la RoutesConfig.php
+     */
+    public function run()
     {
         try {
-            $setting = new ConfigManager(ROOT."\config\DatabaseConfig.php");
+            $router = $this->container->get(Router::class);
+            require(ROOT."/config/routes/frontend.php");
+            require(ROOT."/config/routes/backend.php");
 
-            if (!isset(self::$db_instance)) {
-                self::$db_instance = new MysqlDatabase(
-                    $setting->get("db_name"),
-                    $setting->get("db_host"),
-                    $setting->get("db_user"),
-                    $setting->get("db_pass")
-                );
+            $route = $router->run();
+            if ($route) {
+                if (is_string($route->getController())) {
+                    $action         =   explode("#", $route->getController());
+                    $method         =   $action[1] ?? 'index';
+                    $controller     =   $this->container->get($this->getAction($action[0]));
+
+                    return call_user_func_array([$controller, $method], $route->getMatches());
+                }
+                return call_user_func_array($route->getController(), $route->getMatches());
+            } else {
+                //404
             }
-            return self::$db_instance;
-        } catch (ConfigManagerException $e) {
+        } catch (RouterException $e) {
             LogMessageManager::register(__class__, $e);
-            return null;
+            self::redirect("/error/internal");
         }
     }
 
 
-    /**
-     * recupere est instancie un nouveau model
-     * @param string $class_name
-     * @return mixed
-     */
-    public function getModel(string $class_name)
+    private function getAction(string $action)
     {
-        $class_name = "\\Ngpictures\\Models\\".ucfirst($class_name)."Model";
-        return new $class_name($this->getDb());
+        $namespace = __NAMESPACE__ . "\\Controllers\\";
+        $class = ucfirst($action) . "Controller";
+        return $namespace . $class;
     }
 
-
-    /**
-     * recupere est instancie un nouveau controller
-     * @param string $name
-     * @return mixed
-     */
-    public function getController(string $name)
-    {
-        $controller = "\\Ngpictures\\Controllers\\".ucfirst($name)."Controller";
-        return new $controller(self::getInstance(), new PageManager());
-    }
-
-
-    /**
-     * recupere une instance de flash
-     * @return FlashMessageManager
-     */
-    public function getFlash(): FlashMessageManager
-    {
-        return new FlashMessageManager($this->getSession());
-    }
-
-
-    /**
-     * recupere une instance de validator
-     * @return ValidationManager
-     */
-    public function getValidator(): ValidationManager
-    {
-        return new ValidationManager();
-    }
-
-
-    /**
-     * recupere la session
-     * @return SessionManager
-     */
-    public function getSession(): SessionManager
-    {
-        return SessionManager::getInstance();
-    }
-
-
-    /**
-     * recupere le cookie
-     * @return cookieManager
-     */
-    public function getCookie(): CookieManager
-    {
-        return CookieManager::getInstance();
-    }
-
-
-    /**
-     * recupere le gestion de chaine de charactere
-     * @return stringManager
-     */
-    public function getStr(): StringManager
-    {
-        return new StringManager();
-    }
-
-
-    /**
-     * @return CacheBustingManager
-     */
-    public function getCacheBusting()
-    {
-        return new CacheBustingManager();
-    }
-
-
-    /**
-     * @return MessageManager
-     */
-    public function getMessageManager(): MessageManager
-    {
-        return new MessageManager();
-    }
 
 
     //GENERAL APPLICATION METHODS
@@ -191,7 +109,7 @@ class Ngpictures
     public static function hasDebug()
     {
         try {
-            $settings = new ConfigManager(ROOT."/config/SystemConfig.php");
+            $settings = new ConfigManager(ROOT."/config/system.php");
             return $settings->get('sys.debug');
         } catch (ConfigManagerException $e) {
             LogMessageManager::register(__class__, $e);
@@ -206,7 +124,7 @@ class Ngpictures
     public static function hasCache(): bool
     {
         try {
-            $settings = new ConfigManager(ROOT."/config/SystemConfig.php");
+            $settings = new ConfigManager(ROOT."/config/system.php");
             return $settings->get('sys.cache');
         } catch (ConfigManagerException $e) {
             LogMessageManager::register(__class__, $e);
@@ -253,5 +171,15 @@ class Ngpictures
     public static function turbolinksLocation(string $name)
     {
         header("Turbolinks-Location: {$name}");
+    }
+
+    /**
+     * Get le container
+     *
+     * @return  ContainerInterface
+     */
+    public static function getDic()
+    {
+        return self::$dic;
     }
 }

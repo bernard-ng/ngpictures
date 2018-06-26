@@ -33,17 +33,17 @@ trait ShowPostTrait
                         compact("article", "comments", "user", "categories", "author", "similars")
                     );
                 } else {
-                    $this->flash->set("danger", $this->msg['post_not_found']);
+                    $this->flash->set("danger", $this->flash->msg['post_not_found']);
                     http_response_code(404);
                     $this->app::redirect("/error/not-found");
                 }
             } else {
-                $this->flash->set("danger", $this->msg['post_not_found']);
+                $this->flash->set("danger", $this->flash->msg['post_not_found']);
                 http_response_code(404);
                 $this->app::redirect("/error/not-found");
             }
         } else {
-            $this->flash->set("danger", $this->msg['undefined_error']);
+            $this->flash->set("danger", $this->flash->msg['undefined_error']);
             $this->index();
         }
     }

@@ -27,21 +27,11 @@ class Router
 
 
     /**
-     * l'application
-     * @var Ngpictures
+     * construction
      */
-    private $app;
-
-
-    /**
-     * Router constructor
-     * @param string $url
-     * @param Ngpictures $app
-     */
-    public function __construct(string $url, Ngpictures $app)
+    public function __construct()
     {
-        $this->url = $url;
-        $this->app = $app;
+        $this->url = $_SERVER['REQUEST_URI'] ?? '/';
     }
 
 
@@ -55,7 +45,7 @@ class Router
      */
     private function add(string $path, $controller, string $name = null, string $method): Route
     {
-        $route = new Route($path, $controller, $this->app);
+        $route = new Route($path, $controller);
         $this->routes[$method][] = $route;
 
         if ($name) {
@@ -74,7 +64,7 @@ class Router
      */
     public function any(string $path, $controller, string $name = null): Route
     {
-        $route = new Route($path, $controller, $this->app);
+        $route = new Route($path, $controller);
         $this->routes['GET'][] = $route;
         $this->routes['POST'][] = $route;
 
@@ -121,7 +111,7 @@ class Router
     {
         if (!isset($this->namedRoute[$name])) {
             http_response_code(404);
-            $this->app::redirect("/error/not-found");
+            throw new RouterException('no routes matched', 404);
         }
         return $this->namedRoute[$name]->getUrl($params);
     }
@@ -138,22 +128,21 @@ class Router
     public function run()
     {
         if (isset($_SERVER['REQUEST_METHOD'])) {
-            // trailingSlash
             if (strlen($this->url) > 1 && strripos($this->url, "/") === strlen($this->url) - 1) {
                 $url = substr($this->url, 0, -1);
-                $this->app::redirect("/{$url}", true);
+                http_response_code(301);
+                header("location: /{$url}");
+                exit();
             }
 
             foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
                 if ($route->match($this->url)) {
-                    return $route->call();
+                    return $route;
                 }
             }
-
-            http_response_code(404);
-            $this->app::redirect("/error/not-found");
+            return null;
         }
 
-        throw new RouterException("undefinied Request method");
+        throw new RouterException("undefinied Request method", 500);
     }
 }

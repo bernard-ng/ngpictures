@@ -3,15 +3,16 @@ namespace Ngpictures\Models;
 
 use Ng\Core\Models\Model;
 use Ngpictures\Ngpictures;
-use Ng\Core\Database\MysqlDatabase;
+use Ng\Core\Database\DatabaseInterface;
+use Ng\Core\Interfaces\SessionInterface;
 
 class FollowingModel extends Model
 {
 
-    public function __construct(MysqlDatabase $db)
+    public function __construct(DatabaseInterface $db)
     {
         parent::__construct($db);
-        $this->session = Ngpictures::getInstance()->getSession();
+        $this->session = Ngpictures::getDic()->get(SessionInterface::class);
     }
 
 

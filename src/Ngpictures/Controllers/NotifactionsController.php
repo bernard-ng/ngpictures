@@ -32,7 +32,7 @@ class NotificationsController extends Controller
             $this->app::turbolinksLocation("/nofications/{$user_id}/{$token}");
             $this->viewRender('frontend/users/account/notifications', compact('notifications'));
         } else {
-            $this->flash->set('danger', $this->msg['undefined_error']);
+            $this->flash->set('danger', $this->flash->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }
@@ -50,12 +50,12 @@ class NotificationsController extends Controller
 
         if ($this->authService->getToken() == $token) {
             $this->notifications->setRead($user_id);
-            $this->flash->set('success', $this->msg['success']);
+            $this->flash->set('success', $this->flash->msg['success']);
             $this->app::redirect(true);
         } else {
             $this->isAjax()?
-                $this->ajaxFail($this->msg['undefined_error']):
-                $this->flash->set('danger', $this->msg['undefined_error']);
+                $this->ajaxFail($this->flash->msg['undefined_error']):
+                $this->flash->set('danger', $this->flash->msg['undefined_error']);
                 $this->app::redirect(true);
         }
     }
@@ -72,14 +72,14 @@ class NotificationsController extends Controller
 
                 if ($post->get('token') == $token) {
                     $this->notifications->delete($user_id);
-                    $this->flash->set('success', $this->msg['success']);
+                    $this->flash->set('success', $this->flash->msg['success']);
                     $this->app::redirect(true);
                 }
             }
         } else {
             $this->isAjax() ?
-                $this->ajaxFail($this->msg['undefined_error']) :
-                $this->flash->set('danger', $this->msg['undefined_error']);
+                $this->ajaxFail($this->flash->msg['undefined_error']) :
+                $this->flash->set('danger', $this->flash->msg['undefined_error']);
                 $this->app::redirect(true);
         }
     }

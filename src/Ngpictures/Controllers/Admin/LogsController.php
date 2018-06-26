@@ -35,7 +35,7 @@ class LogsController extends AdminController
     public function clear()
     {
         LogMessageManager::clear();
-        $this->flash->set("success", $this->msg['success']);
+        $this->flash->set("success", $this->flash->msg['success']);
         $this->app::redirect(true);
     }
 
@@ -48,15 +48,15 @@ class LogsController extends AdminController
      */
     public function send()
     {
-        $email = (new ConfigManager(ROOT."/config/SystemConfig.php"))->get('site.email');
+        $email = (new ConfigManager(ROOT."/config/system.php"))->get('site.email');
 
         try {
             (new Mailer())->sendLogs($email);
-            $this->flash->set("success", $this->msg['success']);
+            $this->flash->set("success", $this->flash->msg['success']);
             $this->app::redirect(true);
         } catch (RuntimeException $e) {
             LogMessageManager::register(__class__, $e);
-            $this->flash->set('danger', $this->msg['undefined_error']);
+            $this->flash->set('danger', $this->flash->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }

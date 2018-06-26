@@ -1,9 +1,10 @@
 <?php
 namespace Ngpictures\Models;
 
-use Ng\Core\Database\MysqlDatabase;
 use Ng\Core\Models\Model;
 use Ngpictures\Ngpictures;
+use Ng\Core\Database\DatabaseInterface;
+use Ng\Core\Interfaces\SessionInterface;
 use Ngpictures\Traits\Util\TypesActionTrait;
 
 /**
@@ -23,12 +24,12 @@ class LikesModel extends Model
 
     /**
      * LikesModel constructor.
-     * @param MysqlDatabase $db
+     * @param DatabaseInterface $db
      */
-    public function __construct(MysqlDatabase $db)
+    public function __construct(DatabaseInterface $db)
     {
         parent::__construct($db);
-        $this->session = Ngpictures::getInstance()->getSession();
+        $this->session = Ngpictures::getDic()->get(SessionInterface::class);
     }
 
 

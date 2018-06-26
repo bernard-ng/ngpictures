@@ -64,10 +64,10 @@ class AlbumsController extends AdminController
                 $description    =   $post->get('description');
 
                 $this->albums->create(compact('title', 'description', 'slug'));
-                $this->flash->set('success', $this->msg['form_post_submitted']);
+                $this->flash->set('success', $this->flash->msg['form_post_submitted']);
                 $this->app::redirect(ADMIN . "/gallery/albums");
             } else {
-                $this->flash->set('danger', $this->msg['form_multi_errors']);
+                $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
                 $errors = new Collection($this->validator->getErrors());
             }
         }
@@ -100,10 +100,10 @@ class AlbumsController extends AdminController
                     $description    =   $post->get('description') ?? $album->description;
 
                     $this->albums->update($album->id, compact('title', 'description', 'slug'));
-                    $this->flash->set('success', $this->msg['post_edit_success']);
+                    $this->flash->set('success', $this->flash->msg['post_edit_success']);
                     $this->app::redirect(ADMIN . "/gallery/albums");
                 } else {
-                    $this->flash->set('danger', $this->msg['form_multi_errors']);
+                    $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
                     $errors = new Collection($this->validator->getErrors());
                 }
             }
@@ -112,7 +112,7 @@ class AlbumsController extends AdminController
             $this->setLayout('admin/default');
             $this->viewRender('backend/gallery/albums.edit', compact('post', 'album', 'errors'));
         } else {
-            $this->flash->set('danger', $this->msg['undefined_error']);
+            $this->flash->set('danger', $this->flash->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }

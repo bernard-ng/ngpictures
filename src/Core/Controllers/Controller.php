@@ -1,7 +1,8 @@
 <?php
 namespace Ng\Core\Controllers;
 
-use Ng\Core\Renderer\TwigRenderer;
+use Psr\Container\ContainerInterface;
+use Ng\Core\Renderer\RendererInterface;
 
 
 class Controller
@@ -11,9 +12,10 @@ class Controller
     protected $renderer;
 
 
-    public function __construct()
+    public function __construct(ContainerInterface $container)
     {
-        $this->renderer = new TwigRenderer();
+        $this->container = $container;
+        $this->renderer = $this->container->get(RendererInterface::class);
     }
 
 

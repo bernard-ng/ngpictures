@@ -3,34 +3,31 @@ namespace Ng\Core\Managers;
 
 use Ng\Core\Interfaces\SessionInterface;
 use Ng\Core\Traits\SingletonTrait;
+use Ngpictures\Managers\MessageManager;
 
 class FlashMessageManager
 {
-
-    use SingletonTrait;
-    private $session = null;
+    /**
+     * la session
+     * @var SessionInterface
+     */
+    private $session;
 
     /**
-     * recupere la mm instance du falshmessagemanager
-     *
-     * @return FlashMessageManager
+     * les message
+     * @var MessageManager
      */
-    public static function getInstance(): FlashMessageManager
-    {
-        if (self::$instance === null) {
-            self::$instance = new self(new SessionManager);
-        }
-        return self::$instance;
-    }
+    private $msg;
 
 
     /**
      * Flash constructor.
      * @param SessionInterface $session
      */
-    public function __construct(SessionInterface $session)
+    public function __construct(SessionInterface $session, MessageManager $msg)
     {
-        $this->session = $session;
+        $this->session  = $session;
+        $this->msg      = $msg;
     }
 
 

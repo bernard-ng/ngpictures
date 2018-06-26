@@ -70,7 +70,7 @@ class CategoriesController extends Controller
             $this->setLayout('posts/default');
             $this->viewRender('frontend/categories/show', compact('category', 'blog', 'posts', 'gallery'));
         } else {
-            $this->flash->set('danger', $this->msg['category_not_found']);
+            $this->flash->set('danger', $this->flash->msg['category_not_found']);
             $this->app::redirect('/categories');
         }
     }

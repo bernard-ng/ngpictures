@@ -62,10 +62,10 @@ class CategoriesController extends AdminController
                 $description    =   $post->get('description');
                 $this->categories->create(compact('title', 'description', 'slug'));
 
-                $this->flash->set('success', $this->msg['form_post_submitted']);
+                $this->flash->set('success', $this->flash->msg['form_post_submitted']);
                 $this->app::redirect(ADMIN . "/blog/categories");
             } else {
-                $this->flash->set('danger', $this->msg['form_multi_errors']);
+                $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
                 $errors = new Collection($this->validator->getErrors());
             }
         }
@@ -98,10 +98,10 @@ class CategoriesController extends AdminController
                     $description    =   $post->get('description') ?? $category->description;
 
                     $this->categories->update($category->id, compact('title', 'description', 'slug'));
-                    $this->flash->set('success', $this->msg['post_edit_success']);
+                    $this->flash->set('success', $this->flash->msg['post_edit_success']);
                     $this->app::redirect(ADMIN . "/blog/categories");
                 } else {
-                    $this->flash->set("danger", $this->msg['form_multi_errors']);
+                    $this->flash->set("danger", $this->flash->msg['form_multi_errors']);
                     $errors = new Collection($this->validator->getErrors());
                 }
             }
@@ -110,7 +110,7 @@ class CategoriesController extends AdminController
             $this->setLayout('admin/default');
             $this->viewRender('backend/blog/categories.edit', compact('post', 'category', 'errors'));
         } else {
-            $this->flash->set('danger', $this->msg['undefined_error']);
+            $this->flash->set('danger', $this->flash->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }

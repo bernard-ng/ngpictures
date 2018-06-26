@@ -1,8 +1,8 @@
 <?php
 namespace Ng\Core\Models;
 
-use Ng\Core\Database\Database;
-use Ng\Core\Database\MysqlDatabase;
+
+use Ng\Core\Database\DatabaseInterface;
 
 class Model
 {
@@ -23,17 +23,11 @@ class Model
 
     /**
      * Model constructor.
-     * @param MysqlDatabase
+     * @param DatabaseInterface
      */
-    public function __construct(MysqlDatabase $database)
+    public function __construct(DatabaseInterface $database)
     {
         $this->database = $database;
-        if (is_null($this->table)) {
-            $part = explode("\\", get_class($this));
-            $table = end($part);
-            $this->table = strtolower(str_replace("Model", "", $table));
-        }
-        return $this->table;
     }
 
 
@@ -63,13 +57,8 @@ class Model
      * @param bool $rowCount if true retrun the PDO::rowCount()
      * @return mixed
      */
-    public function query(
-        string $statement,
-        array $data = null,
-        bool $class = true,
-        bool $one = false,
-        bool $rowCount = false
-    ) {
+    public function query(string $statement, array $data = null, bool $class = true, bool $one = false, bool $rowCount = false)
+    {
         $class = ($class === true)? str_replace("Model", "Entity", get_class($this)) : false;
         $class = str_replace("Entitys", "Entity", $class);
 
@@ -89,18 +78,16 @@ class Model
      */
     public function update(int $id, array $data = [])
     {
-        $array_sql = [];
-        $array_data = [];
-
+        $fields = [];
+        $values = [];
         foreach ($data as $k => $v) {
-            $array_sql[] = "{$k} = ?";
-            $array_data[] = $v;
+            $fields[] = "{$k} = ?";
+            $values[] = "{$v}";
         }
+        $fields = implode(', ', $fields);
+        $values[] = $id;
 
-        $sql = implode(', ', $array_sql);
-        $array_data[] = $id;
-
-        return $this->query("UPDATE {$this->table} SET $sql WHERE id = ? ", $array_data);
+        return $this->query("UPDATE {$this->table} SET {$fields} WHERE id = ? ", $values);
     }
 
 
@@ -112,19 +99,17 @@ class Model
      */
     public function create(array $data = [], bool $date_created = true)
     {
-        $array_sql = [];
-        $array_data = [];
-
+        $fields = [];
+        $values = [];
         foreach ($data as $k => $v) {
-            $array_sql[] = "{$k} = ?";
-            $array_data[] = $v;
+            $fields[] = "{$k} = ?";
+            $values[] = $v;
         }
+        $values = implode(', ', $fields);
 
-        $sql = implode(', ', $array_sql);
-        if ($date_created) {
-            return $this->query("INSERT INTO {$this->table} SET $sql , date_created = NOW() ", $array_data);
-        }
-        return $this->query("INSERT INTO {$this->table} SET $sql ", $array_data);
+        return ($date_created)?
+            $this->query("INSERT INTO {$this->table} SET $values , date_created = NOW() ", $values) :
+            $this->query("INSERT INTO {$this->table} SET $values ", $values);
     }
 
 
@@ -135,7 +120,7 @@ class Model
      */
     public function delete(int $id)
     {
-        return $this->query("DELETE FROM {$this->table} WHERE id = ?", [$id], true, true);
+        return $this->query("DELETE FROM {$this->table} WHERE id = ?", [$id]);
     }
 
 
@@ -173,6 +158,7 @@ class Model
             true
         );
     }
+
 
     /**
      * recupere un enregistrement avec une contrainte

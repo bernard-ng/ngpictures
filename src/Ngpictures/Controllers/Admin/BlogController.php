@@ -73,13 +73,13 @@ class BlogController extends AdminController
                     $categories_id = (int)$post->get('category') ?? 1;
 
                     $this->blog->update($id, compact('title', 'content', 'slug', 'categories_id'));
-                    $this->flash->set("success", $this->msg['post_edit_success']);
+                    $this->flash->set("success", $this->flash->msg['post_edit_success']);
                     $this->app::redirect(ADMIN . "/blog");
                 } else {
                     $errors = $this->validator->getErrors();
                 }
             } else {
-                $this->flash->set('danger', $this->msg['form_all_required']);
+                $this->flash->set('danger', $this->flash->msg['form_all_required']);
             }
         }
 
@@ -119,7 +119,7 @@ class BlogController extends AdminController
                     $slug = $this->str::slugify($title);
                 }
             } else {
-                $this->flash->set('danger', $this->msg['form_multi_errors']);
+                $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
                 $errors = new Collection($this->validator->getErrors());
             }
 
@@ -143,18 +143,18 @@ class BlogController extends AdminController
                                 ]
                             );
 
-                            $this->flash->set('success', $this->msg['form_post_submitted']);
+                            $this->flash->set('success', $this->flash->msg['form_post_submitted']);
                             $this->app::redirect(ADMIN . "/blog");
                         } else {
                             $this->blog->delete($last_id);
-                            $this->flash->set('danger', $this->msg['files_not_uploaded']);
+                            $this->flash->set('danger', $this->flash->msg['files_not_uploaded']);
                         }
                     } else {
-                        $this->flash->set("danger", $this->msg['form_multi_errors']);
+                        $this->flash->set("danger", $this->flash->msg['form_multi_errors']);
                         $errors = new Collection($this->validator->getErrors());
                     }
                 } else {
-                    $this->flash->set('danger', $this->msg['post_requires_picture']);
+                    $this->flash->set('danger', $this->flash->msg['post_requires_picture']);
                 }
             }
         }

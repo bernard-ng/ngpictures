@@ -1,10 +1,10 @@
 <?php
 namespace Ngpictures\Models;
 
-use Ng\Core\Database\MysqlDatabase;
-use Ng\Core\Managers\SessionManager;
 use Ng\Core\Models\Model;
 use Ngpictures\Ngpictures;
+use Ng\Core\Database\DatabaseInterface;
+use Ng\Core\Interfaces\SessionInterface;
 use Ngpictures\Traits\Util\TypesActionTrait;
 
 /**
@@ -13,17 +13,19 @@ use Ngpictures\Traits\Util\TypesActionTrait;
 class SavesModel extends Model
 {
 
+    use TypesActionTrait;
+
     /**
      * SavesModel constructor.
-     * @param MysqlDatabase $database
+     * @param DatabaseInterface $database
      */
-    public function __construct(MysqlDatabase $database)
+    public function __construct(DatabaseInterface $database)
     {
         parent::__construct($database);
-        $this->session = Ngpictures::getInstance()->getSession();
+        $this->session = Ngpictures::getDic()->get(SessionInterface::class);
     }
 
-    use TypesActionTrait;
+
 
     /**
      * le nom de la table

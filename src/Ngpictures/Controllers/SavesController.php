@@ -41,7 +41,7 @@ class SavesController extends controller
 
             if ($exists) {
                 $this->saves->delete($exists->id);
-                $this->flash->set('success', $this->msg['post_remove_save']);
+                $this->flash->set('success', $this->flash->msg['post_remove_save']);
                 $this->app::redirect(true);
             } else {
                 $this->saves->create([
@@ -55,13 +55,13 @@ class SavesController extends controller
                     exit();
                 }
 
-                $this->flash->set('success', $this->msg['post_saved']);
+                $this->flash->set('success', $this->flash->msg['post_saved']);
                 $this->app::redirect(true);
             }
         } else {
             ($this->isAjax())?
-                $this->ajaxFail($this->msg['post_not_found']) :
-                $this->flash->set('danger', $this->msg['post_not_found']);
+                $this->ajaxFail($this->flash->msg['post_not_found']) :
+                $this->flash->set('danger', $this->flash->msg['post_not_found']);
                 $this->app::redirect(true);
         }
     }

@@ -72,7 +72,7 @@ class PageManager
     public static function setName(string $name): string
     {
         try {
-            $config = new ConfigManager(ROOT."/config/SystemConfig.php");
+            $config = new ConfigManager(ROOT."/config/system.php");
             self::$pageTitle = $name . " | " . $config->get('site.name');
         } catch (ConfigManagerException $e) {
             LogMessageManager::register(__class__, $e);

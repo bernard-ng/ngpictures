@@ -84,14 +84,14 @@ class GalleryController extends AdminController
                         ]
                     );
 
-                    $this->flash->set('success', $this->msg['form_post_submitted']);
+                    $this->flash->set('success', $this->flash->msg['form_post_submitted']);
                     $this->app::redirect(ADMIN . "/gallery");
                 } else {
-                    $this->flash->set('danger', $this->msg['files_not_uploaded']);
+                    $this->flash->set('danger', $this->flash->msg['files_not_uploaded']);
                     $this->gallery->delete($last_id);
                 }
             } else {
-                $this->flash->set('danger', $this->msg['post_requires_picture']);
+                $this->flash->set('danger', $this->flash->msg['post_requires_picture']);
                 $this->app::redirect(true);
             }
         }
@@ -122,7 +122,7 @@ class GalleryController extends AdminController
                 $categories_id    =   intval($post->get('category')) ?? 1;
 
                 $this->gallery->update($id, compact('name', 'tags', 'description', 'categories_id'));
-                $this->flash->set("success", $this->msg['post_edit_success']);
+                $this->flash->set("success", $this->flash->msg['post_edit_success']);
                 $this->app::redirect(ADMIN . "/gallery");
             }
 
@@ -130,7 +130,7 @@ class GalleryController extends AdminController
             $this->setLayout("admin/default");
             $this->viewRender("backend/gallery/edit", compact('photo', 'categories'));
         } else {
-            $this->flash->set('danger', $this->msg['post_not_found']);
+            $this->flash->set('danger', $this->flash->msg['post_not_found']);
             $this->app::redirect(true);
         }
     }
@@ -164,7 +164,7 @@ class GalleryController extends AdminController
             $files = new DirectoryIterator($dos);
         } catch (Exception  $e) {
             LogMessageManager::register(__class__, $e);
-            $this->flash->set('danger', $this->msg['undefined_error']);
+            $this->flash->set('danger', $this->flash->msg['undefined_error']);
             $this->app::redirect(true);
         }
 
@@ -197,7 +197,7 @@ class GalleryController extends AdminController
                 );
 
                 if ($isWatermarked) {
-                    $this->flash->set('success', $this->msg['success']);
+                    $this->flash->set('success', $this->flash->msg['success']);
                     $this->app::redirect(true);
                 } else {
                     $this->flash->set('danger', "Watermark non effectué");
@@ -209,7 +209,7 @@ class GalleryController extends AdminController
             $this->setLayout("admin/default");
             $this->viewRender("backend/gallery/watermark", ['image' => "/uploads/$path[$type]/{$filename}"]);
         } else {
-            $this->flash->set('danger', $this->msg['files_not_image']);
+            $this->flash->set('danger', $this->flash->msg['files_not_image']);
             $this->app::redirect(true);
         }
     }

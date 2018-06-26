@@ -57,19 +57,19 @@ class CommentsController extends Controller
                     echo $this->loadModel($this->getAction($type))->find(intval($id))->getCommentsNumber();
                     exit();
                 } else {
-                    $this->flash->set('success', $this->msg['form_comment_submitted']);
+                    $this->flash->set('success', $this->flash->msg['form_comment_submitted']);
                     $this->app::redirect(true);
                 }
             } else {
                 $this->isAjax() ?
-                    $this->ajaxFail($this->msg['form_all_required']) :
-                    $this->flash->set('danger', $this->msg['form_all_required']);
+                    $this->ajaxFail($this->flash->msg['form_all_required']) :
+                    $this->flash->set('danger', $this->flash->msg['form_all_required']);
                     $this->app::redirect(true);
             }
         } else {
             $this->isAjax()?
-                $this->ajaxFail($this->msg['comment_not_found']) :
-                $this->flash->set('warning', $this->msg['comment_not_found']);
+                $this->ajaxFail($this->flash->msg['comment_not_found']) :
+                $this->flash->set('warning', $this->flash->msg['comment_not_found']);
                 $this->app::redirect(true);
         }
     }
@@ -90,18 +90,18 @@ class CommentsController extends Controller
             if ($comment) {
                 if ($comment->users_id == $this->user->id) {
                     $this->comments->delete($id);
-                    $this->flash->set('success', $this->msg['comment_delete_success']);
+                    $this->flash->set('success', $this->flash->msg['comment_delete_success']);
                     $this->app::redirect(true);
                 } else {
-                    $this->flash->set('danger', $this->msg['delete_not_allowed']);
+                    $this->flash->set('danger', $this->flash->msg['delete_not_allowed']);
                     $this->app::redirect(true);
                 }
             } else {
-                $this->flash->set('warning', $this->msg['comment_not_found']);
+                $this->flash->set('warning', $this->flash->msg['comment_not_found']);
                 $this->app::redirect(true);
             }
         } else {
-            $this->flash->set('danger', $this->msg['delete_not_allowed']);
+            $this->flash->set('danger', $this->flash->msg['delete_not_allowed']);
             $this->app::redirect(true);
         }
     }
@@ -126,18 +126,18 @@ class CommentsController extends Controller
                         $text = $this->str::escape($post->get('comment_edit'));
                         $this->comments->update($comment->id, ['comment' => $text]);
 
-                        $this->flash->set('success', $this->msg['comment_edit_success']);
+                        $this->flash->set('success', $this->flash->msg['comment_edit_success']);
                         $this->app::redirect(true);
                     } else {
-                        $this->flash->set('danger', $this->msg['form_all_required']);
+                        $this->flash->set('danger', $this->flash->msg['form_all_required']);
                         $this->app::redirect(true);
                     }
                 } else {
-                    $this->flash->set('danger', $this->msg['edit_not_allowed']);
+                    $this->flash->set('danger', $this->flash->msg['edit_not_allowed']);
                     $this->app::redirect(true);
                 }
             } else {
-                $this->flash->set('warning', $this->msg['comment_not_found']);
+                $this->flash->set('warning', $this->flash->msg['comment_not_found']);
                 $this->app::redirect(true);
             }
         }

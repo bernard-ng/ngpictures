@@ -35,11 +35,11 @@ class PostsController extends Controller
                 $this->setLayout("posts/default");
                 $this->viewRender("frontend/users/posts/posts", compact('posts', 'user'));
             } else {
-                $this->flash->set("danger", $this->msg['users_not_found']);
+                $this->flash->set("danger", $this->flash->msg['users_not_found']);
                 $this->app::redirect(true);
             }
         } else {
-            $this->flash->set("danger", $this->msg['undefined_error']);
+            $this->flash->set("danger", $this->flash->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }
@@ -79,27 +79,27 @@ class PostsController extends Controller
                                 ]
                             );
 
-                            $this->flash->set('success', $this->msg['form_post_submitted']);
+                            $this->flash->set('success', $this->flash->msg['form_post_submitted']);
                             $this->app::redirect("/posts");
                         } else {
-                            $this->flash->set('danger', $this->msg['files_not_uploaded']);
+                            $this->flash->set('danger', $this->flash->msg['files_not_uploaded']);
                             $this->posts->delete($last_id);
                         }
                     } else {
                         $errors = new Collection($this->validator->getErrors());
                         $this->isAjax()?
                             $this->ajaxFail($errors->asJson(), 403):
-                            $this->flash->set('danger', $this->msg['form_multi_errors']);
+                            $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
                     }
                 } else {
                     $this->isAjax()?
-                        $this->ajaxFail($this->msg['post_requires_picture']):
-                        $this->flash->set('danger', $this->msg['post_requires_picture']);
+                        $this->ajaxFail($this->flash->msg['post_requires_picture']):
+                        $this->flash->set('danger', $this->flash->msg['post_requires_picture']);
                 }
             } else {
                 $this->isAjax()?
-                    $this->ajaxFail($this->msg['post_requires_picture']):
-                    $this->flash->set('danger', $this->msg['post_requires_picture']);
+                    $this->ajaxFail($this->flash->msg['post_requires_picture']):
+                    $this->flash->set('danger', $this->flash->msg['post_requires_picture']);
             }
         }
 
@@ -127,7 +127,7 @@ class PostsController extends Controller
                     $categories_id  =   intval($post->get('category')) ?? 1;
 
                     $this->posts->update($id, compact('title', 'content', 'slug', 'categories_id'));
-                    $this->flash->set("success", $this->msg['post_edit_success']);
+                    $this->flash->set("success", $this->flash->msg['post_edit_success']);
                     $this->app::redirect("/account/post");
                 }
 
@@ -138,8 +138,8 @@ class PostsController extends Controller
                 );
             } else {
                 $this->isAjax()?
-                    $this->ajaxFail($this->msg['post_not_found']):
-                    $this->flash->set("danger", $this->msg['post_not_found']);
+                    $this->ajaxFail($this->flash->msg['post_not_found']):
+                    $this->flash->set("danger", $this->flash->msg['post_not_found']);
             }
         }
     }
@@ -161,18 +161,18 @@ class PostsController extends Controller
                 if ($this->isAjax()) {
                     exit();
                 }
-                $this->flash->set('success', $this->msg['post_delete_success']);
+                $this->flash->set('success', $this->flash->msg['post_delete_success']);
                 $this->app::redirect(true);
             } else {
                 $this->isAjax()?
-                    $this->ajaxFail($this->msg['undefined_error']):
-                    $this->flash->set('danger', $this->msg['undefined_error']);
+                    $this->ajaxFail($this->flash->msg['undefined_error']):
+                    $this->flash->set('danger', $this->flash->msg['undefined_error']);
                     $this->app::redirect(true);
             }
         } else {
             $this->isAjax()?
-                $this->ajaxFail($this->msg['delete_not_allowed']):
-                $this->flash->set('danger', $this->msg['delete_not_allowed']);
+                $this->ajaxFail($this->flash->msg['delete_not_allowed']):
+                $this->flash->set('danger', $this->flash->msg['delete_not_allowed']);
                 $this->app::redirect(true);
         }
     }

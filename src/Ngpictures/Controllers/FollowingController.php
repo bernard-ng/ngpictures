@@ -41,15 +41,15 @@ class FollowingController extends Controller
         if ($user) {
             if ($model->isFollowed($user->id, $this->user->id)) {
                 $model->remove($user->id, $this->user->id);
-                $this->flash->set("success", $this->msg['users_unfollowing_success']);
+                $this->flash->set("success", $this->flash->msg['users_unfollowing_success']);
                 $this->app::redirect(true);
             }
 
             $model->add($user->id, $this->user->id);
-            $this->flash->set("success", $this->msg['users_following_success']);
+            $this->flash->set("success", $this->flash->msg['users_following_success']);
             $this->app::redirect(true);
         } else {
-            $this->flash->set("warning", $this->msg['users_not_found']);
+            $this->flash->set("warning", $this->flash->msg['users_not_found']);
             $this->app::redirect(true);
         }
     }
@@ -85,11 +85,11 @@ class FollowingController extends Controller
                 $this->setLayout("posts/default");
                 $this->viewRender("frontend/users/account/followers", compact("followers"));
             } else {
-                $this->flash->set('danger', $this->msg['undefined_error']);
+                $this->flash->set('danger', $this->flash->msg['undefined_error']);
                 $this->app::redirect(true);
             }
         } else {
-            $this->flash->set('danger', $this->msg['undefined_error']);
+            $this->flash->set('danger', $this->flash->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }
@@ -123,11 +123,11 @@ class FollowingController extends Controller
                 $this->setLayout("posts/default");
                 $this->viewRender("frontend/users/account/following", compact("followings"));
             } else {
-                $this->flash->set('danger', $this->msg['undefined_error']);
+                $this->flash->set('danger', $this->flash->msg['undefined_error']);
                 $this->app::redirect(true);
             }
         } else {
-            $this->flash->set('danger', $this->msg['undefined_error']);
+            $this->flash->set('danger', $this->flash->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }

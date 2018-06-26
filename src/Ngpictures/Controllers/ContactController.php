@@ -24,10 +24,10 @@ class ContactController extends Controller
                 $message    = $this->str::escape($post->get('message'));
 
                 (new Mailer())->contact($name, $email, $message);
-                $this->flash->set('success', $this->msg['form_contact_submitted']);
+                $this->flash->set('success', $this->flash->msg['form_contact_submitted']);
             } else {
                 $errors = new Collection($this->validator->getErrors());
-                $this->flash->set("danger", $this->msg['form_multi_errors']);
+                $this->flash->set("danger", $this->flash->msg['form_multi_errors']);
             }
         }
 

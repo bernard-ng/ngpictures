@@ -55,9 +55,9 @@ class LikesController extends Controller
             }
         } else {
             if ($this->isAjax()) {
-                $this->ajaxFail($this->msg['post_not_found']);
+                $this->ajaxFail($this->flash->msg['post_not_found']);
             }
-            $this->flash->set("danger", $this->msg['post_not_found']);
+            $this->flash->set("danger", $this->flash->msg['post_not_found']);
             $this->app::redirect(true);
         }
     }
@@ -87,7 +87,7 @@ class LikesController extends Controller
                 $this->setLayout("posts/default");
                 $this->viewRender("frontend/posts/likers", compact("likers"));
             } else {
-                $this->flash->set('info', $this->msg['post_not_liked']);
+                $this->flash->set('info', $this->flash->msg['post_not_liked']);
                 $this->app::redirect(true);
             }
         }

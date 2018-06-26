@@ -2,30 +2,40 @@
 namespace Ngpictures\Services\Auth;
 
 
-use Ng\Core\Managers\Mailer\Mailer;
-use Ngpictures\Entity\UsersEntity;
 use Ngpictures\Models\UsersModel;
-use Ngpictures\Ngpictures;
+use Ng\Core\Managers\Mailer\Mailer;
+use Ng\Core\Managers\StringManager;
+use Ng\Core\Managers\SessionManager;
+use Psr\Container\ContainerInterface;
+use Ng\Core\Managers\FlashMessageManager;
 
 
-class DatabaseAuthService extends AuthService
+class DatabaseAuthService
 {
     /**
      * le model des users, donc l'access a la base de donnee.
      * @var UsersModel
      */
-    protected $users;
+    private $users;
+
+
+    /**
+     * container
+     * @var ContainerInterface
+     */
+    private $container;
 
 
     /**
      * DatabaseAuthService constructor.
-     * @param Ngpictures $app
-     * @param UsersModel $users
+     * @param ContainerInterface $container
      */
-    public function __construct(Ngpictures $app, UsersModel $users)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app);
-        $this->users = $users;
+        $this->container = $container;
+        $this->users = $this->container->get(UsersModel::class);
+        $this->flash = $this->container->get(FlashMessageManager::class);
+        $this->session = $this->container->get(SessionManager::class);
     }
 
 
@@ -36,7 +46,8 @@ class DatabaseAuthService extends AuthService
     public function restrict($msg = null)
     {
         if (!$this->isLogged()) {
-            $this->flash->set("danger", $msg ?? $this->msg["users_not_logged"]);
+            $this->flash->set("danger", $msg ?? $this->flash->msg["users_not_logged"]);
+
             $this->app::redirect(true);
         }
     }
@@ -56,7 +67,8 @@ class DatabaseAuthService extends AuthService
             $this->connect($user);
             $this->app::redirect("/login");
         } else {
-            $this->flash->set('danger', $this->msg['users_confirmation_failed']);
+            $this->flash->set('danger', $this->flash->msg['users_confirmation_failed']);
+
             $this->app::redirect("/login");
         }
     }
@@ -69,7 +81,7 @@ class DatabaseAuthService extends AuthService
     {
         $this->restrict();
         if ($this->session->getValue(AUTH_KEY, 'rank') !== 'admin') {
-            $this->flash->set('warning', $this->msg['users_forbidden']);
+            $this->flash->set('warning', $this->flash->msg['users_forbidden']);
             $this->app::redirect(true);
         }
     }
@@ -86,7 +98,7 @@ class DatabaseAuthService extends AuthService
         if (!$this->isLogged()) {
             $this->session->write(AUTH_KEY, $user);
             $this->session->write(TOKEN_KEY, $this->str::setToken(10));
-            $this->flash->set('success', $msg ?? $this->msg['users_login_success']);
+            $this->flash->set('success', $msg ?? $this->flash->msg['users_login_success']);
         }
     }
 
@@ -137,7 +149,7 @@ class DatabaseAuthService extends AuthService
     {
         $this->session->write(AUTH_KEY, $user);
         $this->session->write(TOKEN_KEY, $this->str::setToken(10));
-        $this->flash->set('success', $msg ?? $this->msg['users_edit_success']);
+        $this->flash->set('success', $msg ?? $this->flash->msg['users_edit_success']);
     }
 
 
@@ -171,17 +183,22 @@ class DatabaseAuthService extends AuthService
      */
     public function register(string $name, string $email, string $password)
     {
-        $name       =   $this->str::escape($name);
-        $email      =   $this->str::escape($email);
-        $token      =   $this->str::setToken(60);
-        $password   =   $this->str::hashPassword($password);
+        $str    = $this->container->get(StringManager::class);
+        $name       =   $str::escape($name);
+        $email      =   $str::escape($email);
+        $token      =   $str::setToken(60);
+        $password   =   $str::hashPassword($password);
 
         $this->users->add($name, $email, $password, $token);
         $users_id = $this->users->lastInsertId();
         $link = SITE_NAME."/confirm/{$users_id}/{$token}";
 
-        (new Mailer())->accountConfirmation($link, $email);
-        $this->flash->set('success', $this->msg['form_registration_submitted']);
+        $this->container
+            ->get(Malier::class)
+            ->accountConfirmation($link, $email);
+
+        $this->flash->set('success', $this->flash->msg['form_registration_submitted']);
+
         $this->app::redirect('/login');
     }
 }

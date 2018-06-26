@@ -9,7 +9,7 @@ use Suin\RSSWriter\Item;
 
 class RssController extends Controller
 {
- 
+
     public function __construct(Ngpictures $app, PageManager $pageManager)
     {
         parent::__construct($app, $pageManager);
@@ -51,7 +51,7 @@ class RssController extends Controller
             require WEBROOT."/feed.xml";
             exit();
         } else {
-            $this->flash->set('info', $this->msg['rss_empty']);
+            $this->flash->set('info', $this->flash->msg['rss_empty']);
             $this->app::redirect(true);
         }
     }

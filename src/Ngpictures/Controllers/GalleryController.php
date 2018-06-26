@@ -50,9 +50,9 @@ class GalleryController extends Controller
             $this->viewRender('frontend/gallery/show', compact('photo'), false);
         } else {
             if ($this->isAjax()) {
-                $this->ajaxFail($this->msg['post_not_found']);
+                $this->ajaxFail($this->flash->msg['post_not_found']);
             }
-            $this->flash->set("danger", $this->msg['post_not_found']);
+            $this->flash->set("danger", $this->flash->msg['post_not_found']);
             $this->app::redirect(true);
         }
     }
@@ -91,7 +91,7 @@ class GalleryController extends Controller
                 $this->setLayout('blank');
                 $this->viewRender('frontend/gallery/slider', compact('photos'));
             } else {
-                $this->flash->set('danger', $this->msg['undefined_error']);
+                $this->flash->set('danger', $this->flash->msg['undefined_error']);
                 $this->app::redirect('/gallery');
             }
         } else {

@@ -57,15 +57,15 @@ class UsersController extends AdminController
         if ($user && $user->confirmed_at !== null) {
             if ($user->rank === "admin") {
                 $this->users->update($user->id, ['rank' => 'user']);
-                $this->flash->set('success', $this->msg['admin_removed_admin']);
+                $this->flash->set('success', $this->flash->msg['admin_removed_admin']);
                 $this->app::redirect(true);
             } else {
                 $this->users->update($user->id, ['rank' => 'admin']);
-                $this->flash->set('success', $this->msg['admin_added_admin']);
+                $this->flash->set('success', $this->flash->msg['admin_added_admin']);
                 $this->app::redirect(true);
             }
         } else {
-            $this->flash->set('danger', $this->msg['undefined_error']);
+            $this->flash->set('danger', $this->flash->msg['undefined_error']);
             $this->app::redirect(true);
         }
     }
