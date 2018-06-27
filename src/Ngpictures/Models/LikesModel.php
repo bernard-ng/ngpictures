@@ -12,14 +12,13 @@ use Ngpictures\Traits\Util\TypesActionTrait;
  */
 class LikesModel extends Model
 {
+    use TypesActionTrait;
+
     /**
      * nom de la table
      * @var string
      */
     protected $table = "likes";
-
-
-    use TypesActionTrait;
 
 
     /**

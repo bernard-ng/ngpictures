@@ -2,13 +2,17 @@
 namespace Ngpictures\Entity;
 
 use Ng\Core\Entity\Entity;
-use Ng\Core\Managers\CacheBustingManager;
 use Ngpictures\Ngpictures;
 use Ng\Core\Managers\StringManager;
 use Ng\Core\Managers\SessionManager;
+use Ng\Core\Interfaces\SessionInterface;
+use Ng\Core\Managers\CacheBustingManager;
+use Ngpictures\Traits\Util\ResolverTrait;
 
 class UsersEntity extends Entity
 {
+
+    use ResolverTrait;
 
     /**
      * le lien vers le compte d'un user
@@ -41,7 +45,7 @@ class UsersEntity extends Entity
      */
     public function getIsFollowed(): string
     {
-        $following = Ngpictures::getInstance()->getModel('following');
+        $following = Ngpictures::getDic()->get($this->model('following'));
         return $following->isMentionnedFollow($this->id);
     }
 
@@ -53,7 +57,7 @@ class UsersEntity extends Entity
     public function getEditUrl(): string
     {
         $this->editUrl = "/settings/";
-        $this->editUrl .= Ngpictures::getInstance()->getSession()->read(TOKEN_KEY);
+        $this->editUrl .= Ngpictures::getDic()->get(SessionInterface::class)->read(TOKEN_KEY);
         return $this->editUrl;
     }
 
@@ -65,7 +69,7 @@ class UsersEntity extends Entity
     public function getFollowersUrl(): string
     {
         $this->followersUrl = "/my-followers/";
-        $this->followersUrl .= Ngpictures::getInstance()->getSession()->read(TOKEN_KEY);
+        $this->followersUrl .= Ngpictures::getDic()->get(SessionInterface::class)->read(TOKEN_KEY);
         return $this->followersUrl;
     }
 
@@ -78,7 +82,7 @@ class UsersEntity extends Entity
     public function getFollowingsUrl(): string
     {
         $this->followingsUrl = "/my-following/";
-        $this->followingsUrl .= Ngpictures::getInstance()->getSession()->read(TOKEN_KEY);
+        $this->followingsUrl .= Ngpictures::getDic()->get(SessionInterface::class)->read(TOKEN_KEY);
         return $this->followingsUrl;
     }
 
@@ -91,7 +95,7 @@ class UsersEntity extends Entity
     public function getPostsUrl(): string
     {
         $this->postsUrl = "/my-posts/";
-        $this->postsUrl .= Ngpictures::getInstance()->getSession()->read(TOKEN_KEY);
+        $this->postsUrl .= Ngpictures::getDic()->get(SessionInterface::class)->read(TOKEN_KEY);
         return $this->postsUrl;
     }
 
@@ -116,7 +120,7 @@ class UsersEntity extends Entity
     public function getDeletePostsUrl(): string
     {
         $this->deletePostsUrl = "/delete-post/";
-        $this->deletePostsUrl .= Ngpictures::getInstance()->getSession()->read(TOKEN_KEY);
+        $this->deletePostsUrl .= Ngpictures::getDic()->get(SessionInterface::class)->read(TOKEN_KEY);
         return $this->deletePostUrl;
     }
 

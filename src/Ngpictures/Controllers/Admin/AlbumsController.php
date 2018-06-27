@@ -3,17 +3,16 @@ namespace Ngpictures\Controllers\Admin;
 
 
 use Ng\Core\Managers\Collection;
+use Psr\Container\ContainerInterface;
 use Ngpictures\Controllers\AdminController;
-use Ngpictures\Managers\PageManager;
-use Ngpictures\Ngpictures;
 use Ngpictures\Traits\Controllers\PaginationTrait;
 
 class AlbumsController extends AdminController
 {
 
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
+        parent::__construct($container);
         $this->loadModel('albums');
     }
 
@@ -37,7 +36,6 @@ class AlbumsController extends AdminController
         $albums         = $pagination['result'] ?? $albums;
 
         $this->pageManager::setName('admin gallery.album');
-        $this->setLayout('admin/default');
         $this->viewRender(
             'backend/gallery/albums',
             compact('albums', "currentPage", 'totalPage', 'prevPage', 'nextPage', 'total')
@@ -65,7 +63,7 @@ class AlbumsController extends AdminController
 
                 $this->albums->create(compact('title', 'description', 'slug'));
                 $this->flash->set('success', $this->flash->msg['form_post_submitted']);
-                $this->app::redirect(ADMIN . "/gallery/albums");
+                $this->redirect(ADMIN . "/gallery/albums");
             } else {
                 $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
                 $errors = new Collection($this->validator->getErrors());
@@ -73,7 +71,6 @@ class AlbumsController extends AdminController
         }
 
         $this->pageManager::setName('admin album.add');
-        $this->setLayout('admin/default');
         $this->viewRender('backend/gallery/albums.add', compact('post', 'errors'));
     }
 
@@ -101,7 +98,7 @@ class AlbumsController extends AdminController
 
                     $this->albums->update($album->id, compact('title', 'description', 'slug'));
                     $this->flash->set('success', $this->flash->msg['post_edit_success']);
-                    $this->app::redirect(ADMIN . "/gallery/albums");
+                    $this->redirect(ADMIN . "/gallery/albums");
                 } else {
                     $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
                     $errors = new Collection($this->validator->getErrors());
@@ -109,11 +106,10 @@ class AlbumsController extends AdminController
             }
 
             $this->pageManager::setName('admin album.edit');
-            $this->setLayout('admin/default');
             $this->viewRender('backend/gallery/albums.edit', compact('post', 'album', 'errors'));
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error']);
-            $this->app::redirect(true);
+            $this->redirect(true);
         }
     }
 }

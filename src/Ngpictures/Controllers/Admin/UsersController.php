@@ -1,10 +1,8 @@
 <?php
 namespace Ngpictures\Controllers\Admin;
 
-
+use Psr\Container\ContainerInterface;
 use Ngpictures\Controllers\AdminController;
-use Ngpictures\Managers\PageManager;
-use Ngpictures\Ngpictures;
 use Ngpictures\Traits\Controllers\PaginationTrait;
 
 class UsersController extends AdminController
@@ -15,9 +13,9 @@ class UsersController extends AdminController
      * @param Ngpictures $app
      * @param PageManager $pageManager
      */
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
+        parent::__construct($container);
         $this->loadModel('users');
     }
 
@@ -39,7 +37,6 @@ class UsersController extends AdminController
         $users = $pagination['result'] ?? $users;
 
         $this->pageManager::setName("Adm - users");
-        $this->setLayout("admin/default");
         $this->viewRender(
             "backend/users/index",
             compact('users', 'bugs', 'ideas', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
@@ -58,15 +55,15 @@ class UsersController extends AdminController
             if ($user->rank === "admin") {
                 $this->users->update($user->id, ['rank' => 'user']);
                 $this->flash->set('success', $this->flash->msg['admin_removed_admin']);
-                $this->app::redirect(true);
+                $this->redirect(true);
             } else {
                 $this->users->update($user->id, ['rank' => 'admin']);
                 $this->flash->set('success', $this->flash->msg['admin_added_admin']);
-                $this->app::redirect(true);
+                $this->redirect(true);
             }
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error']);
-            $this->app::redirect(true);
+            $this->redirect(true);
         }
     }
 
@@ -88,7 +85,6 @@ class UsersController extends AdminController
 
 
         $this->pageManager::setName('Adm - bugs');
-        $this->setLayout('admin/default');
         $this->viewRender(
             'backend/users/bugs',
             compact('bugs', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
@@ -112,7 +108,6 @@ class UsersController extends AdminController
         $ideas = $pagination['result'] ?? $ideas;
 
         $this->pageManager::setName('Adm - ideas');
-        $this->setLayout('admin/default');
         $this->viewRender(
             'backend/users/ideas',
             compact('ideas', 'total', "totalPage", "currentPage", "prevPage", "nextPage")

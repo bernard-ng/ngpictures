@@ -7,14 +7,13 @@ use Ngpictures\Traits\Util\TypesActionTrait;
 
 class CommentsModel extends Model
 {
+    use TypesActionTrait;
+
     /**
      * nom de la table
      * @var string
      */
     protected $table = "comments";
-
-
-    use TypesActionTrait;
 
 
     /**

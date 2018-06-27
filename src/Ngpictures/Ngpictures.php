@@ -53,7 +53,9 @@ class Ngpictures
                 }
                 return call_user_func_array($route->getController(), $route->getMatches());
             } else {
-                //404
+                http_response_code(404);
+                header('location:/error/not-found');
+                exit();
             }
         } catch (RouterException $e) {
             LogMessageManager::register(__class__, $e);
@@ -99,78 +101,6 @@ class Ngpictures
         LogMessageManager::register($errfile, $errstr);
         http_response_code(500);
         self::redirect("/error/internal");
-    }
-
-
-    /**
-     * on a le debugger ?
-     * @return mixed|null
-     */
-    public static function hasDebug()
-    {
-        try {
-            $settings = new ConfigManager(ROOT."/config/system.php");
-            return $settings->get('sys.debug');
-        } catch (ConfigManagerException $e) {
-            LogMessageManager::register(__class__, $e);
-            self::redirect("/error/internal");
-        }
-    }
-
-    /**
-     * on active le cache ?
-     * @return bool
-     */
-    public static function hasCache(): bool
-    {
-        try {
-            $settings = new ConfigManager(ROOT."/config/system.php");
-            return $settings->get('sys.cache');
-        } catch (ConfigManagerException $e) {
-            LogMessageManager::register(__class__, $e);
-            self::redirect("/error/internal");
-        }
-    }
-
-
-    /**
-     * gestion de redirection
-     * @param mixed $url
-     * @param bool $moved_permantly
-     */
-    public static function redirect($url = null, $moved_permantly = false)
-    {
-        if (is_bool($url)) {
-            if (!empty($_SERVER['HTTP_REFERER'])) {
-                header("location:{$_SERVER['HTTP_REFERER']}");
-                if ($moved_permantly) {
-                    header("HTTP/1.1 301 Moved Permanently");
-                }
-                exit();
-            } else {
-                header('location:/home');
-                if ($moved_permantly) {
-                    header("HTTP/1.1 301 Moved Permanently");
-                }
-                exit();
-            }
-        } else {
-            is_null($url)? header('location:/home') : header("location:{$url}");
-            if ($moved_permantly) {
-                header("HTTP/1.1 301 Moved Permanently");
-            }
-            exit();
-        }
-    }
-
-
-    /**
-     * gestion de turbolinks
-     * @param string $name nom de la routes, location
-     */
-    public static function turbolinksLocation(string $name)
-    {
-        header("Turbolinks-Location: {$name}");
     }
 
     /**

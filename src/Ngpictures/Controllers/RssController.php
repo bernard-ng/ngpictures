@@ -1,31 +1,26 @@
 <?php
 namespace Ngpictures\Controllers;
 
-use Ngpictures\Ngpictures;
-use Ngpictures\Managers\PageManager;
-use Suin\RSSWriter\Channel;
+
 use Suin\RSSWriter\Feed;
 use Suin\RSSWriter\Item;
+use Suin\RSSWriter\Channel;
+use Psr\Container\ContainerInterface;
 
 class RssController extends Controller
 {
 
-    public function __construct(Ngpictures $app, PageManager $pageManager)
-    {
-        parent::__construct($app, $pageManager);
-        $this->loadModel('blog');
-    }
-
     public function index()
     {
+        $this->loadModel('blog');
         if ($this->blog->last()) {
-            $posts = $this->blog->latest(0, 20);
+            $posts = $this->blog->latest(0, 10);
             $feed = new Feed();
             $channel = new Channel();
             $channel->title('Ngpictures feed')
-                ->description('Galerie, Entreprise d\'art photographique et mini résaux social où vous pouvez voir et partager vos propres photos')
+                ->description($this->container->get('site.description'))
                 ->url(SITE_NAME)
-                ->feedUrl(SITE_NAME."/rss")
+                ->feedUrl(SITE_NAME."/feed")
                 ->language('fr-FR')
                 ->copyright("Copyright ". date('Y') . " Bernard Ng")
                 ->pubDate(strtotime('Tue, 23 May 2018 19:50:37 +0900'))
@@ -38,21 +33,21 @@ class RssController extends Controller
                     ->title($post->title)
                     ->description($post->snipet)
                     ->contentEncoded($post->snipet)
-                    ->url(SITE_NAME."/{$post->url}")
+                    ->url(SITE_NAME."{$post->url}")
                     ->author("Bernard Ng")
                     ->pubDate(strtotime(date("D, d M Y H:i:s T", strtotime($post->date_created))))
-                    ->guid(SITE_NAME."/{$post->url}", true)
+                    ->guid(SITE_NAME."{$post->url}", true)
                     ->preferCdata(true)
                     ->appendTo($channel);
             }
 
-            $this->app::turbolinksLocation("/feed");
-            header("Content-type: application/rss+xml");
-            require WEBROOT."/feed.xml";
+            $this->turbolinksLocation("/feed");
+            header("Content-type: application/xml");
+            echo $feed;
             exit();
         } else {
             $this->flash->set('info', $this->flash->msg['rss_empty']);
-            $this->app::redirect(true);
+            $this->redirect(true);
         }
     }
 }

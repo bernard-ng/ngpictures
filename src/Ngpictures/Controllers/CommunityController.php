@@ -1,16 +1,16 @@
 <?php
 namespace Ngpictures\Controllers;
 
-use Ngpictures\Ngpictures;
+
 use Ng\Core\Managers\Collection;
-use Ngpictures\Managers\PageManager;
+use Psr\Container\ContainerInterface;
 
 class CommunityController extends Controller
 {
 
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
+        parent::__construct($container);
         $this->authService->restrict();
         $this->loadModel("users");
     }
@@ -23,13 +23,12 @@ class CommunityController extends Controller
     {
         $users = $this->users->all();
 
-        $this->app::turbolinksLocation('/community');
+        $this->turbolinksLocation('/community');
         $this->pageManager::setName("Communauté");
         $this->pageManager::setDescription(
             "Rétrouvez la communauté de ngpictures, vos amis, les artistes et les passionnés
             de la photographie"
         );
-        $this->setLayout("posts/default");
         $this->viewRender("frontend/community/community", compact('users'));
     }
 }

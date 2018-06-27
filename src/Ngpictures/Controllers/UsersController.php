@@ -1,12 +1,12 @@
 <?php
 namespace Ngpictures\Controllers;
 
+use ReCaptcha\ReCaptcha;
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\ImageManager;
-use Ngpictures\Managers\PageManager;
 use Ng\Core\Managers\Mailer\Mailer;
-use Ngpictures\Ngpictures;
-use ReCaptcha\ReCaptcha;
+use Psr\Container\ContainerInterface;
+use Ng\Core\Interfaces\CookieInterface;
 
 
 class UsersController extends Controller
@@ -18,9 +18,10 @@ class UsersController extends Controller
      * @param Ngpictures $app
      * @param PageManager $pageManager
      */
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
+        parent::__construct($container);
+        $this->cookie = $this->container->get(CookieInterface::class);
         $this->loadModel('users');
     }
 
@@ -61,11 +62,11 @@ class UsersController extends Controller
 
                     $this->flash->set('success', $this->flash->msg['users_reset_success']);
                     $this->authService->reConnect($user);
-                    $this->app::redirect($user->accountUrl);
+                    $this->redirect($user->accountUrl);
                 } else {
                     $errors = new Collection($this->validator->getErrors());
                     $this->isAjax() ?
-                        $this->ajaxFail($errors->asJson(), 403) :
+                        $this->setFlash($errors->asJson(), 403) :
                         $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
                 }
             }
@@ -74,7 +75,7 @@ class UsersController extends Controller
             $this->viewRender('frontend/users/account/reset', compact('post','errors'));
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error']);
-            $this->app::redirect(true);
+            $this->redirect(true);
         }
     }
 
@@ -99,25 +100,24 @@ class UsersController extends Controller
                     $user   =   $this->users->find($user->id);
                     $link   =   SITE_NAME."/reset/{$user->id}/{$user->reset_token}";
 
-                    (new Mailer())->resetPassword($link, $email);
+                    $this->container->get(Mailer::class)->resetPassword($link, $email);
                     $this->flash->set('success', $this->flash->msg['form_reset_submitted']);
-                    $this->isAjax()? $this->ajaxRedirect("/login") : $this->app::redirect('/login');
+                    $this->redirect('/login');
                 } else {
                     $this->isAjax()?
-                        $this->ajaxFail($this->flash->msg['users_email_notFound']):
+                        $this->setFlash($this->flash->msg['users_email_notFound']):
                         $this->flash->set('danger', $this->flash->msg['users_email_notFound']);
                 }
             } else {
                 $errors = new Collection($this->validator->getErrors());
                 $this->isAjax() ?
-                    $this->ajaxFail($errors->asJson(), 403) :
+                    $this->setFlash($errors->asJson(), 403) :
                     $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
             }
         }
 
-        $this->app::turbolinksLocation("/forgot");
+        $this->turbolinksLocation("/forgot");
         $this->pageManager::setName('Mot de passe oublié');
-        $this->setLayout('users/default');
         $this->viewRender('frontend/users/account/forgot', compact('post', 'errors'));
     }
 
@@ -149,7 +149,7 @@ class UsersController extends Controller
                         if ($this->validator->isValid()) {
                             $this->authService->register($post->get('name'), $post->get('email'), $post->get('password'));
                             $this->flash->set('success', $this->flash->msg['users_registration_success']);
-                            $this->app::redirect("/login");
+                            $this->redirect("/login");
                         } else {
                             $errors = new Collection($this->validator->getErrors());
                             $this->flash->set("danger", $this->flash->msg['form_multi_errors']);
@@ -168,9 +168,8 @@ class UsersController extends Controller
             }
         }
 
-        $this->app::turbolinksLocation("/sign");
+        $this->turbolinksLocation("/sign");
         $this->pageManager::setName("Inscription");
-        $this->setLayout('users/default');
         $this->viewRender('frontend/users/sign', compact('post', 'errors'));
     }
 
@@ -187,7 +186,7 @@ class UsersController extends Controller
 
         if ($this->authService->isLogged()) {
             $this->flash->set('warning', $this->flash->msg['users_already_connected']);
-            $this->app::redirect($this->authService->isLogged()->accountUrl);
+            $this->redirect($this->authService->isLogged()->accountUrl);
         } else {
             if (isset($_POST) && !empty($_POST)) {
                 $this->validator->setRule('name', 'required');
@@ -208,33 +207,27 @@ class UsersController extends Controller
                                 }
 
                                 $this->isAjax()?
-                                    $this->ajaxRedirect($user->accountUrl):
+                                    $this->redirect($user->accountUrl):
                                     $this->flash->set('success', $this->flash->msg['users_login_success']);
-                                    $this->app::redirect($user->accountUrl);
+                                    $this->redirect($user->accountUrl);
                             } else {
-                                $this->isAjax()?
-                                    $this->ajaxFail($this->flash->msg['users_bad_identifier']) :
-                                    $this->flash->set('danger', $this->flash->msg['users_bad_identifier']);
+                                $this->flash->set('danger', $this->flash->msg['users_bad_identifier']);
                             }
                         } else {
-                            $this->isAjax()?
-                                $this->ajaxFail($this->flash->msg['users_not_confirmed']) :
-                                $this->flash->set('warning', $this->flash->msg['users_not_confirmed']);
+                            $this->flash->set('warning', $this->flash->msg['users_not_confirmed']);
                         }
                     } else {
-                        $this->isAjax() ?
-                            $this->ajaxFail($this->flash->msg['users_bad_identifier']) :
-                            $this->flash->set('danger', $this->flash->msg['users_bad_identifier']);
+                        $this->flash->set('danger', $this->flash->msg['users_bad_identifier']);
                     }
                 } else {
                     $errors = new Collection($this->validator->getErrors());
                     $this->isAjax() ?
-                        $this->ajaxFail($errors->asJson(), 403) :
+                        $this->setFlash($errors->asJson(), 403) :
                         $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
                 }
             }
 
-            $this->app::turbolinksLocation("/login");
+            $this->turbolinksLocation("/login");
             $this->pageManager::setName('Connexion');
             $this->viewRender('frontend/users/login', compact('post', 'errors'));
         }
@@ -250,7 +243,7 @@ class UsersController extends Controller
         $this->session->delete(AUTH_KEY);
         $this->session->delete(TOKEN_KEY);
         $this->flash->set('success', $this->flash->msg['users_logout_success']);
-        $this->app::redirect("/login");
+        $this->redirect("/login");
     }
 
 
@@ -272,21 +265,19 @@ class UsersController extends Controller
 
             if ($user) {
                 $this->loadModel('saves');
-
                 $posts      =     $this->loadModel('posts')->findWith('users_id', $user->id, false);
                 $collection =     $this->callController('saves')->show($user->id);
 
-                $this->app::turbolinksLocation($user->accountUrl);
+                $this->turbolinksLocation($user->accountUrl);
                 $this->pageManager::setName("Profile de " . $user->name);
-                $this->setLayout('users/account');
                 $this->viewRender('frontend/users/account/account', compact( "user", "posts", "collection"));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error']);
-                $this->app::redirect(true);
+                $this->redirect(true);
             }
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error']);
-            $this->app::redirect(true);
+            $this->redirect(true);
         }
     }
 
@@ -326,16 +317,16 @@ class UsersController extends Controller
                         $this->users->update($user->id, compact('name', 'email', 'phone', 'bio'));
                         $user = $this->users->find($user->id);
                         $this->authService->reConnect($user, $this->flash->msg['users_edit_success']);
-                        $this->app::redirect($user->accountUrl);
+                        $this->redirect($user->accountUrl);
                     } else {
                         $this->isAjax()?
-                            $this->ajaxFail($errors->asJson(), 403):
+                            $this->setFlash($errors->asJson(), 403):
                             $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
                     }
                 } else {
                     $errors = new Collection($this->validator->getErrors());
                     $this->isAjax()?
-                        $this->ajaxFail($errors->asJson(), 403):
+                        $this->setFlash($errors->asJson(), 403):
                         $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
                 }
             } elseif (!empty($file->get('thumb'))) {
@@ -345,20 +336,18 @@ class UsersController extends Controller
                     $this->users->update($user->id, ['avatar' => "ngpictures-avatar-{$user->id}.jpg"]);
                     $user = $this->users->find($user->id);
                     $this->authService->reConnect($user, $this->flash->msg['users_edit_success']);
-                    $this->app::redirect($user->accountUrl);
+                    $this->redirect($user->accountUrl);
                 } else {
-                    $this->isAjax()?
-                        $this->ajaxFail($this->flash->msg['files_not_uploaded']):
-                        $this->flash->set('danger', $this->flash->msg['files_not_uploaded']);
+                    $this->flash->set('danger', $this->flash->msg['files_not_uploaded']);
                 }
             }
 
-            $this->app::turbolinksLocation("/settings/{$token}");
+            $this->turbolinksLocation("/settings/{$token}");
             $this->pageManager::setName('Paramètres');
             $this->viewRender('frontend/users/account/edit', compact('user', 'errors'));
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error']);
-            $this->app::redirect(true);
+            $this->redirect(true);
         }
     }
 }

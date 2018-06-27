@@ -26,7 +26,7 @@ class PagesEditorController extends AdminController
         } catch (Exception $e) {
             LogMessageManager::register(__class__, $e);
             $this->flash->set('danger', $this->flash->msg['undefined_error']);
-            $this->app::redirect(true);
+            $this->redirect(true);
         }
 
         if (isset($_POST) && !empty($_POST)) {
@@ -37,21 +37,20 @@ class PagesEditorController extends AdminController
                 $isUploaded = ImageManager::updateStatic($file, $post->get('thumb-for'));
                 if ($isUploaded) {
                     $this->flash->set('success', $this->flash->msg['success']);
-                    $this->app::redirect(true);
+                    $this->redirect(true);
                 } else {
                     $this->flash->set('danger', $this->flash->msg['files_not_uploaded']);
-                    $this->app::redirect(true);
+                    $this->redirect(true);
                 }
 
             } else {
                 $this->flash->set('danger', $this->flash->msg['post_img_required']);
-                $this->app::redirect(true);
+                $this->redirect(true);
             }
         }
 
-        $this->app::turbolinksLocation(ADMIN . "/pages");
+        $this->turbolinksLocation(ADMIN . "/pages");
         $this->pageManager::setName("Adm - Les Pages");
-        $this->setLayout('admin/default');
         $this->viewRender("backend/pages/pages", compact('files'));
     }
 
@@ -78,12 +77,11 @@ class PagesEditorController extends AdminController
                 fclose($file);
             }
 
-            $this->setLayout("admin/default");
             $this->pageManager::setName("Adm - Modifier une page");
             $this->viewRender("backend/pages/edit", compact('file_content', 'file_name', 'post'));
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error']);
-            $this->app::redirect(true);
+            $this->redirect(true);
         }
     }
 }

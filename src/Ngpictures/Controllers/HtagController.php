@@ -1,22 +1,18 @@
 <?php
 namespace Ngpictures\Controllers;
 
-use Ngpictures\Ngpictures;
-use Ngpictures\Managers\PageManager;
+use Psr\Container\ContainerInterface;
 
 
 class HtagController extends Controller
 {
 
     /**
-     * HtagController constructor
-     *
-     * @param Ngpictures $app
-     * @param PageManager $pageManager
+     * @inheritDoc
      */
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
+        parent::__construct($container);
         $this->loadModel('blog');
         $this->loadModel('posts');
         $this->loadModel('gallery');
@@ -39,12 +35,12 @@ class HtagController extends Controller
         $gallery    =   $this->gallery->findWithTag($tag);
 
         if ($blog || $posts || $gallery) {
-            $this->app::turbolinksLocation("/htag/" . substr($tag, 1));
+            $this->turbolinksLocation("/htag/" . substr($tag, 1));
             $this->pageManager::setName("Htag " . substr($tag, 1));
             $this->viewRender('frontend/others/htags', compact('tag', 'blog', 'posts', 'gallery'));
         } else {
             $this->flash->set('info', $this->flash->msg['post_htag_empty']);
-            $this->app::redirect(true);
+            $this->redirect(true);
         }
     }
 }

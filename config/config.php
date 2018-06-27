@@ -17,6 +17,23 @@ use Ng\Core\Interfaces\SessionInterface;
 
 return [
 
+    'site.name'         =>  'Ngpictures',
+    'site.owner'        =>  'Bernard Ngandu',
+    'site.email'        =>  'ngandubernard@gmail.com',
+    'site.contact'      =>  'ngpictures@larytech.com',
+    'site.category'     =>  'Photographie & Blog',
+    'site.lang'         =>  'fr_FR',
+    'site.country'      =>  'République Democratique du Congo',
+    'site.copyritght'   =>  '<a href="http://ngpictures.pe.hu">Bernard Ng</a>',
+    'site.description'  =>  "
+        Ngpictures est une galerie d'art photographique et un mini résaux social où
+        vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses,
+        étant chrétiens l'application vous propose une fonctionnalité incroyable,
+        godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l'avance.",
+
+    'ftp.user'      => 'bernard@larytech.com',
+    'ftp.pass'      => 'm^7#IEv665kV',
+
     'database.name' =>  (ENV === 'production')? 'larytech_ngbd' : 'ngbdd',
     'database.host' =>  (ENV === 'production')? 'larytech.com' : '127.0.0.1',
     'database.user' =>  (ENV === 'production')? 'larytech_ngandu' : 'root',

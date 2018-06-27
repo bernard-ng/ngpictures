@@ -4,17 +4,16 @@ namespace Ngpictures\Controllers\Admin;
 
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\ImageManager;
+use Psr\Container\ContainerInterface;
 use Ngpictures\Controllers\AdminController;
-use Ngpictures\Managers\PageManager;
-use Ngpictures\Ngpictures;
 use Ngpictures\Traits\Controllers\PaginationTrait;
 
 class BlogController extends AdminController
 {
 
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
+        parent::__construct($container);
         $this->loadModel('blog');
     }
 
@@ -37,7 +36,6 @@ class BlogController extends AdminController
 
 
         $this->pageManager::setName('Adm - blog');
-        $this->setLayout("admin/default");
         $this->viewRender(
             "backend/blog/index",
             compact("posts", 'total', "totalPage", "currentPage", "prevPage", "nextPage")
@@ -74,7 +72,7 @@ class BlogController extends AdminController
 
                     $this->blog->update($id, compact('title', 'content', 'slug', 'categories_id'));
                     $this->flash->set("success", $this->flash->msg['post_edit_success']);
-                    $this->app::redirect(ADMIN . "/blog");
+                    $this->redirect(ADMIN . "/blog");
                 } else {
                     $errors = $this->validator->getErrors();
                 }
@@ -84,7 +82,6 @@ class BlogController extends AdminController
         }
 
         $this->pageManager::setName('Adm - blog.edit');
-        $this->setLayout('admin/default');
         $this->viewRender('backend/blog/edit', compact('article', 'categories', 'post', 'errors'));
     }
 
@@ -144,7 +141,7 @@ class BlogController extends AdminController
                             );
 
                             $this->flash->set('success', $this->flash->msg['form_post_submitted']);
-                            $this->app::redirect(ADMIN . "/blog");
+                            $this->redirect(ADMIN . "/blog");
                         } else {
                             $this->blog->delete($last_id);
                             $this->flash->set('danger', $this->flash->msg['files_not_uploaded']);
@@ -160,7 +157,6 @@ class BlogController extends AdminController
         }
 
         $this->pageManager::setName('Adm - blog.add');
-        $this->setLayout('admin/default');
         $this->viewRender('backend/blog/add', compact('post', 'categories', 'errors'));
     }
 }

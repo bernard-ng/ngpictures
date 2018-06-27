@@ -7,6 +7,7 @@ use Ngpictures\Ngpictures;
 
 class Router
 {
+
     /**
      * l'url entre par le user
      * @var string
@@ -128,10 +129,10 @@ class Router
     public function run()
     {
         if (isset($_SERVER['REQUEST_METHOD'])) {
-            if (strlen($this->url) > 1 && strripos($this->url, "/") === strlen($this->url) - 1) {
+            if (strlen($this->url) > 1 && substr($this->url, -1) === '/') {
                 $url = substr($this->url, 0, -1);
                 http_response_code(301);
-                header("location: /{$url}");
+                header("location:{$url}");
                 exit();
             }
 

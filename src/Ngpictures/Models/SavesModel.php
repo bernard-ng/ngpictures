@@ -7,9 +7,7 @@ use Ng\Core\Database\DatabaseInterface;
 use Ng\Core\Interfaces\SessionInterface;
 use Ngpictures\Traits\Util\TypesActionTrait;
 
-/**
- * @property SessionManager session
- */
+
 class SavesModel extends Model
 {
 

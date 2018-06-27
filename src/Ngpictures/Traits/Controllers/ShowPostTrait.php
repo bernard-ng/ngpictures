@@ -22,25 +22,22 @@ trait ShowPostTrait
 
             if ($article) {
                 if ($article->slug === $slug) {
-                    $similars = $this->loadModel($this->table)->findSimilars($article->id);
-                    $author = $this->loadModel('users')->find($article->users_id);
+                    $similars   =   $this->loadModel($this->table)->findSimilars($article->id);
+                    $author     =   $this->loadModel('users')->find($article->users_id);
                     $this->pageManager::setName("{$article->title}");
 
-                    $this->app::turbolinksLocation("/{$this->table}/{$slug}-{$id}");
-                    $this->setLayout("show");
+                    $this->turbolinksLocation("/{$this->table}/{$slug}-{$id}");
                     $this->viewRender(
                         "frontend/{$this->table}/show",
                         compact("article", "comments", "user", "categories", "author", "similars")
                     );
                 } else {
                     $this->flash->set("danger", $this->flash->msg['post_not_found']);
-                    http_response_code(404);
-                    $this->app::redirect("/error/not-found");
+                    $this->redirect("/error/not-found", 404);
                 }
             } else {
                 $this->flash->set("danger", $this->flash->msg['post_not_found']);
-                http_response_code(404);
-                $this->app::redirect("/error/not-found");
+                $this->redirect("/error/not-found", 404);
             }
         } else {
             $this->flash->set("danger", $this->flash->msg['undefined_error']);

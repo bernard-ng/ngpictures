@@ -1,9 +1,9 @@
 <?php
 namespace Ngpictures\Controllers;
 
-use Ngpictures\Ngpictures;
+
 use Ng\Core\Managers\Collection;
-use Ngpictures\Managers\PageManager;
+use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Util\TypesActionTrait;
 
 
@@ -11,9 +11,9 @@ use Ngpictures\Traits\Util\TypesActionTrait;
 class SavesController extends controller
 {
 
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
+        parent::__construct($container);
         $this->authService->restrict();
         $this->loadModel('saves');
     }
@@ -42,7 +42,7 @@ class SavesController extends controller
             if ($exists) {
                 $this->saves->delete($exists->id);
                 $this->flash->set('success', $this->flash->msg['post_remove_save']);
-                $this->app::redirect(true);
+                $this->redirect(true);
             } else {
                 $this->saves->create([
                     'users_id' => $user->id,
@@ -56,13 +56,13 @@ class SavesController extends controller
                 }
 
                 $this->flash->set('success', $this->flash->msg['post_saved']);
-                $this->app::redirect(true);
+                $this->redirect(true);
             }
         } else {
             ($this->isAjax())?
-                $this->ajaxFail($this->flash->msg['post_not_found']) :
+                $this->setFlash($this->flash->msg['post_not_found']) :
                 $this->flash->set('danger', $this->flash->msg['post_not_found']);
-                $this->app::redirect(true);
+                $this->redirect(true);
         }
     }
 

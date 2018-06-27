@@ -4,9 +4,13 @@ namespace Ng\Core\Managers;
 use Ng\Core\Interfaces\SessionInterface;
 use Ng\Core\Traits\SingletonTrait;
 use Ngpictures\Managers\MessageManager;
+use Ngpictures\Traits\Util\RequestTrait;
 
 class FlashMessageManager
 {
+
+    use RequestTrait;
+
     /**
      * la session
      * @var SessionInterface
@@ -17,7 +21,7 @@ class FlashMessageManager
      * les message
      * @var MessageManager
      */
-    private $msg;
+    public $msg;
 
 
     /**
@@ -34,10 +38,28 @@ class FlashMessageManager
     /**
      * @param string $type
      * @param string $message
+     * @param int $code
      */
-    public function set(string $type, string $message)
+    public function set(string $type, string $message, int $code = null)
     {
-        $_SESSION[FLASH_MESSAGE_KEY][$type] = $message;
+        if ($this->isAjax()) {
+            if (is_null($code)) {
+                switch ($type) {
+                    case 'danger':
+                        $code = 500;
+                        break;
+                    case 'warning' || 'success' || 'info':
+                        $code = 200;
+                        break;
+                    default :
+                        $code = 200;
+                        break;
+                }
+            }
+            $this->setFlash($message, $code);
+        } else {
+            $_SESSION[FLASH_MESSAGE_KEY][$type] = $message;
+        }
     }
 
 

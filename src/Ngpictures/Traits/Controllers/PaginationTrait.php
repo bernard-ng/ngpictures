@@ -15,7 +15,7 @@ trait PaginationTrait
                 $result = $this->$action->orderBy('date_created', 'DESC', ($currentPage - 1) * 10, 10);
             } else {
                 $this->flash->set('danger', "Page {$page} inéxistante");
-                $this->app::redirect(ADMIN."/{$action}");
+                $this->redirect(ADMIN."/{$action}");
             }
         }
 

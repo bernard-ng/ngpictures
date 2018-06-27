@@ -8,8 +8,7 @@ class StaticController extends Controller
      */
     public function about()
     {
-        $this->app::turbolinksLocation("/about");
-        $this->setLayout("posts/default");
+        $this->turbolinksLocation("/about");
         $this->pageManager::setName("A Propos de nous");
         $this->viewRender('frontend/others/about');
     }
@@ -20,9 +19,8 @@ class StaticController extends Controller
      */
     public function privacy()
     {
-        $this->app::turbolinksLocation("/privacy");
+        $this->turbolinksLocation("/privacy");
         $categories = $this->loadModel('categories')->orderBy('title', 'ASC', 0, 5);
-        $this->setLayout("posts/default");
         $this->pageManager::setName("Politique d'utilisation");
         $this->pageManager::setDescription(
             'La présente clause a pour objet de définir les différents termes essentiels du contrat'

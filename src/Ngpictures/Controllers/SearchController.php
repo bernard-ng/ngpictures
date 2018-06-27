@@ -1,15 +1,16 @@
 <?php
 namespace Ngpictures\Controllers;
 
-use Ngpictures\Ngpictures;
-use Ngpictures\Managers\PageManager;
+
+use Psr\Container\ContainerInterface;
+
 
 class SearchController extends Controller
 {
 
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
+        parent::__construct($container);
         $this->loadModel(['users', 'posts', 'gallery', 'blog']);
     }
 
@@ -56,14 +57,12 @@ class SearchController extends Controller
                 }
             }
 
-            $this->app::turbolinksLocation("/search?q={$query}");
+            $this->turbolinksLocation("/search?q={$query}");
             $this->pageManager::setName("Recherches");
-            $this->setLayout("search");
             $this->viewRender("frontend/others/search", compact("query", "posts", "blog", "gallery"));
         } else {
-            $this->app::turbolinksLocation("/search");
+            $this->turbolinksLocation("/search");
             $this->pageManager::setName("Recherches");
-            $this->setLayout("search");
             $this->viewRender("frontend/others/search");
         }
     }

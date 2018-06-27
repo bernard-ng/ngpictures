@@ -1,17 +1,16 @@
 <?php
 namespace Ngpictures\Controllers;
 
-use Ngpictures\Ngpictures;
-use Ngpictures\Managers\PageManager;
 use Ng\Core\Managers\CalendarManager;
+use Psr\Container\ContainerInterface;
 
 
 
 class BookingController extends Controller
 {
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
+        parent::__construct($container);
         $this->authService->restrict();
         $this->loadModel('booking');
     }
@@ -24,7 +23,7 @@ class BookingController extends Controller
             $year = intval($_GET['y']);
             $this->calendar = new CalendarManager(compact('month', 'year'));
         } else {
-            $this->calendar = new CalendarManager();
+            $this->calendar = $this->container->get(CalendarManager::class);
         }
 
         $days = $this->calendar->days;
@@ -40,8 +39,7 @@ class BookingController extends Controller
         $previousMonth = $this->calendar->previousMonth()->getMonth();
         $previousYear = $this->calendar->previousMonth()->getYear();
 
-
-        $this->setLayout('blank');
+        $this->turbolinksLocation('/booking');
         $this->pageManager::setName('Réservation');
         $this->viewRender('frontend/others/booking', compact(
             'current_month',

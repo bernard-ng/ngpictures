@@ -8,16 +8,16 @@ use Ngpictures\Traits\Models\SearchQueryTrait;
 
 class GalleryModel extends Model
 {
+    use LastQueryTrait;
+    use FindQueryTrait;
+    use SearchQueryTrait;
+
     /**
      * nom de la table
      * @var string
      */
     protected $table = "gallery";
 
-
-    use LastQueryTrait;
-    use FindQueryTrait;
-    use SearchQueryTrait;
 
     /**
      * recupere un enregistrement avec une contrainte

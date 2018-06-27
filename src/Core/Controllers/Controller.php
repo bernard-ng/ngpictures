@@ -3,12 +3,19 @@ namespace Ng\Core\Controllers;
 
 use Psr\Container\ContainerInterface;
 use Ng\Core\Renderer\RendererInterface;
+use Ngpictures\Traits\Util\ResolverTrait;
+use Ngpictures\Traits\Util\RequestTrait;
 
 
 class Controller
 {
-    protected $viewPath;
-    protected $layout;
+    use ResolverTrait;
+    use RequestTrait;
+
+    /**
+     * le renderer
+     * @var RendererInterface
+     */
     protected $renderer;
 
 
@@ -16,6 +23,36 @@ class Controller
     {
         $this->container = $container;
         $this->renderer = $this->container->get(RendererInterface::class);
+    }
+
+
+    /**
+     * le nom du model
+     * @param string|array $model
+     * @return void
+     */
+    public function loadModel($name)
+    {
+        if (is_array($name)) {
+            foreach($name as $n) {
+                $this->$n = $this->container->get($this->model($n));
+                return $this->$n;
+            }
+        } else {
+            $this->$name = $this->container->get($this->model($name));
+            return $this->$name;
+        }
+    }
+
+
+    /**
+     * le nom du controlle
+     * @param string $name
+     * @return void
+     */
+    public function callController(string $name)
+    {
+        return $this->container->get($this->controller($name));
     }
 
 
@@ -31,47 +68,5 @@ class Controller
     public function viewRender(string $view, array $variables = [])
     {
         return $this->renderer->render($view, $variables);
-    }
-
-
-    /**
-     * defini si la request est faite en ajax
-     *
-     * @return boolean
-     */
-    public function isAjax(): bool
-    {
-        return (
-            isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
-            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'
-        ) ? true : false ;
-    }
-
-
-    /**
-     * en cas d'erreur en ajax
-     * @param string $msg
-     * @param int|null $code
-     */
-    public function ajaxFail(string $msg, int $code = null)
-    {
-        if (is_null($code)) {
-            header('HTTP/1.1 500 Internal Server Error');
-        } else {
-            http_response_code($code);
-        }
-        echo $msg;
-        exit();
-    }
-
-
-    /**
-     * renvoi a ajax l'url de redirction
-     * @param string $url
-     */
-    protected function ajaxRedirect(string $url)
-    {
-        echo $url;
-        exit();
     }
 }

@@ -1,7 +1,5 @@
 <?php
 
-//BACK-END ROUTES
-/***************************************************************************/
 $router->get(ADMIN,"admin","admin.index");
 
 //logs

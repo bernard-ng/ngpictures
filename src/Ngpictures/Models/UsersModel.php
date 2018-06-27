@@ -6,21 +6,13 @@ use Ngpictures\Traits\Models\SearchQueryTrait;
 
 class UsersModel extends Model
 {
-    /**
-     * la connection a la base de donnee
-     * @var
-     */
-    protected $db;
-
+    use SearchQueryTrait;
 
     /**
      * le nom de la table dans la base de donnee
      * @var string
      */
     protected $table = "users";
-
-
-    use SearchQueryTrait;
 
 
     /**

@@ -676,3 +676,12 @@
 * D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	88
 		=> 26-Jun 16:30 : SQLSTATE[HY000]: General error: could not call class constructor  
 
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 27-Jun 19:29 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 27-Jun 19:29 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 27-Jun 19:29 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+

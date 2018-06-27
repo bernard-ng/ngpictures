@@ -8,15 +8,15 @@ use Ngpictures\Traits\Models\SearchQueryTrait;
 class BlogModel extends Model
 {
 
+    use FindQueryTrait;
+    use SearchQueryTrait;
+
     /**
      * nom de la table
      * @var string
      */
     protected $table = "blog";
 
-
-    use FindQueryTrait;
-    use SearchQueryTrait;
 
     /**
      * recupere un enregistrement avec une contrainte

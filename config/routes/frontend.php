@@ -1,7 +1,6 @@
 <?php
 
-//  FRONT-END ROUTES
-/***************************************************************************/
+
 $router->get("/", "home", "home");
 $router->get("/home", "home", "home");
 

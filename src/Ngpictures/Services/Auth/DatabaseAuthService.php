@@ -3,15 +3,20 @@ namespace Ngpictures\Services\Auth;
 
 
 use Ngpictures\Models\UsersModel;
+use Ngpictures\Entity\UsersEntity;
+use Ng\Core\Managers\CookieManager;
 use Ng\Core\Managers\Mailer\Mailer;
 use Ng\Core\Managers\StringManager;
 use Ng\Core\Managers\SessionManager;
 use Psr\Container\ContainerInterface;
+use Ngpictures\Traits\Util\RequestTrait;
 use Ng\Core\Managers\FlashMessageManager;
 
 
 class DatabaseAuthService
 {
+    use RequestTrait;
+
     /**
      * le model des users, donc l'access a la base de donnee.
      * @var UsersModel
@@ -36,6 +41,8 @@ class DatabaseAuthService
         $this->users = $this->container->get(UsersModel::class);
         $this->flash = $this->container->get(FlashMessageManager::class);
         $this->session = $this->container->get(SessionManager::class);
+        $this->cookie = $this->container->get(CookieManager::class);
+        $this->str = $this->container->get(StringManager::class);
     }
 
 
@@ -48,7 +55,7 @@ class DatabaseAuthService
         if (!$this->isLogged()) {
             $this->flash->set("danger", $msg ?? $this->flash->msg["users_not_logged"]);
 
-            $this->app::redirect(true);
+            $this->redirect(true);
         }
     }
 
@@ -65,11 +72,11 @@ class DatabaseAuthService
         if ($user && $user->confirmation_token === $token) {
             $this->users->unsetConfirmationToken($user->id);
             $this->connect($user);
-            $this->app::redirect("/login");
+            $this->redirect("/login");
         } else {
             $this->flash->set('danger', $this->flash->msg['users_confirmation_failed']);
 
-            $this->app::redirect("/login");
+            $this->redirect("/login");
         }
     }
 
@@ -82,7 +89,7 @@ class DatabaseAuthService
         $this->restrict();
         if ($this->session->getValue(AUTH_KEY, 'rank') !== 'admin') {
             $this->flash->set('warning', $this->flash->msg['users_forbidden']);
-            $this->app::redirect(true);
+            $this->redirect(true);
         }
     }
 
@@ -199,6 +206,6 @@ class DatabaseAuthService
 
         $this->flash->set('success', $this->flash->msg['form_registration_submitted']);
 
-        $this->app::redirect('/login');
+        $this->redirect('/login');
     }
 }

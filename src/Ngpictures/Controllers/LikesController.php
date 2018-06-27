@@ -2,9 +2,9 @@
 namespace Ngpictures\Controllers;
 
 use Ng\Core\Managers\Collection;
+use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Util\TypesActionTrait;
-use Ngpictures\Ngpictures;
-use Ngpictures\Managers\PageManager;
+
 
 class LikesController extends Controller
 {
@@ -17,9 +17,9 @@ class LikesController extends Controller
      * @param Ngpictures $app
      * @param PageManager $pageManager
      */
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
+        parent::__construct($container);
         $this->authService->restrict();
         $this->user = $this->authService->isLogged();
     }
@@ -41,7 +41,7 @@ class LikesController extends Controller
                 if ($this->isAjax()) {
                     echo $post->likes;
                 } else {
-                    $this->app::redirect(true);
+                    $this->redirect(true);
                 }
             } else {
                 $like->add($post->id, $type, $this->user->id);
@@ -50,15 +50,15 @@ class LikesController extends Controller
                 if ($this->isAjax()) {
                     echo $post->likes;
                 } else {
-                    $this->app::redirect(true);
+                    $this->redirect(true);
                 }
             }
         } else {
             if ($this->isAjax()) {
-                $this->ajaxFail($this->flash->msg['post_not_found']);
+                $this->setFlash($this->flash->msg['post_not_found']);
             }
             $this->flash->set("danger", $this->flash->msg['post_not_found']);
-            $this->app::redirect(true);
+            $this->redirect(true);
         }
     }
 
@@ -82,13 +82,12 @@ class LikesController extends Controller
             if (!empty($likers)) {
                 $likers = $this->loadModel('users')->findList($likers);
 
-                $this->app::turbolinksLocation("/likes/show/{$type}/{$slug}-{$id}");
+                $this->turbolinksLocation("/likes/show/{$type}/{$slug}-{$id}");
                 $this->pageManager::setName("Mentions j'aime");
-                $this->setLayout("posts/default");
                 $this->viewRender("frontend/posts/likers", compact("likers"));
             } else {
                 $this->flash->set('info', $this->flash->msg['post_not_liked']);
-                $this->app::redirect(true);
+                $this->redirect(true);
             }
         }
     }

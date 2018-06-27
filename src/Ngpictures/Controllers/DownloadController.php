@@ -56,15 +56,15 @@ class DownloadController extends Controller
                     }
                 } else {
                     ($this->isAjax()) ?
-                        $this->ajaxFail($this->flash->msg['files_not_found']) :
+                        $this->setFlash($this->flash->msg['files_not_found']) :
                         $this->flash->set('danger', $this->flash->msg['files_not_found']);
-                        $this->app::redirect(true);
+                        $this->redirect(true);
                 }
             } else {
                 ($this->isAjax()) ?
-                    $this->ajaxFail($this->flash->msg['files_download_failed']) :
+                    $this->setFlash($this->flash->msg['files_download_failed']) :
                     $this->flash->set('danger', $this->flash->msg['files_download_failed']);
-                    $this->app::redirect(true);
+                    $this->redirect(true);
             }
         }
     }

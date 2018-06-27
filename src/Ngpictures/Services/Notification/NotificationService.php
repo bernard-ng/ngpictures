@@ -2,11 +2,14 @@
 namespace Ngpictures\Services\Notification;
 
 use Ngpictures\Ngpictures;
+use Psr\Container\ContainerInterface;
+use Ngpictures\Traits\Util\ResolverTrait;
 
 
 class NotificationService
 {
 
+    use ResolverTrait;
 
     /**
      * les diff type de notifications
@@ -28,11 +31,11 @@ class NotificationService
      *
      * @param Ngpictures $app
      */
-    public function __construct(Ngpictures $app)
+    public function __construct(ContainerInterface $container)
     {
-        $this->app = $app;
-        $this->users = $this->app->getModel('users');
-        $this->notifications = $this->app->getModel('notifications');
+        $this->container = $container;
+        $this->users = $this->get($this->model('users'));
+        $this->notifications = $this->get($this->model('notifications'));
     }
 
 
@@ -163,6 +166,6 @@ class NotificationService
      */
     public function newPost($post, string $commentaire)
     {
-        
+
     }
 }

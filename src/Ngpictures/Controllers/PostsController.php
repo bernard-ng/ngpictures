@@ -3,18 +3,18 @@ namespace Ngpictures\Controllers;
 
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\ImageManager;
+use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Controllers\ShowPostTrait;
 use Ngpictures\Traits\Controllers\StoryPostTrait;
-use Ngpictures\Managers\PageManager;
-use Ngpictures\Ngpictures;
+
 
 class PostsController extends Controller
 {
     public $table = "posts";
 
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
+        parent::__construct($container);
         $this->loadModel('posts');
         $this->loadModel('categories');
         $this->authService->restrict();
@@ -32,15 +32,14 @@ class PostsController extends Controller
             if ($user) {
                 $posts = $this->posts->findWithUser($user->id);
                 $this->pageManager::setName("Mes publications");
-                $this->setLayout("posts/default");
                 $this->viewRender("frontend/users/posts/posts", compact('posts', 'user'));
             } else {
                 $this->flash->set("danger", $this->flash->msg['users_not_found']);
-                $this->app::redirect(true);
+                $this->redirect(true);
             }
         } else {
             $this->flash->set("danger", $this->flash->msg['undefined_error']);
-            $this->app::redirect(true);
+            $this->redirect(true);
         }
     }
 
@@ -66,21 +65,21 @@ class PostsController extends Controller
                         $this->posts->create(compact('users_id', 'title', 'content', 'slug', 'categories_id'));
 
                         $last_id    =   $this->posts->lastInsertId();
-                        $isUploaded =   ImageManager::upload($file, 'posts', "ngpictures-{$slug}-{$last_id}", 'article');
+                        $isUploaded =   $this->container->get(ImageManager::class)::upload($file, 'posts', "ngpictures-{$slug}-{$last_id}", 'article');
 
                         if ($isUploaded) {
-                            ImageManager::upload($file, 'posts-thumbs', "ngpictures-{$slug}-{$last_id}", 'medium');
+                            $this->container->get(ImageManager::class)::upload($file, 'posts-thumbs', "ngpictures-{$slug}-{$last_id}", 'medium');
 
                             $this->posts->update(
                                 $last_id,
                                 [
                                     'thumb' => "ngpictures-{$slug}-{$last_id}.jpg",
-                                    'exif' => ImageManager::getExif($file)
+                                    'exif' => $this->container->get(ImageManager::class)::getExif($file)
                                 ]
                             );
 
                             $this->flash->set('success', $this->flash->msg['form_post_submitted']);
-                            $this->app::redirect("/posts");
+                            $this->redirect("/posts");
                         } else {
                             $this->flash->set('danger', $this->flash->msg['files_not_uploaded']);
                             $this->posts->delete($last_id);
@@ -88,17 +87,17 @@ class PostsController extends Controller
                     } else {
                         $errors = new Collection($this->validator->getErrors());
                         $this->isAjax()?
-                            $this->ajaxFail($errors->asJson(), 403):
+                            $this->setFlash($errors->asJson(), 403):
                             $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
                     }
                 } else {
                     $this->isAjax()?
-                        $this->ajaxFail($this->flash->msg['post_requires_picture']):
+                        $this->setFlash($this->flash->msg['post_requires_picture']):
                         $this->flash->set('danger', $this->flash->msg['post_requires_picture']);
                 }
             } else {
                 $this->isAjax()?
-                    $this->ajaxFail($this->flash->msg['post_requires_picture']):
+                    $this->setFlash($this->flash->msg['post_requires_picture']):
                     $this->flash->set('danger', $this->flash->msg['post_requires_picture']);
             }
         }
@@ -128,7 +127,7 @@ class PostsController extends Controller
 
                     $this->posts->update($id, compact('title', 'content', 'slug', 'categories_id'));
                     $this->flash->set("success", $this->flash->msg['post_edit_success']);
-                    $this->app::redirect("/account/post");
+                    $this->redirect("/account/post");
                 }
 
                 $this->pageManager::setName("Edition");
@@ -138,7 +137,7 @@ class PostsController extends Controller
                 );
             } else {
                 $this->isAjax()?
-                    $this->ajaxFail($this->flash->msg['post_not_found']):
+                    $this->setFlash($this->flash->msg['post_not_found']):
                     $this->flash->set("danger", $this->flash->msg['post_not_found']);
             }
         }
@@ -162,18 +161,18 @@ class PostsController extends Controller
                     exit();
                 }
                 $this->flash->set('success', $this->flash->msg['post_delete_success']);
-                $this->app::redirect(true);
+                $this->redirect(true);
             } else {
                 $this->isAjax()?
-                    $this->ajaxFail($this->flash->msg['undefined_error']):
+                    $this->setFlash($this->flash->msg['undefined_error']):
                     $this->flash->set('danger', $this->flash->msg['undefined_error']);
-                    $this->app::redirect(true);
+                    $this->redirect(true);
             }
         } else {
             $this->isAjax()?
-                $this->ajaxFail($this->flash->msg['delete_not_allowed']):
+                $this->setFlash($this->flash->msg['delete_not_allowed']):
                 $this->flash->set('danger', $this->flash->msg['delete_not_allowed']);
-                $this->app::redirect(true);
+                $this->redirect(true);
         }
     }
 }

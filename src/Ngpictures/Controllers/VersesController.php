@@ -12,7 +12,7 @@ class VersesController extends Controller
     public function index()
     {
         $this->loadModel('verses');
-        $max = $this->verses->getVersesNumber();
+        $max = $this->verses->getVersesNumber()->numbers;
 
         if ($max >= 1) {
             $id = mt_rand(1, $max);

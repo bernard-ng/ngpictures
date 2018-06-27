@@ -2,9 +2,8 @@
 namespace Ngpictures\Controllers\Admin;
 
 
+use Psr\Container\ContainerInterface;
 use Ngpictures\Controllers\AdminController;
-use Ngpictures\Managers\PageManager;
-use Ngpictures\Ngpictures;
 use Ngpictures\Traits\Controllers\PaginationTrait;
 
 class PostsController extends AdminController
@@ -16,9 +15,9 @@ class PostsController extends AdminController
      * @param Ngpictures $app
      * @param PageManager $pageManager
      */
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
+        parent::__construct($container);
         $this->loadModel('posts');
     }
 
@@ -38,7 +37,6 @@ class PostsController extends AdminController
 
 
         $this->pageManager::setName('Adm - posts');
-        $this->setLayout("Admin/default");
         $this->viewRender(
             "backend/posts/index",
             compact("posts", 'total', "totalPage", "currentPage", "prevPage", "nextPage")

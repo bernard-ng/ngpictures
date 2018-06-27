@@ -7,15 +7,15 @@ use Ngpictures\Traits\Models\SearchQueryTrait;
 
 class PostsModel extends Model
 {
+
+    use FindQueryTrait;
+    use SearchQueryTrait;
+
     /**
      * nom de la table
      * @var string
      */
     protected $table = "posts";
-
-
-    use FindQueryTrait;
-    use SearchQueryTrait;
 
 
     /**

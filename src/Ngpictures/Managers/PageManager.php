@@ -1,8 +1,9 @@
 <?php
 namespace Ngpictures\Managers;
 
-use Ng\Core\Exception\ConfigManagerException;
+use Ngpictures\Ngpictures;
 use Ng\Core\Managers\ConfigManager;
+use Ng\Core\Exception\ConfigManagerException;
 
 class PageManager
 {
@@ -72,8 +73,7 @@ class PageManager
     public static function setName(string $name): string
     {
         try {
-            $config = new ConfigManager(ROOT."/config/system.php");
-            self::$pageTitle = $name . " | " . $config->get('site.name');
+            self::$pageTitle = $name . " | " . Ngpictures::getDic()->get('site.name');
         } catch (ConfigManagerException $e) {
             LogMessageManager::register(__class__, $e);
             self::$pageTitle = $name . " | Ngpictures";

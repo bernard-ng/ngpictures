@@ -1,8 +1,7 @@
 <?php
 namespace Ngpictures\Controllers;
 
-use Ngpictures\Ngpictures;
-use Ngpictures\Managers\PageManager;
+use Psr\Container\ContainerInterface;
 
 class FollowingController extends Controller
 {
@@ -15,9 +14,9 @@ class FollowingController extends Controller
      * @param Ngpictures $app
      * @param PageManager $pageManager
      */
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
+        parent::__construct($container);
         $this->authService->restrict();
         $this->user = $this->authService->isLogged();
         $this->loadModel(['users', 'following']);
@@ -42,15 +41,15 @@ class FollowingController extends Controller
             if ($model->isFollowed($user->id, $this->user->id)) {
                 $model->remove($user->id, $this->user->id);
                 $this->flash->set("success", $this->flash->msg['users_unfollowing_success']);
-                $this->app::redirect(true);
+                $this->redirect(true);
             }
 
             $model->add($user->id, $this->user->id);
             $this->flash->set("success", $this->flash->msg['users_following_success']);
-            $this->app::redirect(true);
+            $this->redirect(true);
         } else {
             $this->flash->set("warning", $this->flash->msg['users_not_found']);
-            $this->app::redirect(true);
+            $this->redirect(true);
         }
     }
 
@@ -80,17 +79,16 @@ class FollowingController extends Controller
                     $followers = $this->users->findList($followers_list);
                 }
 
-                $this->app::turbolinksLocation("/my-followers/{$token}");
+                $this->turbolinksLocation("/my-followers/{$token}");
                 $this->pageManager::setName("Mes Abonnés");
-                $this->setLayout("posts/default");
                 $this->viewRender("frontend/users/account/followers", compact("followers"));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error']);
-                $this->app::redirect(true);
+                $this->redirect(true);
             }
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error']);
-            $this->app::redirect(true);
+            $this->redirect(true);
         }
     }
 
@@ -118,17 +116,16 @@ class FollowingController extends Controller
                 $followings_list    =   implode(", ", $followings_list);
                 $followings         =   empty($followings_list)? null : $this->users->findList($followings_list);
 
-                $this->app::turbolinksLocation("/my-following/{$token}");
+                $this->turbolinksLocation("/my-following/{$token}");
                 $this->pageManager::setName("Mes Abonnements");
-                $this->setLayout("posts/default");
                 $this->viewRender("frontend/users/account/following", compact("followings"));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error']);
-                $this->app::redirect(true);
+                $this->redirect(true);
             }
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error']);
-            $this->app::redirect(true);
+            $this->redirect(true);
         }
     }
 }

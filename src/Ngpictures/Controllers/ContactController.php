@@ -4,6 +4,7 @@ namespace Ngpictures\Controllers;
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\Mailer\Mailer;
 use PHPMailer\PHPMailer\Exception;
+use Ng\Core\Managers\ValidationManager;
 
 class ContactController extends Controller
 {
@@ -13,17 +14,16 @@ class ContactController extends Controller
         $errors = new Collection();
 
         if (!empty($_POST) && isset($_POST)) {
-
             $this->validator->setRule('name', 'required');
             $this->validator->setRule('email', 'valid_email');
             $this->validator->setRule('message', 'required');
 
             if ($this->validator->isValid()) {
-                $email      = $this->str::escape($post->get('email'));
                 $name       = $this->str::escape($post->get('name'));
+                $email      = $this->str::escape($post->get('email'));
                 $message    = $this->str::escape($post->get('message'));
 
-                (new Mailer())->contact($name, $email, $message);
+                $this->contaiener->get(Mailer::class)->contact($name, $email, $message);
                 $this->flash->set('success', $this->flash->msg['form_contact_submitted']);
             } else {
                 $errors = new Collection($this->validator->getErrors());
@@ -31,9 +31,8 @@ class ContactController extends Controller
             }
         }
 
-        $this->app::turbolinksLocation("/contact");
+        $this->turbolinksLocation("/contact");
         $this->pageManager::setName("Contact");
-        $this->setLayout("posts/default");
         $this->viewRender("frontend/others/contact", compact("post", "errors"));
     }
 }
