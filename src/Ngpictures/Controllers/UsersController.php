@@ -53,21 +53,18 @@ class UsersController extends Controller
             $post = new Collection($_POST);
 
             if (isset($_POST) and !empty($_POST)) {
-                $this->validator->setRule('password', ["must_match[password_confirm]", "min_length[6]"]);
-                $this->validator->setRule('password_confirm', ["must_match[password]", "min_length[6]"]);
+                $this->validator->setRule('password', ["matches[password_confirm]", "min_length[6]"]);
+                $this->validator->setRule('password_confirm', ["matches[password]", "min_length[6]"]);
 
                 if ($this->validator->isValid()) {
                     $password = $this->str::hashPassword($post->get('password'));
                     $this->users->resetPassword($password, $user->id);
 
-                    $this->flash->set('success', $this->flash->msg['users_reset_success']);
+                    $this->flash->set('success', $this->flash->msg['users_reset_success'], false);
                     $this->authService->reConnect($user);
                     $this->redirect($user->accountUrl);
                 } else {
-                    $errors = new Collection($this->validator->getErrors());
-                    $this->isAjax() ?
-                        $this->setFlash($errors->asJson(), 403) :
-                        $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
+                    $this->sendFormError();
                 }
             }
 
@@ -101,12 +98,10 @@ class UsersController extends Controller
                     $link   =   SITE_NAME."/reset/{$user->id}/{$user->reset_token}";
 
                     $this->container->get(Mailer::class)->resetPassword($link, $email);
-                    $this->flash->set('success', $this->flash->msg['form_reset_submitted']);
+                    $this->flash->set('success', $this->flash->msg['form_reset_submitted'], false);
                     $this->redirect('/login');
                 } else {
-                    $this->isAjax()?
-                        $this->setFlash($this->flash->msg['users_email_notFound']):
-                        $this->flash->set('danger', $this->flash->msg['users_email_notFound']);
+                    $this->flash->set('danger', $this->flash->msg['users_email_notFound']);
                 }
             } else {
                 $errors = new Collection($this->validator->getErrors());
@@ -134,12 +129,12 @@ class UsersController extends Controller
         if (isset($_POST) && !empty($_POST)) {
             $this->validator->setRule("email", 'valid_email', 'required');
             $this->validator->setRule("name", ['required', "alpha_dash", "min_length[3]"]);
-            $this->validator->setRule("password", ['required', "must_match[password_confirm]", "min_length[6]"]);
-            $this->validator->setRule('password_confirm', ['required', "must_match[password]", "min_length[6]"]);
+            $this->validator->setRule("password", ['required', "matches[password_confirm]", "min_length[6]"]);
+            $this->validator->setRule('password_confirm', ['required', "matches[password]", "min_length[6]"]);
 
             if ($this->validator->isValid()) {
                 if($post->get('g-recaptcha-response')) {
-                   $recaptchaResponse = (new ReCaptcha(RECAPTCH_API_KEY))
+                    $recaptchaResponse = $this->container->get(ReCaptcha::class)
                         ->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 
                     if($recaptchaResponse->isSuccess()) {
@@ -148,23 +143,31 @@ class UsersController extends Controller
 
                         if ($this->validator->isValid()) {
                             $this->authService->register($post->get('name'), $post->get('email'), $post->get('password'));
-                            $this->flash->set('success', $this->flash->msg['users_registration_success']);
+                            $this->flash->set('success', $this->flash->msg['users_registration_success'], false);
                             $this->redirect("/login");
                         } else {
                             $errors = new Collection($this->validator->getErrors());
-                            $this->flash->set("danger", $this->flash->msg['form_multi_errors']);
+                            ($this->isAjax()) ?
+                                $this->setFlash($errors->asJson(), 403) :
+                                $this->flash->set("danger", $this->flash->msg['form_multi_errors']);
                         }
                     } else {
                         $errors = new Collection($this->validator->getErrors());
-                        $this->flash->set("danger", $this->flash->msg['form_captcha_failed']);
+                        ($this->isAjax()) ?
+                            $this->setFlash($errors->asJson(), 403) :
+                            $this->flash->set("danger", $this->flash->msg['form_captcha_failed']);
                     }
                 } else {
                     $errors = new Collection($this->validator->getErrors());
-                    $this->flash->set("danger", $this->flash->msg['form_captcha_not_set']);
+                    ($this->isAjax()) ?
+                        $this->setFlash($errors->asJson(), 403) :
+                        $this->flash->set("danger", $this->flash->msg['form_captcha_not_set']);
                 }
             } else {
                 $errors = new Collection($this->validator->getErrors());
-                $this->flash->set("danger", $this->flash->msg['form_multi_errors']);
+                ($this->isAjax())?
+                    $this->setFlash($errors->asJson(), 403) :
+                    $this->flash->set("danger", $this->flash->msg['form_multi_errors']);
             }
         }
 

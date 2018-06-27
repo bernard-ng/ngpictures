@@ -32,7 +32,7 @@ class ValidationManager
      * @param array $data
      * @return void
      */
-    public function __construct(array $data = [])
+    public function __construct()
     {
         $this->data = $_POST;
     }
@@ -170,7 +170,7 @@ class ValidationManager
      * @param string $expected_match
      * @return void
      */
-    private function must_match(string $field, string $expected_match)
+    private function matches(string $field, string $expected_match)
     {
         $this->required($field);
         if ($this->getValue($field) !== $this->getValue($expected_match)) {

@@ -9,6 +9,7 @@ use Ngpictures\Traits\Util\RequestTrait;
 
 class Controller
 {
+    use ValidationErrorTrait;
     use ResolverTrait;
     use RequestTrait;
 
@@ -34,7 +35,7 @@ class Controller
     public function loadModel($name)
     {
         if (is_array($name)) {
-            foreach($name as $n) {
+            foreach ($name as $n) {
                 $this->$n = $this->container->get($this->model($n));
                 return $this->$n;
             }

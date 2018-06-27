@@ -13,6 +13,7 @@ use Ng\Core\Database\DatabaseInterface;
 use Ng\Core\Interfaces\CookieInterface;
 use Ng\Core\Renderer\RendererInterface;
 use Ng\Core\Interfaces\SessionInterface;
+use ReCaptcha\ReCaptcha;
 
 
 return [
@@ -47,7 +48,7 @@ return [
     ),
     \PDO::class => factory([MysqlDatabase::class, 'getPDO']),
 
-
+    ReCaptcha::class => object()->constructor(RECAPTCH_API_KEY),
     RendererInterface::class => object(TwigRenderer::class),
     SessionInterface::class  => object(SessionManager::class),
     CookieInterface::class   => object(CookieManager::class),

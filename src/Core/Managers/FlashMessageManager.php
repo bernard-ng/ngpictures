@@ -42,7 +42,7 @@ class FlashMessageManager
      */
     public function set(string $type, string $message, int $code = null)
     {
-        if ($this->isAjax()) {
+        if ($this->isAjax() && $code !== false) {
             if (is_null($code)) {
                 switch ($type) {
                     case 'danger':
