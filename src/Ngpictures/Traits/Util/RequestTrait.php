@@ -9,7 +9,7 @@ trait RequestTrait
      * @param mixed $url
      * @param bool $moved_permantly
      */
-    public function redirect($url = null, int $code = 200)
+    public function redirect($url = null, $ajax = false, int $code = 200)
     {
         if (is_bool($url)) {
             if (!empty($_SERVER['HTTP_REFERER'])) {
@@ -17,16 +17,16 @@ trait RequestTrait
                 header("location:{$_SERVER['HTTP_REFERER']}");
                 exit();
             } else {
-                http_response_code(200);
+                http_response_code($code);
                 header('location:/');
                 exit();
             }
         } else {
-            if ($this->isAjax()) {
+            if ($this->isAjax() && $ajax === true) {
                 echo $url;
                 exit();
             }
-            http_response_code(200);
+            http_response_code($code);
             is_null($url) ? header('location:/') : header("location:{$url}");
             exit();
         }

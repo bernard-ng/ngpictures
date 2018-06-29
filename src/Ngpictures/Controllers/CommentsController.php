@@ -16,8 +16,7 @@ class CommentsController extends Controller
      * CommentsController constructor.
      * oblige un user a se connecter avant de faire une action
      * si il est connecter alors on set son id dans l'instance;
-     * @param Ngpictures $app
-     * @param PageManager $pageManager
+     * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
     {
@@ -57,20 +56,16 @@ class CommentsController extends Controller
                     echo $this->loadModel($this->getAction($type))->find(intval($id))->getCommentsNumber();
                     exit();
                 } else {
-                    $this->flash->set('success', $this->flash->msg['form_comment_submitted']);
-                    $this->redirect(true);
+                    $this->flash->set('success', $this->flash->msg['form_comment_submitted'], false);
+                    $this->redirect(true, false);
                 }
             } else {
-                $this->isAjax() ?
-                    $this->setFlash($this->flash->msg['form_all_required']) :
-                    $this->flash->set('danger', $this->flash->msg['form_all_required']);
-                    $this->redirect(true);
+                $this->flash->set('danger', $this->flash->msg['form_all_required']);
+                $this->redirect(true, false);
             }
         } else {
-            $this->isAjax()?
-                $this->setFlash($this->flash->msg['comment_not_found']) :
-                $this->flash->set('warning', $this->flash->msg['comment_not_found']);
-                $this->redirect(true);
+            $this->flash->set('warning', $this->flash->msg['comment_not_found']);
+            $this->redirect(true, false);
         }
     }
 
@@ -91,18 +86,18 @@ class CommentsController extends Controller
                 if ($comment->users_id == $this->user->id) {
                     $this->comments->delete($id);
                     $this->flash->set('success', $this->flash->msg['comment_delete_success']);
-                    $this->redirect(true);
+                    $this->redirect(true, false);
                 } else {
                     $this->flash->set('danger', $this->flash->msg['delete_not_allowed']);
-                    $this->redirect(true);
+                    $this->redirect(true, false);
                 }
             } else {
                 $this->flash->set('warning', $this->flash->msg['comment_not_found']);
-                $this->redirect(true);
+                $this->redirect(true, false);
             }
         } else {
             $this->flash->set('danger', $this->flash->msg['delete_not_allowed']);
-            $this->redirect(true);
+            $this->redirect(true, false);
         }
     }
 
@@ -127,18 +122,18 @@ class CommentsController extends Controller
                         $this->comments->update($comment->id, ['comment' => $text]);
 
                         $this->flash->set('success', $this->flash->msg['comment_edit_success']);
-                        $this->redirect(true);
+                        $this->redirect(true, false);
                     } else {
                         $this->flash->set('danger', $this->flash->msg['form_all_required']);
-                        $this->redirect(true);
+                        $this->redirect(true, false);
                     }
                 } else {
                     $this->flash->set('danger', $this->flash->msg['edit_not_allowed']);
-                    $this->redirect(true);
+                    $this->redirect(true, false);
                 }
             } else {
                 $this->flash->set('warning', $this->flash->msg['comment_not_found']);
-                $this->redirect(true);
+                $this->redirect(true, false);
             }
         }
     }

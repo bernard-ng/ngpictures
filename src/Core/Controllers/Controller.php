@@ -3,8 +3,9 @@ namespace Ng\Core\Controllers;
 
 use Psr\Container\ContainerInterface;
 use Ng\Core\Renderer\RendererInterface;
-use Ngpictures\Traits\Util\ResolverTrait;
 use Ngpictures\Traits\Util\RequestTrait;
+use Ngpictures\Traits\Util\ResolverTrait;
+use Ngpictures\Traits\Util\ValidationErrorTrait;
 
 
 class Controller
@@ -37,7 +38,6 @@ class Controller
         if (is_array($name)) {
             foreach ($name as $n) {
                 $this->$n = $this->container->get($this->model($n));
-                return $this->$n;
             }
         } else {
             $this->$name = $this->container->get($this->model($name));

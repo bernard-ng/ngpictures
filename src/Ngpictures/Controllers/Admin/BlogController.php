@@ -10,13 +10,6 @@ use Ngpictures\Traits\Controllers\PaginationTrait;
 
 class BlogController extends AdminController
 {
-
-    public function __construct(ContainerInterface $container)
-    {
-        parent::__construct($container);
-        $this->loadModel('blog');
-    }
-
     use PaginationTrait;
 
     /**
@@ -25,16 +18,16 @@ class BlogController extends AdminController
     public function index()
     {
         $posts      =   $this->blog->orderBy('id', 'DESC', 0, 10);
-        $total      = count($this->blog->all());
+        $total      =   $this->blog->countAll()->num;
 
-        $pagination = $this->setPagination($total, "blog");
-        $currentPage = $pagination['currentPage'];
-        $totalPage = $pagination['totalPage'];
-        $prevPage = $pagination['prevPage'];
-        $nextPage = $pagination['nextPage'];
-        $posts = $pagination['result'] ?? $posts;
+        $pagination     = $this->setPagination($total, "blog");
+        $currentPage    = $pagination['currentPage'];
+        $totalPage      = $pagination['totalPage'];
+        $prevPage       = $pagination['prevPage'];
+        $nextPage       = $pagination['nextPage'];
+        $posts          = $pagination['result'] ?? $posts;
 
-
+        $this->turbolinksLocation(ADMIN . '/blog');
         $this->pageManager::setName('Adm - blog');
         $this->viewRender(
             "backend/blog/index",
@@ -46,43 +39,47 @@ class BlogController extends AdminController
 
     /**
      * edition d'un article
-     * ne pas escape la valeur de $post->get("content"); a cause de l'editeur wysiwy
+     * ne pas escape la valeur de $post->get("content"); a cause de l'editeur wysiwyg
      * @param int $id
-     * @param null $data
+     * @param null|array $data
      */
     public function edit(int $id, $data = null)
     {
-        $post = new Collection($data ?? $_POST);
-        $errors         =   new Collection();
-        $article        =   $this->blog->find(intval($id));
-        $categories     =   $this->categories->orderBy('title', 'ASC');
+        $post           = new Collection($data ?? $_POST);
+        $errors         = new Collection();
+        $article        = $this->blog->find(intval($id));
+        $categories     = $this->categories->orderBy('title', 'ASC');
 
-        if (isset($_POST) && !empty($_POST)) {
-            if (!empty($post->get('content')) && !empty($post->get('title')) && !empty($post->get('slug'))) {
-                $this->validator->setRule('title', 'required');
-                $this->validator->setRule('content', 'required');
-                $this->validator->setRule('slug', 'required');
-                $this->validator->setRule('slug', 'alpha_dash');
+        if ($article) {
+            if (isset($_POST) && !empty($_POST)) {
+                if (!empty($post->get('content')) && !empty($post->get('title')) && !empty($post->get('slug'))) {
+                    $this->validator->setRule('title', 'required');
+                    $this->validator->setRule('content', 'required');
 
-                if ($this->validator->isValid()) {
-                    $title = $this->str::escape($post->get('title'));
-                    $content = $post->get('content');
-                    $slug = $this->str::escape($post->get('slug'));
-                    $categories_id = (int)$post->get('category') ?? 1;
+                    if ($this->validator->isValid()) {
+                        $title = $this->str::escape($post->get('title'));
+                        $content = $post->get('content');
+                        $slug = $this->str::escape($post->get('slug')) ?? $this->str::suglify($post->get('title'));
+                        $categories_id = (int) $post->get('category') ?? 1;
 
-                    $this->blog->update($id, compact('title', 'content', 'slug', 'categories_id'));
-                    $this->flash->set("success", $this->flash->msg['post_edit_success']);
-                    $this->redirect(ADMIN . "/blog");
+                        $this->blog->update($id, compact('title', 'content', 'slug', 'categories_id'));
+                        $this->flash->set("success", $this->flash->msg['post_edit_success'], false);
+                        $this->redirect(ADMIN . "/blog", false);
+                    } else {
+                        $this->sendFormError();
+                    }
                 } else {
-                    $errors = $this->validator->getErrors();
+                    $this->flash->set('danger', $this->flash->msg['form_all_required'], false);
                 }
-            } else {
-                $this->flash->set('danger', $this->flash->msg['form_all_required']);
             }
-        }
 
-        $this->pageManager::setName('Adm - blog.edit');
-        $this->viewRender('backend/blog/edit', compact('article', 'categories', 'post', 'errors'));
+            $this->turbolinksLocation(ADMIN . '/blog/edit/' . $id);
+            $this->pageManager::setName('Adm - blog.edit');
+            $this->viewRender('backend/blog/edit', compact('article', 'categories', 'post', 'errors'));
+        } else {
+            $this->flash->set('danger', $this->flash->msg['post_not_found']);
+            $this->redirect('/error/not-found', 404);
+        }
     }
 
 
@@ -116,8 +113,7 @@ class BlogController extends AdminController
                     $slug = $this->str::slugify($title);
                 }
             } else {
-                $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
-                $errors = new Collection($this->validator->getErrors());
+                $this->sendFormError();
             }
 
             if (isset($_FILES) && !empty($_FILES)) {
@@ -156,6 +152,7 @@ class BlogController extends AdminController
             }
         }
 
+        $this->turbolinksLocation(ADMIN . "/blog");
         $this->pageManager::setName('Adm - blog.add');
         $this->viewRender('backend/blog/add', compact('post', 'categories', 'errors'));
     }

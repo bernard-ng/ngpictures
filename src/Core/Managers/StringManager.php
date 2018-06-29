@@ -101,14 +101,7 @@ class StringManager
      */
     public static function getSnipet($string)
     {
-        $snipet = preg_replace('#<p>|</p>#', '', $string);
-        $snipet = preg_replace('#<h1>|<h2>|<h3>|<h4>|<h5>|</h1>|</h2>|</h3>|</h4>|</h5>#', '', $snipet);
-        $snipet = preg_replace('#<ul>|<ol>|</ul>|</ol>#', '', $snipet);
-        $snipet = preg_replace('#<img>#', '', $snipet);
-        $snipet = preg_replace('#<blockquote>|</blockquote>#', '', $snipet);
-        $snipet = preg_replace('#<em>|</em>#', '', $snipet);
-        $snipet = preg_replace('#<span>|</span>#', '', $snipet);
-        return $snipet;
+        return strip_tags($string, '<a>');
     }
 
 

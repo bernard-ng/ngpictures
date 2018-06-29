@@ -105,11 +105,11 @@ class Model
             $fields[] = "{$k} = ?";
             $values[] = $v;
         }
-        $values = implode(', ', $fields);
+        $fields = implode(', ', $fields);
 
         return ($date_created)?
-            $this->query("INSERT INTO {$this->table} SET $values , date_created = NOW() ", $values) :
-            $this->query("INSERT INTO {$this->table} SET $values ", $values);
+            $this->query("INSERT INTO {$this->table} SET $fields , date_created = NOW() ", $values) :
+            $this->query("INSERT INTO {$this->table} SET $fields ", $values);
     }
 
 
@@ -141,6 +141,22 @@ class Model
     public function all()
     {
         return $this->query("SELECT * FROM {$this->table} ORDER BY id DESC");
+    }
+
+
+    public function countAll()
+    {
+        return $this->query("SELECT COUNT(id) AS num FROM {$this->table}", null, true, true);
+    }
+
+    public function countOnline()
+    {
+        return $this->query("SELECT COUNT(id) as num FROM {$this->table} WHERE online = 1", null, true, true);
+    }
+
+    public function countOffline()
+    {
+        return $this->query("SELECT COUNT(id) as num FROM {$this->table} WHERE online = 0", null, true, true);
     }
 
 

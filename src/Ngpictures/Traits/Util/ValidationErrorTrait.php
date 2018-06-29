@@ -4,16 +4,12 @@ namespace Ngpictures\Traits\Util;
 
 trait ValidationErrorTrait
 {
-
-    use RequestTrait;
-
-
     /**
      * envoyer les erreurs a une vue
      * @param string|null $msg
      * @return void
      */
-    public function sendFormError(string $msg = null)
+    public function sendFormError($msg = null)
     {
         $errors = new Collection($this->validator->getErrors());
         $this->isAjax() ?

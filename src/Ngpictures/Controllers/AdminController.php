@@ -24,6 +24,7 @@ class AdminController extends Controller
         'albums'
     ];
 
+
     /**
      * recupere la tables apartir de son index
      * @param int $id
@@ -50,7 +51,7 @@ class AdminController extends Controller
         $this->authService->isAdmin();
 
         $this->pageManager::setMeta(['name' => 'robots', 'content' => 'noindex']);
-        $this->loadModel(['users', 'posts', 'blog', 'gallery', 'ideas', 'bugs', 'categories', 'verses', 'albums']);
+        $this->loadModel(['users', 'posts', 'blog', 'gallery', 'ideas', 'bugs', 'categories', 'verses', 'albums', 'online']);
     }
 
 
@@ -59,42 +60,40 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $posts         =  $this->posts->latest();
-        $blog          =  $this->blog->latest();
-        $photo         =  $this->gallery->latest();
-
-        $site_posts    = [count($this->blog->lastOnline()), count($this->blog->lastOffline())];
-        $users_posts   = [count($this->posts->lastOnline()), count($this->posts->lastOffline())];
-        $site_photos   = [count($this->gallery->lastOnline()), count($this->gallery->lastOffline())];
-        $users         = [count($this->users->lastConfirmed()), count($this->users->lastNotConfirmed())];
+        $blog               =  $this->blog->latest();
+        $posts              =  $this->posts->latest();
+        $photo              =  $this->gallery->latest();
+        $users              = [count($this->users->lastConfirmed()), count($this->users->lastNotConfirmed())];
+        $site_bugs          = $this->bugs->countAll()->num;
+        $site_ideas         = $this->ideas->countAll()->num;
+        $site_posts         = [$this->blog->countOnline()->num, $this->blog->countOffline()->num];
+        $users_posts        = [$this->posts->countOnline()->num, $this->posts->countOffline()->num];
+        $site_photos        = [$this->gallery->countOnline()->num, $this->gallery->countOffline()->num];
+        $users_online       = $this->online->countAll()->num;
+        $site_categories    = $this->categories->countAll()->num;
 
         $disk_space    = disk_free_space(CORE) * 100 / disk_total_space(CORE);
         $used_space    = 100 - ceil($disk_space);
         $total_space   = ceil($disk_space);
 
-        $site_bugs          =   count($this->loadModel('bugs')->all());
-        $site_ideas         =   count($this->loadModel('ideas')->all());
-        $users_online       =   count($this->loadModel('online')->all());
-        $site_categories    =   count($this->loadModel('categories')->all());
-
         $this->pageManager::setName('admin');
         $this->viewRender(
             'backend/index',
             compact(
-                'posts',
                 'blog',
-                'photo',
-                'site_posts',
-                'users_posts',
-                'site_photos',
-                'users_photos',
                 'users',
-                'users_online',
-                'site_categories',
+                'posts',
+                'photo',
                 'site_bugs',
                 'site_ideas',
                 'used_space',
-                'total_space'
+                'site_posts',
+                'total_space',
+                'users_posts',
+                'site_photos',
+                'users_photos',
+                'users_online',
+                'site_categories'
             )
         );
     }
@@ -115,21 +114,15 @@ class AdminController extends Controller
 
             if ($result) {
                 $model->delete($post->get('id'));
-                $this->flash->set('success', $msg ?? $this->flash->msg['post_delete_success']);
-                $this->redirect(true);
+                $this->flash->set('success', $msg ?? $this->flash->msg['post_delete_success'], false);
+                $this->redirect(true, false);
             } else {
-                if ($this->isAjax()) {
-                    $this->setFlash($this->flash->msg['post_not_found']);
-                }
-                $this->flash->set('danger', $this->flash->msg['post_not_found']);
-                $this->redirect(true);
+                $this->flash->set('danger', $this->flash->msg['post_not_found'], false);
+                $this->redirect(true, false);
             }
         } else {
-            if ($this->isAjax()) {
-                $this->setFlash($this->flash->msg['post_delete_failed']);
-            }
-            $this->flash->set('danger', $this->flash->msg['post_delete_failed']);
-            $this->redirect(true);
+            $this->flash->set('danger', $this->flash->msg['post_delete_failed'], false);
+            $this->redirect(true, false);
         }
     }
 
@@ -142,43 +135,34 @@ class AdminController extends Controller
         if (isset($_POST) && !empty($_POST)) {
             $post = new Collection($_POST);
             if (!empty($post->get('name')) && !empty($post->get('dir'))) {
-                $dir = str_replace('/uploads/', UPLOAD.'/', $post->get('dir'));
-                $tdir = str_replace('/uploads/thumbs/', UPLOAD.'/', $post->get('dir'));
+                $dir    = str_replace('/uploads/', UPLOAD.'/', $post->get('dir'));
+                $tdir   = str_replace('/uploads/thumbs/', UPLOAD.'/', $post->get('dir'));
 
                 if (is_dir($dir)) {
-                    $file = $dir.'/'.$post->get('name');
-                    $thumb = $tdir.'/'.$post->get('name');
+                    $file   =   $dir.'/'.$post->get('name');
+                    $thumb  =   $tdir.'/'.$post->get('name');
 
                     if (is_file($file) || is_file($thumb)) {
                         unlink($file);
                         unlink($thumb);
 
-                        $this->flash->set('success', $this->flash->msg['post_delete_success']);
-                        $this->redirect(true);
+                        $this->flash->set('success', $this->flash->msg['post_delete_success'], false);
+                        $this->redirect(true, false);
                     } else {
-                        if ($this->isAjax()) {
-                            $this->setFlash($this->flash->msg['post_delete_failed']);
-                        }
                         $this->flash->set('danger', $this->flash->msg['post_delete_failed']);
-                        $this->redirect(true);
+                        $this->redirect(true, false);
                     }
                 } else {
-                    if ($this->isAjax()) {
-                        $this->setFlash($this->flash->msg['files_not_directory']);
-                    }
                     $this->flash->set('danger', $this->flash->msg['files_not_directory']);
-                    $this->redirect(true);
+                    $this->redirect(true, false);
                 }
             } else {
-                if ($this->isAjax()) {
-                    $this->setFlash($this->flash->msg['undefined_error']);
-                }
                 $this->flash->set('danger', $this->flash->msg['undefined_error']);
-                $this->redirect(true);
+                $this->redirect(true, false);
             }
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error']);
-            $this->redirect(true);
+            $this->redirect(true, false);
         }
     }
 
@@ -191,22 +175,19 @@ class AdminController extends Controller
      */
     public function confirm($t, $id)
     {
-        $model = $this->loadModel($this->getType($t));
-        $result = $model->find(intval($id));
+        $model      =   $this->loadModel($this->getType($t));
+        $result     =   $model->find(intval($id));
 
         if (intval($t) === 5) {
             if ($result->confirmed_at === null) {
                 $model->unsetConfirmationToken($result->id);
-                $this->redirect(true);
+                $this->redirect(true, false);
             } elseif ($result->confirmed_at !== null) {
                 $this->flash->set('success', $this->flash->msg['post_already_online']);
-                $this->redirect(true);
+                $this->redirect(true, false);
             } else {
-                if ($this->isAjax()) {
-                    $this->setFlash($this->flash->msg['undefined_error']);
-                }
                 $this->flash->set('danger', $this->flash->msg['undefined_error']);
-                $this->redirect(true);
+                $this->redirect(true, false);
             }
         } else {
             if ($result && !$result->online) {
@@ -217,8 +198,8 @@ class AdminController extends Controller
                     exit;
                 }
 
-                $this->flash->set('success', $this->flash->msg['post_online_success']);
-                $this->redirect(true);
+                $this->flash->set('success', $this->flash->msg['post_online_success'], false);
+                $this->redirect(true, false);
             } elseif ($result && $result->online) {
                 $model->update($id, ['online' => 0]);
 
@@ -227,14 +208,11 @@ class AdminController extends Controller
                     exit;
                 }
 
-                $this->flash->set('success', $this->flash->msg['post_offline_success']);
-                $this->redirect(true);
+                $this->flash->set('success', $this->flash->msg['post_offline_success'], false);
+                $this->redirect(true, false);
             } else {
-                if ($this->isAjax()) {
-                    $this->setFlash($this->flash->msg['undefined_error']);
-                }
                 $this->flash->set('danger', $this->flash->msg['undefined_error']);
-                $this->redirect(true);
+                $this->redirect(true, false);
             }
         }
     }
