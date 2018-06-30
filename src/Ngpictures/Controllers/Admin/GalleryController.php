@@ -59,11 +59,11 @@ class GalleryController extends AdminController
             if (!empty($file->get('thumb'))) {
                 $this->gallery->create(compact('name', 'slug', 'description', 'tags', 'categories_id'));
                 $last_id    =   $this->gallery->lastInsertId();
-                $isUploaded =   ImageManager::upload($file, 'gallery', "{$slug}-{$last_id}", 'ratio');
+                $isUploaded =   $this->container->get(ImageManager::class)->upload($file, 'gallery', "{$slug}-{$last_id}", 'ratio');
 
                 if ($isUploaded) {
-                    ImageManager::upload($file, 'gallery-thumbs', "{$slug}-{$last_id}", 'small');
-                    $exif = ImageManager::getExif($file);
+                    $this->container->get(ImageManager::class)->upload($file, 'gallery-thumbs', "{$slug}-{$last_id}", 'small');
+                    $exif = $this->container->get(ImageManager::class)->getExif($file);
 
                     $this->gallery->update(
                         $last_id,
@@ -174,7 +174,7 @@ class GalleryController extends AdminController
 
         if (is_file($image)) {
             if (isset($_POST) and !empty($_POST)) {
-                $isWatermarked = ImageManager::watermark(
+                $isWatermarked = $this->container->get(ImageManager::class)->watermark(
                     $filename,
                     $post->get('watermark'),
                     $path[intval($type)],

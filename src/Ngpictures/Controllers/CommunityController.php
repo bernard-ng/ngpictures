@@ -8,19 +8,13 @@ use Psr\Container\ContainerInterface;
 class CommunityController extends Controller
 {
 
-    public function __construct(ContainerInterface $container)
-    {
-        parent::__construct($container);
-        $this->authService->restrict();
-        $this->loadModel("users");
-    }
-
-
     /**
      * page de community
      */
     public function index()
     {
+        $this->authService->restrict();
+        $this->loadModel("users");
         $users = $this->users->all();
 
         $this->turbolinksLocation('/community');

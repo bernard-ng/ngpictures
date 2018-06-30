@@ -55,9 +55,9 @@ class StringManager
     /**
      * slugifie une valeur de bernard ng a bernard-ng
      * @param string $text
-     * @return string
+     * @return string|null
      */
-    public static function slugify($text = "n-a"): string
+    public static function slugify($text = "n-a")
     {
         $text = preg_replace('#[^\pL\d]+#u', '-', $text);
         $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
@@ -66,7 +66,7 @@ class StringManager
         $text = preg_replace('#-+#', '-', $text);
         $text = strtolower($text);
         if (empty($text)) {
-            return 'sans-titre';
+            return null;
         }
         return $text;
     }

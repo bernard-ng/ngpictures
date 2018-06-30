@@ -37,13 +37,10 @@ class BugsController extends Controller
                 $users_id = $this->session->getValue('auth', 'id');
 
                 $this->loadModel('bugs')->create(compact('content', 'users_id'));
-                $this->flash->set('success', $this->flash->msg['form_bug_submitted']);
-                $this->redirect("/home");
+                $this->flash->set('success', $this->flash->msg['form_bug_submitted'], false);
+                $this->redirect("/home", false);
             } else {
-                $errors = new Collection($this->validator->getErrors());
-                $this->isAjax() ?
-                    $this->setFlash(json_encode($errors->asArray()), 403) :
-                    $this->flash->set('danger', $this->flash->msg['form_field_required']);
+               $this->sendFormError();
             }
         }
 

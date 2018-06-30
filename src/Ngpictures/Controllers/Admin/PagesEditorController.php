@@ -34,7 +34,7 @@ class PagesEditorController extends AdminController
                 $file = new Collection($_FILES);
                 $post = new Collection($_POST);
 
-                $isUploaded = $this->container->get(ImageManager::class)::updateStatic($file, $post->get('thumb-for'));
+                $isUploaded = $this->container->get(ImageManager::class)->updateStatic($file, $post->get('thumb-for'));
                 if ($isUploaded) {
                     $this->flash->set('success', $this->flash->msg['success'], false);
                     $this->redirect(true, false);

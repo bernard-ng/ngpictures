@@ -32,7 +32,7 @@ class Router
      */
     public function __construct()
     {
-        $this->url = $_SERVER['REQUEST_URI'] ?? '/';
+        $this->url = $_GET['url'] ?? $_SERVER['REQUEST_URI'] ?? '/';
     }
 
 

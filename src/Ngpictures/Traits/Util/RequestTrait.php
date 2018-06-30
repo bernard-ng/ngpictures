@@ -6,8 +6,9 @@ trait RequestTrait
 {
     /**
      * gestion de redirection
-     * @param mixed $url
-     * @param bool $moved_permantly
+     * @param string|null|bool $url
+     * @param bool $ajax
+     * @param int $code de redirection.
      */
     public function redirect($url = null, $ajax = false, int $code = 200)
     {

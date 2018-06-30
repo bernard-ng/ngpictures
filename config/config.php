@@ -4,16 +4,18 @@ use function \DI\get;
 use function \DI\object;
 use function \DI\factory;
 
+use ReCaptcha\ReCaptcha;
 use Ngpictures\Models\UsersModel;
 use Ng\Core\Renderer\TwigRenderer;
 use Ng\Core\Database\MysqlDatabase;
 use Ng\Core\Managers\CookieManager;
 use Ng\Core\Managers\SessionManager;
+use Ngpictures\Managers\MessageManager;
 use Ng\Core\Database\DatabaseInterface;
 use Ng\Core\Interfaces\CookieInterface;
 use Ng\Core\Renderer\RendererInterface;
 use Ng\Core\Interfaces\SessionInterface;
-use ReCaptcha\ReCaptcha;
+use Ng\Core\Managers\FlashMessageManager;
 
 
 return [
@@ -49,6 +51,10 @@ return [
     \PDO::class => factory([MysqlDatabase::class, 'getPDO']),
 
     ReCaptcha::class => object()->constructor(RECAPTCH_API_KEY),
+    FlashMessageManager::class => object()->constructor(
+        get(SessionInterface::class),
+        get(MessageManager::class)
+    ),
     RendererInterface::class => object(TwigRenderer::class),
     SessionInterface::class  => object(SessionManager::class),
     CookieInterface::class   => object(CookieManager::class),

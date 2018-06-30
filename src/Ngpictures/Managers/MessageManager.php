@@ -58,6 +58,12 @@ class MessageManager implements ArrayAccess
         'form_comment_submitted'        => "Votre commentaire a bien été posté",
         'form_contact_submitted'        => 'Nous avons bien reçu votre message et comptons vous répondre dans le plus bref délais',
         "form_registration_submitted"   => "Un email de confirmation de compte vous a été envoyé, veuillez le confirmer pour continuer",
+        "form_invalid_username"         => "Votre pseudo n'est pas valide",
+        "form_invalid_username_num"     => "Votre pseudo doit contenir au moins une lettre",
+        "form_invalid_email"            => "Cet adresse mail n'est pas valide",
+        "form_invalid_password"         => "les deux mdp ne correspondent pas",
+        "form_invalid_data"             => "donnée invalide",
+        "form_empty_field"              => "Complétez le champ",
 
 
         //FILES

@@ -10,40 +10,52 @@ use Ngpictures\Traits\Controllers\StoryPostTrait;
 
 class PostsController extends Controller
 {
+    use StoryPostTrait, ShowPostTrait;
+
     public $table = "posts";
+
 
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $this->loadModel('posts');
-        $this->loadModel('categories');
+        $this->loadModel(['posts', 'categories']);
         $this->authService->restrict();
     }
 
-    use StoryPostTrait;
-    use ShowPostTrait;
 
-
+    /**
+     * affiches les publication d'un user
+     *
+     * @param string $token
+     * @return void
+     */
     public function showPosts(string $token)
     {
-        if ($this->session->read(TOKEN_KEY) == $token) {
-            $user = $this->session->read(AUTH_KEY);
+        if ($this->authService->getToken() == $token) {
+            $user = $this->authService->isLogged();
 
             if ($user) {
                 $posts = $this->posts->findWithUser($user->id);
+
+                $this->turbolinksLocation("/my-posts");
                 $this->pageManager::setName("Mes publications");
                 $this->view("frontend/users/posts/posts", compact('posts', 'user'));
             } else {
-                $this->flash->set("danger", $this->flash->msg['users_not_found']);
-                $this->redirect(true);
+                $this->flash->set("danger", $this->flash->msg['users_not_found'], false);
+                $this->redirect(true, false);
             }
         } else {
-            $this->flash->set("danger", $this->flash->msg['undefined_error']);
-            $this->redirect(true);
+            $this->flash->set("danger", $this->flash->msg['undefined_error'], false);
+            $this->redirect(true, false);
         }
     }
 
 
+    /**
+     * ajout d'une publication
+     *
+     * @return void
+     */
     public function add()
     {
         $post           =   new Collection($_POST);
@@ -52,10 +64,9 @@ class PostsController extends Controller
         $categories     =   $this->categories->orderBy('title', 'ASC');
 
         if (isset($_POST) && !empty($_POST)) {
-
             $title          =   $this->str::escape($post->get('title'));
             $content        =   $this->str::escape($post->get('content'));
-            $slug           =   $this->str::slugify($title);
+            $slug           =   $this->str::slugify(empty($title)? "publication" : $title);
             $categories_id  =   (intval($post->get('category')) == 0) ? 1 : intval($post->get('category'));
             $users_id       =   $this->authService->isLogged()->id;
 
@@ -65,48 +76,55 @@ class PostsController extends Controller
                         $this->posts->create(compact('users_id', 'title', 'content', 'slug', 'categories_id'));
 
                         $last_id    =   $this->posts->lastInsertId();
-                        $isUploaded =   $this->container->get(ImageManager::class)::upload($file, 'posts', "ngpictures-{$slug}-{$last_id}", 'article');
+                        $isUploaded =   $this
+                            ->container
+                            ->get(ImageManager::class)
+                            ->upload($file, 'posts', "ngpictures-{$slug}-{$last_id}", 'article');
 
                         if ($isUploaded) {
-                            $this->container->get(ImageManager::class)::upload($file, 'posts-thumbs', "ngpictures-{$slug}-{$last_id}", 'medium');
+                            $this
+                                ->container
+                                ->get(ImageManager::class)
+                                ->upload($file, 'posts-thumbs', "ngpictures-{$slug}-{$last_id}", 'medium');
 
                             $this->posts->update(
                                 $last_id,
                                 [
                                     'thumb' => "ngpictures-{$slug}-{$last_id}.jpg",
-                                    'exif' => $this->container->get(ImageManager::class)::getExif($file)
+                                    'exif' => $this->container->get(ImageManager::class)->getExif($file)
                                 ]
                             );
 
-                            $this->flash->set('success', $this->flash->msg['form_post_submitted']);
-                            $this->redirect("/posts");
+                            $this->flash->set('success', $this->flash->msg['form_post_submitted'], false);
+                            $this->redirect("/posts", true);
                         } else {
-                            $this->flash->set('danger', $this->flash->msg['files_not_uploaded']);
                             $this->posts->delete($last_id);
+                            $this->flash->set('danger', $this->flash->msg['files_not_uploaded']);
                         }
                     } else {
-                        $errors = new Collection($this->validator->getErrors());
-                        $this->isAjax()?
-                            $this->setFlash($errors->asJson(), 403):
-                            $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
+                        $this->sendFormError();
                     }
                 } else {
-                    $this->isAjax()?
-                        $this->setFlash($this->flash->msg['post_requires_picture']):
-                        $this->flash->set('danger', $this->flash->msg['post_requires_picture']);
+                    $this->flash->set('danger', $this->flash->msg['post_requires_picture']);
                 }
             } else {
-                $this->isAjax()?
-                    $this->setFlash($this->flash->msg['post_requires_picture']):
-                    $this->flash->set('danger', $this->flash->msg['post_requires_picture']);
+                $this->flash->set('danger', $this->flash->msg['post_requires_picture']);
             }
         }
 
+        $this->turbolinksLocation('/submit-photo');
         $this->pageManager::setName("Publication");
         $this->view("frontend/users/posts/add", compact('post', 'categories', 'errors'));
     }
 
 
+    /**
+     * edition d'une publication
+     *
+     * @param int $id
+     * @param string $token
+     * @return void
+     */
     public function edit($id, $token)
     {
         $categories = $this->categories->orderBy('title', 'ASC');
@@ -120,25 +138,24 @@ class PostsController extends Controller
                 $article    =   $this->posts->find(intval($id));
 
                 if (isset($_POST) && !empty($_POST)) {
-                    $title          =   $this->str::escape($post->get('title') ?? 'post');
-                    $content        =   $this->str::escape($post->get('content') ?? '{{description}}');
-                    $slug           =   $this->str::slugify($title);
+                    $title          =   $this->str::escape($post->get('title'));
+                    $content        =   $this->str::escape($post->get('content'));
+                    $slug           =   $this->str::slugify($title ?? 'publication');
                     $categories_id  =   intval($post->get('category')) ?? 1;
 
                     $this->posts->update($id, compact('title', 'content', 'slug', 'categories_id'));
-                    $this->flash->set("success", $this->flash->msg['post_edit_success']);
-                    $this->redirect("/account/post");
+                    $this->flash->set("success", $this->flash->msg['post_edit_success'], false);
+                    $this->redirect("/my-posts/{$token}", true);
                 }
 
+                $this->turbolinksLocation("/my-posts/edit/{$id}/{$token}");
                 $this->pageManager::setName("Edition");
                 $this->view(
                     "frontend/users/posts/edit",
                     compact('article', 'categories', 'post', 'errors')
                 );
             } else {
-                $this->isAjax()?
-                    $this->setFlash($this->flash->msg['post_not_found']):
-                    $this->flash->set("danger", $this->flash->msg['post_not_found']);
+                $this->flash->set("danger", $this->flash->msg['post_not_found'], false);
             }
         }
     }
@@ -154,25 +171,21 @@ class PostsController extends Controller
         $post   =   new Collection($_POST);
         $post   =   $model->find(intval($post->get('id')));
 
-        if ($this->session->read(TOKEN_KEY) == $token) {
+        if ($this->authService->getToken() == $token) {
             if ($post && $post->users_id == $this->authService->isLogged()->id) {
                 $model->delete($post->id);
                 if ($this->isAjax()) {
                     exit();
                 }
-                $this->flash->set('success', $this->flash->msg['post_delete_success']);
-                $this->redirect(true);
+                $this->flash->set('success', $this->flash->msg['post_delete_success'], false);
+                $this->redirect(true, false);
             } else {
-                $this->isAjax()?
-                    $this->setFlash($this->flash->msg['undefined_error']):
-                    $this->flash->set('danger', $this->flash->msg['undefined_error']);
-                    $this->redirect(true);
+                $this->flash->set('danger', $this->flash->msg['delete_not_allowed']);
+                $this->redirect(true, false);
             }
         } else {
-            $this->isAjax()?
-                $this->setFlash($this->flash->msg['delete_not_allowed']):
-                $this->flash->set('danger', $this->flash->msg['delete_not_allowed']);
-                $this->redirect(true);
+            $this->flash->set('danger', $this->flash->msg['delete_not_allowed']);
+            $this->redirect(true, false);
         }
     }
 }

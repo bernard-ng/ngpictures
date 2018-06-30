@@ -122,12 +122,18 @@ class BlogController extends AdminController
                         $this->blog->create(compact('title', 'content', 'slug', 'categories_id'));
 
                         $last_id        =   $this->blog->lastInsertId();
-                        $isUploaded     =   ImageManager::upload($file, 'blog', "ngpictures-{$slug}-{$last_id}", 'article');
+                        $isUploaded     =   $this
+                            ->container
+                            ->get(ImageManager::class)
+                            ->upload($file, 'blog', "ngpictures-{$slug}-{$last_id}", 'article');
 
                         if ($isUploaded) {
-                            ImageManager::upload($file, 'blog-thumbs', "ngpictures-{$slug}-{$last_id}", 'small');
-                            $exif = ImageManager::getExif($file);
+                            $this
+                                ->container
+                                ->get(ImageManager::class)
+                                ->upload($file, 'blog-thumbs', "ngpictures-{$slug}-{$last_id}", 'small');
 
+                            $exif = $this->container->get(ImageManager::class)->getExif($file);
                             $this->blog->update(
                                 $last_id,
                                 [
@@ -143,8 +149,7 @@ class BlogController extends AdminController
                             $this->flash->set('danger', $this->flash->msg['files_not_uploaded']);
                         }
                     } else {
-                        $this->flash->set("danger", $this->flash->msg['form_multi_errors']);
-                        $errors = new Collection($this->validator->getErrors());
+                       $this->sendFormError();
                     }
                 } else {
                     $this->flash->set('danger', $this->flash->msg['post_requires_picture']);

@@ -3,8 +3,6 @@ namespace Ngpictures\Controllers;
 
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\Mailer\Mailer;
-use PHPMailer\PHPMailer\Exception;
-use Ng\Core\Managers\ValidationManager;
 
 class ContactController extends Controller
 {
@@ -23,11 +21,10 @@ class ContactController extends Controller
                 $email      = $this->str::escape($post->get('email'));
                 $message    = $this->str::escape($post->get('message'));
 
-                $this->contaiener->get(Mailer::class)->contact($name, $email, $message);
+                $this->container->get(Mailer::class)->contact($name, $email, $message);
                 $this->flash->set('success', $this->flash->msg['form_contact_submitted']);
             } else {
-                $errors = new Collection($this->validator->getErrors());
-                $this->flash->set("danger", $this->flash->msg['form_multi_errors']);
+                $this->sendFormError();
             }
         }
 

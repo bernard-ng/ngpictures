@@ -105,7 +105,7 @@ class DatabaseAuthService
         if (!$this->isLogged()) {
             $this->session->write(AUTH_KEY, $user);
             $this->session->write(TOKEN_KEY, $this->str::setToken(10));
-            $this->flash->set('success', $msg ?? $this->flash->msg['users_login_success']);
+            $this->flash->set('success', $msg ?? $this->flash->msg['users_login_success'], false);
         }
     }
 

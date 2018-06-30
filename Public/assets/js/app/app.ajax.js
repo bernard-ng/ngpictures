@@ -3,24 +3,24 @@
  * @param element
  */
 function formFeedComments(element) {
-    let postContainer       =   document.querySelector(element);
-    let activeUser          =   document.querySelector("meta[active-user]");
+    let postContainer = document.querySelector(element);
+    let activeUser = document.querySelector("meta[active-user]");
     if (postContainer) {
         let posts = postContainer.getElementsByTagName("article");
         for (let i = 0; i < posts.length; i++) {
-            let submitBtn =  posts[i].querySelector("button[type='submit']");
-            submitBtn.addEventListener('click', function(){
+            let submitBtn = posts[i].querySelector("button[type='submit']");
+            submitBtn.addEventListener('click', function () {
                 setLoader(this);
             });
 
-            posts[i].querySelector("form").addEventListener('submit', function(e){
+            posts[i].querySelector("form").addEventListener('submit', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
 
-                let comment         =   this.querySelector('textarea').value;
-                let closeBtn        =   this.querySelector("[type='reset']");
-                let showComment     =   posts[i].querySelector("[data-action='showComment']");
-                let icon            =   showComment.querySelector("i.icon");
+                let comment = this.querySelector('textarea').value;
+                let closeBtn = this.querySelector("[type='reset']");
+                let showComment = posts[i].querySelector("[data-action='showComment']");
+                let icon = showComment.querySelector("i.icon");
 
                 if (activeUser) {
                     if (comment.length > 0 && comment !== ' ') {
@@ -51,7 +51,7 @@ function formFeedComments(element) {
                                             setFlash('success', msg.formCommentSubmitted);
                                         }
                                     } else {
-                                        removeLoader(submitBtn,'Envoyer');
+                                        removeLoader(submitBtn, 'Envoyer');
                                         setEventTrigger(closeBtn, 'click');
                                         setFlash(
                                             'danger',
@@ -60,18 +60,18 @@ function formFeedComments(element) {
                                     }
                                 }
                             }
-                            closeBtn.addEventListener('click', function(){
+                            closeBtn.addEventListener('click', function () {
                                 xhr.abort();
                             });
                             xhr.send(new FormData(this));
                         }
                     } else {
-                        removeLoader(submitBtn,'Envoyer');
+                        removeLoader(submitBtn, 'Envoyer');
                         setEventTrigger(closeBtn, 'click');
                         setFlash('danger', msg.formFieldRequired);
                     }
                 } else {
-                    removeLoader(submitBtn,'Envoyer');
+                    removeLoader(submitBtn, 'Envoyer');
                     setEventTrigger(closeBtn, 'click');
                     setFlash('danger', msg.usersNotLogged);
                 }
@@ -95,20 +95,20 @@ function formShowComments(element) {
  * @param element
  */
 function likes(element) {
-    let postContainer   =   document.querySelector(element);
-    let activeUser      =   document.querySelector("meta[active-user]");
+    let postContainer = document.querySelector(element);
+    let activeUser = document.querySelector("meta[active-user]");
     if (postContainer) {
         let posts = postContainer.getElementsByTagName("article");
         for (let i = 0; i < posts.length; i++) {
             let likeBtn = posts[i].querySelector("a[data-action='like']");
-            likeBtn.addEventListener('click', function(e) {
+            likeBtn.addEventListener('click', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
 
                 if (activeUser) {
                     this.classList.toggle('active');
-                    let icon        =   this.querySelector('i.icon');
-                    let showLikes   =   this.parentElement.parentElement.querySelector("[data-action='showLikes']");
+                    let icon = this.querySelector('i.icon');
+                    let showLikes = this.parentElement.parentElement.querySelector("[data-action='showLikes']");
 
                     if (this.classList.contains('active')) {
                         icon.classList.remove('icon-heart-empty');
@@ -129,14 +129,14 @@ function likes(element) {
                                 } else {
                                     setFlash(
                                         'danger',
-                                        xhr.responseText? xhr.responseText : msg.undefinedError
+                                        xhr.responseText ? xhr.responseText : msg.undefinedError
                                     );
                                 }
                             }
                         };
                         xhr.send();
                         xhr.timeout = 10000;
-                        xhr.addEventListener('abort', function(){
+                        xhr.addEventListener('abort', function () {
                             setFlash('warning', msg.undefinedError);
                         });
                     }
@@ -156,7 +156,7 @@ function likes(element) {
  * @param element
  */
 function loadVerses(element) {
-    window.setInterval(function(){
+    window.setInterval(function () {
         let verseContainer = document.querySelector(element);
         if (verseContainer) {
             let indicator = verseContainer.querySelector('.indicator');
@@ -168,23 +168,23 @@ function loadVerses(element) {
                 }
                 xhr.open('GET', verseContainer.getAttribute('data-ajax'), true);
                 xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-                xhr.onreadystatechange = function() {
+                xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4) {
                         if (xhr.status === 200) {
                             try {
-                                window.setTimeout(function(){
+                                window.setTimeout(function () {
                                     let verse = JSON.parse(xhr.responseText);
                                     verseContainer.querySelector("[data-content='txt']").innerHTML = verse.txt;
                                     verseContainer.querySelector("[data-content='ref']").innerHTML = verse.ref;
                                     indicator.classList.add('active');
-                                },10000);
+                                }, 10000);
                             } catch (e) {
                                 return false;
                             }
                         } else {
                             setFlash(
                                 'danger',
-                                xhr.responseText? xhr.responseText : msg.undefinedError,
+                                xhr.responseText ? xhr.responseText : msg.undefinedError,
                             );
                         }
                     }
@@ -195,7 +195,7 @@ function loadVerses(element) {
         } else {
             return false;
         }
-    },10000);
+    }, 10000);
 }
 
 
@@ -203,9 +203,9 @@ function loadVerses(element) {
  * inifinty scroll, ajour du contenu avec ajax
  */
 function loadPosts(element) {
-    let action          =   "inactive";
-    let statusBar       =   document.querySelector('#statusBar');
-    let postContainer   =   document.querySelector(element);
+    let action = "inactive";
+    let statusBar = document.querySelector('#statusBar');
+    let postContainer = document.querySelector(element);
 
     function getData(lastId) {
         if (postContainer && statusBar) {
@@ -219,15 +219,15 @@ function loadPosts(element) {
                     if (xhr.readyState === 4) {
                         if (xhr.status === 200) {
                             if (xhr.responseText = '') {
-                                action                  =   "inactive";
-                                statusBar.innerHTML     =   "Aucun contenu à charger";
+                                action = "inactive";
+                                statusBar.innerHTML = "Aucun contenu à charger";
                             } else {
-                                action                  =   "active";
-                                statusBar.innerHTML     =   "Chargement...";
+                                action = "active";
+                                statusBar.innerHTML = "Chargement...";
                             }
                             postContainer.append(xhr.responseText);
                         } else {
-                            statusBar.innerHTML         =   "Impossible de charger la suite";
+                            statusBar.innerHTML = "Impossible de charger la suite";
                         }
                     }
                 }
@@ -237,13 +237,13 @@ function loadPosts(element) {
         }
     }
 
-    window.addEventListener('scroll', function(){
-        let windowHeight        =   window.getBoundingClientRect().height;
-        let containerHeight     =   window.getBoundingClientRect().height;
+    window.addEventListener('scroll', function () {
+        let windowHeight = window.getBoundingClientRect().height;
+        let containerHeight = window.getBoundingClientRect().height;
         if (window.scrollTop() + windowHeight > containerHeight && action === "inactive") {
             action = "active";
 
-            window.setTimeout(function(){
+            window.setTimeout(function () {
                 getData(postContainer.lastElementChild.getAttribute("id"));
             }, 2000);
         }
@@ -267,7 +267,7 @@ function loadPictureInfo(element) {
             element.offsetHeight; // force du repaint
             element.style.height = height + "px";
 
-            window.setTimeout(function() {
+            window.setTimeout(function () {
                 element.style.height = null
             }, 500);
         };
@@ -278,12 +278,12 @@ function loadPictureInfo(element) {
             element.offsetHeight; // force du repaint
             element.style.height = "0px";
 
-            window.setTimeout(function() {
+            window.setTimeout(function () {
                 element.parentNode.removeChild(element);
             }, 500);
         };
 
-        let scrollTo = function(target, offset = 0) {
+        let scrollTo = function (target, offset = 0) {
             window.scrollTo({
                 behavior: "smooth",
                 left: 0,
@@ -291,7 +291,7 @@ function loadPictureInfo(element) {
             });
         };
 
-        let show = function(item){
+        let show = function (item) {
             let offset = 0;
             if (activeContent !== null) {
                 slideUp(activeContent);
@@ -336,11 +336,11 @@ function loadPictureInfo(element) {
  * login ajax
  * @param element
  */
-function formLogin(element){
+function formLogin(element) {
     let form = document.querySelector(element);
     if (form) {
         let submitBtn = form.querySelector("button[type='submit']")
-        submitBtn.addEventListener('click', function(){
+        submitBtn.addEventListener('click', function () {
             setLoader(this);
         });
         form.addEventListener('submit', function (e) {
@@ -365,11 +365,8 @@ function formLogin(element){
                             removeLoader(submitBtn, 'Connexion');
                             let errors = JSON.parse(xhr.responseText);
 
-                            if (errors.name) {
-                                formDataInvalid(name, errors.name);
-                            } else if (errors.password) {
-                                formDataInvalid(password, errors.password);
-                            }
+                            errors.name ? formDataInvalid(name, errors.name) : '';
+                            errors.password ? formDataInvalid(password, errors.password) : '';
                         } else {
                             removeLoader(submitBtn, 'Connexion');
                             xhr.responseText ? setFlash('danger', xhr.responseText) : setFlash('danger', msg.undefinedError);
@@ -386,7 +383,7 @@ function formLogin(element){
  * sign up ajax
  * @param element
  */
-function formSign(element){}
+function formSign(element) {}
 
 
 /**
@@ -397,7 +394,7 @@ function formGenericSubmit(element) {
     let form = document.querySelector(element);
     if (form) {
         let submitBtn = form.querySelector("button[type='submit']")
-        submitBtn.addEventListener('click', function(){
+        submitBtn.addEventListener('click', function () {
             setLoader(this);
         });
         form.addEventListener('submit', function (e) {
@@ -446,16 +443,16 @@ function savePost(element) {
     let saveBtn = document.querySelectorAll(element);
     let activeUser = document.querySelector("meta[active-user]");
     if (typeof saveBtn !== 'undefined') {
-        for(let i = 0; i < saveBtn.length; i++) {
-            saveBtn[i].addEventListener('click', function(e){
+        for (let i = 0; i < saveBtn.length; i++) {
+            saveBtn[i].addEventListener('click', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
 
                 let that = this;
                 let icon = that.firstElementChild;
 
-                if(activeUser) {
-                    if(icon.classList.contains('blue-txt')) {
+                if (activeUser) {
+                    if (icon.classList.contains('blue-txt')) {
                         icon.classList.remove('icon-bookmark', 'blue-txt');
                         icon.classList.add('icon-bookmark-empty');
                     } else {
@@ -467,9 +464,9 @@ function savePost(element) {
                         let xhr = getXhr();
                         xhr.open('GET', this.getAttribute('href'));
                         xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-                        xhr.onreadystatechange = function() {
-                            if(xhr.readyState === 4) {
-                                if(xhr.status === 200) {
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4) {
+                                if (xhr.status === 200) {
                                     if (xhr.responseText === 'true') {
                                         that.innerHTML = "<i class='icon icon-bookmark blue-txt'></i>"
                                         setFlash('success', msg.postSaved);
@@ -480,7 +477,7 @@ function savePost(element) {
                                         return true;
                                     }
                                 } else {
-                                    setFlash('danger', xhr.responseText? xhr.responseText : msg.undefinedError);
+                                    setFlash('danger', xhr.responseText ? xhr.responseText : msg.undefinedError);
                                     return false;
                                 }
                             }
@@ -509,8 +506,8 @@ function savePost(element) {
 function downloadFile(element) {
     let downloadBtn = document.querySelectorAll(element);
     if (typeof downloadBtn !== 'undefined') {
-        for(let i = 0; i < downloadBtn.length; i++) {
-            downloadBtn[i].addEventListener('click', function(e){
+        for (let i = 0; i < downloadBtn.length; i++) {
+            downloadBtn[i].addEventListener('click', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
 
@@ -521,14 +518,14 @@ function downloadFile(element) {
                     let xhr = getXhr();
                     xhr.open('GET', downloadLink);
                     xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-                    xhr.onreadystatechange = function() {
-                        if(xhr.readyState === 4) {
-                            if(xhr.status === 200) {
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4) {
+                            if (xhr.status === 200) {
                                 that.innerHTML = "<span>" + xhr.responseText + "&nbsp;<i class='icon icon-download'></i>";
                                 window.location = downloadLink + "?option=once";
                                 return true;
                             } else {
-                                setFlash('danger', xhr.responseText? xhr.responseText : msg.undefinedError);
+                                setFlash('danger', xhr.responseText ? xhr.responseText : msg.undefinedError);
                                 return false;
                             }
                         }

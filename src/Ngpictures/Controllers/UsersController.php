@@ -188,8 +188,8 @@ class UsersController extends Controller
         $errors     =   new Collection();
 
         if ($this->authService->isLogged()) {
-            $this->flash->set('warning', $this->flash->msg['users_already_connected']);
-            $this->redirect($this->authService->isLogged()->accountUrl);
+            $this->flash->set('warning', $this->flash->msg['users_already_connected'], false);
+            $this->redirect($this->authService->isLogged()->accountUrl, false);
         } else {
             if (isset($_POST) && !empty($_POST)) {
                 $this->validator->setRule('name', 'required');
@@ -209,10 +209,7 @@ class UsersController extends Controller
                                     $this->authService->remember($user->id);
                                 }
 
-                                $this->isAjax()?
-                                    $this->redirect($user->accountUrl):
-                                    $this->flash->set('success', $this->flash->msg['users_login_success']);
-                                    $this->redirect($user->accountUrl);
+                                $this->redirect($user->accountUrl, true);
                             } else {
                                 $this->flash->set('danger', $this->flash->msg['users_bad_identifier']);
                             }
@@ -223,10 +220,7 @@ class UsersController extends Controller
                         $this->flash->set('danger', $this->flash->msg['users_bad_identifier']);
                     }
                 } else {
-                    $errors = new Collection($this->validator->getErrors());
-                    $this->isAjax() ?
-                        $this->setFlash($errors->asJson(), 403) :
-                        $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
+                    $this->sendFormError();
                 }
             }
 
@@ -245,8 +239,8 @@ class UsersController extends Controller
         $this->cookie->delete(COOKIE_REMEMBER_KEY);
         $this->session->delete(AUTH_KEY);
         $this->session->delete(TOKEN_KEY);
-        $this->flash->set('success', $this->flash->msg['users_logout_success']);
-        $this->redirect("/login");
+        $this->flash->set('success', $this->flash->msg['users_logout_success'], false);
+        $this->redirect("/login", false);
     }
 
 
@@ -275,12 +269,12 @@ class UsersController extends Controller
                 $this->pageManager::setName("Profile de " . $user->name);
                 $this->view('frontend/users/account/account', compact( "user", "posts", "collection"));
             } else {
-                $this->flash->set('danger', $this->flash->msg['undefined_error']);
-                $this->redirect(true);
+                $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
+                $this->redirect(true, false);
             }
         } else {
-            $this->flash->set('danger', $this->flash->msg['undefined_error']);
-            $this->redirect(true);
+            $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
+            $this->redirect(true, false);
         }
     }
 
@@ -322,18 +316,13 @@ class UsersController extends Controller
                         $this->authService->reConnect($user, $this->flash->msg['users_edit_success']);
                         $this->redirect($user->accountUrl);
                     } else {
-                        $this->isAjax()?
-                            $this->setFlash($errors->asJson(), 403):
-                            $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
+                        $this->sendFormError();
                     }
                 } else {
-                    $errors = new Collection($this->validator->getErrors());
-                    $this->isAjax()?
-                        $this->setFlash($errors->asJson(), 403):
-                        $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
+                    $this->sendFormError();
                 }
             } elseif (!empty($file->get('thumb'))) {
-                $isUploaded = ImageManager::upload($file, 'avatars', "ngpictures-avatar-{$user->id}", 'medium');
+                $isUploaded = $this->container->get(ImageManager::class)->upload($file, 'avatars', "ngpictures-avatar-{$user->id}", 'medium');
 
                 if ($isUploaded) {
                     $this->users->update($user->id, ['avatar' => "ngpictures-avatar-{$user->id}.jpg"]);

@@ -38,9 +38,9 @@ class FlashMessageManager
     /**
      * @param string $type
      * @param string $message
-     * @param int $code
+     * @param int|null|bool $code
      */
-    public function set(string $type, string $message, int $code = null)
+    public function set(string $type, string $message, $code = null)
     {
         if ($this->isAjax() && $code !== false) {
             if (is_null($code)) {
