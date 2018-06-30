@@ -81,7 +81,7 @@ class FollowingController extends Controller
 
                 $this->turbolinksLocation("/my-followers/{$token}");
                 $this->pageManager::setName("Mes Abonnés");
-                $this->viewRender("frontend/users/account/followers", compact("followers"));
+                $this->view("frontend/users/account/followers", compact("followers"));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error']);
                 $this->redirect(true);
@@ -118,7 +118,7 @@ class FollowingController extends Controller
 
                 $this->turbolinksLocation("/my-following/{$token}");
                 $this->pageManager::setName("Mes Abonnements");
-                $this->viewRender("frontend/users/account/following", compact("followings"));
+                $this->view("frontend/users/account/following", compact("followings"));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error']);
                 $this->redirect(true);

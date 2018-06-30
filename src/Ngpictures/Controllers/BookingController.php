@@ -41,7 +41,7 @@ class BookingController extends Controller
 
         $this->turbolinksLocation('/booking');
         $this->pageManager::setName('Réservation');
-        $this->viewRender('frontend/others/booking', compact(
+        $this->view('frontend/others/booking', compact(
             'current_month',
             'nextMonth',
             'nextYear',

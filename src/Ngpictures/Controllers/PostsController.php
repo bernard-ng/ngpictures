@@ -32,7 +32,7 @@ class PostsController extends Controller
             if ($user) {
                 $posts = $this->posts->findWithUser($user->id);
                 $this->pageManager::setName("Mes publications");
-                $this->viewRender("frontend/users/posts/posts", compact('posts', 'user'));
+                $this->view("frontend/users/posts/posts", compact('posts', 'user'));
             } else {
                 $this->flash->set("danger", $this->flash->msg['users_not_found']);
                 $this->redirect(true);
@@ -103,7 +103,7 @@ class PostsController extends Controller
         }
 
         $this->pageManager::setName("Publication");
-        $this->viewRender("frontend/users/posts/add", compact('post', 'categories', 'errors'));
+        $this->view("frontend/users/posts/add", compact('post', 'categories', 'errors'));
     }
 
 
@@ -131,7 +131,7 @@ class PostsController extends Controller
                 }
 
                 $this->pageManager::setName("Edition");
-                $this->viewRender(
+                $this->view(
                     "frontend/users/posts/edit",
                     compact('article', 'categories', 'post', 'errors')
                 );

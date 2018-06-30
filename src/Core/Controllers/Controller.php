@@ -66,7 +66,7 @@ class Controller
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function viewRender(string $view, array $variables = [])
+    public function view(string $view, array $variables = [])
     {
         return $this->renderer->render($view, $variables);
     }

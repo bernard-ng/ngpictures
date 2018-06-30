@@ -29,6 +29,6 @@ class CommunityController extends Controller
             "Rétrouvez la communauté de ngpictures, vos amis, les artistes et les passionnés
             de la photographie"
         );
-        $this->viewRender("frontend/community/community", compact('users'));
+        $this->view("frontend/community/community", compact('users'));
     }
 }

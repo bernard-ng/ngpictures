@@ -10,7 +10,7 @@ class StaticController extends Controller
     {
         $this->turbolinksLocation("/about");
         $this->pageManager::setName("A Propos de nous");
-        $this->viewRender('frontend/others/about');
+        $this->view('frontend/others/about');
     }
 
 
@@ -25,6 +25,6 @@ class StaticController extends Controller
         $this->pageManager::setDescription(
             'La présente clause a pour objet de définir les différents termes essentiels du contrat'
         );
-        $this->viewRender("frontend/others/privacy", compact('categories'));
+        $this->view("frontend/others/privacy", compact('categories'));
     }
 }

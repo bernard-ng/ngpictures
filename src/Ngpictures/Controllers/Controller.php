@@ -51,7 +51,7 @@ class Controller extends SuperController
      * @param boolean $layout
      * @return void
      */
-    public function viewRender(string $view, array $variables = [], bool $layout = true)
+    public function view(string $view, array $variables = [], bool $layout = true)
     {
         $this->renderer->addGlobal('pageManager', $this->pageManager);
         $this->renderer->addGlobal('sessionManager', $this->session);
@@ -68,6 +68,6 @@ class Controller extends SuperController
             $this->renderer->addGlobal('securityToken', false);
         }
 
-        parent::viewRender($view, $variables, $layout);
+        parent::view($view, $variables, $layout);
     }
 }

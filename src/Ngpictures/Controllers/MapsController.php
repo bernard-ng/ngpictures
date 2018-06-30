@@ -7,6 +7,6 @@ class MapsController extends Controller
 
     public function show()
     {
-        $this->viewRender('frontend/others/maps');
+        $this->view('frontend/others/maps');
     }
 }

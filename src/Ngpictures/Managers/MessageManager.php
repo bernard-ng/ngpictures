@@ -17,6 +17,7 @@ class MessageManager implements ArrayAccess
         //GENERAL
         //***************************************************************************************/
         "success"               => "Action effectuée",
+        "failed"                => "Action non effectuée",
         "rss_empty"             => "Notre flux RSS est actuellement vide",
         "undefined_error"       => "Ooups, une erreur s'est produite, veuillez réessayer",
         "edit_not_allowed"      => "Vous n'avez pas le droit d'édition",

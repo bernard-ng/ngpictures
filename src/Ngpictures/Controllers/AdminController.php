@@ -77,7 +77,7 @@ class AdminController extends Controller
         $total_space   = ceil($disk_space);
 
         $this->pageManager::setName('admin');
-        $this->viewRender(
+        $this->view(
             'backend/index',
             compact(
                 'blog',

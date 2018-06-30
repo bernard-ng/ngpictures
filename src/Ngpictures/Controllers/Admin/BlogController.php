@@ -29,7 +29,7 @@ class BlogController extends AdminController
 
         $this->turbolinksLocation(ADMIN . '/blog');
         $this->pageManager::setName('Adm - blog');
-        $this->viewRender(
+        $this->view(
             "backend/blog/index",
             compact("posts", 'total', "totalPage", "currentPage", "prevPage", "nextPage")
         );
@@ -75,7 +75,7 @@ class BlogController extends AdminController
 
             $this->turbolinksLocation(ADMIN . '/blog/edit/' . $id);
             $this->pageManager::setName('Adm - blog.edit');
-            $this->viewRender('backend/blog/edit', compact('article', 'categories', 'post', 'errors'));
+            $this->view('backend/blog/edit', compact('article', 'categories', 'post', 'errors'));
         } else {
             $this->flash->set('danger', $this->flash->msg['post_not_found']);
             $this->redirect('/error/not-found', 404);
@@ -154,6 +154,6 @@ class BlogController extends AdminController
 
         $this->turbolinksLocation(ADMIN . "/blog");
         $this->pageManager::setName('Adm - blog.add');
-        $this->viewRender('backend/blog/add', compact('post', 'categories', 'errors'));
+        $this->view('backend/blog/add', compact('post', 'categories', 'errors'));
     }
 }

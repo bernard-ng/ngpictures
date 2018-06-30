@@ -30,7 +30,7 @@ class GalleryController extends Controller
 
         $this->turbolinksLocation("/gallery");
         $this->pageManager::setName('Galerie');
-        $this->viewRender('frontend/gallery/index', compact('photo', 'photos'));
+        $this->view('frontend/gallery/index', compact('photo', 'photos'));
     }
 
 
@@ -45,7 +45,7 @@ class GalleryController extends Controller
         $photo = $this->gallery->find(intval($id));
         if ($photo) {
             $this->turbolinksLocation("/gallery/{$id}");
-            $this->viewRender('frontend/gallery/show', compact('photo'), false);
+            $this->view('frontend/gallery/show', compact('photo'), false);
         } else {
             if ($this->isAjax()) {
                 $this->setFlash($this->flash->msg['post_not_found']);
@@ -67,7 +67,7 @@ class GalleryController extends Controller
 
         $this->turbolinksLocation("/gallery/albums");
         $this->pageManager::setName('albums');
-        $this->viewRender('frontend/gallery/albums', compact("albums"));
+        $this->view('frontend/gallery/albums', compact("albums"));
     }
 
 
@@ -85,7 +85,7 @@ class GalleryController extends Controller
                 $photos = $this->gallery->findGreater($lastId, 4);
 
                 $this->pageManager::setName('Diaporama');
-                $this->viewRender('frontend/gallery/slider', compact('photos'));
+                $this->view('frontend/gallery/slider', compact('photos'));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error']);
                 $this->redirect('/gallery');
@@ -93,7 +93,7 @@ class GalleryController extends Controller
         } else {
             $photos = $this->gallery->latest();
             $this->pageManager::setName('Diaporama');
-            $this->viewRender('frontend/gallery/slider', compact('photos'));
+            $this->view('frontend/gallery/slider', compact('photos'));
         }
     }
 }

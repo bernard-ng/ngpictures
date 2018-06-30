@@ -84,7 +84,7 @@ class LikesController extends Controller
 
                 $this->turbolinksLocation("/likes/show/{$type}/{$slug}-{$id}");
                 $this->pageManager::setName("Mentions j'aime");
-                $this->viewRender("frontend/posts/likers", compact("likers"));
+                $this->view("frontend/posts/likers", compact("likers"));
             } else {
                 $this->flash->set('info', $this->flash->msg['post_not_liked']);
                 $this->redirect(true);

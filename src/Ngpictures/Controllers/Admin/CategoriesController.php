@@ -10,12 +10,6 @@ use Ngpictures\Traits\Controllers\PaginationTrait;
 class CategoriesController extends AdminController
 {
 
-    public function __construct(ContainerInterface $container)
-    {
-        parent::__construct($container);
-        $this->loadModel('categories');
-    }
-
     use PaginationTrait;
 
     /**
@@ -24,17 +18,17 @@ class CategoriesController extends AdminController
     public function index()
     {
         $categories = $this->categories->orderBy('title', 'DESC', 0, 10);
-        $total = count($this->categories->all());
+        $total = $this->categories->countAll()->num;
 
-        $pagination = $this->setPagination($total, "categories");
-        $currentPage = $pagination['currentPage'];
-        $totalPage = $pagination['totalPage'];
-        $prevPage = $pagination['prevPage'];
-        $nextPage = $pagination['nextPage'];
-        $categories = $pagination['result'] ?? $categories;
+        $pagination     = $this->setPagination($total, "categories");
+        $currentPage    = $pagination['currentPage'];
+        $totalPage      = $pagination['totalPage'];
+        $prevPage       = $pagination['prevPage'];
+        $nextPage       = $pagination['nextPage'];
+        $categories     = $pagination['result'] ?? $categories;
 
         $this->pageManager::setName('admin categories');
-        $this->viewRender(
+        $this->view(
             'backend/blog/categories',
             compact('categories', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
         );
@@ -60,16 +54,15 @@ class CategoriesController extends AdminController
                 $description    =   $post->get('description');
                 $this->categories->create(compact('title', 'description', 'slug'));
 
-                $this->flash->set('success', $this->flash->msg['form_post_submitted']);
-                $this->redirect(ADMIN . "/blog/categories");
+                $this->flash->set('success', $this->flash->msg['form_post_submitted'], false);
+                $this->redirect(ADMIN . "/blog/categories", false);
             } else {
-                $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
-                $errors = new Collection($this->validator->getErrors());
+               $this->sendFormError();
             }
         }
 
         $this->pageManager::setName('admin categories.add');
-        $this->viewRender('backend/blog/categories.add', compact('post', 'errors'));
+        $this->view('backend/blog/categories.add', compact('post', 'errors'));
     }
 
 
@@ -98,16 +91,15 @@ class CategoriesController extends AdminController
                     $this->flash->set('success', $this->flash->msg['post_edit_success']);
                     $this->redirect(ADMIN . "/blog/categories");
                 } else {
-                    $this->flash->set("danger", $this->flash->msg['form_multi_errors']);
-                    $errors = new Collection($this->validator->getErrors());
+                    $this->sendFormError();
                 }
             }
 
             $this->pageManager::setName('admin categories.edit');
-            $this->viewRender('backend/blog/categories.edit', compact('post', 'category', 'errors'));
+            $this->view('backend/blog/categories.edit', compact('post', 'category', 'errors'));
         } else {
-            $this->flash->set('danger', $this->flash->msg['undefined_error']);
-            $this->redirect(true);
+            $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
+            $this->redirect(true, false);
         }
     }
 }

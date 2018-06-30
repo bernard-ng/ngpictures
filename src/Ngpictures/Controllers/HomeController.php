@@ -35,7 +35,7 @@ class HomeController extends Controller
 
         $this->turbolinksLocation("/");
         $this->pageManager::setName('Ngpictures');
-        $this->viewRender(
+        $this->view(
             "frontend/index",
             compact('last', 'article', 'categories', 'sliderTitle')
         );

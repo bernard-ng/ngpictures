@@ -30,7 +30,7 @@ class NotificationsController extends Controller
             $nofications = $this->notifcation->findWith('users_id', $user_id, false);
 
             $this->turbolinksLocation("/nofications/{$user_id}/{$token}");
-            $this->viewRender('frontend/users/account/notifications', compact('notifications'));
+            $this->view('frontend/users/account/notifications', compact('notifications'));
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error']);
             $this->redirect(true);

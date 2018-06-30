@@ -16,13 +16,10 @@ class LogsController extends AdminController
      */
     public function index()
     {
-        $logs = (is_file(ROOT."/system.log"))
-            ? file_get_contents(ROOT."/system.log")
-            : "file: system-log not found";
-
+        $logs = (is_file(ROOT."/system.log")) ? file_get_contents(ROOT."/system.log") : "file: system-log not found";
         $this->turbolinksLocation(ADMIN.'/logs');
         $this->pageManager::setName('Adm - Logs');
-        $this->viewRender('backend/logs', compact('logs'));
+        $this->view('backend/logs', compact('logs'));
     }
 
 
@@ -43,20 +40,19 @@ class LogsController extends AdminController
      * envoyer les logs a l'admin par mail
      *
      * @return void
-     * @throws \Ng\Core\Exception\ConfigManagerException
      */
     public function send()
     {
         $email = $this->container->get('site.email');
 
         try {
-            (new Mailer())->sendLogs($email);
-            $this->flash->set("success", $this->flash->msg['success']);
-            $this->redirect(true);
+            $this->container->get(Mailer::class)->sendLogs($email);
+            $this->flash->set("success", $this->flash->msg['success'], false);
+            $this->redirect(true, false);
         } catch (RuntimeException $e) {
             LogMessageManager::register(__class__, $e);
-            $this->flash->set('danger', $this->flash->msg['undefined_error']);
-            $this->redirect(true);
+            $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
+            $this->redirect(true, false);
         }
     }
 }

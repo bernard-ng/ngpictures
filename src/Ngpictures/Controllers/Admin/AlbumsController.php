@@ -28,7 +28,7 @@ class AlbumsController extends AdminController
         $albums         = $pagination['result'] ?? $albums;
 
         $this->pageManager::setName('admin gallery.album');
-        $this->viewRender(
+        $this->view(
             'backend/gallery/albums',
             compact('albums', "currentPage", 'totalPage', 'prevPage', 'nextPage', 'total')
         );
@@ -62,7 +62,7 @@ class AlbumsController extends AdminController
         }
 
         $this->pageManager::setName('admin album.add');
-        $this->viewRender('backend/gallery/albums.add', compact('post', 'errors'));
+        $this->view('backend/gallery/albums.add', compact('post', 'errors'));
     }
 
 
@@ -96,7 +96,7 @@ class AlbumsController extends AdminController
             }
 
             $this->pageManager::setName('admin album.edit');
-            $this->viewRender('backend/gallery/albums.edit', compact('post', 'album', 'errors'));
+            $this->view('backend/gallery/albums.edit', compact('post', 'album', 'errors'));
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
             $this->redirect(true, false);
