@@ -73,6 +73,8 @@ class MessageManager implements ArrayAccess
         'files_not_uploaded'    => "Ooups, votre image n'a pas pu être télécharger",
         'files_not_directory'   => "Impossibe d'ouvrir le dossier demandé, veuillez réessayer",
         "files_download_failed" => "Ooups, une Erreur s'est produite lors du téléchargement",
+        "files_download_progress" => "Téléchargement en cours...",
+        "files_download_finished" => "Téléchargement terminé",
 
 
         //ADMIN

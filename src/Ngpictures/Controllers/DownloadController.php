@@ -72,9 +72,35 @@ class DownloadController extends Controller
      */
     private function download($file)
     {
-        header('Content-Type: application/octet-stream');
-        header('Content-Transfer-Encoding: Binary');
+        if (ini_get('zlib.output_compression')) {
+            init_set('zlib.output_compression', 'off');
+        }
+
+        switch(strtolower(pathinfo($file, PATHINFO_EXTENSION))) {
+            case 'pdf' :
+                $mine = 'application/pdf';
+                break;
+            case 'zip' :
+                $mine = 'application/zip';
+                break;
+            case 'jpg' || 'jpeg' :
+                $mine = 'image/jpg';
+                break;
+            default:
+                $mine = 'application/force-download';
+                break;
+        }
+
+        header('Pragma: public');
+        header('Expires : 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header("Last-Modified: ".gmdate('D, d M Y H:i:s', filemtime($file)));
+        header("Cache-Control: private", false);
+        header('Content-Type: '.$mine);
         header('Content-Disposition: attachement; filename="'.basename($file).'"');
+        header('Content-Transfer-Encoding: Binary');
+        header('Content-Length: '.filesize($file));
+        header('Connection: close');
         echo readfile($file);
         exit();
     }
