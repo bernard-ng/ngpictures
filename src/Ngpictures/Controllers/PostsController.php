@@ -6,6 +6,7 @@ use Ng\Core\Managers\ImageManager;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Controllers\ShowPostTrait;
 use Ngpictures\Traits\Controllers\StoryPostTrait;
+use Ngpictures\Services\Notification\NotificationService;
 
 
 class PostsController extends Controller
@@ -61,12 +62,13 @@ class PostsController extends Controller
         $post           =   new Collection($_POST);
         $file           =   new Collection($_FILES);
         $errors         =   new Collection();
+        $notifier       =   $this->container->get(NotificationService::class);
         $categories     =   $this->categories->orderBy('title', 'ASC');
 
         if (isset($_POST) && !empty($_POST)) {
-            $title          =   $this->str::escape($post->get('title'));
-            $content        =   $this->str::escape($post->get('content'));
-            $slug           =   $this->str::slugify(empty($title)? "publication" : $title);
+            $title          =   $this->str->escape($post->get('title'));
+            $content        =   $this->str->escape($post->get('content'));
+            $slug           =   $this->str->slugify(empty($title)? "publication" : $title);
             $categories_id  =   (intval($post->get('category')) == 0) ? 1 : intval($post->get('category'));
             $users_id       =   $this->authService->isLogged()->id;
 
@@ -95,6 +97,7 @@ class PostsController extends Controller
                                 ]
                             );
 
+                            $notifier->notify(1, [$this->posts->find($last_id)]);
                             $this->flash->set('success', $this->flash->msg['form_post_submitted'], false);
                             $this->redirect("/posts", true);
                         } else {
@@ -138,9 +141,9 @@ class PostsController extends Controller
                 $article    =   $this->posts->find(intval($id));
 
                 if (isset($_POST) && !empty($_POST)) {
-                    $title          =   $this->str::escape($post->get('title'));
-                    $content        =   $this->str::escape($post->get('content'));
-                    $slug           =   $this->str::slugify($title ?? 'publication');
+                    $title          =   $this->str->escape($post->get('title'));
+                    $content        =   $this->str->escape($post->get('content'));
+                    $slug           =   $this->str->slugify($title ?? 'publication');
                     $categories_id  =   intval($post->get('category')) ?? 1;
 
                     $this->posts->update($id, compact('title', 'content', 'slug', 'categories_id'));

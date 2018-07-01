@@ -185,7 +185,7 @@ class Model
     public function findWith(string $field, $value, $one = true)
     {
         return $this->query(
-            "SELECT * FROM {$this->table} WHERE {$field} = ?",
+            "SELECT * FROM {$this->table} WHERE {$field} = ? ORDER BY id DESC",
             [$value],
             true,
             $one
@@ -312,6 +312,13 @@ class Model
         );
     }
 
+
+    public function random(int $limit)
+    {
+        return $this->query(
+            "SELECT * FROM {$this->table} WHERE online = 1 ORDER BY RAND() LIMIT {$limit}"
+        );
+    }
 
     /**
      * tout les enregistrements en ligne

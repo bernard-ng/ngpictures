@@ -16,8 +16,8 @@
                             <tr><td height="30" style="font-size: 30px; line-height: 30px;"> &nbsp;</td></tr>
                             <tr>
                                 <td align="center" style="text-align: center;">
-                                    <a href="http://ngpictures.dev/home">
-                                        <img src="http://127.1.1.1/imgs/logo-white.png" width="500" border="0" alt="logo ngpictures">
+                                    <a href="https://larytech.com">
+                                        <img src="https://larytech.com/imgs/logo-white.png" width="500" border="0" alt="logo ngpictures">
                                     </a>
                                 </td>
                             </tr>

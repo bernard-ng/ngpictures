@@ -33,7 +33,7 @@ class BugsController extends Controller
             $this->validator->setRule('bugs', "required");
 
             if ($this->validator->isValid()) {
-                $content = $this->str::escape($post->get('bugs'));
+                $content = $this->str->escape($post->get('bugs'));
                 $users_id = $this->session->getValue('auth', 'id');
 
                 $this->loadModel('bugs')->create(compact('content', 'users_id'));

@@ -50,11 +50,11 @@ class GalleryController extends AdminController
         $categories     =   $this->categories->orderBy('title', 'ASC');
 
         if (!empty($_FILES)) {
-            $name = (empty($post->get('name'))) ? 'ngpictures-photo' : $this->str::escape($post->get('name'));
-            $tags           =   $this->str::escape($post->get('tags')) ?? null;
-            $description    =   $this->str::escape($post->get('description')) ?? null;
+            $name = (empty($post->get('name'))) ? 'ngpictures-photo' : $this->str->escape($post->get('name'));
+            $tags           =   $this->str->escape($post->get('tags')) ?? null;
+            $description    =   $this->str->escape($post->get('description')) ?? null;
             $categories_id  =   intval($post->get('category')) ?? 1;
-            $slug           =   $this->str::slugify($name);
+            $slug           =   $this->str->slugify($name);
 
             if (!empty($file->get('thumb'))) {
                 $this->gallery->create(compact('name', 'slug', 'description', 'tags', 'categories_id'));
@@ -104,9 +104,9 @@ class GalleryController extends AdminController
             $categories =   $this->categories->orderBy('title', 'ASC');
 
             if (isset($_POST) && !empty($_POST)) {
-                $name           =   $this->str::escape($post->get('name')) ?? $photo->name;
-                $tags           =   $this->str::escape($post->get('tags')) ?? $photo->tags;
-                $description    =   $this->str::escape($post->get('description')) ?? $photo->description;
+                $name           =   $this->str->escape($post->get('name')) ?? $photo->name;
+                $tags           =   $this->str->escape($post->get('tags')) ?? $photo->tags;
+                $description    =   $this->str->escape($post->get('description')) ?? $photo->description;
                 $categories_id  =   intval($post->get('category')) ?? 1;
 
                 $this->gallery->update($id, compact('name', 'tags', 'description', 'categories_id'));

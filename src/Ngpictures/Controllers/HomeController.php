@@ -8,19 +8,6 @@ use Ngpictures\Traits\Util\ResolverTrait;
 
 class HomeController extends Controller
 {
-
-    use ResolverTrait;
-
-    public function __construct(ContainerInterface $container)
-    {
-        parent::__construct($container);
-        $this->blog         =   $this->container->get($this->model('blog'));
-        $this->posts        =   $this->container->get($this->model('posts'));
-        $this->gallery      =   $this->container->get($this->model('gallery'));
-        $this->categories   =   $this->container->get($this->model('categories'));
-    }
-
-
     /**
      * homepage
      *
@@ -28,9 +15,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $last           =   $this->gallery->latest();
-        $article        =   $this->blog->last();
-        $categories     =   $this->categories->orderBy('title', 'DESC', 0, 5);
+        $last           =   $this->loadModel('gallery')->latest();
+        $article        =   $this->loadModel('blog')->last();
+        $categories     =   $this->loadModel('categories')->orderBy('title', 'DESC', 0, 10);
         $sliderTitle    =   ["Deep Shooting", "See the beauty", "Discover More", "Share feelings"];
 
         $this->turbolinksLocation("/");

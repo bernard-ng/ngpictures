@@ -3,11 +3,7 @@ namespace Ng\Core\Managers;
 
 use Ngpictures\Models\UsersModel;
 
-/**
- * gestion des chaines des charateres
- * Class Str
- * @package Ng\Core\Generic
- */
+
 class StringManager
 {
 
@@ -16,7 +12,7 @@ class StringManager
      * @param int $length
      * @return string
      */
-    public static function setToken(int $length): string
+    public function setToken(int $length): string
     {
         $components = "1234567890QERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfhjklzxcvbnm";
         $token = substr(uniqid().str_shuffle(str_repeat($components, $length)), 0, $length);
@@ -28,9 +24,9 @@ class StringManager
      * cree un token pour les cookie
      * @return string
      */
-    public static function cookieToken(): string
+    public function cookieToken(): string
     {
-        return mt_rand(1000, 9999).".".self::setToken(10);
+        return mt_rand(1000, 9999).".".$this->setToken(10);
     }
 
     /**
@@ -39,7 +35,7 @@ class StringManager
      * @param int $maxChar
      * @return string
      */
-    public static function truncateText($text, int $maxChar = 155)
+    public function truncate($text, int $maxChar = 155)
     {
         if (strlen($text) > $maxChar) {
              $text = substr($text, 0, $maxChar);
@@ -57,7 +53,7 @@ class StringManager
      * @param string $text
      * @return string|null
      */
-    public static function slugify($text = "n-a")
+    public function slugify($text = "n-a")
     {
         $text = preg_replace('#[^\pL\d]+#u', '-', $text);
         $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
@@ -77,7 +73,7 @@ class StringManager
      * @param string $password
      * @return string
      */
-    public static function hashPassword(string $password): string
+    public function hashPassword(string $password): string
     {
         return password_hash($password, PASSWORD_BCRYPT);
     }
@@ -88,7 +84,7 @@ class StringManager
      * @param $unescapestring
      * @return string
      */
-    public static function escape($unescapestring): string
+    public function escape($unescapestring): string
     {
         return htmlspecialchars($unescapestring);
     }
@@ -99,7 +95,7 @@ class StringManager
      * @param string $string
      * @return string
      */
-    public static function getSnipet($string)
+    public function getSnipet($string)
     {
         return strip_tags($string, '<a>');
     }
@@ -111,9 +107,9 @@ class StringManager
      * @param string $name
      * @return string
      */
-    public static function checkUserUrl(string $url, string $name): string
+    public function checkUserUrl(string $url, string $name): string
     {
-        $name = self::slugify($name);
+        $name = $this->slugify($name);
         return $name == $url;
     }
 
@@ -124,7 +120,7 @@ class StringManager
      * @param $text
      * @return string
      */
-    public static function userMention(UsersModel $users, $text)
+    public function userMention(UsersModel $users, $text)
     {
         return preg_replace_callback(
             "#@([A-Za-z0-9-_]+)#",
@@ -146,7 +142,7 @@ class StringManager
      * @param string $text
      * @return string
      */
-    public static function htag($text)
+    public function htag($text)
     {
         return preg_replace_callback(
             "~#([A-Za-z0-9_]+)~",
@@ -162,10 +158,10 @@ class StringManager
      * @param string $time
      * @return string
      */
-    public static function relativeTime(string $time): string
+    public function relativeTime(string $time): string
     {
         setlocale(LC_TIME, 'fr');
-        $time = self::escape(strtotime($time));
+        $time = $this->escape(strtotime($time));
         $time = time() - $time ;
 
         switch ($time) {
@@ -204,9 +200,9 @@ class StringManager
      * @param int $number
      * @return string
      */
-    public static function truncateNumber(int $number): string
+    public function truncateNumber(int $number): string
     {
-        $number = intval(self::escape($number));
+        $number = intval($this->escape($number));
 
         switch ($number) {
             case $number >= 0 && $number < 1000:
@@ -227,22 +223,5 @@ class StringManager
                 return $number;
                 break;
         }
-    }
-
-
-    /**
-     * genere des balises meta a partir d'un tableau
-     * @param array $data
-     */
-    public static function generateMeta(array $data = [])
-    {
-        $array_meta = [];
-
-        foreach ($data as $k => $v) {
-            $array_meta[] = "{$k} ='$v' ";
-        }
-
-        $meta = implode(' ', $array_meta);
-        echo "<meta {$meta} >";
     }
 }

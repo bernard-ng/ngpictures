@@ -20,8 +20,6 @@ class FollowingController extends Controller
         $this->authService->restrict();
         $this->user = $this->authService->isLogged();
         $this->loadModel(['users', 'following']);
-
-        var_dump($this->following->getFollowers(5)); die();
     }
 
 

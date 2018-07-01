@@ -4,6 +4,7 @@ namespace Ngpictures\Controllers;
 use Ng\Core\Managers\Collection;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Util\TypesActionTrait;
+use Ngpictures\Services\Notification\NotificationService;
 
 
 class LikesController extends Controller
@@ -30,35 +31,35 @@ class LikesController extends Controller
      * @param string $slug
      * @param int $id
      */
-    public function index(string $type, string $slug, int $id)
+    public function index($type, $slug, $id)
     {
-        $like   =   $this->loadModel('likes');
-        $post   =   $this->loadModel($this->getAction($type))->find(intval($id));
+        $like       = $this->loadModel('likes');
+        $post       = $this->loadModel($this->getAction($type))->find(intval($id));
+        $notifier   = $this->container->get(NotificationService::class);
 
         if ($post && $post->slug === $slug) {
             if ($like->isLiked($post->id, $type, $this->user->id)) {
                 $like->remove($post->id, $type, $this->user->id);
                 if ($this->isAjax()) {
                     echo $post->likes;
+                    exit();
                 } else {
-                    $this->redirect(true);
+                    $this->redirect(true, false);
                 }
             } else {
                 $like->add($post->id, $type, $this->user->id);
-                $this->notificationService->notify(2, [$post, $this->user->id]);
+                $notifier->notify(2, [$post, $this->user->id]);
 
                 if ($this->isAjax()) {
                     echo $post->likes;
+                    exit();
                 } else {
-                    $this->redirect(true);
+                    $this->redirect(true, false);
                 }
             }
         } else {
-            if ($this->isAjax()) {
-                $this->setFlash($this->flash->msg['post_not_found']);
-            }
             $this->flash->set("danger", $this->flash->msg['post_not_found']);
-            $this->redirect(true);
+            $this->redirect(true, false);
         }
     }
 

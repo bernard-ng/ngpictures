@@ -1,7 +1,7 @@
 {% extends 'layout/posts/default.twig' %}
 
 {% block content %}
-    <div class="container row">
+    <section class="section container row">
         {% for u in likers %}
         <div class="row nexted col l3 m6 s12">
                 <div class="card-user card transparent hovercard hoverable">
@@ -47,5 +47,5 @@
                 </div>
             </div>
         {% endfor %}
-    </div>
+    </section>
 {% endblock %}

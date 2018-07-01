@@ -49,8 +49,8 @@ class CategoriesController extends AdminController
             $this->validator->setRule('description', 'required');
 
             if ($this->validator->isValid()) {
-                $title          =   $this->str::escape($post->get('title'));
-                $slug           =   $this->str::slugify($title);
+                $title          =   $this->str->escape($post->get('title'));
+                $slug           =   $this->str->slugify($title);
                 $description    =   $post->get('description');
                 $this->categories->create(compact('title', 'description', 'slug'));
 
@@ -83,8 +83,8 @@ class CategoriesController extends AdminController
                 $this->validator->setRule('description', 'required');
 
                 if ($this->validator->isValid()) {
-                    $title          =   $this->str::escape($post->get('title')) ?? $category->title;
-                    $slug           =   $this->str::slugify($title);
+                    $title          =   $this->str->escape($post->get('title')) ?? $category->title;
+                    $slug           =   $this->str->slugify($title);
                     $description    =   $post->get('description') ?? $category->description;
 
                     $this->categories->update($category->id, compact('title', 'description', 'slug'));

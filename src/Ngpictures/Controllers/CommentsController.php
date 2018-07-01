@@ -5,6 +5,7 @@ namespace Ngpictures\Controllers;
 use Ng\Core\Managers\Collection;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Util\TypesActionTrait;
+use Ngpictures\Services\Notification\NotificationService;
 
 class CommentsController extends Controller
 {
@@ -38,12 +39,13 @@ class CommentsController extends Controller
         $post           =   new Collection($_POST);
         $comments       =   $this->loadModel('comments');
         $publication    =   $this->loadModel($this->getAction($type))->find(intval($id));
+        $notifier       =   $this->container->get(NotificationService::class);
 
         if ($publication && $publication->slug === $slug) {
             $this->validator->setRule('comment', 'required');
 
             if ($this->validator->isValid()) {
-                $comment = $this->str::escape($post->get('comment'));
+                $comment = $this->str->escape($post->get('comment'));
                 $comments->create(
                     [
                         'users_id' => $this->user->id,
@@ -51,6 +53,7 @@ class CommentsController extends Controller
                         'comment' => $comment
                     ]
                 );
+                $notifier->notify(3, [$publication, $this->user->id, $comment]);
 
                 if ($this->isAjax()) {
                     echo $this->loadModel($this->getAction($type))->find(intval($id))->getCommentsNumber();
@@ -118,7 +121,7 @@ class CommentsController extends Controller
                     $this->validator->setRule('comment', 'required');
 
                     if ($this->validator->isValid()) {
-                        $text = $this->str::escape($post->get('comment_edit'));
+                        $text = $this->str->escape($post->get('comment_edit'));
                         $this->comments->update($comment->id, ['comment' => $text]);
 
                         $this->flash->set('success', $this->flash->msg['comment_edit_success'], false);

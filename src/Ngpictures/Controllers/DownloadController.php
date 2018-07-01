@@ -32,7 +32,7 @@ class DownloadController extends Controller
     {
         if (isset($type, $file_name) && !empty($type) && !empty($file_name)) {
             $type       =   intval($type);
-            $file_name  =   $this->str::escape($file_name);
+            $file_name  =   $this->str->escape($file_name);
             $file       =   self::$path[$type].$file_name;
 
             $posts = $this->loadModel($this->getAction($type));

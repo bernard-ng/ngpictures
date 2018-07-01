@@ -66,7 +66,7 @@ class DatabaseAuthService
      * @param string $token
      */
     public function confirm(int $users_id, string $token) {
-        $token  =   $this->str::escape($token);
+        $token  =   $this->str->escape($token);
         $user   =   $this->users->isNotConfirmed(intval($users_id));
 
         if ($user && $user->confirmation_token === $token) {
@@ -104,7 +104,7 @@ class DatabaseAuthService
     {
         if (!$this->isLogged()) {
             $this->session->write(AUTH_KEY, $user);
-            $this->session->write(TOKEN_KEY, $this->str::setToken(10));
+            $this->session->write(TOKEN_KEY, $this->str->setToken(10));
             $this->flash->set('success', $msg ?? $this->flash->msg['users_login_success'], false);
         }
     }
@@ -140,7 +140,7 @@ class DatabaseAuthService
      */
     public function remember(int $users_id)
     {
-        $remember_token = $this->str::cookieToken();
+        $remember_token = $this->str->cookieToken();
         $this->users->setRememberToken($remember_token, $users_id);
         $this->cookie->write(COOKIE_REMEMBER_KEY, "NG.23.{$users_id}.{$remember_token}");
     }
@@ -155,7 +155,7 @@ class DatabaseAuthService
     public function reConnect(UsersEntity $user, string $msg = null)
     {
         $this->session->write(AUTH_KEY, $user);
-        $this->session->write(TOKEN_KEY, $this->str::setToken(10));
+        $this->session->write(TOKEN_KEY, $this->str->setToken(10));
         $this->flash->set('success', $msg ?? $this->flash->msg['users_edit_success']);
     }
 
@@ -191,10 +191,10 @@ class DatabaseAuthService
     public function register(string $name, string $email, string $password)
     {
         $str    = $this->container->get(StringManager::class);
-        $name       =   $str::escape($name);
-        $email      =   $str::escape($email);
-        $token      =   $str::setToken(60);
-        $password   =   $str::hashPassword($password);
+        $name       =   $str->escape($name);
+        $email      =   $str->escape($email);
+        $token      =   $str->setToken(60);
+        $password   =   $str->hashPassword($password);
 
         $this->users->add($name, $email, $password, $token);
         $users_id = $this->users->lastInsertId();

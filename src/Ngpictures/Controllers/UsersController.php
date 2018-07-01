@@ -46,7 +46,7 @@ class UsersController extends Controller
     public function reset($users_id, string $token)
     {
         $user   =   $this->users->find(intval($users_id));
-        $token  =   $this->str::escape($token);
+        $token  =   $this->str->escape($token);
         $errors =   new Collection();
 
         if ($user && $user->reset_token == $token) {
@@ -57,7 +57,7 @@ class UsersController extends Controller
                 $this->validator->setRule('password_confirm', ["matches[password]", "min_length[6]"]);
 
                 if ($this->validator->isValid()) {
-                    $password = $this->str::hashPassword($post->get('password'));
+                    $password = $this->str->hashPassword($post->get('password'));
                     $this->users->resetPassword($password, $user->id);
 
                     $this->flash->set('success', $this->flash->msg['users_reset_success'], false);
@@ -89,11 +89,11 @@ class UsersController extends Controller
             $this->validator->setRule('email', ['valid_email']);
 
             if ($this->validator->isValid()) {
-                $email  =    $this->str::escape($post->get('email'));
+                $email  =    $this->str->escape($post->get('email'));
                 $user   =    $this->users->findWith('email', $email);
 
                 if ($user && $user->confirmed_at != null) {
-                    $this->users->setResetToken($this->str::setToken(60), $user->id);
+                    $this->users->setResetToken($this->str->setToken(60), $user->id);
                     $user   =   $this->users->find($user->id);
                     $link   =   SITE_NAME."/reset/{$user->id}/{$user->reset_token}";
 
@@ -196,7 +196,7 @@ class UsersController extends Controller
                 $this->validator->setRule('password', 'required');
 
                 if ($this->validator->isValid()) {
-                    $name       =   $this->str::escape($post->get('name'));
+                    $name       =   $this->str->escape($post->get('name'));
                     $remember   =   intval($post->get('remember'));
                     $password   =   $post->get('password');
 
@@ -306,10 +306,10 @@ class UsersController extends Controller
                     }
 
                     if ($this->validator->isValid()) {
-                        $name       =    $this->str::escape($post->get('name'));
-                        $email      =    $this->str::escape($post->get('email'));
-                        $bio        =    $this->str::escape($post->get('bio'))      ??  "Hey suis sur Ngpictures 2.0";
-                        $phone      =    $this->str::escape($post->get('phone'))    ??  null;
+                        $name       =    $this->str->escape($post->get('name'));
+                        $email      =    $this->str->escape($post->get('email'));
+                        $bio        =    $this->str->escape($post->get('bio'))      ??  "Hey suis sur Ngpictures 2.0";
+                        $phone      =    $this->str->escape($post->get('phone'))    ??  null;
 
                         $this->users->update($user->id, compact('name', 'email', 'phone', 'bio'));
                         $user = $this->users->find($user->id);

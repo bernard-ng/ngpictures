@@ -1,7 +1,16 @@
 {% extends 'layout/posts/default.twig' %}
 
 {% block content %}
-    <section class="section col l6 m12 s12 animated slideInLeft">
+    {% if activeUser %}
+        <div class="row col s12">
+            <ul class="tabs transparent shadow-3">
+                <li class="tab col s4"><a href="{{ activeUser.followersUrl }}" target="_self">Abonnées</a></li>
+                <li class="tab col s4"><a href="{{ activeUser.followingsUrl }}" target="_self">Abonnement</a></li>
+                <li class="tab col s4"><a href="#collection">Photographes</a></li>
+            </ul>
+        </div>
+    {% endif %}
+    <section class="section col l12 m12 s12 animated slideInLeft">
     <div class="container row">
         {% for u in users %}
             <div class="row nexted col l3 m6 s12">
@@ -61,7 +70,7 @@
         {% endfor %}
     </div>
 </section>
-<div class="fixed-action-btn second">
+<div class="fixed-action-btn {{ activeUser ? 'second' : '' }}">
     <a href="/community/search" class="btn-floating btn-large blue dark-2 waves-effect shadow-4">
         <i class="icon icon-search"></i>
     </a>

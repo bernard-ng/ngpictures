@@ -25,7 +25,7 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $photo = $this->gallery->latest();
+        $photo = $this->gallery->random(4);
         $photos = $this->gallery->lastOnline();
 
         $this->turbolinksLocation("/gallery");
@@ -47,11 +47,8 @@ class GalleryController extends Controller
             $this->turbolinksLocation("/gallery/{$id}");
             $this->view('frontend/gallery/show', compact('photo'), false);
         } else {
-            if ($this->isAjax()) {
-                $this->setFlash($this->flash->msg['post_not_found']);
-            }
             $this->flash->set("danger", $this->flash->msg['post_not_found']);
-            $this->redirect(true);
+            $this->redirect(true, false);
         }
     }
 
@@ -79,7 +76,7 @@ class GalleryController extends Controller
     public function slider()
     {
         if (isset($_GET['last_id']) && !empty($_GET['last_id'])) {
-            $lastId = $this->str::escape($_GET['last_id']);
+            $lastId = $this->str->escape($_GET['last_id']);
 
             if ($this->gallery->find(intval($lastId))) {
                 $photos = $this->gallery->findGreater($lastId, 4);

@@ -33,7 +33,7 @@ class SavesController extends controller
         $user = $this->session->read(AUTH_KEY);
         $type = intval($type);
         $id   = intval($id);
-        $slug = $this->str::escape($slug);
+        $slug = $this->str->escape($slug);
 
         $post = $this->loadModel($this->getAction($type))->find($id);
         if ($post && $post->slug == $slug) {

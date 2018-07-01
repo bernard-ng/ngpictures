@@ -17,9 +17,9 @@ class ContactController extends Controller
             $this->validator->setRule('message', 'required');
 
             if ($this->validator->isValid()) {
-                $name       = $this->str::escape($post->get('name'));
-                $email      = $this->str::escape($post->get('email'));
-                $message    = $this->str::escape($post->get('message'));
+                $name       = $this->str->escape($post->get('name'));
+                $email      = $this->str->escape($post->get('email'));
+                $message    = $this->str->escape($post->get('message'));
 
                 $this->container->get(Mailer::class)->contact($name, $email, $message);
                 $this->flash->set('success', $this->flash->msg['form_contact_submitted']);

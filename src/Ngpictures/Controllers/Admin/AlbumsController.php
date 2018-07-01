@@ -49,8 +49,8 @@ class AlbumsController extends AdminController
             $this->validator->setRule('description', 'required');
 
             if ($this->validator->isValid()) {
-                $title          =   $this->str::escape($post->get('title'));
-                $slug           =   $this->str::slugify($title);
+                $title          =   $this->str->escape($post->get('title'));
+                $slug           =   $this->str->slugify($title);
                 $description    =   $post->get('description');
 
                 $this->albums->create(compact('title', 'description', 'slug'));
@@ -83,8 +83,8 @@ class AlbumsController extends AdminController
                 $this->validator->setRule('description', 'required');
 
                 if ($this->validator->isValid()) {
-                    $title          =   $this->str::escape($post->get('title')) ?? $album->title;
-                    $slug           =   $this->str::slugify($title);
+                    $title          =   $this->str->escape($post->get('title')) ?? $album->title;
+                    $slug           =   $this->str->slugify($title);
                     $description    =   $post->get('description') ?? $album->description;
 
                     $this->albums->update($album->id, compact('title', 'description', 'slug'));

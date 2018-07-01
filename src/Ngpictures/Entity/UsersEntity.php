@@ -21,7 +21,7 @@ class UsersEntity extends Entity
     public function getAccountUrl(): string
     {
         $this->accountUrl = "/";
-        $this->accountUrl .= StringManager::slugify($this->name)."-{$this->id}";
+        $this->accountUrl .= Ngpictures::getDic()->get(StringManager::class)->slugify($this->name)."-{$this->id}";
         return $this->accountUrl;
     }
 
@@ -33,7 +33,7 @@ class UsersEntity extends Entity
     public function getFollowingUrl(): string
     {
         $this->followingUrl = "/following/";
-        $this->followingUrl .= StringManager::slugify($this->name)."-{$this->id}";
+        $this->followingUrl .= Ngpictures::getDic()->get(StringManager::class)->slugify($this->name)."-{$this->id}";
         return $this->followingUrl;
     }
 

@@ -38,7 +38,7 @@ class PostsModel extends Model
     public function findWith(string $field, $value, $one = true)
     {
         return $this->query(
-            "SELECT * FROM {$this->table} WHERE {$field} = ? and online = 1",
+            "SELECT * FROM {$this->table} WHERE {$field} = ? and online = 1 ORDER BY date_created DESC",
             [$value],
             true,
             $one

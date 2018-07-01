@@ -9,7 +9,7 @@ trait PaginationTrait
         $totalPage = ceil($total / 10);
 
         if (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0) {
-            $page = $this->str::escape($_GET['page']);
+            $page = $this->str->escape($_GET['page']);
             if ($page <= $totalPage) {
                 $currentPage = $page;
                 $result = $this->$action->orderBy('date_created', 'DESC', ($currentPage - 1) * 10, 10);

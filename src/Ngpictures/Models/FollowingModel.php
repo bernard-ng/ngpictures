@@ -74,26 +74,6 @@ class FollowingModel extends Model
 
 
     /**
-     * recupere tout les followers
-     *
-     * @param integer $users_id
-     * @return void
-     */
-    public function getFollowers(int $users_id)
-    {
-        return $this->query(
-            "SELECT {$this->table}.follower_id, {$this->table}.followed_id , users.*
-            FROM {$this->table}
-            LEFT JOIN {$this->table}.follower_id = users.id
-            WHERE (
-                SELECT {$this->table}.follower_id WHERE {$this->table}.followed_id = ?
-            )"
-        );
-    }
-
-
-
-    /**
      * le user est follow ?
      * methode pour les entity
      * @param int $id

@@ -57,9 +57,9 @@ class BlogController extends AdminController
                     $this->validator->setRule('content', 'required');
 
                     if ($this->validator->isValid()) {
-                        $title = $this->str::escape($post->get('title'));
+                        $title = $this->str->escape($post->get('title'));
                         $content = $post->get('content');
-                        $slug = $this->str::escape($post->get('slug')) ?? $this->str::suglify($post->get('title'));
+                        $slug = $this->str->escape($post->get('slug')) ?? $this->str::suglify($post->get('title'));
                         $categories_id = (int) $post->get('category') ?? 1;
 
                         $this->blog->update($id, compact('title', 'content', 'slug', 'categories_id'));
@@ -100,17 +100,17 @@ class BlogController extends AdminController
             $this->validator->setRule('content', 'required');
 
             if ($this->validator->isValid()) {
-                $title              =   $this->str::escape($post->get('title'));
+                $title              =   $this->str->escape($post->get('title'));
                 $content            =   $post->get('content');
                 $categories_id      =   ($post->get('category') == 0) ? 1 : $post->get('category');
 
                 if ($post->get('slug') !== '') {
                     $this->validator->setRule('slug', 'alnum_dash');
                     if ($this->validator->isValid()) {
-                        $slug = $this->str::escape($post->get('slug'));
+                        $slug = $this->str->escape($post->get('slug'));
                     }
                 } else {
-                    $slug = $this->str::slugify($title);
+                    $slug = $this->str->slugify($title);
                 }
             } else {
                 $this->sendFormError();

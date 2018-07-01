@@ -60,7 +60,7 @@ class CategoriesController extends Controller
     {
         $category = $this->categories->find(intval($id));
 
-        if ($category && $this->str::checkUserUrl($name, $category->title)) {
+        if ($category && $this->str->checkUserUrl($name, $category->title)) {
             $blog       = $this->blog->findWith('categories_id', $category->id, false);
             $posts      = $this->posts->findWith('categories_id', $category->id, false);
             $gallery    = $this->gallery->findWith('categories_id', $category->id, false);

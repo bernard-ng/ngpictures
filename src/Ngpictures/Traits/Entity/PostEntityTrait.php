@@ -54,7 +54,7 @@ trait PostEntityTrait
      */
     public function getCategoryUrl(): string
     {
-        $category = StringManager::Slugify($this->category);
+        $category = Ngpictures::getDic()->get(StringManager::class)->slugify($this->category);
         $this->categoryUrl = "/categories";
         $this->categoryUrl .= "/{$category}-{$this->categories_id}";
         return $this->categoryUrl;
@@ -225,10 +225,11 @@ trait PostEntityTrait
      */
     public function getSnipet()
     {
+        $str = Ngpictures::getDic()->get(StringManager::class);
         $users = Ngpictures::getDic()->get($this->model('users'));
-        $content = StringManager::getSnipet(StringManager::truncateText($this->content, 150));
-        $text = StringManager::userMention($users, strip_tags($content));
-        return StringManager::htag($text);
+        $content = $str->getSnipet($str->truncate($this->content, 150));
+        $text = $str->userMention($users, strip_tags($content));
+        return $str->htag($text);
     }
 
 
@@ -238,9 +239,10 @@ trait PostEntityTrait
      */
     public function getFullText()
     {
+        $str = Ngpictures::getDic()->get(StringManager::class);
         $users = Ngpictures::getDic()->get($this->model('users'));
-        $text = StringManager::userMention($users, strip_tags($this->content));
-        return nl2br(StringManager::htag($text));
+        $text = $str->userMention($users, strip_tags($this->content));
+        return nl2br($str->htag($text));
     }
 
     /**

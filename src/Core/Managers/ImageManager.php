@@ -85,7 +85,7 @@ class ImageManager
         $ext = strtolower(end($ext));
         $expected_type = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 
-        if (in_array($ext, $this->$extensions) && in_array($type, $expected_type)) {
+        if (in_array($ext, $this->extensions) && in_array($type, $expected_type)) {
             return true;
         }
         return false;
@@ -131,10 +131,10 @@ class ImageManager
     {
         if (!empty($file->get('thumb.tmp_name'))) {
             $size = ($file->get('thumb.size'));
-            $path = $this->$path[$path];
+            $path = $this->path[$path];
 
             if ($this->checkFile($file->get('thumb.name'), $file->get('thumb.type'))) {
-                if ($size <= $this->$size_max) {
+                if ($size <= $this->size_max) {
                     $manager = new InterventionImage();
 
                     try {
@@ -142,7 +142,7 @@ class ImageManager
 
                         switch ($format) :
                             case 'ratio':
-                            $image->resize($this->$format[$format], null, function ($c) {
+                            $image->resize($this->format[$format], null, function ($c) {
                                 $c->aspectRatio();
                             });
                             break;
@@ -152,12 +152,12 @@ class ImageManager
                             });
                             break;
                         case 'small':
-                            $image->fit($this->$format[$format], $this->$format[$format], function ($c) {
+                            $image->fit($this->format[$format], $this->format[$format], function ($c) {
                                 $c->upsize();
                             });
                             break;
                         case 'medium ' || 'large':
-                            $image->fit($this->$format[$format], $this->$format[$format]);
+                            $image->fit($this->format[$format], $this->format[$format]);
                         endswitch;
 
                         $image
@@ -201,7 +201,7 @@ class ImageManager
     public function updateStatic(Collection $file, string $name)
     {
         if (!empty($file->get('thumb.tmp_name'))) {
-            $path = $this->$path['imgs'];
+            $path = $this->path['imgs'];
             if ($this->checkFile($file->get('thumb.name'), $file->get('thumb.type'))) {
                 $manager = new InterventionImage();
                 $sizes = getimagesize($file->get('thumb.tmp_name'));
@@ -270,7 +270,7 @@ class ImageManager
         $manager = new InterventionImage();
 
         try {
-            $manager->make($this->$path[$type] . "/{$filename}")
+            $manager->make($this->path[$type] . "/{$filename}")
                 ->text(
                     $text,
                     20,
@@ -283,7 +283,7 @@ class ImageManager
                         $font->valign("middle");
                     }
                 )
-                ->save($this->$path[$type] . "/{$filename}")
+                ->save($this->path[$type] . "/{$filename}")
                 ->destroy();
 
             return true;
@@ -309,13 +309,13 @@ class ImageManager
 
         try {
             $manager = $manager
-                ->make($this->$path[$type] . "/{$filename}")
+                ->make($this->path[$type] . "/{$filename}")
                 ->orientate()
                 ->insert($logo, 'bottom-right', 30, 30);
 
-            if (file_exists($this->$path[$type] . "/{$filename}")) {
+            if (file_exists($this->path[$type] . "/{$filename}")) {
                 $manager
-                    ->save($this->$path[$type] . "/{$filename}")
+                    ->save($this->path[$type] . "/{$filename}")
                     ->destroy();
 
                 return true;
