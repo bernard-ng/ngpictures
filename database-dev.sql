@@ -1,453 +1,447 @@
--- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- MySQL dump 10.13  Distrib 5.7.14, for Win64 (x86_64)
 --
--- Client :  127.0.0.1
--- Généré le :  Dim 08 Avril 2018 à 23:52
--- Version du serveur :  5.7.14
--- Version de PHP :  7.0.10
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
+-- Host: localhost    Database: ngbdd
+-- ------------------------------------------------------
+-- Server version	5.7.14
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Base de données :  `ngbdd`
+-- Table structure for table `albums`
 --
 
--- --------------------------------------------------------
-
---
--- Structure de la table `albums`
---
-
+DROP TABLE IF EXISTS `albums`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `albums` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(500) NOT NULL,
   `description` text NOT NULL,
   `slug` varchar(255) NOT NULL,
-  `date_created` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `code` varchar(20) DEFAULT NULL,
+  `status` smallint(3) unsigned NOT NULL DEFAULT '1',
+  `date_created` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `idx_uni_code` (`code`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Contenu de la table `albums`
+-- Dumping data for table `albums`
 --
 
-INSERT INTO `albums` (`id`, `title`, `description`, `slug`, `date_created`) VALUES
-(3, 'Noir et Blanc', '<p>la beautE du monochrome</p>', 'noir-et-blanc', '2018-01-28 23:22:19');
-
--- --------------------------------------------------------
+LOCK TABLES `albums` WRITE;
+/*!40000 ALTER TABLE `albums` DISABLE KEYS */;
+INSERT INTO `albums` VALUES (1,'It Open Talk','Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.','it-open-talk',NULL,1,'2018-05-14 00:22:25'),(8,'Gretta shooting','Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.','gretta-shooting',NULL,1,'2018-05-14 00:26:07'),(9,'Precylia shooting','Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.','precylia-shooting',NULL,1,'2018-05-14 00:26:22'),(12,'Complexe scolaire imani','Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.','complexe-scolaire-imani',NULL,1,'2018-05-14 00:27:01'),(13,'Balloy anniversaire 2017','Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.','balloy-anniversaire-2017',NULL,1,'2018-05-14 00:27:24'),(14,'Gretta anniversaire 2018','Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.','gretta-anniversaire-2018',NULL,1,'2018-05-14 00:27:43'),(15,'Marlah shooting','Ngpictures est une galerie photo et un mini résau sociale pour photographe et passionné de la photographie, Nous vous proposons de découvrir la photographie autrement, avec nos différents services étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance. En savoir plus','marlah-shooting',NULL,1,'2018-07-02 00:36:20');
+/*!40000 ALTER TABLE `albums` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Structure de la table `api`
+-- Table structure for table `api`
 --
 
+DROP TABLE IF EXISTS `api`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `api` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `users_id` int(10) UNSIGNED NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `users_id` int(10) unsigned NOT NULL,
   `namespace` varchar(100) DEFAULT NULL,
   `key` varchar(100) NOT NULL,
   `secret` varchar(100) NOT NULL,
-  `date_created` datetime NOT NULL
+  `date_created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='content, client app information for ngpicturesClient API';
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Structure de la table `blog`
+-- Dumping data for table `api`
 --
 
+LOCK TABLES `api` WRITE;
+/*!40000 ALTER TABLE `api` DISABLE KEYS */;
+/*!40000 ALTER TABLE `api` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `blog`
+--
+
+DROP TABLE IF EXISTS `blog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `blog` (
-  `id` int(10) UNSIGNED NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `content` longtext NOT NULL,
-  `users_id` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `users_id` bigint(20) unsigned NOT NULL DEFAULT '1',
   `date_created` datetime NOT NULL,
   `thumb` varchar(255) DEFAULT NULL,
+  `exif` text,
   `slug` varchar(255) DEFAULT NULL,
   `categories_id` int(10) DEFAULT NULL,
-  `online` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `online` tinyint(4) NOT NULL DEFAULT '0',
+  `downloads` bigint(20) DEFAULT '0',
+  `location` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `fk_users_id_idx` (`users_id`),
+  KEY `fk_catgories_id_idx` (`categories_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Contenu de la table `blog`
+-- Dumping data for table `blog`
 --
 
-INSERT INTO `blog` (`id`, `title`, `content`, `users_id`, `date_created`, `thumb`, `slug`, `categories_id`, `online`) VALUES
-(56, 'In tincidunt congue turpis. In', 'Lorem ipsum dolor sit', 3, '2017-04-28 23:48:48', 'Ngpictures.jpg', 'tincidunt nibh. Phasellus nulla. Integer', 10, 1),
-(57, 'ornare, lectus ante dictum mi,', 'Lorem ipsum dolor sit amet,', 3, '2017-07-02 12:41:23', 'Ngpictures.jpg', 'Praesent interdum ligula eu enim.', 3, 1),
-(58, 'vitae odio sagittis semper. Nam', 'Lorem', 1, '2017-10-23 05:16:06', 'Ngpictures.jpg', 'ante dictum cursus. Nunc mauris', 1, 1),
-(59, 'non dui nec urna suscipit', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 1, '2018-05-18 01:50:57', 'Ngpictures.jpg', 'magnis dis parturient montes, nascetur', 2, 1),
-(60, 'velit eu sem. Pellentesque ut', 'Lorem ipsum dolor', 3, '2018-10-20 18:01:29', 'Ngpictures.jpg', 'mattis ornare, lectus ante dictum', 6, 1),
-(61, 'ridiculus mus. Donec dignissim magna', 'Lorem ipsum dolor sit amet, consectetuer', 3, '2017-01-01 14:23:43', 'Ngpictures.jpg', 'et netus et malesuada fames', 5, 1),
-(62, 'turpis vitae purus gravida sagittis.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur', 1, '2018-04-27 16:25:34', 'Ngpictures.jpg', 'dignissim tempor arcu. Vestibulum ut', 5, 1),
-(63, 'pellentesque, tellus sem mollis dui,', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 1, '2018-11-02 00:11:31', 'Ngpictures.jpg', 'nulla. Donec non justo. Proin', 2, 1),
-(64, 'orci. Ut sagittis lobortis mauris.', 'Lorem ipsum dolor sit', 3, '2018-10-21 07:01:22', 'Ngpictures.jpg', 'nec ante. Maecenas mi felis,', 2, 1),
-(69, 'auctor vitae, aliquet nec, imperdiet', 'Lorem ipsum dolor sit amet, consectetuer adipiscing', 5, '2017-06-09 18:55:59', 'Ngpictures.jpg', 'Donec est mauris, rhoncus id,', 10, 1),
-(70, 'diam. Duis mi enim, condimentum', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 1, '2018-03-09 04:44:17', 'Ngpictures.jpg', 'molestie pharetra nibh. Aliquam ornare,', 6, 1),
-(71, 'eu arcu. Morbi sit amet', 'Lorem', 2, '2018-10-14 22:36:15', 'Ngpictures.jpg', 'ac nulla. In tincidunt congue', 7, 1),
-(72, 'amet luctus vulputate, nisi sem', 'Lorem', 5, '2017-07-22 03:00:22', 'Ngpictures.jpg', 'dis parturient montes, nascetur ridiculus', 9, 1),
-(127, 'wonderful design photography', '<p><span style="display: inline !important; float: none; background-color: transparent; color: #4e4e4e; font-family: openSans,sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: justify; text-decoration: none; text-indent: 0px; text-transform: none; -webkit-text-stroke-width: 0px; white-space: normal; word-spacing: 0px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place. </span><u></u></p>', 1, '2018-01-30 21:21:06', 'ngpictures-wonderful-design-photography-127.jpg', 'wonderful-design-photography', 8, 1),
-(128, 'Bernard ng', '<p><span style="display: inline !important; float: none; background-color: transparent; color: #4e4e4e; font-family: openSans,sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: justify; text-decoration: none; text-indent: 0px; text-transform: none; -webkit-text-stroke-width: 0px; white-space: normal; word-spacing: 0px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place. </span><u></u></p>', 1, '2018-01-30 21:24:12', 'ngpictures-bernard-ng-128.jpg', 'bernard-ng', 6, 1),
-(130, 'outside', '<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place<img style="display: block; margin-left: auto; margin-right: auto;" src="/uploads/gallery/thumbs/ngpictures-5a5fc658ec71e-38.jpg" alt="" width="270" height="270" /></span></p>', 1, '2018-02-06 02:16:42', 'ngpictures-outside-130.jpg', 'outside', 7, 1),
-(131, 'login box', '<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>', 1, '2018-02-11 22:53:32', 'ngpictures-login-box-131.jpg', 'login-box', 2, 0),
-(132, 'New Event', '<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;"><img style="display: block; margin-left: auto; margin-right: auto;" src="/uploads/gallery/thumbs/-36.jpg" alt="" width="500" height="500" /></span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;"><img style="display: block; margin-left: auto; margin-right: auto;" src="/uploads/gallery/thumbs/-37.jpg" alt="" width="500" height="500" /></span></p>', 1, '2018-02-14 20:34:29', 'ngpictures-new-event-132.jpg', 'new-event', 8, 1),
-(135, 'le retour des reines', '<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;"><img style="display: block; margin-left: auto; margin-right: auto;" src="/uploads/gallery/ngpictures-5a99bb6e7e74e-58.jpg" alt="" width="663" height="442" /></span></p>\r\n<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>', 1, '2018-03-04 19:18:27', 'ngpictures-le-retour-des-reines-135.jpg', 'le-retour-des-reines', 8, 1),
-(136, 'imani', '<p><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>', 1, '2018-03-18 03:25:46', 'ngpictures-imani-136.jpg', 'imani', 2, 1),
-(137, 'test new coming', '<p><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>', 1, '2018-03-18 12:24:10', 'ngpictures-new-coming-137.jpg', 'new-coming', 8, 1),
-(138, 'new comer', '<p><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>', 1, '2018-03-18 14:00:01', 'ngpictures-new-comer-138.jpg', 'new-comer', 4, 1),
-(139, 'rapha is back', '<p><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>', 1, '2018-03-18 15:02:12', 'ngpictures-rapha-back-139.jpg', 'rapha-back', 7, 1),
-(143, 'the last', '<p><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>', 1, '2018-03-18 15:46:01', 'ngpictures-the-last-143.jpg', 'the-last', 1, 1),
-(155, 'new design', '<p><span style="font-size: 11.0pt; font-family: \'Arial\',sans-serif; mso-fareast-font-family: \'Times New Roman\'; color: #808a8f; mso-ansi-language: FR; mso-fareast-language: FR; mso-bidi-language: AR-SA;">Salut, vous venez tout juste de cr&eacute;er un compte sur Ngpictures, Confirmez-le en cliquant le button si dessous, si vous n\\\'est pas responsable de la cr&eacute;ation de ce compte, Veuillez tout simplement ignorer ce mail.&nbsp;</span></p>', 1, '2018-03-19 22:17:04', 'ngpictures-new-design-155.jpg', 'new-design', 1, 1),
-(160, 'balloy', '<p><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>', 1, '2018-03-20 00:07:34', 'ngpictures-balloy-160.jpg', 'balloy', 1, 1),
-(161, 'notification avec un son ', '<p><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>', 1, '2018-03-20 00:57:47', 'ngpictures-notification-avec-un-son-161.jpg', 'notification-avec-un-son', 1, 1),
-(162, 'new post', '<p><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>', 1, '2018-03-20 18:07:22', 'ngpictures-new-post-162.jpg', 'new-post', 2, 1),
-(166, 'bernard ng &amp; Ngpictures l\'histoire d\'une vie', '<p><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make @dania design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span><span style="color: #cccccc; font-family: Roboto, sans-serif; font-size: 15px;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>', 1, '2018-03-23 08:58:10', 'ngpictures-bernard-et-ngpictures-166.jpg', 'bernard-et-ngpictures', 1, 1);
-
--- --------------------------------------------------------
+LOCK TABLES `blog` WRITE;
+/*!40000 ALTER TABLE `blog` DISABLE KEYS */;
+INSERT INTO `blog` VALUES (221,'Made By love','<p>l\'amour est un sentiment que nous ressentons tous, cette peinture de l\'autre X nous present un amour asses interessant, bla bla</p>',1,'2018-06-12 19:08:25','ngpictures-made-by-love-221.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"1920\\\" height=\\\"1080\\\"\",\"Height\":1080,\"Width\":1920,\"IsColor\":1,\"ByteOrderMotorola\":0}}','made-by-love',9,1,0,NULL),(222,'simon stalenhag','<p>blur blur blurune description bisare, car en realite ceci est un article une description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un article</p>',1,'2018-06-12 19:10:42','ngpictures-simon-stalenhag-222.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":2,\"COMPUTED\":{\"html\":\"width=\\\"1920\\\" height=\\\"1080\\\"\",\"Height\":1080,\"Width\":1920,\"IsColor\":1,\"ByteOrderMotorola\":1,\"Thumbnail.FileType\":2,\"Thumbnail.MimeType\":\"image\\/jpeg\"}}','simon-stalenhag',9,1,0,NULL),(224,'simon stalenhag','<p>une description bisare, car en realite ceci est un article une description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un articleune description bisare, car en realite ceci est un article</p>',1,'2018-06-12 19:13:17','ngpictures-simon-stalenhag-224.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"1920\\\" height=\\\"1080\\\"\",\"Height\":1080,\"Width\":1920,\"IsColor\":1,\"ByteOrderMotorola\":0}}','simon-stalenhag',2,1,0,NULL),(231,'Gretta Mpunga, shooting 2017','<p>un contenu ou une description.</p>',1,'2018-06-15 09:57:19','ngpictures-gretta-mpunga-shooting-2017-231.jpg','{\"ISOSpeedRatings\":100,\"Flash\":16,\"Model\":\"NIKON D810\",\"ExposureTime\":\"4\\/10\",\"FocalLength\":\"140\\/10\",\"ResolutionUnit\":2,\"COMPUTED\":{\"html\":\"width=\\\"1200\\\" height=\\\"814\\\"\",\"Height\":814,\"Width\":1200,\"IsColor\":1,\"ByteOrderMotorola\":0,\"CCDWidth\":\"5mm\",\"ApertureFNumber\":\"f\\/11.0\",\"Copyright\":\"Ted Gore\",\"Thumbnail.FileType\":2,\"Thumbnail.MimeType\":\"image\\/jpeg\"}}','gretta-mpunga-shooting-2017',1,1,0,NULL),(232,'blur','<p>b</p>',1,'2018-06-15 23:40:00','ngpictures-blur-232.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"1920\\\" height=\\\"908\\\"\",\"Height\":908,\"Width\":1920,\"IsColor\":1,\"ByteOrderMotorola\":0}}','blur',6,1,0,NULL),(235,'linear background exposure','<p>une photo du couch&eacute; du soleil, modifi&eacute;e avec gimp en utilisant un d&eacute;grad&eacute; pour cr&eacute;er les deux couleurs.&nbsp;</p>',1,'2018-06-16 00:19:39','ngpictures-linear-background-exposure-235.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"3708\\\" height=\\\"2614\\\"\",\"Height\":2614,\"Width\":3708,\"IsColor\":1}}','linear-background-exposure',1,1,2,NULL),(244,'Je suis la lumière du monde','<p>il est la lumiere du monde</p>',1,'2018-06-16 19:18:50','ngpictures-je-suis-la-lumiere-du-monde-244.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"3888\\\" height=\\\"2592\\\"\",\"Height\":2592,\"Width\":3888,\"IsColor\":1}}','je-suis-la-lumiere-du-monde',9,1,3,NULL),(245,'Balloy anniversaire 2017','<p>fkf</p>',1,'2018-06-23 00:03:07','ngpictures-balloy-anniversaire-2017-245.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"1672\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":1672,\"IsColor\":1,\"ByteOrderMotorola\":1,\"Thumbnail.FileType\":2,\"Thumbnail.MimeType\":\"image\\/jpeg\"}}','balloy-anniversaire-2017',7,1,3,NULL),(246,'belela - mike kalambay','<p>kdkd</p>',1,'2018-06-23 02:02:06','ngpictures-dkd-246.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','belela-mike-kalambay',9,1,7,NULL);
+/*!40000 ALTER TABLE `blog` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Structure de la table `bugs`
+-- Table structure for table `bugs`
 --
 
+DROP TABLE IF EXISTS `bugs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bugs` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `users_id` int(11) NOT NULL,
   `content` text NOT NULL,
   `date_created` datetime NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Structure de la table `categories`
+-- Dumping data for table `bugs`
 --
 
+LOCK TABLES `bugs` WRITE;
+/*!40000 ALTER TABLE `bugs` DISABLE KEYS */;
+INSERT INTO `bugs` VALUES (40,6,'','2018-06-30 16:14:13',0),(41,6,'','2018-06-30 16:14:15',0),(42,6,'','2018-06-30 16:14:16',0),(43,6,'','2018-06-30 16:14:17',0),(44,6,'','2018-06-30 16:14:17',0),(45,6,'','2018-06-30 16:14:17',0),(46,6,'','2018-06-30 16:14:18',0),(47,6,'','2018-06-30 16:14:18',0),(48,6,'','2018-06-30 16:14:18',0),(49,6,'','2018-06-30 16:14:18',0),(50,6,'','2018-06-30 16:14:22',0),(51,6,'','2018-06-30 16:14:24',0),(52,6,'','2018-06-30 16:14:24',0),(53,6,'','2018-06-30 16:14:25',0),(54,6,'','2018-06-30 16:14:25',0),(55,6,'','2018-06-30 16:14:25',0),(56,6,'','2018-06-30 16:14:25',0),(57,6,'','2018-06-30 16:14:30',0),(58,6,'','2018-06-30 16:14:40',0),(59,6,'','2018-06-30 16:14:49',0),(60,6,'','2018-06-30 16:15:50',0),(61,6,'','2018-06-30 16:18:30',0),(62,6,'','2018-06-30 21:14:20',0);
+/*!40000 ALTER TABLE `bugs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categories` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(500) NOT NULL,
   `description` text,
   `slug` varchar(1000) NOT NULL,
-  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Contenu de la table `categories`
+-- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `title`, `description`, `slug`, `date_created`) VALUES
-(1, 'autre', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'autre', '2018-01-01 02:08:43'),
-(2, 'art', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'art', '2018-01-01 02:08:43'),
-(3, 'musique', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'musique', '2018-01-01 02:08:43'),
-(4, 'mode et fashion', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'mode-et-fashion', '2018-01-01 02:08:43'),
-(5, 'religion', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'religion', '2018-01-01 02:08:43'),
-(6, 'culture', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'culture', '2018-01-01 02:08:43'),
-(7, 'technologie', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'technologie', '2018-01-01 02:08:43'),
-(8, 'evenement', '<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>', 'evenement', '2018-01-01 02:08:43'),
-(12, 'La vie de codeur', '<p><span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>', 'la-vie-de-codeur', '2018-02-23 00:10:04');
-
--- --------------------------------------------------------
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` VALUES (1,'autre','<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>','autre','2018-01-01 02:08:43'),(3,'musique','<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>','musique','2018-01-01 02:08:43'),(4,'mode et fashion','<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>','mode-et-fashion','2018-01-01 02:08:43'),(5,'religion','<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>','religion','2018-01-01 02:08:43'),(6,'culture','<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>','culture','2018-01-01 02:08:43'),(7,'technologie','<p>les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>','technologie','2018-01-01 02:08:43'),(9,'Art','Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.','art','2018-06-15 23:37:32');
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Structure de la table `comments`
+-- Table structure for table `comments`
 --
 
+DROP TABLE IF EXISTS `comments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `comments` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `users_id` int(10) UNSIGNED NOT NULL,
-  `posts_id` int(10) UNSIGNED DEFAULT NULL,
-  `gallery_id` int(10) UNSIGNED DEFAULT NULL,
-  `blog_id` int(10) UNSIGNED DEFAULT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `users_id` int(10) unsigned NOT NULL,
+  `posts_id` int(10) unsigned DEFAULT NULL,
+  `gallery_id` int(10) unsigned DEFAULT NULL,
+  `blog_id` int(10) unsigned DEFAULT NULL,
   `comment` text NOT NULL,
-  `date_created` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `date_created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=286 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Contenu de la table `comments`
+-- Dumping data for table `comments`
 --
 
-INSERT INTO `comments` (`id`, `users_id`, `posts_id`, `gallery_id`, `blog_id`, `comment`, `date_created`) VALUES
-(13, 5, 69, NULL, NULL, 'lol', '2018-01-20 22:39:53'),
-(2, 5, NULL, NULL, 98, '&lt;p&gt;lol&lt;/p&gt;', '2017-12-26 18:36:54'),
-(5, 5, NULL, NULL, 124, 'la vie de louga We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place. courage mon bro', '2018-01-19 19:55:57'),
-(7, 5, NULL, NULL, 124, 'bernard ng', '2018-01-19 20:22:13'),
-(8, 5, NULL, NULL, 124, 'bernard ng', '2018-01-19 20:22:53'),
-(12, 5, NULL, NULL, 64, '&lt;?php echo &quot;lol&quot; ?&gt;', '2018-01-20 22:20:44'),
-(14, 5, NULL, NULL, 64, '&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;', '2018-01-21 09:00:57'),
-(15, 5, NULL, NULL, 64, '&quot;&gt;&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;', '2018-01-21 09:05:54'),
-(16, 9, 83, NULL, NULL, 'la belle naomi et gretta, chaud', '2018-01-21 16:19:37'),
-(17, 5, 83, NULL, NULL, 'hummm naomi', '2018-01-21 16:20:04'),
-(18, 14, 87, NULL, NULL, 'c\'etait trop chaud ', '2018-01-21 17:25:35'),
-(19, 5, NULL, NULL, 130, 'c\'est bon tout refonction comme avant apres un refactoring', '2018-02-07 09:34:26'),
-(20, 5, NULL, NULL, 130, 'cool edit', '2018-02-07 09:39:01'),
-(21, 5, NULL, NULL, 130, 'bg', '2018-02-08 00:11:57'),
-(22, 5, NULL, NULL, 130, 'test', '2018-02-10 09:31:32'),
-(23, 9, 93, NULL, NULL, 'test edit', '2018-02-11 19:54:38'),
-(24, 5, 93, NULL, NULL, 'cool la pub', '2018-02-11 19:55:47'),
-(25, 5, NULL, NULL, 130, 'coll', '2018-02-11 21:35:14'),
-(29, 5, 83, NULL, NULL, 'heo', '2018-02-15 10:31:57'),
-(28, 5, NULL, NULL, 132, 'clean edit', '2018-02-14 21:18:35'),
-(30, 5, 83, NULL, NULL, 'trop clean', '2018-02-20 19:01:27'),
-(31, 17, NULL, NULL, 128, 'qui a poster ?', '2018-03-01 10:55:54'),
-(33, 18, 112, NULL, NULL, 'deux commentaires\r\nedit', '2018-03-01 11:00:05'),
-(35, 20, NULL, NULL, 135, 'cool ta bosser dure pour la deuxieme version hein ?', '2018-03-07 00:48:43'),
-(36, 21, 124, NULL, NULL, 'tester', '2018-03-11 15:24:18');
-
--- --------------------------------------------------------
+LOCK TABLES `comments` WRITE;
+/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+INSERT INTO `comments` VALUES (13,5,69,NULL,NULL,'lol','2018-01-20 22:39:53'),(2,5,NULL,NULL,98,'&lt;p&gt;lol&lt;/p&gt;','2017-12-26 18:36:54'),(5,5,NULL,NULL,124,'la vie de louga We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place. courage mon bro','2018-01-19 19:55:57'),(7,5,NULL,NULL,124,'bernard ng','2018-01-19 20:22:13'),(8,5,NULL,NULL,124,'bernard ng','2018-01-19 20:22:53'),(12,5,NULL,NULL,64,'&lt;?php echo &quot;lol&quot; ?&gt;','2018-01-20 22:20:44'),(14,5,NULL,NULL,64,'&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;','2018-01-21 09:00:57'),(15,5,NULL,NULL,64,'&quot;&gt;&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;','2018-01-21 09:05:54'),(16,9,83,NULL,NULL,'la belle naomi et gretta, chaud','2018-01-21 16:19:37'),(17,5,83,NULL,NULL,'hummm naomi','2018-01-21 16:20:04'),(18,14,87,NULL,NULL,'c\'etait trop chaud ','2018-01-21 17:25:35'),(19,5,NULL,NULL,130,'c\'est bon tout refonction comme avant apres un refactoring','2018-02-07 09:34:26'),(20,5,NULL,NULL,130,'cool edit','2018-02-07 09:39:01'),(21,5,NULL,NULL,130,'bg','2018-02-08 00:11:57'),(22,5,NULL,NULL,130,'test','2018-02-10 09:31:32'),(23,9,93,NULL,NULL,'test edit','2018-02-11 19:54:38'),(24,5,93,NULL,NULL,'cool la pub','2018-02-11 19:55:47'),(25,5,NULL,NULL,130,'coll','2018-02-11 21:35:14'),(29,5,83,NULL,NULL,'heo','2018-02-15 10:31:57'),(28,5,NULL,NULL,132,'clean edit','2018-02-14 21:18:35'),(30,5,83,NULL,NULL,'trop clean','2018-02-20 19:01:27'),(31,17,NULL,NULL,128,'qui a poster ?','2018-03-01 10:55:54'),(33,18,112,NULL,NULL,'deux commentaires\r\nedit','2018-03-01 11:00:05'),(35,20,NULL,NULL,135,'cool ta bosser dure pour la deuxieme version hein ?','2018-03-07 00:48:43'),(36,21,124,NULL,NULL,'tester','2018-03-11 15:24:18'),(45,5,127,NULL,NULL,';adfjks','2018-04-28 19:41:21'),(46,5,128,NULL,NULL,'jhldaldjd trio cikk','2018-04-28 20:04:59'),(53,5,133,NULL,NULL,'jjhjhjh','2018-04-28 20:56:01'),(47,5,123,NULL,NULL,'clean','2018-04-28 20:07:29'),(48,5,123,NULL,NULL,'overlaymodal-overlaymodal-overlaymodal-overlaymodal-overlaymodal-overlaymodal-overlaymodal-overlaymodal-overlaymodal-overlaymodal-overlaymodal-overlaymodal-overlaymodal-overll-overlaymodal-overlaymodal-overlaymodal-overlaymodal-overlaymodal-overlay','2018-04-28 20:08:41'),(101,5,129,NULL,NULL,'dk','2018-04-28 23:59:57'),(99,5,129,NULL,NULL,'je','2018-04-28 23:59:43'),(100,5,129,NULL,NULL,'dk','2018-04-28 23:59:51'),(51,5,128,NULL,NULL,'dckjdkfj; djdk  dja ♥♥♥♥♥♥♥','2018-04-28 20:44:51'),(54,5,133,NULL,NULL,'jjhjhjh','2018-04-28 20:56:01'),(55,5,133,NULL,NULL,'nb,bn,b','2018-04-28 20:56:11'),(56,5,133,NULL,NULL,'dkasjf;djfk','2018-04-28 21:27:25'),(57,5,133,NULL,NULL,'djfdk','2018-04-28 21:54:57'),(58,5,133,NULL,NULL,'fj','2018-04-28 22:05:43'),(59,5,133,NULL,NULL,'new comment','2018-04-28 23:10:30'),(60,5,133,NULL,NULL,'new comment','2018-04-28 23:10:42'),(61,5,133,NULL,NULL,'djkf;kdjfa','2018-04-28 23:10:59'),(62,5,133,NULL,NULL,'un commentaire','2018-04-28 23:11:41'),(63,5,133,NULL,NULL,'un commentaire','2018-04-28 23:12:17'),(64,5,133,NULL,NULL,'un commentaire','2018-04-28 23:12:29'),(65,5,133,NULL,NULL,'bb','2018-04-28 23:21:32'),(66,5,133,NULL,NULL,'les commentaires sont bien send','2018-04-28 23:30:41'),(67,5,133,NULL,NULL,';dkfja','2018-04-28 23:31:02'),(68,5,133,NULL,NULL,'shj','2018-04-28 23:32:29'),(69,5,133,NULL,NULL,'shj','2018-04-28 23:32:32'),(70,5,133,NULL,NULL,'shj','2018-04-28 23:32:39'),(71,5,133,NULL,NULL,'dkfd','2018-04-28 23:34:57'),(72,5,133,NULL,NULL,'dkfd','2018-04-28 23:34:59'),(73,5,133,NULL,NULL,'dkfd','2018-04-28 23:35:00'),(74,5,133,NULL,NULL,'dkfd','2018-04-28 23:35:01'),(78,5,132,NULL,NULL,'dk','2018-04-28 23:42:14'),(77,5,132,NULL,NULL,'un comm','2018-04-28 23:42:01'),(79,5,132,NULL,NULL,'djfkjdk','2018-04-28 23:42:25'),(80,5,132,NULL,NULL,'djfkjdk','2018-04-28 23:42:29'),(81,5,133,NULL,NULL,'dj','2018-04-28 23:43:04'),(85,5,131,NULL,NULL,'un djfkd','2018-04-28 23:46:49'),(102,5,129,NULL,NULL,'dk','2018-04-28 23:59:58'),(86,5,131,NULL,NULL,'un djfkd','2018-04-28 23:46:51'),(87,5,131,NULL,NULL,'un djfkd','2018-04-28 23:46:53'),(88,5,131,NULL,NULL,'un djfkd','2018-04-28 23:46:54'),(89,5,131,NULL,NULL,'un djfkd','2018-04-28 23:46:56'),(90,5,131,NULL,NULL,'un djfkd','2018-04-28 23:46:57'),(91,5,131,NULL,NULL,'un djfkd','2018-04-28 23:46:58'),(92,5,131,NULL,NULL,'un djfkd','2018-04-28 23:46:59'),(93,5,131,NULL,NULL,'ajskl','2018-04-28 23:49:36'),(103,5,129,NULL,NULL,'dk','2018-04-29 00:08:29'),(104,5,129,NULL,NULL,'ajax commentaire fini','2018-04-29 00:15:41'),(105,5,129,NULL,NULL,'sa devrait etre 7','2018-04-29 00:15:57'),(106,5,129,NULL,NULL,'comment...','2018-04-29 00:16:50'),(107,5,131,NULL,NULL,'10eme comments','2018-04-29 00:17:03'),(108,5,132,NULL,NULL,'5em commentaire','2018-04-29 00:17:20'),(109,5,133,NULL,NULL,'humm 24em pas ma la petit alex','2018-04-29 00:17:51'),(110,5,132,NULL,NULL,'blabla','2018-04-29 00:22:55'),(111,5,132,NULL,NULL,'hjj','2018-04-29 00:39:14'),(112,5,NULL,NULL,169,'the first','2018-04-29 00:59:04'),(113,5,NULL,NULL,166,'the first','2018-04-29 00:59:27'),(114,5,NULL,NULL,172,'clean bro','2018-04-29 01:00:32'),(115,5,NULL,NULL,172,'deuxieme commentaire','2018-04-29 01:01:51'),(116,5,NULL,NULL,173,'the new evenement ??? ou evenement c\'est la categorie ','2018-04-29 01:02:30'),(117,5,NULL,NULL,172,'c','2018-04-29 08:29:04'),(118,5,NULL,NULL,172,'love\r\n','2018-04-29 08:34:37'),(119,5,133,NULL,NULL,'c\'est moche','2018-04-29 08:47:11'),(120,5,131,NULL,NULL,'du contenu bizarre','2018-04-29 08:50:43'),(121,5,133,NULL,NULL,'comment...','2018-04-29 08:52:13'),(122,5,133,NULL,NULL,'comment...','2018-04-29 08:55:08'),(123,5,133,NULL,NULL,'djkdk','2018-04-29 08:57:04'),(124,5,133,NULL,NULL,'kdkd','2018-04-29 08:59:21'),(125,5,133,NULL,NULL,'kd','2018-04-29 09:00:06'),(126,5,133,NULL,NULL,'dm','2018-04-29 09:00:25'),(127,5,133,NULL,NULL,'dfdk','2018-04-29 09:04:54'),(128,5,133,NULL,NULL,'new comments','2018-04-29 09:08:39'),(129,5,133,NULL,NULL,'dkdjd','2018-04-29 09:21:37'),(130,5,133,NULL,NULL,'dkfj;adkj','2018-04-29 09:24:04'),(131,5,133,NULL,NULL,'kdjfkd','2018-04-29 09:25:37'),(132,5,133,NULL,NULL,'jd;akdj ','2018-04-29 09:30:26'),(133,5,133,NULL,NULL,'dfj;adk;fjd','2018-04-29 09:30:44'),(134,5,133,NULL,NULL,'dfkdjfdjkfjdkj','2018-04-29 09:34:19'),(135,5,133,NULL,NULL,'kdjfkjfk','2018-04-29 09:34:39'),(136,5,133,NULL,NULL,'d','2018-04-29 09:36:43'),(137,5,NULL,NULL,172,'fjgfgjfg','2018-04-29 10:00:11'),(138,5,NULL,NULL,172,'fjgfgjfg','2018-04-29 10:00:11'),(139,5,133,NULL,NULL,'jdkd;','2018-04-29 13:56:38'),(140,5,133,NULL,NULL,'jdkd;','2018-04-29 13:56:43'),(141,5,133,NULL,NULL,'jdkd;','2018-04-29 13:56:52'),(142,5,133,NULL,NULL,'kdkd','2018-04-29 13:57:37'),(143,5,133,NULL,NULL,'dkdkdk','2018-04-29 14:07:14'),(144,5,133,NULL,NULL,'kdkd','2018-04-29 14:07:21'),(145,5,133,NULL,NULL,'dddkdk','2018-04-29 14:07:43'),(146,5,133,NULL,NULL,'js pur','2018-04-29 14:14:32'),(147,5,132,NULL,NULL,'tu dors ?','2018-04-29 14:14:46'),(148,5,133,NULL,NULL,'clean','2018-04-29 19:57:24'),(149,5,133,NULL,NULL,'cool','2018-04-29 19:57:45'),(150,5,NULL,NULL,173,'dkdjf;','2018-04-29 19:58:44'),(151,5,NULL,NULL,173,'3','2018-04-29 19:58:49'),(152,5,NULL,NULL,173,'love your self','2018-04-29 19:59:05'),(153,5,134,NULL,NULL,'clean','2018-04-29 20:02:38'),(154,5,NULL,NULL,173,'un comment','2018-04-30 00:20:02'),(155,5,134,NULL,NULL,'c cc','2018-04-30 18:13:26'),(156,5,133,NULL,NULL,'kdjfkdjfk','2018-04-30 18:13:41'),(157,5,NULL,NULL,169,'  ','2018-05-01 07:36:36'),(158,5,135,NULL,NULL,'nice les filles','2018-05-01 11:42:05'),(159,5,133,NULL,NULL,'52 comment s ???','2018-05-02 08:07:55'),(160,5,133,NULL,NULL,'jd','2018-05-02 08:08:18'),(161,5,132,NULL,NULL,'0ddk','2018-05-02 08:08:33'),(162,5,132,NULL,NULL,'dmd','2018-05-02 08:08:38'),(163,5,109,NULL,NULL,'blur','2018-05-02 23:20:37'),(164,5,109,NULL,NULL,'lolo','2018-05-02 23:29:46'),(165,5,109,NULL,NULL,'kjkjk','2018-05-02 23:29:59'),(167,5,109,NULL,NULL,'nouveau commentaire','2018-05-02 23:40:01'),(207,5,150,NULL,NULL,'cool','2018-05-19 18:48:51'),(169,5,109,NULL,NULL,'Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.','2018-05-03 00:21:09'),(170,5,109,NULL,NULL,'new comment','2018-05-03 00:30:07'),(171,5,109,NULL,NULL,'cmc ','2018-05-03 00:39:59'),(174,5,NULL,NULL,181,'kdkd','2018-05-04 22:11:03'),(175,5,NULL,NULL,176,'kdkd','2018-05-05 02:40:18'),(176,5,NULL,NULL,181,'k','2018-05-06 00:24:00'),(177,5,NULL,NULL,181,'kvkvk','2018-05-06 00:24:13'),(178,5,136,NULL,NULL,'dkdkdkd','2018-05-06 16:02:40'),(179,5,136,NULL,NULL,'ldld','2018-05-06 16:03:53'),(180,5,NULL,NULL,181,'m','2018-05-06 20:52:28'),(181,5,NULL,NULL,176,'n','2018-05-06 21:10:49'),(182,5,NULL,NULL,176,' kkk','2018-05-06 21:10:57'),(183,5,135,NULL,NULL,'n ','2018-05-07 09:50:07'),(184,14,135,NULL,NULL,'mx','2018-05-07 09:58:24'),(185,5,136,NULL,NULL,'image de  nuditE','2018-05-07 10:59:40'),(187,20,136,NULL,NULL,'cool','2018-05-07 23:39:53'),(188,20,136,NULL,NULL,'lent','2018-05-07 23:40:13'),(189,20,134,NULL,NULL,'n;','2018-05-07 23:43:36'),(190,20,134,NULL,NULL,'ll','2018-05-07 23:43:45'),(191,20,122,NULL,NULL,'vv','2018-05-08 09:29:55'),(192,17,138,NULL,NULL,'j','2018-05-08 23:55:36'),(193,5,NULL,NULL,182,'cool','2018-05-13 16:39:08'),(194,5,NULL,NULL,182,'tres cool','2018-05-13 16:39:25'),(195,5,NULL,NULL,178,'m','2018-05-14 00:48:12'),(196,5,NULL,NULL,181,'test connexion','2018-05-14 08:34:21'),(197,5,NULL,NULL,183,'clean','2018-05-14 08:36:01'),(198,5,NULL,NULL,182,'rn c\'est quoi ?','2018-05-14 08:55:32'),(199,5,NULL,NULL,181,'ng, rosi','2018-05-14 08:56:07'),(200,5,NULL,NULL,181,'','2018-05-14 09:02:24'),(201,5,NULL,NULL,181,'','2018-05-14 09:02:37'),(202,5,NULL,NULL,181,'da;fk;','2018-05-14 09:02:52'),(204,5,151,NULL,NULL,'kdkdjk','2018-05-17 12:40:28'),(206,5,151,NULL,NULL,'di','2018-05-19 18:48:42'),(208,14,NULL,NULL,192,'c\'est malix j\'y crois pas....\r\n','2018-05-20 19:42:14'),(209,14,NULL,NULL,192,'wewe\r\n','2018-05-20 19:46:13'),(210,14,152,NULL,NULL,'lol','2018-05-20 19:46:47'),(211,5,152,NULL,NULL,'???\r\n','2018-05-20 19:47:14'),(212,17,152,NULL,NULL,'test','2018-05-20 19:47:49'),(213,17,152,NULL,NULL,'cool c\'est bon now','2018-05-20 20:35:38'),(214,17,152,NULL,NULL,'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate eius error expedita perspiciatis rerum? Ad alias amet debitis, iure maxime nulla officia omnis quis ut voluptatum. Dignissimos hic ut velit!','2018-05-20 20:36:13'),(215,5,152,NULL,NULL,'eh vous etes tous des matt ???','2018-05-20 20:41:26'),(216,5,152,NULL,NULL,'oh sorry\r\n','2018-05-20 20:43:59'),(217,5,152,NULL,NULL,'aldkdk','2018-05-20 20:54:42'),(218,5,146,NULL,NULL,'un nouveau commentaire de test, sur cette publication ','2018-05-20 22:33:59'),(219,5,146,NULL,NULL,'c\'est un gratere ?','2018-05-20 22:35:12'),(220,17,146,NULL,NULL,'c\'est toi qui a poster nn...','2018-05-20 22:36:51'),(221,17,146,NULL,NULL,'comment peut tu nous poser la question ? @bernard ng','2018-05-20 22:37:14'),(222,17,146,NULL,NULL,'@miss-ng','2018-05-20 22:37:28'),(223,14,146,NULL,NULL,'la nouvelle version de ngpictures est cool cote commentaire, je vois que c\'est plus facile pour commenter la nouvelle version de ngpictures est cool cote commentaire, je vois que c\'est plus facile pour commenterla nouvelle version de ngpictures est cool cote commentaire, je vois que c\'est plus facile pour commenter','2018-05-20 22:39:04'),(224,14,152,NULL,NULL,'ahah','2018-05-21 00:24:49'),(225,5,152,NULL,NULL,'@princess_fane ?','2018-05-21 11:28:17'),(226,5,NULL,NULL,194,'@bernard-ng Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.','2018-05-23 23:38:03'),(227,5,NULL,NULL,194,'yeah','2018-05-23 23:38:19'),(228,14,NULL,NULL,194,'Je suis bien humilié: Éternel, rends-moi la vie selon ta parole','2018-05-23 23:39:36'),(229,5,162,NULL,NULL,'clean','2018-05-24 00:08:25'),(230,5,162,NULL,NULL,'trop cool','2018-05-24 00:08:39'),(231,5,NULL,NULL,197,',c,c','2018-05-26 16:23:45'),(232,5,166,NULL,NULL,'test','2018-05-27 07:58:11'),(233,5,166,NULL,NULL,'dkdkdk','2018-05-27 07:59:39'),(234,5,NULL,NULL,200,'nenw comment','2018-05-27 16:05:29'),(235,5,NULL,NULL,199,'new comment','2018-05-27 16:05:38'),(236,5,NULL,NULL,199,'donc c\'est bon','2018-05-27 16:05:51'),(237,5,NULL,NULL,199,'??\r\n','2018-05-27 16:05:57'),(238,5,166,NULL,NULL,'mmm','2018-05-27 16:57:00'),(239,5,171,NULL,NULL,'','2018-05-27 23:07:22'),(240,5,171,NULL,NULL,'ka;kdekidk','2018-05-28 22:53:48'),(241,5,171,NULL,NULL,'kkkf','2018-05-30 10:15:47'),(242,5,171,NULL,NULL,'je suis le seul a commentE ici hein ??\r\n','2018-05-31 09:21:33'),(243,5,171,NULL,NULL,'blur','2018-05-31 09:21:46'),(244,5,171,NULL,NULL,'over flow doit etre charger en ajax, en remplacant le contenu\r\n','2018-05-31 09:22:22'),(245,5,NULL,NULL,218,'ldld','2018-06-02 00:36:56'),(246,5,NULL,NULL,218,'llsls','2018-06-02 00:37:06'),(247,5,NULL,NULL,204,'cool','2018-06-02 01:53:34'),(248,6,189,NULL,NULL,'the comment','2018-06-06 23:01:49'),(249,6,NULL,16,NULL,'dkdkdkdkdkdkdkdkdkdk','2018-06-11 09:57:40'),(250,6,190,NULL,NULL,'test one','2018-06-12 19:21:56'),(251,6,190,NULL,NULL,'yeah that is','2018-06-12 19:25:31'),(252,6,192,NULL,NULL,'cool ton site','2018-06-15 21:59:20'),(253,6,192,NULL,NULL,'trop cool','2018-06-15 21:59:43'),(254,6,193,NULL,NULL,'cool','2018-06-16 00:53:30'),(255,6,194,NULL,NULL,'cool','2018-06-18 10:17:26'),(256,6,194,NULL,NULL,'cool 2','2018-06-18 10:17:36'),(257,6,193,NULL,NULL,'cool a','2018-06-18 10:18:03'),(258,6,193,NULL,NULL,'vmv','2018-06-18 10:18:27'),(259,6,197,NULL,NULL,'baws on the beat','2018-06-22 10:39:45'),(260,6,NULL,NULL,221,'c\'est vraiment cool ce system de commentaire, comment tu l\'a fai ?','2018-06-24 13:34:36'),(261,6,NULL,NULL,246,'c','2018-06-28 23:39:35'),(262,6,NULL,NULL,246,' ','2018-06-28 23:39:42'),(263,6,NULL,NULL,246,'kd','2018-06-28 23:39:56'),(264,6,197,NULL,NULL,'yeah','2018-06-30 21:40:47'),(265,6,207,NULL,NULL,'cool','2018-06-30 22:44:55'),(266,6,204,NULL,NULL,'le bon codeur, hum ng','2018-06-30 22:45:15'),(267,6,202,NULL,NULL,'c\'est ou Ca ?','2018-06-30 22:45:37'),(268,6,171,NULL,NULL,'dd','2018-07-01 00:17:54'),(269,6,171,NULL,NULL,'d','2018-07-01 00:19:50'),(270,6,171,NULL,NULL,'dldl','2018-07-01 00:20:30'),(271,6,171,NULL,NULL,'dld','2018-07-01 00:21:02'),(272,6,171,NULL,NULL,'lol','2018-07-01 00:21:56'),(273,6,171,NULL,NULL,'sdfjkl;as;kdlfjasdkfj;asdkfj;asdf','2018-07-01 00:22:51'),(274,6,174,NULL,NULL,'mdr','2018-07-01 00:23:08'),(275,6,178,NULL,NULL,'koi','2018-07-01 00:23:33'),(276,6,178,NULL,NULL,'dldl','2018-07-01 00:23:51'),(277,6,178,NULL,NULL,'cool','2018-07-01 00:26:58'),(278,6,178,NULL,NULL,'cool','2018-07-01 00:27:41'),(279,6,178,NULL,NULL,'cool','2018-07-01 00:29:30'),(280,6,178,NULL,NULL,'cool','2018-07-01 00:46:02'),(281,6,178,NULL,NULL,'cool','2018-07-01 00:46:43'),(282,6,178,NULL,NULL,'cool','2018-07-01 00:46:52'),(283,6,178,NULL,NULL,'il ne reste plus qu\'a afficher tout','2018-07-01 00:47:30'),(284,6,190,NULL,NULL,'lol','2018-07-01 01:35:30'),(285,6,225,NULL,NULL,'c\'est la partition de quel chant ?','2018-07-01 01:52:21');
+/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Structure de la table `following`
+-- Table structure for table `following`
 --
 
+DROP TABLE IF EXISTS `following`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `following` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `follower_id` int(11) UNSIGNED NOT NULL,
-  `followed_id` int(11) UNSIGNED NOT NULL,
-  `date_created` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `follower_id` int(11) unsigned NOT NULL,
+  `followed_id` int(11) unsigned NOT NULL,
+  `date_created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=353 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Contenu de la table `following`
+-- Dumping data for table `following`
 --
 
-INSERT INTO `following` (`id`, `follower_id`, `followed_id`, `date_created`) VALUES
-(1, 14, 5, '2018-02-07 00:00:00'),
-(117, 17, 18, '2018-03-01 10:58:11'),
-(111, 18, 18, '2018-02-11 22:43:24'),
-(136, 5, 19, '2018-03-04 18:06:34'),
-(13, 18, 14, '2018-02-11 20:37:20'),
-(14, 18, 17, '2018-02-11 20:37:27'),
-(141, 20, 18, '2018-03-07 00:48:02'),
-(113, 17, 11, '2018-02-15 11:38:23'),
-(114, 17, 17, '2018-02-15 11:38:28'),
-(118, 18, 9, '2018-03-02 00:47:46'),
-(137, 5, 18, '2018-03-04 18:06:40'),
-(163, 5, 9, '2018-03-27 20:35:21'),
-(140, 20, 19, '2018-03-07 00:47:58'),
-(142, 5, 20, '2018-03-10 16:06:29'),
-(143, 21, 9, '2018-03-11 15:25:32'),
-(144, 21, 5, '2018-03-11 15:25:36'),
-(147, 17, 5, '2018-03-20 00:28:57'),
-(148, 17, 9, '2018-03-20 00:29:02'),
-(156, 5, 14, '2018-03-20 22:46:31'),
-(155, 5, 17, '2018-03-20 22:46:26'),
-(157, 5, 11, '2018-03-20 22:55:49'),
-(162, 5, 5, '2018-03-20 23:56:05'),
-(164, 17, 19, '2018-04-05 14:34:03');
-
--- --------------------------------------------------------
+LOCK TABLES `following` WRITE;
+/*!40000 ALTER TABLE `following` DISABLE KEYS */;
+INSERT INTO `following` VALUES (247,14,5,'2018-04-25 07:36:28'),(117,17,18,'2018-03-01 10:58:11'),(111,18,18,'2018-02-11 22:43:24'),(136,5,19,'2018-03-04 18:06:34'),(13,18,14,'2018-02-11 20:37:20'),(14,18,17,'2018-02-11 20:37:27'),(141,20,18,'2018-03-07 00:48:02'),(113,17,11,'2018-02-15 11:38:23'),(328,20,9,'2018-05-08 09:31:16'),(118,18,9,'2018-03-02 00:47:46'),(137,5,18,'2018-03-04 18:06:40'),(290,5,9,'2018-04-26 08:25:52'),(140,20,19,'2018-03-07 00:47:58'),(142,5,20,'2018-03-10 16:06:29'),(143,21,9,'2018-03-11 15:25:32'),(144,21,5,'2018-03-11 15:25:36'),(147,17,5,'2018-03-20 00:28:57'),(148,17,9,'2018-03-20 00:29:02'),(331,5,14,'2018-05-19 22:05:41'),(155,5,17,'2018-03-20 22:46:26'),(171,14,14,'2018-04-24 08:09:45'),(182,14,20,'2018-04-24 08:15:22'),(164,17,19,'2018-04-05 14:34:03'),(236,14,11,'2018-04-25 07:36:27'),(332,5,21,'2018-05-24 00:11:03'),(329,17,20,'2018-05-09 10:44:28'),(330,17,17,'2018-05-09 10:45:29'),(338,17,6,'2018-05-31 09:08:49'),(352,8,6,'2018-07-01 02:06:42'),(348,7,6,'2018-07-01 01:44:18'),(349,7,5,'2018-07-01 01:44:22'),(350,8,7,'2018-07-01 02:06:34'),(351,8,5,'2018-07-01 02:06:37');
+/*!40000 ALTER TABLE `following` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Structure de la table `gallery`
+-- Table structure for table `gallery`
 --
 
+DROP TABLE IF EXISTS `gallery`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `gallery` (
-  `id` int(10) UNSIGNED NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `users_id` int(11) NOT NULL DEFAULT '1',
   `name` varchar(500) DEFAULT NULL,
   `tags` text,
   `thumb` varchar(1000) DEFAULT NULL,
+  `exif` text,
   `description` longtext,
-  `categories_id` int(10) UNSIGNED DEFAULT '9',
-  `albums_id` int(10) UNSIGNED DEFAULT '1',
+  `slug` varchar(500) NOT NULL,
+  `categories_id` int(10) unsigned DEFAULT '9',
+  `albums_id` int(10) unsigned DEFAULT '1',
   `date_created` datetime NOT NULL,
-  `online` tinyint(3) UNSIGNED NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `online` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `downloads` bigint(20) DEFAULT '0',
+  `location` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Contenu de la table `gallery`
+-- Dumping data for table `gallery`
 --
 
-INSERT INTO `gallery` (`id`, `users_id`, `name`, `tags`, `thumb`, `description`, `categories_id`, `s_id`, `date_created`, `online`) VALUES
-(35, 1, 'les filles d\'imani', '', 'les filles d\'imani-35.jpg', '', 0, 1, '2018-01-17 23:50:08', 1),
-(36, 1, '', '', '-36.jpg', '', 0, 1, '2018-01-17 23:50:23', 1),
-(37, 1, '', '', '-37.jpg', '', 0, 1, '2018-01-17 23:53:46', 1),
-(38, 1, 'ngpictures-5a5fc658ec71e', '', 'ngpictures-5a5fc658ec71e-38.jpg', '', 0, 1, '2018-01-17 23:55:36', 1),
-(39, 1, 'ngpictures-5a5fc67b4dffc', '', 'ngpictures-5a5fc67b4dffc-39.jpg', '', 0, 1, '2018-01-17 23:56:11', 1),
-(40, 1, 'ngpictures-5a5fc68f57030', '', 'ngpictures-5a5fc68f57030-40.jpg', '', 0, 1, '2018-01-17 23:56:31', 1),
-(42, 1, 'ngpictures-5a8f415591793', '', 'ngpictures-5a8f415591793-42.jpg', '', 0, 1, '2018-02-23 00:16:53', 1),
-(43, 1, 'ngpictures-5a8f416d3dd9a', '', 'ngpictures-5a8f416d3dd9a-43.jpg', '', 0, 1, '2018-02-23 00:17:17', 1),
-(44, 1, 'ngpictures-5a8f418421d59', '', 'ngpictures-5a8f418421d59-44.jpg', '', 0, 1, '2018-02-23 00:17:40', 1),
-(45, 1, 'ngpictures-5a8f419cb5a7a', '', 'ngpictures-5a8f419cb5a7a-45.jpg', '', 0, 1, '2018-02-23 00:18:04', 1),
-(46, 1, 'ngpictures-5a8f41b686013', '', 'ngpictures-5a8f41b686013-46.jpg', '', 0, 1, '2018-02-23 00:18:30', 1),
-(47, 1, 'ngpictures-5a8f41d218240', '', 'ngpictures-5a8f41d218240-47.jpg', '', 0, 1, '2018-02-23 00:18:58', 1),
-(48, 1, 'ngpictures-5a8f420e01de7', '', 'ngpictures-5a8f420e01de7-48.jpg', '', 0, 1, '2018-02-23 00:19:58', 1),
-(50, 1, 'ngpictures-5a8f429134d82', '', 'ngpictures-5a8f429134d82-50.jpg', '', 0, 1, '2018-02-23 00:22:09', 1),
-(51, 1, 'ngpictures-5a8f42b3267a3', '', 'ngpictures-5a8f42b3267a3-51.jpg', '', 0, 1, '2018-02-23 00:22:43', 1),
-(52, 1, 'la vie de codeur', '', 'ngpictures-5a8f42cb9f264-52.jpg', '<p>la vie de codeur&nbsp;<span style="color: #4e4e4e; font-family: openSans, sans-serif; text-align: justify;">We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.</span></p>', 0, 1, '2018-02-23 00:23:07', 1),
-(56, 1, 'ngpictures-5a99ba720bc09', '', 'ngpictures-5a99ba720bc09-56.jpg', '', 0, 1, '2018-03-02 22:56:18', 1),
-(58, 1, 'ngpictures-5a99bb6e7e74e', '', 'ngpictures-5a99bb6e7e74e-58.jpg', '', 0, 1, '2018-03-02 23:00:30', 1),
-(60, 1, 'ngpictures-5a99bc274f3fe', '', 'ngpictures-5a99bc274f3fe-60.jpg', '', 0, 1, '2018-03-02 23:03:35', 1),
-(61, 1, 'ngpictures-5abb723459599', '', 'ngpictures-5abb723459599-61.jpg', '', 0, 1, '2018-03-28 12:45:08', 1);
-
--- --------------------------------------------------------
+LOCK TABLES `gallery` WRITE;
+/*!40000 ALTER TABLE `gallery` DISABLE KEYS */;
+INSERT INTO `gallery` VALUES (1,1,'alena-aenami','digital','alena-aenami-1.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"1920\\\" height=\\\"1080\\\"\",\"Height\":1080,\"Width\":1920,\"IsColor\":1}}','Exhortez-vous les uns les autres chaque jour.','',0,1,'2018-06-01 09:17:21',1,0,NULL),(2,1,'when-sun-goes-down','art','when-sun-goes-down-2.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"1920\\\" height=\\\"1080\\\"\",\"Height\":1080,\"Width\":1920,\"IsColor\":1}}','L\'attente des justes n\'est que joie, mais l\'espérance des méchants périra.','',2,1,'2018-06-01 09:18:11',1,0,NULL),(3,1,'smoke-in-peace','','smoke-in-peace-3.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"1920\\\" height=\\\"1360\\\"\",\"Height\":1360,\"Width\":1920,\"IsColor\":1}}','Ne craignez pas, et que vos mains se fortifient!','',2,1,'2018-06-01 09:18:55',1,0,NULL),(4,1,'the-night','','the-night-4.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"1920\\\" height=\\\"1360\\\"\",\"Height\":1360,\"Width\":1920,\"IsColor\":1}}','Grâces soient rendues à Dieu pour son don ineffable!','',6,1,'2018-06-01 09:19:22',1,0,NULL),(5,1,'ngpictures-5b12976e77143','','ngpictures-5b12976e77143-5.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"1920\\\" height=\\\"1080\\\"\",\"Height\":1080,\"Width\":1920,\"IsColor\":1}}','','ngpictures-5b12976e77143',6,1,'2018-06-02 15:11:10',1,0,NULL),(6,1,'ngpictures-5b1297eb34c21','','ngpictures-5b1297eb34c21-6.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":2,\"COMPUTED\":{\"html\":\"width=\\\"1300\\\" height=\\\"656\\\"\",\"Height\":656,\"Width\":1300,\"IsColor\":1,\"ByteOrderMotorola\":1,\"Thumbnail.FileType\":2,\"Thumbnail.MimeType\":\"image\\/jpeg\"}}','','ngpictures-5b1297eb34c21',8,1,'2018-06-02 15:13:15',1,0,NULL),(11,1,'ééééé','','eeeee-11.jpg','{\"ISOSpeedRatings\":400,\"Flash\":25,\"Model\":\"Canon EOS DIGITAL REBEL XTi\",\"ExposureTime\":\"1\\/60\",\"FocalLength\":\"50\\/1\",\"ResolutionUnit\":2,\"COMPUTED\":{\"html\":\"width=\\\"3888\\\" height=\\\"2592\\\"\",\"Height\":2592,\"Width\":3888,\"IsColor\":1,\"ByteOrderMotorola\":0,\"ApertureFNumber\":\"f\\/4.0\"}}','','eeeee',0,1,'2018-06-03 12:59:53',1,0,NULL),(13,1,'Felo','','felo-13.jpg','{\"ISOSpeedRatings\":400,\"Flash\":25,\"Model\":\"Canon EOS DIGITAL REBEL XTi\",\"ExposureTime\":\"1\\/60\",\"FocalLength\":\"50\\/1\",\"ResolutionUnit\":2,\"COMPUTED\":{\"html\":\"width=\\\"3888\\\" height=\\\"2592\\\"\",\"Height\":2592,\"Width\":3888,\"IsColor\":1,\"ByteOrderMotorola\":0,\"ApertureFNumber\":\"f\\/4.0\"}}','','felo',8,1,'2018-06-03 16:17:46',1,0,NULL),(14,1,'ngpictures-5b1d5c2c62149','','ngpictures-5b1d5c2c62149-14.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":2,\"COMPUTED\":{\"html\":\"width=\\\"1920\\\" height=\\\"1022\\\"\",\"Height\":1022,\"Width\":1920,\"IsColor\":1,\"ByteOrderMotorola\":1,\"Thumbnail.FileType\":2,\"Thumbnail.MimeType\":\"image\\/jpeg\"}}','','ngpictures-5b1d5c2c62149',0,1,'2018-06-10 19:13:16',1,0,NULL),(15,1,'ngpictures-5b1d5c3892ff9','','ngpictures-5b1d5c3892ff9-15.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"1920\\\" height=\\\"1080\\\"\",\"Height\":1080,\"Width\":1920,\"IsColor\":1}}','','ngpictures-5b1d5c3892ff9',0,1,'2018-06-10 19:13:28',1,0,NULL),(22,1,'ngpictures-5b2150d835a7b','','ngpictures-5b2150d835a7b-22.jpg','{\"ISOSpeedRatings\":400,\"Flash\":16,\"Model\":\"Canon EOS DIGITAL REBEL XTi\",\"ExposureTime\":\"1\\/125\",\"FocalLength\":\"35\\/1\",\"ResolutionUnit\":2,\"COMPUTED\":{\"html\":\"width=\\\"3888\\\" height=\\\"2592\\\"\",\"Height\":2592,\"Width\":3888,\"IsColor\":1,\"ByteOrderMotorola\":0,\"ApertureFNumber\":\"f\\/8.0\"}}','','ngpictures-5b2150d835a7b',0,1,'2018-06-13 19:14:00',1,0,NULL),(26,1,' proche de vous, et immortalisez l\'instant avec une photo.','','proche-de-vous-et-immortalisez-l-instant-avec-une-photo-26.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"1600\\\" height=\\\"1067\\\"\",\"Height\":1067,\"Width\":1600,\"IsColor\":1}}','Rétrouvez les photographes qui sont proche de vous, et immortalisez l\'instant avec une photo. Rétrouvez les photographes qui sont proche de vous, et immortalisez l\'instant avec une photo. Rétrouvez les photographes qui sont proche de vous, et immortalisez l\'instant avec une photo.\r\nRétrouvez les photographes qui sont proche de vous, et immortalisez l\'instant avec une photo.Rétrouvez les photographes qui sont proche de vous, et immortalisez l\'instant avec une photo.','proche-de-vous-et-immortalisez-l-instant-avec-une-photo',9,1,'2018-06-16 16:08:14',1,0,NULL),(27,1,'ngpictures-photo','','ngpictures-photo-27.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','','ngpictures-photo',0,1,'2018-07-01 02:19:34',1,0,NULL),(28,1,'ngpictures-photo','','ngpictures-photo-28.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','','ngpictures-photo',0,1,'2018-07-01 02:20:09',1,0,NULL),(29,1,'ngpictures-photo','','ngpictures-photo-29.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','','ngpictures-photo',9,1,'2018-07-02 00:37:00',1,0,NULL),(30,1,'ngpictures-photo','','ngpictures-photo-30.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','','ngpictures-photo',5,1,'2018-07-02 00:50:10',0,0,NULL);
+/*!40000 ALTER TABLE `gallery` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Structure de la table `ideas`
+-- Table structure for table `ideas`
 --
 
+DROP TABLE IF EXISTS `ideas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ideas` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `users_id` int(11) NOT NULL,
   `content` text NOT NULL,
-  `date_created` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `date_created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Contenu de la table `ideas`
+-- Dumping data for table `ideas`
 --
 
-INSERT INTO `ideas` (`id`, `users_id`, `content`, `date_created`) VALUES
-(28, 5, '', '2018-04-01 19:37:54'),
-(29, 5, ' ', '2018-04-01 19:46:39');
-
--- --------------------------------------------------------
+LOCK TABLES `ideas` WRITE;
+/*!40000 ALTER TABLE `ideas` DISABLE KEYS */;
+INSERT INTO `ideas` VALUES (59,5,'cool stuff','2018-06-03 17:16:58'),(60,6,' dkd;gkjkeidl','2018-06-30 16:18:51'),(61,6,'dkdk','2018-06-30 16:21:20'),(62,6,'dkdk','2018-06-30 16:21:30'),(63,6,'mdk','2018-06-30 16:22:52'),(64,6,'mdk','2018-06-30 16:25:40'),(65,6,' ,','2018-06-30 21:14:09');
+/*!40000 ALTER TABLE `ideas` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Structure de la table `likes`
+-- Table structure for table `likes`
 --
 
+DROP TABLE IF EXISTS `likes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `likes` (
-  `id` bigint(255) UNSIGNED NOT NULL,
-  `users_id` int(10) UNSIGNED NOT NULL,
-  `posts_id` int(10) UNSIGNED DEFAULT NULL,
-  `gallery_id` int(10) UNSIGNED DEFAULT NULL,
-  `blog_id` int(10) UNSIGNED DEFAULT NULL,
-  `date_created` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `id` bigint(255) unsigned NOT NULL AUTO_INCREMENT,
+  `users_id` int(10) unsigned NOT NULL,
+  `posts_id` int(10) unsigned DEFAULT NULL,
+  `gallery_id` int(10) unsigned DEFAULT NULL,
+  `blog_id` int(10) unsigned DEFAULT NULL,
+  `date_created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=623 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Contenu de la table `likes`
+-- Dumping data for table `likes`
 --
 
-INSERT INTO `likes` (`id`, `users_id`, `posts_id`, `gallery_id`, `blog_id`, `date_created`) VALUES
-(101, 5, NULL, NULL, 121, '2018-01-17 17:20:21'),
-(73, 5, NULL, NULL, 66, '2017-12-27 02:48:47'),
-(69, 6, NULL, NULL, 94, '2017-12-25 17:55:14'),
-(5, 5, NULL, NULL, 87, '2017-12-16 20:14:11'),
-(80, 18, 89, NULL, NULL, '2017-12-28 10:09:07'),
-(77, 5, NULL, NULL, 92, '2017-12-27 02:50:46'),
-(76, 5, NULL, NULL, 98, '2017-12-27 02:50:02'),
-(70, 6, NULL, NULL, 95, '2017-12-25 17:55:28'),
-(100, 5, NULL, NULL, 63, '2018-01-15 10:07:53'),
-(64, 5, NULL, NULL, 2, '2017-12-22 19:28:06'),
-(83, 5, NULL, NULL, 79, '2017-12-31 19:21:08'),
-(88, 5, NULL, NULL, 115, '2017-12-31 19:21:24'),
-(89, 5, NULL, NULL, 114, '2017-12-31 19:21:29'),
-(192, 5, NULL, NULL, 132, '2018-03-18 14:44:27'),
-(91, 5, NULL, NULL, 116, '2018-01-01 10:00:27'),
-(92, 5, 79, NULL, NULL, '2018-01-06 12:59:15'),
-(93, 9, 75, NULL, NULL, '2018-01-06 15:40:48'),
-(94, 9, 76, NULL, NULL, '2018-01-06 15:40:57'),
-(97, 9, 79, NULL, NULL, '2018-01-06 15:42:34'),
-(98, 9, NULL, NULL, 65, '2018-01-06 15:43:23'),
-(99, 5, 80, NULL, NULL, '2018-01-15 10:02:46'),
-(108, 5, NULL, NULL, 122, '2018-01-17 22:41:38'),
-(110, 5, NULL, NULL, 123, '2018-01-19 20:38:12'),
-(116, 5, NULL, NULL, 64, '2018-01-20 21:30:53'),
-(134, 14, 86, NULL, NULL, '2018-01-21 17:20:03'),
-(133, 9, 85, NULL, NULL, '2018-01-21 17:13:54'),
-(132, 9, 83, NULL, NULL, '2018-01-21 16:19:00'),
-(127, 5, 70, NULL, NULL, '2018-01-21 16:17:35'),
-(128, 5, 68, NULL, NULL, '2018-01-21 16:17:41'),
-(136, 5, 87, NULL, NULL, '2018-01-21 17:33:05'),
-(137, 5, 89, NULL, NULL, '2018-01-21 17:33:09'),
-(138, 9, NULL, NULL, 125, '2018-01-21 17:52:13'),
-(190, 5, NULL, NULL, 127, '2018-03-18 02:38:25'),
-(140, 5, NULL, NULL, 128, '2018-02-03 09:42:50'),
-(141, 5, NULL, NULL, 74, '2018-02-03 09:42:59'),
-(187, 5, NULL, NULL, 70, '2018-03-02 23:07:07'),
-(143, 5, 91, NULL, NULL, '2018-02-03 09:46:04'),
-(145, 5, 90, NULL, NULL, '2018-02-03 10:25:06'),
-(152, 17, NULL, NULL, 130, '2018-02-08 00:12:57'),
-(167, 5, NULL, NULL, 130, '2018-02-11 21:35:34'),
-(153, 17, NULL, NULL, 128, '2018-02-08 00:13:05'),
-(154, 17, NULL, NULL, 127, '2018-02-08 00:13:10'),
-(155, 17, NULL, NULL, 72, '2018-02-08 00:13:15'),
-(156, 17, NULL, NULL, 71, '2018-02-08 00:13:21'),
-(168, 17, NULL, NULL, 131, '2018-02-14 10:48:26'),
-(169, 17, 96, NULL, NULL, '2018-02-14 10:48:43'),
-(170, 5, NULL, NULL, 71, '2018-02-14 21:16:34'),
-(172, 5, NULL, NULL, 131, '2018-02-14 21:16:42'),
-(173, 5, NULL, NULL, 72, '2018-02-14 21:16:52'),
-(179, 5, 94, NULL, NULL, '2018-02-20 19:01:14'),
-(180, 5, 83, NULL, NULL, '2018-02-20 19:01:18'),
-(183, 5, 93, NULL, NULL, '2018-02-20 20:16:02'),
-(184, 18, 112, NULL, NULL, '2018-03-02 09:37:54'),
-(186, 18, 96, NULL, NULL, '2018-03-02 10:43:00'),
-(188, 5, 96, NULL, NULL, '2018-03-02 23:36:52'),
-(189, 21, 124, NULL, NULL, '2018-03-11 15:24:10');
-
--- --------------------------------------------------------
+LOCK TABLES `likes` WRITE;
+/*!40000 ALTER TABLE `likes` DISABLE KEYS */;
+INSERT INTO `likes` VALUES (101,5,NULL,NULL,121,'2018-01-17 17:20:21'),(73,5,NULL,NULL,66,'2017-12-27 02:48:47'),(69,6,NULL,NULL,94,'2017-12-25 17:55:14'),(5,5,NULL,NULL,87,'2017-12-16 20:14:11'),(80,18,89,NULL,NULL,'2017-12-28 10:09:07'),(77,5,NULL,NULL,92,'2017-12-27 02:50:46'),(76,5,NULL,NULL,98,'2017-12-27 02:50:02'),(70,6,NULL,NULL,95,'2017-12-25 17:55:28'),(100,5,NULL,NULL,63,'2018-01-15 10:07:53'),(64,5,NULL,NULL,2,'2017-12-22 19:28:06'),(83,5,NULL,NULL,79,'2017-12-31 19:21:08'),(88,5,NULL,NULL,115,'2017-12-31 19:21:24'),(89,5,NULL,NULL,114,'2017-12-31 19:21:29'),(192,5,NULL,NULL,132,'2018-03-18 14:44:27'),(91,5,NULL,NULL,116,'2018-01-01 10:00:27'),(92,5,79,NULL,NULL,'2018-01-06 12:59:15'),(93,9,75,NULL,NULL,'2018-01-06 15:40:48'),(94,9,76,NULL,NULL,'2018-01-06 15:40:57'),(97,9,79,NULL,NULL,'2018-01-06 15:42:34'),(98,9,NULL,NULL,65,'2018-01-06 15:43:23'),(99,5,80,NULL,NULL,'2018-01-15 10:02:46'),(108,5,NULL,NULL,122,'2018-01-17 22:41:38'),(110,5,NULL,NULL,123,'2018-01-19 20:38:12'),(116,5,NULL,NULL,64,'2018-01-20 21:30:53'),(134,14,86,NULL,NULL,'2018-01-21 17:20:03'),(133,9,85,NULL,NULL,'2018-01-21 17:13:54'),(132,9,83,NULL,NULL,'2018-01-21 16:19:00'),(127,5,70,NULL,NULL,'2018-01-21 16:17:35'),(128,5,68,NULL,NULL,'2018-01-21 16:17:41'),(136,5,87,NULL,NULL,'2018-01-21 17:33:05'),(137,5,89,NULL,NULL,'2018-01-21 17:33:09'),(138,9,NULL,NULL,125,'2018-01-21 17:52:13'),(190,5,NULL,NULL,127,'2018-03-18 02:38:25'),(140,5,NULL,NULL,128,'2018-02-03 09:42:50'),(141,5,NULL,NULL,74,'2018-02-03 09:42:59'),(187,5,NULL,NULL,70,'2018-03-02 23:07:07'),(143,5,91,NULL,NULL,'2018-02-03 09:46:04'),(145,5,90,NULL,NULL,'2018-02-03 10:25:06'),(152,17,NULL,NULL,130,'2018-02-08 00:12:57'),(167,5,NULL,NULL,130,'2018-02-11 21:35:34'),(153,17,NULL,NULL,128,'2018-02-08 00:13:05'),(154,17,NULL,NULL,127,'2018-02-08 00:13:10'),(155,17,NULL,NULL,72,'2018-02-08 00:13:15'),(156,17,NULL,NULL,71,'2018-02-08 00:13:21'),(168,17,NULL,NULL,131,'2018-02-14 10:48:26'),(169,17,96,NULL,NULL,'2018-02-14 10:48:43'),(170,5,NULL,NULL,71,'2018-02-14 21:16:34'),(172,5,NULL,NULL,131,'2018-02-14 21:16:42'),(173,5,NULL,NULL,72,'2018-02-14 21:16:52'),(179,5,94,NULL,NULL,'2018-02-20 19:01:14'),(180,5,83,NULL,NULL,'2018-02-20 19:01:18'),(183,5,93,NULL,NULL,'2018-02-20 20:16:02'),(184,18,112,NULL,NULL,'2018-03-02 09:37:54'),(186,18,96,NULL,NULL,'2018-03-02 10:43:00'),(188,5,96,NULL,NULL,'2018-03-02 23:36:52'),(189,21,124,NULL,NULL,'2018-03-11 15:24:10'),(212,14,NULL,NULL,173,'2018-04-26 10:23:15'),(333,5,NULL,NULL,173,'2018-05-02 09:53:23'),(282,5,NULL,NULL,172,'2018-04-29 08:34:31'),(213,14,NULL,NULL,172,'2018-04-26 10:23:23'),(214,17,NULL,NULL,173,'2018-04-26 10:24:25'),(216,17,NULL,NULL,172,'2018-04-26 10:24:34'),(331,5,NULL,NULL,169,'2018-05-01 13:07:33'),(230,11,NULL,NULL,172,'2018-04-27 00:20:18'),(285,5,131,NULL,NULL,'2018-04-29 19:58:02'),(241,5,NULL,NULL,166,'2018-04-27 07:34:00'),(284,5,133,NULL,NULL,'2018-04-29 19:57:52'),(281,5,132,NULL,NULL,'2018-04-29 00:23:17'),(286,5,129,NULL,NULL,'2018-04-29 19:58:09'),(326,5,134,NULL,NULL,'2018-05-01 09:22:54'),(477,5,NULL,NULL,176,'2018-05-06 21:09:38'),(483,5,135,NULL,NULL,'2018-05-07 09:50:14'),(472,5,136,NULL,NULL,'2018-05-06 20:59:24'),(516,5,NULL,NULL,181,'2018-05-19 18:45:00'),(514,5,NULL,NULL,183,'2018-05-14 08:36:11'),(479,5,NULL,NULL,174,'2018-05-06 21:15:20'),(480,17,NULL,NULL,181,'2018-05-06 21:19:54'),(481,17,NULL,NULL,178,'2018-05-06 21:19:58'),(484,17,NULL,NULL,176,'2018-05-07 09:50:57'),(485,17,NULL,NULL,174,'2018-05-07 09:51:06'),(501,14,NULL,NULL,181,'2018-05-10 10:06:27'),(487,14,NULL,NULL,176,'2018-05-07 10:00:21'),(492,20,134,NULL,NULL,'2018-05-08 07:42:57'),(491,20,136,NULL,NULL,'2018-05-07 23:40:49'),(493,17,138,NULL,NULL,'2018-05-08 23:55:28'),(495,17,NULL,NULL,182,'2018-05-09 10:44:05'),(500,14,NULL,NULL,182,'2018-05-10 10:06:22'),(503,14,NULL,NULL,183,'2018-05-10 10:06:38'),(502,14,NULL,NULL,178,'2018-05-10 10:06:30'),(504,5,150,NULL,NULL,'2018-05-10 19:46:09'),(515,5,NULL,NULL,182,'2018-05-17 15:05:34'),(506,5,148,NULL,NULL,'2018-05-10 19:46:25'),(517,5,146,NULL,NULL,'2018-05-20 10:21:20'),(518,5,141,NULL,NULL,'2018-05-20 10:21:24'),(519,14,NULL,NULL,192,'2018-05-20 19:41:59'),(521,5,152,NULL,NULL,'2018-05-24 08:57:46'),(522,5,153,NULL,NULL,'2018-05-24 08:57:55'),(523,5,160,NULL,NULL,'2018-05-24 09:52:36'),(544,5,NULL,NULL,218,'2018-06-02 00:36:52'),(543,5,171,NULL,NULL,'2018-05-30 10:16:25'),(553,5,NULL,NULL,204,'2018-06-05 09:24:11'),(546,5,183,NULL,NULL,'2018-06-02 15:18:47'),(547,5,181,NULL,NULL,'2018-06-03 12:26:59'),(548,5,NULL,NULL,205,'2018-06-03 19:35:31'),(584,6,189,NULL,NULL,'2018-06-13 09:45:50'),(596,6,184,NULL,NULL,'2018-06-13 09:53:49'),(551,6,183,NULL,NULL,'2018-06-05 00:05:56'),(552,6,182,NULL,NULL,'2018-06-05 00:06:00'),(555,6,NULL,NULL,218,'2018-06-09 14:38:08'),(557,6,NULL,16,NULL,'2018-06-11 09:57:26'),(558,6,NULL,NULL,224,'2018-06-12 19:33:17'),(559,6,NULL,NULL,225,'2018-06-12 20:56:09'),(563,6,NULL,NULL,223,'2018-06-12 23:48:55'),(568,6,NULL,NULL,222,'2018-06-13 00:43:53'),(595,6,190,NULL,NULL,'2018-06-13 09:53:08'),(597,6,NULL,6,NULL,'2018-06-13 20:15:04'),(602,6,NULL,25,NULL,'2018-06-15 21:39:55'),(603,6,193,NULL,NULL,'2018-06-16 00:52:29'),(604,6,NULL,NULL,231,'2018-06-21 19:51:55'),(605,6,195,NULL,NULL,'2018-06-22 00:16:03'),(606,6,194,NULL,NULL,'2018-06-22 00:16:07'),(607,6,196,NULL,NULL,'2018-06-22 00:16:15'),(608,6,197,NULL,NULL,'2018-06-22 00:16:17'),(610,6,NULL,NULL,221,'2018-06-23 21:11:18'),(611,6,192,NULL,NULL,'2018-06-30 17:40:42'),(612,6,204,NULL,NULL,'2018-06-30 21:42:22'),(614,6,NULL,NULL,246,'2018-06-30 23:14:26'),(615,6,174,NULL,NULL,'2018-06-30 23:15:26'),(617,6,171,NULL,NULL,'2018-06-30 23:36:03'),(618,6,178,NULL,NULL,'2018-07-01 00:23:34'),(619,6,225,NULL,NULL,'2018-07-01 01:48:36'),(620,6,219,NULL,NULL,'2018-07-01 01:57:55'),(622,6,NULL,NULL,244,'2018-07-01 22:16:55');
+/*!40000 ALTER TABLE `likes` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Structure de la table `online`
+-- Table structure for table `notifications`
 --
 
+DROP TABLE IF EXISTS `notifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `notifications` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `type` tinyint(10) unsigned DEFAULT '1',
+  `notification` varchar(500) NOT NULL,
+  `users_id` bigint(20) unsigned NOT NULL,
+  `date_created` datetime NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `publication_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_users_id` (`users_id`),
+  CONSTRAINT `fk_users_id` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notifications`
+--
+
+LOCK TABLES `notifications` WRITE;
+/*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
+INSERT INTO `notifications` VALUES (9,2,'gervais a aimé votre publication : \"love\"',5,'2018-06-13 09:52:46',0,0),(10,2,'gervais a aimé votre publication : \"une titre sans description\"',5,'2018-06-13 09:53:49',0,0),(11,2,'gervais a aimé votre publication : \"lushi town\"',5,'2018-06-30 23:15:26',0,0),(12,2,'gervais a aimé votre publication : \"Gael shooting\"',5,'2018-06-30 23:28:26',0,171),(13,3,'gervais a commenté votre publication: \"Gael shooting\"',5,'2018-07-01 00:20:30',0,171),(14,3,'gervais a commenté votre publication: \"5\"',5,'2018-07-01 00:21:56',0,171),(15,2,'gervais a aimé votre publication : \"nae\"',5,'2018-07-01 00:23:34',0,178),(16,3,'gervais a commenté votre publication: \"cool\"',5,'2018-07-01 00:46:52',0,178),(17,3,'gervais a commenté votre publication: \"il ne reste plus qu\'a afficher tout\"',5,'2018-07-01 00:47:30',0,178),(18,1,'gervais a ajouté une nouvelle photo .',5,'2018-07-01 01:11:07',0,213),(22,1,'gervais a ajouté une nouvelle photo .',5,'2018-07-01 01:14:55',0,216),(25,1,'gervais a ajouté une nouvelle photo .',5,'2018-07-01 01:17:01',0,218),(28,1,'gervais a ajouté une nouvelle photo .',5,'2018-07-01 01:23:49',0,219),(31,1,'gervais a ajouté une nouvelle photo .',5,'2018-07-01 01:23:58',0,220),(34,1,'gervais a ajouté une nouvelle photo .',5,'2018-07-01 01:24:47',0,221),(37,1,'gervais a ajouté une nouvelle photo .',5,'2018-07-01 01:26:02',0,223),(39,3,'gervais a commenté votre publication : « lol »',5,'2018-07-01 01:35:30',0,190),(42,2,'gervais a aimé votre publication.',7,'2018-07-01 01:48:36',0,225),(43,3,'gervais a commenté votre publication : « c\'est la partition de quel chant ? »',7,'2018-07-01 01:52:21',0,225),(44,1,'gervais a ajouté une nouvelle photo.',7,'2018-07-01 02:04:19',0,226),(47,1,'gervais a ajouté une nouvelle photo.',8,'2018-07-01 02:08:17',0,227),(48,1,'gervais a ajouté une nouvelle photo.',7,'2018-07-01 02:08:17',0,227);
+/*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `online`
+--
+
+DROP TABLE IF EXISTS `online`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `online` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `online_time` timestamp NOT NULL,
   `date_created` timestamp NOT NULL,
-  `users_id` bigint(20) NOT NULL
+  `users_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Structure de la table `posts`
+-- Dumping data for table `online`
 --
 
+LOCK TABLES `online` WRITE;
+/*!40000 ALTER TABLE `online` DISABLE KEYS */;
+/*!40000 ALTER TABLE `online` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `posts`
+--
+
+DROP TABLE IF EXISTS `posts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `posts` (
-  `id` int(10) UNSIGNED NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `content` longtext NOT NULL,
-  `users_id` int(10) UNSIGNED NOT NULL,
+  `users_id` int(10) unsigned NOT NULL,
   `date_created` datetime NOT NULL,
   `thumb` varchar(255) DEFAULT NULL,
+  `exif` text,
   `slug` varchar(255) DEFAULT NULL,
   `categories_id` varchar(255) DEFAULT NULL,
-  `online` tinyint(4) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `online` tinyint(4) NOT NULL DEFAULT '1',
+  `downloads` bigint(20) DEFAULT '0',
+  `location` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=228 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Contenu de la table `posts`
+-- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`id`, `title`, `content`, `users_id`, `date_created`, `thumb`, `slug`, `categories_id`, `online`) VALUES
-(87, 'my birthday 2018', 'We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.', 14, '2018-01-21 17:24:30', 'ngpictures-my-birthday-2018-87.jpg', 'my-birthday-2018', '8', 1),
-(90, 'dania is back', '$flash-&gt;set(\'danger\', self::$msg[\'not_image\']);\r\n                return false;$flash-&gt;set(\'danger\', self::$msg[\'not_image\']);\r\n                return false;$flash-&gt;set(\'danger\', self::$msg[\'not_image\']);\r\n                return false;$flash-&gt;set(\'danger\', self::$msg[\'not_image\']);\r\n                return false;$flash-&gt;set(\'danger\', self::$msg[\'not_image\']);\r\n                return false;', 17, '2018-01-21 18:41:39', 'ngpictures-dania-is-back-90.jpg', 'dania-is-back', '7', 1),
-(93, 'Partager vos Photos edit', 'We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.', 9, '2018-02-11 19:29:29', 'ngpictures-partager-vos-photos-93.jpg', 'partager-vos-photos-edit', '8', 1),
-(94, 'edit', 'We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.', 5, '2018-02-11 19:58:32', 'ngpictures-1234-94.jpg', 'edit', '2', 1),
-(96, 'titre', 'We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.', 17, '2018-02-14 01:13:46', 'ngpictures-titre-96.jpg', 'titre', '3', 1),
-(109, 'titre', 'We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.', 17, '2018-02-14 20:17:35', 'ngpictures-titre-109.jpg', 'titre', '3', 1),
-(110, 'the life', 'We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.', 5, '2018-02-23 09:15:17', 'ngpictures-the-life-110.jpg', 'the-life', '12', 1),
-(111, 'ngpictures', 'We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.', 5, '2018-03-01 10:49:45', 'ngpictures-ngpictures-2-0-111.jpg', 'ngpictures', '8', 0),
-(113, 'new post', 'We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.\r\n', 5, '2018-03-06 21:00:16', 'ngpictures-new-post-113.jpg', 'new-post', '12', 1),
-(115, 'Bienvenue sur Ngpictures', 'Bienvenue sur Ngpictures', 5, '2018-03-06 21:01:55', 'ngpictures-bienvenue-sur-ngpictures-115.jpg', 'bienvenue-sur-ngpictures', '2', 1),
-(116, 'Bienvenue', 'Bienvenue sur NgpicturesBienvenue sur NgpicturesBienvenue sur NgpicturesBienvenue sur Ngpictures', 5, '2018-03-06 21:05:01', 'ngpictures-bienvenue-116.jpg', 'bienvenue', '2', 1),
-(117, 'frontend/others/download', 'frontend/others/download', 5, '2018-03-06 21:52:29', 'ngpictures-front-end-others-download-117.jpg', 'front-end-others-download', '1', 1),
-(118, 'frontend/others/download', 'frontend/others/download', 5, '2018-03-06 22:19:30', 'ngpictures-front-end-others-download-118.jpg', 'front-end-others-download', '2', 1),
-(119, 'frontend/others/download', 'frontend/others/download', 5, '2018-03-06 22:20:05', 'ngpictures-front-end-others-download-119.jpg', 'front-end-others-download', '2', 0),
-(120, 'frontend/others/download', 'frontend/others/download', 5, '2018-03-06 22:20:36', 'ngpictures-front-end-others-download-120.jpg', 'front-end-others-download', '2', 1),
-(121, 'frontend/others/download', 'frontend/others/download', 5, '2018-03-06 22:21:34', 'ngpictures-front-end-others-download-121.jpg', 'front-end-others-download', '2', 1),
-(122, 'download', 'frontend/others/download', 5, '2018-03-06 22:25:45', 'ngpictures-download-122.jpg', 'download', '2', 1),
-(123, 'miss ng', 'We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.', 17, '2018-04-05 14:32:01', 'ngpictures-miss-ng-123.jpg', 'miss-ng', '4', 1),
-(127, 'new post', 'We make design and photography wonderful. want to like or have something wonderful ? you are at the right place.', 5, '2018-04-06 19:56:22', 'ngpictures-new-post-127.jpg', 'new-post', '1', 1);
-
--- --------------------------------------------------------
+LOCK TABLES `posts` WRITE;
+/*!40000 ALTER TABLE `posts` DISABLE KEYS */;
+INSERT INTO `posts` VALUES (171,'Gael shooting','Rédaction',5,'2018-05-27 21:13:22','ngpictures-gael-shooting-171.jpg','{\"ISOSpeedRatings\":400,\"Flash\":16,\"Model\":\"Canon EOS DIGITAL REBEL XTi\",\"ExposureTime\":\"1\\/200\",\"FocalLength\":\"50\\/1\",\"ResolutionUnit\":2,\"COMPUTED\":{\"html\":\"width=\\\"3888\\\" height=\\\"2592\\\"\",\"Height\":2592,\"Width\":3888,\"IsColor\":1,\"ByteOrderMotorola\":0,\"ApertureFNumber\":\"f\\/4.0\"}}','gael-shooting','1',1,2,NULL),(174,'lushi town','Car ils ne pourront plus mourir,... étant fils de la résurrection.Car ils ne pourront plus mourir,... étant fils de la résurrection.Car ils ne pourront plus mourir,... étant fils de la résurrection.Car ils ne pourront plus mourir,... étant fils de la résurrection.',5,'2018-05-27 21:58:02','ngpictures-lushi-town-174.jpg','{\"ISOSpeedRatings\":400,\"Flash\":16,\"Model\":\"Canon EOS DIGITAL REBEL XTi\",\"ExposureTime\":\"1\\/200\",\"FocalLength\":\"35\\/1\",\"ResolutionUnit\":2,\"COMPUTED\":{\"html\":\"width=\\\"3888\\\" height=\\\"2592\\\"\",\"Height\":2592,\"Width\":3888,\"IsColor\":1,\"ByteOrderMotorola\":0,\"ApertureFNumber\":\"f\\/10.0\"}}','lushi-town','1',1,7,NULL),(178,'nae','teest pub',5,'2018-05-31 22:01:28','ngpictures-nae-178.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":2,\"COMPUTED\":{\"html\":\"width=\\\"1920\\\" height=\\\"933\\\"\",\"Height\":933,\"Width\":1920,\"IsColor\":1,\"ByteOrderMotorola\":1,\"Thumbnail.FileType\":2,\"Thumbnail.MimeType\":\"image\\/jpeg\"}}','nae','1',1,0,NULL),(184,'une titre sans description','',5,'2018-06-02 01:49:31','ngpictures-une-titre-sans-description-184.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"1920\\\" height=\\\"1080\\\"\",\"Height\":1080,\"Width\":1920,\"IsColor\":1}}','une-titre-sans-description','1',1,0,NULL),(189,'balloy fane','Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',6,'2018-06-05 00:05:04','ngpictures-balloy-fane-189.jpg','{\"ISOSpeedRatings\":400,\"Flash\":25,\"Model\":\"Canon EOS DIGITAL REBEL XTi\",\"ExposureTime\":\"1\\/60\",\"FocalLength\":\"50\\/1\",\"ResolutionUnit\":2,\"COMPUTED\":{\"html\":\"width=\\\"3888\\\" height=\\\"2592\\\"\",\"Height\":2592,\"Width\":3888,\"IsColor\":1,\"ByteOrderMotorola\":0,\"ApertureFNumber\":\"f\\/4.0\"}}','balloy-fane','1',1,1,NULL),(190,'love','#love',5,'2018-06-05 09:25:52','ngpictures-love-190.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":2,\"COMPUTED\":{\"html\":\"width=\\\"1920\\\" height=\\\"1080\\\"\",\"Height\":1080,\"Width\":1920,\"IsColor\":1,\"ByteOrderMotorola\":1,\"Thumbnail.FileType\":2,\"Thumbnail.MimeType\":\"image\\/jpeg\"}}','love','1',1,2,NULL),(192,'le cache fait des scenes','Et que celui qui a soif vienne, que celui qui veut, prenne de l\'eau de la vie, gratuitement.Et que celui qui a soif vienne, que celui qui veut, prenne de l\'eau de la vie, gratuitement.\r\nEt que celui qui a soif vienne, que celui qui veut, prenne de l\'eau de la vie, gratuitement.Et que celui qui a soif vienne, que celui qui veut, prenne de l\'eau de la vie, gratuitement.',6,'2018-06-07 17:36:58','ngpictures-le-cache-fait-des-scenes-192.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":2,\"COMPUTED\":{\"html\":\"width=\\\"1920\\\" height=\\\"1080\\\"\",\"Height\":1080,\"Width\":1920,\"IsColor\":1,\"ByteOrderMotorola\":0,\"UserComment\":\"230351a0fccef69facb65dd21418aa3eb5b283c303376e99049dbafb0cdf5a1c\",\"UserCommentEncoding\":\"UNDEFINED\",\"Thumbnail.FileType\":2,\"Thumbnail.MimeType\":\"image\\/jpeg\"}}','le-cache-fait-des-scenes','1',1,0,NULL),(195,'this is an htag test','#love #love',6,'2018-06-18 23:39:25','ngpictures-this-is-an-htag-test-195.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','this-is-an-htag-test','1',1,0,NULL),(196,'this is love htag','love',6,'2018-06-18 23:40:05','ngpictures-this-is-love-htag-196.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','this-is-love-htag','1',1,1,NULL),(197,'plus htag test','#ng #bb #bernard #gervais',6,'2018-06-19 00:07:09','ngpictures-plus-htag-test-197.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','plus-htag-test','1',1,5,NULL),(201,'le prophete majeur','bishop M. lambalamba, annonce le 4em message',6,'2018-06-30 18:39:31','ngpictures-le-prophete-majeur-201.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"1080\\\" height=\\\"719\\\"\",\"Height\":719,\"Width\":1080,\"IsColor\":1}}','le-prophete-majeur','1',1,0,NULL),(202,'','',6,'2018-06-30 18:44:01','ngpictures-sans-titre-202.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"1080\\\" height=\\\"607\\\"\",\"Height\":607,\"Width\":1080,\"IsColor\":1}}','sans-titre','1',1,0,NULL),(203,'','',6,'2018-06-30 18:56:23','ngpictures--203.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"1080\\\" height=\\\"607\\\"\",\"Height\":607,\"Width\":1080,\"IsColor\":1}}',NULL,'1',1,0,NULL),(204,'','',6,'2018-06-30 18:59:58','ngpictures-publication-204.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"1080\\\" height=\\\"607\\\"\",\"Height\":607,\"Width\":1080,\"IsColor\":1}}','publication','1',1,0,NULL),(206,'','#love',6,'2018-06-30 22:36:11','ngpictures-publication-206.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','publication','1',1,0,NULL),(207,'','&lt;p&gt;love&lt;/p&gt; &lt;a href=\'hack\'&gt;baby&lt;/a&gt;',6,'2018-06-30 22:37:22','ngpictures-publication-207.jpg','{\"ISOSpeedRatings\":200,\"Flash\":null,\"Model\":\"Sony ILCE-6000\",\"ExposureTime\":\"100\\/6002\",\"FocalLength\":\"3000\\/100\",\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"1600\\\" height=\\\"900\\\"\",\"Height\":900,\"Width\":1600,\"IsColor\":1,\"ByteOrderMotorola\":1,\"ApertureFNumber\":\"f\\/6.3\"}}','publication','1',1,0,NULL),(208,'','ll',6,'2018-07-01 00:59:57','ngpictures-publication-208.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','publication','1',1,0,NULL),(209,'','ll',6,'2018-07-01 01:00:27','ngpictures-publication-209.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','publication','1',1,0,NULL),(210,'','ll',6,'2018-07-01 01:01:01','ngpictures-publication-210.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','publication','1',1,0,NULL),(211,'','ll',6,'2018-07-01 01:01:42','ngpictures-publication-211.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','publication','1',1,0,NULL),(212,'','ll',6,'2018-07-01 01:10:14','ngpictures-publication-212.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','publication','1',1,0,NULL),(213,'','ll',6,'2018-07-01 01:11:05','ngpictures-publication-213.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','publication','1',1,0,NULL),(214,'','',6,'2018-07-01 01:12:46','ngpictures-publication-214.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','publication','1',1,0,NULL),(215,'','',6,'2018-07-01 01:14:11','ngpictures-publication-215.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','publication','1',1,0,NULL),(216,'','',6,'2018-07-01 01:14:54','ngpictures-publication-216.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','publication','1',1,0,NULL),(217,'','',6,'2018-07-01 01:15:56','ngpictures-publication-217.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','publication','1',1,0,NULL),(218,'','',6,'2018-07-01 01:17:00','ngpictures-publication-218.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','publication','1',1,0,NULL),(219,'','',6,'2018-07-01 01:23:48','ngpictures-publication-219.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','publication','1',1,0,NULL),(220,'','',6,'2018-07-01 01:23:57','ngpictures-publication-220.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','publication','1',1,0,NULL),(221,'','',6,'2018-07-01 01:24:45','ngpictures-publication-221.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"2508\\\" height=\\\"1672\\\"\",\"Height\":1672,\"Width\":2508,\"IsColor\":1,\"ByteOrderMotorola\":1}}','publication','1',1,0,NULL),(222,'','',6,'2018-07-01 01:25:05',NULL,NULL,'publication','1',1,0,NULL),(223,'','',6,'2018-07-01 01:26:00','ngpictures-publication-223.jpg','{\"ISOSpeedRatings\":[200,0],\"Flash\":[16,0],\"Model\":\"PENTAX *ist DL     \",\"ExposureTime\":\"1\\/4000\",\"FocalLength\":\"180\\/1\",\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"3008\\\" height=\\\"2000\\\"\",\"Height\":2000,\"Width\":3008,\"IsColor\":1,\"ByteOrderMotorola\":1,\"ApertureFNumber\":\"f\\/2.8\"}}','publication','1',1,0,NULL),(224,'','',6,'2018-07-01 01:41:59','ngpictures-publication-224.jpg','{\"ISOSpeedRatings\":null,\"Flash\":null,\"Model\":null,\"ExposureTime\":null,\"FocalLength\":null,\"ResolutionUnit\":null,\"COMPUTED\":{\"html\":\"width=\\\"250\\\" height=\\\"167\\\"\",\"Height\":167,\"Width\":250,\"IsColor\":1,\"ByteOrderMotorola\":1}}','publication','1',1,0,NULL),(225,'','',7,'2018-07-01 01:47:53','ngpictures-publication-225.jpg','{\"ISOSpeedRatings\":125,\"Flash\":null,\"Model\":\"SM-J320H\",\"ExposureTime\":\"59991\\/959856\",\"FocalLength\":\"1924\\/1000\",\"ResolutionUnit\":2,\"COMPUTED\":{\"html\":\"width=\\\"1920\\\" height=\\\"1920\\\"\",\"Height\":1920,\"Width\":1920,\"IsColor\":1,\"ByteOrderMotorola\":0,\"ApertureFNumber\":\"f\\/2.2\",\"Thumbnail.FileType\":2,\"Thumbnail.MimeType\":\"image\\/jpeg\"}}','publication','1',1,0,NULL),(226,'','',6,'2018-07-01 02:04:18','ngpictures-publication-226.jpg','{\"ISOSpeedRatings\":100,\"Flash\":null,\"Model\":\"GT-I9300\",\"ExposureTime\":\"1\\/196\",\"FocalLength\":\"25\\/10\",\"ResolutionUnit\":2,\"COMPUTED\":{\"html\":\"width=\\\"640\\\" height=\\\"480\\\"\",\"Height\":480,\"Width\":640,\"IsColor\":1,\"ByteOrderMotorola\":0,\"ApertureFNumber\":\"f\\/2.8\",\"UserComment\":\"User comments\",\"UserCommentEncoding\":\"ASCII\",\"Thumbnail.FileType\":2,\"Thumbnail.MimeType\":\"image\\/jpeg\",\"Thumbnail.Height\":120,\"Thumbnail.Width\":160}}','publication','1',1,0,NULL),(227,'','',6,'2018-07-01 02:08:15','ngpictures-publication-227.jpg','{\"ISOSpeedRatings\":64,\"Flash\":1,\"Model\":\"GT-I9508\",\"ExposureTime\":\"1\\/10\",\"FocalLength\":\"420\\/100\",\"ResolutionUnit\":2,\"COMPUTED\":{\"html\":\"width=\\\"2236\\\" height=\\\"2002\\\"\",\"Height\":2002,\"Width\":2236,\"IsColor\":1,\"ByteOrderMotorola\":0,\"ApertureFNumber\":\"f\\/2.2\",\"UserComment\":\"{\\\"total_draw_time\\\":0,\\\"uid\\\":\\\"e2a8366c-a084-4c18-bb6f-6b2f470ed155\\\",\\\"layers_used\\\":0,\\\"effects_tried\\\":0,\\\"photos_added\\\":3,\\\"origin\\\":\\\"unknown\\\",\\\"effects_applied\\\":2,\\\"brushes_used\\\":0,\\\"total_effects_time\\\":0,\\\"total_draw_actions\\\":0,\\\"total_editor_actions\\\":{\\\"image\\\":3},\\\"longitude\\\":-1,\\\"total_effects_actions\\\":53,\\\"latitude\\\":-1,\\\"tools_used\\\":{\\\"crop\\\":1},\\\"fte_image_ids\\\":[],\\\"total_editor_time\\\":76}\",\"UserCommentEncoding\":\"ASCII\"}}','publication','1',1,0,NULL);
+/*!40000 ALTER TABLE `posts` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Structure de la table `users`
+-- Table structure for table `saves`
 --
 
+DROP TABLE IF EXISTS `saves`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `saves` (
+  `id` bigint(11) unsigned NOT NULL AUTO_INCREMENT,
+  `users_id` int(10) unsigned NOT NULL,
+  `blog_id` int(10) unsigned DEFAULT NULL,
+  `gallery_id` int(10) unsigned DEFAULT NULL,
+  `posts_id` int(10) unsigned DEFAULT NULL,
+  `date_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_blog_id_idx` (`blog_id`),
+  KEY `fk_gallery_id_idx` (`gallery_id`),
+  KEY `fk_posts_id_idx` (`posts_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `saves`
+--
+
+LOCK TABLES `saves` WRITE;
+/*!40000 ALTER TABLE `saves` DISABLE KEYS */;
+INSERT INTO `saves` VALUES (12,5,203,NULL,NULL,'2018-05-28 23:54:16'),(26,5,NULL,NULL,175,'2018-05-30 00:50:18'),(51,5,NULL,NULL,174,'2018-05-30 23:28:42'),(67,6,NULL,NULL,198,'2018-06-24 00:02:51'),(65,6,218,NULL,NULL,'2018-06-07 19:51:12'),(60,6,206,NULL,NULL,'2018-06-07 17:27:41'),(36,5,NULL,NULL,0,'2018-05-30 02:58:53'),(61,6,205,NULL,NULL,'2018-06-07 17:27:46'),(62,6,204,NULL,NULL,'2018-06-07 17:27:51'),(77,6,NULL,NULL,196,'2018-06-30 17:40:34'),(69,6,NULL,NULL,190,'2018-06-24 13:18:14'),(78,6,NULL,NULL,225,'2018-07-01 02:00:43'),(71,6,245,NULL,NULL,'2018-06-24 16:00:28'),(72,6,235,NULL,NULL,'2018-06-24 16:00:34'),(73,6,232,NULL,NULL,'2018-06-24 16:00:38'),(74,6,231,NULL,NULL,'2018-06-24 16:00:41'),(76,6,244,NULL,NULL,'2018-06-24 16:38:12'),(79,6,NULL,NULL,223,'2018-07-01 02:01:15');
+/*!40000 ALTER TABLE `saves` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `facebook_id` bigint(255) DEFAULT NULL,
   `name` varchar(60) NOT NULL,
   `email` varchar(100) NOT NULL,
@@ -460,726 +454,54 @@ CREATE TABLE `users` (
   `reset_token` varchar(60) DEFAULT NULL,
   `reset_at` datetime DEFAULT NULL,
   `remember_token` varchar(60) DEFAULT NULL,
-  `status` int(10) UNSIGNED DEFAULT NULL,
-  `rank` varchar(10) NOT NULL DEFAULT 'user'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `status` int(10) unsigned DEFAULT NULL,
+  `rank` varchar(10) NOT NULL DEFAULT 'user',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Contenu de la table `users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `facebook_id`, `name`, `email`, `password`, `phone`, `bio`, `avatar`, `confirmation_token`, `confirmed_at`, `reset_token`, `reset_at`, `remember_token`, `status`, `rank`) VALUES
-(5, NULL, 'bernard_ng', 'ngandubernard@gmail.com', '$2y$10$PHKfWWJ/6s9zLBZNHScWnuNxLIwmoTk6MeWrtf9ioZcjy7OAYYpeC', '243973142232', 'une bio de ouff', 'ngpictures-avatar-5.jpg', NULL, '2017-12-16 00:09:39', '5a7ab8fa4e8c8EcuJw7xwObQ0kicbDsetU3cE3OOHO90PMeqcczD4jMxhPYf', '2018-02-07 10:29:46', '4307.5ac4be1c54', NULL, 'admin'),
-(9, NULL, 'bob_kazadi', 'bob@bob.com', '$2y$10$ePA4c9EXfPG2c5E4W8Tr1ORJAL8iBOM9dxvT5igOJqK7Tl1Bs9e3q', NULL, 'fuck mes jaloux', 'ngpictures-young_b-9.jpg', NULL, '2017-12-25 15:57:03', NULL, NULL, '5978.5a50d1bfd9', NULL, 'user'),
-(11, NULL, 'lys_ngomba', 'lys@lys.com', '$2y$10$0CQ6rP7t7qlrDa4eu.0bTe.AcVla6Do4Jb7Vk9C7jKHRr3h49UGoK', NULL, 'Hey je suis sur Ngpictures 2.0', 'default.jpg', NULL, '2017-12-25 15:59:00', NULL, NULL, NULL, NULL, 'user'),
-(14, NULL, 'princess_fane', 'princess@princess.com', '$2y$10$gaCCrB2CEgDclYQ0cTzbH.5fWnELAKMuPc7ZaosbgSR6GXM8iO9UW', NULL, 'I\'am a princess', 'ngpictures-princess_fane-14.jpg', NULL, '2017-12-25 16:01:22', NULL, NULL, NULL, NULL, 'user'),
-(17, NULL, 'miss-ng', 'danias@dania.com', '$2y$10$Eznp.PAZ/gJjLq2M8hM2LO9DIvdIXhCLPRBArBmq2OeCJWgW5nHze', 'la vie de ', 'Hey je suis sur Ngpictures 2.0', 'ngpictures-avatar-17.jpg', NULL, '2018-01-21 18:28:56', '5ab03b918465b8Z7pAaGQLbAReoxzSADM9XpLzEFUGe9MmeyuAmUhp1vzySf', '2018-03-20 00:37:05', '3756.5a83f7af5b', NULL, 'user'),
-(18, NULL, 'ng', 'ng@ng.com', '$2y$10$Qgve1VN6J87GF4hU8YipYu/Zke75bvfUZeFswB1QkSWyKAkalJonC', NULL, 'Hey je suis sur Ngpictures 2.0', 'default.jpg', '5abb59bb533caS7QRtRoxL0KwyJQQIvuRrGEbps9JjoeDrCUiYhpoixQG4v9', NULL, NULL, NULL, NULL, NULL, 'user'),
-(19, NULL, 'ngs', 'ng@ngs.com', '$2y$10$8RrJXiUuxXwj/Y94R7k98eg9jPkaES.rVJrlpFevwX42Zt8Sc08hK', NULL, 'Hey je suis sur Ngpictures 2.0', 'default.jpg', '5abb5aea0c855pLSVczSFttQarno6BGwR0IelGAYmlSIPTc3Pp5Zvb7NX5Ri', NULL, NULL, NULL, NULL, NULL, 'user');
-
--- --------------------------------------------------------
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (5,NULL,'bernard ng','ngandubernard@gmail.com','$2y$10$SJ/uP.LEYwejSkVGnCEMbO/RDZGdK2w3q8Bc9pi9aTqnNlpJ/hTnu','243973142232','j\'ai une bio merde','ngpictures-avatar-5.jpg',NULL,'2017-12-16 00:09:39','5b24263560f7d0XZ8QqYE3h6LGOq3ovVbJLqFbE1JnbQb12f474t1AoBdq5a','2018-06-15 22:48:53','5925.5b180edc36',NULL,'admin'),(6,NULL,'gervais','gervais@gmail.com','$2y$10$2fG6Rf9xiLUhSCKSu48MUObS5Bm7T2w1rkLfd453145XoueqpejTC','949589309530','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.','ngpictures-avatar-6.jpg',NULL,'2018-06-05 00:03:39',NULL,NULL,'9384.5b2e366172',NULL,'admin'),(7,NULL,'bernard','gervais@gmail.com','$2y$10$2fG6Rf9xiLUhSCKSu48MUObS5Bm7T2w1rkLfd453145XoueqpejTC','949589309530','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.','ngpictures-avatar-7.jpg',NULL,'2018-06-05 00:03:39',NULL,NULL,'9384.5b2e366172',NULL,'admin'),(8,NULL,'lop','gervais@gmail.com','$2y$10$2fG6Rf9xiLUhSCKSu48MUObS5Bm7T2w1rkLfd453145XoueqpejTC','949589309530','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.Ngpictures est une galerie d\'art photographique et un mini résaux social où vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses, étant chrétiens l\'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l\'avance.','ngpictures-avatar-8.jpg',NULL,'2018-06-05 00:03:39',NULL,NULL,'2558.5b381ad973',NULL,'user');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Structure de la table `verses`
+-- Table structure for table `verses`
 --
 
+DROP TABLE IF EXISTS `verses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `verses` (
-  `id` int(11) UNSIGNED NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `text` varchar(1000) NOT NULL,
-  `ref` varchar(15) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `ref` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=519 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Contenu de la table `verses`
+-- Dumping data for table `verses`
 --
 
-INSERT INTO `verses` (`id`, `text`, `ref`) VALUES
-(1, 'Et vous, enfants de Sion, soyez dans l\'allégresse', 'Joë.2:23\r'),
-(2, 'Pour moi, m\'approcher de Dieu, c\'est mon bien', 'Ps.73:28\r'),
-(3, 'Maintenant donc ces trois choses demeurent: la foi, l\'espérance, la charité ', '1Co.13:13\r'),
-(4, 'Celui qui a construit toutes choses, c\'est Dieu', 'Hé.3:4\r'),
-(5, 'Montre-moi ce que je ne vois pas', 'Job 34:32\r'),
-(6, 'L\'Éternel a de la bonté pour qui espère en lui', 'La.3:25\r'),
-(7, 'Le bonheur est pour ceux qui craignent Dieu', 'Ec.8:12\r'),
-(8, 'Grâces soient rendues à Dieu pour son don ineffable!', '2Co.9:15\r'),
-(9, 'Grâces soient rendues à Dieu, qui nous donne la victoire par notre Seigneur Jésus-Christ! ', '1Co.15:57\r'),
-(10, 'Donne aujourd\'hui du succès à ton serviteur', 'Né.1:11\r'),
-(11, 'Béni soit le Seigneur chaque jour! Quand on nous accable, Dieu nous délivre', 'Ps.68:20\r'),
-(12, 'Je te bénirai, ... et tu seras une source de bénédictions', 'Ge.12:2\r'),
-(13, 'Il bénira ceux qui craignent l\'Éternel', 'Ps.115:13\r'),
-(14, 'Heureux l\'homme qui supporte patiemment la tentation', 'Ja.1:12\r'),
-(15, 'Heureux celui à qui la transgression est remise, à qui le péché est pardonné!', 'Ps.32:1\r'),
-(16, 'Heureux vous qui pleurez maintenant, car vous serez dans la joie!', 'Lu.6:21\r'),
-(17, 'La parole est près de toi, dans ta bouche et dans ton cœur', 'Ro.10:8\r'),
-(18, 'La fin de toutes choses est proche', '1Pi.4:7\r'),
-(19, 'Dieu était en Christ, réconciliant le monde avec lui-même', '2Co.5:19\r'),
-(20, 'Dieu nous a donne la vie éternellement,...et cette vie éternelle est dans son Fils', '1Jn.5:11\r'),
-(21, 'Dieu est amour', '1Jn.4:8\r'),
-(22, 'Dieu est lumière et il n\'y a point en lui de ténèbres', '1Jn.1:5\r'),
-(23, 'Dieu peut vous combler de toutes sortes de grâces ', '2Co.9:8\r'),
-(24, 'Et mon Dieu pourvoira à tous vos besoins ', 'Ph.4:19\r'),
-(25, 'Dieu est notre refuge', 'Ps.62:9\r'),
-(26, 'Voici, notre Dieu que nous servons peut nous délivrer de la fournaise ardente', 'Da.3:17\r'),
-(27, 'Car c\'est Dieu qui produit en vous le vouloir et le faire, selon son bon plaisir', 'Ph.2:13\r'),
-(28, 'Moi, l\'Éternel, ton Dieu, je t\'instruis pour ton bien', 'És.48:17\r'),
-(29, 'Où est Dieu, mon créateur, qui inspire des chants d\'allégresse pendant la nuit', 'Job 35:10\r'),
-(30, 'Que le Dieu de la persévérance.. vous donne d\'avoir les mêmes sentiments...', 'Ro.15:5\r'),
-(31, 'Veillez et priez, afin que vous ne tombiez pas dans la tentation', 'Mt.26:41\r'),
-(32, 'Veillez, demeurez fermes dans la foi', '1Co.16:13\r'),
-(33, 'Garde ton coeur plus que toute autre chose', 'Pr.4:23\r'),
-(34, 'Je rappellerai les oeuvres de l\'Éternel, Car je me souviens de tes merveilles d\'autrefois', 'Ps.77:12\r'),
-(35, 'Je prendrai plaisir à leur faire du bien', 'Jé.32:41\r'),
-(36, 'Je ferai d\'elle un sujet de bénédiction', 'Éz.34:26\r'),
-(37, 'Sois fidèle jusqu\'à la mort, et je te donnerai la couronne de vie', 'Ap.2:10\r'),
-(38, 'Soyez pleins d\'affection les uns pour les autres, par honneur, usez de prévenances réciproques', 'Ro.12:10\r'),
-(39, 'Ayez un même sentiment, vivez en paix', '2Co.13:11\r'),
-(40, 'Mettez en pratique la parole', 'Ja.1:22\r'),
-(41, 'Soyez saints dans toute votre conduite, selon qu\'il est écrit ', '1Pi.1:15\r'),
-(42, 'Vous serez saints, car je suis saint', '1Pi.1:16\r'),
-(43, 'Rappelle-leur d\'être soumis ..., d\'être prêts à toute bonne oeuvre', 'Ti.3:1\r'),
-(44, 'Recevez avec douceur la parole qui a été planté en vous, et qui peut sauver vos âmes ', 'Ja.1:21\r'),
-(45, 'En lui vous avez été comblés de toutes les richesses ', '1Co.1:5\r'),
-(46, 'Protège-moi, à l\'ombre de tes ailes', 'Ps.17:8\r'),
-(47, 'Il y a beaucoup de paix pour ceux qui aiment ta loi, et il ne leur arrive aucun malheur', 'Ps.119:165\r'),
-(48, 'Les plus grandes et les plus précieuses promesses', '2Pi.1:4\r'),
-(49, 'La foi sans œuvres est morte', 'Ja.2:26\r'),
-(50, 'Ainsi la foi vient de ce qu\'on entend, et ce qu\'on entend vient de la parole de Christ ', 'Ro.10:17\r'),
-(51, 'Croyez-vous que je puisse faire cela? ', 'Mt.9:28\r'),
-(52, 'Celui qui croit en elle ne sera point confus', '1Pi.2:6\r'),
-(53, 'Leur joie sera éternelle', 'És.61:7\r'),
-(54, 'C\'est devant l\'Éternel ton Dieu que tu feras servir à ta joie tous les biens que tu posséderas', 'De.12:18\r'),
-(55, 'Cherchez-moi, et vous vivrez!', 'Am.5:4\r'),
-(56, 'Les choses visibles sont passagères, et les invisibles sont éternelles', '2Co.4:18\r'),
-(57, 'Entraîne-moi après toi! Nous courrons! ', 'Ca.1:4\r'),
-(58, 'Dans toutes leurs détresses ils n\'ont pas été sans secours', 'És.63:9\r'),
-(59, 'Qui vous tenez dans la maison de l\'Éternel, dans les parvis de la maison de notre Dieu! ', 'Ps.134:2\r'),
-(60, 'Invoque-moi, et je te répondrai', 'Jé.33:3\r'),
-(61, 'Je crie au Dieu Très Haut, au Dieu qui agit en ma faveur', 'Ps.57:3\r'),
-(62, 'Remets ton sort à l\'Éternel, et il te soutiendra ', 'Ps.55:23\r'),
-(63, 'Bien-aimé, nous sommes maintenant enfant de Dieu ', '1Jn.3:2\r'),
-(64, 'Croissez dans la grâce ', '2Pi.3:18\r'),
-(65, 'Béni soit Dieu et notre Seigneur J-C...qui nous a régénérés,...pour un héritage...', '1Pi.1:3,4\r'),
-(66, 'Si quelqu\'un veut venir après moi, qu\'il renonce à lui-même, qu\'il se charge chaque jour de sa croix, et qu\'il me suive', 'Lu.9:23\r'),
-(67, 'Je dirai tes oeuvres puissantes, Seigneur Éternel! ', 'Ps.71:16\r'),
-(68, 'Que vous discerniez quelle est la volonté de Dieu, ce qui est bon, agréable et parfait', 'Ro.12:2\r'),
-(69, 'Il nous a engendrés selon sa volonté, par la parole de vérité', 'Ja.1:18\r'),
-(70, 'Voici maintenant le jour du salut', '2Co.6:2\r'),
-(71, 'Tous vous êtes un en Jésus-Christ', 'Ga.3:28\r'),
-(72, 'Faites tout pour la gloire de Dieu ', '1Co.10:31\r'),
-(73, 'Déchargez-vous sur lui de tous vos soucis, car lui-même prend soin de vous', '1Pi.5:7\r'),
-(74, 'Tout ce qui est à moi est à toi, et ce qui est à toi est à moi', 'Jn.17:10\r'),
-(75, 'Mais dans toutes ces choses nous sommes plus que vainqueurs ', 'Ro.8:37\r'),
-(76, 'Que tout ce que vous faites se fasse avec charité! ', '1Co.16:14\r'),
-(77, 'Il fait tout à merveille', 'Mc.7:37\r'),
-(78, 'Tous ceux qui sont conduits par l\'Esprit de Dieu sont fils de Dieu', 'Ro.8:14\r'),
-(79, 'Tout ce que Dieu fait durera toujours', 'Ec.3:14\r'),
-(80, 'Pendant qu\'il faisait encore très sombre, il se leva, et sortit pour aller dans un lieu désert, où il pria', 'Mc.1:35\r'),
-(81, 'Car quiconque invoquera le nom du Seigneur sera sauvé', 'Ro.10:13\r'),
-(82, 'Toute grâce excellente... descend d\'en haut ', 'Ja.1:17\r'),
-(83, 'Vous êtes manifestement une lettre de Christ', '2Co.3:3\r'),
-(84, 'Vous avez goûté que le Seigneur est bon', '1Pi.2:3\r'),
-(85, 'Tout est à vous, et vous êtes à Christ, et Christ est à Dieu ', '1Co.3:23\r'),
-(86, 'Vous avez été rachetés à un grand prix', '1Co.6:20\r'),
-(87, 'Vous obtiendrez la couronne incorruptible de la gloire', '1Pi.5:4\r'),
-(88, 'Or nous, nous n\'avons pas reçu l\'esprit du monde, mais l\'Esprit qui vient de Dieu', '1Co.2:12\r'),
-(89, 'Vous avez été rapprochés par le sang de Christ', 'Ép.2:13\r'),
-(90, 'Il fit sortir son peuple dans l\'allégresse, ses élus au milieu des cris de joie', 'Ps.105:43\r'),
-(91, 'Là où est l\'Esprit du Seigneur, là est la liberté', '2Co.3:17\r'),
-(92, 'Là où je suis, là aussi sera mon Serviteur', 'Jn.12:26\r'),
-(93, 'Ils annonçaient la parole de Dieu avec assurance', 'Ac.4:31\r'),
-(94, 'Si quelqu\'un parle, que ce soit comme annonçant les oracles de Dieu', '1Pi.4:11\r'),
-(95, 'Sanctifiez dans vos cœurs Christ le Seigneur', '1Pi.3:15\r'),
-(96, 'Seigneur! tous mes désirs sont devant toi ', 'Ps.38:10\r'),
-(97, 'Accomplis ton œuvre dans le cours des années, ô Éternel!', 'Ha.3:2\r'),
-(98, 'Tu adoreras le Seigneur, ton Dieu, et tu le serviras lui seul ', 'Mt.4:10\r'),
-(99, 'L\'Éternel est ma force et le sujet de mes louanges', 'És.12:2\r'),
-(100, 'L\'Éternel bénit son peuple et le rend heureux', 'Ps.29:11\r'),
-(101, 'Car l\'Éternel Dieu est un soleil et un bouclier... ', 'Ps.84:12\r'),
-(102, 'L\'Éternel est le rocher des siècles', 'Ps.27:4\r'),
-(103, 'L\'Éternel sera ta lumière à toujours', 'És.60:20\r'),
-(104, 'L\'Éternel est refuge pour son peuple', 'Joë.3:16\r'),
-(105, 'Le Seigneur est plein de miséricorde et de compassion', 'Ja.5:11\r'),
-(106, 'L\'Éternel a fait retomber sur lui l\'iniquité de nous tous', 'És.53:6\r'),
-(107, 'L\'Éternel donne la grâce et la gloire', 'Ps.84:12b\r'),
-(108, 'L\'Éternel est bon,... Il connaît ceux qui se confient en lui', 'Na.1:7\r'),
-(109, 'L\'Éternel agira en ma faveur', 'Ps.138:8\r'),
-(110, 'L\'Éternel, l\'Éternel, Dieu miséricordieux et compatissant', 'Ex.34:6\r'),
-(111, 'Je ne me souviendrai plus de leur péché', 'Jé.31:34\r'),
-(112, 'Il vient, notre Dieu, il ne reste pas en silence', 'Ps.50:3\r'),
-(113, 'Que la volonté du Seigneur se fasse!', 'Ac.21:14\r'),
-(114, 'Que ta bonté soit ma consolation, Comme tu l\'as promis à ton serviteur!', 'Ps.119:76\r'),
-(115, 'Que ta main me soit en aide! ', 'Ps.119:173\r'),
-(116, 'Je voudrais séjourner éternellement dans ta tente', 'Ps.61:5\r'),
-(117, 'Que nous portions des fruits pour Dieu ', 'Ro.7:4\r'),
-(118, 'Qu\'il demandent avec foi, sans douter', 'Ja.1:6\r'),
-(119, 'Qu\'il l\'a demande (la sagesse) à Dieu, qui donne à tous simplement et sans reproche ', 'Ja.1:5\r'),
-(120, 'Afin que nous reçussions l\'adoption', 'Ga.4:5\r'),
-(121, 'Le don gratuit de Dieu, c\'est la vie éternelle en Jésus-Christ notre Seigneur', 'Ro.6:23\r'),
-(122, 'Vous avez reçu gratuitement, donnez gratuitement', 'Mt.10:8\r'),
-(123, 'Dieu ne se repent pas de ses dons et de son appel ', 'Ro.11:29\r'),
-(124, 'Par les oeuvres la foi fut rendue parfaite ', 'Ja.2:22\r'),
-(125, 'L\'œuvre de la justice sera la paix', 'És.32:17\r'),
-(126, 'Prends courage, mon enfant, tes péchés te sont pardonnés', 'Mt.9:2\r'),
-(127, 'Croyez que la patience de notre Seigneur est votre salut', '2Pi.3:15\r'),
-(128, 'Vous aussi, soyez patients, affermissez vos cœurs', 'Ja.5:8\r'),
-(129, 'Le rachat de leur âme est cher, et n\'aura jamais lieu', 'Ps.49:9\r'),
-(130, 'Rachetez le temps, car les jours sont mauvais', 'Ép.5:16\r'),
-(131, 'Recherchez la charité. Aspirez aussi aux dons spirituels', '1Co.14:1\r'),
-(132, 'L\'agneau qui a été immolé est digne de recevoir la puissance,... et la louange', 'Ap.5:12\r'),
-(133, 'Les choses anciennes sont passées, voici, toutes choses sont devenues nouvelles ', '2Co.5:17\r'),
-(134, 'L\'Esprit de gloire, l\'Esprit de Dieu, repose sur vous', '1Pi.4:14\r'),
-(135, 'Soyez fervents d\'esprit. Servez le Seigneur', 'Ro.12:11\r'),
-(136, 'Il y a un seul Dieu ... un Seul médiateur entre Dieu et les hommes, Jésus-Christ homme', '1Ti.2:5\r'),
-(137, 'Si Dieu est pour nous, qui sera contre nous?', 'Ro.8:31\r'),
-(138, 'Si tu le cherches, il se laissera trouver par toi', '1Ch.28:9\r'),
-(139, 'Encore un peu, ... celui qui doit venir viendra et  il ne tardera pas', 'Hé.10:37\r'),
-(140, 'Votre vie est cachée avec Christ en Dieu', 'Col.3:3\r'),
-(141, 'Il bénit la demeure des justes', 'Pr.3:33\r'),
-(142, 'Il a fait avec moi une alliance éternelle', '2S.23:5\r'),
-(143, 'Vous avez été scellés du Saint-esprit', 'Ép.1:13\r'),
-(144, 'Car l\'Éternel connaît la voie des justes, et la voie des pécheurs mène à la ruine', 'Ps.1:6\r'),
-(145, 'Votre Père sait de quoi vous avez besoin, avant que vous le lui demandiez', 'Mt.6:8\r'),
-(146, 'La connaissance enfle, mais la charité édifie', '1Co.8:1\r'),
-(147, 'Je serai pour vous un père, et vous serez pour moi des fils et des filles', '2Co.6:18\r'),
-(148, 'Et que quiconque crois est justifié par lui de toutes les choses', 'Ac.13:39\r'),
-(149, 'Ils célébreront les voies de l\'Éternel', 'Ps.138:5\r'),
-(150, 'Je disais: Tu m\'appelleras: Mon père!', 'Jé.3:19\r'),
-(151, 'Je vous donnerai un cœur nouveau', 'Éz.36:26\r'),
-(152, 'En elle était la vie, et la vie était la lumière des hommes', 'Jn.1:4\r'),
-(153, 'Et tous ceux qui le touchaient étaient guéris.', 'Mc.6:56\r'),
-(154, 'Et nous, nous avons connu l\'amour que Dieu a pour nous ', '1Jn.4:16\r'),
-(155, 'Gloire à Dieu dans les lieux très hauts, et paix sur la terre parmi les hommes qu\'Il agrée! ', 'Lu.2:14\r'),
-(156, 'Et pour attendre des cieux son Fils', '1Th.1:10\r'),
-(157, 'J\'établirai ma demeure au milieu de vous', 'Lé.26:11\r'),
-(158, 'Et ma parole et ma prédication ... une démonstration d\'Esprit et de puissance', '1Co.2:4\r'),
-(159, 'Et c\'est ainsi qu\'Abraham, ayant persévéré, obtint l\'effet de la promesse.', 'Hé.6:15\r'),
-(160, 'Et le roi leur répondra: ... c\'est à moi que vous les avez faites. ', 'Mt.25:40\r'),
-(161, 'Car l\'agneau qui est au milieu du trône les paîtra et les conduira aux sources des eaux de la vie', 'Ap.7:17\r'),
-(162, 'Car l\'Éternel prend plaisir à son peuple', 'Ps.149:4\r'),
-(163, 'Le jour de l\'Éternel est proche', 'So.1:7\r'),
-(164, 'Car sa bonté pour nous est grande, et sa fidélité dure à toujours. ', 'Ps.117:2\r'),
-(165, 'Car je vais créer des nouveaux cieux et une nouvelle terre', 'És.65:17\r'),
-(166, 'C\'est pourquoi encore l\'Amen par lui est prononcé par nous à sa gloire.', '2Co.1:20\r'),
-(167, 'Car la vie a été manifestée ', '1Jn.1:2\r'),
-(168, 'Car mon joug est doux, et mon fardeau léger. ', 'Mt.11:30\r'),
-(169, 'Car celui qui a pitié d\'eux sera leur guide', 'És.49:10\r'),
-(170, 'Car nous sommes ouvriers avec Dieu.', '1Co.3:9\r'),
-(171, 'Nous sommes, en effet, pour Dieu la bonne odeur de Christ', '2Co.2:15\r'),
-(172, 'Car le Père lui-même vous aime', 'Jn.16:27\r'),
-(173, 'Car la prédication de la croix est... une puissance de Dieu.', '1Co.1:18\r'),
-(174, 'Venez et attachez-vous à l\'Éternel', 'Jé.50:5\r'),
-(175, 'La vérité sort de ma bouche et ma parole ne sera point révoquée', 'És.45:23\r'),
-(176, 'Jésus ... toujours vivant pour intercéder en leur faveur', 'é.7:22,25\r'),
-(177, 'Élie était un homme de la même nature que nous ', 'Ja.5:17\r'),
-(178, 'Ayant donc de telles promesses, bien-aimés, purifions-nous ', '2Co.7:1\r'),
-(179, 'Le nom de l\'Éternel est une tour forte', 'Pr.18:10\r'),
-(180, 'Il a été tenté comme nous en toutes choses, sans commettre de péché.', 'Hé.4:15\r'),
-(181, 'Celui qui fait la volonté de Dieu demeure éternellement. ', '1Jn.2:17\r'),
-(182, 'Car l\'Éternel est bon, sa bonté dure toujours... ', 'Ps.100:5\r'),
-(183, 'Éternel! ta bonté atteint jusqu\'aux cieux', 's.36:6\r'),
-(184, 'Et maintenant, petits enfants, demeurez en lui', '1Jn.2:28\r'),
-(185, 'Ceux qui me cherchent me trouvent.', 'Pr.8:17\r'),
-(186, 'Mon âme est attachée à toi, ta droite me soutient.', 'Ps.63:9\r'),
-(187, 'C\'est vers toi que je crie, ô Éternel', 'Joë.1:19\r'),
-(188, 'Chacun recevra sa propre récompense selon son propre travail.', '1Co.3:8\r'),
-(189, 'Que ton nom est magnifique sur toute la terre! ', 'Ps.8:10\r'),
-(190, 'Que tes pensées, ô Dieu, me semblent impénétrables! ', 'Ps.139:17\r'),
-(191, 'Que ses jugements sont insondables, et ses voies incompréhensibles! ', 'Ro.11:33\r'),
-(192, 'Comme un berger, il paîtra son troupeau', 'És.40:11\r'),
-(193, 'Qu\'ils sont beaux les pieds de ceux qui annoncent la paix', 'Ro.10:15\r'),
-(194, 'Quand je suis dans la crainte, en toi je me confie.', 'Ps.56:4\r'),
-(195, 'Celui que tu bénis est béni, et que celui que tu maudis est maudit. ', 'No.22:6\r'),
-(196, 'Il nous affermira aussi jusqu\'à la fin', '1Co.1:8\r'),
-(197, 'J-C s\'est donné lui-même pour nos péché', 'Ga.1:4\r'),
-(198, 'Le sang de Jésus son fils nous purifie de tout péché.', '1Jn.1:7\r'),
-(199, 'Si quelqu\'un est en Christ, il est une nouvelle créature. ', '2Co.5:1\r'),
-(200, 'Si quelqu\'un entre par moi il sera sauvé', 'Jn.10:9\r'),
-(201, 'Si quelqu\'un a soif, qu\'il vienne à moi, et qu\'il boive. ', 'Jn.7:37\r'),
-(202, 'Quel est donc le serviteur fidèle et prudent?', 'Mt.24:45\r'),
-(203, 'Mais si quelqu\'un aime Dieu, celui-là est connu de lui. ', '1Co.8:3\r'),
-(204, 'Si quelqu\'un me sert, qu\'il me suive', 'Jn.12:26\rb'),
-(205, 'Quand on tourne vers lui les regards, on est rayonnant de joie', 'Ps.34:6\r'),
-(206, 'Celui qui me suit...aura la lumière de la vie.', 'Jn.8:12\r'),
-(207, 'Celui qui sème peu moissonnera peu, et celui qui sème abondamment moissonnera abondamment.', '2Co.9:6\r'),
-(208, 'Les hommes intègres héritent le bonheur', 'Pr.28:18\r'),
-(209, 'Celui qui peut faire par la puissance qui agit en nous, ... à lui soit la gloire', 'Ép.3:20,21\r'),
-(210, 'Mieux vaut chercher un refuge en l\'Éternel que de se confier à l\'homme', 'Ps.118:8\r'),
-(211, 'L\'amour de Dieu est répandu dans nos cœurs par le Saint Esprit qui nous a été donné. ', 'Ro.5:5\r'),
-(212, 'L\'Amour de Dieu a été manifesté envers nous', '1Jn.4:9\r'),
-(213, 'Toutes choses concourent au bien de ceux qui aiment Dieu', 'Ro.8:28\r'),
-(214, 'L\'homme dont le regard est bienveillant sera béni ', 'Pr.22:9\r'),
-(215, 'Mon amour ne s\'éloignera point de toi', 'És.54:10\r'),
-(216, 'La miséricorde triomphe du jugement. ', 'Ja.2:13\r'),
-(217, 'Ta droite me soutient, Et je deviens grand par ta bonté.', 'Ps.18:36\r'),
-(218, 'La prière fervente du juste a une grande efficace. ', 'Ja.5:16\r'),
-(219, 'L\'Éternel peut te donner bien plus que cela.', '2Ch.25:9\r'),
-(220, 'La prière de la foi sauvera le malade', 'Ja.5:15\r'),
-(221, 'Il écoute la prière des justes.', 'Pr.15:29\r'),
-(222, 'Je changerai les devant eux les ténèbres en lumière', 'És.42:16\r'),
-(223, 'Nous sommes fous à cause de Christ', '1Co.4:10\r'),
-(224, 'Nous marcherons, nous, au nom de l\'Éternel, notre Dieu, à toujours et à perpétuité.', 'Mi.4:5\r'),
-(225, 'Nous qui sommes des jours, soyons sobres', '1Th.5:8\r'),
-(226, 'Nous avons dans le ciel un édifice qui est l\'ouvrage de Dieu', '2Co.5:1\rb'),
-(227, 'Nous, nous prêchons Christ crucifié', '1Co.1:23\r'),
-(228, 'Car nous marchons par la foi et non par la vue', '2Co.5:7\r'),
-(229, 'Sa colère dure un instant, Mais sa grâce toute la vie', 'Ps.30:6\r'),
-(230, 'C\'est en l\'Éternel que je cherche un refuge. ', 'Ps.11:1\r'),
-(231, 'En lui mon coeur se confie, et je suis secouru', 'Ps.28:7\r'),
-(232, 'J\'espère en ton secours, ô Éternel!', 'Ge.49:18\r'),
-(233, 'Que ta bénédiction soit sur ton peuple!', 'Ps.3:9\r'),
-(234, 'J\'écrirai sur lui le nom de mon Dieu,... et mon nom nouveau.', 'Ap.3:12\r'),
-(235, 'Regarde si je suis sur une mauvaise voie, et conduis-moi sur la voie de l\'éternité! ', 'Ps.139:24\r'),
-(236, 'On l\'appellera Admirable, Conseiller, Dieu puissant', 'És.9:5\r'),
-(237, 'Mon peuple demeurera dans le séjour de la paix', 'És.32:18\r'),
-(238, 'Voici, le jour de l\'Éternel arrive', 'Za.14:1\r'),
-(239, 'C\'est l\'heure de vous réveiller enfin du sommeil', 'Ro.13:11\r'),
-(240, 'Éternel! enseigne-moi ta voie ', 'Ps.27:11\r'),
-(241, 'Enseigne-moi à faire ta volonté! Car tu es mon Dieu. ', 'Ps.143:10\r'),
-(242, 'Venez, et montons...afin qu\'il nous enseigne ses voies', 'És.2:3\r'),
-(243, 'Apprenez à faire le bien', 'És.1:17\r'),
-(244, 'Notre communion est avec le Père et avec son Fils Jésus-Christ. ', '1Jn.1:3\r'),
-(245, 'Ne crains rien, je viens à ton secours.', 'És.41:13\r'),
-(246, 'Ne craignez pas, et que vos mains se fortifient!', 'Za.8:13\r'),
-(247, 'Mais je ne fais pour moi-même aucun cas de ma vie', 'Ac.20:24\r'),
-(248, 'Mon âme, bénis l\'Éternel, Et n\'oublie aucun de ses bienfaits! ', 'Ps.103:2\r'),
-(249, 'Celui qui n\'a point connu le péché, il l\'a fait devenir péché pour nous', '2Co.5:21\r'),
-(250, 'Le Seigneur ne tarde pas dans l\'accomplissement de la promesse', '2Pi.3:9\r'),
-(251, 'L\'espérance des misérables ne périt pas à toujours.', 'Ps.9:19\r'),
-(252, 'N\'attristez pas le Saint-esprit de Dieu ', 'Ép.4:30\r'),
-(253, 'La richesse ne sert à rien, mais la justice délivre de la mort. ', 'Pr.11:4\r'),
-(254, 'Ne jugez point, afin que vous ne soyez point jugés. ', 'Mt.7:1\r'),
-(255, 'L\'homme ne vivra pas de pain seulement, mais de toute parole qui sort de la bouche de Dieu.', 'Mt.4:4\r'),
-(256, 'Non! Nous servirons l\'Éternel.', 'Jos.24:21\r'),
-(257, 'Ne nous rendras-tu pas à la vie, afin que ton peuple se réjouisse en toi? ', 'Ps.85:7\r'),
-(258, 'Poursuivez toujours le bien', '1Th.5:15\r'),
-(259, 'D\'ailleurs, quand vous souffririez pour la justice, vous seriez heureux. ', '1Pi.3:14\r'),
-(260, 'Mais au sein de leur détresse ils sont retournes à l\'Eternel ... ils l\'ont trouvé', '2Ch.15:4\r'),
-(261, 'Mais, par ce que l\'Éternel vous aime ', 'De.7:8\r'),
-(262, 'Nous portons ce trésor dans des vases de terre ', '2Co.4:7\r'),
-(263, 'Et toi, Éternel, ne t\'éloigne pas! Toi qui es ma force, viens en hâte à mon secours! ', 'Ps.22:20\r'),
-(264, 'Mais maintenant, Christ est ressuscité des morts', '1Co.15:20\r'),
-(265, 'Mais Noé trouva grâce aux yeux de l\'Éternel.', 'Ge.6:8\r'),
-(266, 'O profondeur de la richesse, de la sagesse et de la science de Dieu!', 'Ro.11:33\r'),
-(267, 'Il se réjouit sans cesse de ton nom, et il se glorifie de ta justice.', 'Ps.89:17\r'),
-(268, 'Mais revêtez-vous du Seigneur Jésus-Christ ', 'Ro.13:14\r'),
-(269, 'Mais revêtez-vous du Seigneur Jésus-Christ ', 'Ro.13:14\r'),
-(270, 'Fortifiez-vous dans le Seigneur et par sa force toute puissante.', 'Ép.6:10\r'),
-(271, 'Revêtons les armes de la lumière.', 'Ro.13:12\r'),
-(272, 'Reviens à moi, car je t\'ai racheté.', 'És.44:22\r'),
-(273, 'Je suis l\'ami de tous ceux qui te craignent', 'Ps.119:63\r'),
-(274, 'Il n\'y a aucune différence, en effet, entre le Juif et le Grec, puisqu\'ils ont tous un même Seigneur', 'Ro.10:12\r'),
-(275, 'Bien qu\'Il fût fils, l\'obéissance par les choses qu\'il a souffertes', 'Hé.5:8\r'),
-(276, 'L\'attente des justes n\'est que joie, mais l\'espérance des méchants périra. ', 'Pr.10:28\r'),
-(277, 'Maintenez-vous dans l\'amour de Dieu, en attendant la miséricorde de notre Seigneur Jésus-Christ', 'Jude.21\r'),
-(278, 'Lui qui a porté lui-même nos péchés en son corps sur le bois ', '1Pi.2:24\r'),
-(279, 'Il agit de tout son cœur, et il réussit dans tout ce qu\'il entreprit', '2Ch.31:21\r'),
-(280, 'Il est le médiateur d\'une nouvelle alliance', 'Hé.9:15\r'),
-(281, 'C\'est lui qui rachètera Israël de toutes ses iniquités.', 'Ps.130:8\r'),
-(282, 'Car il délivrera le pauvre qui crie, et le malheureux qui n\'a point d\'aide.', 'Ps.72:12\r'),
-(283, 'Il a satisfait l\'âme altérée, Il a comblé de biens l\'âme affamée.', 'Ps.107:9\r'),
-(284, 'Il n\'a pas honte de les appeler frères.', 'Hé.2:11\r'),
-(285, 'Il me fait reposer dans de verts pâturages, Il me dirige près des eaux paisibles.', 'Ps.23:2\r'),
-(286, 'Dans leur bouche il ne s\'est point trouvé de mensonge, car ils sont irrépréhensibles.', 'Ap.14:5\r'),
-(287, 'Ils périront, mais tu subsisteras', 'Ps.102:27\r'),
-(288, 'Heureux le peuple qui connaît le son de la trompette', ' Il marche à la'),
-(289, 'Ils ont lavé leurs robes, et ils les ont blanchies dans le sang de l\'agneau.', 'Ap.7:14 \r'),
-(290, 'Étant donc justifiés par la foi, nous avons la paix avec Dieu par notre Seigneur Jésus-Christ ', 'Ro.5:1\r'),
-(291, 'C\'est dans la tranquillité et le repos que sera votre salut', 'És.30:15\r'),
-(292, 'Pardonne-moi ceux que j\'ignore. ', 'Ps.19:3\r'),
-(293, 'Nous sommes pressés de toute manière, mais non réduits à l\'extrémité ', '2Co.4:8\r'),
-(294, 'Nous attestons que le Père a envoyé le Fils comme Sauveur du monde. ', '1Jn.4:14\r'),
-(295, 'La révélation de tes paroles éclaire, elle donne de l\'intelligence aux simples. ', 'Ps.119:130\r'),
-(296, 'Les yeux du Seigneur sont sur les justes', '1Pi.3:12\r'),
-(297, 'Christ, notre Pâque été immolé', '1Co.5:7\r'),
-(298, 'Je rassasierai de pain ses indigents', 'Ps.132:15\r'),
-(299, 'Souviens-toi de moi selon ta miséricorde, à cause de ta bonté, ô Éternel!', 'Ps.25:7\r'),
-(300, 'Celui qui vaincra héritera ces choses, je serai son Dieu, et il sera mon fils.', 'Ap.21:7\r'),
-(301, 'J\'ai combattu le bon combat', '2Ti.4:7\r'),
-(302, 'Je suis bien humilié: Éternel, rends-moi la vie selon ta parole!', 'Ps.119:117\r'),
-(303, 'Le Seigneur connaît ceux qui lui appartiennent', '2Ti.2:19\r'),
-(304, 'Prosternez-vous devant l\'Éternel avec des ornements sacrés. ', 'Ps.96:9\r'),
-(305, 'Soumettez-vous donc à Dieu, résistez au diable, et il fuira loin de vous. ', 'Ja.4:7\r'),
-(306, 'La sagesse d\'en haut est ... pleine de miséricorde et de bons fruits', 'Ja.3:17\r'),
-(307, 'Il y a d\'abondantes joies devant ta face, des délices éternelles à ta droite. ', 'Ps.16:11\r'),
-(308, 'Mettez dans votre cœur et dans votre âme ces paroles que je vous dis.', 'De.11:18\r'),
-(309, 'Notre secours est dans le nom de l\'Éternel, qui a fait les cieux et la terre. ', 'Ps.124:8\r'),
-(310, 'Souviens-toi favorablement de moi, ô mon Dieu!', 'Né.13:31\r'),
-(311, 'Écoute la voix de l\'Éternel dans ce que je te dis', 'Jé.38:20\r'),
-(312, 'Celui qui agit selon la vérité vient de à la lumière', 'Jn.3:21\r'),
-(313, 'Envoie ta lumière et ta fidélité! ', 'Ps.43:3\r'),
-(314, 'Recommande ton sort à l\'Éternel, Mets en lui ta confiance, et il agira. ', 'Ps.37:5\r'),
-(315, 'Espère en l\'Éternel, et il te délivrera.', 'Pr.20:22\r'),
-(316, 'Que tes bien-aimés jouissent du bonheur!', '2Ch.6:41\r'),
-(317, 'Mais celui qui persévérera jusqu\'à la fin sera sauvé', 'Mt.24:13\r'),
-(318, 'Je dis à l\'Éternel: mon refuge et ma forteresse, mon Dieu en qui je me confie! ', 'Ps.91:2\r'),
-(319, 'Approchez-vous de Dieu, et il s\'approchera de vous. ', 'Ja.4:8\r'),
-(320, 'Je reviendrai, et je vous prendrai avec moi', 'Jn.14:3\r'),
-(321, 'Mon Dieu, prête l\'oreille et écoute!', 'Da.9:18\r'),
-(322, 'Soyez réconciliés avec Dieu!', '2Co.5:20\r'),
-(323, 'Je vous recevrai comme un parfum d\'une agréable odeur', 'Éz.20:41\r'),
-(324, 'Celui qui vient à moi n\'aura jamais faim', 'Jn.6:35\r'),
-(325, 'L\'avènement du Seigneur est proche.', 'Ja.5:8\r'),
-(326, 'Les eaux jailliront dans le désert', 'És.35:6\r'),
-(327, 'Glorifiez donc Dieu dans votre corps et dans votre esprit', '1Co.6:20\r'),
-(328, 'Vos péchés vous sont pardonnés à cause de son nom. ', '1Jn.2:12\r'),
-(329, 'À cause de ton nom tu me conduiras, tu me dirigeras. ', 'Ps.31:4\r'),
-(330, 'La joie de l\'Éternel sera votre force.', 'Né.8:10\r'),
-(331, 'Soyez dans la joie, perfectionnez-vous, consolez-vous, ayez un même sentiment, vivez en paix', '2Co.13:11\r'),
-(332, 'Ne sachez-vous pas que vous êtes le temple de Dieu?', '1Co.3:16\r'),
-(333, 'Celui qui a l\'esprit calme est un homme intelligent.', 'Pr.17:27\r'),
-(334, 'Lui par les meurtrissures duquel vous avez été guéris. ', '1Pi.2:24\r'),
-(335, 'Placez-vous sur les chemins, regardez, et demandez quel sont les anciens sentiers', 'Jé.6:16\r'),
-(336, 'Tout ce qui est né de Dieu triomphe du monde', '1Jn.5:4\r'),
-(337, 'Que le Seigneur de la paix vous donne lui-même la paix en tout temps, de toute manière', '2Th.3:16\r'),
-(338, 'Saint, saint, saint est le Seigneur Dieu, le Tout Puisant, qui était, qui est, et qui vient! ', 'Ap.4:8\r'),
-(339, 'Saint, saint, saint est l\'Éternel des armées!', 'És.6:3\r'),
-(340, 'Voici, ton roi vient à toi, plein de douceur, et monté sur un âne, sur un ânon, le petit d\'une ânesse. ', 'Mt.21:5\r'),
-(341, 'Ce Jésus, ... reviendras de la même façon', 'Ac.1:11\r'),
-(342, 'Mais lui, ... peut sauver parfaitement...', 'Hé.7:24-25\r'),
-(343, 'Ma puissance s\'accomplit dans la faiblesse', '2Co.12:9\r'),
-(344, 'Que votre parole soit toujours accompagnée de grâce', 'Col.4:6\r'),
-(345, 'Mais la parole du Seigneur demeure éternellement.', '1Pi.1:25\r'),
-(346, 'Ta parole est une lampe à mes pieds, et une lumière sur mon sentier.', 'Ps.119:105\r'),
-(347, 'Dieu résiste aux l\'orgueilleux, Mais il fait grâce aux humbles. ', 'Ja.4:6\r'),
-(348, 'Humiliez-vous devant le Seigneur, et il vous élèvera. ', 'Ja.4:10\r'),
-(349, 'Voyez quel amour le Père nous a témoigné', '1Jn.3:1\r'),
-(350, 'En achevant notre sanctification dans la crainte de Dieu', '2Co.7:1\r'),
-(351, 'Mais celui qui s\'attache au Seigneur est avec lui un seul esprit. ', '1Co.6:17\r'),
-(352, 'Maintenez-vous dans l\'amour de Dieu', 'Jude.21\r'),
-(353, 'Dieu nous a sauvés, et nous a adressé une sainte vocation', '2Ti.1:9\r'),
-(354, 'Notre capacité vient de Dieu', '2Co.3:5\r'),
-(355, 'Recherchez la paix avec tous, et la sanctification, sans laquelle personne ne verra le Seigneur', 'Hé.12:14\r'),
-(356, 'Demeurez fermes dans un même esprit', 'Ph.1:27\r'),
-(357, 'Il gardera les pas de ses bien-aimés.', '1S.2:9\r'),
-(358, 'Ils étaient étrangers et voyageurs sur la terre', 'Hé.11:13\r'),
-(359, 'La crainte de l\'Éternel est une source de vie ', 'Pr.14:27\r'),
-(360, 'La crainte du Seigneur, c\'est  la sagesse', 'Job 28:28\r'),
-(361, 'Mon fils, retiens mes paroles, et garde avec toi mes préceptes.', 'Pr.7:1\r'),
-(362, 'L\'amitié de l\'Éternel est pour ceux qui le craignent', 'Ps.25:14\r'),
-(363, 'Courez de manière à remporter', '1Co.9:24\r'),
-(364, 'Que votre lumière luise ainsi devant les hommes', 'Mt.5:16\r'),
-(365, 'Comme Christ est ressuscité des morts par la gloire du Père, de même nous aussi nous marchions en nouveauté de vie.', 'Ro.6:4\r'),
-(366, 'De même aussi l\'Esprit nous aide dans notre faiblesse ', 'Ro.8:26\r'),
-(367, 'Je te couvre de l\'ombre de ma main', 'És.51:16\r'),
-(368, 'Craignez seulement le l\'Éternel et servez-le fidèlement', '1S.12:24\r'),
-(369, 'Mais vous craindrez l\'Éternel votre Dieu', '2 R.17:39\r'),
-(370, 'Celui qui est en vous est plus grand que celui qui est dans le monde. ', '1Jn.4:4\r'),
-(371, 'Il ne brisera point le roseau cassé', 'Mt.12:20\r'),
-(372, 'Tu seras comme un jardin arrosé', 'És.58:11\r'),
-(373, 'Tu as été guéri, ne pèche plus', 'Jn.5:14\r'),
-(374, 'Toi qui sondes les cœurs et les reins, Dieu juste!', 'Ps.7:10\r'),
-(375, 'Car tu es bon, Seigneur, tu pardonnes, Tu es plein d\'amour pour tous ceux qui t\'invoquent. ', 'Ps.86:5\r'),
-(376, 'Les ténèbres se dissipent et la lumière véritable paraît déjà. ', '1Jn.2:8\r'),
-(377, 'Le salut vient de l\'Éternel. ', 'Jon.2:10\r'),
-(378, 'Ils retournèrent ... les exhortant à persévérer dans la foi', 'Ac.14:22\r'),
-(379, 'Les malheureux le voient et se réjouissent', 'Ps.69:33\r'),
-(380, 'Car ils ne pourront plus mourir,... étant fils de la résurrection. ', 'Lu.20:36\r'),
-(381, 'Notre consolation abonde par Christ', '2Co.1:5\r'),
-(382, 'Je me confie dans la bonté de Dieu, éternellement et à jamais.', 'Ps.52:10\r'),
-(383, 'C\'est en confessant de la bouche qu\'on parvient au salut', 'Ro.10:10\r'),
-(384, 'Accomplis envers ton serviteur ta promesse', 'Ps.119:38\r'),
-(385, 'Le temple de Dieu est saint, et c\'est ce que vous êtes. ', '1Co.3:17\r'),
-(386, 'La religion pure consiste .. à se préserver des souillures du monde. ', 'Ja.1:27\r'),
-(387, 'Car le royaume de Dieu ne consiste pas en paroles, mais en puissance.', '1Co.4:20\r'),
-(388, 'Qu\'il fasse ce qui lui semblera bon!', '1S.3:18\r'),
-(389, 'Car il est mort, et c\'est pour le péché qu\'il est mort une fois pour toutes', 'Ro.6:10\r'),
-(390, 'Que voulez-vous que je fasse pour vous?', 'Mc.10:36\r'),
-(391, 'Nous ne cessons de prier Dieu ... que vous soyez remplis de la connaissance de sa volonté', 'Col.1:9\r'),
-(392, 'Afin que notre joie soit parfaite. ', '1Jn.1:4\r'),
-(393, 'Je cherche ta face, ô Éternel!', 'Ps.27:8\r'),
-(394, 'Je regarderai vers l\'Eternel,...mon Dieu m\'exaucera.', 'Mi.7:7\r'),
-(395, 'Je vous ai donné un exemple, afin que vous fassiez comme je vous ai fait.', 'Jn.13:15\r'),
-(396, 'Je suis le cep. Vous êtes les sarments.', 'Jn.15:5\r'),
-(397, 'Et moi, je crie à Dieu, et l\'Éternel me sauvera. ', 'Ps.55:17\r'),
-(398, 'Je veux faire ta volonté, mon Dieu! ', 'Ps.40:9\r'),
-(399, 'Je suis rempli de force, de l\'esprit de l\'Éternel ', 'Mi.3:8\r'),
-(400, 'J\'aime la piété et non les sacrifices', 'Os.6:6\r'),
-(401, 'Je n\'ai point honte de l\'Évangile', 'Ro.1:16\r'),
-(402, 'Je suis au milieu de vous comme celui qui sert.', 'Lu.22:27\r'),
-(403, 'Je ferai passer devant toi toute ma bonté', 'Ex.33:19\r'),
-(404, 'Je serai avec toi pour te sauver et te délivrer', 'Jé.15:20\r'),
-(405, 'Je ne me souviendrai plus de tes péchés.', 'És.43:25\r'),
-(406, 'Je suis la lumière du monde', 'Jn.9:5\r'),
-(407, 'Je suis ton bouclier, et ta récompense sera grande', 'Ge.15:1\r'),
-(408, 'J\'ai vu la souffrance de mon peuple...', 'Ex.3:7\r'),
-(409, 'Je te ferai connaître ce que tu dois faire', '1S.16:3\r'),
-(410, 'Moi, le Dieu d\'Israël, je ne les abandonnerai pas', 'És.41:17\r'),
-(411, 'Moi, l\'Éternel, j\'éprouve le cœur', 'Jé.17:10\r'),
-(412, 'Or sans la foi il est impossible de lui être (à Dieu) agréable', 'Heb.11:6\r'),
-(413, 'Toi, demeure dans les choses que tu as apprises, et reconnues certaines', '2Tim.3:14\r'),
-(414, 'Rendez grâce au père...qui nous a délivrés de la puissance des ténèbres ', 'Col.1:13\r'),
-(415, 'C\'est par grâce que vous êtes sauvés', 'Eph.2:5\r'),
-(416, 'Heureux celui qui veille, et qui garde ses vêtements', 'Rv.16:15\r'),
-(417, 'Heureux celui qui garde les paroles de la prophétie de ce livre! ', 'Rv.22:7\r'),
-(418, 'Car Dieu ne nous a pas destinés à la colère, mais à l\'acquisition du salut par notre Seigneur Jésus Christ', '1Thes.5:9\r'),
-(419, 'Dieu a envoyé dans nos cœurs l\'Esprit de son Fils', 'Gal.4:6\r'),
-(420, 'Demeurons fermes dans la foi que nous professons.', 'Heb.4:14\r'),
-(421, 'Sois fidèle jusqu\'à la mort, et je te donnerai la couronne de vie.', 'Rv.2:10\r'),
-(422, 'Soyez reconnaissants.', 'Col.3:15\r'),
-(423, 'Persévérez dans la prière, veillez-y avec actions de grâces.', 'Col.4:2\r'),
-(424, 'Et, sans contredit, le mystère de la piété est grand: celui qui a été manifesté en chair...', '1Tim.3:16\r'),
-(425, 'Tes œuvres sont grandes et admirables, Seigneur Dieu tout puissant! ', 'Rv.15:3\r'),
-(426, 'C\'est, en effet, une grande source de gain que la piété avec le contentement', '1Tim.6:6\r'),
-(427, 'La foi est une ferme assurance des choses qu\'on espère, une démonstration de celles qu\'on ne voit pas. ', 'Heb.11:1\r'),
-(428, 'Car, en Jésus Christ, ni la circoncision ni l\'incirconcision n\'a de valeur, mais la foi qui est agissante par la charité.', 'Gal.5:6\r'),
-(429, 'Le Seigneur est fidèle, il vous affermira et vous préservera du malin. ', '2Thes.3:3\r'),
-(430, 'Je mettrai mes lois dans leur esprit, Je les écrirai dans leur cœur', 'Heb.8:10\r'),
-(431, 'Veille sur toi-même et sur ton enseignement, persévère dans ces choses', '1Tim.4:16\r'),
-(432, 'Donnant un enseignement pur, digne', 'Ti.2:7\r'),
-(433, 'Car vous êtes tous fils de Dieu par la foi en Jésus Christ', 'Gal.3:26\r'),
-(434, 'Faites tout au nom du Seigneur Jésus', 'Col.3:17\r'),
-(435, 'Examinez toutes choses, retenez ce qui est bon', '1Thes.5:21\r'),
-(436, 'Je puis tout par celui qui me fortifie. ', 'Phil.4:13\r'),
-(437, 'Je les (toutes choses) regarde comme de la boue, afin de gagner Christ', 'Phil.3:8\r'),
-(438, 'Je regarde toutes choses comme de la boue, afin de gagner Christ, ', 'Phil.3:8\r'),
-(439, 'Soyez toujours joyeux.', '1Thes.5:16\r'),
-(440, 'Vous n\'avez pas encore résisté jusqu\'au sang, en luttant contre le péché. ', 'Heb.12:4\r'),
-(441, 'Le Seigneur est proche. ', 'Phil.4:5\r'),
-(442, 'Et que la paix de Christ... règne dans vos cœurs', 'Col.3:15\r'),
-(443, 'Approchons-nous donc avec assurance du trône de la grâce ', 'Heb.4:16\r'),
-(444, 'Il dit cela, quoique ses œuvres eussent été achevées depuis la création du monde. ', 'Heb.4:3\r'),
-(445, 'Ne nous lassons pas de faire le bien', 'Gal.6:9\r'),
-(446, 'Retiens ce que tu as, afin que personne ne prenne ta couronne.', 'Rv.3:11\r'),
-(447, 'Car Christ est ma vie, et la mort m\'est un gain.', 'Phil.1:21\r'),
-(448, 'Et que celui qui a soif vienne, que celui qui veut, prenne de l\'eau de la vie, gratuitement.', 'Rv.22:17\r'),
-(449, 'Conduisez-vous d\'une manière digne de l\'Évangile de Christ', 'Phil.1:27\r'),
-(450, 'Rendez grâces en toutes choses', '1Thes.5:18\r'),
-(451, 'Jésus, nous le voyons couronné de gloire et d\'honneur à cause de la mort qu\'il a soufferte...', 'Heb.2:9\r'),
-(452, 'Vous avez été scellés du Saint-Esprit qui avait été promis', 'Eph.1:13\r'),
-(453, 'Vous avez tout pleinement en lui', 'Col.2:10\r'),
-(454, 'Ce n\'est plus moi qui vis, c\'est Christ qui vit en moi ', 'Gal.2:20\r'),
-(455, 'Ce que Dieu veut, c\'est votre sanctification', '1Thes.4:3\r'),
-(456, 'Vous êtes tous des enfants de la lumière et des enfants du jour. ', '1Thes.5:5\r'),
-(457, 'Ce n\'est pas un esprit de timidité que Dieu nous a donné, mais un esprit de force, d\'amour et de sagesse.', '2Tim.1:7\r'),
-(458, 'Car nous n\'avons point ici-bas de cité permanente, mais nous cherchons celle qui est à venir.', 'Heb.13:14\r'),
-(459, 'Car Dieu ne nous a pas appelés à l\'impureté, mais à la sanctification.', '1Thes.4:7\r'),
-(460, 'Car la parole de Dieu est vivante et efficace', 'Heb.4:12\r'),
-(461, 'Car Dieu a tant aimé le monde qu\'il a donné son Fils unique, afin que quiconque croit en lui ne périsse point, mais qu\'il ait la vie éternelle.', 'Jn.3:16\r'),
-(462, 'Car je sais en qui j\'ai cru...', '2Tim.1:12\r'),
-(463, 'Car la grâce de Dieu, source de salut pour tous les hommes, a été manifestée. ', 'Ti.2:11\r'),
-(464, 'Jésus Christ est le même hier, aujourd\'hui, et éternellement. ', 'Heb.13:8\r'),
-(465, 'Si donc nous avons la nourriture et le vêtement, cela nous suffira. ', '1Tim.6:8\r'),
-(466, 'Soyez remplis de l\'esprit ', 'Eph.5:18\r'),
-(467, 'Quelle est envers nous qui croyons l\'infinie grandeur de sa puissance', 'Eph.1:19\r'),
-(468, 'Qu\'il illumine les yeux de votre coeur, pour que vous sachiez ...quelle est la richesse de la gloire de son héritage qu\'il réserve //', 'aux saints'),
-(469, 'Si vous entendez sa voix, n\'endurcissez pas vos coeurs', 'Heb.3:7-8\r'),
-(470, 'Moi, je reprends et je châtie tous ceux que j\'aime. Aie donc du zèle, et repens-toi.', 'Rv.3:19\r'),
-(471, 'Rendez-vous, par la charité, serviteurs les uns des autres.', 'Gal.5:13\r'),
-(472, 'Faites en tout temps par l\'Esprit toutes sortes de prières et de supplications.', 'Eph.6:18\r'),
-(473, 'En lui nous avons la rédemption par son sang, la rémission des péchés', 'Eph.1:7\r'),
-(474, 'Nous sommes devenus participants de Christ', 'Heb.3:14\r'),
-(475, 'Exhortez-vous les uns les autres chaque jour.', 'Heb.3:13\r'),
-(476, 'N\'abandonnons pas notre assemblée', 'Heb.10:25\r'),
-(477, 'Ne dormons donc point comme les autres, mais veillons et soyons sobres.', '1Thes.5:6\r'),
-(478, 'Ne vous inquiétez de rien', 'Phil.4:6\r'),
-(479, 'Ne néglige pas le don qui est en toi', '1Tim.4:14\r'),
-(480, 'Priez sans cesse.', '1Thes.5:17\r'),
-(481, 'Affectionnez-vous aux choses d\'en haut, et non à celles qui sont sur la terre. ', 'Col.3:2\r'),
-(482, 'Il nous a sauvés, non à cause des oeuvres...mais selon sa miséricorde', 'Ti.3:5\r'),
-(483, 'Ils l\'ont vaincu à cause du sang de l\'agneau et à cause de la parole de leur témoignage', 'Rv.12:11\r'),
-(484, 'Laissant les éléments de la parole de Christ, tendons à ce qui est parfait...', 'Heb.6:1\r'),
-(485, 'Il s\'est donne lui-même pour nos péchés...', 'Gal.1:4\r'),
-(486, 'Faites connaître vos besoins à Dieu', 'Phil.4:6\r'),
-(487, 'Mais le fruit de l\'Esprit, c\'est l\'amour, la joie, la paix, ...', 'Gal.5:22\r'),
-(488, 'À celui qui vaincra, je donnerai à manger de l\'arbre de vie, qui est dans le paradis de Dieu. ', 'Rv.2:7\r'),
-(489, 'Celui qui vaincra, je le ferai asseoir avec moi sur mon trône', 'Rv.3:21\r'),
-(490, 'Combats le bon combat de la foi, saisis la vie éternelle', '1Tim.6:12\r'),
-(491, 'Devenez donc les imitateurs de Dieu, comme des enfants bien-aimés', 'Eph.5:1\r'),
-(492, 'Comprenez quelle est la volonté du Seigneur.', 'Eph.5:17\r'),
-(493, 'Considérez, en effet, celui qui a supporté contre sa personne une telle opposition de la part des pécheurs', 'Heb.12:3\r'),
-(494, 'Marchez selon l\'Esprit', 'Gal.5:16\r'),
-(495, 'Marchez comme des enfants de lumière!', 'Eph.5:8\r'),
-(496, 'Le juste vivra par la foi. ', 'Rom.1:17\r'),
-(497, 'Recherche la justice, la piété, la foi, la charité, la patience, la douceur. ', '1Tim.6:11\r'),
-(498, 'Prêche la parole, insiste en toute occasion, favorable ou non...', '2Tim.4:2\r'),
-(499, 'Réjouissez-vous toujours dans le Seigneur, je le répète, réjouissez-vous. ', 'Phil.4:4\r'),
-(500, 'Courons avec persévérance dans la carrière qui nous est ouverte', 'Heb.12:1\r'),
-(501, 'Que le juste pratique encore la justice', 'Rv.22:11\r'),
-(502, 'Je viens bientôt. ', 'Rv.3:11\r'),
-(503, 'Que votre parole soit toujours accompagnée de grâce, assaisonnée de sel', 'Col.4:6\r'),
-(504, 'Que la parole de Christ habite parmi vous abondamment', 'Col.3:16\r'),
-(505, 'Demeurez donc fermes, et ne vous laissez pas mettre de nouveau sous le joug de la servitude. ', 'Gal.5:1\r'),
-(506, 'Ceux qui sont à Jésus Christ ont crucifié la chair...', 'Gal.5:24\r'),
-(507, 'Vous avez besoin de persévérance, afin qu\'après avoir accompli la volonté de Dieu, vous obteniez ce qui vous est promis.', 'Heb.10:36\r'),
-(508, 'Fortifiez donc vos mains languissantes et vos genoux affaiblis', 'Heb.12:12\r'),
-(509, 'Toi donc, mon enfant, fortifie-toi dans la grâce qui est en Jésus Christ. ', '2Tim.2:1\r'),
-(510, 'Fortifiez-vous dans le Seigneur, et par sa force toute-puissante. ', 'Eph.6:10\r'),
-(511, 'Nous mettons notre espérance dans le Dieu vivant, qui est le Sauveur de tous les hommes, principalement des croyants.', '1Tim.4:10\r'),
-(512, 'Garde le bon dépôt, par le Saint-Esprit qui habite en nous.', '2Tim.1:14\r'),
-(513, 'Christ en vous, l\'espérance de la gloire', 'Col.1:27\r'),
-(514, 'Christ, qui nous a aimés, et qui s\'est livre lui-même...', 'Eph.5:2\r'),
-(515, 'Jésus Christ est venu dans le monde pour sauver les pécheurs', '1Tim.1:15\r'),
-(516, 'Je suis l\'alpha et l\'oméga, dit le Seigneur Dieu, celui qui est, qui était, et qui vient, le Tout Puissant.', 'Rv.1:8\r'),
-(517, 'J\'ai mis devant toi une porte ouverte, que personne ne peut fermer.', 'Rv.3:8'),
-(518, 'Je demande une chose au seigneur... habiter la maison du Seigneur tous les jours de ma vie.', 'Ps.27:4');
+LOCK TABLES `verses` WRITE;
+/*!40000 ALTER TABLE `verses` DISABLE KEYS */;
+INSERT INTO `verses` VALUES (1,'Et vous, enfants de Sion, soyez dans l\'allégresse','Joë.2:23\r'),(2,'Pour moi, m\'approcher de Dieu, c\'est mon bien','Ps.73:28\r'),(3,'Maintenant donc ces trois choses demeurent: la foi, l\'espérance, la charité ','1Co.13:13\r'),(4,'Celui qui a construit toutes choses, c\'est Dieu','Hé.3:4\r'),(5,'Montre-moi ce que je ne vois pas','Job 34:32\r'),(6,'L\'Éternel a de la bonté pour qui espère en lui','La.3:25\r'),(7,'Le bonheur est pour ceux qui craignent Dieu','Ec.8:12\r'),(8,'Grâces soient rendues à Dieu pour son don ineffable!','2Co.9:15\r'),(9,'Grâces soient rendues à Dieu, qui nous donne la victoire par notre Seigneur Jésus-Christ! ','1Co.15:57\r'),(10,'Donne aujourd\'hui du succès à ton serviteur','Né.1:11\r'),(11,'Béni soit le Seigneur chaque jour! Quand on nous accable, Dieu nous délivre','Ps.68:20\r'),(12,'Je te bénirai, ... et tu seras une source de bénédictions','Ge.12:2\r'),(13,'Il bénira ceux qui craignent l\'Éternel','Ps.115:13\r'),(14,'Heureux l\'homme qui supporte patiemment la tentation','Ja.1:12\r'),(15,'Heureux celui à qui la transgression est remise, à qui le péché est pardonné!','Ps.32:1\r'),(16,'Heureux vous qui pleurez maintenant, car vous serez dans la joie!','Lu.6:21\r'),(17,'La parole est près de toi, dans ta bouche et dans ton cœur','Ro.10:8\r'),(18,'La fin de toutes choses est proche','1Pi.4:7\r'),(19,'Dieu était en Christ, réconciliant le monde avec lui-même','2Co.5:19\r'),(20,'Dieu nous a donne la vie éternellement,...et cette vie éternelle est dans son Fils','1Jn.5:11\r'),(21,'Dieu est amour','1Jn.4:8\r'),(22,'Dieu est lumière et il n\'y a point en lui de ténèbres','1Jn.1:5\r'),(23,'Dieu peut vous combler de toutes sortes de grâces ','2Co.9:8\r'),(24,'Et mon Dieu pourvoira à tous vos besoins ','Ph.4:19\r'),(25,'Dieu est notre refuge','Ps.62:9\r'),(26,'Voici, notre Dieu que nous servons peut nous délivrer de la fournaise ardente','Da.3:17\r'),(27,'Car c\'est Dieu qui produit en vous le vouloir et le faire, selon son bon plaisir','Ph.2:13\r'),(28,'Moi, l\'Éternel, ton Dieu, je t\'instruis pour ton bien','És.48:17\r'),(29,'Où est Dieu, mon créateur, qui inspire des chants d\'allégresse pendant la nuit','Job 35:10\r'),(30,'Que le Dieu de la persévérance.. vous donne d\'avoir les mêmes sentiments...','Ro.15:5\r'),(31,'Veillez et priez, afin que vous ne tombiez pas dans la tentation','Mt.26:41\r'),(32,'Veillez, demeurez fermes dans la foi','1Co.16:13\r'),(33,'Garde ton coeur plus que toute autre chose','Pr.4:23\r'),(34,'Je rappellerai les oeuvres de l\'Éternel, Car je me souviens de tes merveilles d\'autrefois','Ps.77:12\r'),(35,'Je prendrai plaisir à leur faire du bien','Jé.32:41\r'),(36,'Je ferai d\'elle un sujet de bénédiction','Éz.34:26\r'),(37,'Sois fidèle jusqu\'à la mort, et je te donnerai la couronne de vie','Ap.2:10\r'),(38,'Soyez pleins d\'affection les uns pour les autres, par honneur, usez de prévenances réciproques','Ro.12:10\r'),(39,'Ayez un même sentiment, vivez en paix','2Co.13:11\r'),(40,'Mettez en pratique la parole','Ja.1:22\r'),(41,'Soyez saints dans toute votre conduite, selon qu\'il est écrit ','1Pi.1:15\r'),(42,'Vous serez saints, car je suis saint','1Pi.1:16\r'),(43,'Rappelle-leur d\'être soumis ..., d\'être prêts à toute bonne oeuvre','Ti.3:1\r'),(44,'Recevez avec douceur la parole qui a été planté en vous, et qui peut sauver vos âmes ','Ja.1:21\r'),(45,'En lui vous avez été comblés de toutes les richesses ','1Co.1:5\r'),(46,'Protège-moi, à l\'ombre de tes ailes','Ps.17:8\r'),(47,'Il y a beaucoup de paix pour ceux qui aiment ta loi, et il ne leur arrive aucun malheur','Ps.119:165\r'),(48,'Les plus grandes et les plus précieuses promesses','2Pi.1:4\r'),(49,'La foi sans œuvres est morte','Ja.2:26\r'),(50,'Ainsi la foi vient de ce qu\'on entend, et ce qu\'on entend vient de la parole de Christ ','Ro.10:17\r'),(51,'Croyez-vous que je puisse faire cela? ','Mt.9:28\r'),(52,'Celui qui croit en elle ne sera point confus','1Pi.2:6\r'),(53,'Leur joie sera éternelle','És.61:7\r'),(54,'C\'est devant l\'Éternel ton Dieu que tu feras servir à ta joie tous les biens que tu posséderas','De.12:18\r'),(55,'Cherchez-moi, et vous vivrez!','Am.5:4\r'),(56,'Les choses visibles sont passagères, et les invisibles sont éternelles','2Co.4:18\r'),(57,'Entraîne-moi après toi! Nous courrons! ','Ca.1:4\r'),(58,'Dans toutes leurs détresses ils n\'ont pas été sans secours','És.63:9\r'),(59,'Qui vous tenez dans la maison de l\'Éternel, dans les parvis de la maison de notre Dieu! ','Ps.134:2\r'),(60,'Invoque-moi, et je te répondrai','Jé.33:3\r'),(61,'Je crie au Dieu Très Haut, au Dieu qui agit en ma faveur','Ps.57:3\r'),(62,'Remets ton sort à l\'Éternel, et il te soutiendra ','Ps.55:23\r'),(63,'Bien-aimé, nous sommes maintenant enfant de Dieu ','1Jn.3:2\r'),(64,'Croissez dans la grâce ','2Pi.3:18\r'),(65,'Béni soit Dieu et notre Seigneur J-C...qui nous a régénérés,...pour un héritage...','1Pi.1:3,4\r'),(66,'Si quelqu\'un veut venir après moi, qu\'il renonce à lui-même, qu\'il se charge chaque jour de sa croix, et qu\'il me suive','Lu.9:23\r'),(67,'Je dirai tes oeuvres puissantes, Seigneur Éternel! ','Ps.71:16\r'),(68,'Que vous discerniez quelle est la volonté de Dieu, ce qui est bon, agréable et parfait','Ro.12:2\r'),(69,'Il nous a engendrés selon sa volonté, par la parole de vérité','Ja.1:18\r'),(70,'Voici maintenant le jour du salut','2Co.6:2\r'),(71,'Tous vous êtes un en Jésus-Christ','Ga.3:28\r'),(72,'Faites tout pour la gloire de Dieu ','1Co.10:31\r'),(73,'Déchargez-vous sur lui de tous vos soucis, car lui-même prend soin de vous','1Pi.5:7\r'),(74,'Tout ce qui est à moi est à toi, et ce qui est à toi est à moi','Jn.17:10\r'),(75,'Mais dans toutes ces choses nous sommes plus que vainqueurs ','Ro.8:37\r'),(76,'Que tout ce que vous faites se fasse avec charité! ','1Co.16:14\r'),(77,'Il fait tout à merveille','Mc.7:37\r'),(78,'Tous ceux qui sont conduits par l\'Esprit de Dieu sont fils de Dieu','Ro.8:14\r'),(79,'Tout ce que Dieu fait durera toujours','Ec.3:14\r'),(80,'Pendant qu\'il faisait encore très sombre, il se leva, et sortit pour aller dans un lieu désert, où il pria','Mc.1:35\r'),(81,'Car quiconque invoquera le nom du Seigneur sera sauvé','Ro.10:13\r'),(82,'Toute grâce excellente... descend d\'en haut ','Ja.1:17\r'),(83,'Vous êtes manifestement une lettre de Christ','2Co.3:3\r'),(84,'Vous avez goûté que le Seigneur est bon','1Pi.2:3\r'),(85,'Tout est à vous, et vous êtes à Christ, et Christ est à Dieu ','1Co.3:23\r'),(86,'Vous avez été rachetés à un grand prix','1Co.6:20\r'),(87,'Vous obtiendrez la couronne incorruptible de la gloire','1Pi.5:4\r'),(88,'Or nous, nous n\'avons pas reçu l\'esprit du monde, mais l\'Esprit qui vient de Dieu','1Co.2:12\r'),(89,'Vous avez été rapprochés par le sang de Christ','Ép.2:13\r'),(90,'Il fit sortir son peuple dans l\'allégresse, ses élus au milieu des cris de joie','Ps.105:43\r'),(91,'Là où est l\'Esprit du Seigneur, là est la liberté','2Co.3:17\r'),(92,'Là où je suis, là aussi sera mon Serviteur','Jn.12:26\r'),(93,'Ils annonçaient la parole de Dieu avec assurance','Ac.4:31\r'),(94,'Si quelqu\'un parle, que ce soit comme annonçant les oracles de Dieu','1Pi.4:11\r'),(95,'Sanctifiez dans vos cœurs Christ le Seigneur','1Pi.3:15\r'),(96,'Seigneur! tous mes désirs sont devant toi ','Ps.38:10\r'),(97,'Accomplis ton œuvre dans le cours des années, ô Éternel!','Ha.3:2\r'),(98,'Tu adoreras le Seigneur, ton Dieu, et tu le serviras lui seul ','Mt.4:10\r'),(99,'L\'Éternel est ma force et le sujet de mes louanges','És.12:2\r'),(100,'L\'Éternel bénit son peuple et le rend heureux','Ps.29:11\r'),(101,'Car l\'Éternel Dieu est un soleil et un bouclier... ','Ps.84:12\r'),(102,'L\'Éternel est le rocher des siècles','Ps.27:4\r'),(103,'L\'Éternel sera ta lumière à toujours','És.60:20\r'),(104,'L\'Éternel est refuge pour son peuple','Joë.3:16\r'),(105,'Le Seigneur est plein de miséricorde et de compassion','Ja.5:11\r'),(106,'L\'Éternel a fait retomber sur lui l\'iniquité de nous tous','És.53:6\r'),(107,'L\'Éternel donne la grâce et la gloire','Ps.84:12b\r'),(108,'L\'Éternel est bon,... Il connaît ceux qui se confient en lui','Na.1:7\r'),(109,'L\'Éternel agira en ma faveur','Ps.138:8\r'),(110,'L\'Éternel, l\'Éternel, Dieu miséricordieux et compatissant','Ex.34:6\r'),(111,'Je ne me souviendrai plus de leur péché','Jé.31:34\r'),(112,'Il vient, notre Dieu, il ne reste pas en silence','Ps.50:3\r'),(113,'Que la volonté du Seigneur se fasse!','Ac.21:14\r'),(114,'Que ta bonté soit ma consolation, Comme tu l\'as promis à ton serviteur!','Ps.119:76\r'),(115,'Que ta main me soit en aide! ','Ps.119:173\r'),(116,'Je voudrais séjourner éternellement dans ta tente','Ps.61:5\r'),(117,'Que nous portions des fruits pour Dieu ','Ro.7:4\r'),(118,'Qu\'il demandent avec foi, sans douter','Ja.1:6\r'),(119,'Qu\'il l\'a demande (la sagesse) à Dieu, qui donne à tous simplement et sans reproche ','Ja.1:5\r'),(120,'Afin que nous reçussions l\'adoption','Ga.4:5\r'),(121,'Le don gratuit de Dieu, c\'est la vie éternelle en Jésus-Christ notre Seigneur','Ro.6:23\r'),(122,'Vous avez reçu gratuitement, donnez gratuitement','Mt.10:8\r'),(123,'Dieu ne se repent pas de ses dons et de son appel ','Ro.11:29\r'),(124,'Par les oeuvres la foi fut rendue parfaite ','Ja.2:22\r'),(125,'L\'œuvre de la justice sera la paix','És.32:17\r'),(126,'Prends courage, mon enfant, tes péchés te sont pardonnés','Mt.9:2\r'),(127,'Croyez que la patience de notre Seigneur est votre salut','2Pi.3:15\r'),(128,'Vous aussi, soyez patients, affermissez vos cœurs','Ja.5:8\r'),(129,'Le rachat de leur âme est cher, et n\'aura jamais lieu','Ps.49:9\r'),(130,'Rachetez le temps, car les jours sont mauvais','Ép.5:16\r'),(131,'Recherchez la charité. Aspirez aussi aux dons spirituels','1Co.14:1\r'),(132,'L\'agneau qui a été immolé est digne de recevoir la puissance,... et la louange','Ap.5:12\r'),(133,'Les choses anciennes sont passées, voici, toutes choses sont devenues nouvelles ','2Co.5:17\r'),(134,'L\'Esprit de gloire, l\'Esprit de Dieu, repose sur vous','1Pi.4:14\r'),(135,'Soyez fervents d\'esprit. Servez le Seigneur','Ro.12:11\r'),(136,'Il y a un seul Dieu ... un Seul médiateur entre Dieu et les hommes, Jésus-Christ homme','1Ti.2:5\r'),(137,'Si Dieu est pour nous, qui sera contre nous?','Ro.8:31\r'),(138,'Si tu le cherches, il se laissera trouver par toi','1Ch.28:9\r'),(139,'Encore un peu, ... celui qui doit venir viendra et  il ne tardera pas','Hé.10:37\r'),(140,'Votre vie est cachée avec Christ en Dieu','Col.3:3\r'),(141,'Il bénit la demeure des justes','Pr.3:33\r'),(142,'Il a fait avec moi une alliance éternelle','2S.23:5\r'),(143,'Vous avez été scellés du Saint-esprit','Ép.1:13\r'),(144,'Car l\'Éternel connaît la voie des justes, et la voie des pécheurs mène à la ruine','Ps.1:6\r'),(145,'Votre Père sait de quoi vous avez besoin, avant que vous le lui demandiez','Mt.6:8\r'),(146,'La connaissance enfle, mais la charité édifie','1Co.8:1\r'),(147,'Je serai pour vous un père, et vous serez pour moi des fils et des filles','2Co.6:18\r'),(148,'Et que quiconque crois est justifié par lui de toutes les choses','Ac.13:39\r'),(149,'Ils célébreront les voies de l\'Éternel','Ps.138:5\r'),(150,'Je disais: Tu m\'appelleras: Mon père!','Jé.3:19\r'),(151,'Je vous donnerai un cœur nouveau','Éz.36:26\r'),(152,'En elle était la vie, et la vie était la lumière des hommes','Jn.1:4\r'),(153,'Et tous ceux qui le touchaient étaient guéris.','Mc.6:56\r'),(154,'Et nous, nous avons connu l\'amour que Dieu a pour nous ','1Jn.4:16\r'),(155,'Gloire à Dieu dans les lieux très hauts, et paix sur la terre parmi les hommes qu\'Il agrée! ','Lu.2:14\r'),(156,'Et pour attendre des cieux son Fils','1Th.1:10\r'),(157,'J\'établirai ma demeure au milieu de vous','Lé.26:11\r'),(158,'Et ma parole et ma prédication ... une démonstration d\'Esprit et de puissance','1Co.2:4\r'),(159,'Et c\'est ainsi qu\'Abraham, ayant persévéré, obtint l\'effet de la promesse.','Hé.6:15\r'),(160,'Et le roi leur répondra: ... c\'est à moi que vous les avez faites. ','Mt.25:40\r'),(161,'Car l\'agneau qui est au milieu du trône les paîtra et les conduira aux sources des eaux de la vie','Ap.7:17\r'),(162,'Car l\'Éternel prend plaisir à son peuple','Ps.149:4\r'),(163,'Le jour de l\'Éternel est proche','So.1:7\r'),(164,'Car sa bonté pour nous est grande, et sa fidélité dure à toujours. ','Ps.117:2\r'),(165,'Car je vais créer des nouveaux cieux et une nouvelle terre','És.65:17\r'),(166,'C\'est pourquoi encore l\'Amen par lui est prononcé par nous à sa gloire.','2Co.1:20\r'),(167,'Car la vie a été manifestée ','1Jn.1:2\r'),(168,'Car mon joug est doux, et mon fardeau léger. ','Mt.11:30\r'),(169,'Car celui qui a pitié d\'eux sera leur guide','És.49:10\r'),(170,'Car nous sommes ouvriers avec Dieu.','1Co.3:9\r'),(171,'Nous sommes, en effet, pour Dieu la bonne odeur de Christ','2Co.2:15\r'),(172,'Car le Père lui-même vous aime','Jn.16:27\r'),(173,'Car la prédication de la croix est... une puissance de Dieu.','1Co.1:18\r'),(174,'Venez et attachez-vous à l\'Éternel','Jé.50:5\r'),(175,'La vérité sort de ma bouche et ma parole ne sera point révoquée','És.45:23\r'),(176,'Jésus ... toujours vivant pour intercéder en leur faveur','é.7:22,25\r'),(177,'Élie était un homme de la même nature que nous ','Ja.5:17\r'),(178,'Ayant donc de telles promesses, bien-aimés, purifions-nous ','2Co.7:1\r'),(179,'Le nom de l\'Éternel est une tour forte','Pr.18:10\r'),(180,'Il a été tenté comme nous en toutes choses, sans commettre de péché.','Hé.4:15\r'),(181,'Celui qui fait la volonté de Dieu demeure éternellement. ','1Jn.2:17\r'),(182,'Car l\'Éternel est bon, sa bonté dure toujours... ','Ps.100:5\r'),(183,'Éternel! ta bonté atteint jusqu\'aux cieux','s.36:6\r'),(184,'Et maintenant, petits enfants, demeurez en lui','1Jn.2:28\r'),(185,'Ceux qui me cherchent me trouvent.','Pr.8:17\r'),(186,'Mon âme est attachée à toi, ta droite me soutient.','Ps.63:9\r'),(187,'C\'est vers toi que je crie, ô Éternel','Joë.1:19\r'),(188,'Chacun recevra sa propre récompense selon son propre travail.','1Co.3:8\r'),(189,'Que ton nom est magnifique sur toute la terre! ','Ps.8:10\r'),(190,'Que tes pensées, ô Dieu, me semblent impénétrables! ','Ps.139:17\r'),(191,'Que ses jugements sont insondables, et ses voies incompréhensibles! ','Ro.11:33\r'),(192,'Comme un berger, il paîtra son troupeau','És.40:11\r'),(193,'Qu\'ils sont beaux les pieds de ceux qui annoncent la paix','Ro.10:15\r'),(194,'Quand je suis dans la crainte, en toi je me confie.','Ps.56:4\r'),(195,'Celui que tu bénis est béni, et que celui que tu maudis est maudit. ','No.22:6\r'),(196,'Il nous affermira aussi jusqu\'à la fin','1Co.1:8\r'),(197,'J-C s\'est donné lui-même pour nos péché','Ga.1:4\r'),(198,'Le sang de Jésus son fils nous purifie de tout péché.','1Jn.1:7\r'),(199,'Si quelqu\'un est en Christ, il est une nouvelle créature. ','2Co.5:1\r'),(200,'Si quelqu\'un entre par moi il sera sauvé','Jn.10:9\r'),(201,'Si quelqu\'un a soif, qu\'il vienne à moi, et qu\'il boive. ','Jn.7:37\r'),(202,'Quel est donc le serviteur fidèle et prudent?','Mt.24:45\r'),(203,'Mais si quelqu\'un aime Dieu, celui-là est connu de lui. ','1Co.8:3\r'),(204,'Si quelqu\'un me sert, qu\'il me suive','Jn.12:26\rb'),(205,'Quand on tourne vers lui les regards, on est rayonnant de joie','Ps.34:6\r'),(206,'Celui qui me suit...aura la lumière de la vie.','Jn.8:12\r'),(207,'Celui qui sème peu moissonnera peu, et celui qui sème abondamment moissonnera abondamment.','2Co.9:6\r'),(208,'Les hommes intègres héritent le bonheur','Pr.28:18\r'),(209,'Celui qui peut faire par la puissance qui agit en nous, ... à lui soit la gloire','Ép.3:20,21\r'),(210,'Mieux vaut chercher un refuge en l\'Éternel que de se confier à l\'homme','Ps.118:8\r'),(211,'L\'amour de Dieu est répandu dans nos cœurs par le Saint Esprit qui nous a été donné. ','Ro.5:5\r'),(212,'L\'Amour de Dieu a été manifesté envers nous','1Jn.4:9\r'),(213,'Toutes choses concourent au bien de ceux qui aiment Dieu','Ro.8:28\r'),(214,'L\'homme dont le regard est bienveillant sera béni ','Pr.22:9\r'),(215,'Mon amour ne s\'éloignera point de toi','És.54:10\r'),(216,'La miséricorde triomphe du jugement. ','Ja.2:13\r'),(217,'Ta droite me soutient, Et je deviens grand par ta bonté.','Ps.18:36\r'),(218,'La prière fervente du juste a une grande efficace. ','Ja.5:16\r'),(219,'L\'Éternel peut te donner bien plus que cela.','2Ch.25:9\r'),(220,'La prière de la foi sauvera le malade','Ja.5:15\r'),(221,'Il écoute la prière des justes.','Pr.15:29\r'),(222,'Je changerai les devant eux les ténèbres en lumière','És.42:16\r'),(223,'Nous sommes fous à cause de Christ','1Co.4:10\r'),(224,'Nous marcherons, nous, au nom de l\'Éternel, notre Dieu, à toujours et à perpétuité.','Mi.4:5\r'),(225,'Nous qui sommes des jours, soyons sobres','1Th.5:8\r'),(226,'Nous avons dans le ciel un édifice qui est l\'ouvrage de Dieu','2Co.5:1\rb'),(227,'Nous, nous prêchons Christ crucifié','1Co.1:23\r'),(228,'Car nous marchons par la foi et non par la vue','2Co.5:7\r'),(229,'Sa colère dure un instant, Mais sa grâce toute la vie','Ps.30:6\r'),(230,'C\'est en l\'Éternel que je cherche un refuge. ','Ps.11:1\r'),(231,'En lui mon coeur se confie, et je suis secouru','Ps.28:7\r'),(232,'J\'espère en ton secours, ô Éternel!','Ge.49:18\r'),(233,'Que ta bénédiction soit sur ton peuple!','Ps.3:9\r'),(234,'J\'écrirai sur lui le nom de mon Dieu,... et mon nom nouveau.','Ap.3:12\r'),(235,'Regarde si je suis sur une mauvaise voie, et conduis-moi sur la voie de l\'éternité! ','Ps.139:24\r'),(236,'On l\'appellera Admirable, Conseiller, Dieu puissant','És.9:5\r'),(237,'Mon peuple demeurera dans le séjour de la paix','És.32:18\r'),(238,'Voici, le jour de l\'Éternel arrive','Za.14:1\r'),(239,'C\'est l\'heure de vous réveiller enfin du sommeil','Ro.13:11\r'),(240,'Éternel! enseigne-moi ta voie ','Ps.27:11\r'),(241,'Enseigne-moi à faire ta volonté! Car tu es mon Dieu. ','Ps.143:10\r'),(242,'Venez, et montons...afin qu\'il nous enseigne ses voies','És.2:3\r'),(243,'Apprenez à faire le bien','És.1:17\r'),(244,'Notre communion est avec le Père et avec son Fils Jésus-Christ. ','1Jn.1:3\r'),(245,'Ne crains rien, je viens à ton secours.','És.41:13\r'),(246,'Ne craignez pas, et que vos mains se fortifient!','Za.8:13\r'),(247,'Mais je ne fais pour moi-même aucun cas de ma vie','Ac.20:24\r'),(248,'Mon âme, bénis l\'Éternel, Et n\'oublie aucun de ses bienfaits! ','Ps.103:2\r'),(249,'Celui qui n\'a point connu le péché, il l\'a fait devenir péché pour nous','2Co.5:21\r'),(250,'Le Seigneur ne tarde pas dans l\'accomplissement de la promesse','2Pi.3:9\r'),(251,'L\'espérance des misérables ne périt pas à toujours.','Ps.9:19\r'),(252,'N\'attristez pas le Saint-esprit de Dieu ','Ép.4:30\r'),(253,'La richesse ne sert à rien, mais la justice délivre de la mort. ','Pr.11:4\r'),(254,'Ne jugez point, afin que vous ne soyez point jugés. ','Mt.7:1\r'),(255,'L\'homme ne vivra pas de pain seulement, mais de toute parole qui sort de la bouche de Dieu.','Mt.4:4\r'),(256,'Non! Nous servirons l\'Éternel.','Jos.24:21\r'),(257,'Ne nous rendras-tu pas à la vie, afin que ton peuple se réjouisse en toi? ','Ps.85:7\r'),(258,'Poursuivez toujours le bien','1Th.5:15\r'),(259,'D\'ailleurs, quand vous souffririez pour la justice, vous seriez heureux. ','1Pi.3:14\r'),(260,'Mais au sein de leur détresse ils sont retournes à l\'Eternel ... ils l\'ont trouvé','2Ch.15:4\r'),(261,'Mais, par ce que l\'Éternel vous aime ','De.7:8\r'),(262,'Nous portons ce trésor dans des vases de terre ','2Co.4:7\r'),(263,'Et toi, Éternel, ne t\'éloigne pas! Toi qui es ma force, viens en hâte à mon secours! ','Ps.22:20\r'),(264,'Mais maintenant, Christ est ressuscité des morts','1Co.15:20\r'),(265,'Mais Noé trouva grâce aux yeux de l\'Éternel.','Ge.6:8\r'),(266,'O profondeur de la richesse, de la sagesse et de la science de Dieu!','Ro.11:33\r'),(267,'Il se réjouit sans cesse de ton nom, et il se glorifie de ta justice.','Ps.89:17\r'),(268,'Mais revêtez-vous du Seigneur Jésus-Christ ','Ro.13:14\r'),(269,'Mais revêtez-vous du Seigneur Jésus-Christ ','Ro.13:14\r'),(270,'Fortifiez-vous dans le Seigneur et par sa force toute puissante.','Ép.6:10\r'),(271,'Revêtons les armes de la lumière.','Ro.13:12\r'),(272,'Reviens à moi, car je t\'ai racheté.','És.44:22\r'),(273,'Je suis l\'ami de tous ceux qui te craignent','Ps.119:63\r'),(274,'Il n\'y a aucune différence, en effet, entre le Juif et le Grec, puisqu\'ils ont tous un même Seigneur','Ro.10:12\r'),(275,'Bien qu\'Il fût fils, l\'obéissance par les choses qu\'il a souffertes','Hé.5:8\r'),(276,'L\'attente des justes n\'est que joie, mais l\'espérance des méchants périra. ','Pr.10:28\r'),(277,'Maintenez-vous dans l\'amour de Dieu, en attendant la miséricorde de notre Seigneur Jésus-Christ','Jude.21\r'),(278,'Lui qui a porté lui-même nos péchés en son corps sur le bois ','1Pi.2:24\r'),(279,'Il agit de tout son cœur, et il réussit dans tout ce qu\'il entreprit','2Ch.31:21\r'),(280,'Il est le médiateur d\'une nouvelle alliance','Hé.9:15\r'),(281,'C\'est lui qui rachètera Israël de toutes ses iniquités.','Ps.130:8\r'),(282,'Car il délivrera le pauvre qui crie, et le malheureux qui n\'a point d\'aide.','Ps.72:12\r'),(283,'Il a satisfait l\'âme altérée, Il a comblé de biens l\'âme affamée.','Ps.107:9\r'),(284,'Il n\'a pas honte de les appeler frères.','Hé.2:11\r'),(285,'Il me fait reposer dans de verts pâturages, Il me dirige près des eaux paisibles.','Ps.23:2\r'),(286,'Dans leur bouche il ne s\'est point trouvé de mensonge, car ils sont irrépréhensibles.','Ap.14:5\r'),(287,'Ils périront, mais tu subsisteras','Ps.102:27\r'),(288,'Heureux le peuple qui connaît le son de la trompette',' Il marche à la'),(289,'Ils ont lavé leurs robes, et ils les ont blanchies dans le sang de l\'agneau.','Ap.7:14 \r'),(290,'Étant donc justifiés par la foi, nous avons la paix avec Dieu par notre Seigneur Jésus-Christ ','Ro.5:1\r'),(291,'C\'est dans la tranquillité et le repos que sera votre salut','És.30:15\r'),(292,'Pardonne-moi ceux que j\'ignore. ','Ps.19:3\r'),(293,'Nous sommes pressés de toute manière, mais non réduits à l\'extrémité ','2Co.4:8\r'),(294,'Nous attestons que le Père a envoyé le Fils comme Sauveur du monde. ','1Jn.4:14\r'),(295,'La révélation de tes paroles éclaire, elle donne de l\'intelligence aux simples. ','Ps.119:130\r'),(296,'Les yeux du Seigneur sont sur les justes','1Pi.3:12\r'),(297,'Christ, notre Pâque été immolé','1Co.5:7\r'),(298,'Je rassasierai de pain ses indigents','Ps.132:15\r'),(299,'Souviens-toi de moi selon ta miséricorde, à cause de ta bonté, ô Éternel!','Ps.25:7\r'),(300,'Celui qui vaincra héritera ces choses, je serai son Dieu, et il sera mon fils.','Ap.21:7\r'),(301,'J\'ai combattu le bon combat','2Ti.4:7\r'),(302,'Je suis bien humilié: Éternel, rends-moi la vie selon ta parole!','Ps.119:117\r'),(303,'Le Seigneur connaît ceux qui lui appartiennent','2Ti.2:19\r'),(304,'Prosternez-vous devant l\'Éternel avec des ornements sacrés. ','Ps.96:9\r'),(305,'Soumettez-vous donc à Dieu, résistez au diable, et il fuira loin de vous. ','Ja.4:7\r'),(306,'La sagesse d\'en haut est ... pleine de miséricorde et de bons fruits','Ja.3:17\r'),(307,'Il y a d\'abondantes joies devant ta face, des délices éternelles à ta droite. ','Ps.16:11\r'),(308,'Mettez dans votre cœur et dans votre âme ces paroles que je vous dis.','De.11:18\r'),(309,'Notre secours est dans le nom de l\'Éternel, qui a fait les cieux et la terre. ','Ps.124:8\r'),(310,'Souviens-toi favorablement de moi, ô mon Dieu!','Né.13:31\r'),(311,'Écoute la voix de l\'Éternel dans ce que je te dis','Jé.38:20\r'),(312,'Celui qui agit selon la vérité vient de à la lumière','Jn.3:21\r'),(313,'Envoie ta lumière et ta fidélité! ','Ps.43:3\r'),(314,'Recommande ton sort à l\'Éternel, Mets en lui ta confiance, et il agira. ','Ps.37:5\r'),(315,'Espère en l\'Éternel, et il te délivrera.','Pr.20:22\r'),(316,'Que tes bien-aimés jouissent du bonheur!','2Ch.6:41\r'),(317,'Mais celui qui persévérera jusqu\'à la fin sera sauvé','Mt.24:13\r'),(318,'Je dis à l\'Éternel: mon refuge et ma forteresse, mon Dieu en qui je me confie! ','Ps.91:2\r'),(319,'Approchez-vous de Dieu, et il s\'approchera de vous. ','Ja.4:8\r'),(320,'Je reviendrai, et je vous prendrai avec moi','Jn.14:3\r'),(321,'Mon Dieu, prête l\'oreille et écoute!','Da.9:18\r'),(322,'Soyez réconciliés avec Dieu!','2Co.5:20\r'),(323,'Je vous recevrai comme un parfum d\'une agréable odeur','Éz.20:41\r'),(324,'Celui qui vient à moi n\'aura jamais faim','Jn.6:35\r'),(325,'L\'avènement du Seigneur est proche.','Ja.5:8\r'),(326,'Les eaux jailliront dans le désert','És.35:6\r'),(327,'Glorifiez donc Dieu dans votre corps et dans votre esprit','1Co.6:20\r'),(328,'Vos péchés vous sont pardonnés à cause de son nom. ','1Jn.2:12\r'),(329,'À cause de ton nom tu me conduiras, tu me dirigeras. ','Ps.31:4\r'),(330,'La joie de l\'Éternel sera votre force.','Né.8:10\r'),(331,'Soyez dans la joie, perfectionnez-vous, consolez-vous, ayez un même sentiment, vivez en paix','2Co.13:11\r'),(332,'Ne sachez-vous pas que vous êtes le temple de Dieu?','1Co.3:16\r'),(333,'Celui qui a l\'esprit calme est un homme intelligent.','Pr.17:27\r'),(334,'Lui par les meurtrissures duquel vous avez été guéris. ','1Pi.2:24\r'),(335,'Placez-vous sur les chemins, regardez, et demandez quel sont les anciens sentiers','Jé.6:16\r'),(336,'Tout ce qui est né de Dieu triomphe du monde','1Jn.5:4\r'),(337,'Que le Seigneur de la paix vous donne lui-même la paix en tout temps, de toute manière','2Th.3:16\r'),(338,'Saint, saint, saint est le Seigneur Dieu, le Tout Puisant, qui était, qui est, et qui vient! ','Ap.4:8\r'),(339,'Saint, saint, saint est l\'Éternel des armées!','És.6:3\r'),(340,'Voici, ton roi vient à toi, plein de douceur, et monté sur un âne, sur un ânon, le petit d\'une ânesse. ','Mt.21:5\r'),(341,'Ce Jésus, ... reviendras de la même façon','Ac.1:11\r'),(342,'Mais lui, ... peut sauver parfaitement...','Hé.7:24-25\r'),(343,'Ma puissance s\'accomplit dans la faiblesse','2Co.12:9\r'),(344,'Que votre parole soit toujours accompagnée de grâce','Col.4:6\r'),(345,'Mais la parole du Seigneur demeure éternellement.','1Pi.1:25\r'),(346,'Ta parole est une lampe à mes pieds, et une lumière sur mon sentier.','Ps.119:105\r'),(347,'Dieu résiste aux l\'orgueilleux, Mais il fait grâce aux humbles. ','Ja.4:6\r'),(348,'Humiliez-vous devant le Seigneur, et il vous élèvera. ','Ja.4:10\r'),(349,'Voyez quel amour le Père nous a témoigné','1Jn.3:1\r'),(350,'En achevant notre sanctification dans la crainte de Dieu','2Co.7:1\r'),(351,'Mais celui qui s\'attache au Seigneur est avec lui un seul esprit. ','1Co.6:17\r'),(352,'Maintenez-vous dans l\'amour de Dieu','Jude.21\r'),(353,'Dieu nous a sauvés, et nous a adressé une sainte vocation','2Ti.1:9\r'),(354,'Notre capacité vient de Dieu','2Co.3:5\r'),(355,'Recherchez la paix avec tous, et la sanctification, sans laquelle personne ne verra le Seigneur','Hé.12:14\r'),(356,'Demeurez fermes dans un même esprit','Ph.1:27\r'),(357,'Il gardera les pas de ses bien-aimés.','1S.2:9\r'),(358,'Ils étaient étrangers et voyageurs sur la terre','Hé.11:13\r'),(359,'La crainte de l\'Éternel est une source de vie ','Pr.14:27\r'),(360,'La crainte du Seigneur, c\'est  la sagesse','Job 28:28\r'),(361,'Mon fils, retiens mes paroles, et garde avec toi mes préceptes.','Pr.7:1\r'),(362,'L\'amitié de l\'Éternel est pour ceux qui le craignent','Ps.25:14\r'),(363,'Courez de manière à remporter','1Co.9:24\r'),(364,'Que votre lumière luise ainsi devant les hommes','Mt.5:16\r'),(365,'Comme Christ est ressuscité des morts par la gloire du Père, de même nous aussi nous marchions en nouveauté de vie.','Ro.6:4\r'),(366,'De même aussi l\'Esprit nous aide dans notre faiblesse ','Ro.8:26\r'),(367,'Je te couvre de l\'ombre de ma main','És.51:16\r'),(368,'Craignez seulement le l\'Éternel et servez-le fidèlement','1S.12:24\r'),(369,'Mais vous craindrez l\'Éternel votre Dieu','2 R.17:39\r'),(370,'Celui qui est en vous est plus grand que celui qui est dans le monde. ','1Jn.4:4\r'),(371,'Il ne brisera point le roseau cassé','Mt.12:20\r'),(372,'Tu seras comme un jardin arrosé','És.58:11\r'),(373,'Tu as été guéri, ne pèche plus','Jn.5:14\r'),(374,'Toi qui sondes les cœurs et les reins, Dieu juste!','Ps.7:10\r'),(375,'Car tu es bon, Seigneur, tu pardonnes, Tu es plein d\'amour pour tous ceux qui t\'invoquent. ','Ps.86:5\r'),(376,'Les ténèbres se dissipent et la lumière véritable paraît déjà. ','1Jn.2:8\r'),(377,'Le salut vient de l\'Éternel. ','Jon.2:10\r'),(378,'Ils retournèrent ... les exhortant à persévérer dans la foi','Ac.14:22\r'),(379,'Les malheureux le voient et se réjouissent','Ps.69:33\r'),(380,'Car ils ne pourront plus mourir,... étant fils de la résurrection. ','Lu.20:36\r'),(381,'Notre consolation abonde par Christ','2Co.1:5\r'),(382,'Je me confie dans la bonté de Dieu, éternellement et à jamais.','Ps.52:10\r'),(383,'C\'est en confessant de la bouche qu\'on parvient au salut','Ro.10:10\r'),(384,'Accomplis envers ton serviteur ta promesse','Ps.119:38\r'),(385,'Le temple de Dieu est saint, et c\'est ce que vous êtes. ','1Co.3:17\r'),(386,'La religion pure consiste .. à se préserver des souillures du monde. ','Ja.1:27\r'),(387,'Car le royaume de Dieu ne consiste pas en paroles, mais en puissance.','1Co.4:20\r'),(388,'Qu\'il fasse ce qui lui semblera bon!','1S.3:18\r'),(389,'Car il est mort, et c\'est pour le péché qu\'il est mort une fois pour toutes','Ro.6:10\r'),(390,'Que voulez-vous que je fasse pour vous?','Mc.10:36\r'),(391,'Nous ne cessons de prier Dieu ... que vous soyez remplis de la connaissance de sa volonté','Col.1:9\r'),(392,'Afin que notre joie soit parfaite. ','1Jn.1:4\r'),(393,'Je cherche ta face, ô Éternel!','Ps.27:8\r'),(394,'Je regarderai vers l\'Eternel,...mon Dieu m\'exaucera.','Mi.7:7\r'),(395,'Je vous ai donné un exemple, afin que vous fassiez comme je vous ai fait.','Jn.13:15\r'),(396,'Je suis le cep. Vous êtes les sarments.','Jn.15:5\r'),(397,'Et moi, je crie à Dieu, et l\'Éternel me sauvera. ','Ps.55:17\r'),(398,'Je veux faire ta volonté, mon Dieu! ','Ps.40:9\r'),(399,'Je suis rempli de force, de l\'esprit de l\'Éternel ','Mi.3:8\r'),(400,'J\'aime la piété et non les sacrifices','Os.6:6\r'),(401,'Je n\'ai point honte de l\'Évangile','Ro.1:16\r'),(402,'Je suis au milieu de vous comme celui qui sert.','Lu.22:27\r'),(403,'Je ferai passer devant toi toute ma bonté','Ex.33:19\r'),(404,'Je serai avec toi pour te sauver et te délivrer','Jé.15:20\r'),(405,'Je ne me souviendrai plus de tes péchés.','És.43:25\r'),(406,'Je suis la lumière du monde','Jn.9:5\r'),(407,'Je suis ton bouclier, et ta récompense sera grande','Ge.15:1\r'),(408,'J\'ai vu la souffrance de mon peuple...','Ex.3:7\r'),(409,'Je te ferai connaître ce que tu dois faire','1S.16:3\r'),(410,'Moi, le Dieu d\'Israël, je ne les abandonnerai pas','És.41:17\r'),(411,'Moi, l\'Éternel, j\'éprouve le cœur','Jé.17:10\r'),(412,'Or sans la foi il est impossible de lui être (à Dieu) agréable','Heb.11:6\r'),(413,'Toi, demeure dans les choses que tu as apprises, et reconnues certaines','2Tim.3:14\r'),(414,'Rendez grâce au père...qui nous a délivrés de la puissance des ténèbres ','Col.1:13\r'),(415,'C\'est par grâce que vous êtes sauvés','Eph.2:5\r'),(416,'Heureux celui qui veille, et qui garde ses vêtements','Rv.16:15\r'),(417,'Heureux celui qui garde les paroles de la prophétie de ce livre! ','Rv.22:7\r'),(418,'Car Dieu ne nous a pas destinés à la colère, mais à l\'acquisition du salut par notre Seigneur Jésus Christ','1Thes.5:9\r'),(419,'Dieu a envoyé dans nos cœurs l\'Esprit de son Fils','Gal.4:6\r'),(420,'Demeurons fermes dans la foi que nous professons.','Heb.4:14\r'),(421,'Sois fidèle jusqu\'à la mort, et je te donnerai la couronne de vie.','Rv.2:10\r'),(422,'Soyez reconnaissants.','Col.3:15\r'),(423,'Persévérez dans la prière, veillez-y avec actions de grâces.','Col.4:2\r'),(424,'Et, sans contredit, le mystère de la piété est grand: celui qui a été manifesté en chair...','1Tim.3:16\r'),(425,'Tes œuvres sont grandes et admirables, Seigneur Dieu tout puissant! ','Rv.15:3\r'),(426,'C\'est, en effet, une grande source de gain que la piété avec le contentement','1Tim.6:6\r'),(427,'La foi est une ferme assurance des choses qu\'on espère, une démonstration de celles qu\'on ne voit pas. ','Heb.11:1\r'),(428,'Car, en Jésus Christ, ni la circoncision ni l\'incirconcision n\'a de valeur, mais la foi qui est agissante par la charité.','Gal.5:6\r'),(429,'Le Seigneur est fidèle, il vous affermira et vous préservera du malin. ','2Thes.3:3\r'),(430,'Je mettrai mes lois dans leur esprit, Je les écrirai dans leur cœur','Heb.8:10\r'),(431,'Veille sur toi-même et sur ton enseignement, persévère dans ces choses','1Tim.4:16\r'),(432,'Donnant un enseignement pur, digne','Ti.2:7\r'),(433,'Car vous êtes tous fils de Dieu par la foi en Jésus Christ','Gal.3:26\r'),(434,'Faites tout au nom du Seigneur Jésus','Col.3:17\r'),(435,'Examinez toutes choses, retenez ce qui est bon','1Thes.5:21\r'),(436,'Je puis tout par celui qui me fortifie. ','Phil.4:13\r'),(437,'Je les (toutes choses) regarde comme de la boue, afin de gagner Christ','Phil.3:8\r'),(438,'Je regarde toutes choses comme de la boue, afin de gagner Christ, ','Phil.3:8\r'),(439,'Soyez toujours joyeux.','1Thes.5:16\r'),(440,'Vous n\'avez pas encore résisté jusqu\'au sang, en luttant contre le péché. ','Heb.12:4\r'),(441,'Le Seigneur est proche. ','Phil.4:5\r'),(442,'Et que la paix de Christ... règne dans vos cœurs','Col.3:15\r'),(443,'Approchons-nous donc avec assurance du trône de la grâce ','Heb.4:16\r'),(444,'Il dit cela, quoique ses œuvres eussent été achevées depuis la création du monde. ','Heb.4:3\r'),(445,'Ne nous lassons pas de faire le bien','Gal.6:9\r'),(446,'Retiens ce que tu as, afin que personne ne prenne ta couronne.','Rv.3:11\r'),(447,'Car Christ est ma vie, et la mort m\'est un gain.','Phil.1:21\r'),(448,'Et que celui qui a soif vienne, que celui qui veut, prenne de l\'eau de la vie, gratuitement.','Rv.22:17\r'),(449,'Conduisez-vous d\'une manière digne de l\'Évangile de Christ','Phil.1:27\r'),(450,'Rendez grâces en toutes choses','1Thes.5:18\r'),(451,'Jésus, nous le voyons couronné de gloire et d\'honneur à cause de la mort qu\'il a soufferte...','Heb.2:9\r'),(452,'Vous avez été scellés du Saint-Esprit qui avait été promis','Eph.1:13\r'),(453,'Vous avez tout pleinement en lui','Col.2:10\r'),(454,'Ce n\'est plus moi qui vis, c\'est Christ qui vit en moi ','Gal.2:20\r'),(455,'Ce que Dieu veut, c\'est votre sanctification','1Thes.4:3\r'),(456,'Vous êtes tous des enfants de la lumière et des enfants du jour. ','1Thes.5:5\r'),(457,'Ce n\'est pas un esprit de timidité que Dieu nous a donné, mais un esprit de force, d\'amour et de sagesse.','2Tim.1:7\r'),(458,'Car nous n\'avons point ici-bas de cité permanente, mais nous cherchons celle qui est à venir.','Heb.13:14\r'),(459,'Car Dieu ne nous a pas appelés à l\'impureté, mais à la sanctification.','1Thes.4:7\r'),(460,'Car la parole de Dieu est vivante et efficace','Heb.4:12\r'),(461,'Car Dieu a tant aimé le monde qu\'il a donné son Fils unique, afin que quiconque croit en lui ne périsse point, mais qu\'il ait la vie éternelle.','Jn.3:16\r'),(462,'Car je sais en qui j\'ai cru...','2Tim.1:12\r'),(463,'Car la grâce de Dieu, source de salut pour tous les hommes, a été manifestée. ','Ti.2:11\r'),(464,'Jésus Christ est le même hier, aujourd\'hui, et éternellement. ','Heb.13:8\r'),(465,'Si donc nous avons la nourriture et le vêtement, cela nous suffira. ','1Tim.6:8\r'),(466,'Soyez remplis de l\'esprit ','Eph.5:18\r'),(467,'Quelle est envers nous qui croyons l\'infinie grandeur de sa puissance','Eph.1:19\r'),(468,'Qu\'il illumine les yeux de votre coeur, pour que vous sachiez ...quelle est la richesse de la gloire de son héritage qu\'il réserve //','aux saints'),(469,'Si vous entendez sa voix, n\'endurcissez pas vos coeurs','Heb.3:7-8\r'),(470,'Moi, je reprends et je châtie tous ceux que j\'aime. Aie donc du zèle, et repens-toi.','Rv.3:19\r'),(471,'Rendez-vous, par la charité, serviteurs les uns des autres.','Gal.5:13\r'),(472,'Faites en tout temps par l\'Esprit toutes sortes de prières et de supplications.','Eph.6:18\r'),(473,'En lui nous avons la rédemption par son sang, la rémission des péchés','Eph.1:7\r'),(474,'Nous sommes devenus participants de Christ','Heb.3:14\r'),(475,'Exhortez-vous les uns les autres chaque jour.','Heb.3:13\r'),(476,'N\'abandonnons pas notre assemblée','Heb.10:25\r'),(477,'Ne dormons donc point comme les autres, mais veillons et soyons sobres.','1Thes.5:6\r'),(478,'Ne vous inquiétez de rien','Phil.4:6\r'),(479,'Ne néglige pas le don qui est en toi','1Tim.4:14\r'),(480,'Priez sans cesse.','1Thes.5:17\r'),(481,'Affectionnez-vous aux choses d\'en haut, et non à celles qui sont sur la terre. ','Col.3:2\r'),(482,'Il nous a sauvés, non à cause des oeuvres...mais selon sa miséricorde','Ti.3:5\r'),(483,'Ils l\'ont vaincu à cause du sang de l\'agneau et à cause de la parole de leur témoignage','Rv.12:11\r'),(484,'Laissant les éléments de la parole de Christ, tendons à ce qui est parfait...','Heb.6:1\r'),(485,'Il s\'est donne lui-même pour nos péchés...','Gal.1:4\r'),(486,'Faites connaître vos besoins à Dieu','Phil.4:6\r'),(487,'Mais le fruit de l\'Esprit, c\'est l\'amour, la joie, la paix, ...','Gal.5:22\r'),(488,'À celui qui vaincra, je donnerai à manger de l\'arbre de vie, qui est dans le paradis de Dieu. ','Rv.2:7\r'),(489,'Celui qui vaincra, je le ferai asseoir avec moi sur mon trône','Rv.3:21\r'),(490,'Combats le bon combat de la foi, saisis la vie éternelle','1Tim.6:12\r'),(491,'Devenez donc les imitateurs de Dieu, comme des enfants bien-aimés','Eph.5:1\r'),(492,'Comprenez quelle est la volonté du Seigneur.','Eph.5:17\r'),(493,'Considérez, en effet, celui qui a supporté contre sa personne une telle opposition de la part des pécheurs','Heb.12:3\r'),(494,'Marchez selon l\'Esprit','Gal.5:16\r'),(495,'Marchez comme des enfants de lumière!','Eph.5:8\r'),(496,'Le juste vivra par la foi. ','Rom.1:17\r'),(497,'Recherche la justice, la piété, la foi, la charité, la patience, la douceur. ','1Tim.6:11\r'),(498,'Prêche la parole, insiste en toute occasion, favorable ou non...','2Tim.4:2\r'),(499,'Réjouissez-vous toujours dans le Seigneur, je le répète, réjouissez-vous. ','Phil.4:4\r'),(500,'Courons avec persévérance dans la carrière qui nous est ouverte','Heb.12:1\r'),(501,'Que le juste pratique encore la justice','Rv.22:11\r'),(502,'Je viens bientôt. ','Rv.3:11\r'),(503,'Que votre parole soit toujours accompagnée de grâce, assaisonnée de sel','Col.4:6\r'),(504,'Que la parole de Christ habite parmi vous abondamment','Col.3:16\r'),(505,'Demeurez donc fermes, et ne vous laissez pas mettre de nouveau sous le joug de la servitude. ','Gal.5:1\r'),(506,'Ceux qui sont à Jésus Christ ont crucifié la chair...','Gal.5:24\r'),(507,'Vous avez besoin de persévérance, afin qu\'après avoir accompli la volonté de Dieu, vous obteniez ce qui vous est promis.','Heb.10:36\r'),(508,'Fortifiez donc vos mains languissantes et vos genoux affaiblis','Heb.12:12\r'),(509,'Toi donc, mon enfant, fortifie-toi dans la grâce qui est en Jésus Christ. ','2Tim.2:1\r'),(510,'Fortifiez-vous dans le Seigneur, et par sa force toute-puissante. ','Eph.6:10\r'),(511,'Nous mettons notre espérance dans le Dieu vivant, qui est le Sauveur de tous les hommes, principalement des croyants.','1Tim.4:10\r'),(512,'Garde le bon dépôt, par le Saint-Esprit qui habite en nous.','2Tim.1:14\r'),(513,'Christ en vous, l\'espérance de la gloire','Col.1:27\r'),(514,'Christ, qui nous a aimés, et qui s\'est livre lui-même...','Eph.5:2\r'),(515,'Jésus Christ est venu dans le monde pour sauver les pécheurs','1Tim.1:15\r'),(516,'Je suis l\'alpha et l\'oméga, dit le Seigneur Dieu, celui qui est, qui était, et qui vient, le Tout Puissant.','Rv.1:8\r'),(517,'J\'ai mis devant toi une porte ouverte, que personne ne peut fermer.','Rv.3:8'),(518,'Je demande une chose au seigneur... habiter la maison du Seigneur tous les jours de ma vie.','Ps.27:4');
+/*!40000 ALTER TABLE `verses` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
---
--- Index pour les tables exportées
---
-
---
--- Index pour la table `albums`
---
-ALTER TABLE `albums`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`);
-
---
--- Index pour la table `api`
---
-ALTER TABLE `api`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `blog`
---
-ALTER TABLE `blog`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`);
-
---
--- Index pour la table `bugs`
---
-ALTER TABLE `bugs`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `categories`
---
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`);
-
---
--- Index pour la table `comments`
---
-ALTER TABLE `comments`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `following`
---
-ALTER TABLE `following`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `gallery`
---
-ALTER TABLE `gallery`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`);
-
---
--- Index pour la table `ideas`
---
-ALTER TABLE `ideas`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `likes`
---
-ALTER TABLE `likes`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `online`
---
-ALTER TABLE `online`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `posts`
---
-ALTER TABLE `posts`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`);
-
---
--- Index pour la table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `verses`
---
-ALTER TABLE `verses`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT pour les tables exportées
---
-
---
--- AUTO_INCREMENT pour la table `albums`
---
-ALTER TABLE `albums`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT pour la table `api`
---
-ALTER TABLE `api`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `blog`
---
-ALTER TABLE `blog`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
---
--- AUTO_INCREMENT pour la table `bugs`
---
-ALTER TABLE `bugs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT pour la table `categories`
---
-ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT pour la table `comments`
---
-ALTER TABLE `comments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
---
--- AUTO_INCREMENT pour la table `following`
---
-ALTER TABLE `following`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
---
--- AUTO_INCREMENT pour la table `gallery`
---
-ALTER TABLE `gallery`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
---
--- AUTO_INCREMENT pour la table `ideas`
---
-ALTER TABLE `ideas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
---
--- AUTO_INCREMENT pour la table `likes`
---
-ALTER TABLE `likes`
-  MODIFY `id` bigint(255) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
---
--- AUTO_INCREMENT pour la table `online`
---
-ALTER TABLE `online`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `posts`
---
-ALTER TABLE `posts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
---
--- AUTO_INCREMENT pour la table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
---
--- AUTO_INCREMENT pour la table `verses`
---
-ALTER TABLE `verses`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=519;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-07-04 23:47:26

@@ -47,13 +47,15 @@ class GalleryController extends AdminController
     {
         $post           =   new Collection($_POST);
         $file           =   new Collection($_FILES);
-        $categories     =   $this->categories->orderBy('title', 'ASC');
+        $categories     =   $this->categories->all();
+        $albums         =   $this->albums->all();
 
         if (!empty($_FILES)) {
             $name = (empty($post->get('name'))) ? 'ngpictures-photo' : $this->str->escape($post->get('name'));
             $tags           =   $this->str->escape($post->get('tags')) ?? null;
             $description    =   $this->str->escape($post->get('description')) ?? null;
             $categories_id  =   intval($post->get('category')) ?? 1;
+            $albums_id      =   intval($post->get('album')) ?? null;
             $slug           =   $this->str->slugify($name);
 
             if (!empty($file->get('thumb'))) {
@@ -86,7 +88,7 @@ class GalleryController extends AdminController
         }
 
         $this->pageManager::setName('Adm - gallery.add');
-        $this->view("backend/gallery/add", compact('post', 'categories'));
+        $this->view("backend/gallery/add", compact('post', 'categories', 'albums'));
     }
 
 
@@ -101,21 +103,23 @@ class GalleryController extends AdminController
 
         if ($photo) {
             $post       =   new Collection($_POST);
-            $categories =   $this->categories->orderBy('title', 'ASC');
+            $categories =   $this->categories->all();
+            $albums     =   $this->albums->all();
 
             if (isset($_POST) && !empty($_POST)) {
                 $name           =   $this->str->escape($post->get('name')) ?? $photo->name;
                 $tags           =   $this->str->escape($post->get('tags')) ?? $photo->tags;
                 $description    =   $this->str->escape($post->get('description')) ?? $photo->description;
                 $categories_id  =   intval($post->get('category')) ?? 1;
+                $albums_id      =   ($posts->get('album') == 0)? null : inval($this->get('album'));
 
-                $this->gallery->update($id, compact('name', 'tags', 'description', 'categories_id'));
+                $this->gallery->update($id, compact('name', 'tags', 'description', 'categories_id', 'albums_id'));
                 $this->flash->set("success", $this->flash->msg['post_edit_success'], false);
                 $this->redirect(ADMIN . "/gallery", false);
             }
 
             $this->pageManager::setName('Adm - gallery.edit');
-            $this->view("backend/gallery/edit", compact('photo', 'categories'));
+            $this->view("backend/gallery/edit", compact('photo', 'categories', 'albums'));
         } else {
             $this->flash->set('danger', $this->flash->msg['post_not_found'], false);
             $this->redirect(true, false);

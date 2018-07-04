@@ -7,6 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648
 {
     public static $files = array (
+        'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'c65d09b6820da036953a371c8c73a9b1' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/polyfills.php',
@@ -24,6 +25,7 @@ class ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648
         ),
         'R' => 
         array (
+            'React\\Promise\\' => 14,
             'ReCaptcha\\' => 10,
         ),
         'P' => 
@@ -46,7 +48,11 @@ class ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648
         ),
         'G' => 
         array (
+            'GuzzleHttp\\Stream\\' => 18,
+            'GuzzleHttp\\Ring\\' => 16,
             'GuzzleHttp\\Psr7\\' => 16,
+            'GuzzleHttp\\' => 11,
+            'Glooby\\Pexels\\' => 14,
         ),
         'F' => 
         array (
@@ -66,6 +72,10 @@ class ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'React\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/promise/src',
         ),
         'ReCaptcha\\' => 
         array (
@@ -107,9 +117,25 @@ class ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648
         array (
             0 => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container',
         ),
+        'GuzzleHttp\\Stream\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/streams/src',
+        ),
+        'GuzzleHttp\\Ring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/ringphp/src',
+        ),
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
+        'GuzzleHttp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'Glooby\\Pexels\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/glooby/pexels/src',
         ),
         'Facebook\\' => 
         array (
@@ -119,6 +145,10 @@ class ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648
         array (
             0 => __DIR__ . '/..' . '/php-di/php-di/src/DI',
         ),
+    );
+
+    public static $fallbackDirsPsr4 = array (
+        0 => __DIR__ . '/..' . '/league/color-extractor/src',
     );
 
     public static $prefixesPsr0 = array (
@@ -143,6 +173,7 @@ class ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648::$fallbackDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit7763b2f5ee7e37ce006a3c72880aa648::$prefixesPsr0;
 
         }, null, ClassLoader::class);

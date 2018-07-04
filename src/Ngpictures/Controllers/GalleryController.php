@@ -61,10 +61,24 @@ class GalleryController extends Controller
     public function albums()
     {
         $albums = $this->loadModel('albums')->all();
+        $thumbs = [];
+        $nb     = [];
+
+        foreach ($albums as $album) {
+            $thumbs[$album->id] =
+                $this->gallery->findWith('albums_id', $album->id, true)->smallThumbUrl ??
+                '/imgs/default.jpeg';
+        }
+
+        foreach ($albums as $album) {
+            $nb[$album->id] =
+                count($this->gallery->findWith('albums_id', $album->id, false));
+        }
+
 
         $this->turbolinksLocation("/gallery/albums");
         $this->pageManager::setName('albums');
-        $this->view('frontend/gallery/albums', compact("albums"));
+        $this->view('frontend/gallery/albums', compact("albums", "thumbs", "nb"));
     }
 
 

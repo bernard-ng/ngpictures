@@ -543,7 +543,7 @@ function downloadFile(element) {
 //------------------------------------------------------------------------------------
 //loadVerses("[data-action='verses']");
 savePost("[data-action='save']");
-//downloadFile("[data-action='download']");
+downloadFile("[data-action='download']");
 formLogin("form[data-action='login']");
 formGenericSubmit("form[data-action='ideas']");
 formGenericSubmit("form[data-action='bugs']");
