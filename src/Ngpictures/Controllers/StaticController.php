@@ -15,6 +15,20 @@ class StaticController extends Controller
 
 
     /**
+     * genere une page pour dire aux user
+     * qu'il est offline.
+     *
+     * @return void
+     */
+    public function offline()
+    {
+        $this->turbolinksLocation("/app.offline");
+        $this->pageManager::setName("Aucune Connexion Internet");
+        $this->view('frontend/others/offline');
+    }
+
+
+    /**
      * privacy terms
      */
     public function privacy()

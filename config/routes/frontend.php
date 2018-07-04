@@ -74,6 +74,7 @@ $router->any("/bugs", "bugs", "bugs.index");
 $router->any("/contact", "contact", "contact.index");
 $router->get("/about", "static#about", "static.about");
 $router->get("/privacy", "static#privacy", "static.privacy");
+$router->any("/app.offline", "static#offline", 'static.offline');
 $router->get("/booking", 'booking', 'reservation');
 $router->get('/saves/:type/:slug-:id', 'saves#add', 'saves.add');
 $router->get("/maps", 'maps#show', 'maps.show');
