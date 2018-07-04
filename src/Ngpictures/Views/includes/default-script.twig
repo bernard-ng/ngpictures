@@ -1,11 +1,12 @@
 <script>
-   /*if('serviceWorker' in navigator) {
-        navigator.serviceWorker
-            .register('/serviceworker.js')
-            .then(function() {
-                console.log("Service Worker Registered");
-            });
-   }*/
+   if('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js', {scope: '/'})
+        .then(
+            function() {
+                console.log("Ngpictures-sw Registered");
+            }
+        );
+   }
 </script>
 <script type="text/javascript" src="{{ cacheBusting('/assets/js/lib/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ cacheBusting('/assets/js/app/materialize.js') }}"></script>
