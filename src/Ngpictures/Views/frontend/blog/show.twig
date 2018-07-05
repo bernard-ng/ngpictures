@@ -4,7 +4,7 @@
         <div class="col l9 m12 s12 pb10">
             <img src="{{ article.thumbUrl }}" alt="{{ article.title }}" title="{{ article.title }}" class="responsive-img materialboxed">
             <h1 class="ui header">{{ article.title }}</h1>
-            {{ article.content | snipet }}
+            {{ article.fullText | snipet }}
         </div>
         <div class="section col l3 m12 s12 ">
             <div class="ui divided list animated slideInRight">
@@ -68,20 +68,20 @@
     <div class="bg"></div>
 </section>
 {% if similars %}
-    <section class="section">
-        <div class="row container pb10">
-            <span class="col l12 s12 m12">
-                <h2 class="ui header">Voir aussi</h2>
-            </span>
-            <div class="carousel small">
-                {% for p in similars %}
-                <a href="{{ p.url }}" class="carousel-item">
-                    <img src="{{ p.smallThumbUrl }}" title="{{ p.title }}" alt="{{ p.title }}">
-                </a>
-                {% endfor %}
-            </div>
+<section class="section">
+    <div class="row container pb10">
+        <span class="col l12 s12 m12">
+            <h2 class="ui header">Voir aussi</h2>
+        </span>
+        <div class="carousel small">
+            {% for p in similars %}
+            <a href="{{ p.url }}" class="carousel-item">
+                <img src="{{ p.smallThumbUrl }}" title="{{ p.title }}" alt="{{ p.title }}">
+            </a>
+            {% endfor %}
         </div>
-    </section>
+    </div>
+</section>
 {% endif %}
 
 <div class="fixed-action-btn {{ activeUser ? 'second' : '' }}">

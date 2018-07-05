@@ -18,15 +18,11 @@ sales.
  les differents user avec un compte photographe.
 
 ****    slider bugs with lastId
-****    followingController bug
 ****    notification system a finir. / afficher nombre dans la menu mobile
 ****    reservation system a finir
 ***     map localisation a finir.
 ****    profile user page
-***     force download heaer, to fixed it in apache
 ***     deinition de la pagintation pour le frontend
-***     changer dans les photos "sans-titre-4" a "ngpictures-posts-4"
-***     changer dans la gallery aussi "ngpictues-ekdjfdk" - "ngpictues-photos"
 ***     page d'edition d'article pour les users.
 ***     ameliorer pages de recherche
 ***     vider les erreurs de validation lorsque on saisie

@@ -157,7 +157,7 @@ class BlogController extends AdminController
             }
         }
 
-        $this->turbolinksLocation(ADMIN . "/blog");
+        $this->turbolinksLocation(ADMIN . "/blog/add");
         $this->pageManager::setName('Adm - blog.add');
         $this->view('backend/blog/add', compact('post', 'categories', 'errors'));
     }
