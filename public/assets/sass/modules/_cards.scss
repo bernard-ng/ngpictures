@@ -187,6 +187,10 @@
   width: auto;
 }
 
+.card-image a > img {
+  width: 100% !important;
+}
+
 .card.horizontal .card-stacked {
   display: -webkit-box;
   display: -ms-flexbox;

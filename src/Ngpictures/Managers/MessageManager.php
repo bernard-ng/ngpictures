@@ -75,6 +75,7 @@ class MessageManager implements ArrayAccess
         "files_download_failed" => "Ooups, une Erreur s'est produite lors du téléchargement",
         "files_download_progress" => "Téléchargement en cours...",
         "files_download_finished" => "Téléchargement terminé",
+        "files_pexels_failed" => "Les photos de Pexels.com sont indisponibles...",
 
 
         //ADMIN
