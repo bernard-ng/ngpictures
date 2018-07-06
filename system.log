@@ -9,3 +9,6 @@
 * D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
 		=> 05-Jul 22:36 : cURL error 6: Could not resolve host: api.pexels.com  
 
+* Ng\Core\Managers\Mailer\Mailer
+		=> 06-Jul 10:00 : Message could not be sent. Mailer Error: Could not instantiate mail function.  
+
