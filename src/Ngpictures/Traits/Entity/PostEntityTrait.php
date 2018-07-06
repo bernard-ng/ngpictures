@@ -4,9 +4,13 @@ namespace Ngpictures\Traits\Entity;
 use Ng\Core\Managers\CacheBustingManager;
 use Ng\Core\Managers\StringManager;
 use Ngpictures\Ngpictures;
+use Ngpictures\Traits\Util\ResolverTrait;
 
 trait PostEntityTrait
 {
+
+    use ResolverTrait;
+
     /**
      * lien vers la publication
      * @return string
@@ -14,16 +18,33 @@ trait PostEntityTrait
     public function getUrl(): string
     {
         $this->url = "/{$this->action_url}";
-        $this->url .= "/{$this->slug}-{$this->id}";
+        $this->url .= "/{$this->SI}";
         return $this->url;
     }
 
 
+    /**
+     * url d'enregistrement
+     *
+     * @return string
+     */
     public function getSaveUrl(): string
     {
         $this->saveUrl = "saves/{$this->action_type}";
-        $this->saveUrl .= "/{$this->slug}-{$this->id}";
+        $this->saveUrl .= "/{$this->SI}";
         return $this->saveUrl;
+    }
+
+
+    /**
+     * url de signalement
+     * @return string
+     */
+    public function getReportUrl(): string
+    {
+        $this->reportUrl = "report/{$this->action_type}";
+        $this->reportUrl .= "/{$this->SI}";
+        return $this->reportUrl;
     }
 
 
@@ -33,7 +54,7 @@ trait PostEntityTrait
      */
     public function getCategoryUrl(): string
     {
-        $category = StringManager::Slugify($this->category);
+        $category = Ngpictures::getDic()->get(StringManager::class)->slugify($this->category);
         $this->categoryUrl = "/categories";
         $this->categoryUrl .= "/{$category}-{$this->categories_id}";
         return $this->categoryUrl;
@@ -95,7 +116,7 @@ trait PostEntityTrait
     {
         $this->likeUrl = "/likes";
         $this->likeUrl .= "/{$this->action_type}";
-        $this->likeUrl .= "/{$this->slug}-{$this->id}";
+        $this->likeUrl .= "/{$this->SI}";
         return $this->likeUrl;
     }
 
@@ -109,7 +130,7 @@ trait PostEntityTrait
     {
         $this->likersUrl = "/likes/show";
         $this->likersUrl .= "/{$this->action_type}";
-        $this->likersUrl .= "/{$this->slug}-{$this->id}";
+        $this->likersUrl .= "/{$this->SI}";
         return $this->likersUrl;
     }
 
@@ -122,7 +143,7 @@ trait PostEntityTrait
     {
         $this->commentUrl = "/comments";
         $this->commentUrl .= "/{$this->action_type}";
-        $this->commentUrl .= "/{$this->slug}-{$this->id}";
+        $this->commentUrl .= "/{$this->SI}";
         return $this->commentUrl;
     }
 
@@ -143,21 +164,21 @@ trait PostEntityTrait
      */
     public function getLikes(): string
     {
-        $likes = Ngpictures::getInstance()->getModel('likes');
+        $likes = Ngpictures::getDic()->get($this->model('likes'));
         return $likes->getLikeSentence($this->id, $this->action_type);
     }
 
 
     public function getNbLikes(): string
     {
-        $likes = Ngpictures::getInstance()->getModel('likes');
+        $likes = Ngpictures::getDic()->get($this->model('likes'));
         return $likes->getLikes($this->id, $this->action_type);
     }
 
 
     public function getSaves(): string
     {
-        $saves = Ngpictures::getInstance()->getModel('saves');
+        $saves = Ngpictures::getDic()->get($this->model('saves'));
         return $saves->getSaves($this->id, $this->action_type);
     }
 
@@ -169,7 +190,7 @@ trait PostEntityTrait
      */
     public function getCommentsNumber(): string
     {
-        $comments = Ngpictures::getInstance()->getModel('comments');
+        $comments = Ngpictures::getDic()->get($this->model('comments'));
         $comments = $comments->getNumber($this->id, $this->action_type);
         return $comments;
     }
@@ -181,7 +202,7 @@ trait PostEntityTrait
      */
     public function getIsLike(): string
     {
-        $likes = Ngpictures::getInstance()->getModel('likes');
+        $likes = Ngpictures::getDic()->get($this->model('likes'));
         return $likes->isMentionnedLike($this->id, $this->action_type);
     }
 
@@ -192,7 +213,7 @@ trait PostEntityTrait
      */
     public function getIsSaved(): string
     {
-        $saves = Ngpictures::getInstance()->getModel('saves');
+        $saves = Ngpictures::getDic()->get($this->model('saves'));
         return $saves->isSaved($this->id, $this->action_type);
     }
 
@@ -204,9 +225,11 @@ trait PostEntityTrait
      */
     public function getSnipet()
     {
-        $users = Ngpictures::getInstance()->getModel('users');
-        $content = StringManager::getSnipet(StringManager::truncateText($this->content, 150));
-        return (StringManager::userMention($users, $content));
+        $str = Ngpictures::getDic()->get(StringManager::class);
+        $users = Ngpictures::getDic()->get($this->model('users'));
+        $content = $str->getSnipet($str->truncate($this->content, 150));
+        $text = $str->userMention($users, strip_tags($content));
+        return $str->htag($text);
     }
 
 
@@ -216,8 +239,10 @@ trait PostEntityTrait
      */
     public function getFullText()
     {
-        $users = Ngpictures::getInstance()->getModel('users');
-        return nl2br(StringManager::userMention($users, $this->content));
+        $str = Ngpictures::getDic()->get(StringManager::class);
+        $users = Ngpictures::getDic()->get($this->model('users'));
+        $text = $str->userMention($users, strip_tags($this->content));
+        return nl2br($str->htag($text));
     }
 
     /**

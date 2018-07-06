@@ -1,18 +1,13 @@
 <?php
 namespace Ngpictures\Controllers;
 
-use Ngpictures\Ngpictures;
-use Ngpictures\Managers\PageManager;
+use Psr\Container\ContainerInterface;
+use Ngpictures\Traits\Util\ResolverTrait;
+
+
 
 class HomeController extends Controller
 {
-    public function __construct(Ngpictures $app, PageManager $pageManager)
-    {
-        parent::__construct($app, $pageManager);
-        $this->loadModel(['blog', 'posts', 'categories', 'gallery']);
-    }
-
-
     /**
      * homepage
      *
@@ -20,17 +15,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $last           =   $this->blog->latest(1, 4);
-        $photos         =   $this->gallery->latest();
-        $article        =   $this->blog->last();
-        $categories     =   $this->loadModel('categories')->orderBy('title', 'DESC', 0, 5);
+        $last           =   $this->loadModel('gallery')->latest();
+        $article        =   $this->loadModel('blog')->last();
+        $categories     =   $this->loadModel('categories')->orderBy('title', 'DESC', 0, 10);
         $sliderTitle    =   ["Deep Shooting", "See the beauty", "Discover More", "Share feelings"];
 
-        $this->app::turbolinksLocation("/");
+        $this->turbolinksLocation("/");
         $this->pageManager::setName('Ngpictures');
-        $this->viewRender(
+        $this->view(
             "frontend/index",
-            compact('last', 'article', 'photos', 'categories', 'sliderTitle')
+            compact('last', 'article', 'categories', 'sliderTitle')
         );
     }
 }

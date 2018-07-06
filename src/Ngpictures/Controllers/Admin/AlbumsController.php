@@ -3,21 +3,12 @@ namespace Ngpictures\Controllers\Admin;
 
 
 use Ng\Core\Managers\Collection;
+use Psr\Container\ContainerInterface;
 use Ngpictures\Controllers\AdminController;
-use Ngpictures\Managers\PageManager;
-use Ngpictures\Ngpictures;
 use Ngpictures\Traits\Controllers\PaginationTrait;
 
 class AlbumsController extends AdminController
 {
-
-    public function __construct(Ngpictures $app, PageManager $pageManager)
-    {
-        parent::__construct($app, $pageManager);
-        $this->loadModel('albums');
-    }
-
-
     use PaginationTrait;
 
     /**
@@ -26,8 +17,8 @@ class AlbumsController extends AdminController
      */
     public function index()
     {
-        $albums = $this->albums->all();
-        $total          =   count($this->albums->all());
+        $albums         = $this->albums->orderBy('id', 'DESC', 0, 10);
+        $total          = $this->albums->countAll()->num;
 
         $pagination     = $this->setPagination($total, "albums");
         $currentPage    = $pagination['currentPage'];
@@ -37,8 +28,7 @@ class AlbumsController extends AdminController
         $albums         = $pagination['result'] ?? $albums;
 
         $this->pageManager::setName('admin gallery.album');
-        $this->setLayout('admin/default');
-        $this->viewRender(
+        $this->view(
             'backend/gallery/albums',
             compact('albums', "currentPage", 'totalPage', 'prevPage', 'nextPage', 'total')
         );
@@ -51,7 +41,7 @@ class AlbumsController extends AdminController
      */
     public function add()
     {
-        $post = new Collection($_POST);
+        $post   = new Collection($_POST);
         $errors = new Collection();
 
         if (isset($_POST) && !empty($_POST)) {
@@ -59,22 +49,20 @@ class AlbumsController extends AdminController
             $this->validator->setRule('description', 'required');
 
             if ($this->validator->isValid()) {
-                $title          =   $this->str::escape($post->get('title'));
-                $slug           =   $this->str::slugify($title);
+                $title          =   $this->str->escape($post->get('title'));
+                $slug           =   $this->str->slugify($title);
                 $description    =   $post->get('description');
 
                 $this->albums->create(compact('title', 'description', 'slug'));
-                $this->flash->set('success', $this->msg['form_post_submitted']);
-                $this->app::redirect(ADMIN . "/gallery/albums");
+                $this->flash->set('success', $this->flash->msg['form_post_submitted'], false);
+                $this->redirect(ADMIN . "/gallery/albums", false);
             } else {
-                $this->flash->set('danger', $this->msg['form_multi_errors']);
-                $errors = new Collection($this->validator->getErrors());
+                $this->sendFormError();
             }
         }
 
         $this->pageManager::setName('admin album.add');
-        $this->setLayout('admin/default');
-        $this->viewRender('backend/gallery/albums.add', compact('post', 'errors'));
+        $this->view('backend/gallery/albums.add', compact('post', 'errors'));
     }
 
 
@@ -85,9 +73,9 @@ class AlbumsController extends AdminController
      */
     public function edit($id)
     {
-        $post = new Collection($_POST);
-        $errors = new Collection();
-        $album = $this->albums->find(intval($id));
+        $post       = new Collection($_POST);
+        $album      = $this->albums->find(intval($id));
+        $errors     = new Collection();
 
         if ($album) {
             if (isset($_POST) && !empty($_POST)) {
@@ -95,25 +83,23 @@ class AlbumsController extends AdminController
                 $this->validator->setRule('description', 'required');
 
                 if ($this->validator->isValid()) {
-                    $title          =   $this->str::escape($post->get('title')) ?? $album->title;
-                    $slug           =   $this->str::slugify($title);
+                    $title          =   $this->str->escape($post->get('title')) ?? $album->title;
+                    $slug           =   $this->str->slugify($title);
                     $description    =   $post->get('description') ?? $album->description;
 
                     $this->albums->update($album->id, compact('title', 'description', 'slug'));
-                    $this->flash->set('success', $this->msg['post_edit_success']);
-                    $this->app::redirect(ADMIN . "/gallery/albums");
+                    $this->flash->set('success', $this->flash->msg['post_edit_success']);
+                    $this->redirect(ADMIN . "/gallery/albums");
                 } else {
-                    $this->flash->set('danger', $this->msg['form_multi_errors']);
-                    $errors = new Collection($this->validator->getErrors());
+                    $this->sendFormError();
                 }
             }
 
             $this->pageManager::setName('admin album.edit');
-            $this->setLayout('admin/default');
-            $this->viewRender('backend/gallery/albums.edit', compact('post', 'album', 'errors'));
+            $this->view('backend/gallery/albums.edit', compact('post', 'album', 'errors'));
         } else {
-            $this->flash->set('danger', $this->msg['undefined_error']);
-            $this->app::redirect(true);
+            $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
+            $this->redirect(true, false);
         }
     }
 }

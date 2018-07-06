@@ -1,19 +1,71 @@
-{% block content %}
-    <section class="section row container">
-        <div class="fb-page" data-href="https://www.facebook.com/ngpictures23/" data-tabs="messages" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-            <blockquote cite="https://www.facebook.com/ngpictures23/" class="fb-xfbml-parse-ignore">
-                <a href="https://www.facebook.com/ngpictures23/">Ngpictures</a>
-            </blockquote>
-        </div>
+{% extends "layout/default.twig" %}
 
-        <div id="fb-root"></div>
+{% block content %}
+    <section class="row container animated slideInLeft">
+        <span class="row col l12 s12 m12">
+            <h2 class="ui header"> Notre Histoire</h2>
+            <p>
+            Avez-vous déjà fait une recherche sur internet à propos de la RDC dans la section image ? c'est triste, les résultats d'images ne reflecte pas
+            la beauté de notre pays, voir même de l'afrique, vous verrez des photos qui montre une souffrance interminable, la misère, les guerres.
+            alors un jour, entre amis nous avons décidés de changer, cette vue, cette idée que les autres se font de nous, nous avons décidés de valoriser notre image,
+            et le moyen pour le faire était la photographie, nous avions commencés à prendre des photos et les partager sur les résaux sociaux, mais cela ne suffisait pas.
+            Nous avons donc opter pour une nouvelle solution, notre propre résau social. Le 23 Juillet 2017, ngpictures a fait son apparution, notre objectif était atteint
+            les résultats d'image sur la RDC changaient, et continu de changer avec cette nouvelle version...
+            </p>
+        </span>
     </section>
-    <script>(function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.0&appId=518552818524133&autoLogAppEvents=1';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
-{% enblock %}
+    <section class="section jumbotron dark">
+        <div class="row container">
+            <span class="row col l12 s12 m12">
+                <h2 class="ui header"> Notre Equipe</h2>
+            </span>
+            <div class="carousel small">
+                <img src="/imgs/team/bernard.jpg" title="bernard ng" alt="bernard ng" class="carousel-item">
+                <img src="/imgs/team/gael.jpg" title="bernard ng" alt="bernard ng" class="carousel-item">
+                <img src="/imgs/team/grey.jpg" title="bernard ng" alt="bernard ng" class="carousel-item">
+                <img src="/imgs/team/prisca.jpg" title="bernard ng" alt="bernard ng" class="carousel-item">
+                <img src="/imgs/team/balloy.jpg" title="bernard ng" alt="bernard ng" class="carousel-item">
+            </div>
+    </section>
+     <section class="section jumbotron parallax-container col l12 s12 m12" style="margin-top: -20px; margin-bottom: 0px;">
+        <div class="row container">
+            <div class="col l12 m12 s12 row">
+                <div class="col l4 m4 s12 center-align pb10">
+                    <span class="stats-value">
+                        <i class="icon icon-location"></i>
+                    </span>
+                    <span class="stats-label">Trouver des photographes</span>
+                    <p>
+                        Nous vous proposons de trouver les photographes à votre proximité afin d'immortaliser l'instant que vous vivez ou
+                        que vous vivrez, ce service est gratuit et demande la connaissance de votre position.
+                    </p>
+                </div>
+                <div class="col l4 m4 s12 center-align pb10">
+                    <span class="stats-value">
+                        <i class="icon icon-camera"></i>
+                    </span>
+                    <span class="stats-label">Shooting professionnel</span>
+                    <p>
+                        Nous mettons des photographes professionels à votre disposition,
+                        ceux-ci sont souvant chargés, il serait préferable de faire votre réservation
+                        trois ou quatre jours avant la date du shoot.
+                    </p>
+                </div>
+                <div class="col l4 m4 s12 center-align pb10">
+                    <span class="stats-value">
+                        <i class="icon icon-heart"></i>
+                    </span>
+                    <span class="stats-label">Publier vos Photos</span>
+                    <p>
+                        Nous vous donnons la possiblité d'agrandir notre communauté et notre galerie en publiant vos photos.
+                        voulez-vous gagner de l'argent grâce à vos photos ?
+                        créer un compte photographe.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="parallax">
+            <img src="/imgs/outils.jpeg" alt="{{ article.title}}" title="{{ article.title}}" class="bw">
+        </div>
+    </section>
+{% endblock %}

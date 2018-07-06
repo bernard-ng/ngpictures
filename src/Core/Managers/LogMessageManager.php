@@ -11,11 +11,16 @@ final class LogMessageManager
      * @param string $msg
      * @return void
      */
-    public static function register(string $file, string $msg)
+    public static function register(string $file, $e)
     {
         $time = date("d-M H:i");
         $last_log = date("d-M-Y  H:i:s");
-        $message = "* ".$file."\n\t=> {$time} : {$msg}  \n\n";
+
+        if (is_object($e)) {
+            $message = "* ".$e->getFile()."\t".$e->getLine()."\n\t\t=> {$time} : {$e->getMessage()}  \n\n";
+        } else {
+            $message = "* ".$file."\n\t\t=> {$time} : {$e}  \n\n";
+        }
 
         $header =
         "#*************************************************************

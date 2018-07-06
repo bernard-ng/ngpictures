@@ -46,7 +46,7 @@
                                     </li>
                                 {% endif %}
                                 <li>
-                                    <a data-action="report" class="news-card-header-icon modal-trigger" href="#report-{{ a.id }}">
+                                    <a data-action="report" class="news-card-header-icon modal-trigger" href="{{ a.reportUrl }}">
                                         <i class="icon icon-attention"></i>
                                         Signaler
                                     </a>
@@ -56,11 +56,11 @@
                     </header>
                     {% if a.thumb %}
                     <div class="card-image">
-                                    <span class="news-card-image-article">
-                                        <a href="{{ a.url }}" class="waves-effect">
-                                            <img src="{{ a.thumbUrl }}" alt="Image de l'article" title="{{ a.title }}">
-                                        </a>
-                                    </span>
+                        <span class="news-card-image-article">
+                            <a href="{{ a.url }}" class="waves-effect">
+                                <img src="{{ a.thumbUrl }}" alt="Image de l'article" title="{{ a.title }}">
+                            </a>
+                        </span>
                     </div>
                     {% endif %}
                     <main class="news-card-content">
@@ -71,7 +71,7 @@
                         {% endif %}
                         {% if a.content %}
                         <section>
-                            <p>{{ a.snipet }}</p>
+                            <p>{{ a.snipet | snipet }}</p>
                             <a href="{{ a.url }}" class="news-card-seemore right">Voir plus</a>
                         </section>
                         {% endif %}
@@ -158,7 +158,7 @@
                     </div>
                 </article>
                 {% endfor %}
-                    <div id="statusBar" class="btn ng-progress-indeterminate disabled" data-ajax="blog">
+                    <div id="statusBar" class="mtb ng-progress-indeterminate disabled" data-ajax="posts">
                         <span></span>
                         <span></span>
                         <span></span>
@@ -178,32 +178,6 @@
                 {% endif %}
             </div>
         </section>
-        {% for a in posts %}
-        <div id="report-{{ a.id }}" class="modal grey dark-4">
-            <div class="modal-content">
-                <p>Choissez un motif pour le signalement de cette publication</p>
-                <form action="{{ a.watchoutUrl }}" method="POST" data-action="watchout">
-                    <p>
-                        <input type="checkbox" class="filled-in" name="indesirable" id="indesirable">
-                        <label for="indesirable">Contenu indésirable</label>
-                    </p>
-                    <p>
-                        <input type="checkbox" class="filled-in" name="inappropriate" id="inappropriate">
-                        <label for="inappropriate">Contenu inapproprié</label>
-                    </p>
-                    <div class="modal-footer transparent comment">
-                        <button type="submit" class="modal-action btn blue-grey dark-2 waves-effect">
-                            Envoyer
-                        </button>
-                        <button id="cmtAdd-{{ a.id }}" type="reset" class="btn btn-small transparent waves-effect modal-action modal-close">
-                            Annuler
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        {% endfor %}
         {% include "includes/menu-aside.twig" %}
-    </section>
     </section>
 {% endblock %}

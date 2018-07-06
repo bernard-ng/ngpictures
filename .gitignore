@@ -5,10 +5,9 @@ public/assets/.sass-cache
 public/imgs/
 /public/i/
 /.idea/
-.idea
-.vscode
 /.vscode/
-/vendor/
+vendor
 Desktop.ini
 composer.lock
 system.log
+TODO.txt

@@ -2,8 +2,7 @@
 namespace Ngpictures\Controllers;
 
 use Ng\Core\Managers\Collection;
-use Ngpictures\Ngpictures;
-use Ngpictures\Managers\PageManager;
+use Psr\Container\ContainerInterface;
 
 class BugsController extends Controller
 {
@@ -11,15 +10,14 @@ class BugsController extends Controller
     /**
      * BugsController constructor.
      * oblige un user a se connecter pour effectuer l'action
-     * @param Ngpictures $app
-     * @param PageManager $pageManager
+     * @param ContainerInterface $container
      */
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
+        parent::__construct($container);
         $this->authService->restrict();
         $this->loadModel('bugs');
-        $this->app::turbolinksLocation("/bugs");
+        $this->turbolinksLocation("/bugs");
     }
 
 
@@ -35,28 +33,19 @@ class BugsController extends Controller
             $this->validator->setRule('bugs', "required");
 
             if ($this->validator->isValid()) {
-                $content = $this->str::escape($post->get('bugs'));
+                $content = $this->str->escape($post->get('bugs'));
                 $users_id = $this->session->getValue('auth', 'id');
 
                 $this->loadModel('bugs')->create(compact('content', 'users_id'));
-                $this->flash->set('success', $this->msg['form_bug_submitted']);
-
-                if ($this->isAjax()) {
-                    $this->ajaxRedirect('/');
-                }
-
-                $this->app::redirect("/home");
+                $this->flash->set('success', $this->flash->msg['form_bug_submitted'], false);
+                $this->redirect("/home", false);
             } else {
-                $errors = new Collection($this->validator->getErrors());
-                $this->isAjax() ?
-                    $this->ajaxFail(json_encode($errors->asArray()), 403) :
-                    $this->flash->set('danger', $this->msg['form_field_required']);
+               $this->sendFormError();
             }
         }
 
-        $this->app::turbolinksLocation("/bugs");
+        $this->turbolinksLocation("/bugs");
         $this->pageManager::setName("Signaler un Bug");
-        $this->setLayout('users/default');
-        $this->viewRender('frontend/others/bugs', compact('post', "errors"));
+        $this->view('frontend/others/bugs', compact('post', "errors"));
     }
 }

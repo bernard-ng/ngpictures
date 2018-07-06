@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="{{ cacheBusting('/assets/css/style.css') }}">
 <style type="text/css">
     .turbolinks-progress-bar {
         position: fixed;
@@ -12,11 +12,22 @@
         transform: translate3d(0, 0, 0);
     }
 </style>
-<script type="text/javascript" src="/assets/js/lib/turbolinks.js"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110487894-1"></script>
-<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'UA-110487894-1');
-</script>
+<script type="text/javascript" src="{{ cacheBusting('/assets/js/lib/turbolinks.js') }}"></script>
+<script type="text/javascript" src="sw.js"></script>
+{% if constant('ENV') == 'production' %}
+    <script>
+        UpUp.start({
+            'service-worker-url': 'sw.offline.js',
+            'content-url': 'app.offline',
+            'assets': [
+                '/assets/css/style.css',
+                '/assets/js/turbolinks.js',
+                '/assets/js/jquery.min.js',
+                '/assets/js/app/materialize.js',
+                '/assets/js/app/app.init.js',
+                '/assets/js/app/app.ajax.js',
+                '/assets/js/app/app.js',
+            ]
+        })
+    </script>
+{% endif %}

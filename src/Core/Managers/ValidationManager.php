@@ -2,8 +2,7 @@
 namespace Ng\Core\Managers;
 
 use \RuntimeException;
-use Ng\Core\Database\MysqlDatabase;
-use Ng\Core\Managers\MessageManager;
+use Ngpictures\Managers\MessageManager;
 
 class ValidationManager
 {
@@ -32,8 +31,9 @@ class ValidationManager
      * @param array $data
      * @return void
      */
-    public function __construct(array $data = [])
+    public function __construct(MessageManager $msg)
     {
+        $this->msg  = $msg;
         $this->data = $_POST;
     }
 
@@ -118,7 +118,7 @@ class ValidationManager
     private function required(string $field)
     {
         if ($this->getValue($field) === '' && trim($this->getValue($field) === '')) {
-            $this->errors[$field] = MessageManager::get('form_empty_field');
+            $this->errors[$field] = $this->msg['form_empty_field'];
             return;
         }
         return;
@@ -170,12 +170,12 @@ class ValidationManager
      * @param string $expected_match
      * @return void
      */
-    private function must_match(string $field, string $expected_match)
+    private function matches(string $field, string $expected_match)
     {
         $this->required($field);
         if ($this->getValue($field) !== $this->getValue($expected_match)) {
-            $this->errors[$field]           =   MessageManager::get("form_invalid_password");
-            $this->errors[$expected_match]  =   MessageManager::get('form_invalid_password');
+            $this->errors[$field]           =   $this->msg["form_invalid_password"];
+            $this->errors[$expected_match]  =   $this->msg['form_invalid_password'];
             return;
         }
         return;
@@ -192,7 +192,7 @@ class ValidationManager
     {
         $this->required($field);
         if (ctype_alpha($this->getValue($field))) {
-            $this->errors[$field] = MessageManager::get('form_invalid_alpha');
+            $this->errors[$field] = $this->msg['form_invalid_alpha'];
             return;
         }
         return;
@@ -209,7 +209,7 @@ class ValidationManager
     {
         $this->required($field);
         if (ctype_alnum($this->getValue($field))) {
-            $this->errors[$field] = MessageManager::get("form_invalid_alnum");
+            $this->errors[$field] = $this->msg["form_invalid_alnum"];
             return;
         }
         return;
@@ -226,7 +226,7 @@ class ValidationManager
     {
         $this->required($field);
         if (!preg_match('/^[a-z0-9-]+$/i', $this->getValue($field))) {
-            $this->errors[$field] = MessageManager::get("form_invalid_username");
+            $this->errors[$field] = $this->msg["form_invalid_username"];
             return;
         }
         return;
@@ -242,7 +242,7 @@ class ValidationManager
     private function numeric($field)
     {
         if (!preg_match('/^[\-+]?[0-9-]+$/', $field)) {
-            $this->errors[$field] = MessageManager::get("form_invalid_data");
+            $this->errors[$field] = $this->msg["form_invalid_data"];
             return;
         }
         return;
@@ -279,7 +279,7 @@ class ValidationManager
         }
 
         if (filter_var('http://'.$url, FILTER_VALIDATE_URL) !== false) {
-            $this->errors[$field] = MessageManager::get("form_invalid_url");
+            $this->errors[$field] = $this->msg["form_invalid_url"];
         }
         return true;
     }
@@ -304,7 +304,7 @@ class ValidationManager
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $this->errors[$field] = MessageManager::get("form_invalid_email");
+            $this->errors[$field] = $this->msg["form_invalid_email"];
             return;
         }
         return;

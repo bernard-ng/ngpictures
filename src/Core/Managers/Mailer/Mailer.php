@@ -40,7 +40,8 @@ class Mailer
             $mail->AltBody = "Cliquez pour confirmer votre compte: {$link}";
             $mail->send();
         } catch (Exception $e) {
-            echo 'Message could not be sent. Mailer Error: '. $mail->ErrorInfo;
+            LogMessageManager::register(__class__, $e);
+            return false;
         }
     }
 
@@ -112,7 +113,7 @@ class Mailer
                 $mail->addAttachment(ROOT."/system.log");
                 $mail->send();
             } catch (Exception $e) {
-                LogMessageManager::register(__CLASS__, 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo);
+                LogMessageManager::register(__CLASS__, $e);
                 return false;
             }
         } else {

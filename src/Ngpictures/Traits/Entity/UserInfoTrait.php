@@ -15,9 +15,7 @@ trait UserInfoTrait
 
     private function getUsersModel(int $id)
     {
-        return $this->usersModel = Ngpictures::getInstance()
-           ->getModel("users")
-           ->find($id);
+        return $this->usersModel = Ngpictures::getDic()->get($this->model("users"))->find($id);
     }
 
     /**

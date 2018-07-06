@@ -4,7 +4,7 @@
         <li>
             <div class="user-view">
                 <div class="background">
-                    <img src="/imgs/bgjumbo.jpeg" alt="bg">
+                    <img src="{{ cacheBusting('/imgs/bgjumbo.jpg') }}" alt="bg">
                 </div>
                 <a href="{{ activeUser.accountUrl }}">
                     <img src="{{ activeUser.avatarUrl }}" alt="bg2" class="circle">
@@ -38,7 +38,12 @@
                         <ul>
                             <li><a href="{{ activeUser.accountUrl }}">Profile <i class="icon icon-user"></i></a></li>
                             <li><a href="{{ activeUser.editUrl }}">Paramètres <i class="icon icon-cog-alt"></i></a></li>
-                            <li><a href="{{ activeUser.followingsUrl }}">Mes abonnements <i class="icon icon-users"></i></a></li>
+                            <li>
+                                <a href="{{ activeUser.notificationsUrl}}">
+                                    Notifications <i class="icon icon-bell"></i>
+                                    <span class="right">[nb]&nbsp;</span>
+                                </a>
+                            </li>
                             <li><a href="/logout">Déconnexion <i class="icon icon-off"></i></a></li>
                         </ul>
                     </div>
@@ -46,6 +51,26 @@
             </ul>
         </li>
    {% endif %}
+    <li>
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a class="collapsible-header waves-effect">Services & autres <i class="icon icon-angle-down"></i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="/categories">Catégories des photos <i class="icon icon-tags"></i></a></li>
+                        {% if activeUser %}
+                            <li><a href="/community">La Communauté <i class="icon icon-users"></i></a></li>
+                        {% endif %}
+                        <li><a href="/maps/photographers">Trouver des photographes <i class="icon icon-location"></i></a></li>
+                        <li><a href="/photographers">Compte photographe <i class="icon icon-camera"></i></a></li>
+                        <li><a href="/contact">Nous contacter <i class="icon icon-mail"></i></a></li>
+                        <li><a href="/booking">Réservations <i class="icon icon-calendar"></i></a></li>
+                        <li><a href="/publicities">Publicités <i class="icon icon-megaphone"></i></a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
 
     {% if activeUser.rank == 'admin' %}
         <li><a href="{{ ADMIN }}">Administration <i class="icon icon-code right"></i></a></li>
@@ -53,11 +78,8 @@
 
     <li id="Ngpictures"><a href="/">Accueil <i class="icon icon-home"></i></a></li>
     <li id="Blog"><a href="/blog">Blog <i class="icon icon-quote-left"></i></a></li>
-
+    <li id="Galerie"><a href="/gallery">Galerie <i class="icon icon-picture"></i></a></li>
     {% if activeUser %}
-        <li id="Communauté"><a href="/community">Communauté <i class="icon icon-users"></i></a></li>
         <li id="Posts"><a href="/posts">Actualités </a></li>
     {% endif %}
-
-    <li id="Galerie"><a href="/gallery">Galerie <i class="icon icon-picture"></i></a></li>
 </ul>

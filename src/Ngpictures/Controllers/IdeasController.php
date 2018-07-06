@@ -3,18 +3,18 @@
 namespace Ngpictures\Controllers;
 
 use Ng\Core\Managers\Collection;
-use Ngpictures\Ngpictures;
-use Ngpictures\Managers\PageManager;
+use Psr\Container\ContainerInterface;
+
 
 class IdeasController extends Controller
 {
 
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
+        parent::__construct($container);
         $this->authService->restrict();
         $this->loadModel('ideas');
-        $this->app::turbolinksLocation("/ideas");
+        $this->turbolinksLocation("/ideas");
     }
 
 
@@ -30,28 +30,19 @@ class IdeasController extends Controller
             $this->validator->setRule('ideas', 'required');
 
             if ($this->validator->isValid()) {
-                $content    =   $this->str::escape($post->get('ideas'));
-                $users_id    =    $this->session->getValue(AUTH_KEY, 'id');
+                $content     =   $this->str->escape($post->get('ideas'));
+                $users_id    =    $this->authService->isLogged()->id;
 
                 $this->loadModel('ideas')->create(compact('content', 'users_id'));
-                $this->flash->set('success', $this->msg['form_idea_submitted']);
-
-                if ($this->isAjax()) {
-                    $this->ajaxRedirect('/');
-                }
-
-                $this->app::redirect("/");
+                $this->flash->set('success', $this->flash->msg['form_idea_submitted'], false);
+                $this->redirect("/", true);
             } else {
-                $errors = new Collection($this->validator->getErrors());
-                $this->isAjax() ?
-                    $this->ajaxFail(json_encode($errors->asArray()), 403) :
-                    $this->flash->set('danger', $this->msg['form_field_required']);
+                $this->sendFormError();
             }
         }
 
-        $this->app::turbolinksLocation("/ideas");
+        $this->turbolinksLocation("/ideas");
         $this->pageManager::setName("Donner une idée");
-        $this->setLayout('users/default');
-        $this->viewRender('frontend/others/ideas', compact('post', "errors"));
+        $this->view('frontend/others/ideas', compact('post', "errors"));
     }
 }

@@ -21,6 +21,7 @@ class TwigRenderer implements RendererInterface
         ]);
 
         $this->twig->addExtension(new \Twig_Extension_Debug());
+        $this->twig->addExtension(new TwigRendererExtension());
     }
 
 

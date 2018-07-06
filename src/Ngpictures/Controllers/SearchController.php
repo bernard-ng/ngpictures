@@ -1,15 +1,16 @@
 <?php
 namespace Ngpictures\Controllers;
 
-use Ngpictures\Ngpictures;
-use Ngpictures\Managers\PageManager;
+
+use Psr\Container\ContainerInterface;
+
 
 class SearchController extends Controller
 {
 
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
+        parent::__construct($container);
         $this->loadModel(['users', 'posts', 'gallery', 'blog']);
     }
 
@@ -19,7 +20,7 @@ class SearchController extends Controller
     public function index()
     {
         if (isset($_GET['q']) && !empty($_GET['q'])) {
-            $query = trim($this->str::escape($_GET['q']));
+            $query = trim($this->str->escape($_GET['q']));
 
             $posts = $this->posts->search($query, "begin");
             $blog = $this->blog->search($query, "begin");
@@ -56,15 +57,15 @@ class SearchController extends Controller
                 }
             }
 
-            $this->app::turbolinksLocation("/search?q={$query}");
+            $pexels = $this->callController('pexels')->search($query, 15, 1);
+
+            $this->turbolinksLocation("/search?q={$query}");
             $this->pageManager::setName("Recherches");
-            $this->setLayout("search");
-            $this->viewRender("frontend/others/search", compact("query", "posts", "blog", "gallery"));
+            $this->view("frontend/others/search", compact("query", "posts", "blog", "gallery", "pexels"));
         } else {
-            $this->app::turbolinksLocation("/search");
+            $this->turbolinksLocation("/search");
             $this->pageManager::setName("Recherches");
-            $this->setLayout("search");
-            $this->viewRender("frontend/others/search");
+            $this->view("frontend/others/search");
         }
     }
 }

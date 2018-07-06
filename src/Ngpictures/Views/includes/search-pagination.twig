@@ -1,0 +1,20 @@
+<ul class="pagination center">
+    <li class="prev">
+        <a href="/search?q={{ query }}&page={{ next }}">
+            <i class="icon icon-left-open"></i>
+        </a>
+    </li>
+    <li class="active">
+        <a href="/search?q={{ query }}&page=1">1</a>
+    </li>
+    {% for i in 1..5 %}
+    <li>
+        <a href="/search?q={{ query }}&page={{ i }}">{{ i }}</a>
+    </li>
+    {% endfor %}
+    <li class="next">
+        <a href="/search?q={{ query }}&page={{ prev }}">
+            <i class="icon icon-right-open"></i>
+        </a>
+    </li>
+</ul>

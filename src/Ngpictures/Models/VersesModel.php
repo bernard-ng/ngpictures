@@ -16,14 +16,10 @@ class VersesModel extends Model
      * renvoi le nombre de verset
      * @return int
      */
-    public function getVersesNumber(): int
+    public function getVersesNumber()
     {
-        return (int) $this->query(
-            "SELECT id FROM {$this->table}",
-            null,
-            true,
-            false,
-            true
+        return $this->query(
+            "SELECT COUNT(id) AS numbers FROM {$this->table}", null, true, true
         );
     }
 }

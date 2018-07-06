@@ -2,11 +2,12 @@
 namespace Ng\Core\Database;
 
 use \PDO;
-use Ngpictures\Ngpictures;
-use \PDOException;
 use \Exception;
+use \PDOException;
+use Ngpictures\Ngpictures;
+use Ng\Core\Managers\LogMessageManager;
 
-class MysqlDatabase extends Database
+class MysqlDatabase implements DatabaseInterface
 {
 
     /**
@@ -15,10 +16,10 @@ class MysqlDatabase extends Database
      * @var string
      */
 
-    private $db_user;
-    private $db_pass;
-    private $db_host;
-    private $db_name;
+    private $dbuser;
+    private $dbpass;
+    private $dbhost;
+    private $dbname;
     private $PDO;
 
     /**
@@ -28,12 +29,12 @@ class MysqlDatabase extends Database
      * @param string $db_user
      * @param string $db_pass
      */
-    public function __construct(string $db_name, string $db_host, string $db_user, string $db_pass)
+    public function __construct(string $dbname, string $dbhost, string $dbuser, string $dbpass)
     {
-        $this->db_name = $db_name;
-        $this->db_host = $db_host;
-        $this->db_user = $db_user;
-        $this->db_pass = $db_pass;
+        $this->dbname = $dbname;
+        $this->dbhost = $dbhost;
+        $this->dbuser = $dbuser;
+        $this->dbpass = $dbpass;
     }
 
 
@@ -46,16 +47,17 @@ class MysqlDatabase extends Database
         if ($this->PDO === null) {
             try {
                 $PDO = new PDO(
-                    "mysql:Host={$this->db_host};dbname={$this->db_name};charset=utf8",
-                    $this->db_user,
-                    $this->db_pass
+                    "mysql:Host={$this->dbhost};dbname={$this->dbname};charset=utf8",
+                    $this->dbuser,
+                    $this->dbpass
                 );
                 $PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $PDO->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
                 $PDO->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
                 $this->PDO = $PDO;
             } catch (PDOException $e) {
-                die($e->getMessage());
+                LogMessageManager::register(__class__, $e);
+                return null;
             }
         }
         return $this->PDO;
@@ -70,7 +72,7 @@ class MysqlDatabase extends Database
      * @param bool $rowcount
      * @return array|int|mixed|\PDOStatement
      */
-    public function query($statement, $class_name = true, $one = false, $rowcount = false)
+    public function query($statement, $entity = true, $one = false, $rowcount = false)
     {
         try {
             $req = $this->getPDO()->query($statement);
@@ -82,20 +84,13 @@ class MysqlDatabase extends Database
                 return $req;
             }
 
-            if ($class_name === true) {
-                $req->setFetchMode(PDO::FETCH_OBJ);
-            } else {
-                $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
-            }
+            ($entity === true) ? $req->setFetchMode(PDO::FETCH_OBJ) : $req->setFetchMode(PDO::FETCH_CLASS, $entity);
+            $res = ($rowcount === true) ? $req->rowCount() : ($one)? $req->fetch() : $req->fetchAll();
+            return $res;
 
-            if ($rowcount === true) {
-                $result = $req->rowCount();
-            } else {
-                $result = ($one)? $req->fetch() : $req->fetchAll();
-            }
-            return $result;
         } catch (PDOException $e) {
-            die($e->getMessage());
+            LogMessageManager::register(__class__, $e);
+            return null;
         }
     }
 
@@ -135,7 +130,8 @@ class MysqlDatabase extends Database
             }
             return $result;
         } catch (PDOException $e) {
-            die($e->getMessage());
+            LogMessageManager::register(__class__, $e);
+            return null;
         }
     }
 

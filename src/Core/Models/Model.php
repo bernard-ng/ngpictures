@@ -1,8 +1,8 @@
 <?php
 namespace Ng\Core\Models;
 
-use Ng\Core\Database\Database;
-use Ng\Core\Database\MysqlDatabase;
+
+use Ng\Core\Database\DatabaseInterface;
 
 class Model
 {
@@ -23,17 +23,11 @@ class Model
 
     /**
      * Model constructor.
-     * @param MysqlDatabase
+     * @param DatabaseInterface
      */
-    public function __construct(MysqlDatabase $database)
+    public function __construct(DatabaseInterface $database)
     {
         $this->database = $database;
-        if (is_null($this->table)) {
-            $part = explode("\\", get_class($this));
-            $table = end($part);
-            $this->table = strtolower(str_replace("Model", "", $table));
-        }
-        return $this->table;
     }
 
 
@@ -63,13 +57,8 @@ class Model
      * @param bool $rowCount if true retrun the PDO::rowCount()
      * @return mixed
      */
-    public function query(
-        string $statement,
-        array $data = null,
-        bool $class = true,
-        bool $one = false,
-        bool $rowCount = false
-    ) {
+    public function query(string $statement, array $data = null, bool $class = true, bool $one = false, bool $rowCount = false)
+    {
         $class = ($class === true)? str_replace("Model", "Entity", get_class($this)) : false;
         $class = str_replace("Entitys", "Entity", $class);
 
@@ -89,18 +78,16 @@ class Model
      */
     public function update(int $id, array $data = [])
     {
-        $array_sql = [];
-        $array_data = [];
-
+        $fields = [];
+        $values = [];
         foreach ($data as $k => $v) {
-            $array_sql[] = "{$k} = ?";
-            $array_data[] = $v;
+            $fields[] = "{$k} = ?";
+            $values[] = "{$v}";
         }
+        $fields = implode(', ', $fields);
+        $values[] = $id;
 
-        $sql = implode(', ', $array_sql);
-        $array_data[] = $id;
-
-        return $this->query("UPDATE {$this->table} SET $sql WHERE id = ? ", $array_data);
+        return $this->query("UPDATE {$this->table} SET {$fields} WHERE id = ? ", $values);
     }
 
 
@@ -112,19 +99,17 @@ class Model
      */
     public function create(array $data = [], bool $date_created = true)
     {
-        $array_sql = [];
-        $array_data = [];
-
+        $fields = [];
+        $values = [];
         foreach ($data as $k => $v) {
-            $array_sql[] = "{$k} = ?";
-            $array_data[] = $v;
+            $fields[] = "{$k} = ?";
+            $values[] = $v;
         }
+        $fields = implode(', ', $fields);
 
-        $sql = implode(', ', $array_sql);
-        if ($date_created) {
-            return $this->query("INSERT INTO {$this->table} SET $sql , date_created = NOW() ", $array_data);
-        }
-        return $this->query("INSERT INTO {$this->table} SET $sql ", $array_data);
+        return ($date_created)?
+            $this->query("INSERT INTO {$this->table} SET $fields , date_created = NOW() ", $values) :
+            $this->query("INSERT INTO {$this->table} SET $fields ", $values);
     }
 
 
@@ -135,7 +120,7 @@ class Model
      */
     public function delete(int $id)
     {
-        return $this->query("DELETE FROM {$this->table} WHERE id = ?", [$id], true, true);
+        return $this->query("DELETE FROM {$this->table} WHERE id = ?", [$id]);
     }
 
 
@@ -159,6 +144,22 @@ class Model
     }
 
 
+    public function countAll()
+    {
+        return $this->query("SELECT COUNT(id) AS num FROM {$this->table}", null, true, true);
+    }
+
+    public function countOnline()
+    {
+        return $this->query("SELECT COUNT(id) as num FROM {$this->table} WHERE online = 1", null, true, true);
+    }
+
+    public function countOffline()
+    {
+        return $this->query("SELECT COUNT(id) as num FROM {$this->table} WHERE online = 0", null, true, true);
+    }
+
+
     /**
      * recupere un enregistrement
      * @param int $id
@@ -174,6 +175,7 @@ class Model
         );
     }
 
+
     /**
      * recupere un enregistrement avec une contrainte
      * @param string $field
@@ -183,10 +185,48 @@ class Model
     public function findWith(string $field, $value, $one = true)
     {
         return $this->query(
-            "SELECT * FROM {$this->table} WHERE {$field} = ?",
+            "SELECT * FROM {$this->table} WHERE {$field} = ? ORDER BY id DESC",
             [$value],
             true,
             $one
+        );
+    }
+
+
+    /**
+     * recupere une publication grace aux htags
+     *
+     * @param string $tag
+     * @return mixed
+     */
+    public function findwithTag(string $tag)
+    {
+        return $this->query(
+            "SELECT * FROM {$this->table} WHERE content LIKE ?",
+            ["%{$tag}%"]
+        );
+    }
+
+
+    /**
+     * recupere les publication similaire
+     * @todo ameliorer cette methode.
+     *
+     * @param integer $id
+     * @return void
+     */
+    public function findSimilars(int $id)
+    {
+        return $this->query(
+            "SELECT *
+            FROM {$this->table}
+            WHERE (categories_id = (
+                SELECT categories_id
+                FROM {$this->table}
+                WHERE id = ?
+            ) AND id <> ? ) AND online = 1
+            ORDER BY RAND() LIMIT 5 ",
+            [$id, $id]
         );
     }
 
@@ -272,6 +312,13 @@ class Model
         );
     }
 
+
+    public function random(int $limit)
+    {
+        return $this->query(
+            "SELECT * FROM {$this->table} WHERE online = 1 ORDER BY RAND() LIMIT {$limit}"
+        );
+    }
 
     /**
      * tout les enregistrements en ligne

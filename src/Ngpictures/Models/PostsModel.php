@@ -7,15 +7,15 @@ use Ngpictures\Traits\Models\SearchQueryTrait;
 
 class PostsModel extends Model
 {
+
+    use FindQueryTrait;
+    use SearchQueryTrait;
+
     /**
      * nom de la table
      * @var string
      */
     protected $table = "posts";
-
-
-    use FindQueryTrait;
-    use SearchQueryTrait;
 
 
     /**
@@ -26,6 +26,23 @@ class PostsModel extends Model
     public function lastByCategory($categories_id)
     {
         return $this->query("SELECT * FROM {$this->table} WHERE categories_id = ?", [$categories_id]);
+    }
+
+
+    /**
+     * recupere un enregistrement avec une contrainte
+     * @param string $field
+     * @param $value
+     * @return mixed
+     */
+    public function findWith(string $field, $value, $one = true)
+    {
+        return $this->query(
+            "SELECT * FROM {$this->table} WHERE {$field} = ? and online = 1 ORDER BY date_created DESC",
+            [$value],
+            true,
+            $one
+        );
     }
 
 

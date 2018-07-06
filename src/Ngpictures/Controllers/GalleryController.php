@@ -1,20 +1,19 @@
 <?php
 namespace Ngpictures\Controllers;
 
-use Ngpictures\Ngpictures;
-use Ngpictures\Managers\PageManager;
+use Psr\Container\ContainerInterface;
+
 
 class GalleryController extends Controller
 {
 
     /**
-     * GalleryController constructor.
-     * @param Ngpictures $app
-     * @param PageManager $pageManager
+     * @inheritDoc
+     * @param ContainerInterface $container
      */
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
+        parent::__construct($container);
         $this->loadModel('gallery');
     }
 
@@ -26,13 +25,12 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $photo = $this->gallery->latest();
+        $photo = $this->gallery->random(4);
         $photos = $this->gallery->lastOnline();
 
-        $this->app::turbolinksLocation("/gallery");
+        $this->turbolinksLocation("/gallery");
         $this->pageManager::setName('Galerie');
-        $this->setLayout('posts/default');
-        $this->viewRender('frontend/gallery/index', compact('photo', 'photos'));
+        $this->view('frontend/gallery/index', compact('photo', 'photos'));
     }
 
 
@@ -42,18 +40,15 @@ class GalleryController extends Controller
      * @param integer $id
      * @return void
      */
-    public function show(int $id)
+    public function show($id)
     {
         $photo = $this->gallery->find(intval($id));
         if ($photo) {
-            $this->app::turbolinksLocation("/gallery/{$id}");
-            $this->viewRender('frontend/gallery/show', compact('photo'), false);
+            $this->turbolinksLocation("/gallery/{$id}");
+            $this->view('frontend/gallery/show', compact('photo'), false);
         } else {
-            if ($this->isAjax()) {
-                $this->ajaxFail($this->msg['post_not_found']);
-            }
-            $this->flash->set("danger", $this->msg['post_not_found']);
-            $this->app::redirect(true);
+            $this->flash->set("danger", $this->flash->msg['post_not_found']);
+            $this->redirect(true, false);
         }
     }
 
@@ -66,11 +61,24 @@ class GalleryController extends Controller
     public function albums()
     {
         $albums = $this->loadModel('albums')->all();
+        $thumbs = [];
+        $nb     = [];
 
-        $this->app::turbolinksLocation("/gallery/albums");
+        foreach ($albums as $album) {
+            $thumbs[$album->id] =
+                $this->gallery->findWith('albums_id', $album->id, true)->smallThumbUrl ??
+                '/imgs/default.jpeg';
+        }
+
+        foreach ($albums as $album) {
+            $nb[$album->id] =
+                count($this->gallery->findWith('albums_id', $album->id, false));
+        }
+
+
+        $this->turbolinksLocation("/gallery/albums");
         $this->pageManager::setName('albums');
-        $this->setLayout('posts/default');
-        $this->viewRender('frontend/gallery/albums', compact("albums"));
+        $this->view('frontend/gallery/albums', compact("albums", "thumbs", "nb"));
     }
 
 
@@ -82,23 +90,21 @@ class GalleryController extends Controller
     public function slider()
     {
         if (isset($_GET['last_id']) && !empty($_GET['last_id'])) {
-            $lastId = $this->str::escape($_GET['last_id']);
+            $lastId = $this->str->escape($_GET['last_id']);
 
             if ($this->gallery->find(intval($lastId))) {
                 $photos = $this->gallery->findGreater($lastId, 4);
 
                 $this->pageManager::setName('Diaporama');
-                $this->setLayout('blank');
-                $this->viewRender('frontend/gallery/slider', compact('photos'));
+                $this->view('frontend/gallery/slider', compact('photos'));
             } else {
-                $this->flash->set('danger', $this->msg['undefined_error']);
-                $this->app::redirect('/gallery');
+                $this->flash->set('danger', $this->flash->msg['undefined_error']);
+                $this->redirect('/gallery');
             }
         } else {
             $photos = $this->gallery->latest();
             $this->pageManager::setName('Diaporama');
-            $this->setLayout('blank');
-            $this->viewRender('frontend/gallery/slider', compact('photos'));
+            $this->view('frontend/gallery/slider', compact('photos'));
         }
     }
 }

@@ -100,19 +100,19 @@
                             <td><a href="{{ b.url }}">{{ b.title }}</a></td>
                             <td>
                                 <form method="POST" action="{{ constant('ADMIN')~"/delete"  }}" style="display: inline-block !important;" data-action="ajax-delete">
-                                <input type="hidden" name="id" value="{{ b.id}}" >
+                                <input type="hidden" name="id" value="{{ b.id }}" >
                                 <input type="hidden" name="type" value="3" >
                                 <button type="submit" class="btn btn-small waves-effect waves-light red" title="supprimer" id="delete">
                                     <i class="icon icon-cancel" style="font-size: smaller !important;"></i>
                                 </button>
                                 </form>
 
-                                <a href="{{ constant('ADMIN')~"/blog/edit/{b.id}" }}" title="editer">
+                                <a href="{{ constant('ADMIN')~"/blog/edit/" ~ b.id }}" title="editer">
                                 <button class="btn btn-small waves-effect waves-light">
                                     <i class="icon icon-plus-circled" style="font-size: smaller !important;"></i>
                                 </button>
                                 </a>
-                                <a href="{{ constant('ADMIN')~"/confirm/1/{a.id}" }}" title="retirer" id="confirm">
+                                <a href="{{ constant('ADMIN')~"/confirm/3/" ~ b.id }}" title="retirer" id="confirm">
                                 <button class="btn btn-small blue-2 waves-effect waves-light">
                                     {% if a.online %}
                                         <i class="icon icon-download" style="font-size: smaller !important;"></i>
@@ -129,8 +129,6 @@
                             <td>Aucun article pour l'instant</td>
                             <td>
                                 <form method="POST" action="{{ constant('ADMIN')~"/delete" }}" style="display: inline-block !important;" data-action="ajax-delete">
-                                <input type="hidden" name="id" value="0" >
-                                <input type="hidden" name="type" value="1" >
                                 <button type="submit" class="btn btn-small waves-effect waves-light disabled">
                                     <i class="icon icon-cancel" style="font-size: smaller !important;"></i>
                                 </button>
@@ -168,23 +166,23 @@
             Morris.Donut({
                 element: 'stat2',
                 data: [
-                    {value: {{ used_space }}, label: 'Utiliser'},
-                {value: {{ total_space }}, label: 'Libre'}
-            ],
-                formatter: function (x) { return x + "%"}
+                    {value: '{{ used_space }}', label: 'Utiliser'},
+                    {value: '{{ total_space }}', label: 'Libre'}
+                ],
+                formatter:  (x) => { return x + "%"}
             });
 
             Morris.Bar({
                 element: 'stat',
                 data: [
-                    {x: 'Users', y: {{ users[0] ?? 0  }}, z: {{ users[1] ?? 0 }} },
-                    {x: 'posts', y: {{ users_posts[0] ?? 0 }}, z: {{ users_posts[1] ?? 1 }}},
-                    {x: 'Online', y: {{ users_online ?? 0 }}},
-                    {x: 'pictures', y: {{ site_photos[0] ?? 0 }}, z: {{ site_photos[1] ?? 0 }}},
-                    {x: 'Blog', y: {{ site_posts[0] ?? 0 }}, z: {{ site_posts[1] ?? 0 }}},
-                    {x: 'Categ.', y: {{ site_categories ?? 0 }}},
-                    {x: 'Bugs', y: {{ site_bugs  ?? 0 }}},
-                    {x: 'Ideas', y: {{ site_ideas  ?? 0 }}}
+                    {x: 'Users', y: '{{ users[0] ?? 0  }}', z: '{{ users[1] ?? 0 }}' },
+                    {x: 'posts', y: '{{ users_posts[0] ?? 0 }}', z: '{{ users_posts[1] ?? 1 }}' },
+                    {x: 'Online', y: '{{ users_online ?? 0 }}' },
+                    {x: 'pictures', y: '{{ site_photos[0] ?? 0 }}', z: '{{ site_photos[1] ?? 0 }}' },
+                    {x: 'Blog', y: '{{ site_posts[0] ?? 0 }}', z: '{{ site_posts[1] ?? 0 }}' },
+                    {x: 'Categ.', y: '{{ site_categories ?? 0 }}' },
+                    {x: 'Bugs', y: '{{ site_bugs  ?? 0 }}' },
+                    {x: 'Ideas', y: '{{ site_ideas  ?? 0 }}' }
                 ],
                 xkey: 'x',
                 ykeys: ['y', 'z'],

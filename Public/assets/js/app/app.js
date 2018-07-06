@@ -22,6 +22,33 @@ function toggleMenuItem() {
 }
 
 
+function transparizeMenu()
+{
+    let menu = document.querySelector("[data-action='menu']");
+    let slider = document.querySelector("[data-action-requires='menu-transparent']")
+
+    if (slider === null) {
+        menu.classList.remove('transparent');
+    } else if (window.scrollY > 10 && menu.classList.contains('transparent'))  {
+        menu.classList.remove('transparent');
+    }
+
+    if (slider !== null) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                if (menu.classList.contains('transparent')) {
+                    menu.classList.remove('transparent');
+                }
+            } else {
+                if (!menu.classList.contains('transparent')) {
+                    menu.classList.add('transparent');
+                }
+            }
+        });
+    }
+}
+
+
 /**
  * premet de rendre un item du menu mobile active
  * @returns {boolean}
@@ -284,6 +311,7 @@ function showImageBeforeUpload(element) {
 
 //CALL
 //----------------------------------------------------------------------
+transparizeMenu();
 toggleMenuItem();
 toggleMobileMenuItem();
 relativeTimer('time[data-time]');

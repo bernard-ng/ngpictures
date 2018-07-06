@@ -114,9 +114,9 @@ input[type=tel]:not(.browser-default):focus:not([readonly]),
 input[type=number]:not(.browser-default):focus:not([readonly]),
 input[type=search]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-  border-bottom: 1px solid #1565C0;
-  -webkit-box-shadow: 0 1px 0 0 #1565C0;
-          box-shadow: 0 1px 0 0 #1565C0;
+  border-bottom: 1px solid $active-color;
+  -webkit-box-shadow: 0 1px 0 0 $active-color;
+          box-shadow: 0 1px 0 0 $active-color;
 }
 
 input:not([type]):focus:not([readonly]) + label,
@@ -132,7 +132,7 @@ input[type=tel]:not(.browser-default):focus:not([readonly]) + label,
 input[type=number]:not(.browser-default):focus:not([readonly]) + label,
 input[type=search]:not(.browser-default):focus:not([readonly]) + label,
 textarea.materialize-textarea:focus:not([readonly]) + label {
-  color: #1565C0;
+  color: $active-color;
 }
 
 input:not([type]).validate + label,
@@ -429,7 +429,7 @@ textarea.materialize-textarea + label:after, .select-wrapper + label:after {
 }
 
 .input-field .prefix.active {
-  color: #1565C0;
+  color: $active-color;
 }
 
 .input-field .prefix ~ input,
@@ -521,7 +521,7 @@ textarea {
 textarea.materialize-textarea {
   overflow-y: hidden;
   /* prevents scroll bar flash */
-  padding: .3rem 0 1.6rem 0;
+  padding: .3rem 0 1rem 0;
   /* prevents text jump on Enter keypress */
   resize: none;
   min-height: 3rem;
@@ -643,12 +643,12 @@ textarea.materialize-textarea.validate + label:not(.label-icon).active {
 [type="radio"]:checked + label:after,
 [type="radio"].with-gap:checked + label:before,
 [type="radio"].with-gap:checked + label:after {
-  border: 2px solid #1565C0;
+  border: 2px solid $active-color;
 }
 
 [type="radio"]:checked + label:after,
 [type="radio"].with-gap:checked + label:after {
-  background-color: #1565C0;
+  background-color: $active-color;
 }
 
 [type="radio"]:checked + label:after {
@@ -785,8 +785,8 @@ form p:last-child {
   height: 22px;
   border-top: 2px solid transparent;
   border-left: 2px solid transparent;
-  border-right: 2px solid #1565C0;
-  border-bottom: 2px solid #1565C0;
+  border-right: 2px solid $active-color;
+  border-bottom: 2px solid $active-color;
   -webkit-transform: rotate(40deg);
           -ms-transform: rotate(40deg);
       transform: rotate(40deg);
@@ -810,7 +810,7 @@ form p:last-child {
   height: 22px;
   border-top: none;
   border-left: none;
-  border-right: 2px solid #1565C0;
+  border-right: 2px solid $active-color;
   border-bottom: none;
   -webkit-transform: rotate(90deg);
           -ms-transform: rotate(90deg);
@@ -887,8 +887,8 @@ form p:last-child {
   top: 0;
   width: 20px;
   height: 20px;
-  border: 2px solid #1565C0;
-  background-color: #1565C0;
+  border: 2px solid $active-color;
+  background-color: $active-color;
   z-index: 0;
 }
 
@@ -900,8 +900,8 @@ form p:last-child {
 
 [type="checkbox"].filled-in.tabbed:checked:focus + label:after {
   border-radius: 2px;
-  background-color: #1565C0;
-  border-color: #1565C0;
+  background-color: $active-color;
+  border-color: $active-color;
 }
 
 [type="checkbox"].filled-in:disabled:not(:checked) + label:before {
@@ -953,7 +953,7 @@ form p:last-child {
 }
 
 .switch label input[type=checkbox]:checked + .lever:after {
-  background-color: #1565C0;
+  background-color: $active-color;
 }
 
 .switch label .lever {
@@ -1257,7 +1257,7 @@ input[type=range] + .thumb {
   height: 0;
   width: 0;
   border-radius: 50%;
-  background-color: #1565C0;
+  background-color: $active-color;
   margin-left: 7px;
   -webkit-transform-origin: 50% 50%;
           -ms-transform-origin: 50% 50%;
@@ -1271,7 +1271,7 @@ input[type=range] + .thumb .value {
   display: block;
   width: 30px;
   text-align: center;
-  color: #1565C0;
+  color: $active-color;
   font-size: 0;
   -webkit-transform: rotate(45deg);
           -ms-transform: rotate(45deg);
@@ -1305,7 +1305,7 @@ input[type=range]::-webkit-slider-thumb {
   height: 14px;
   width: 14px;
   border-radius: 50%;
-  background-color: #1565C0;
+  background-color: $active-color;
   -webkit-transform-origin: 50% 50%;
           transform-origin: 50% 50%;
   margin: -5px 0 0 0;
@@ -1335,7 +1335,7 @@ input[type=range]::-moz-range-thumb {
   height: 14px;
   width: 14px;
   border-radius: 50%;
-  background: #1565C0;
+  background: $active-color;
   margin-top: -5px;
 }
 
@@ -1370,7 +1370,7 @@ input[type=range]::-ms-thumb {
   height: 14px;
   width: 14px;
   border-radius: 50%;
-  background: #1565C0;
+  background: $active-color;
 }
 
 input[type=range]:focus::-ms-fill-lower {

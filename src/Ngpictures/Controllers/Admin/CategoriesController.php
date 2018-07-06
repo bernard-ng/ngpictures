@@ -3,19 +3,12 @@ namespace Ngpictures\Controllers\Admin;
 
 
 use Ng\Core\Managers\Collection;
+use Psr\Container\ContainerInterface;
 use Ngpictures\Controllers\AdminController;
-use Ngpictures\Managers\PageManager;
-use Ngpictures\Ngpictures;
 use Ngpictures\Traits\Controllers\PaginationTrait;
 
 class CategoriesController extends AdminController
 {
-
-    public function __construct(Ngpictures $app, PageManager $pageManager)
-    {
-        parent::__construct($app, $pageManager);
-        $this->loadModel('categories');
-    }
 
     use PaginationTrait;
 
@@ -24,10 +17,21 @@ class CategoriesController extends AdminController
      */
     public function index()
     {
-        $categories = $this->categories->all();
+        $categories = $this->categories->orderBy('title', 'DESC', 0, 10);
+        $total = $this->categories->countAll()->num;
+
+        $pagination     = $this->setPagination($total, "categories");
+        $currentPage    = $pagination['currentPage'];
+        $totalPage      = $pagination['totalPage'];
+        $prevPage       = $pagination['prevPage'];
+        $nextPage       = $pagination['nextPage'];
+        $categories     = $pagination['result'] ?? $categories;
+
         $this->pageManager::setName('admin categories');
-        $this->setLayout('admin/default');
-        $this->viewRender('backend/blog/categories', compact('categories'));
+        $this->view(
+            'backend/blog/categories',
+            compact('categories', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
+        );
     }
 
 
@@ -45,22 +49,20 @@ class CategoriesController extends AdminController
             $this->validator->setRule('description', 'required');
 
             if ($this->validator->isValid()) {
-                $title          =   $this->str::escape($post->get('title'));
-                $slug           =   $this->str::slugify($title);
+                $title          =   $this->str->escape($post->get('title'));
+                $slug           =   $this->str->slugify($title);
                 $description    =   $post->get('description');
                 $this->categories->create(compact('title', 'description', 'slug'));
 
-                $this->flash->set('success', $this->msg['form_post_submitted']);
-                $this->app::redirect(ADMIN . "/blog/categories");
+                $this->flash->set('success', $this->flash->msg['form_post_submitted'], false);
+                $this->redirect(ADMIN . "/blog/categories", false);
             } else {
-                $this->flash->set('danger', $this->msg['form_multi_errors']);
-                $errors = new Collection($this->validator->getErrors());
+               $this->sendFormError();
             }
         }
 
         $this->pageManager::setName('admin categories.add');
-        $this->setLayout('admin/default');
-        $this->viewRender('backend/blog/categories.add', compact('post', 'errors'));
+        $this->view('backend/blog/categories.add', compact('post', 'errors'));
     }
 
 
@@ -81,25 +83,23 @@ class CategoriesController extends AdminController
                 $this->validator->setRule('description', 'required');
 
                 if ($this->validator->isValid()) {
-                    $title          =   $this->str::escape($post->get('title')) ?? $category->title;
-                    $slug           =   $this->str::slugify($title);
+                    $title          =   $this->str->escape($post->get('title')) ?? $category->title;
+                    $slug           =   $this->str->slugify($title);
                     $description    =   $post->get('description') ?? $category->description;
 
                     $this->categories->update($category->id, compact('title', 'description', 'slug'));
-                    $this->flash->set('success', $this->msg['post_edit_success']);
-                    $this->app::redirect(ADMIN . "/blog/categories");
+                    $this->flash->set('success', $this->flash->msg['post_edit_success']);
+                    $this->redirect(ADMIN . "/blog/categories");
                 } else {
-                    $this->flash->set("danger", $this->msg['form_multi_errors']);
-                    $errors = new Collection($this->validator->getErrors());
+                    $this->sendFormError();
                 }
             }
 
             $this->pageManager::setName('admin categories.edit');
-            $this->setLayout('admin/default');
-            $this->viewRender('backend/blog/categories.edit', compact('post', 'category', 'errors'));
+            $this->view('backend/blog/categories.edit', compact('post', 'category', 'errors'));
         } else {
-            $this->flash->set('danger', $this->msg['undefined_error']);
-            $this->app::redirect(true);
+            $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
+            $this->redirect(true, false);
         }
     }
 }

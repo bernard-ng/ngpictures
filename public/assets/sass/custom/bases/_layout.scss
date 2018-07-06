@@ -31,19 +31,20 @@
     height: auto;
     position: relative;
     padding: 0.75em !important;
-    background-size: cover;
-    background: url("/imgs/bgjumbo.jpeg") no-repeat fixed center;
+    background: url("/imgs/bgjumbo.jpg") no-repeat fixed center !important;
+    background-size: cover !important;
     border-bottom: 5px solid rgba(255,255,255,0.2);
 
     & .jumbotron-content {
         display: block;
         word-wrap: break-word;
+        margin-bottom: 20px;
     }
 
     & .title h3{
-        font-family: Mechanic, sans-serif !Important;
+        font-family: Mechanic, sans-serif !important;
         padding-left: 10px;
-        margin-top: 10px;
+        margin-top: 20px;
         margin-bottom: 10px;
         font-weight: 500 !important;
         text-transform: capitalize !important;
@@ -53,8 +54,50 @@
 
 .jumbotron-user {
     @extend .jumbotron-small;
+    background-attachment: fixed;
     min-height: 300px;
+    height: auto !important;
+
+    .jumbotron-user-avatar {
+        width: 10rem;
+        height: 10rem;
+        border-radius: 100%;
+        overflow: hidden;
+        border: 5px solid rgba(255, 255, 255, 0.2);
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+    }
+
+    .jumbotron-user-name {
+        position: absolute;
+        top: calc(10rem + 40px);
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+    }
+
+    .jumbotron-user-stats {
+        position: absolute;
+        top: calc(10rem + 80px);
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+    }
+
+    .jumbotron-user-avatar img {
+        width: 100%;
+        height: 100%;
+    }
+
 }
+
+
 
     .user-avatar {
         width: 180px;
@@ -86,40 +129,4 @@
     display: block;
     color: #100f0f !important;
     padding: 10px;
-}
-
-.calendar__table {
-    width: 100%;
-    height: calc(100vh - 170px) !important;
-}
-
-.calendar__table td {
-    padding: 10px;
-    border: 1px solid $border-color;
-    vertical-align: top;
-    width: 14.29%;
-    height: 20%;
-}
-
-.calendar__table--6weeks td {
-    height: 16.66%;
-}
-
-.calendar__weekday {
-    font-weight: bold;
-    color: $active-color;
-    text-transform: uppercase;
-}
-
-.calendar__day {
-    font-size: 1.3em;
-}
-
-.calendar__event {
-    font-size: small;
-}
-
-.calendar__othermonth .calendar__day {
-    font-weight: 100;
-    color: rgba(204, 204, 204, 0.385);
 }

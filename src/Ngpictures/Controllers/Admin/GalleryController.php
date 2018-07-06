@@ -2,23 +2,16 @@
 namespace Ngpictures\Controllers\Admin;
 
 
-use DirectoryIterator;
 use Exception;
+use DirectoryIterator;
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\ImageManager;
+use Psr\Container\ContainerInterface;
 use Ngpictures\Controllers\AdminController;
-use Ngpictures\Managers\PageManager;
-use Ngpictures\Ngpictures;
 use Ngpictures\Traits\Controllers\PaginationTrait;
 
 class GalleryController extends AdminController
 {
-
-    public function __construct(Ngpictures $app, PageManager $pageManager)
-    {
-        parent::__construct($app, $pageManager);
-        $this->loadModel('gallery');
-    }
 
     use PaginationTrait;
 
@@ -29,7 +22,7 @@ class GalleryController extends AdminController
     {
         $photo          =   $this->gallery->latest();
         $photos         =   $this->gallery->orderBy('date_created', 'DESC', 0, 10);
-        $total          =   count($this->gallery->all());
+        $total          =   $this->gallery->countAll()->num;
 
         $pagination     = $this->setPagination($total, "gallery");
         $currentPage    = $pagination['currentPage'];
@@ -40,8 +33,7 @@ class GalleryController extends AdminController
 
 
         $this->pageManager::setName('Adm - gallery');
-        $this->setLayout("admin/default");
-        $this->viewRender(
+        $this->view(
             "backend/gallery/index",
             compact('photos', 'photo', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
         );
@@ -55,26 +47,25 @@ class GalleryController extends AdminController
     {
         $post           =   new Collection($_POST);
         $file           =   new Collection($_FILES);
-        $categories     =   $this->categories->orderBy('title', 'ASC');
+        $categories     =   $this->categories->all();
+        $albums         =   $this->albums->all();
 
         if (!empty($_FILES)) {
-            $name = (empty($post->get('name'))) ?
-                strtolower(uniqid("ngpictures-")) :
-                $this->str::escape($post->get('name'));
-
-            $tags           =   $this->str::escape($post->get('tags')) ?? null;
-            $description    =   $this->str::escape($post->get('description')) ?? null;
-            $categories_id    =   intval($post->get('category')) ?? 1;
-            $slug = $this->str::slugify($name);
+            $name = (empty($post->get('name'))) ? 'ngpictures-photo' : $this->str->escape($post->get('name'));
+            $tags           =   $this->str->escape($post->get('tags')) ?? null;
+            $description    =   $this->str->escape($post->get('description')) ?? null;
+            $categories_id  =   intval($post->get('category')) ?? 1;
+            $albums_id      =   intval($post->get('album')) ?? null;
+            $slug           =   $this->str->slugify($name);
 
             if (!empty($file->get('thumb'))) {
                 $this->gallery->create(compact('name', 'slug', 'description', 'tags', 'categories_id'));
                 $last_id    =   $this->gallery->lastInsertId();
-                $isUploaded =   ImageManager::upload($file, 'gallery', "{$slug}-{$last_id}", 'ratio');
+                $isUploaded =   $this->container->get(ImageManager::class)->upload($file, 'gallery', "{$slug}-{$last_id}", 'ratio');
 
                 if ($isUploaded) {
-                    ImageManager::upload($file, 'gallery-thumbs', "{$slug}-{$last_id}", 'small');
-                    $exif = ImageManager::getExif($file);
+                    $this->container->get(ImageManager::class)->upload($file, 'gallery-thumbs', "{$slug}-{$last_id}", 'small');
+                    $exif = $this->container->get(ImageManager::class)->getExif($file);
 
                     $this->gallery->update(
                         $last_id,
@@ -84,21 +75,20 @@ class GalleryController extends AdminController
                         ]
                     );
 
-                    $this->flash->set('success', $this->msg['form_post_submitted']);
-                    $this->app::redirect(ADMIN . "/gallery");
+                    $this->flash->set('success', $this->flash->msg['form_post_submitted'], false);
+                    $this->redirect(ADMIN . "/gallery", false);
                 } else {
-                    $this->flash->set('danger', $this->msg['files_not_uploaded']);
-                    $this->gallery->delete($last_id);
+                    $this->flash->set('danger', $this->flash->msg['files_not_uploaded'], false);
+                    $this->gallery->delete($last_id, false);
                 }
             } else {
-                $this->flash->set('danger', $this->msg['post_requires_picture']);
-                $this->app::redirect(true);
+                $this->flash->set('danger', $this->flash->msg['post_requires_picture'], false);
+                $this->redirect(true, false);
             }
         }
 
         $this->pageManager::setName('Adm - gallery.add');
-        $this->setLayout("admin/default");
-        $this->viewRender("backend/gallery/add", compact('post', 'categories'));
+        $this->view("backend/gallery/add", compact('post', 'categories', 'albums'));
     }
 
 
@@ -112,26 +102,27 @@ class GalleryController extends AdminController
         $photo = $this->gallery->find(intval($id));
 
         if ($photo) {
-            $post       =   new Collection($data ?? $_POST);
-            $categories =   $this->categories->orderBy('title', 'ASC');
+            $post       =   new Collection($_POST);
+            $categories =   $this->categories->all();
+            $albums     =   $this->albums->all();
 
             if (isset($_POST) && !empty($_POST)) {
-                $name           =   $this->str::escape($post->get('name')) ?? $photo->name;
-                $tags           =   $this->str::escape($post->get('tags')) ?? $photo->tags;
-                $description    =   $this->str::escape($post->get('description')) ?? $photo->description;
-                $categories_id    =   intval($post->get('category')) ?? 1;
+                $name           =   $this->str->escape($post->get('name')) ?? $photo->name;
+                $tags           =   $this->str->escape($post->get('tags')) ?? $photo->tags;
+                $description    =   $this->str->escape($post->get('description')) ?? $photo->description;
+                $categories_id  =   intval($post->get('category')) ?? 1;
+                $albums_id      =   ($posts->get('album') == 0)? null : inval($this->get('album'));
 
-                $this->gallery->update($id, compact('name', 'tags', 'description', 'categories_id'));
-                $this->flash->set("success", $this->msg['post_edit_success']);
-                $this->app::redirect(ADMIN . "/gallery");
+                $this->gallery->update($id, compact('name', 'tags', 'description', 'categories_id', 'albums_id'));
+                $this->flash->set("success", $this->flash->msg['post_edit_success'], false);
+                $this->redirect(ADMIN . "/gallery", false);
             }
 
             $this->pageManager::setName('Adm - gallery.edit');
-            $this->setLayout("admin/default");
-            $this->viewRender("backend/gallery/edit", compact('photo', 'categories'));
+            $this->view("backend/gallery/edit", compact('photo', 'categories', 'albums'));
         } else {
-            $this->flash->set('danger', $this->msg['post_not_found']);
-            $this->app::redirect(true);
+            $this->flash->set('danger', $this->flash->msg['post_not_found'], false);
+            $this->redirect(true, false);
         }
     }
 
@@ -145,8 +136,7 @@ class GalleryController extends AdminController
     {
         $images = $this->gallery->all();
         $this->pageManager::setName('admin media-browser');
-        $this->setLayout('modal');
-        $this->viewRender('backend/gallery/media-browser', compact('images'));
+        $this->view('backend/gallery/media-browser', compact('images'));
     }
 
 
@@ -163,17 +153,13 @@ class GalleryController extends AdminController
         try {
             $files = new DirectoryIterator($dos);
         } catch (Exception  $e) {
-            if ($this->app::hasDebug()) {
-                die($e->getMessage());
-            } else {
-                $this->flash->set('danger', $this->msg['undefined_error']);
-                $this->app::redirect(true);
-            }
+            LogMessageManager::register(__class__, $e);
+            $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
+            $this->redirect(true, true);
         }
 
         $this->pageManager::setName('admin file-browser');
-        $this->setLayout('modal');
-        $this->viewRender('backend/gallery/file-browser', compact('files', 'relative_dos'));
+        $this->view('backend/gallery/file-browser', compact('files', 'relative_dos'));
     }
 
 
@@ -192,7 +178,7 @@ class GalleryController extends AdminController
 
         if (is_file($image)) {
             if (isset($_POST) and !empty($_POST)) {
-                $isWatermarked = ImageManager::watermark(
+                $isWatermarked = $this->container->get(ImageManager::class)->watermark(
                     $filename,
                     $post->get('watermark'),
                     $path[intval($type)],
@@ -200,20 +186,19 @@ class GalleryController extends AdminController
                 );
 
                 if ($isWatermarked) {
-                    $this->flash->set('success', $this->msg['success']);
-                    $this->app::redirect(true);
+                    $this->flash->set('success', $this->flash->msg['success'], false);
+                    $this->redirect(true, false);
                 } else {
-                    $this->flash->set('danger', "Watermark non effectué");
-                    $this->app::redirect(true);
+                    $this->flash->set('danger', $this->flash->msg['failed'], false);
+                    $this->redirect(true, false);
                 }
             }
 
             $this->pageManager::setName('adm - watermarker');
-            $this->setLayout("admin/default");
-            $this->viewRender("backend/gallery/watermark", ['image' => "/uploads/$path[$type]/{$filename}"]);
+            $this->view("backend/gallery/watermark", ['image' => "/uploads/$path[$type]/{$filename}"]);
         } else {
-            $this->flash->set('danger', $this->msg['files_not_image']);
-            $this->app::redirect(true);
+            $this->flash->set('danger', $this->flash->msg['files_not_image'], false);
+            $this->redirect(true, false);
         }
     }
 }

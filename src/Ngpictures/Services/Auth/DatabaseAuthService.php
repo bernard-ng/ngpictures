@@ -2,30 +2,47 @@
 namespace Ngpictures\Services\Auth;
 
 
-use Ng\Core\Managers\Mailer\Mailer;
-use Ngpictures\Entity\UsersEntity;
 use Ngpictures\Models\UsersModel;
-use Ngpictures\Ngpictures;
+use Ngpictures\Entity\UsersEntity;
+use Ng\Core\Managers\CookieManager;
+use Ng\Core\Managers\Mailer\Mailer;
+use Ng\Core\Managers\StringManager;
+use Ng\Core\Managers\SessionManager;
+use Psr\Container\ContainerInterface;
+use Ngpictures\Traits\Util\RequestTrait;
+use Ng\Core\Managers\FlashMessageManager;
 
 
-class DatabaseAuthService extends AuthService
+class DatabaseAuthService
 {
+    use RequestTrait;
+
     /**
      * le model des users, donc l'access a la base de donnee.
      * @var UsersModel
      */
-    protected $users;
+    private $users;
+
+
+    /**
+     * container
+     * @var ContainerInterface
+     */
+    private $container;
 
 
     /**
      * DatabaseAuthService constructor.
-     * @param Ngpictures $app
-     * @param UsersModel $users
+     * @param ContainerInterface $container
      */
-    public function __construct(Ngpictures $app, UsersModel $users)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app);
-        $this->users = $users;
+        $this->container = $container;
+        $this->users = $this->container->get(UsersModel::class);
+        $this->flash = $this->container->get(FlashMessageManager::class);
+        $this->session = $this->container->get(SessionManager::class);
+        $this->cookie = $this->container->get(CookieManager::class);
+        $this->str = $this->container->get(StringManager::class);
     }
 
 
@@ -36,8 +53,9 @@ class DatabaseAuthService extends AuthService
     public function restrict($msg = null)
     {
         if (!$this->isLogged()) {
-            $this->flash->set("danger", $msg ?? $this->msg["users_not_logged"]);
-            $this->app::redirect(true);
+            $this->flash->set("danger", $msg ?? $this->flash->msg["users_not_logged"]);
+
+            $this->redirect(true);
         }
     }
 
@@ -48,16 +66,17 @@ class DatabaseAuthService extends AuthService
      * @param string $token
      */
     public function confirm(int $users_id, string $token) {
-        $token  =   $this->str::escape($token);
+        $token  =   $this->str->escape($token);
         $user   =   $this->users->isNotConfirmed(intval($users_id));
 
         if ($user && $user->confirmation_token === $token) {
             $this->users->unsetConfirmationToken($user->id);
             $this->connect($user);
-            $this->app::redirect("/login");
+            $this->redirect("/login");
         } else {
-            $this->flash->set('danger', $this->msg['users_confirmation_failed']);
-            $this->app::redirect("/login");
+            $this->flash->set('danger', $this->flash->msg['users_confirmation_failed']);
+
+            $this->redirect("/login");
         }
     }
 
@@ -69,8 +88,8 @@ class DatabaseAuthService extends AuthService
     {
         $this->restrict();
         if ($this->session->getValue(AUTH_KEY, 'rank') !== 'admin') {
-            $this->flash->set('warning', $this->msg['users_forbidden']);
-            $this->app::redirect(true);
+            $this->flash->set('warning', $this->flash->msg['users_forbidden']);
+            $this->redirect(true);
         }
     }
 
@@ -85,8 +104,8 @@ class DatabaseAuthService extends AuthService
     {
         if (!$this->isLogged()) {
             $this->session->write(AUTH_KEY, $user);
-            $this->session->write(TOKEN_KEY, $this->str::setToken(10));
-            $this->flash->set('success', $msg ?? $this->msg['users_login_success']);
+            $this->session->write(TOKEN_KEY, $this->str->setToken(10));
+            $this->flash->set('success', $msg ?? $this->flash->msg['users_login_success'], false);
         }
     }
 
@@ -121,7 +140,7 @@ class DatabaseAuthService extends AuthService
      */
     public function remember(int $users_id)
     {
-        $remember_token = $this->str::cookieToken();
+        $remember_token = $this->str->cookieToken();
         $this->users->setRememberToken($remember_token, $users_id);
         $this->cookie->write(COOKIE_REMEMBER_KEY, "NG.23.{$users_id}.{$remember_token}");
     }
@@ -136,8 +155,8 @@ class DatabaseAuthService extends AuthService
     public function reConnect(UsersEntity $user, string $msg = null)
     {
         $this->session->write(AUTH_KEY, $user);
-        $this->session->write(TOKEN_KEY, $this->str::setToken(10));
-        $this->flash->set('success', $msg ?? $this->msg['users_edit_success']);
+        $this->session->write(TOKEN_KEY, $this->str->setToken(10));
+        $this->flash->set('success', $msg ?? $this->flash->msg['users_edit_success']);
     }
 
 
@@ -171,17 +190,22 @@ class DatabaseAuthService extends AuthService
      */
     public function register(string $name, string $email, string $password)
     {
-        $name       =   $this->str::escape($name);
-        $email      =   $this->str::escape($email);
-        $token      =   $this->str::setToken(60);
-        $password   =   $this->str::hashPassword($password);
+        $str    = $this->container->get(StringManager::class);
+        $name       =   $str->escape($name);
+        $email      =   $str->escape($email);
+        $token      =   $str->setToken(60);
+        $password   =   $str->hashPassword($password);
 
         $this->users->add($name, $email, $password, $token);
         $users_id = $this->users->lastInsertId();
         $link = SITE_NAME."/confirm/{$users_id}/{$token}";
 
-        (new Mailer())->accountConfirmation($link, $email);
-        $this->flash->set('success', $this->msg['form_registration_submitted']);
-        $this->app::redirect('/login');
+        $this->container
+            ->get(Malier::class)
+            ->accountConfirmation($link, $email);
+
+        $this->flash->set('success', $this->flash->msg['form_registration_submitted']);
+
+        $this->redirect('/login');
     }
 }

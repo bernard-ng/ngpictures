@@ -19,28 +19,27 @@ trait ShowPostTrait
             $comments   =   $this->loadModel('comments')->findWith($this->table."_id", $id, false);
             $categories =   $this->loadModel('categories')->orderBy('title', 'ASC', 0, 5);
 
-
-            if ($article) {
-                if ($article->slug === $slug) {
+            if ($article && $article->slug === $slug) {
+                if($article->online == 1) {
+                    $similars = $this->loadModel($this->table)->findSimilars($article->id);
                     $author = $this->loadModel('users')->find($article->users_id);
                     $this->pageManager::setName("{$article->title}");
 
-                    $this->app::turbolinksLocation("/{$this->table}/{$slug}-{$id}");
-                    $this->setLayout("show");
-                    $this->viewRender(
+                    $this->turbolinksLocation("/{$this->table}/{$slug}-{$id}");
+                    $this->view(
                         "frontend/{$this->table}/show",
-                        compact("article", "comments", "user", "categories", "author")
+                        compact("article", "comments", "user", "categories", "author", "similars")
                     );
                 } else {
-                    $this->flash->set("danger", $this->msg['posts_not_found']);
-                    $this->app::redirect("/error/not-found");
+                    $this->flash->set("warning", $this->flash->msg['post_private'], false);
+                    $this->redirect(true, false);
                 }
             } else {
-                $this->flash->set("danger", $this->msg['posts_not_found']);
-                $this->app::redirect("/error/not-found");
+                $this->flash->set("danger", $this->flash->msg['post_not_found'], false);
+                $this->redirect("/error/not-found", 404);
             }
         } else {
-            $this->flash->set("danger", $this->msg['undefined_error']);
+            $this->flash->set("danger", $this->flash->msg['undefined_error'], false);
             $this->index();
         }
     }

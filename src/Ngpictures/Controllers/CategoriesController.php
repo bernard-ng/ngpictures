@@ -1,16 +1,20 @@
 <?php
 namespace Ngpictures\Controllers;
 
-use Ngpictures\Ngpictures;
-use Ngpictures\Managers\PageManager;
+
+use Psr\Container\ContainerInterface;
+
 
 class CategoriesController extends Controller
 {
 
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
-        $this->loadModel('categories');
+        parent::__construct($container);
+        $this->blog         = $this->loadModel('blog');
+        $this->posts        = $this->loadModel('posts');
+        $this->gallery      = $this->loadModel('gallery');
+        $this->categories   = $this->loadModel('categories');
     }
 
 
@@ -19,12 +23,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $this->loadModel('gallery');
-        $this->loadModel('blog');
-        $this->loadModel('posts');
+        $nb         = [];
+        $thumbs     = [];
         $categories = $this->categories->orderBy('title', 'ASC');
-        $thumbs = [];
-        $nb = [];
 
         foreach($categories as $category) {
             $thumbs[$category->id] =
@@ -41,13 +42,12 @@ class CategoriesController extends Controller
                 count($this->posts->findWith('categories_id', $category->id, false));;
         }
 
-        $this->app::turbolinksLocation('/categories');
+        $this->turbolinksLocation('/categories');
         $this->pageManager::setName('Les catégories');
         $this->pageManager::setDescription(
             "Rétrouvez facilement une photo en cliquant sur une catégorie"
         );
-        $this->setLayout('posts/default');
-        $this->viewRender("frontend/categories/index", compact('categories', 'thumbs', 'nb'));
+        $this->view("frontend/categories/index", compact('categories', 'thumbs', 'nb'));
     }
 
 
@@ -60,18 +60,17 @@ class CategoriesController extends Controller
     {
         $category = $this->categories->find(intval($id));
 
-        if ($category && $this->str::checkUserUrl($name, $category->title)) {
-            $blog = $this->loadModel('blog')->findWith('categories_id', $category->id, false);
-            $posts = $this->loadModel('posts')->findWith('categories_id', $category->id, false);
-            $gallery = $this->loadModel('gallery')->findWith('categories_id', $category->id, false);
+        if ($category && $this->str->checkUserUrl($name, $category->title)) {
+            $blog       = $this->blog->findWith('categories_id', $category->id, false);
+            $posts      = $this->posts->findWith('categories_id', $category->id, false);
+            $gallery    = $this->gallery->findWith('categories_id', $category->id, false);
 
-            $this->app::turbolinksLocation("/categories/{$name}-{$id}");
+            $this->turbolinksLocation("/categories/{$name}-{$id}");
             $this->pageManager::setName("{$category->title}");
-            $this->setLayout('posts/default');
-            $this->viewRender('frontend/categories/show', compact('category', 'blog', 'posts', 'gallery'));
+            $this->view('frontend/categories/show', compact('category', 'blog', 'posts', 'gallery'));
         } else {
-            $this->flash->set('danger', $this->msg['category_not_found']);
-            $this->app::redirect('/categories');
+            $this->flash->set('danger', $this->flash->msg['category_not_found']);
+            $this->redirect('/categories');
         }
     }
 }

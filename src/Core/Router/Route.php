@@ -1,7 +1,6 @@
 <?php
 namespace Ng\Core\Router;
 
-use Ngpictures\Ngpictures;
 
 class Route
 {
@@ -31,25 +30,15 @@ class Route
      */
     private $params = [];
 
-
-    /**
-     * l'application
-     * @var Ngpictures
-     */
-    private $app;
-
-
     /**
      * Route constructor
      * @param string $path
      * @param callable|string $controller
-     * @param Ngpictures $app
      */
-    public function __construct(string $path, $controller, Ngpictures $app)
+    public function __construct(string $path, $controller)
     {
         $this->path = trim($path, "/");
         $this->controller = $controller;
-        $this->app = $app;
     }
 
 
@@ -116,20 +105,23 @@ class Route
         return $path;
     }
 
+    /**
+     * Get pour les url particulieres
+     *
+     * @return  array
+     */
+    public function getMatches()
+    {
+        return $this->matches;
+    }
 
     /**
-     * execute la callable correspondant a la route.
-     * @return mixed
+     * Get le callback
+     *
+     * @return  callable|string
      */
-    public function call()
+    public function getController()
     {
-        if (is_string($this->controller)) {
-            $url = explode("#", $this->controller);
-            $action = $url[1] ?? 'index';
-            $controller = $this->app->getController($url[0]);
-
-            return call_user_func_array([$controller, $action], $this->matches);
-        }
-        return call_user_func_array($this->controller, $this->matches);
+        return $this->controller;
     }
 }

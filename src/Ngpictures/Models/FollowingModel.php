@@ -3,15 +3,16 @@ namespace Ngpictures\Models;
 
 use Ng\Core\Models\Model;
 use Ngpictures\Ngpictures;
-use Ng\Core\Database\MysqlDatabase;
+use Ng\Core\Database\DatabaseInterface;
+use Ng\Core\Interfaces\SessionInterface;
 
 class FollowingModel extends Model
 {
 
-    public function __construct(MysqlDatabase $db)
+    public function __construct(DatabaseInterface $db)
     {
         parent::__construct($db);
-        $this->session = Ngpictures::getInstance()->getSession();
+        $this->session = Ngpictures::getDic()->get(SessionInterface::class);
     }
 
 
@@ -70,26 +71,6 @@ class FollowingModel extends Model
             true
         ));
     }
-
-
-    /**
-     * recupere tout les followers
-     *
-     * @param integer $users_id
-     * @return void
-     */
-    public function getFollowers(int $users_id)
-    {
-        return $this->query(
-            "SELECT {$this->table}.follower_id, {$this->table}.followed_id , users.*
-            FROM {$this->table}
-            LEFT JOIN {$this->table}.follower_id = users.id
-            WHERE (
-                SELECT {$this->table}.follower_id WHERE {$this->table}.followed_id = ?
-            )"
-        );
-    }
-
 
 
     /**

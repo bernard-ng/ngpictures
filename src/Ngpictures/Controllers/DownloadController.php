@@ -32,7 +32,7 @@ class DownloadController extends Controller
     {
         if (isset($type, $file_name) && !empty($type) && !empty($file_name)) {
             $type       =   intval($type);
-            $file_name  =   $this->str::escape($file_name);
+            $file_name  =   $this->str->escape($file_name);
             $file       =   self::$path[$type].$file_name;
 
             $posts = $this->loadModel($this->getAction($type));
@@ -55,16 +55,12 @@ class DownloadController extends Controller
                         $this->download($file);
                     }
                 } else {
-                    ($this->isAjax()) ?
-                        $this->ajaxFail($this->msg['files_not_found']) :
-                        $this->flash->set('danger', $this->msg['files_not_found']);
-                        $this->app::redirect(true);
+                    $this->flash->set('danger', $this->flash->msg['files_not_found']);
+                    $this->redirect(true, false);
                 }
             } else {
-                ($this->isAjax()) ?
-                    $this->ajaxFail($this->msg['files_download_failed']) :
-                    $this->flash->set('danger', $this->msg['files_download_failed']);
-                    $this->app::redirect(true);
+                $this->flash->set('danger', $this->flash->msg['files_download_failed']);
+                $this->redirect(true, false);
             }
         }
     }
@@ -76,9 +72,35 @@ class DownloadController extends Controller
      */
     private function download($file)
     {
-        header('Content-Type: application/octet-stream');
-        header('Content-Transfer-Encoding: Binary');
+        if (ini_get('zlib.output_compression')) {
+            init_set('zlib.output_compression', 'off');
+        }
+
+        switch(strtolower(pathinfo($file, PATHINFO_EXTENSION))) {
+            case 'pdf' :
+                $mine = 'application/pdf';
+                break;
+            case 'zip' :
+                $mine = 'application/zip';
+                break;
+            case 'jpg' || 'jpeg' :
+                $mine = 'image/jpg';
+                break;
+            default:
+                $mine = 'application/force-download';
+                break;
+        }
+
+        header('Pragma: public');
+        header('Expires : 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header("Last-Modified: ".gmdate('D, d M Y H:i:s', filemtime($file)));
+        header("Cache-Control: private", false);
+        header('Content-Type: '.$mine);
         header('Content-Disposition: attachement; filename="'.basename($file).'"');
+        header('Content-Transfer-Encoding: Binary');
+        header('Content-Length: '.filesize($file));
+        header('Connection: close');
         echo readfile($file);
         exit();
     }

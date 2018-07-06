@@ -22,7 +22,7 @@ trait SearchQueryTrait
         switch ($option) {
             case "begin":
                 return $this->query(
-                    "SELECT * FROM {$this->table} WHERE {$title} LIKE ? ",
+                    "SELECT * FROM {$this->table} WHERE {$title} LIKE ? and online = 1",
                     ["{$query}%"],
                     true,
                     false
@@ -31,7 +31,7 @@ trait SearchQueryTrait
 
             case "end":
                 return $this->query(
-                    "SELECT * FROM {$this->table} WHERE {$title} LIKE ? ",
+                    "SELECT * FROM {$this->table} WHERE {$title} LIKE ? and online = 1",
                     ["%{$query}"],
                     true,
                     false
@@ -40,7 +40,7 @@ trait SearchQueryTrait
 
             case "within":
                 return $this->query(
-                    "SELECT * FROM {$this->table} WHERE {$title} LIKE ?",
+                    "SELECT * FROM {$this->table} WHERE {$title} LIKE ? and online = 1",
                     ["%{$query}%"],
                     true,
                     false
@@ -49,7 +49,7 @@ trait SearchQueryTrait
 
             case "concat":
                 return $this->query(
-                    "SELECT * FROM {$this->table} WHERE CONCAT({$title},{$content}) LIKE ? ",
+                    "SELECT * FROM {$this->table} WHERE CONCAT({$title},{$content}) LIKE ? and online = 1",
                     ["%{$query}%"],
                     true,
                     false

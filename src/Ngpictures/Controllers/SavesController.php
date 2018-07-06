@@ -1,9 +1,9 @@
 <?php
 namespace Ngpictures\Controllers;
 
-use Ngpictures\Ngpictures;
+
 use Ng\Core\Managers\Collection;
-use Ngpictures\Managers\PageManager;
+use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Util\TypesActionTrait;
 
 
@@ -11,9 +11,9 @@ use Ngpictures\Traits\Util\TypesActionTrait;
 class SavesController extends controller
 {
 
-    public function __construct(Ngpictures $app, PageManager $pageManager)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($app, $pageManager);
+        parent::__construct($container);
         $this->authService->restrict();
         $this->loadModel('saves');
     }
@@ -33,7 +33,7 @@ class SavesController extends controller
         $user = $this->session->read(AUTH_KEY);
         $type = intval($type);
         $id   = intval($id);
-        $slug = $this->str::escape($slug);
+        $slug = $this->str->escape($slug);
 
         $post = $this->loadModel($this->getAction($type))->find($id);
         if ($post && $post->slug == $slug) {
@@ -41,8 +41,8 @@ class SavesController extends controller
 
             if ($exists) {
                 $this->saves->delete($exists->id);
-                $this->flash->set('success', $this->msg['post_remove_save']);
-                $this->app::redirect(true);
+                $this->flash->set('success', $this->flash->msg['post_remove_save']);
+                $this->redirect(true);
             } else {
                 $this->saves->create([
                     'users_id' => $user->id,
@@ -55,14 +55,14 @@ class SavesController extends controller
                     exit();
                 }
 
-                $this->flash->set('success', $this->msg['post_saved']);
-                $this->app::redirect(true);
+                $this->flash->set('success', $this->flash->msg['post_saved']);
+                $this->redirect(true);
             }
         } else {
             ($this->isAjax())?
-                $this->ajaxFail($this->msg['post_not_found']) :
-                $this->flash->set('danger', $this->msg['post_not_found']);
-                $this->app::redirect(true);
+                $this->setFlash($this->flash->msg['post_not_found']) :
+                $this->flash->set('danger', $this->flash->msg['post_not_found']);
+                $this->redirect(true);
         }
     }
 
@@ -70,30 +70,19 @@ class SavesController extends controller
     /**
      * affiche les publication saved d'un user
      *
-     * @param string $token
+     * @param int $user_id
      * @return void
      */
-    public function show(string $token)
+    public function show(int $user_id): array
     {
-        $token = $this->str::escape($token);
+        $blog_list = (new Collection($this->saves->get('blog_id', $user_id)))->asList(', ', 'blog_id');
+        $posts_list = (new Collection($this->saves->get('posts_id', $user_id)))->asList(', ', 'posts_id');
+        $gallery_list = (new Collection($this->saves->get('gallery_id', $user_id)))->asList(', ', 'gallery_id');
 
-        if ($token == $this->session->read(TOKEN_KEY)) {
-            $user = $this->session->read(AUTH_KEY);
+        $blog = $this->loadModel('blog')->findList($blog_list);
+        $gallery = $this->loadModel('gallery')->findList($gallery_list);
+        $posts = $this->loadModel('posts')->findList($posts_list);
 
-            $blog_list = (new Collection($this->saves->getBlog($user->id)))->asList();
-            $posts_list = (new Collection($this->saves->getPosts($user->id)))->asList();
-            $gallery_list = (new Collection($this->saves->getGallery($user->id)))->asList();
-
-            $blog = $this->loadModel('blog')->findList($blog_list);
-            $gallery = $this->loadModel('gallery')->findList($gallery_list);
-            $posts = $this->loadModel('posts')->findList($posts_list);
-
-            $this->pageManager::setName('Mes Enregistrements');
-            $this->app::turbolinksLocation("my-saves/{$token}");
-            $this->viewRender('frontend/others/saves', compact('blog','gallery',  'posts'));
-        } else {
-            $this->flash->set('danger', $this->msg['users_forbidden']);
-            $this->app::redirect(true);
-        }
+        return compact('blog', 'gallery', 'posts');
     }
 }

@@ -14,11 +14,11 @@ class NotificationsModel extends Model
     protected $table = "notifications";
 
 
-    public function add(int $type, $notification, $user_id)
+    public function add(int $type, $notification, $user_id, $pub_id)
     {
         return $this->query(
-            "INSERT INTO {$this->table} SET type = ?, notification = ?, users_id = ?, date_created = NOW()",
-            [$type, $notification, $user_id]
+            "INSERT INTO {$this->table} SET type = ?, notification = ?, users_id = ?, publication_id = ?, date_created = NOW()",
+            [$type, $notification, $user_id, $pub_id]
         );
     }
 

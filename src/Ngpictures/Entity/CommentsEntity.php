@@ -1,8 +1,9 @@
 <?php
 namespace Ngpictures\Entity;
 
-use Ngpictures\Ngpictures;
 use Ng\Core\Entity\Entity;
+use Ngpictures\Ngpictures;
+use Ng\Core\Interfaces\SessionInterface;
 
 class CommentsEntity extends Entity
 {
@@ -12,7 +13,7 @@ class CommentsEntity extends Entity
      */
     public function getDeleteUrl()
     {
-        $session = Ngpictures::getInstance()->getSession();
+        $session = Ngpictures::getDic()->get(SessionInterface::class);
         $this->deleteUrl = "/comments/delete/";
         $this->deleteUrl .= "{$this->id}/{$session->read(TOKEN_KEY)}";
         return $this->deleteUrl;
@@ -25,7 +26,7 @@ class CommentsEntity extends Entity
      */
     public function getEditUrl()
     {
-        $session = Ngpictures::getInstance()->getSession();
+        $session = Ngpictures::getDic()->get(SessionInterface::class);
         $this->editUrl =  "/comments/edit/";
         $this->editUrl .= "{$this->id}/{$session->read(TOKEN_KEY)}";
         return $this->editUrl;
