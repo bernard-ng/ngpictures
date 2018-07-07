@@ -38,16 +38,25 @@ class FollowingController extends Controller
         if ($user) {
             if ($model->isFollowed($user->id, $this->user->id)) {
                 $model->remove($user->id, $this->user->id);
-                $this->flash->set("success", $this->flash->msg['users_unfollowing_success']);
-                $this->redirect(true);
+                if ($this->isAjax()) {
+                    echo "S'abonner";
+                    exit();
+                }
+                $this->flash->set("success", $this->flash->msg['users_unfollowing_success'], false);
+                $this->redirect(true, false);
+
             }
 
             $model->add($user->id, $this->user->id);
-            $this->flash->set("success", $this->flash->msg['users_following_success']);
-            $this->redirect(true);
+            if ($this->isAjax()) {
+                echo "Se désabonner";
+                exit();
+            }
+            $this->flash->set("success", $this->flash->msg['users_following_success'], false);
+            $this->redirect(true, false);
         } else {
             $this->flash->set("warning", $this->flash->msg['users_not_found']);
-            $this->redirect(true);
+            $this->redirect(true, false);
         }
     }
 

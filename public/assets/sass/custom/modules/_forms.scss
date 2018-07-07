@@ -9,15 +9,15 @@
   width: 100% !important;
   height: auto;
   -webkit-transition: all linear 0.3s;
-  -moz-transition: all linear 0.3s;
-  -ms-transition: all linear 0.3s;
   -o-transition: all linear 0.3s;
   transition: all linear 0.3s;
 
   position: absolute;
   top: 89px;
   left: 50%;
-  transform: translateY(-70px) translateX(-50%);
+  -webkit-transform: translateY(-70px) translateX(-50%);
+      -ms-transform: translateY(-70px) translateX(-50%);
+          transform: translateY(-70px) translateX(-50%);
 }
 
 .transparent-form {
@@ -28,8 +28,6 @@
   width: 100% !important;
   height: auto;
   -webkit-transition: all linear 0.3s;
-  -moz-transition: all linear 0.3s;
-  -ms-transition: all linear 0.3s;
   -o-transition: all linear 0.3s;
   transition: all linear 0.3s;
 
@@ -50,7 +48,9 @@
     position: absolute;
     top: 50px;
     left: 50%;
-    transform: translateY(-70px) translateX(-50%);
+    -webkit-transform: translateY(-70px) translateX(-50%);
+        -ms-transform: translateY(-70px) translateX(-50%);
+            transform: translateY(-70px) translateX(-50%);
   }
 }
 
@@ -61,7 +61,9 @@
     position: absolute;
     top: 50px;
     left: 50%;
-    transform: translateY(-70px) translateX(-50%);
+    -webkit-transform: translateY(-70px) translateX(-50%);
+        -ms-transform: translateY(-70px) translateX(-50%);
+            transform: translateY(-70px) translateX(-50%);
   }
 }
 
@@ -81,5 +83,9 @@
 
 #loginBox input, #signUpBox input {
   color: $txt-color !important;
-  padding-left: 10px;
+}
+
+a[data-action='following'] {
+  display: inline-block;
+  position: relative !important;
 }

@@ -4,14 +4,13 @@
     {% if activeUser %}
         <div class="row col s12">
             <ul class="tabs transparent shadow-3">
-                <li class="tab col s4"><a href="{{ activeUser.followersUrl }}" target="_self">Abonnées</a></li>
-                <li class="tab col s4"><a href="{{ activeUser.followingsUrl }}" target="_self">Abonnement</a></li>
-                <li class="tab col s4"><a href="#collection">Photographes</a></li>
+                <li class="tab col s6" class="active"><a href="#all">Tout</a></li>
+                <li class="tab col s6"><a href="/community/photographers" target="_self">Photographes</a></li>
             </ul>
         </div>
     {% endif %}
     <section class="section col l12 m12 s12 animated slideInLeft">
-    <div class="container row">
+    <div class="container row" id="all">
         {% for u in users %}
             <div class="row nexted col l3 m6 s12">
                 <div class="card-user card transparent hovercard hoverable">
@@ -32,20 +31,10 @@
                                     <div class="header">1,35k&nbsp;Posts</div>
                                 </div>
                             </div>
-                            <div class="item">
-                                <div class="content">
-                                    <div class="header">4,9k&nbsp;Abonnés</div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="content">
-                                    <div class="header">12&nbsp;Abonnement</div>
-                                </div>
-                            </div>
                         </div>
 
                         {% if u.id != activeUser.id %}
-                            <a href="{{ u.followingUrl }}" class="btn btn-flat">
+                            <a href="{{ u.followingUrl }}" class="btn btn-flat" data-action="following">
                                 {{ u.isFollowed ? "Se désabonner" : "S'abonner" }}
                             </a>
                         {% else %}

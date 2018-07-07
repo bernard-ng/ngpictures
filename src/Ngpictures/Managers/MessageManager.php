@@ -103,7 +103,7 @@ class MessageManager implements ArrayAccess
         "users_phone_token"         => "Ce numéro de mobile est déjà utilisé par un autre compte",
         "users_edit_success"        => "Vos informations ont été mises à jour",
         "users_bad_password"        => "Vos deux mots de passe ne correspondent pas",
-        "users_not_confirmed"       => "Ooups, votre compte n'a pas encore été confirmé",
+        "users_not_confirmed"       => "Ooups, votre compte n'a pas encore été confirmé, consulter vos mails pour le faire",
         "users_reset_success"       => "Votre mot de passe a bien été changé",
         "users_login_success"       => "Vous êtes maintenant connecté",
         "users_username_token"      => "Ce pseudo est déjà utilisé par un autre compte",

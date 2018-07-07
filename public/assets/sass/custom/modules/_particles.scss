@@ -20,10 +20,15 @@ canvas {
 }
 
 .ng-progress-indeterminate {
-    position: relative;
+    position: absolute;
     min-width: 100px;
     width: 100%;
     display: block;
+
+    left: 50%; top: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+        -ms-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
 
     span {
       position: absolute;

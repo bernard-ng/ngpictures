@@ -17,10 +17,10 @@ $container->addDefinitions(ROOT."/config/config.php");
 $container = $container->build();
 
 
+$application = new Ngpictures($container);
 if (ENV === 'production') {
-    set_exception_handler([Ngpictures::getInstance(), "exceptionHandler"]);
-    set_error_handler([Ngpictures::getInstance(), "errorHandler"]);
+    set_exception_handler([$application, "exceptionHandler"]);
+    set_error_handler([$application, "errorHandler"]);
 }
 
-$application = new Ngpictures($container);
 $application->run();

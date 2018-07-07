@@ -53,8 +53,7 @@ class DatabaseAuthService
     public function restrict($msg = null)
     {
         if (!$this->isLogged()) {
-            $this->flash->set("danger", $msg ?? $this->flash->msg["users_not_logged"]);
-
+            $this->flash->set("danger", $msg ?? $this->flash->msg["users_not_logged"], false);
             $this->redirect(true);
         }
     }
@@ -74,8 +73,7 @@ class DatabaseAuthService
             $this->connect($user);
             $this->redirect("/login");
         } else {
-            $this->flash->set('danger', $this->flash->msg['users_confirmation_failed']);
-
+            $this->flash->set('danger', $this->flash->msg['users_confirmation_failed'], false);
             $this->redirect("/login");
         }
     }
@@ -200,12 +198,6 @@ class DatabaseAuthService
         $users_id = $this->users->lastInsertId();
         $link = SITE_NAME."/confirm/{$users_id}/{$token}";
 
-        $this->container
-            ->get(Malier::class)
-            ->accountConfirmation($link, $email);
-
-        $this->flash->set('success', $this->flash->msg['form_registration_submitted']);
-
-        $this->redirect('/login');
+        $this->container->get(Mailer::class)->accountConfirmation($link, $email);
     }
 }

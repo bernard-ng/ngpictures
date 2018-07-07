@@ -129,45 +129,22 @@ class UsersController extends Controller
         if (isset($_POST) && !empty($_POST)) {
             $this->validator->setRule("email", 'valid_email', 'required');
             $this->validator->setRule("name", ['required', "alpha_dash", "min_length[3]"]);
-            $this->validator->setRule("password", ['required', "matches[password_confirm]", "min_length[6]"]);
-            $this->validator->setRule('password_confirm', ['required', "matches[password]", "min_length[6]"]);
+            $this->validator->setRule("password", ["matches[password_confirm]" ,'required', "min_length[6]"]);
+            $this->validator->setRule('password_confirm', ["matches[password]" ,'required', "min_length[6]"]);
 
             if ($this->validator->isValid()) {
-                if($post->get('g-recaptcha-response')) {
-                    $recaptchaResponse = $this->container->get(ReCaptcha::class)
-                        ->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+                $this->validator->unique("name", $this->users, $this->flash->msg['users_username_token']);
+                $this->validator->unique("email", $this->users, $this->flash->msg['users_mail_token']);
 
-                    if($recaptchaResponse->isSuccess()) {
-                        $this->validator->unique("name", $this->users, $this->flash->msg['users_username_token']);
-                        $this->validator->unique("email", $this->users, $this->flash->msg['users_mail_token']);
-
-                        if ($this->validator->isValid()) {
-                            $this->authService->register($post->get('name'), $post->get('email'), $post->get('password'));
-                            $this->flash->set('success', $this->flash->msg['users_registration_success'], false);
-                            $this->redirect("/login");
-                        } else {
-                            $errors = new Collection($this->validator->getErrors());
-                            ($this->isAjax()) ?
-                                $this->setFlash($errors->asJson(), 403) :
-                                $this->flash->set("danger", $this->flash->msg['form_multi_errors']);
-                        }
-                    } else {
-                        $errors = new Collection($this->validator->getErrors());
-                        ($this->isAjax()) ?
-                            $this->setFlash($errors->asJson(), 403) :
-                            $this->flash->set("danger", $this->flash->msg['form_captcha_failed']);
-                    }
+                if ($this->validator->isValid()) {
+                    $this->authService->register($post->get('name'), $post->get('email'), $post->get('password'));
+                    $this->flash->set('success', $this->flash->msg['form_registration_submitted'], false);
+                    $this->redirect("/login");
                 } else {
-                    $errors = new Collection($this->validator->getErrors());
-                    ($this->isAjax()) ?
-                        $this->setFlash($errors->asJson(), 403) :
-                        $this->flash->set("danger", $this->flash->msg['form_captcha_not_set']);
+                    $this->sendFormError();
                 }
             } else {
-                $errors = new Collection($this->validator->getErrors());
-                ($this->isAjax())?
-                    $this->setFlash($errors->asJson(), 403) :
-                    $this->flash->set("danger", $this->flash->msg['form_multi_errors']);
+                $this->sendFormError();
             }
         }
 
@@ -202,19 +179,16 @@ class UsersController extends Controller
 
                     $user  = $this->users->findAlternative(['name','email'], $name);
                     if ($user) {
-                        if ($user->confirmed_at !== null) {
-                            if (password_verify($password, $user->password)) {
+                        if (password_verify($password, $user->password)) {
+                            if ($user->confirmed_at !== null) {
                                 $this->authService->connect($user);
-                                if ($remember) {
-                                    $this->authService->remember($user->id);
-                                }
-
+                                $remember ? $this->authService->remember($user->id) : '';
                                 $this->redirect($user->accountUrl, true);
                             } else {
-                                $this->flash->set('danger', $this->flash->msg['users_bad_identifier']);
+                                $this->flash->set('danger', $this->flash->msg['users_not_confirmed']);
                             }
                         } else {
-                            $this->flash->set('warning', $this->flash->msg['users_not_confirmed']);
+                            $this->flash->set('danger', $this->flash->msg['users_bad_identifier']);
                         }
                     } else {
                         $this->flash->set('danger', $this->flash->msg['users_bad_identifier']);

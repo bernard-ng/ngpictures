@@ -25,7 +25,7 @@ class UsersController extends AdminController
         $nextPage       = $pagination['nextPage'];
         $users          = $pagination['result'] ?? $users;
 
-        $this->turbolinksLocation(AMIN."/users");
+        $this->turbolinksLocation(ADMIN."/users");
         $this->pageManager::setName("Adm - users");
         $this->view(
             "backend/users/index",
