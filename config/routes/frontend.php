@@ -17,6 +17,8 @@ $router->get("/confirm/:id/:token", "users#confirm", "users.confirmation");
 $router->get("/logout", "users#logout", "users.logout");
 $router->get("/:user-:id", "users#account", "users.account");
 $router->get("/my-posts/:token", "posts#showPosts", "posts.show-post");
+$router->any("/my-posts/edit/:id/:token", "posts#edit", "posts.edit");
+$router->any("/my-posts/delete/:id/:token", "posts#delete", "posts.delete");
 $router->get("/my-followers/:token", "following#showFollowers", "users.show-followers");
 $router->get("/my-following/:token", "following#showFollowing", "users.show-following");
 $router->get('/my-saves/:token', 'saves#add', 'saves.index');
@@ -72,6 +74,7 @@ $router->get("/feed", "rss", "rss.index");
 $router->any("/ideas", "ideas", "ideas.index");
 $router->any("/bugs", "bugs", "bugs.index");
 $router->any("/contact", "contact", "contact.index");
+$router->any("/report/:type/:slug-:id", 'reports', 'report.index');
 $router->get("/about", "static#about", "static.about");
 $router->get("/privacy", "static#privacy", "static.privacy");
 $router->any("/app.offline", "static#offline", 'static.offline');
@@ -79,8 +82,6 @@ $router->get("/booking", 'booking', 'reservation');
 $router->get('/saves/:type/:slug-:id', 'saves#add', 'saves.add');
 $router->get("/maps", 'maps#show', 'maps.show');
 $router->get("/htag/:tag", 'htag', 'htag.index');
-
-
 
 //facebook routes
 $router->get("/facebook/connect", "facebook#connect", "facebook.connect");

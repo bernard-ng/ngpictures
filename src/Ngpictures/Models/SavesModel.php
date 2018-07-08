@@ -7,7 +7,6 @@ use Ng\Core\Database\DatabaseInterface;
 use Ng\Core\Interfaces\SessionInterface;
 use Ngpictures\Traits\Util\TypesActionTrait;
 
-
 class SavesModel extends Model
 {
 
@@ -44,7 +43,7 @@ class SavesModel extends Model
         $req = $this->query(
 
             "SELECT * FROM {$this->table} WHERE {$this->getType($type)} = ? AND users_id = ? ",
-            [$id, $this->session->getValue(AUTH_KEY,'id')],
+            [$id, $this->session->getValue(AUTH_KEY, 'id')],
             true,
             true
         );

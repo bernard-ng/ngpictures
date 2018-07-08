@@ -28,3 +28,4 @@ sales.
 ***     vider les erreurs de validation lorsque on saisie
 ***     trailling slash bug, avec les page show.
 ***     show pour les users il faut echaper sa.
+***     checker l'error Allowed memory size of 134217728 bytes exhausted (tried to allocate 32768 bytes)

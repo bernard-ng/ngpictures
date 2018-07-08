@@ -3,7 +3,6 @@ namespace Ngpictures\Controllers;
 
 use Psr\Container\ContainerInterface;
 
-
 class GalleryController extends Controller
 {
 
@@ -29,7 +28,7 @@ class GalleryController extends Controller
         $photos = $this->gallery->lastOnline();
 
         $this->turbolinksLocation("/gallery");
-        $this->pageManager::setName('Galerie');
+        $this->pageManager::setTitle('Galerie');
         $this->view('frontend/gallery/index', compact('photo', 'photos'));
     }
 
@@ -77,7 +76,7 @@ class GalleryController extends Controller
 
 
         $this->turbolinksLocation("/gallery/albums");
-        $this->pageManager::setName('albums');
+        $this->pageManager::setTitle('albums');
         $this->view('frontend/gallery/albums', compact("albums", "thumbs", "nb"));
     }
 
@@ -95,7 +94,7 @@ class GalleryController extends Controller
             if ($this->gallery->find(intval($lastId))) {
                 $photos = $this->gallery->findGreater($lastId, 4);
 
-                $this->pageManager::setName('Diaporama');
+                $this->pageManager::setTitle('Diaporama');
                 $this->view('frontend/gallery/slider', compact('photos'));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error']);
@@ -103,7 +102,7 @@ class GalleryController extends Controller
             }
         } else {
             $photos = $this->gallery->latest();
-            $this->pageManager::setName('Diaporama');
+            $this->pageManager::setTitle('Diaporama');
             $this->view('frontend/gallery/slider', compact('photos'));
         }
     }

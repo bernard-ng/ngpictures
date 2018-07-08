@@ -3,8 +3,6 @@ namespace Ngpictures\Models;
 
 use Ng\Core\Models\Model;
 
-
-
 class NotificationsModel extends Model
 {
 

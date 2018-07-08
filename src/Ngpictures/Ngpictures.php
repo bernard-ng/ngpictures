@@ -1,9 +1,9 @@
 <?php
 namespace Ngpictures;
 
-use Psr\Container\ContainerInterface;
 use Ng\Core\Router\Router;
-
+use Psr\Container\ContainerInterface;
+use Ng\Core\Managers\FlashMessageManager;
 
 class Ngpictures
 {
@@ -83,7 +83,7 @@ class Ngpictures
      */
     public function exceptionHandler($e)
     {
-        FlashMessageManager::getInstance()->set('danger', "Oups une erreur est survenue !");
+        $this->container->get(FlashMessageManager::class)->set('danger', "Oups une erreur est survenue !");
         LogMessageManager::register(__CLASS__, $e);
         http_response_code(500);
         self::redirect("/error/internal");
@@ -97,7 +97,7 @@ class Ngpictures
      */
     public function errorHandler(int $errno, string $errstr, string $errfile)
     {
-        FlashMessageManager::getInstance()->set('danger', "Oups une erreur est survenue !");
+        $this->container->get(FlashMessageManager::class)->set('danger', "Oups une erreur est survenue !");
         LogMessageManager::register($errfile, $errstr);
         http_response_code(500);
         self::redirect("/error/internal");

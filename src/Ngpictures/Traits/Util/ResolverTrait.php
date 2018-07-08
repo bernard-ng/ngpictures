@@ -1,24 +1,24 @@
 <?php
 namespace Ngpictures\Traits\Util;
 
+trait ResolverTrait
+{
 
-trait ResolverTrait {
-
-    function model(string $name)
+    function model($name)
     {
         $namespace = "\\Ngpictures\\Models\\";
         $class      = ucfirst($name) . "Model";
         return $namespace . $class;
     }
 
-    function controller(string $name)
+    function controller($name)
     {
         $namespace = "\\Ngpictures\\Controllers\\";
         $class = ucfirst($name) . "Controller";
         return $namespace . $class;
     }
 
-    function entity(string $name)
+    function entity($name)
     {
         $namespace = "\\Ngpictures\\Entities\\";
         $class = ucfirst($name) . "Entity";

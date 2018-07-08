@@ -1,9 +1,7 @@
 <?php
 namespace Ngpictures\Controllers;
 
-
 use Psr\Container\ContainerInterface;
-
 
 class CategoriesController extends Controller
 {
@@ -27,7 +25,7 @@ class CategoriesController extends Controller
         $thumbs     = [];
         $categories = $this->categories->orderBy('title', 'ASC');
 
-        foreach($categories as $category) {
+        foreach ($categories as $category) {
             $thumbs[$category->id] =
                 $this->blog->findWith('categories_id', $category->id, true)->smallThumbUrl ??
                 $this->gallery->findWith('categories_id', $category->id, true)->smallThumbUrl ??
@@ -35,15 +33,16 @@ class CategoriesController extends Controller
                 '/imgs/default.jpeg';
         }
 
-        foreach($categories as $category) {
+        foreach ($categories as $category) {
             $nb[$category->id] =
                 count($this->blog->findWith('categories_id', $category->id, false)) +
                 count($this->gallery->findWith('categories_id', $category->id, false)) +
-                count($this->posts->findWith('categories_id', $category->id, false));;
+                count($this->posts->findWith('categories_id', $category->id, false));
+            ;
         }
 
         $this->turbolinksLocation('/categories');
-        $this->pageManager::setName('Les catégories');
+        $this->pageManager::setTitle('Les catégories');
         $this->pageManager::setDescription(
             "Rétrouvez facilement une photo en cliquant sur une catégorie"
         );
@@ -66,7 +65,7 @@ class CategoriesController extends Controller
             $gallery    = $this->gallery->findWith('categories_id', $category->id, false);
 
             $this->turbolinksLocation("/categories/{$name}-{$id}");
-            $this->pageManager::setName("{$category->title}");
+            $this->pageManager::setTitle("{$category->title}");
             $this->view('frontend/categories/show', compact('category', 'blog', 'posts', 'gallery'));
         } else {
             $this->flash->set('danger', $this->flash->msg['category_not_found']);

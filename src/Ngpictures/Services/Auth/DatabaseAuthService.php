@@ -1,7 +1,6 @@
 <?php
 namespace Ngpictures\Services\Auth;
 
-
 use Ngpictures\Models\UsersModel;
 use Ngpictures\Entity\UsersEntity;
 use Ng\Core\Managers\CookieManager;
@@ -11,7 +10,6 @@ use Ng\Core\Managers\SessionManager;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Util\RequestTrait;
 use Ng\Core\Managers\FlashMessageManager;
-
 
 class DatabaseAuthService
 {
@@ -53,8 +51,7 @@ class DatabaseAuthService
     public function restrict($msg = null)
     {
         if (!$this->isLogged()) {
-            $this->flash->set("danger", $msg ?? $this->flash->msg["users_not_logged"]);
-
+            $this->flash->set("danger", $msg ?? $this->flash->msg["users_not_logged"], false);
             $this->redirect(true);
         }
     }
@@ -65,7 +62,8 @@ class DatabaseAuthService
      * @param int $users_id
      * @param string $token
      */
-    public function confirm(int $users_id, string $token) {
+    public function confirm(int $users_id, string $token)
+    {
         $token  =   $this->str->escape($token);
         $user   =   $this->users->isNotConfirmed(intval($users_id));
 
@@ -74,8 +72,7 @@ class DatabaseAuthService
             $this->connect($user);
             $this->redirect("/login");
         } else {
-            $this->flash->set('danger', $this->flash->msg['users_confirmation_failed']);
-
+            $this->flash->set('danger', $this->flash->msg['users_confirmation_failed'], false);
             $this->redirect("/login");
         }
     }
@@ -177,7 +174,8 @@ class DatabaseAuthService
      * renvoi le token de la session active
      * @return mixed
      */
-    public function getToken() {
+    public function getToken()
+    {
         return $this->session->read(TOKEN_KEY);
     }
 
@@ -200,12 +198,6 @@ class DatabaseAuthService
         $users_id = $this->users->lastInsertId();
         $link = SITE_NAME."/confirm/{$users_id}/{$token}";
 
-        $this->container
-            ->get(Malier::class)
-            ->accountConfirmation($link, $email);
-
-        $this->flash->set('success', $this->flash->msg['form_registration_submitted']);
-
-        $this->redirect('/login');
+        $this->container->get(Mailer::class)->accountConfirmation($link, $email);
     }
 }

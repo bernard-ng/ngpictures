@@ -4,7 +4,7 @@
 {% block content %}
     <div class="row col l4 m4 s12">
         <div class="card-panel hoverable" id="signUpBox">
-            <form method="POST" action="">
+            <form method="POST" action="" data-action="sign">
                 <div class="row">
                     {{ form.input('name',"pseudo (nom d'utilisateur)",'text', errors.get('name'),post.get('name'))}}
                     {{ form.input('email','adresse mail','email', errors.get('email'), post.get('email'))}}
@@ -25,7 +25,7 @@
                         </p>
                     </div>
                     <div class="input-field col s12">
-                        <button type="submit-sign" class="btn btn-flat" id="sign" >Inscription</button>
+                        <button type="submit" class="btn btn-flat" id="sign" >Inscription</button>
                     </div>
                 </div>
             </form>

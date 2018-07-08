@@ -8,7 +8,6 @@ use Ng\Core\Managers\Mailer\Mailer;
 use Psr\Container\ContainerInterface;
 use Ng\Core\Interfaces\CookieInterface;
 
-
 class UsersController extends Controller
 {
 
@@ -68,8 +67,8 @@ class UsersController extends Controller
                 }
             }
 
-            $this->pageManager::setName("Rénitialisation du mot de passe");
-            $this->view('frontend/users/account/reset', compact('post','errors'));
+            $this->pageManager::setTitle("Rénitialisation du mot de passe");
+            $this->view('frontend/users/account/reset', compact('post', 'errors'));
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error']);
             $this->redirect(true);
@@ -112,7 +111,7 @@ class UsersController extends Controller
         }
 
         $this->turbolinksLocation("/forgot");
-        $this->pageManager::setName('Mot de passe oublié');
+        $this->pageManager::setTitle('Mot de passe oublié');
         $this->view('frontend/users/account/forgot', compact('post', 'errors'));
     }
 
@@ -129,50 +128,27 @@ class UsersController extends Controller
         if (isset($_POST) && !empty($_POST)) {
             $this->validator->setRule("email", 'valid_email', 'required');
             $this->validator->setRule("name", ['required', "alpha_dash", "min_length[3]"]);
-            $this->validator->setRule("password", ['required', "matches[password_confirm]", "min_length[6]"]);
-            $this->validator->setRule('password_confirm', ['required', "matches[password]", "min_length[6]"]);
+            $this->validator->setRule("password", ["matches[password_confirm]" ,'required', "min_length[6]"]);
+            $this->validator->setRule('password_confirm', ["matches[password]" ,'required', "min_length[6]"]);
 
             if ($this->validator->isValid()) {
-                if($post->get('g-recaptcha-response')) {
-                    $recaptchaResponse = $this->container->get(ReCaptcha::class)
-                        ->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+                $this->validator->unique("name", $this->users, $this->flash->msg['users_username_token']);
+                $this->validator->unique("email", $this->users, $this->flash->msg['users_mail_token']);
 
-                    if($recaptchaResponse->isSuccess()) {
-                        $this->validator->unique("name", $this->users, $this->flash->msg['users_username_token']);
-                        $this->validator->unique("email", $this->users, $this->flash->msg['users_mail_token']);
-
-                        if ($this->validator->isValid()) {
-                            $this->authService->register($post->get('name'), $post->get('email'), $post->get('password'));
-                            $this->flash->set('success', $this->flash->msg['users_registration_success'], false);
-                            $this->redirect("/login");
-                        } else {
-                            $errors = new Collection($this->validator->getErrors());
-                            ($this->isAjax()) ?
-                                $this->setFlash($errors->asJson(), 403) :
-                                $this->flash->set("danger", $this->flash->msg['form_multi_errors']);
-                        }
-                    } else {
-                        $errors = new Collection($this->validator->getErrors());
-                        ($this->isAjax()) ?
-                            $this->setFlash($errors->asJson(), 403) :
-                            $this->flash->set("danger", $this->flash->msg['form_captcha_failed']);
-                    }
+                if ($this->validator->isValid()) {
+                    $this->authService->register($post->get('name'), $post->get('email'), $post->get('password'));
+                    $this->flash->set('success', $this->flash->msg['form_registration_submitted'], false);
+                    $this->redirect("/login");
                 } else {
-                    $errors = new Collection($this->validator->getErrors());
-                    ($this->isAjax()) ?
-                        $this->setFlash($errors->asJson(), 403) :
-                        $this->flash->set("danger", $this->flash->msg['form_captcha_not_set']);
+                    $this->sendFormError();
                 }
             } else {
-                $errors = new Collection($this->validator->getErrors());
-                ($this->isAjax())?
-                    $this->setFlash($errors->asJson(), 403) :
-                    $this->flash->set("danger", $this->flash->msg['form_multi_errors']);
+                $this->sendFormError();
             }
         }
 
         $this->turbolinksLocation("/sign");
-        $this->pageManager::setName("Inscription");
+        $this->pageManager::setTitle("Inscription");
         $this->view('frontend/users/sign', compact('post', 'errors'));
     }
 
@@ -202,19 +178,16 @@ class UsersController extends Controller
 
                     $user  = $this->users->findAlternative(['name','email'], $name);
                     if ($user) {
-                        if ($user->confirmed_at !== null) {
-                            if (password_verify($password, $user->password)) {
+                        if (password_verify($password, $user->password)) {
+                            if ($user->confirmed_at !== null) {
                                 $this->authService->connect($user);
-                                if ($remember) {
-                                    $this->authService->remember($user->id);
-                                }
-
+                                $remember ? $this->authService->remember($user->id) : '';
                                 $this->redirect($user->accountUrl, true);
                             } else {
-                                $this->flash->set('danger', $this->flash->msg['users_bad_identifier']);
+                                $this->flash->set('danger', $this->flash->msg['users_not_confirmed']);
                             }
                         } else {
-                            $this->flash->set('warning', $this->flash->msg['users_not_confirmed']);
+                            $this->flash->set('danger', $this->flash->msg['users_bad_identifier']);
                         }
                     } else {
                         $this->flash->set('danger', $this->flash->msg['users_bad_identifier']);
@@ -225,7 +198,7 @@ class UsersController extends Controller
             }
 
             $this->turbolinksLocation("/login");
-            $this->pageManager::setName('Connexion');
+            $this->pageManager::setTitle('Connexion');
             $this->view('frontend/users/login', compact('post', 'errors'));
         }
     }
@@ -266,8 +239,8 @@ class UsersController extends Controller
                 $collection =     $this->callController('saves')->show($user->id);
 
                 $this->turbolinksLocation($user->accountUrl);
-                $this->pageManager::setName("Profile de " . $user->name);
-                $this->view('frontend/users/account/account', compact( "user", "posts", "collection"));
+                $this->pageManager::setTitle("Profile de " . $user->name);
+                $this->view('frontend/users/account/account', compact("user", "posts", "collection"));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
                 $this->redirect(true, false);
@@ -335,7 +308,7 @@ class UsersController extends Controller
             }
 
             $this->turbolinksLocation("/settings/{$token}");
-            $this->pageManager::setName('Paramètres');
+            $this->pageManager::setTitle('Paramètres');
             $this->view('frontend/users/account/edit', compact('user', 'errors'));
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error']);

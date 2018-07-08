@@ -4,7 +4,6 @@ namespace Ngpictures\Controllers;
 use Ng\Core\Managers\Collection;
 use Psr\Container\ContainerInterface;
 
-
 class AdminController extends Controller
 {
     /**
@@ -21,7 +20,8 @@ class AdminController extends Controller
         'bugs',
         'verses',
         'categories',
-        'albums'
+        'albums',
+        'reports'
     ];
 
 
@@ -51,7 +51,7 @@ class AdminController extends Controller
         $this->authService->isAdmin();
 
         $this->pageManager::setMeta(['name' => 'robots', 'content' => 'noindex']);
-        $this->loadModel(['users', 'posts', 'blog', 'gallery', 'ideas', 'bugs', 'categories', 'verses', 'albums', 'online']);
+        $this->loadModel(['users', 'posts', 'blog', 'gallery', 'ideas', 'bugs', 'categories', 'verses', 'albums', 'online', 'reports']);
     }
 
 
@@ -76,7 +76,7 @@ class AdminController extends Controller
         $used_space    = 100 - ceil($disk_space);
         $total_space   = ceil($disk_space);
 
-        $this->pageManager::setName('admin');
+        $this->pageManager::setTitle('admin');
         $this->view(
             'backend/index',
             compact(

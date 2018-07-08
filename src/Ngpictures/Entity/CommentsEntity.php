@@ -3,19 +3,22 @@ namespace Ngpictures\Entity;
 
 use Ng\Core\Entity\Entity;
 use Ngpictures\Ngpictures;
+use Ngpictures\Traits\Util\AuthTrait;
 use Ng\Core\Interfaces\SessionInterface;
 
 class CommentsEntity extends Entity
 {
+
+    use AuthTrait;
+
     /**
      * lien de suppression de commentaire
      * @return string
      */
     public function getDeleteUrl()
     {
-        $session = Ngpictures::getDic()->get(SessionInterface::class);
         $this->deleteUrl = "/comments/delete/";
-        $this->deleteUrl .= "{$this->id}/{$session->read(TOKEN_KEY)}";
+        $this->deleteUrl .= "{$this->id}/" . self::$token;
         return $this->deleteUrl;
     }
 
@@ -26,9 +29,8 @@ class CommentsEntity extends Entity
      */
     public function getEditUrl()
     {
-        $session = Ngpictures::getDic()->get(SessionInterface::class);
         $this->editUrl =  "/comments/edit/";
-        $this->editUrl .= "{$this->id}/{$session->read(TOKEN_KEY)}";
+        $this->editUrl .= "{$this->id}/" . self::$token;
         return $this->editUrl;
     }
 }

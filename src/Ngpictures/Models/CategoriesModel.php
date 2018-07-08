@@ -31,6 +31,4 @@ class CategoriesModel extends Model
             $one
         );
     }
-
-
 }

@@ -235,9 +235,9 @@ input[type=search].valid:not(.browser-default),
 input[type=search].valid:not(.browser-default):focus,
 textarea.materialize-textarea.valid,
 textarea.materialize-textarea.valid:focus, .select-wrapper.valid > input.select-dropdown {
-  border-bottom: 1px solid #4CAF50;
-  -webkit-box-shadow: 0 1px 0 0 #4CAF50;
-          box-shadow: 0 1px 0 0 #4CAF50;
+  border-bottom: 1px solid #9e9e9e;
+  -webkit-box-shadow: 0 1px 0 0 #9e9e9e;
+          box-shadow: 0 1px 0 0 #9e9e9e;
 }
 
 input.invalid:not([type]), input.invalid:not([type]):focus,
@@ -297,7 +297,7 @@ input[type=search]:not(.browser-default):focus.valid + label:after,
 textarea.materialize-textarea.valid + label:after,
 textarea.materialize-textarea:focus.valid + label:after, .select-wrapper.valid + label:after {
   content: attr(data-success);
-  color: #4CAF50;
+  color: #9e9e9e;
   opacity: 1;
   -webkit-transform: translateY(9px);
           -ms-transform: translateY(9px);

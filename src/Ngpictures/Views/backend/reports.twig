@@ -7,7 +7,6 @@
                 <li>
                     <a href="{{ constant('ADMIN') ~ " /file-browser/blog" }}">Photo blog</a>
                 </li>
-                <li class="right"><a href="{{ constant('ADMIN') ~ "/reports" }}">Reports</a></li>
                 <li class="right">
                     <a href="{{ constant('ADMIN') ~ " /blog/categories/"  }}">Catégories</a>
                 </li>
@@ -22,15 +21,13 @@
         <section class="col l12 m12 s12">
             <div class="card-panel grey dark-4" style="padding: 20px">
                 <div class="section">
-                    <span class="btn">Page :
-                        {{ currentPage }}/{{ totalPage }}</span>
-                    <span class="btn">Total :
-                        {{ total }}</span>
+                    <span class="btn">Page : {{ currentPage }}/{{ totalPage }}</span>
+                    <span class="btn">Total :  {{ total }}</span>
 
-                    <a href="{{ constant('ADMIN') ~ "/posts?page=" ~ prevPage }}" class="btn">
+                    <a href="{{ constant('ADMIN') ~ "/reports?page=" ~ prevPage }}" class="btn">
                         <i class="icon icon-left-open"></i>
                     </a>
-                    <a href="{{ constant('ADMIN') ~ "/posts?page=" ~ nextPage }}" class="btn">
+                    <a href="{{ constant('ADMIN') ~ "/reports?page=" ~ nextPage }}" class="btn">
                         <i class="icon icon-right-open"></i>
                     </a>
                 </div>
@@ -38,50 +35,35 @@
                     <thead>
                         <tr>
                             <th>id</th>
-                            <th>title</th>
+                            <th>type</th>
+                            <th>content</th>
+                            <th>publication_id</th>
                             <th>action</th>
-                            <th>date</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for a in posts %}
+                        {% for r in reports %}
                             <tr>
-                                <td><b>{{ a.id }}</b></td>
-                                <td><a href="{{ a.url }}">{{ a.title }}</a></td>
+                                <td><b>{{ r.id }}</b></td>
+                                <td>{{ r.type }}</td>
+                                <td>{{ r.content }}</td>
+                                <td>{{ r.publication_id}}</td>
                                 <td>
                                     <form method="POST" action="{{ constant('ADMIN') ~ '/delete' }}" style="display: inline-block !important;">
-                                        <input type="hidden" name="id" value="{{ a.id }}">
-                                        <input type="hidden" name="type" value="1">
+                                        <input type="hidden" name="id" value="{{ r.id }}">
+                                        <input type="hidden" name="type" value="11">
                                         <button type="submit" class="btn waves-effect waves-light red" id="delete">
                                             <i class="icon icon-cancel" style="font-size: smaller !important;"></i>
                                         </button>
                                     </form>
-
-                                    <a href="{{ constant('ADMIN') ~ '/confirm/1/' ~ a.id }}" id="confirm">
-                                        <button class="btn btn-small blue-2 waves-effect waves-light">
-                                            {% if a.online %}
-                                                <i class="icon icon-download" style="font-size: smaller !important;"></i>
-                                            {% else %}
-                                                <i class="icon icon-upload" style="font-size: smaller !important;"></i>
-                                            {% endif %}
-                                        </button>
-                                    </a>
-                                    <a href="{{ constant('ADMIN') ~ a.watermarkUrl }}">
-                                        <button class="btn blue waves-effect waves-light">
-                                            <i class="icon icon-tag" style="font-size: smaller !important;"></i>
-                                        </button>
-                                    </a>
-                                </td>
-                                <td>
-                                    <time>{{ a.time }}</time>
                                 </td>
                             </tr>
                         {% else %}
                             <tr>
-                                <td>
-                                    <b>0</b>
-                                </td>
-                                <td>Aucun article pour l'instant</td>
+                                <td><b>0</b></td>
+                                <td>Aucun Signalement</td>
+                                <td></td>
+                                <td></td>
                                 <td>
                                     <button type="submit" class="btn btn-small waves-effect waves-light disabled">
                                         <i class="icon icon-remove" style="font-size: smaller !important;"></i>

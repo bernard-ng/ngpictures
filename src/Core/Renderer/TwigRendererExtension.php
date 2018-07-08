@@ -3,8 +3,6 @@ namespace Ng\Core\Renderer;
 
 use Ng\Core\Managers\CacheBustingManager;
 
-
-
 class TwigRendererExtension extends \Twig_Extension
 {
 
@@ -46,6 +44,4 @@ class TwigRendererExtension extends \Twig_Extension
     {
         return $text;
     }
-
-
 }

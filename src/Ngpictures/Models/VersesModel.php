@@ -19,7 +19,10 @@ class VersesModel extends Model
     public function getVersesNumber()
     {
         return $this->query(
-            "SELECT COUNT(id) AS numbers FROM {$this->table}", null, true, true
+            "SELECT COUNT(id) AS numbers FROM {$this->table}",
+            null,
+            true,
+            true
         );
     }
 }

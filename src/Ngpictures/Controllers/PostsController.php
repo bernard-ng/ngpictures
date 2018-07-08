@@ -8,7 +8,6 @@ use Ngpictures\Traits\Controllers\ShowPostTrait;
 use Ngpictures\Traits\Controllers\StoryPostTrait;
 use Ngpictures\Services\Notification\NotificationService;
 
-
 class PostsController extends Controller
 {
     use StoryPostTrait, ShowPostTrait;
@@ -39,8 +38,8 @@ class PostsController extends Controller
                 $posts = $this->posts->findWithUser($user->id);
 
                 $this->turbolinksLocation("/my-posts");
-                $this->pageManager::setName("Mes publications");
-                $this->view("frontend/users/posts/posts", compact('posts', 'user'));
+                $this->pageManager::setTitle("Mes publications");
+                $this->view("frontend/posts/users", compact('posts', 'user'));
             } else {
                 $this->flash->set("danger", $this->flash->msg['users_not_found'], false);
                 $this->redirect(true, false);
@@ -116,8 +115,8 @@ class PostsController extends Controller
         }
 
         $this->turbolinksLocation('/submit-photo');
-        $this->pageManager::setName("Publication");
-        $this->view("frontend/users/posts/add", compact('post', 'categories', 'errors'));
+        $this->pageManager::setTitle("Publication");
+        $this->view("frontend/posts/add", compact('post', 'categories', 'errors'));
     }
 
 
@@ -133,12 +132,9 @@ class PostsController extends Controller
         $categories = $this->categories->orderBy('title', 'ASC');
 
         if ($token == $this->authService->getToken()) {
-
             $publication = $this->posts->find(intval($id));
             if ($publication) {
                 $post       =   new Collection($data ?? $_POST);
-                $errors     =   new Collection();
-                $article    =   $this->posts->find(intval($id));
 
                 if (isset($_POST) && !empty($_POST)) {
                     $title          =   $this->str->escape($post->get('title'));
@@ -148,15 +144,13 @@ class PostsController extends Controller
 
                     $this->posts->update($id, compact('title', 'content', 'slug', 'categories_id'));
                     $this->flash->set("success", $this->flash->msg['post_edit_success'], false);
-                    $this->redirect("/my-posts/{$token}", true);
+                    $this->redirect("/posts", true);
                 }
 
+                $this->pageManager::setTitle("Edition");
+                $this->pageManager::setDescription("Editer vos publications, rajouter du contenu ou faites une mise à jour");
                 $this->turbolinksLocation("/my-posts/edit/{$id}/{$token}");
-                $this->pageManager::setName("Edition");
-                $this->view(
-                    "frontend/users/posts/edit",
-                    compact('article', 'categories', 'post', 'errors')
-                );
+                $this->view("frontend/posts/edit", compact('publication', 'categories', 'post'));
             } else {
                 $this->flash->set("danger", $this->flash->msg['post_not_found'], false);
             }
@@ -168,26 +162,30 @@ class PostsController extends Controller
      * suppression des publications des users
      * @param string $token
      */
-    public function delete($token)
+    public function delete($id, $token)
     {
-        $model  =   $this->loadModel("posts");
-        $post   =   new Collection($_POST);
-        $post   =   $model->find(intval($post->get('id')));
+        $data   =   new Collection($_POST);
+        $post   =   $this->posts->find(intval($id));
 
         if ($this->authService->getToken() == $token) {
-            if ($post && $post->users_id == $this->authService->isLogged()->id) {
-                $model->delete($post->id);
-                if ($this->isAjax()) {
-                    exit();
+            if ($post && ($post->users_id == $this->authService->isLogged()->id)) {
+
+                if (isset($_POST) && !empty($_POST)) {
+                    $this->posts->delete($post->id);
+                    $this->flash->set('success', $this->flash->msg['post_delete_success'], false);
+                    $this->redirect("/posts");
                 }
-                $this->flash->set('success', $this->flash->msg['post_delete_success'], false);
-                $this->redirect(true, false);
+
+                $this->pageManager::setTitle("Supprimer une publication");
+                $this->pageManager::setDescription("suppresion d'une publication");
+                $this->turbolinksLocation("/my-posts/delete/{$id}/{$token}");
+                $this->view("frontend/posts/delete", compact('post'));
             } else {
-                $this->flash->set('danger', $this->flash->msg['delete_not_allowed']);
+                $this->flash->set('danger', $this->flash->msg['delete_not_allowed'], false);
                 $this->redirect(true, false);
             }
         } else {
-            $this->flash->set('danger', $this->flash->msg['delete_not_allowed']);
+            $this->flash->set('danger', $this->flash->msg['delete_not_allowed'], false);
             $this->redirect(true, false);
         }
     }

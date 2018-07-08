@@ -3,7 +3,6 @@ namespace Ng\Core\Managers;
 
 use Ngpictures\Models\UsersModel;
 
-
 class StringManager
 {
 
@@ -148,7 +147,8 @@ class StringManager
             "~#([A-Za-z0-9_]+)~",
             function ($matches) {
                 return "<a href='/htag/{$matches[1]}'>{$matches[0]}</a>";
-            }, $text
+            },
+            $text
         );
     }
 

@@ -87,7 +87,6 @@ class MysqlDatabase implements DatabaseInterface
             ($entity === true) ? $req->setFetchMode(PDO::FETCH_OBJ) : $req->setFetchMode(PDO::FETCH_CLASS, $entity);
             $res = ($rowcount === true) ? $req->rowCount() : ($one)? $req->fetch() : $req->fetchAll();
             return $res;
-
         } catch (PDOException $e) {
             LogMessageManager::register(__class__, $e);
             return null;

@@ -1,7 +1,6 @@
 <?php
 namespace Ngpictures\Services\Notification;
 
-
 use Ngpictures\Models\UsersModel;
 use Ng\Core\Managers\StringManager;
 use Psr\Container\ContainerInterface;
@@ -69,23 +68,23 @@ class NotificationService
     {
         $subject = "{$user} a ";
 
-        switch($type) {
-            case 1 :
+        switch ($type) {
+            case 1:
                 $action = "ajouté une nouvelle photo";
                 break;
-            case 2 :
+            case 2:
                 $action = "aimé votre publication";
                 break;
-            case 3 :
+            case 3:
                 $action = "commenté votre publication";
                 break;
-            case 4 :
+            case 4:
                 $action = "ajouté une publication sur le blog";
                 break;
-            case 5 :
+            case 5:
                 $action = "ajouté une photo dans la gallery";
                 break;
-            case 6 :
+            case 6:
                 $action = "commencé a vous suivre";
                 break;
         }
@@ -102,7 +101,7 @@ class NotificationService
             $this->notifications->add($type, $nofication, $post->users_id, $post->id);
             return true;
         } elseif ($type === 1) {
-            foreach($data as $follower_id) {
+            foreach ($data as $follower_id) {
                 $this->notifications->add($type, $nofication, $follower_id, $post->id);
             }
             return true;
@@ -147,7 +146,7 @@ class NotificationService
         $sendTo = $this->users->find($post->users_id);
         $liker_name = $this->users->find($liker_id)->name;
 
-        if(is_object($sendTo)) {
+        if (is_object($sendTo)) {
             if ($sendTo->id == $liker_id) {
                 return false;
             }

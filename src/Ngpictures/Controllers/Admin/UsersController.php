@@ -25,8 +25,8 @@ class UsersController extends AdminController
         $nextPage       = $pagination['nextPage'];
         $users          = $pagination['result'] ?? $users;
 
-        $this->turbolinksLocation(AMIN."/users");
-        $this->pageManager::setName("Adm - users");
+        $this->turbolinksLocation(ADMIN."/users");
+        $this->pageManager::setTitle("Adm - users");
         $this->view(
             "backend/users/index",
             compact('users', 'bugs', 'ideas', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
@@ -74,7 +74,7 @@ class UsersController extends AdminController
         $bugs           = $pagination['result'] ?? $bugs;
 
         $this->turbolinksLocation(ADMIN.'/bugs');
-        $this->pageManager::setName('Adm - bugs');
+        $this->pageManager::setTitle('Adm - bugs');
         $this->view(
             'backend/users/bugs',
             compact('bugs', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
@@ -98,7 +98,7 @@ class UsersController extends AdminController
         $ideas          = $pagination['result'] ?? $ideas;
 
         $this->turbolinksLocation(ADMIN.'/ideas');
-        $this->pageManager::setName('Adm - ideas');
+        $this->pageManager::setTitle('Adm - ideas');
         $this->view(
             'backend/users/ideas',
             compact('ideas', 'total', "totalPage", "currentPage", "prevPage", "nextPage")

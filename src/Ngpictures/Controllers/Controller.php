@@ -11,7 +11,6 @@ use Ng\Core\Managers\FlashMessageManager;
 use Ngpictures\Services\Auth\DatabaseAuthService;
 use Ng\Core\Controllers\Controller as SuperController;
 
-
 class Controller extends SuperController
 {
     protected $msg;
@@ -37,7 +36,7 @@ class Controller extends SuperController
         $this->pageManager      =   $this->container->get(PageManager::class);
         $this->authService      =   $this->container->get(DatabaseAuthService::class);
 
-        if(!$this->authService->isLogged()) {
+        if (!$this->authService->isLogged()) {
             $this->authService->cookieConnect();
         }
     }

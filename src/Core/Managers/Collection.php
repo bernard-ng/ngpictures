@@ -54,8 +54,7 @@ class Collection implements IteratorAggregate, ArrayAccess
     public function asList(string $glue = ', ', $rule = null): string
     {
         $list = [];
-        foreach($this->items as $item) {
-
+        foreach ($this->items as $item) {
             if (is_object($item)) {
                 if (is_null($rule)) {
                     $list[] = $item->id;

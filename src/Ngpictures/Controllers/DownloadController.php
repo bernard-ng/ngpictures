@@ -40,13 +40,13 @@ class DownloadController extends Controller
 
             if ($post) {
                 if (file_exists($file)) {
-                    if(isset($_GET['option']) && !empty($_GET['option'])) {
+                    if (isset($_GET['option']) && !empty($_GET['option'])) {
                         $this->download($file);
                     } else {
                         $downloads = (int) $post->downloads + 1;
                         $posts->update($post->id, compact('downloads'));
 
-                        if($this->isAjax()) {
+                        if ($this->isAjax()) {
                             $post = $posts->find($post->id);
                             echo (int) $post->downloads;
                             exit();
@@ -76,14 +76,14 @@ class DownloadController extends Controller
             init_set('zlib.output_compression', 'off');
         }
 
-        switch(strtolower(pathinfo($file, PATHINFO_EXTENSION))) {
-            case 'pdf' :
+        switch (strtolower(pathinfo($file, PATHINFO_EXTENSION))) {
+            case 'pdf':
                 $mine = 'application/pdf';
                 break;
-            case 'zip' :
+            case 'zip':
                 $mine = 'application/zip';
                 break;
-            case 'jpg' || 'jpeg' :
+            case 'jpg' || 'jpeg':
                 $mine = 'image/jpg';
                 break;
             default:

@@ -5,7 +5,6 @@ use Glooby\Pexels\Client;
 use Psr\Container\ContainerInterface;
 use Ng\Core\Managers\LogMessageManager;
 
-
 class PexelsController extends Controller
 {
 
@@ -25,7 +24,7 @@ class PexelsController extends Controller
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $this->pexels = new Client(PEXELS_API_KEY);
+        $this->pexels = $this->container->get(Client::class);
     }
 
 

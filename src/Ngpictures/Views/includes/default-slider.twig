@@ -1,12 +1,12 @@
 <div class="slider" style="margin-top: -64px" data-action-requires="menu-transparent">
     <ul class="slides">
-        {% for title in sliderTitle  %}
+        {% for i in 0..3  %}
             <li>
                 <img src="{{ cacheBusting('/imgs/slider.jpg') }}">
                 <div class="caption center-align">
-                    <h2 class="title">{{ title }}</h2>
+                    <h2 class="title">{{ sliderTitle[i] }}</h2>
                     <h6 class="light grey-text text-lighten-3">
-                        Découvrez la version 2.0 de ngpictures et toutes les nouvelles fonctionnalités.
+                       {{ sliderDesc[i] }}
                     </h6>
                 </div>
                 <div class="bg"></div>

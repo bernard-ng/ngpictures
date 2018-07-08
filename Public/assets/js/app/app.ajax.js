@@ -1,3 +1,15 @@
+(function () {
+    let links = document.querySelectorAll("[target='_self']");
+    [].slice.call(links).forEach(function (link) {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            Turbolinks.visit(this.href);
+            return true;
+        })
+    })
+})()
+
+
 /**
  * envoyer un commentaire en ajax
  * @param element
@@ -184,7 +196,7 @@ function loadVerses(element) {
                         } else {
                             setFlash(
                                 'danger',
-                                xhr.responseText ? xhr.responseText : msg.undefinedError,
+                                xhr.responseText ? xhr.responseText : msg.undefinedError
                             );
                         }
                     }
@@ -315,7 +327,7 @@ function loadPictureInfo(element) {
         };
 
         if (typeof gallery !== 'undefined') {
-            let items = Array.prototype.slice.call(gallery.querySelectorAll("[data-action='gallery-item']"));
+            let items = [].slice.call(gallery.querySelectorAll("[data-action='gallery-item']"));
             items.forEach((item) => {
                 item.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -383,7 +395,51 @@ function formLogin(element) {
  * sign up ajax
  * @param element
  */
-function formSign(element) {}
+function formSign(element) {
+    let form = document.querySelector(element);
+    if (form) {
+        let submitBtn = form.querySelector("button[type='submit']")
+        submitBtn.addEventListener('click', function () {
+            setLoader(this);
+        });
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            let name = form.querySelector("input[name='name']");
+            let email = form.querySelector("input[name='email']");
+            let password = form.querySelector("input[name='password']");
+            let password_confirm = form.querySelector("input[name='password_confirm']");
+            resetValidation([name, email, password, password_confirm]);
+
+            if (getXhr()) {
+                let xhr = getXhr();
+                xhr.open('POST', this.getAttribute('action'), true);
+                xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+                xhr.send(new FormData(this));
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            removeLoader(submitBtn, 'Inscription');
+                            redirect(xhr.responseText);
+                        } else if (xhr.status === 403) {
+                            removeLoader(submitBtn, 'Inscription');
+                            let errors = JSON.parse(xhr.responseText);
+
+                            errors.name ? formDataInvalid(name, errors.name) : '';
+                            errors.email ? formDataInvalid(email, errors.email) : '';
+                            errors.password ? formDataInvalid(password, errors.password) : '';
+                            errors.password_confirm ? formDataInvalid(password_confirm, errors.password_confirm) : '';
+                        } else {
+                            removeLoader(submitBtn, 'Inscription');
+                            xhr.responseText ? setFlash('danger', xhr.responseText) : setFlash('danger', msg.undefinedError);
+                        }
+                    }
+                }
+            }
+        });
+    }
+}
 
 
 /**
@@ -443,8 +499,8 @@ function savePost(element) {
     let saveBtn = document.querySelectorAll(element);
     let activeUser = document.querySelector("meta[active-user]");
     if (typeof saveBtn !== 'undefined') {
-        for (let i = 0; i < saveBtn.length; i++) {
-            saveBtn[i].addEventListener('click', function (e) {
+        [].slice.call(saveBtn).forEach((saveBtn) => {
+            saveBtn.addEventListener('click', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
 
@@ -491,7 +547,52 @@ function savePost(element) {
                     return false;
                 }
             });
-        }
+        })
+    } else {
+        return false;
+    }
+}
+
+
+function follow(element) {
+    let followBtns = document.querySelectorAll(element);
+    let activeUser = document.querySelector("meta[active-user]");
+    if (typeof followBtns !== 'undefined') {
+        [].slice.call(followBtns).forEach(function (followBtn) {
+            followBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                let that = this;
+                let nativeText = that.innerText;
+                setLoader(that);
+
+                if (activeUser) {
+                    let followLink = this.getAttribute('href');
+                    if (getXhr()) {
+                        let xhr = getXhr();
+                        xhr.open('GET', followLink);
+                        xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4) {
+                                if (xhr.status === 200) {
+                                    removeLoader(that, xhr.responseText);
+                                    return true;
+                                } else {
+                                    removeLoader(that, nativeText);
+                                    setFlash('danger', xhr.responseText ? xhr.responseText : msg.undefinedError);
+                                    return false;
+                                }
+                            }
+                        }
+                        xhr.send();
+                    }
+                } else {
+                    setFlash('danger', msg.usersNotLogged);
+                    return false;
+                }
+            })
+        })
     } else {
         return false;
     }
@@ -537,7 +638,6 @@ function downloadFile(element) {
     } else {
         return false;
     }
-
 }
 
 //------------------------------------------------------------------------------------
@@ -545,8 +645,10 @@ function downloadFile(element) {
 savePost("[data-action='save']");
 downloadFile("[data-action='download']");
 formLogin("form[data-action='login']");
+formSign("form[data-action='sign']");
 formGenericSubmit("form[data-action='ideas']");
 formGenericSubmit("form[data-action='bugs']");
 formFeedComments('#dataContainer');
 likes("#dataContainer");
 loadPictureInfo("[data-action='gallery']");
+follow("[data-action='following']");

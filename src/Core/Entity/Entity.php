@@ -1,8 +1,6 @@
 <?php
 namespace Ng\Core\Entity;
 
-use Ngpictures\Ngpictures;
-use Psr\Container\ContainerInterface;
 
 class Entity
 {

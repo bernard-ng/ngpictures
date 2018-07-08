@@ -5,7 +5,6 @@ namespace Ngpictures\Controllers;
 use Ng\Core\Managers\Collection;
 use Psr\Container\ContainerInterface;
 
-
 class IdeasController extends Controller
 {
 
@@ -42,7 +41,7 @@ class IdeasController extends Controller
         }
 
         $this->turbolinksLocation("/ideas");
-        $this->pageManager::setName("Donner une idée");
+        $this->pageManager::setTitle("Donner une idée");
         $this->view('frontend/others/ideas', compact('post', "errors"));
     }
 }

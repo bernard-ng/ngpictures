@@ -51,7 +51,7 @@ class FlashMessageManager
                     case 'warning' || 'success' || 'info':
                         $code = 200;
                         break;
-                    default :
+                    default:
                         $code = 200;
                         break;
                 }

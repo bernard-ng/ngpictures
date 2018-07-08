@@ -1,7 +1,6 @@
 <?php
 namespace Ngpictures\Controllers;
 
-
 use Ng\Core\Managers\Collection;
 use Psr\Container\ContainerInterface;
 
@@ -15,10 +14,10 @@ class CommunityController extends Controller
     {
         $this->authService->restrict();
         $this->loadModel("users");
-        $users = $this->users->all();
+        $users = $this->users->lastConfirmed();
 
         $this->turbolinksLocation('/community');
-        $this->pageManager::setName("Communauté");
+        $this->pageManager::setTitle("Communauté");
         $this->pageManager::setDescription(
             "Rétrouvez la communauté de ngpictures, vos amis, les artistes et les passionnés
             de la photographie"

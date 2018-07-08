@@ -1,0 +1,28 @@
+{% extends 'layout/posts/default.twig' %}
+{% import 'includes/form.twig' as form %}
+{% block content %}
+    <section class="section row">
+        <div class="container">
+            {% include 'includes/right-aside.twig' %}
+            <section class="col l6 m12 s12">
+                <div class="grey dark-4 col l12 m12 s12">
+                    <form action="" method="POST" data-action="edit">
+                        <div class="row">
+                            <div class="row col s12">
+                                <div data-action="show-uploaded-file" style="margin-top: 10px;">
+                                    <img src="{{ publication.thumbUrl }}" alt="{{ publication.title }}" title="{{ publication.title }}" class="responsive-img">
+                                </div>
+                            </div>
+                            {{ form.input('title','Titre', 'text', errors.get('title'), post.get('title') ?? publication.title ) }}
+                            {{ form.textarea('content','Description', errors.get('content'), post.get('content') ?? publication.content ) }}
+                            <div class="submit-button col s12">
+                                <button type="submit" class="btn btn-flat waves-effect">Editer</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            {% include 'includes/menu-aside.twig' %}
+        </div>
+    </section>
+{% endblock %}

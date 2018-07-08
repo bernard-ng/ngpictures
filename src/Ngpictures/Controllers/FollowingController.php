@@ -38,16 +38,24 @@ class FollowingController extends Controller
         if ($user) {
             if ($model->isFollowed($user->id, $this->user->id)) {
                 $model->remove($user->id, $this->user->id);
-                $this->flash->set("success", $this->flash->msg['users_unfollowing_success']);
-                $this->redirect(true);
+                if ($this->isAjax()) {
+                    echo "S'abonner";
+                    exit();
+                }
+                $this->flash->set("success", $this->flash->msg['users_unfollowing_success'], false);
+                $this->redirect(true, false);
             }
 
             $model->add($user->id, $this->user->id);
-            $this->flash->set("success", $this->flash->msg['users_following_success']);
-            $this->redirect(true);
+            if ($this->isAjax()) {
+                echo "Se désabonner";
+                exit();
+            }
+            $this->flash->set("success", $this->flash->msg['users_following_success'], false);
+            $this->redirect(true, false);
         } else {
             $this->flash->set("warning", $this->flash->msg['users_not_found']);
-            $this->redirect(true);
+            $this->redirect(true, false);
         }
     }
 
@@ -78,7 +86,7 @@ class FollowingController extends Controller
                 }
 
                 $this->turbolinksLocation("/my-followers/{$token}");
-                $this->pageManager::setName("Mes Abonnés");
+                $this->pageManager::setTitle("Mes Abonnés");
                 $this->view("frontend/users/account/followers", compact("followers"));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error']);
@@ -115,7 +123,7 @@ class FollowingController extends Controller
                 $followings         =   empty($followings_list)? null : $this->users->findList($followings_list);
 
                 $this->turbolinksLocation("/my-following/{$token}");
-                $this->pageManager::setName("Mes Abonnements");
+                $this->pageManager::setTitle("Mes Abonnements");
                 $this->view("frontend/users/account/following", compact("followings"));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error']);

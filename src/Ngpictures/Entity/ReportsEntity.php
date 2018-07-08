@@ -3,7 +3,7 @@ namespace Ngpictures\Entity;
 
 use Ng\Core\Entity\Entity;
 
-class SavesEntity extends Entity
+class ReportsEntity extends Entity
 {
 
 }

@@ -40,12 +40,12 @@ class BugsController extends Controller
                 $this->flash->set('success', $this->flash->msg['form_bug_submitted'], false);
                 $this->redirect("/home", false);
             } else {
-               $this->sendFormError();
+                $this->sendFormError();
             }
         }
 
         $this->turbolinksLocation("/bugs");
-        $this->pageManager::setName("Signaler un Bug");
+        $this->pageManager::setTitle("Signaler un Bug");
         $this->view('frontend/others/bugs', compact('post', "errors"));
     }
 }

@@ -4,8 +4,6 @@ namespace Ngpictures\Controllers;
 use Ng\Core\Managers\CalendarManager;
 use Psr\Container\ContainerInterface;
 
-
-
 class BookingController extends Controller
 {
     public function __construct(ContainerInterface $container)
@@ -40,7 +38,7 @@ class BookingController extends Controller
         $previousYear = $this->calendar->previousMonth()->getYear();
 
         $this->turbolinksLocation('/booking');
-        $this->pageManager::setName('Réservation');
+        $this->pageManager::setTitle('Réservation');
         $this->view('frontend/others/booking', compact(
             'current_month',
             'nextMonth',

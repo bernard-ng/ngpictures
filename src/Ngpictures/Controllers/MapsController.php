@@ -1,7 +1,6 @@
 <?php
 namespace Ngpictures\Controllers;
 
-
 class MapsController extends Controller
 {
 

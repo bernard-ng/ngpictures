@@ -29,7 +29,7 @@ class ContactController extends Controller
         }
 
         $this->turbolinksLocation("/contact");
-        $this->pageManager::setName("Contact");
+        $this->pageManager::setTitle("Contact");
         $this->view("frontend/others/contact", compact("post", "errors"));
     }
 }

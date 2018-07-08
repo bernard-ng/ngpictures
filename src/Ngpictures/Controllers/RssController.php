@@ -1,7 +1,6 @@
 <?php
 namespace Ngpictures\Controllers;
 
-
 use Suin\RSSWriter\Feed;
 use Suin\RSSWriter\Item;
 use Suin\RSSWriter\Channel;

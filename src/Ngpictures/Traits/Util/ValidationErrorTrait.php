@@ -3,7 +3,6 @@ namespace Ngpictures\Traits\Util;
 
 use Ng\Core\Managers\Collection;
 
-
 trait ValidationErrorTrait
 {
     /**

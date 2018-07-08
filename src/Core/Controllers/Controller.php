@@ -7,7 +7,6 @@ use Ngpictures\Traits\Util\RequestTrait;
 use Ngpictures\Traits\Util\ResolverTrait;
 use Ngpictures\Traits\Util\ValidationErrorTrait;
 
-
 class Controller
 {
     use ValidationErrorTrait;
