@@ -72,7 +72,7 @@ $router->get("/feed", "rss", "rss.index");
 $router->any("/ideas", "ideas", "ideas.index");
 $router->any("/bugs", "bugs", "bugs.index");
 $router->any("/contact", "contact", "contact.index");
-$router->any("/report/:type/:slug-:id", 'report', 'report.index');
+$router->any("/report/:type/:slug-:id", 'reports', 'report.index');
 $router->get("/about", "static#about", "static.about");
 $router->get("/privacy", "static#privacy", "static.privacy");
 $router->any("/app.offline", "static#offline", 'static.offline');

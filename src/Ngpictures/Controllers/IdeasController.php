@@ -42,7 +42,7 @@ class IdeasController extends Controller
         }
 
         $this->turbolinksLocation("/ideas");
-        $this->pageManager::setName("Donner une idée");
+        $this->pageManager::setTitle("Donner une idée");
         $this->view('frontend/others/ideas', compact('post', "errors"));
     }
 }

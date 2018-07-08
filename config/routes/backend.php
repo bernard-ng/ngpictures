@@ -1,6 +1,7 @@
 <?php
 
 $router->get(ADMIN,"admin","admin.index");
+$router->any(ADMIN."/reports", "admin\\reports#index", 'admin.reports.index');
 
 //logs
 $router->get(ADMIN."/logs","admin\logs","admin.logs");

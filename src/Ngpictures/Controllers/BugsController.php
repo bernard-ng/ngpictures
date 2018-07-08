@@ -45,7 +45,7 @@ class BugsController extends Controller
         }
 
         $this->turbolinksLocation("/bugs");
-        $this->pageManager::setName("Signaler un Bug");
+        $this->pageManager::setTitle("Signaler un Bug");
         $this->view('frontend/others/bugs', compact('post', "errors"));
     }
 }

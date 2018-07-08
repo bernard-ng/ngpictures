@@ -23,7 +23,8 @@ trait ShowPostTrait
                 if($article->online == 1) {
                     $similars = $this->loadModel($this->table)->findSimilars($article->id);
                     $author = $this->loadModel('users')->find($article->users_id);
-                    $this->pageManager::setName("{$article->title}");
+                    $altName = $this->table . " - publication - " . $article->id;
+                    $this->pageManager::setTitle($article->title ?? $altName);
 
                     $this->turbolinksLocation("/{$this->table}/{$slug}-{$id}");
                     $this->view(

@@ -6,12 +6,12 @@
     <div class="card-panel hoverable" id="loginBox">
         <h2 class="ui header">Signaler la publication</h2>
         <p>
-            Choissiez un motif de signalement pour cette publication
+            Veuillez nous dire ce qui ne va pas avec cette publication
         </p>
         <div class="row">
-            <img src="/imgs/bgjumbo.jpg" class="responsive" alt="" width="100%" height="auto">
+            <img src="{{ post.thumbUrl }}" class="responsive" alt="{{ post.title ?: post.name }}" title="{{ post.title ?: post.name }}" width="100%" height="auto">
         </div>
-        <form method="POST" action="/bugs" data-action="bugs">
+        <form method="POST" action="" data-action="report">
             {{ form.textarea('report', 'Votre signalement...', errors.get('report'), post.get('report')) }}
             <button type="submit" class="btn btn-flat waves-effect">Envoyer</button>
         </form>

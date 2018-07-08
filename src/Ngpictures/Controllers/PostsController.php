@@ -39,7 +39,7 @@ class PostsController extends Controller
                 $posts = $this->posts->findWithUser($user->id);
 
                 $this->turbolinksLocation("/my-posts");
-                $this->pageManager::setName("Mes publications");
+                $this->pageManager::setTitle("Mes publications");
                 $this->view("frontend/users/posts/posts", compact('posts', 'user'));
             } else {
                 $this->flash->set("danger", $this->flash->msg['users_not_found'], false);
@@ -116,7 +116,7 @@ class PostsController extends Controller
         }
 
         $this->turbolinksLocation('/submit-photo');
-        $this->pageManager::setName("Publication");
+        $this->pageManager::setTitle("Publication");
         $this->view("frontend/users/posts/add", compact('post', 'categories', 'errors'));
     }
 
@@ -152,7 +152,7 @@ class PostsController extends Controller
                 }
 
                 $this->turbolinksLocation("/my-posts/edit/{$id}/{$token}");
-                $this->pageManager::setName("Edition");
+                $this->pageManager::setTitle("Edition");
                 $this->view(
                     "frontend/users/posts/edit",
                     compact('article', 'categories', 'post', 'errors')

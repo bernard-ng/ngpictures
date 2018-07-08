@@ -46,7 +46,7 @@ class PageManager
      * retourne le nom de la page courante
      * @return string
      */
-    public static function getName(): string
+    public static function getTitle(): string
     {
         return self::$pageTitle;
     }
@@ -70,15 +70,10 @@ class PageManager
      * @param string $name
      * @return string
      */
-    public static function setName(string $name): string
+    public static function setTitle(string $name): string
     {
-        try {
-            self::$pageTitle = $name . " | " . Ngpictures::getDic()->get('site.name');
-        } catch (ConfigManagerException $e) {
-            LogMessageManager::register(__class__, $e);
-            self::$pageTitle = $name . " | Ngpictures";
-        }
-        return self::getName();
+        self::$pageTitle = $name . " | " . Ngpictures::getDic()->get('site.name');
+        return self::getTitle();
     }
 
 

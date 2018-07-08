@@ -24,7 +24,7 @@ class PostsController extends AdminController
 
 
         $this->turbolinksLocation(ADMIN.'/posts');
-        $this->pageManager::setName('Adm - posts');
+        $this->pageManager::setTitle('Adm - posts');
         $this->view(
             "backend/posts/index",
             compact("posts", 'total', "totalPage", "currentPage", "prevPage", "nextPage")

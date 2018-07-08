@@ -27,7 +27,7 @@ class CategoriesController extends AdminController
         $nextPage       = $pagination['nextPage'];
         $categories     = $pagination['result'] ?? $categories;
 
-        $this->pageManager::setName('admin categories');
+        $this->pageManager::setTitle('admin categories');
         $this->view(
             'backend/blog/categories',
             compact('categories', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
@@ -61,7 +61,7 @@ class CategoriesController extends AdminController
             }
         }
 
-        $this->pageManager::setName('admin categories.add');
+        $this->pageManager::setTitle('admin categories.add');
         $this->view('backend/blog/categories.add', compact('post', 'errors'));
     }
 
@@ -95,7 +95,7 @@ class CategoriesController extends AdminController
                 }
             }
 
-            $this->pageManager::setName('admin categories.edit');
+            $this->pageManager::setTitle('admin categories.edit');
             $this->view('backend/blog/categories.edit', compact('post', 'category', 'errors'));
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error'], false);

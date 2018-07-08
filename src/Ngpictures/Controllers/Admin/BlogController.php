@@ -28,7 +28,7 @@ class BlogController extends AdminController
         $posts          = $pagination['result'] ?? $posts;
 
         $this->turbolinksLocation(ADMIN . '/blog');
-        $this->pageManager::setName('Adm - blog');
+        $this->pageManager::setTitle('Adm - blog');
         $this->view(
             "backend/blog/index",
             compact("posts", 'total', "totalPage", "currentPage", "prevPage", "nextPage")
@@ -74,7 +74,7 @@ class BlogController extends AdminController
             }
 
             $this->turbolinksLocation(ADMIN . '/blog/edit/' . $id);
-            $this->pageManager::setName('Adm - blog.edit');
+            $this->pageManager::setTitle('Adm - blog.edit');
             $this->view('backend/blog/edit', compact('article', 'categories', 'post', 'errors'));
         } else {
             $this->flash->set('danger', $this->flash->msg['post_not_found']);
@@ -158,7 +158,7 @@ class BlogController extends AdminController
         }
 
         $this->turbolinksLocation(ADMIN . "/blog/add");
-        $this->pageManager::setName('Adm - blog.add');
+        $this->pageManager::setTitle('Adm - blog.add');
         $this->view('backend/blog/add', compact('post', 'categories', 'errors'));
     }
 }

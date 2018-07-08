@@ -9,7 +9,7 @@ class StaticController extends Controller
     public function about()
     {
         $this->turbolinksLocation("/about");
-        $this->pageManager::setName("A Propos de nous");
+        $this->pageManager::setTitle("A Propos de nous");
         $this->view('frontend/others/about');
     }
 
@@ -23,7 +23,7 @@ class StaticController extends Controller
     public function offline()
     {
         $this->turbolinksLocation("/app.offline");
-        $this->pageManager::setName("Aucune Connexion Internet");
+        $this->pageManager::setTitle("Aucune Connexion Internet");
         $this->view('frontend/others/offline');
     }
 
@@ -35,7 +35,7 @@ class StaticController extends Controller
     {
         $this->turbolinksLocation("/privacy");
         $categories = $this->loadModel('categories')->orderBy('title', 'ASC', 0, 5);
-        $this->pageManager::setName("Politique d'utilisation");
+        $this->pageManager::setTitle("Politique d'utilisation");
         $this->pageManager::setDescription(
             'La présente clause a pour objet de définir les différents termes essentiels du contrat'
         );

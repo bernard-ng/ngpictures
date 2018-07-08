@@ -43,7 +43,7 @@ class CategoriesController extends Controller
         }
 
         $this->turbolinksLocation('/categories');
-        $this->pageManager::setName('Les catégories');
+        $this->pageManager::setTitle('Les catégories');
         $this->pageManager::setDescription(
             "Rétrouvez facilement une photo en cliquant sur une catégorie"
         );
@@ -66,7 +66,7 @@ class CategoriesController extends Controller
             $gallery    = $this->gallery->findWith('categories_id', $category->id, false);
 
             $this->turbolinksLocation("/categories/{$name}-{$id}");
-            $this->pageManager::setName("{$category->title}");
+            $this->pageManager::setTitle("{$category->title}");
             $this->view('frontend/categories/show', compact('category', 'blog', 'posts', 'gallery'));
         } else {
             $this->flash->set('danger', $this->flash->msg['category_not_found']);

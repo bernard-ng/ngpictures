@@ -68,7 +68,7 @@ class UsersController extends Controller
                 }
             }
 
-            $this->pageManager::setName("Rénitialisation du mot de passe");
+            $this->pageManager::setTitle("Rénitialisation du mot de passe");
             $this->view('frontend/users/account/reset', compact('post','errors'));
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error']);
@@ -112,7 +112,7 @@ class UsersController extends Controller
         }
 
         $this->turbolinksLocation("/forgot");
-        $this->pageManager::setName('Mot de passe oublié');
+        $this->pageManager::setTitle('Mot de passe oublié');
         $this->view('frontend/users/account/forgot', compact('post', 'errors'));
     }
 
@@ -149,7 +149,7 @@ class UsersController extends Controller
         }
 
         $this->turbolinksLocation("/sign");
-        $this->pageManager::setName("Inscription");
+        $this->pageManager::setTitle("Inscription");
         $this->view('frontend/users/sign', compact('post', 'errors'));
     }
 
@@ -199,7 +199,7 @@ class UsersController extends Controller
             }
 
             $this->turbolinksLocation("/login");
-            $this->pageManager::setName('Connexion');
+            $this->pageManager::setTitle('Connexion');
             $this->view('frontend/users/login', compact('post', 'errors'));
         }
     }
@@ -240,7 +240,7 @@ class UsersController extends Controller
                 $collection =     $this->callController('saves')->show($user->id);
 
                 $this->turbolinksLocation($user->accountUrl);
-                $this->pageManager::setName("Profile de " . $user->name);
+                $this->pageManager::setTitle("Profile de " . $user->name);
                 $this->view('frontend/users/account/account', compact( "user", "posts", "collection"));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
@@ -309,7 +309,7 @@ class UsersController extends Controller
             }
 
             $this->turbolinksLocation("/settings/{$token}");
-            $this->pageManager::setName('Paramètres');
+            $this->pageManager::setTitle('Paramètres');
             $this->view('frontend/users/account/edit', compact('user', 'errors'));
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error']);

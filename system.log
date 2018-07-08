@@ -129,3 +129,15 @@
 * D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
 		=> 08-Jul 12:37 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
 
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	111
+		=> 08-Jul 13:44 : SQLSTATE[42S02]: Base table or view not found: 1146 La table 'ngbdd.reports' n'existe pas  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 08-Jul 14:44 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 08-Jul 14:44 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 08-Jul 14:44 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+

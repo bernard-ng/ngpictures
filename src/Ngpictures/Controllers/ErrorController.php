@@ -10,7 +10,7 @@ class ErrorController extends Controller
     public function e404()
     {
         $this->turbolinksLocation('/error/not-found');
-        $this->pageManager::setName("404 Page Introuvable");
+        $this->pageManager::setTitle("404 Page Introuvable");
         $this->view("frontend/error/404");
     }
 
@@ -21,7 +21,7 @@ class ErrorController extends Controller
     public function e500()
     {
         $this->turbolinksLocation('/error/internal');
-        $this->pageManager::setName("500 Erreur interne");
+        $this->pageManager::setTitle("500 Erreur interne");
         $this->view("frontend/error/500");
     }
 }

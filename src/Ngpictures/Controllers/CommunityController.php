@@ -18,7 +18,7 @@ class CommunityController extends Controller
         $users = $this->users->lastConfirmed();
 
         $this->turbolinksLocation('/community');
-        $this->pageManager::setName("Communauté");
+        $this->pageManager::setTitle("Communauté");
         $this->pageManager::setDescription(
             "Rétrouvez la communauté de ngpictures, vos amis, les artistes et les passionnés
             de la photographie"
