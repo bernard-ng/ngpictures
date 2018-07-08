@@ -1,8 +1,8 @@
 <?php
 namespace Ngpictures\Traits\Util;
 
-
-trait ResolverTrait {
+trait ResolverTrait
+{
 
     function model($name)
     {

@@ -1,7 +1,6 @@
 <?php
 namespace Ng\Core\Managers;
 
-
 class CacheBustingManager
 {
 

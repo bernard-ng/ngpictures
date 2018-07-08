@@ -1,7 +1,6 @@
 <?php
 namespace Ngpictures\Controllers\Admin;
 
-
 use Ng\Core\Managers\Collection;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Controllers\AdminController;

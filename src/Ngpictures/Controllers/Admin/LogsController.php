@@ -1,7 +1,6 @@
 <?php
 namespace Ngpictures\Controllers\Admin;
 
-
 use Ng\Core\Managers\ConfigManager;
 use Ng\Core\Managers\LogMessageManager;
 use Ng\Core\Managers\Mailer\Mailer;

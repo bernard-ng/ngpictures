@@ -4,8 +4,6 @@ namespace Ngpictures\Controllers;
 use Ng\Core\Managers\Collection;
 use Ngpictures\Traits\Util\TypesActionTrait;
 
-
-
 class ReportsController extends Controller
 {
 
@@ -38,7 +36,6 @@ class ReportsController extends Controller
             $this->pageManager::setDescription("Veuillez nous dire ce qui ne va pas avec cette publication");
             $this->turbolinksLocation("/report/{$type}/{$slug}-{$id}");
             $this->view('frontend/others/report', compact('post'));
-
         } else {
             $this->flash->set('danger', $this->flash->msg['post_not_found'], false);
             $this->redirect(true);

@@ -8,7 +8,6 @@ use Ngpictures\Traits\Controllers\ShowPostTrait;
 use Ngpictures\Traits\Controllers\StoryPostTrait;
 use Ngpictures\Services\Notification\NotificationService;
 
-
 class PostsController extends Controller
 {
     use StoryPostTrait, ShowPostTrait;
@@ -133,7 +132,6 @@ class PostsController extends Controller
         $categories = $this->categories->orderBy('title', 'ASC');
 
         if ($token == $this->authService->getToken()) {
-
             $publication = $this->posts->find(intval($id));
             if ($publication) {
                 $post       =   new Collection($data ?? $_POST);

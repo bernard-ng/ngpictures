@@ -4,8 +4,6 @@ namespace Ngpictures\Controllers;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Util\ResolverTrait;
 
-
-
 class HomeController extends Controller
 {
     /**

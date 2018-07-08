@@ -1,7 +1,6 @@
 <?php
 namespace Ngpictures\Traits\Controllers;
 
-
 trait StoryPostTrait
 {
     /**

@@ -1,7 +1,6 @@
 <?php
 namespace Ngpictures\Controllers\Admin;
 
-
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\ImageManager;
 use Psr\Container\ContainerInterface;
@@ -149,7 +148,7 @@ class BlogController extends AdminController
                             $this->flash->set('danger', $this->flash->msg['files_not_uploaded']);
                         }
                     } else {
-                       $this->sendFormError();
+                        $this->sendFormError();
                     }
                 } else {
                     $this->flash->set('danger', $this->flash->msg['post_requires_picture']);

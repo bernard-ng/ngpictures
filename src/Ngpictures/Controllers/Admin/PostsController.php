@@ -1,7 +1,6 @@
 <?php
 namespace Ngpictures\Controllers\Admin;
 
-
 use Psr\Container\ContainerInterface;
 use Ngpictures\Controllers\AdminController;
 use Ngpictures\Traits\Controllers\PaginationTrait;

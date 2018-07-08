@@ -6,7 +6,6 @@ use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Util\TypesActionTrait;
 use Ngpictures\Services\Notification\NotificationService;
 
-
 class LikesController extends Controller
 {
 

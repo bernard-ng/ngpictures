@@ -44,7 +44,6 @@ class FollowingController extends Controller
                 }
                 $this->flash->set("success", $this->flash->msg['users_unfollowing_success'], false);
                 $this->redirect(true, false);
-
             }
 
             $model->add($user->id, $this->user->id);

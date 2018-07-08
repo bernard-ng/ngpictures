@@ -5,7 +5,6 @@ use Glooby\Pexels\Client;
 use Psr\Container\ContainerInterface;
 use Ng\Core\Managers\LogMessageManager;
 
-
 class PexelsController extends Controller
 {
 

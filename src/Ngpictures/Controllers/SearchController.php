@@ -1,9 +1,7 @@
 <?php
 namespace Ngpictures\Controllers;
 
-
 use Psr\Container\ContainerInterface;
-
 
 class SearchController extends Controller
 {

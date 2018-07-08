@@ -1,12 +1,9 @@
 <?php
 namespace Ngpictures\Controllers;
 
-
 use Ng\Core\Managers\Collection;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Util\TypesActionTrait;
-
-
 
 class SavesController extends controller
 {
@@ -49,7 +46,7 @@ class SavesController extends controller
                     $this->getType($type) => $post->id
                 ]);
 
-                if($this->isAjax()) {
+                if ($this->isAjax()) {
                     $post = $this->loadModel($this->getAction($type))->find($post->id);
                     echo ($post->isSaved)? 'true' : 'false';
                     exit();

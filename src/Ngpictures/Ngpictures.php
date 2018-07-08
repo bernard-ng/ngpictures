@@ -5,7 +5,6 @@ use Ng\Core\Router\Router;
 use Psr\Container\ContainerInterface;
 use Ng\Core\Managers\FlashMessageManager;
 
-
 class Ngpictures
 {
 

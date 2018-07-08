@@ -1,7 +1,6 @@
 <?php
 namespace Ng\Core\Router;
 
-
 class Route
 {
 

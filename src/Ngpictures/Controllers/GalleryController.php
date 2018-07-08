@@ -3,7 +3,6 @@ namespace Ngpictures\Controllers;
 
 use Psr\Container\ContainerInterface;
 
-
 class GalleryController extends Controller
 {
 

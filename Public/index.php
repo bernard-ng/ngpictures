@@ -2,7 +2,6 @@
 use DI\ContainerBuilder;
 use Ngpictures\Ngpictures;
 
-
 /**
  * declaration de la racine du projet
  * inclusion de configuration

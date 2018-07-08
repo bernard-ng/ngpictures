@@ -4,8 +4,6 @@ namespace Ngpictures\Controllers;
 use Ng\Core\Managers\CalendarManager;
 use Psr\Container\ContainerInterface;
 
-
-
 class BookingController extends Controller
 {
     public function __construct(ContainerInterface $container)

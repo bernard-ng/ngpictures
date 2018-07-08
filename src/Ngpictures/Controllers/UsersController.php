@@ -8,7 +8,6 @@ use Ng\Core\Managers\Mailer\Mailer;
 use Psr\Container\ContainerInterface;
 use Ng\Core\Interfaces\CookieInterface;
 
-
 class UsersController extends Controller
 {
 
@@ -69,7 +68,7 @@ class UsersController extends Controller
             }
 
             $this->pageManager::setTitle("Rénitialisation du mot de passe");
-            $this->view('frontend/users/account/reset', compact('post','errors'));
+            $this->view('frontend/users/account/reset', compact('post', 'errors'));
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error']);
             $this->redirect(true);
@@ -241,7 +240,7 @@ class UsersController extends Controller
 
                 $this->turbolinksLocation($user->accountUrl);
                 $this->pageManager::setTitle("Profile de " . $user->name);
-                $this->view('frontend/users/account/account', compact( "user", "posts", "collection"));
+                $this->view('frontend/users/account/account', compact("user", "posts", "collection"));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
                 $this->redirect(true, false);

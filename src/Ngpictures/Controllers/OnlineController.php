@@ -3,7 +3,6 @@ namespace Ngpictures\Controllers;
 
 use Psr\Container\ContainerInterface;
 
-
 class OnlineController extends Controller
 {
     private $number = null;

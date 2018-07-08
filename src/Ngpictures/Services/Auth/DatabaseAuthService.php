@@ -1,7 +1,6 @@
 <?php
 namespace Ngpictures\Services\Auth;
 
-
 use Ngpictures\Models\UsersModel;
 use Ngpictures\Entity\UsersEntity;
 use Ng\Core\Managers\CookieManager;
@@ -11,7 +10,6 @@ use Ng\Core\Managers\SessionManager;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Util\RequestTrait;
 use Ng\Core\Managers\FlashMessageManager;
-
 
 class DatabaseAuthService
 {
@@ -64,7 +62,8 @@ class DatabaseAuthService
      * @param int $users_id
      * @param string $token
      */
-    public function confirm(int $users_id, string $token) {
+    public function confirm(int $users_id, string $token)
+    {
         $token  =   $this->str->escape($token);
         $user   =   $this->users->isNotConfirmed(intval($users_id));
 
@@ -175,7 +174,8 @@ class DatabaseAuthService
      * renvoi le token de la session active
      * @return mixed
      */
-    public function getToken() {
+    public function getToken()
+    {
         return $this->session->read(TOKEN_KEY);
     }
 

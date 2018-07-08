@@ -1,7 +1,6 @@
 <?php
 namespace Ngpictures\Controllers\Admin;
 
-
 use Ng\Core\Managers\Collection;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Controllers\AdminController;
@@ -57,7 +56,7 @@ class CategoriesController extends AdminController
                 $this->flash->set('success', $this->flash->msg['form_post_submitted'], false);
                 $this->redirect(ADMIN . "/blog/categories", false);
             } else {
-               $this->sendFormError();
+                $this->sendFormError();
             }
         }
 

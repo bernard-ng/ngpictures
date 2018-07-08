@@ -20,7 +20,7 @@ trait ShowPostTrait
             $categories =   $this->loadModel('categories')->orderBy('title', 'ASC', 0, 5);
 
             if ($article && $article->slug === $slug) {
-                if($article->online == 1) {
+                if ($article->online == 1) {
                     $similars = $this->loadModel($this->table)->findSimilars($article->id);
                     $author = $this->loadModel('users')->find($article->users_id);
                     $altName = $this->table . " - publication - " . $article->id;

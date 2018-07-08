@@ -6,7 +6,6 @@ use Ngpictures\Controllers\AdminController;
 use Ngpictures\Traits\Util\TypesActionTrait;
 use Ngpictures\Traits\Controllers\PaginationTrait;
 
-
 class ReportsController extends AdminController
 {
 

@@ -1,10 +1,8 @@
 <?php
 namespace Ngpictures\Controllers;
 
-
 use Ng\Core\Managers\Collection;
 use Psr\Container\ContainerInterface;
-
 
 class NotificationsController extends Controller
 {
