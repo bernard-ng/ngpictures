@@ -22,7 +22,8 @@ class HtagController extends Controller
 
         if ($blog || $posts || $gallery) {
             $this->turbolinksLocation("/htag/" . substr($tag, 1));
-            $this->pageManager::setTitle("Htag " . substr($tag, 1));
+            $this->pageManager::setTitle("Htag");
+            $this->pageManager::setDescription("Rétrouvez toutes les photos associées à l'Htag : " . substr($tag, 1));
             $this->view('frontend/others/htags', compact('tag', 'blog', 'posts', 'gallery'));
         } else {
             $this->flash->set('info', $this->flash->msg['post_htag_empty']);

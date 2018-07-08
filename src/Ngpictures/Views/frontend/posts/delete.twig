@@ -1,0 +1,24 @@
+{% extends 'layout/users/default.twig' %}
+{% import 'includes/form.twig' as form %}
+{% block content %}
+    <div class="row col l4 m4 s12">
+        <div class="card-panel hoverable" id="loginBox">
+            <h2 class="ui header">Supprimer la publication</h2>
+            <p>
+                Voulez-vous vraiment supprimer cette publication ?
+            </p>
+            <div class="row">
+                <img src="{{ post.thumbUrl }}" class="responsive" alt="{{ post.title ?: post.name }}" title="{{ post.title ?: post.name }}"
+                    width="100%" height="auto">
+            </div>
+            <form method="POST" action="{{ post.deleteUrl }}" data-action="delete">
+                <input type="hidden" name="id" value="{{ post.id }}">
+                <input type="hidden" name="token" value="{{ session.getToken }}">
+                <div class="row right">
+                    <button type="submit" class="btn waves-effect">confirmer</button>
+                    <a href="/posts" class="btn waves-effect">Annuler</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

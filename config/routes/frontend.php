@@ -17,6 +17,8 @@ $router->get("/confirm/:id/:token", "users#confirm", "users.confirmation");
 $router->get("/logout", "users#logout", "users.logout");
 $router->get("/:user-:id", "users#account", "users.account");
 $router->get("/my-posts/:token", "posts#showPosts", "posts.show-post");
+$router->any("/my-posts/edit/:id/:token", "posts#edit", "posts.edit");
+$router->any("/my-posts/delete/:id/:token", "posts#delete", "posts.delete");
 $router->get("/my-followers/:token", "following#showFollowers", "users.show-followers");
 $router->get("/my-following/:token", "following#showFollowing", "users.show-following");
 $router->get('/my-saves/:token', 'saves#add', 'saves.index');

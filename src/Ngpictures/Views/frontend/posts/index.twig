@@ -46,11 +46,25 @@
                                     </li>
                                 {% endif %}
                                 <li>
-                                    <a data-action="report" class="news-card-header-icon modal-trigger" href="{{ a.reportUrl }}">
+                                    <a data-action="report" class="news-card-header-icon" href="{{ a.reportUrl }}">
                                         <i class="icon icon-attention"></i>
                                         Signaler
                                     </a>
                                 </li>
+                                {% if a.users_id == activeUser.id %}
+                                    <li>
+                                        <a data-action="edit" class="news-card-header-icon modal-trigger" href="{{ a.editUrl }}">
+                                            <i class="icon icon-plus-circled"></i>
+                                            Editer
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-action="delete" class="news-card-header-icon modal-trigger" href="{{ a.deleteUrl }}">
+                                            <i class="icon icon-cancel"></i>
+                                            Supprimer
+                                        </a>
+                                    </li>
+                                {% endif %}
                             </ul>
                         {% endif %}
                     </header>
