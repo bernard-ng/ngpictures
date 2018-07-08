@@ -28,7 +28,7 @@ trait TypesActionTrait
      * @param int $type
      * @return string
      */
-    private function getType(int $type): string
+    private function getType(int $type)
     {
         $model = new Collection($this->types);
         return $model->get($type);
@@ -40,7 +40,7 @@ trait TypesActionTrait
      * @param int $actions
      * @return string
      */
-    private function getAction(int $actions) : string
+    private function getAction(int $actions)
     {
         $model = new Collection($this->actions);
         return $model->get($actions);

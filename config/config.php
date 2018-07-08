@@ -51,6 +51,7 @@ return [
     \PDO::class => factory([MysqlDatabase::class, 'getPDO']),
 
     ReCaptcha::class => object()->constructor(RECAPTCH_API_KEY),
+    Glooby\Pexels\Client::class => object()->constructor(PEXELS_API_KEY),
     FlashMessageManager::class => object()->constructor(
         get(SessionInterface::class),
         get(MessageManager::class)
