@@ -1,51 +1,47 @@
-{% extends 'layout/posts/default.twig' %}
+{% extends "layout/posts/default.twig" %}
+{% import 'includes/form.twig' as form %}
+
 
 {% block content %}
-    <section class="section container row">
-        {% for u in likers %}
-        <div class="row nexted col l3 m6 s12">
-                <div class="card-user card transparent hovercard hoverable">
-                    <div class="cardheader" style="background: url('{{ u.avatarUrl }}')"></div>
-                    <div class="avatar">
-                        <a href="{{ u.accountUrl }}">
-                            <img alt="{{ u.name }}" title="{{ u.name }}" src="{{ u.avatarUrl }}">
-                        </a>
-                    </div>
-                    <div class="info">
-                        <div class="title">
-                            <a href="{{ u.accountUrl }}">{{ u.name }}</a>
-                        </div>
-                        <div class="desc truncate">{{ u.bio }}</div>
-                        <div class="ui tiny horizontal divided list">
-                            <div class="item">
-                                <div class="content">
-                                    <div class="header">1,35k&nbsp;Posts</div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="content">
-                                    <div class="header">4,9k&nbsp;Abonnés</div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="content">
-                                    <div class="header">12&nbsp;Abonnement</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {% if u.id != activeUser.id %}
-                            <a href="{{ u.followingUrl }}" class="btn btn-flat">
-                                {{ u.isFollowed ? "Se désabonner" : "S'abonner" }}
+    <section id="likers" class="section container row">
+        <div class="col l9 m12 s12 card grey dark-4">
+        <div class="section" id="commentContainer">
+            {% if likers %}
+                <ul class="collection">
+                    {% for u in likers %}
+                        <li class="collection-item avatar">
+                            <a href="{{ u.accountUrl }}">
+                                <img src="{{ u.avatarUrl }}" alt="{{ u.name }}" class="circle">
+                                <span class="title">{{ u.name }}</span>
                             </a>
-                        {% else %}
-                            <button class="btn btn-flat disabled">
-                                Se désabonner
-                            </button>
-                        {% endif %}
+                            <p>{{ u.bio | escape | nl2br }}</p>
+                            <br>
+                            {% if u.id != activeUser.id %}
+                                <a href="{{ u.followingUrl }}" class="btn" data-action="following">
+                                    {{ u.isFollowed ? "Se désabonner" : "S'abonner" }}
+                                </a>
+                            {% else %}
+                                <button class="btn disabled">
+                                    Se désabonner
+                                </button>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                    <div class="section center-align col l8 offset-l2 s12 m12">
+                        <h2 class="icon icon-comment-empty red-txt center-align"></h2>
+                        <h2 class="ui header divided center"> Aucun "J'aime" pour l'instant</h2>
+                        <p>
+                            le site ne présente actuellement aucune mention j'aime pour cette publication, soyez la première
+                            personne à aimer cette publication.
+                        </p>
                     </div>
-                </div>
+                {% endif %}
             </div>
-        {% endfor %}
+        </div>
+        <div class="hide-on-small-and-down">
+            {% include "includes/menu-aside.twig" %}
+        </div>
     </section>
 {% endblock %}

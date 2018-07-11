@@ -180,3 +180,39 @@
 * D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
 		=> 08-Jul 20:34 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
 
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 09-Jul 15:35 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 09-Jul 15:42 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 09-Jul 15:42 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 09-Jul 15:44 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 09-Jul 15:44 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 09-Jul 15:44 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 10-Jul 03:22 : SQLSTATE[42S22]: Column not found: 1054 Champ '_id' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 10-Jul 03:43 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 10-Jul 20:32 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 10-Jul 20:32 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 10-Jul 20:39 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
+		=> 10-Jul 20:39 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+

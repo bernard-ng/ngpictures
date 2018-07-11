@@ -44,6 +44,7 @@ $router->get("/categories/:name-:id", "categories#show", "categories.show");
 $router->get("/gallery","gallery","gallery.index");
 $router->get("/gallery/slider", "gallery#slider", "gallery.slider");
 $router->get("/gallery/albums", "gallery#albums", "gallery.albums");
+$router->get("/gallery/albums/:slug-:id", "gallery#album_show", "gallery.album_show");
 $router->get("/gallery/:id","gallery#show","gallery.show");
 
 
@@ -59,7 +60,8 @@ $router->get("/download/:type/:name", "download", "download");
 $router->get("/download/show/:type/:name", "download#show", "download");
 
 //comments
-$router->post("/comments/:type/:slug-:id","comments","comments.show");
+$router->get("/comments/:type/:slug-:id", "comments#show", "comments.show");
+$router->post("/comments/:type/:slug-:id","comments#index","comments.add");
 $router->post("/comments/edit/:id/:token", "comments#edit", "comments.edit");
 $router->get("/comments/delete/:id/:token", "comments#delete", "comments.delete");
 

@@ -46,6 +46,7 @@
 
 .collection .collection-item.avatar .title {
   font-size: 16px;
+  color: $txt-color;
 }
 
 .collection .collection-item.avatar p {
@@ -82,6 +83,14 @@
 
 .collection-item a {
   color:  $txt-color;
+}
+
+.collection-item time.time {
+  position: absolute;
+  bottom: 5px; right: 20px;
+  font-size: small;
+  margin-top: 20px;
+  display: block;
 }
 
 .collection a.collection-item:not(.active):hover {

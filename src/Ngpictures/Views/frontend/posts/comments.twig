@@ -1,7 +1,10 @@
+{% extends "layout/posts/default.twig" %}
 {% import 'includes/form.twig' as form %}
 
-<div id="comments" class="section container row">
-    <span class="row col l12 s12 m12">
+{% block content %}
+
+    <div id="comments" class="section container row">
+    <span class="row section col l12 s12 m12" style="margin-top: 20px;">
         <h2 class="ui header">{{ commentsNumber > 2 ? commentsNumber ~ " Commentaires" : commentsNumber ~ " Commentaire"}} </h2>
     </span>
     <div class="col l9 m12 s12 card grey dark-4">
@@ -20,21 +23,13 @@
                             <span class="title">{{ user.find(c.users_id).name }}</span>
                         </a>
                         <p>{{ c.comment | escape | nl2br }}</p>
-                        {% if c.users_id == activeUser.id %}
-                            <div class="ui horizontal bulleted list">
-                                <a href="{{ c.editUrl }}" class="blue-txt item" style="font-size: small;">Editer</a>
-                                <a href="{{ c.deleteUrl }}" class="blue-txt item" style="font-size: small;">Supprimer</a>
-                            </div>
-                        {% endif %}
                         <br>
                         <time class="time" data-time="{{ c.date_created | date("U") }}">{{ c.time }}</time>
+                        {% if c.users_id == activeUser.id %}
+                            <a href="{{ c.deleteUrl }}" class="secondary-content"><i class="icon icon-cancel"></i></a>
+                        {% endif %}
                     </li>
                 {% endfor %}
-                {% if commentsNumber > 4 %}
-                    <li class="collection-item">
-                        <p><a href="{{ article.commentUrl }}">Afficher les {{ commentsNumber }} commentaires</a></p>
-                    </li>
-                {% endif %}
             </ul>
            {% else %}
                 <div class="section center-align col l8 offset-l2 s12 m12">
@@ -52,3 +47,4 @@
         {% include "includes/menu-aside.twig" %}
     </div>
 </div>
+{% endblock %}

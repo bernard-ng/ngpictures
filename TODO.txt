@@ -17,7 +17,6 @@ sales.
  une api pour trouver les photographes et des studios photos. on va utiliser un fournisseur de carte et geolocaliser
  les differents user avec un compte photographe.
 
-****    slider bugs with lastId
 ****    notification system a finir. / afficher nombre dans la menu mobile
 ****    reservation system a finir
 ***     map localisation a finir.

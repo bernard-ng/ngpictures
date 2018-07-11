@@ -74,10 +74,25 @@ class GalleryController extends Controller
                 count($this->gallery->findWith('albums_id', $album->id, false));
         }
 
-
         $this->turbolinksLocation("/gallery/albums");
         $this->pageManager::setTitle('albums');
         $this->view('frontend/gallery/albums', compact("albums", "thumbs", "nb"));
+    }
+
+
+    public function album_show($slug, $id)
+    {
+        $album = $this->loadModel('albums')->find(intval($id));
+        if ($album && $album->slug == $slug) {
+            $author = $this->loadModel('users')->find($album->users_id);
+            $this->pageManager::setTitle("Album : {$album->title}");
+            $this->pageManager::setDescription("Toutes les photos de l'album : {$album->title}");
+            $this->turbolinksLocation("/gallery/albums/{$slug}-{$id}");
+            $this->view("frontend/gallery/album_show.twig", compact("album", "author"));
+        } else {
+            $this->flash->set('danger', "Cet album n'existe pas ou plus");
+            $this->redirect(true);
+        }
     }
 
 
@@ -93,17 +108,21 @@ class GalleryController extends Controller
 
             if ($this->gallery->find(intval($lastId))) {
                 $photos = $this->gallery->findGreater($lastId, 4);
+                $last_id = $photos == null ? 1 : end($photos)->id;
 
                 $this->pageManager::setTitle('Diaporama');
-                $this->view('frontend/gallery/slider', compact('photos'));
+                $this->pageManager::setDescription("Voir les photos de la galerie, en diaporama");
+                $this->view('frontend/gallery/slider', compact('photos', 'last_id'));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error']);
                 $this->redirect('/gallery');
             }
         } else {
             $photos = $this->gallery->latest();
+            $last_id =  $photos == null ? 1 : end($photos)->id;
             $this->pageManager::setTitle('Diaporama');
-            $this->view('frontend/gallery/slider', compact('photos'));
+            $this->pageManager::setDescription("Voir les photos de la galerie, en diaporama");
+            $this->view('frontend/gallery/slider', compact('photos', 'last_id'));
         }
     }
 }

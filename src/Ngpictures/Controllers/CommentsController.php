@@ -139,4 +139,28 @@ class CommentsController extends Controller
             }
         }
     }
+
+
+    public function show($type, $slug, $id)
+    {
+        $type   = intval($type);
+        $id     = intval($id);
+        $user   = $this->loadModel("users");
+        $publication    = $this->loadModel($this->getAction($type))->find($id);
+
+        if ($publication) {
+            $comments       = $this->loadModel('comments')->findWith($this->getAction($type) . "_id", $id, false);
+            $commentsNumber = $this->loadModel("comments")->count($id, $this->getAction($type) . "_id")->num;
+
+            $this->pageManager::setTitle("Commentaires");
+            $this->pageManager::setDescription("Tous les commentaires, poster pour la publication : " . $publication->title);
+            $this->turbolinksLocation("/comments/{$type}/{$slug}-{$id}");
+            $this->view("frontend/posts/comments", compact("publication", "comments", "commentsNumber", "user"));
+        } else {
+            $this->flash->set("danger", $this->flash->msg['post_not_found']);
+            redirect(true);
+        }
+
+
+    }
 }
