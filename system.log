@@ -216,3 +216,12 @@
 * D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
 		=> 10-Jul 20:39 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
 
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 11-Jul 10:21 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 11-Jul 10:28 : SQLSTATE[42S22]: Column not found: 1054 Champ 'password' inconnu dans field list  
+
+* D:\sites\ng-pictures\vendor\phpmailer\phpmailer\src\PHPMailer.php	1671
+		=> 11-Jul 10:28 : Could not instantiate mail function.  
+
