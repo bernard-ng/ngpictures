@@ -64,8 +64,6 @@ CREATE TABLE IF NOT EXISTS `photographers` (
 ENGINE = InnoDB
 COMMENT = 'la table qui contient et gère les photographes';
 
-CREATE INDEX ON `photographers` (`users_id` ASC);
-
 
 -- -----------------------------------------------------
 -- Table `verses`
