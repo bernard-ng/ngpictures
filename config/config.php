@@ -37,7 +37,7 @@ return [
     'ftp.user'      => 'bernard@larytech.com',
     'ftp.pass'      => 'm^7#IEv665kV',
 
-    'database.name' =>  (ENV === 'production')? 'larytech_ngbd' : 'ngpictures',
+    'database.name' =>  (ENV === 'production')? 'larytech_ngbd' : 'ngbdd',
     'database.host' =>  (ENV === 'production')? 'larytech.com' : '127.0.0.1',
     'database.user' =>  (ENV === 'production')? 'larytech_ngandu' : 'root',
     'database.pass' =>  (ENV === 'production')? '/&sF^2`Wjhquq2Hm~k`,' : '',

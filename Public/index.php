@@ -3,10 +3,10 @@ use DI\ContainerBuilder;
 use Ngpictures\Ngpictures;
 
 /**
- * declaration de la racine du projet
  * inclusion de configuration
  * inclusion du composer/autoload
  */
+require(dirname(__DIR__)."/config/ini.php");
 require(dirname(__DIR__)."/config/constant.php");
 require(ROOT."/vendor/autoload.php");
 
