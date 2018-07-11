@@ -243,3 +243,6 @@
 * D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
 		=> 11-Jul 13:23 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
 
+* Ng\Core\Managers\Mailer\Mailer
+		=> 11-Jul 13:35 : Message could not be sent. Mailer Error: Could not instantiate mail function.  
+

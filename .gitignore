@@ -8,6 +8,6 @@ public/imgs/
 /.vscode/
 vendor
 Desktop.ini
-composer.lock
-system.log
-TODO.txt
+/composer.lock
+/system.log
+/TODO.txt
