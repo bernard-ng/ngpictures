@@ -1,4 +1,4 @@
-(function () {
+ (function () {
     let links = document.querySelectorAll("[target='_self']");
     [].slice.call(links).forEach(function (link) {
         link.addEventListener('click', function (e) {

@@ -54,7 +54,7 @@
     <li>
         <ul class="collapsible collapsible-accordion">
             <li>
-                <a class="collapsible-header waves-effect">Services & autres <i class="icon icon-angle-down"></i></a>
+                <a class="collapsible-header waves-effect">Services<i class="icon icon-angle-down"></i></a>
                 <div class="collapsible-body">
                     <ul>
                         <li><a href="/categories">Catégories des photos <i class="icon icon-tags"></i></a></li>
@@ -65,7 +65,6 @@
                         <li><a href="/photographers">Compte photographe <i class="icon icon-camera"></i></a></li>
                         <li><a href="/contact">Nous contacter <i class="icon icon-mail"></i></a></li>
                         <li><a href="/booking">Réservations <i class="icon icon-calendar"></i></a></li>
-                        <li><a href="/publicities">Publicités <i class="icon icon-megaphone"></i></a></li>
                     </ul>
                 </div>
             </li>
@@ -80,6 +79,20 @@
     <li id="Blog"><a href="/blog">Blog <i class="icon icon-quote-left"></i></a></li>
     <li id="Galerie"><a href="/gallery">Galerie <i class="icon icon-picture"></i></a></li>
     {% if activeUser %}
-        <li id="Posts"><a href="/posts">Actualités </a></li>
+        <li id="Posts"><a href="/posts">Actualités <i class="icon icon-globe"></i></a></li>
     {% endif %}
+    <li>
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a class="collapsible-header waves-effect">Autres<i class="icon icon-angle-down"></i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="/bugs">Signaler un problème<i class="icon icon-tags"></i></a></li>
+                        <li><a href="/ideas">Donner un avis<i class="icon icon-location"></i></a></li>
+                        <li><a href="/privacy">Politique d'utilisation <i class="icon icon-camera"></i></a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
 </ul>

@@ -46,6 +46,15 @@ class PostsModel extends Model
     }
 
 
+    public function get($user_id, $limit)
+    {
+        return $this->query(
+            "SELECT * FROM {$this->table} WHERE users_id = ? AND online = 1 ORDER BY RAND() LIMIT ?",
+            [$user_id, $limit]
+        );
+    }
+
+
     /**
      * find toute les publication du user selon la category
      *

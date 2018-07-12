@@ -22,7 +22,6 @@ sales.
 ***     map localisation a finir.
 ****    profile user page
 ***     deinition de la pagintation pour le frontend
-***     page d'edition d'article pour les users.
 ***     ameliorer pages de recherche
 ***     vider les erreurs de validation lorsque on saisie
 ***     trailling slash bug, avec les page show.

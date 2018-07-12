@@ -228,15 +228,17 @@ class UsersController extends Controller
      * @param string $username
      * @param int $id
      */
-    public function account(string $username, $id)
+    public function account($username, $id)
     {
         if (!empty($username)) {
             $user = $this->users->find(intval($id));
-
             if ($user) {
-                $this->loadModel('saves');
-                $posts      =     $this->loadModel('posts')->findWith('users_id', $user->id, false);
-                $collection =     $this->callController('saves')->show($user->id);
+                $posts = $this->loadModel('posts')->findWithUser($user->id);
+                $recent = null;
+
+                if (count($posts) > 6) {
+                    $recent = $this->loadModel('posts')->get($user->id, 6);
+                }
 
                 $this->turbolinksLocation($user->accountUrl);
                 $this->pageManager::setTitle("Profile de " . $user->name);
@@ -247,6 +249,22 @@ class UsersController extends Controller
             }
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
+            $this->redirect(true, false);
+        }
+    }
+
+
+    public function collection($token)
+    {
+        if($this->authService->getToken() == $token) {
+            $user = $this->authService->isLogged();
+            $collection = $this->callController('saves')->show($user->id);
+
+            $this->turbolinksLocation("/my-collection/{$token}");
+            $this->pageManager::setTitle("Collection de " . $user->name);
+            $this->view('frontend/users/account/collection', compact("collection"));
+        } else {
+            $this->flash->set('danger', $this->flash->msg['collection_not_allowed'], false);
             $this->redirect(true, false);
         }
     }

@@ -38,7 +38,7 @@ class BugsController extends Controller
 
                 $this->loadModel('bugs')->create(compact('content', 'users_id'));
                 $this->flash->set('success', $this->flash->msg['form_bug_submitted'], false);
-                $this->redirect("/home", false);
+                $this->redirect("/", true);
             } else {
                 $this->sendFormError();
             }

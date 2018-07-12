@@ -6,6 +6,11 @@
     height: auto;
     position: relative;
     padding-top: 2em !important;
+
+    &.spaced {
+        padding-top: 6em !important;
+    }
+
     -webkit-transition: all linear 0.3s;
     -o-transition: all linear 0.3s;
     transition: all linear 0.3s;

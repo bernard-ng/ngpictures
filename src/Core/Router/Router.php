@@ -132,7 +132,7 @@ class Router
             if (strlen($this->url) > 1 && substr($this->url, -1) === '/') {
                 $url = substr($this->url, 0, -1);
                 http_response_code(301);
-                header("location:{$url}");
+                header("location: {$url}");
                 exit();
             }
 
