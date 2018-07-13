@@ -18,10 +18,16 @@ sales.
  les differents user avec un compte photographe.
 
 ****    notification system a finir. / afficher nombre dans la menu mobile
-****    reservation system a finir
 ***     map localisation a finir.
 ****    profile user page
 ***     deinition de la pagintation pour le frontend
 ***     ameliorer pages de recherche
 ***     vider les erreurs de validation lorsque on saisie
 ***     trailling slash bug, avec les page show.
+
+
+2.1
+------------------------------------------------------------------------------------------------------------------------
+## posibiliter d'editer un commentaire
+## mentionner quelqu'un partout sur le site
+## posibiliter d'aimer une ou save une publicaiton dans la page show.

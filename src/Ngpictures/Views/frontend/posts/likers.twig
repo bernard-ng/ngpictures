@@ -1,11 +1,10 @@
 {% extends "layout/posts/default.twig" %}
-{% import 'includes/form.twig' as form %}
 
 
 {% block content %}
     <section id="likers" class="section container row">
-        <div class="col l9 m12 s12 card grey dark-4">
-        <div class="section" id="commentContainer">
+        <div class="col l9 m12 s12">
+        <div class="section card grey dark-4" id="likers">
             {% if likers %}
                 <ul class="collection">
                     {% for u in likers %}
@@ -31,7 +30,7 @@
             {% else %}
                     <div class="section center-align col l8 offset-l2 s12 m12">
                         <h2 class="icon icon-comment-empty red-txt center-align"></h2>
-                        <h2 class="ui header divided center"> Aucun "J'aime" pour l'instant</h2>
+                        <h2 class="ui header divided center"> Aucun "J'aime" </h2>
                         <p>
                             le site ne présente actuellement aucune mention j'aime pour cette publication, soyez la première
                             personne à aimer cette publication.
@@ -40,7 +39,7 @@
                 {% endif %}
             </div>
         </div>
-        <div class="hide-on-small-and-down">
+        <div class="hide-on-med-and-down">
             {% include "includes/menu-aside.twig" %}
         </div>
     </section>

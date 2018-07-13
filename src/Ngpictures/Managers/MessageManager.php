@@ -29,7 +29,7 @@ class MessageManager implements ArrayAccess
         //****************************************************************************************/
         'post_saved'            => "Publication ajoutée aux enregistrements",
         'post_not_found'        => "Ooups, cette publication n'existe pas ou plus",
-        'post_private'          => "Désolé cette publication n'est pas accecible pour l'instant",
+        'post_private'          => "Désolé cette publication n'est pas accecible ",
         'post_not_paid'         => "Veuillez débourser la somme exiger, pour obtenir vos photos",
         'post_not_liked'        => "Aucune mention j'aime pour cette publication",
         "post_htag_empty"       => "Aucune publication pour ce Htag",

@@ -19,16 +19,16 @@ class GalleryController extends AdminController
      */
     public function index()
     {
-        $photo          =   $this->gallery->latest();
-        $photos         =   $this->gallery->orderBy('date_created', 'DESC', 0, 10);
-        $total          =   $this->gallery->countAll()->num;
+        $photo = $this->gallery->latest();
+        $photos = $this->gallery->orderBy('date_created', 'DESC', 0, 10);
+        $total = $this->gallery->countAll()->num;
 
-        $pagination     = $this->setPagination($total, "gallery");
-        $currentPage    = $pagination['currentPage'];
-        $totalPage      = $pagination['totalPage'];
-        $prevPage       = $pagination['prevPage'];
-        $nextPage       = $pagination['nextPage'];
-        $photos         = $pagination['result'] ?? $photos;
+        $pagination = $this->setPagination($total, "gallery");
+        $currentPage = $pagination['currentPage'];
+        $totalPage = $pagination['totalPage'];
+        $prevPage = $pagination['prevPage'];
+        $nextPage = $pagination['nextPage'];
+        $photos = $pagination['result'] ?? $photos;
 
 
         $this->pageManager::setTitle('Adm - gallery');
@@ -44,23 +44,26 @@ class GalleryController extends AdminController
      */
     public function add()
     {
-        $post           =   new Collection($_POST);
-        $file           =   new Collection($_FILES);
-        $categories     =   $this->categories->all();
-        $albums         =   $this->albums->all();
+        $post = new Collection($_POST);
+        $file = new Collection($_FILES);
+        $categories = $this->categories->all();
+        $albums = $this->albums->findWith(
+            "photographers_id",
+            $this->loadModel('photographers')->find($this->authService->isLogged()->id)->id
+        , false);
 
         if (!empty($_FILES)) {
-            $name = (empty($post->get('name'))) ? 'ngpictures-photo' : $this->str->escape($post->get('name'));
-            $tags           =   $this->str->escape($post->get('tags')) ?? null;
-            $description    =   $this->str->escape($post->get('description')) ?? null;
-            $categories_id  =   intval($post->get('category')) ?? 1;
-            $albums_id      =   intval($post->get('album')) ?? null;
-            $slug           =   $this->str->slugify($name);
+            $name = $this->str->escape($post->get('name'));
+            $tags = $this->str->escape($post->get('tags')) ?? null;
+            $description = $this->str->escape($post->get('description')) ?? null;
+            $categories_id = ($post->get('category') == 0) ? 1 : intval($post->get('category'));
+            $albums_id = ($post->get('album') == 0) ? 1 : intval($post->get('category'));
+            $slug =  empty($name)? 'ngpictures-photo' : "ngpictures-" . $this->str->slugify($name);
 
             if (!empty($file->get('thumb'))) {
                 $this->gallery->create(compact('name', 'slug', 'description', 'tags', 'categories_id'));
-                $last_id    =   $this->gallery->lastInsertId();
-                $isUploaded =   $this->container->get(ImageManager::class)->upload($file, 'gallery', "{$slug}-{$last_id}", 'ratio');
+                $last_id = $this->gallery->lastInsertId();
+                $isUploaded = $this->container->get(ImageManager::class)->upload($file, 'gallery', "{$slug}-{$last_id}", 'ratio');
 
                 if ($isUploaded) {
                     $this->container->get(ImageManager::class)->upload($file, 'gallery-thumbs', "{$slug}-{$last_id}", 'small');
@@ -101,16 +104,16 @@ class GalleryController extends AdminController
         $photo = $this->gallery->find(intval($id));
 
         if ($photo) {
-            $post       =   new Collection($_POST);
-            $categories =   $this->categories->all();
-            $albums     =   $this->albums->all();
+            $post = new Collection($_POST);
+            $categories = $this->categories->all();
+            $albums = $this->albums->all();
 
             if (isset($_POST) && !empty($_POST)) {
-                $name           =   $this->str->escape($post->get('name')) ?? $photo->name;
-                $tags           =   $this->str->escape($post->get('tags')) ?? $photo->tags;
-                $description    =   $this->str->escape($post->get('description')) ?? $photo->description;
-                $categories_id  =   intval($post->get('category')) ?? 1;
-                $albums_id      =   ($posts->get('album') == 0)? null : inval($this->get('album'));
+                $name = $this->str->escape($post->get('name')) ?? $photo->name;
+                $tags = $this->str->escape($post->get('tags')) ?? $photo->tags;
+                $description = $this->str->escape($post->get('description')) ?? $photo->description;
+                $categories_id = intval($post->get('category')) ?? 1;
+                $albums_id = ($posts->get('album') == 0) ? null : inval($this->get('album'));
 
                 $this->gallery->update($id, compact('name', 'tags', 'description', 'categories_id', 'albums_id'));
                 $this->flash->set("success", $this->flash->msg['post_edit_success'], false);
@@ -146,12 +149,12 @@ class GalleryController extends AdminController
      */
     public function fileBrowser($dirname)
     {
-        $dos = UPLOAD."/{$dirname}";
+        $dos = UPLOAD . "/{$dirname}";
         $relative_dos = "/uploads/{$dirname}";
 
         try {
             $files = new DirectoryIterator($dos);
-        } catch (Exception  $e) {
+        } catch (Exception $e) {
             LogMessageManager::register(__class__, $e);
             $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
             $this->redirect(true, true);
@@ -172,7 +175,7 @@ class GalleryController extends AdminController
     public function watermark(int $type, string $filename)
     {
         $path = [1 => 'posts', 'gallery', 'blog'];
-        $image = UPLOAD."/$path[$type]/{$filename}";
+        $image = UPLOAD . "/$path[$type]/{$filename}";
         $post = new Collection($_POST);
 
         if (is_file($image)) {

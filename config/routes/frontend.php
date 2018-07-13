@@ -20,9 +20,10 @@ $router->any("/my-posts/edit/:id/:token", "posts#edit", "posts.edit");
 $router->any("/my-posts/delete/:id/:token", "posts#delete", "posts.delete");
 $router->get("/my-followers/:token", "following#showFollowers", "users.show-followers");
 $router->get("/my-following/:token", "following#showFollowing", "users.show-following");
-$router->get('/my-collection/:token', 'saves#show', 'saves.index');
-$router->post("/delete-post/:token", "posts#delete", "posts.delete");
-$router->post("/notifications/:id/:token", "nofications#delete", "notification.index");
+$router->get('/my-collection/:token', 'users#collection', 'saves.index');
+$router->get('/my-notifications/:token', "users#notification", 'notification.index');
+$router->get("/my-notifications/delete/:token", "notifications#delete", "notification.delete");
+$router->get("/my-notifications/clear/:token", "notifications#clear", "notification.clear");
 
 
 //community pages
@@ -44,7 +45,7 @@ $router->get("/gallery","gallery","gallery.index");
 $router->get("/gallery/slider", "gallery#slider", "gallery.slider");
 $router->get("/gallery/albums", "gallery#albums", "gallery.albums");
 $router->get("/gallery/albums/:slug-:id", "gallery#album_show", "gallery.album_show");
-$router->get("/gallery/:id","gallery#show","gallery.show");
+$router->get("/gallery/:slug-:id","gallery#show","gallery.show");
 
 
 //likes

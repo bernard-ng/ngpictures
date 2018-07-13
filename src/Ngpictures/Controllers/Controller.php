@@ -60,6 +60,9 @@ class Controller extends SuperController
         if ($this->authService->isLogged()) {
             $this->renderer->addGlobal('activeUser', $this->session->read(AUTH_KEY));
             $this->renderer->addGlobal('securityToken', $this->session->read(TOKEN_KEY));
+            $this->renderer->addGlobal('notificationsNumber',
+                $this->loadModel('notifications')->count($this->authService->isLogged()->id)->num);
+
             $this->pageManager::setMeta(['active-user' => $this->session->getValue(AUTH_KEY, 'id')]);
             $this->pageManager::setMeta(['active-token' => $this->session->read(TOKEN_KEY)]);
         } else {

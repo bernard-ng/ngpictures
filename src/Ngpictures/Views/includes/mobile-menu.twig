@@ -41,7 +41,7 @@
                             <li>
                                 <a href="{{ activeUser.notificationsUrl}}">
                                     Notifications <i class="icon icon-bell"></i>
-                                    <span class="right">[nb]&nbsp;</span>
+                                    <span class="right">{{ notificationsNumber }}&nbsp;</span>
                                 </a>
                             </li>
                             <li><a href="/logout">Déconnexion <i class="icon icon-off"></i></a></li>
@@ -79,7 +79,7 @@
     <li id="Blog"><a href="/blog">Blog <i class="icon icon-quote-left"></i></a></li>
     <li id="Galerie"><a href="/gallery">Galerie <i class="icon icon-picture"></i></a></li>
     {% if activeUser %}
-        <li id="Posts"><a href="/posts">Actualités <i class="icon icon-globe"></i></a></li>
+        <li id="Fil d'actualité"><a href="/posts">Actualités <i class="icon icon-globe"></i></a></li>
     {% endif %}
     <li>
         <ul class="collapsible collapsible-accordion">

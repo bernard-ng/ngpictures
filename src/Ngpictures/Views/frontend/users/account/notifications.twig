@@ -1,0 +1,44 @@
+{% extends "layout/posts/default.twig" %}
+
+{% block content %}
+<section id="notifications" class="section container row">
+    <div class="row col s12">
+        <a href="/my-notifications/delete/{{ securityToken }}" class="btn">Supprimer</a>
+        <a href="/my-notifications/clear/{{ securityToken }}" class="btn">Marquer comme lue</a>
+    </div>
+    <div class="col nexted l9 m12 s12">
+        <div class="card grey dark-4 section" id="commentContainer">
+            {% if notifications %}
+                <ul class="collection">
+                    {% for n in notifications %}
+                        <li class="collection-item avatar">
+                           <a href="{{ n.url }}" style="display: inline-block">
+                                <img src="/imgs/default.jpeg" alt="default" class="circle">
+                                <div class="title" style="color: #ccc"><strong>{{ n.title }}</strong></div>
+                                <p>{{ n.notification }}</p>
+                                <br>
+                                <time class="time" data-time={{ n.date_created | date("U") }}>{{ n.time }}</time>
+
+                                {% if n.status == 0 %}
+                                    <i class="icon icon-star secondary-content"></i>
+                                {% endif %}
+                           </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="section center-align col l8 offset-l2 s12 m12">
+                    <h2 class="icon icon-comment-empty red-txt center-align"></h2>
+                    <h2 class="ui header divided center"> Aucune Notification</h2>
+                    <p>
+                        vous n'avez aucune notification , veuillez revenir plus tard.
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="hide-on-small-and-down">
+        {% include "includes/menu-aside.twig" %}
+    </div>
+</section>
+{% endblock %}

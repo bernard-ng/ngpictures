@@ -48,11 +48,14 @@ class AlbumsController extends AdminController
             $this->validator->setRule('description', 'required');
 
             if ($this->validator->isValid()) {
+
+                $photographers_id = $this->loadModel('photographers')->find($this->authService->isLogged()->id)->id;
                 $title          =   $this->str->escape($post->get('title'));
                 $slug           =   $this->str->slugify($title);
                 $description    =   $post->get('description');
+                $code           =   $this->str->setToken(5);
 
-                $this->albums->create(compact('title', 'description', 'slug'));
+                $this->albums->create(compact('title', 'description', 'slug', 'code', 'photographers_id'));
                 $this->flash->set('success', $this->flash->msg['form_post_submitted'], false);
                 $this->redirect(ADMIN . "/gallery/albums", false);
             } else {

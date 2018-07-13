@@ -7,39 +7,28 @@
             {{ article.fullText | snipet }}
             <br><br>
         </div>
-        <div class="section col l3 m12 s12 ">
-            <div class="ui divided list animated slideInRight">
-                <ul class="collection grey dark-4 shadow-1">
-                    <li class="collection-item">
-                        ISO
-                        <span class="right">{{ article.exifData.ISOSpeedRatings ?? 'Indéfini' }}</span>
-                    </li>
-                    <li class="collection-item">
-                        Flash
-                        <span class="right">{{ article.exifData.Flash ?? 'Indéfini' }}</span>
-                    </li>
-                    <li class="collection-item">
-                        Camera
-                        <span class="right">{{ article.exifData.Model ?? 'Indéfini' }}</span>
-                    </li>
-                    <li class="collection-item">
-                        Dimension
-                        <span class="right">{{ article.exifData.COMPUTED.Height ?? '' }} x {{ article.exifData.COMPUTED.Width ?? '' }} pixels</span>
-                    </li>
-                    <li class="collection-item">
-                        Distance Focale
-                        <span class="right">{{ article.exifData.FocalLength ?? 'Indéfini' }}</span>
-                    </li>
-                    <li class="collection-item">
-                        Temps d'exposition
-                        <span class="right">{{ article.exifData.ExposureTime ?? 'Indéfini' }}</span>
-                    </li>
-                    <li class="collection-item">
-                        Unité de Résolution
-                        <span class="right">{{ article.exifData.ResolutionUnit ?? 'Indéfini' }}</span>
-                    </li>
-                </ul>
-            </div>
+        <div class="section nexted col l3 m12 s12 ">
+            <ul class="collection grey dark-4">
+                <li class="collection-item">
+                    By {{ author.name }}
+                </li>
+                <li class="collection-item">
+                    Camera
+                    <span class="right">{{ article.exifData.Model ?? 'Indéfini' }}</span>
+                </li>
+                <li class="collection-item">
+                    Dimension
+                    <span class="right">{{ article.exifData.COMPUTED.Height ?? '' }} x {{ article.exifData.COMPUTED.Width ?? '' }} pixels</span>
+                </li>
+                <li class="collection-item">
+                    Distance Focale
+                    <span class="right">{{ article.exifData.FocalLength ?? 'Indéfini' }}</span>
+                </li>
+                <li class="collection-item">
+                    Temps d'exposition
+                    <span class="right">{{ article.exifData.ExposureTime ?? 'Indéfini' }}</span>
+                </li>
+            </ul>
         </div>
     </div>
 </section>

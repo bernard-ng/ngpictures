@@ -15,14 +15,16 @@
     <div class>
         <div class="row col s12">
             <ul class="tabs transparent shadow-3">
-               {% if activeUser.id == user.id %}
-                    <li class="tab col s4"><a href="#about">A propos</a></li>
-                    <li class="tab col s4"><a href="#photos" class="active">Photos</a></li>
-                    <li class="tab col s4"><a href="{{ activeUser.collectionUrl }}" target="_self">Collections</a></li>
-               {% else %}
-                    <li class="tab col s6"><a href="#about">A propos</a></li>
-                    <li class="tab col s6"><a href="#photos" class="active">Photos</a></li>
-               {% endif %}
+              <div class="container">
+                   {% if activeUser.id == user.id %}
+                        <li class="tab col s4"><a href="#about">A propos</a></li>
+                        <li class="tab col s4"><a href="#photos" class="active">Photos</a></li>
+                        <li class="tab col s4"><a href="{{ activeUser.collectionUrl }}" target="_self">Collections</a></li>
+                    {% else %}
+                        <li class="tab col s6"><a href="#about">A propos</a></li>
+                        <li class="tab col s6"><a href="#photos" class="active">Photos</a></li>
+                    {% endif %}
+              </div>
             </ul>
         </div>
     </div>
@@ -102,10 +104,10 @@
                 </div>
             </section>
         {% else %}
-            <div class="section jumbotron dark row center-align">
+            <div class="section row center-align">
                 <h2 class="icon icon-inbox red-txt center-align"></h2>
                 <span class="col l12 s12 m12">
-                    <h2 class="ui header divided center"> Aucune publication pour l'instant</h2>
+                    <h2 class="ui header divided center"> Aucune publication </h2>
                 </span>
                 <p class="col l8 offset-l2 s12 m12">
                     {{ user.name }} ne présente actuellement aucune publication disponible, les publications sont peut être en évaluation ou privées,

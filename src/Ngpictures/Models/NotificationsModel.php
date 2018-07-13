@@ -46,9 +46,20 @@ class NotificationsModel extends Model
      */
     public function setRead(int $user_id)
     {
-        return $this->query("UPDATE FROM {$this->table} SET status = 1 WHERE users_id = ?", [$user_id]);
+        return $this->query("UPDATE {$this->table} SET status = 1 WHERE users_id = ? ",
+        [$user_id]);
     }
 
+
+    public function count($user_id)
+    {
+        return $this->query(
+            "SELECT COUNT(id) AS num FROM {$this->table} WHERE status = 0 AND users_id = ?",
+            [$user_id],
+            true,
+            true
+        );
+    }
 
     /**
      * supprime toutes les notifcations d'un user
@@ -58,6 +69,7 @@ class NotificationsModel extends Model
      */
     public function delete(int $user_id)
     {
-        return $this->query("DELETE FROM {$this->table} WHERE users_id = ?", [$user_id]);
+        return $this->query("DELETE FROM {$this->table} WHERE users_id = ? ",
+        [$user_id]);
     }
 }
