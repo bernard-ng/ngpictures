@@ -16,6 +16,44 @@ class UsersEntity extends Entity
     use ResolverTrait;
     use AuthTrait;
 
+
+    /**
+     * compte les publication d'un user
+     *
+     * @return int
+     */
+    public function getPostsNumber()
+    {
+        $posts = Ngpictures::getDic()->get($this->model('posts'));
+        $this->postsNumber = $posts->count($this->id)->num;
+        return $this->postsNumber;
+    }
+
+
+    /**
+     * compte les followers d'un user
+     *
+     * @return int
+     */
+    public function getFollowersNumber()
+    {
+        $following = Ngpictures::getDic()->get($this->model('following'));
+        $this->followersNumber = $following->countFollowers($this->id)['num'];
+        return $this->followersNumber;
+    }
+
+    /**
+     * compte les followings d'un user
+     *
+     * @return int
+     */
+    public function getFollowingsNumber()
+    {
+        $following = Ngpictures::getDic()->get($this->model('following'));
+        $this->followingsNumber = $following->countFollowings($this->id)['num'];
+        return $this->followingsNumber;
+    }
+
     /**
      * le lien vers le compte d'un user
      * @return mixed|string

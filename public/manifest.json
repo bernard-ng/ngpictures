@@ -3,14 +3,12 @@
   "lang": "fr-Fr",
   "name": "Ngpictures",
   "short_name": "Ngpictures",
-  "start_url": "/home",
+  "start_url": "/",
   "background_color": "#1c1b1b",
   "theme_color": "#263238",
   "display": "standalone",
   "orientation": "portrait",
-  "description": "Galerie, Entreprise d'art photographique et mini résaux social où vous pouvez voir et partager vos propres photos",
-  "gcm_sender_id": "103953800507",
-
+  "description": "Ngpictures est une galerie photo et un mini résau sociale pour photographe et passionné de la photographie, Nous vous proposons de découvrir la photographie autrement, avec nos différents services étant chrétiens l'application vous propose une fonctionnalité incroyable, godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l'avance.",
   "icons": [{
       "src": "favicon/android-icon-36x36.png",
       "sizes": "36x36",

@@ -28,6 +28,7 @@ $router->get("/my-notifications/clear/:token", "notifications#clear", "notificat
 
 //community pages
 $router->get("/community", "community", "community.index");
+$router->get("/community/search", "community#search", "community.search");
 
 //posts and blog pages
 $router->get("/blog","blog", "blog.index");

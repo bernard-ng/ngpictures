@@ -3,13 +3,11 @@ namespace Ngpictures\Models;
 
 use Ng\Core\Models\Model;
 use Ngpictures\Traits\Models\FindQueryTrait;
-use Ngpictures\Traits\Models\SearchQueryTrait;
 
 class PostsModel extends Model
 {
 
     use FindQueryTrait;
-    use SearchQueryTrait;
 
     /**
      * nom de la table
@@ -51,6 +49,17 @@ class PostsModel extends Model
         return $this->query(
             "SELECT * FROM {$this->table} WHERE users_id = ? AND online = 1 ORDER BY RAND() LIMIT ?",
             [$user_id, $limit]
+        );
+    }
+
+
+    public function count($user_id)
+    {
+        return $this->query(
+            "SELECT COUNT(id) AS num FROM {$this->table} WHERE users_id = ? AND online = 1",
+            [$user_id],
+            true,
+            true
         );
     }
 

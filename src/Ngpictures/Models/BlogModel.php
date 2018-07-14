@@ -3,13 +3,11 @@ namespace Ngpictures\Models;
 
 use Ng\Core\Models\Model;
 use Ngpictures\Traits\Models\FindQueryTrait;
-use Ngpictures\Traits\Models\SearchQueryTrait;
 
 class BlogModel extends Model
 {
 
     use FindQueryTrait;
-    use SearchQueryTrait;
 
     /**
      * nom de la table

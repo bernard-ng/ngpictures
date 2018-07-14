@@ -56,17 +56,50 @@ class FollowingModel extends Model
 
 
     /**
+     * count les followers
+     *
+     * @param int $user_id
+     * @return void
+     */
+    public function countFollowers($user_id)
+    {
+        return $this->query(
+            "SELECT COUNT(follower_id) AS num FROM {$this->table} WHERE followed_id = ? ",
+            [$user_id],
+            true,
+            true
+        );
+    }
+
+
+    /**
+     * count les followings
+     *
+     * @param int $user_id
+     * @return void
+     */
+    public function countFollowings($user_id)
+    {
+        return $this->query(
+            "SELECT COUNT(followed_id) AS num FROM {$this->table} WHERE follower_id = ? ",
+            [$user_id],
+            true,
+            true
+        );
+    }
+
+    /**
      * le user est follow ?
      *
      * @param integer $id
      * @param int|null $users_id
      * @return boolean
      */
-    public function isFollowed(int $id, $users_id = null): bool
+    public function isFollowed(int $id, $users_id = null) : bool
     {
         return boolval($req = $this->query(
             "SELECT id FROM {$this->table} WHERE followed_id = ? AND follower_id = ? ",
-            [$id,$users_id],
+            [$id, $users_id],
             true,
             true
         ));
@@ -79,7 +112,7 @@ class FollowingModel extends Model
      * @param int $id
      * @return string
      */
-    public function isMentionnedFollow(int $id): string
+    public function isMentionnedFollow(int $id) : string
     {
         return $this->isFollowed($id, $this->session->getValue(AUTH_KEY, 'id'));
     }

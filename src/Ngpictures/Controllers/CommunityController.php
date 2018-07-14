@@ -24,4 +24,21 @@ class CommunityController extends Controller
         );
         $this->view("frontend/community/community", compact('users'));
     }
+
+
+    public function search()
+    {
+        if (isset($_GET['q']) && !empty($_GET['q'])) {
+            $query = trim($this->str->escape($_GET['q']));
+
+            $users = $this->loadModel('users')->search($query);
+            $this->turbolinksLocation("/community/search?q={$query}");
+            $this->pageManager::setTitle("Recherches");
+            $this->view("frontend/community/search", compact("query", "users"));
+        } else {
+            $this->turbolinksLocation("/community/search");
+            $this->pageManager::setTitle("Recherches");
+            $this->view("frontend/community/search");
+        }
+    }
 }

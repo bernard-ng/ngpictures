@@ -20,44 +20,15 @@ class SearchController extends Controller
         if (isset($_GET['q']) && !empty($_GET['q'])) {
             $query = trim($this->str->escape($_GET['q']));
 
-            $posts = $this->posts->search($query, "begin");
-            $blog = $this->blog->search($query, "begin");
-            $gallery = $this->gallery->search($query, "begin");
+            $posts = $this->posts->search($query);
+            $blog = $this->blog->search($query);
+            $gallery = $this->gallery->search($query);
 
-            //recherches dans la gallery
-            while (empty($gallery)) {
-                $gallery = $this->gallery->search($query, 'end');
-                $gallery = $this->gallery->search($query, 'within');
-                $gallery = $this->gallery->search($query, 'concat');
-
-                if (empty($gallery)) {
-                    break;
-                }
-            }
-
-            while (empty($posts)) {
-                $posts = $this->posts->search($query, "end");
-                $posts = $this->posts->search($query, "within");
-                $posts = $this->posts->search($query, "concat");
-
-                if (empty($posts)) {
-                    break;
-                }
-            }
-
-            while (empty($blog)) {
-                $blog = $this->blog->search($query, "end");
-                $blog = $this->blog->search($query, "within");
-                $blog = $this->blog->search($query, "concat");
-
-                if (empty($blog)) {
-                    break;
-                }
-            }
-
+            $words = explode(' ', $query);
             $pexels = $this->callController('pexels')->search($query, 15, 1);
 
-            $this->turbolinksLocation("/search?q={$query}");
+
+            $this->turbolinksLocation("/search?q=". str_replace(' ', '+', $query));
             $this->pageManager::setTitle("Recherches");
             $this->view("frontend/others/search", compact("query", "posts", "blog", "gallery", "pexels"));
         } else {
