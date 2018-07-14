@@ -3,10 +3,13 @@ namespace Ngpictures;
 
 use Ng\Core\Router\Router;
 use Psr\Container\ContainerInterface;
+use Ngpictures\Traits\Util\RequestTrait;
 use Ng\Core\Managers\FlashMessageManager;
 
 class Ngpictures
 {
+
+    use RequestTrait;
 
     /**
      * le container
@@ -27,7 +30,7 @@ class Ngpictures
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        self::$dic      =   $container;
+        self::$dic = $container;
     }
 
 
@@ -39,22 +42,21 @@ class Ngpictures
     {
         try {
             $router = $this->container->get(Router::class);
-            require(ROOT."/config/routes/frontend.php");
-            require(ROOT."/config/routes/backend.php");
+            require(ROOT . "/config/routes/frontend.php");
+            require(ROOT . "/config/routes/backend.php");
 
             $route = $router->run();
             if ($route) {
                 if (is_string($route->getController())) {
-                    $action         =   explode("#", $route->getController());
-                    $method         =   $action[1] ?? 'index';
-                    $controller     =   $this->container->get($this->getAction($action[0]));
+                    $action = explode("#", $route->getController());
+                    $method = $action[1] ?? 'index';
+                    $controller = $this->container->get($this->getAction($action[0]));
 
                     return call_user_func_array([$controller, $method], $route->getMatches());
                 }
                 return call_user_func_array($route->getController(), $route->getMatches());
             } else {
-                http_response_code(404);
-                header('location:/error/not-found');
+                header('location:/error/not-found', true, 404);
                 exit();
             }
         } catch (RouterException $e) {
@@ -84,7 +86,7 @@ class Ngpictures
     public function exceptionHandler($e)
     {
         $this->container->get(FlashMessageManager::class)->set('danger', "Oups une erreur est survenue !");
-        LogMessageManager::register(__CLASS__, $e);
+        LogMessageManager::register(__class__, $e);
         http_response_code(500);
         self::redirect("/error/internal");
     }

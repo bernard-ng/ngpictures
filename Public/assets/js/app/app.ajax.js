@@ -641,7 +641,8 @@ function downloadFile(element) {
 }
 
 //------------------------------------------------------------------------------------
-//loadVerses("[data-action='verses']");
+loadVerses("[data-action='verses']");
+follow("[data-action='following']");
 savePost("[data-action='save']");
 downloadFile("[data-action='download']");
 formLogin("form[data-action='login']");
@@ -650,5 +651,3 @@ formGenericSubmit("form[data-action='ideas']");
 formGenericSubmit("form[data-action='bugs']");
 formFeedComments('#dataContainer');
 likes("#dataContainer");
-loadPictureInfo("[data-action='gallery']");
-follow("[data-action='following']");

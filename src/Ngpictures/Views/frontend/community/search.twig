@@ -65,5 +65,14 @@
                 </div>
             </div>
         {% endfor %}
+        {% if users %}
+            <div class="ng-progress-container">
+                <div id="statusBar" class="mtb ng-progress-indeterminate disabled" data-ajax="community-search">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+            <br>
+        {% endif %}
+
     </section>
 {% endblock %}

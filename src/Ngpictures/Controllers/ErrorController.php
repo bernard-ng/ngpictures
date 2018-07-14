@@ -9,6 +9,7 @@ class ErrorController extends Controller
      */
     public function e404()
     {
+        http_response_code(404);
         $this->turbolinksLocation('/error/not-found');
         $this->pageManager::setTitle("404 Page Introuvable");
         $this->view("frontend/error/404");

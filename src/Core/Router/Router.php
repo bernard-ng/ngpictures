@@ -33,6 +33,11 @@ class Router
     public function __construct()
     {
         $this->url = $_GET['url'] ?? $_SERVER['REQUEST_URI'] ?? '/';
+        if (strlen( $this->url) > 1 && substr( $this->url, -1) === '/') {
+            $url = substr( $this->url, 0, -1);
+            http_response_code(301);
+            header("Location: /{$url}");
+        }
     }
 
 
@@ -129,21 +134,22 @@ class Router
     public function run()
     {
         if (isset($_SERVER['REQUEST_METHOD'])) {
-            if (strlen($this->url) > 1 && substr($this->url, -1) === '/') {
-                $url = substr($this->url, 0, -1);
-                http_response_code(301);
-                header("location: {$url}");
-                exit();
-            }
-
             foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
                 if ($route->match($this->url)) {
                     return $route;
                 }
             }
-            return null;
+            http_response_code(404);
         }
+    }
 
-        throw new RouterException("undefinied Request method", 500);
+    /**
+     * Get l'url entre par le user
+     *
+     * @return  string
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
 }
