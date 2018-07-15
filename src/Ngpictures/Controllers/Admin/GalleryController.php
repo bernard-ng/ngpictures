@@ -49,8 +49,9 @@ class GalleryController extends AdminController
         $categories = $this->categories->all();
         $albums = $this->albums->findWith(
             "photographers_id",
-            $this->loadModel('photographers')->find($this->authService->isLogged()->id)->id
-        , false);
+            $this->loadModel('photographers')->find($this->authService->isLogged()->id)->id,
+            false
+        );
 
         if (!empty($_FILES)) {
             $name = $this->str->escape($post->get('name'));
@@ -68,12 +69,14 @@ class GalleryController extends AdminController
                 if ($isUploaded) {
                     $this->container->get(ImageManager::class)->upload($file, 'gallery-thumbs', "{$slug}-{$last_id}", 'small');
                     $exif = $this->container->get(ImageManager::class)->getExif($file);
+                    $color = $this->container->get(ImageManager::class)->getColor($file);
 
                     $this->gallery->update(
                         $last_id,
                         [
                             "thumb" => "{$slug}-{$last_id}.jpg",
                             'exif' => $exif,
+                            'color' => $color,
                         ]
                     );
 

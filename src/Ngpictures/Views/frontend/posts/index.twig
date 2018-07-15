@@ -71,7 +71,7 @@
                     {% if a.thumb %}
                     <div class="card-image">
                         <span class="news-card-image-article">
-                            <a href="{{ a.url }}" class="waves-effect" style="background-color: #444; width: 100%; min-height: 100px;">
+                            <a href="{{ a.url }}" class="waves-effect" style="background-color: {{ a.color }}; width: 100%; min-height: 100px;">
                                 <img src="{{ a.thumbUrl }}" alt="Image de l'article" title="{{ a.title }}">
                             </a>
                         </span>

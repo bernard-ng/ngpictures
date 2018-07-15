@@ -2,7 +2,10 @@
 namespace Ng\Core\Managers;
 
 use \Throwable;
+use League\ColorExtractor\Color;
+use League\ColorExtractor\Palette;
 use Ng\Core\Interfaces\SessionInterface;
+use League\ColorExtractor\ColorExtractor;
 use Intervention\Image\Exception\NotReadableException;
 use Intervention\Image\ImageManager as InterventionImage;
 
@@ -114,6 +117,25 @@ class ImageManager
         } catch (NotReadableException $e) {
             LogMessageManager::register(__class__, $e);
             return null;
+        }
+    }
+
+
+    /**
+     * recupere la couleur dominante d'une couleur
+     *
+     * @param Collection $file
+     * @return void
+     */
+    public function getColor(Collection $file)
+    {
+        try {
+            $palette = Palette::fromFilename($file->get('thumb.tmp_name'));
+            $extractor = new ColorExtractor($palette);
+            return empty($extractor->extract(1)) ? "#444" : Color::fromIntToHex($extractor->extract(1)[0]);
+        } catch (\Exception $e) {
+            LogMessageManager::register(__CLASS__, $e);
+            return "#444";
         }
     }
 

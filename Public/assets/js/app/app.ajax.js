@@ -641,7 +641,6 @@ function downloadFile(element) {
 }
 
 //------------------------------------------------------------------------------------
-loadVerses("[data-action='verses']");
 follow("[data-action='following']");
 savePost("[data-action='save']");
 downloadFile("[data-action='download']");

@@ -256,7 +256,7 @@ class UsersController extends Controller
 
     public function collection($token)
     {
-        if($this->authService->getToken() == $token) {
+        if ($this->authService->getToken() == $token) {
             $user = $this->authService->isLogged();
             $collection = $this->callController('saves')->show($user->id);
 
@@ -278,7 +278,7 @@ class UsersController extends Controller
      */
     public function notification($token)
     {
-        if($this->authService->getToken() == $token) {
+        if ($this->authService->getToken() == $token) {
             $user = $this->authService->isLogged();
             $notifications = $this->callController('notifications')->show($user->id, $token);
 

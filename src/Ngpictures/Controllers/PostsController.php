@@ -88,11 +88,14 @@ class PostsController extends Controller
                                 ->get(ImageManager::class)
                                 ->upload($file, 'posts-thumbs', "ngpictures-{$slug}-{$last_id}", 'medium');
 
+                            $exif  = $this->container->get(ImageManager::class)->getExif($file);
+                            $color = $this->container->get(ImageManager::class)->getColor($file);
                             $this->posts->update(
                                 $last_id,
                                 [
                                     'thumb' => "ngpictures-{$slug}-{$last_id}.jpg",
-                                    'exif' => $this->container->get(ImageManager::class)->getExif($file)
+                                    'exif' => $exif,
+                                    'color' => $color,
                                 ]
                             );
 
@@ -169,7 +172,6 @@ class PostsController extends Controller
 
         if ($this->authService->getToken() == $token) {
             if ($post && ($post->users_id == $this->authService->isLogged()->id)) {
-
                 if (isset($_POST) && !empty($_POST)) {
                     $this->posts->delete($post->id);
                     $this->flash->set('success', $this->flash->msg['post_delete_success'], false);

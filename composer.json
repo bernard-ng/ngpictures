@@ -11,6 +11,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
+        "endroid/qrcode": "^3.2",
         "league/color-extractor" : "^0.3.2",
         "intervention/image": "^2.4",
         "facebook/graph-sdk": "^5.6",
@@ -25,9 +26,9 @@
         "squizlabs/php_codesniffer": "^3.2"
     },
     "autoload" : {
-        "psr-4" : { 
+        "psr-4" : {
             "Ngpictures\\" : "src/Ngpictures/",
-            "Ng\\Core\\" : "src/Core/" 
+            "Ng\\Core\\" : "src/Core/"
         }
     }
 }

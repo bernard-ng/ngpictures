@@ -160,7 +160,5 @@ class CommentsController extends Controller
             $this->flash->set("danger", $this->flash->msg['post_not_found']);
             redirect(true);
         }
-
-
     }
 }

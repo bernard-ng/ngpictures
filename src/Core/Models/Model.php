@@ -169,7 +169,7 @@ class Model
         $sql = '';
         $data = [];
         $words = explode(' ', $query);
-        foreach($words as $key => $word) {
+        foreach ($words as $key => $word) {
             if (mb_strlen($word) < 3) {
                 unset($words[$key]);
             }

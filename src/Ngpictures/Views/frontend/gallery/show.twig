@@ -1,5 +1,5 @@
 {% extends 'layout/show.twig' %} {% block content %}
-<section class="jumbotron dark">
+<section class="section jumbotron dark" style="border-bottom: 5px solid {{ article.color }}; margin-bottom: 20px;">
     <div class="container row">
         <div class="col l9 m12 s12 pb10">
             <img src="{{ article.thumbUrl }}" alt="{{ article.name }}" title="{{ article.name }}" class="responsive-img materialboxed">

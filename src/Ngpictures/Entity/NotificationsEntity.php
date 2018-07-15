@@ -19,22 +19,22 @@ class NotificationsEntity extends Entity
     public function getTitle()
     {
         switch ($this->type) {
-            case 1 :
+            case 1:
                 return "nouvelle publication";
                 break;
-            case 2 :
+            case 2:
                 return "nouvelle mention j'aime";
                 break;
-            case 3 :
+            case 3:
                 return "nouveau commentaire";
                 break;
-            case 4 :
+            case 4:
                 return "nouvel article sur le blog";
                 break;
-            case 5 :
+            case 5:
                 return "nouvelle photo";
                 break;
-            case 6 :
+            case 6:
                 return "nouvel abonné";
         }
     }

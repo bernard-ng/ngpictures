@@ -4,7 +4,6 @@ namespace Ngpictures\Traits\Util;
 use Ngpictures\Ngpictures;
 use Ng\Core\Interfaces\SessionInterface;
 
-
 trait AuthTrait
 {
 

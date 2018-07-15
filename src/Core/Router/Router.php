@@ -33,8 +33,8 @@ class Router
     public function __construct()
     {
         $this->url = $_GET['url'] ?? $_SERVER['REQUEST_URI'] ?? '/';
-        if (strlen( $this->url) > 1 && substr( $this->url, -1) === '/') {
-            $url = substr( $this->url, 0, -1);
+        if (strlen($this->url) > 1 && substr($this->url, -1) === '/') {
+            $url = substr($this->url, 0, -1);
             http_response_code(301);
             header("Location: /{$url}");
         }
