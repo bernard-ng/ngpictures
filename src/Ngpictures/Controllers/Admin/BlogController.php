@@ -133,11 +133,14 @@ class BlogController extends AdminController
                                 ->upload($file, 'blog-thumbs', "ngpictures-{$slug}-{$last_id}", 'small');
 
                             $exif = $this->container->get(ImageManager::class)->getExif($file);
+                            $color = $this->container->get(ImageManager::class)->getColor($file);
+
                             $this->blog->update(
                                 $last_id,
                                 [
                                     'thumb' => "ngpictures-{$slug}-{$last_id}.jpg",
-                                    'exif' => $exif
+                                    'exif' => $exif,
+                                    'color' => $color,
                                 ]
                             );
 

@@ -59,6 +59,13 @@ canvas {
     }
 }
 
+.ng-progress-container {
+    height: 60px;
+    width: 100%;
+    display: block !important;
+    position: relative !important;
+}
+
 @-webkit-keyframes dots {
     0%, 20% {
         left: 0;

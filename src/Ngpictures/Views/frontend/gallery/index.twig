@@ -1,41 +1,55 @@
 {% extends 'layout/posts/default.twig' %}
 
 {% block content %}
+    <div class="row col s12">
+        <ul class="tabs transparent shadow-3">
+            <div class="container">
+                <li class="tab col s4" class="active"><a href="#">Photos</a></li>
+                <li class="tab col s4"><a href="/gallery/albums" target="_self">Albums</a></li>
+                <li class="tab col s4"><a href="/gallery/slider" target="_self">Diaporama</a></li>
+            </div>
+        </ul>
+    </div>
     <section class="section jumbotron dark hide-on-med-and-up">
         <div class="container animated slideInRight">
             <div class="carousel small">
-                 {% for p in photo %}
-                <a href="{{ p.url }}" class="carousel-item">
-                    <img src="{{ p.smallThumbUrl }}" alt="{{ p.name }}" title="{{ p.name }}">
-                </a>
+                {% for p in photo %}
+                    <a href="{{ p.url }}" class="carousel-item">
+                        <img src="{{ p.smallThumbUrl }}" alt="{{ p.name }}" title="{{ p.name }}">
+                    </a>
                 {% endfor %}
             </div>
         </div>
     </section>
     <section class="section container animated slideInRight">
-        <div class="gallery gallery-container" data-action="gallery">
-            {% for p in photos %}
-                <article class="gallery-item" data-action="gallery-item" id="{{ p.id }}" data-url="{{ p.url }}">
-                    <img src="{{ p.smallThumbUrl }}" class="responsive-img" title="{{ p.name }}" alt="{{ p.name }}" data-action="gallery-item-img">
-                    <div class="gallery-item-body section jumbotron dark" data-action="gallery-item-body">
-                        <div class="row col l12 m12 s12">
-                            <div class="col l6 m6 s12 pb10">
-                                <img src="{{ p.thumbUrl }}" title="{{ p.name }}" class="responsive-img" alt="">
-                            </div>
-                            <div class="col l6 m6 s12">
-                                <h2 class="ui header">{{ p.name }}</h2>
-                                <p>
-                                     {{ p.description }}
-                                </p>
-                                <p>
-                                    <a href="{{ p.url }}" class="btn btn-flat">Voir Plus</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            {% endfor %}
-        </div>
+        {% if photos %}
+            <div class="gallery gallery-container" data-action="dataContainer">
+                {% for p in photos %}
+                    <article class="gallery-item" data-action="gallery-item" id="{{ p.id }}">
+                       <a href="{{ p.url }}">
+                            <img src="{{ p.smallThumbUrl }}" class="responsive-img" title="{{ p.name }}" alt="{{ p.name }}">
+                       </a>
+                    </article>
+                {% endfor %}
+            </div>
+            <div class="ng-progress-container">
+                <div id="statusBar" class="mtb ng-progress-indeterminate disabled" data-ajax="gallery">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+            <br>
+        {% else %}
+            <div class="row">
+                <div class="section center-align col l8 offset-l2 m12 s12">
+                    <h2 class="icon icon-picture red-txt center-align"></h2>
+                    <h2 class="ui header divided center"> Aucune Photo </h2>
+                    <p>
+                        le site ne présente actuellement aucune publication disponible, les publications sont peut être en évaluation,
+                        ceci pourrait prendre du temps, veuillez revenir plus tard
+                    </p>
+                </div>
+            </div>
+        {% endif %}
     </section>
     <div class="fixed-action-btn {{ activeUser ? 'second' : '' }}">
         <a href="/gallery/slider" class="btn-floating btn-large blue dark-2 waves-effect shadow-4">

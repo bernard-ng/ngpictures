@@ -3,15 +3,14 @@
 
 {% block content %}
     <section class="section row container">
-        {% include 'includes/right-aside.twig' %}
-        <div class="col l7"
+        <div class="col l9">
             <p>
                 Vous désirez nous <a href="/ideas">proposés quelque chose</a> ?
                 ou <a href="/bugs">Signaler un problème</a> ?
                 faire une <a href="/booking">réservation</a> ? ce formulaire n'est pas approprié, veuillez suivre les liens proposés pour le faire,
                 dans le cas contraire, contacter nous avec le formulaire ci-dessous merci.
             </p>
-            <form action="" method="POST" class="card-panel grey dark-4" enctype="multipart/form-data" data-action="upload">
+            <form action="" method="POST" class="card-panel grey dark-4">
 
                 {{ form.smallInput('name','Votre nom', 'text', errors.get('name'), post.get('name') ?? activeUser.name) }}
                 {{ form.smallInput('email', 'Votre email', 'email', errors.get('email'), post.get('email') ?? activeUser.email) }}
@@ -23,7 +22,7 @@
                 </div>
             </form>
         </div>
-        <div class="col l2 hide-on-small-and-down">
+        <div class="col l3 hide-on-med-and-down">
             <div style="text-align: center;">
                 <div class="fb-page" data-href="https://www.facebook.com/ngpictures23/" data-tabs="messages" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
                     <blockquote cite="https://www.facebook.com/ngpictures23/" class="fb-xfbml-parse-ignore">
@@ -33,39 +32,5 @@
             </div>
         </div>
     </section>
-    <section class="jumbotron parallax-container col l12 s12 m12" style="margin-bottom: 0px;">
-        <div class="row container">
-            <div class="col l12 m12 s12 row">
-                <div class="col l4 m4 s12 center-align pb10">
-                    <span class="stats-value">
-                        <i class="icon icon-location"></i>
-                    </span>
-                    <span class="stats-label">Trouver des photographes</span>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure perspiciatis voluptatum commodi, inventore
-                        sint debitis, aut veniam corrupti necessitatibus at placeat tenetur dolor error reprehenderit illo voluptatem
-                        laboriosam, officiis ea.</p>
-                </div>
-                <div class="col l4 m4 s12 center-align pb10">
-                    <span class="stats-value">
-                        <i class="icon icon-camera"></i>
-                    </span>
-                    <span class="stats-label">Shooting professionnel</span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt, dicta expedita totam adipisci rem
-                        amet dolorum excepturi tempora, molestiae repudiandae enim consectetur. Nam laudantium facere voluptatum
-                        rem quam aspernatur?</p>
-                </div>
-                <div class="col l4 m4 s12 center-align pb10">
-                    <span class="stats-value">
-                        <i class="icon icon-heart"></i>
-                    </span>
-                    <span class="stats-label">Publier vos Photos</span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum provident ea voluptatibus a facilis, alias ratione
-                        vitae molestiae quam earum perspiciatis eius, quidem modi quae eos harum doloribus, iste quod.</p>
-                </div>
-            </div>
-        </div>
-        <div class="parallax">
-            <img src="imgs/outils.jpeg" alt="ngpictures-outils" title="ngpictures-outils" class="bw">
-        </div>
-    </section>
+    {% include 'includes/services.twig' %}
 {% endblock %}

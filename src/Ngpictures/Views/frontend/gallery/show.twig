@@ -1,68 +1,82 @@
-{% extends 'layout/blank.twig' %}
-
-{% block content %}
-    <div class="gallery-container-details">
-        <div class="col l6 m6 s12 gallery-details-img stagger3">
-            <img src="{{ photo.thumbUrl }}" width="100%" title="{{ photo.name }}" alt="{{ photo.name ?? photo.title }}" class="boxed">
+{% extends 'layout/show.twig' %} {% block content %}
+<section class="section jumbotron dark" style="border-bottom: 5px solid {{ article.color }}; margin-bottom: 20px;">
+    <div class="container row">
+        <div class="col l9 m12 s12 pb10">
+            <img src="{{ article.thumbUrl }}" alt="{{ article.name }}" title="{{ article.name }}" class="responsive-img materialboxed">
+            <h1 class="ui header">{{ article.name }}</h1>
+            {{ article.description | snipet }}
+            <br><br>
         </div>
-        <div class="col l6 m6 s12 gallery-details-text">
-            <h2 class="ui header stagger1">{{ photo.name ?? photo.title }}</h2>
-            <span class="gray-txt stagger2">
-            {{ photo.description }}
-        </span>
+        <div class="section nexted col l3 m12 s12 ">
+            <ul class="collection grey dark-4">
+                 <li class="collection-item">
+                    By {{ author.name }}
+                </li>
+                <li class="collection-item">
+                    Camera
+                    <span class="right">{{ article.exifData.Model ?? 'Indéfini' }}</span>
+                </li>
+                <li class="collection-item">
+                    Dimension
+                    <span class="right">{{ article.exifData.COMPUTED.Height ?? '' }} x {{ article.exifData.COMPUTED.Width ?? '' }} pixels</span>
+                </li>
+                <li class="collection-item">
+                    Distance Focale
+                    <span class="right">{{ article.exifData.FocalLength ?? 'Indéfini' }}</span>
+                </li>
+                <li class="collection-item">
+                    Temps d'exposition
+                    <span class="right">{{ article.exifData.ExposureTime ?? 'Indéfini' }}</span>
+                </li>
+            </ul>
         </div>
     </div>
-    <article class="col l6 m6 s12" id="{{ photo.id }}" style="background: #100F0F">
-        <section class="news-card-contents">
-            <footer id="articleInfo">
-                <div class="news-card-stat">
-                    <i class="icon icon-calendar"></i>&nbsp;
-                    <time id="date_created" data-time="{{ photo.date_created | date('U') }}">{{ photo.time }}</time>
-                </div>
-                <div class="news-card-stat">
-                    <i class="icon icon-thumbs-up"></i>&nbsp;
-                    <small><a data-action="showLikes" href="{{ photo.LikersUrl }}">{{ photo.Likes }}</a></small>
-                </div>
-            </footer>
-        </section>
-        <footer class="news-card-footer" id="articleOptions">
-            <a data-action="like" class="news-card-footer-item {{ photo.isLike }}" href="{{ photo.likeUrl }}">
-                {% if photo.isLike == 'active' %}
-                    <i class="icon icon-heart red-txt"></i>
-                {% else %}
-                    <i class="icon icon-heart-empty"></i>
-                {% endif %}
-            </a>
-            <a class="news-card-footer-item modal-trigger" href="#cmtAdd-{{ photo.id }}" data-action="showComment">
-                {% if photo.commentsNumber > 0 %}
-                    <i class="icon icon-comment" ></i>&nbsp;
-                {% else %}
-                    <i class="icon icon-comment-empty" ></i>&nbsp;
-                {% endif %}
-                <span>{{ photo.commentsNumber }}</span>
-            </a>
-            <a data-action="share" class="news-card-footer-item modal-trigger" href="#share-{{ photo.id }}">
-                <i class="icon icon-share"></i>
-            </a>
-        </footer>
-        <div id="cmtAdd-{{ photo.id }}" class="modal dark bottom-sheet">
-            <div class="modal-content">
-                <form action="{{ photo.commentUrl }}" method="POST" data-action="comment">
-                    <div class="input-field">
-                        <label for="comment">Commentaire</label>
-                        <textarea class="mdz-textarea" name="comment" id="comment" data-length="255"></textarea>
-                    </div>
-                    <div class="modal-footer dark comment">
-                        <button type="submit" class="modal-action btn waves-effect">Envoyer</button>
-                        <button id="cmtAdd-{{ photo.id }}" type="reset" class="btn btn-small transparent waves-effect modal-action modal-close">
-                            Annuler
-                        </button>
-                    </div>
-                </form>
+</section>
+<section class="">
+    {% include 'includes/comments.twig' %}
+</section>
+<section class="jumbotron parallax-container col l12 s12 m12" {{ smilars ? "style='margin-bottom: 20px;'" : '' }}>
+    <div class="row container">
+        <div class="col l12 m12 s12 row">
+            <div class="col l4 m4 s12 center-align pb10">
+                <span class="stats-value">{{ article.downloads }}</span>
+                <span class="stats-label">Téléchargement</span>
+            </div>
+            <div class="col l4 m4 s12 center-align pb10">
+                <span class="stats-value">{{ article.saves }}</span>
+                <span class="stats-label">Enregistrement</span>
+            </div>
+            <div class="col l4 m4 s12 center-align pb10">
+                <span class="stats-value">{{ article.nbLikes }}</span>
+                <span class="stats-label">Mention j'aime</span>
             </div>
         </div>
-        <p>
-            <a href="{{ photo.downloadUrl }}" class="btn btn-flat">Télécharger</a>
-        </p>
-    </article>
+    </div>
+    <div class="parallax">
+        <img src="{{ article.thumbUrl }}" alt="{{ article.name}}" title="{{ article.name}}" class="bw">
+    </div>
+    <div class="bg"></div>
+</section>
+{% if similars %}
+<section class="section">
+    <div class="row container pb10">
+        <span class="col l12 s12 m12">
+            <h2 class="ui header">Voir aussi</h2>
+        </span>
+        <div class="carousel small">
+            {% for p in similars %}
+            <a href="{{ p.url }}" class="carousel-item">
+                <img src="{{ p.smallThumbUrl }}" title="{{ p.name }}" alt="{{ p.name }}">
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<div class="fixed-action-btn {{ activeUser ? 'second' : '' }}">
+    <a class="btn-floating btn-large blue shadow-4" href="{{ article.downloadUrl }}">
+        <i class="icon icon-download"></i>
+    </a>
+</div>
 {% endblock %}

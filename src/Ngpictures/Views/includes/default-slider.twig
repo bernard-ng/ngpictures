@@ -1,6 +1,6 @@
 <div class="slider" style="margin-top: -64px" data-action-requires="menu-transparent">
     <ul class="slides">
-        {% for i in 0..3  %}
+        {% for i, title in sliderTitle %}
             <li>
                 <img src="{{ cacheBusting('/imgs/slider.jpg') }}">
                 <div class="caption center-align">
@@ -13,7 +13,7 @@
             </li>
         {% else %}
             <li>
-                <img src="/imgs/outils.jpeg">
+                <img src="{{ cacheBusting('/imgs/slider.jpg') }}">
                 <div class="caption center-align">
                     <h2 class="title">Deep Shooting</h2>
                     <h6 class="light grey-text text-lighten-3">

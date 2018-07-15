@@ -21,13 +21,13 @@ class CommentsModel extends Model
      * @param $value
      * @return mixed
      */
-    public function findWith(string $field, $value, $one = true)
+    public function get($id, string $field, $start, $end)
     {
         return $this->query(
-            "SELECT * FROM {$this->table} WHERE {$field} = ? ORDER BY date_created DESC",
-            [$value],
+            "SELECT * FROM {$this->table} WHERE {$field} = ? ORDER BY date_created DESC LIMIT {$start}, {$end}",
+            [$id],
             true,
-            $one
+            false
         );
     }
 
@@ -39,13 +39,12 @@ class CommentsModel extends Model
      * @param string $type
      * @return void
      */
-    public function getNumber(int $id, string $type)
+    public function count(int $id, string $type)
     {
         return $this->query(
-            "SELECT id FROM {$this->table} WHERE {$this->getType($type)} = {$id}",
+            "SELECT COUNT('id') AS num FROM {$this->table} WHERE {$type} = {$id}",
             [$id],
             true,
-            false,
             true
         );
     }

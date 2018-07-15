@@ -39,15 +39,48 @@ class GalleryController extends Controller
      * @param integer $id
      * @return void
      */
-    public function show($id)
+    public function show($slug, $id)
     {
-        $photo = $this->gallery->find(intval($id));
-        if ($photo) {
-            $this->turbolinksLocation("/gallery/{$id}");
-            $this->view('frontend/gallery/show', compact('photo'), false);
+        $article = $this->gallery->find(intval($id));
+
+        if (!empty($id)) {
+            $this->loadModel('users');
+            $this->loadModel('gallery');
+
+
+            $user = $this->users;
+            $article = $this->loadModel("gallery")->find(intval($id));
+
+            $comments = $this->loadModel('comments');
+            $commentsNumber = $comments->count($id, "gallery_id")->num;
+            $comments = $comments->get($id, "gallery_id", 0, 4);
+            $categories = $this->loadModel('categories')->orderBy('title', 'ASC', 0, 5);
+
+
+            if ($article) {
+                if ($article->online == 1) {
+                    $similars = $this->gallery->findSimilars($article->id);
+                    $author = $this->users->find($article->users_id);
+                    $altName = " gallery - publication - " . $article->id;
+
+
+                    $this->pageManager::setTitle($article->name ?? $altName);
+                    $this->turbolinksLocation("/gallery/{$article->slug}-{$id}");
+                    $this->view(
+                        "frontend/gallery/show",
+                        compact("article", "comments", "commentsNumber", "user", "categories", "author", "similars")
+                    );
+                } else {
+                    $this->flash->set("warning", $this->flash->msg['post_private'], false);
+                    $this->redirect(true, false);
+                }
+            } else {
+                $this->flash->set("danger", $this->flash->msg['post_not_found'], false);
+                $this->redirect(true);
+            }
         } else {
-            $this->flash->set("danger", $this->flash->msg['post_not_found']);
-            $this->redirect(true, false);
+            $this->flash->set("danger", $this->flash->msg['undefined_error'], false);
+            $this->index();
         }
     }
 
@@ -74,10 +107,28 @@ class GalleryController extends Controller
                 count($this->gallery->findWith('albums_id', $album->id, false));
         }
 
-
         $this->turbolinksLocation("/gallery/albums");
         $this->pageManager::setTitle('albums');
         $this->view('frontend/gallery/albums', compact("albums", "thumbs", "nb"));
+    }
+
+
+    public function album_show($slug, $id)
+    {
+        $album = $this->loadModel('albums')->find(intval($id));
+        if ($album && $album->slug == $slug) {
+            $author = $this->loadModel('users')->find($album->photographers_id);
+            $gallery = $this->loadModel('gallery')->findWith('albums_id', $album->id, false);
+            $posts  = $this->loadModel('posts')->findWith('albums_id', $album->id, false);
+
+            $this->pageManager::setTitle("{$album->title}");
+            $this->pageManager::setDescription("Toutes les photos de l'album : {$album->title}, {$album->description}");
+            $this->turbolinksLocation("/gallery/albums/{$slug}-{$id}");
+            $this->view("frontend/gallery/album_show", compact("album", "author", "gallery", "posts"));
+        } else {
+            $this->flash->set('danger', "Cet album n'existe pas ou plus");
+            $this->redirect(true);
+        }
     }
 
 
@@ -93,17 +144,21 @@ class GalleryController extends Controller
 
             if ($this->gallery->find(intval($lastId))) {
                 $photos = $this->gallery->findGreater($lastId, 4);
+                $last_id = $photos == null ? 1 : end($photos)->id;
 
                 $this->pageManager::setTitle('Diaporama');
-                $this->view('frontend/gallery/slider', compact('photos'));
+                $this->pageManager::setDescription("Voir les photos de la galerie, en diaporama");
+                $this->view('frontend/gallery/slider', compact('photos', 'last_id'));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error']);
                 $this->redirect('/gallery');
             }
         } else {
             $photos = $this->gallery->latest();
+            $last_id =  $photos == null ? 1 : end($photos)->id;
             $this->pageManager::setTitle('Diaporama');
-            $this->view('frontend/gallery/slider', compact('photos'));
+            $this->pageManager::setDescription("Voir les photos de la galerie, en diaporama");
+            $this->view('frontend/gallery/slider', compact('photos', 'last_id'));
         }
     }
 }

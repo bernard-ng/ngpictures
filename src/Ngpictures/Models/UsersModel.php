@@ -2,11 +2,9 @@
 namespace Ngpictures\Models;
 
 use Ng\Core\Models\Model;
-use Ngpictures\Traits\Models\SearchQueryTrait;
 
 class UsersModel extends Model
 {
-    use SearchQueryTrait;
 
     /**
      * le nom de la table dans la base de donnee

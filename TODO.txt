@@ -17,15 +17,18 @@ sales.
  une api pour trouver les photographes et des studios photos. on va utiliser un fournisseur de carte et geolocaliser
  les differents user avec un compte photographe.
 
-****    slider bugs with lastId
-****    notification system a finir. / afficher nombre dans la menu mobile
-****    reservation system a finir
+
 ***     map localisation a finir.
-****    profile user page
+****    profile user page et page photographes
 ***     deinition de la pagintation pour le frontend
-***     page d'edition d'article pour les users.
-***     ameliorer pages de recherche
-***     vider les erreurs de validation lorsque on saisie
-***     trailling slash bug, avec les page show.
-***     show pour les users il faut echaper sa.
-***     checker l'error Allowed memory size of 134217728 bytes exhausted (tried to allocate 32768 bytes)
+***     osibiliter d'aimer une ou save une publicaiton dans la page show.
+***     fakeAJAX pour le reset de formulaire.
+***     administration ajout de la gestion photographes, reservation et des albums
+
+2.1
+------------------------------------------------------------------------------------------------------------------------
+## posibiliter d'editer un commentaire
+## mentionner quelqu'un partout sur le site
+## posibiliter d'aimer une ou save une publicaiton dans la page show.
+## vider les erreurs de validation lorsque on saisie
+## godfirst loading verse dynamique

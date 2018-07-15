@@ -9,14 +9,16 @@
                     <h2 class="icon icon-search red-txt center-align"></h2>
                     <h2 class="ui header divided center"> Aucun Résultat</h2>
                     <p>
-                        Aucun résultat pour : "&nbsp;{{query }}&nbsp;" actuellement, Vérifiez l'orthographe du mot puis réessayer.
+                        Aucun résultat pour : "&nbsp;{{query }}&nbsp;" actuellement, Vérifiez l'orthographe du mot puis réessayer,
+                        les mots de moins de 3 caratères sont ignorés par la recherche.
                     </p>
                 </div>
             </div>
         {% else %}
             <span class="row col l12 s12 m12">
-            <h2 class="ui header"> Résultat pour : "&nbsp;{{query }}&nbsp;"</h2>
-        </span>
+                <h2 class="ui header"> Résultat pour : "&nbsp;{{query }}&nbsp;"</h2>
+            </span>
+        {% endif %}
 
         {% for u in users %}
             <div class="row nexted col l3 m6 s12">
@@ -35,29 +37,42 @@
                         <div class="ui tiny horizontal divided list">
                             <div class="item">
                                 <div class="content">
-                                    <div class="header">1,35k&nbsp;Posts</div>
+                                    <div class="header">{{ u.postsNumber }}&nbsp;Posts</div>
                                 </div>
                             </div>
                             <div class="item">
                                 <div class="content">
-                                    <div class="header">4,9k&nbsp;Abonnés</div>
+                                    <div class="header">{{ u.followersNumber }}&nbsp;Abonnés</div>
                                 </div>
                             </div>
                             <div class="item">
                                 <div class="content">
-                                    <div class="header">12&nbsp;Abonnement</div>
+                                    <div class="header">{{ u.followingsNumber }}&nbsp;Abonnement</div>
                                 </div>
                             </div>
                         </div>
 
-                        {% if user.id != activeUser.id %}
-                            <a href="{{ user.followingUrl }}" class="btn btn-flat action blue-grey dark-1">
-                                {{ user.isFollowed ? "se désabonner" : "s'abonner" }}
+                        {% if u.id != activeUser.id %}
+                            <a href="{{ u.followingUrl }}" class="btn btn-flat" data-action="following">
+                                {{ u.isFollowed ? "Se désabonner" : "S'abonner" }}
                             </a>
+                        {% else %}
+                            <button class="btn btn-flat disabled">
+                                Se désabonner
+                            </button>
                         {% endif %}
                     </div>
                 </div>
             </div>
         {% endfor %}
+        {% if users %}
+            <div class="ng-progress-container">
+                <div id="statusBar" class="mtb ng-progress-indeterminate disabled" data-ajax="community-search">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+            <br>
+        {% endif %}
+
     </section>
 {% endblock %}

@@ -9,7 +9,8 @@
                         <h2 class="icon icon-search red-txt center-align"></h2>
                         <h2 class="ui header divided center"> Aucun Résultat</h2>
                         <p>
-                            Aucun résultat pour : "&nbsp;{{query }}&nbsp;" actuellement, Vérifiez l'orthographe du mot puis réessayer.
+                            Aucun résultat pour : "&nbsp;{{query }}&nbsp;" actuellement, Vérifiez l'orthographe du mot puis réessayer,
+                            les mots de moins de 3 caratères sont ignorés par la recherche.
                         </p>
                     </div>
                 </div>
@@ -94,8 +95,13 @@
         </section>
         {% if posts or blog or gallery or pexels %}
             <section class="section row">
-                <div class="container">
-                    {% include 'includes/search-pagination.twig' %}
+            <div class="container">
+                    <div class="ng-progress-container">
+                        <div id="statusBar" class="mtb ng-progress-indeterminate disabled" data-ajax="search" data-param="{{ query }}">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <br>
                 </div>
             </section>
         {% endif %}

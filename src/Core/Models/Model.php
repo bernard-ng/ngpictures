@@ -34,7 +34,7 @@ class Model
      * renvoi le nom de la table
      * @return string
      */
-    public function getTable(): string
+    public function getTable() : string
     {
         return $this->table;
     }
@@ -58,7 +58,7 @@ class Model
      */
     public function query(string $statement, array $data = null, bool $class = true, bool $one = false, bool $rowCount = false)
     {
-        $class = ($class === true)? str_replace("Model", "Entity", get_class($this)) : false;
+        $class = ($class === true) ? str_replace("Model", "Entity", get_class($this)) : false;
         $class = str_replace("Entitys", "Entity", $class);
 
         if ($data === null) {
@@ -106,7 +106,7 @@ class Model
         }
         $fields = implode(', ', $fields);
 
-        return ($date_created)?
+        return ($date_created) ?
             $this->query("INSERT INTO {$this->table} SET $fields , date_created = NOW() ", $values) :
             $this->query("INSERT INTO {$this->table} SET $fields ", $values);
     }
@@ -156,6 +156,68 @@ class Model
     public function countOffline()
     {
         return $this->query("SELECT COUNT(id) as num FROM {$this->table} WHERE online = 0", null, true, true);
+    }
+
+
+    /**
+     * recherche de publication ou des users
+     * @param string $query
+     * @return void
+     */
+    public function search(string $query)
+    {
+        $sql = '';
+        $data = [];
+        $words = explode(' ', $query);
+        foreach ($words as $key => $word) {
+            if (mb_strlen($word) < 3) {
+                unset($words[$key]);
+            }
+        }
+
+        if ($this->table == "blog" || $this->table == "posts") {
+            foreach ($words as $key => $word) {
+                $data[] = "%{$word}%";
+                $sql .= ($key === 0) ?
+                    "CONCAT({$this->table}.title, {$this->table}.content, categories.title) LIKE ? " :
+                    " OR CONCAT({$this->table}.title, {$this->table}.content, categories.title) LIKE ?";
+            }
+
+            return $this->query(
+                "SELECT {$this->table}.*, categories.title AS category
+                FROM {$this->table} LEFT JOIN categories ON {$this->table}.categories_id = categories.id
+                WHERE ({$sql}) AND online = 1
+                ",
+                $data
+            );
+        } elseif ($this->table == "gallery") {
+            foreach ($words as $key => $word) {
+                $data[] = "%{$word}%";
+                $sql .= ($key === 0) ?
+                    "CONCAT({$this->table}.name, {$this->table}.description, categories.title) LIKE ? " :
+                    " OR CONCAT({$this->table}.name, {$this->table}.description, categories.title) LIKE ?";
+            }
+
+            return $this->query(
+                "SELECT {$this->table}.*, categories.title AS category
+                FROM {$this->table} LEFT JOIN categories ON {$this->table}.categories_id = categories.id
+                WHERE ({$sql}) AND online = 1
+                ",
+                $data
+            );
+        } elseif ($this->table == "users") {
+            foreach ($words as $key => $word) {
+                $data[] = "%{$word}%";
+                $sql .= ($key === 0) ? "{$this->table}.name LIKE ? " : " OR {$this->table}.name LIKE ? ";
+            }
+
+            return $this->query(
+                "SELECT {$this->table}.*
+                FROM {$this->table} WHERE ({$sql}) AND {$this->table}.confirmed_at IS NOT NULL
+                ",
+                $data
+            );
+        }
     }
 
 

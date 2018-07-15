@@ -15,8 +15,8 @@ class TwigRenderer implements RendererInterface
     {
         $loader = new \Twig_Loader_Filesystem(APP."/Views");
         $this->twig = new \Twig_Environment($loader, [
-            'debug' => true,
-            'cache' => false, //ROOT."/cache",
+            'debug' => (ENV === 'developpment'),
+            'cache' => (ENV === 'production')? ROOT."/cache/render" : false,
         ]);
 
         $this->twig->addExtension(new \Twig_Extension_Debug());

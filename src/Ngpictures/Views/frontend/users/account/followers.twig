@@ -11,7 +11,7 @@
     </div>
     <div class="container row">
         {% for f in followers %}
-            <div class="row nexted col l3 m6 s12">
+            <div class="row nexted col l3 m3 s12">
                 <div class="card-user card transparent hovercard hoverable">
                     <div class="cardheader" style="background: url('{{ f.avatarUrl }}')"></div>
                     <div class="avatar">
@@ -27,7 +27,17 @@
                         <div class="ui tiny horizontal divided list">
                             <div class="item">
                                 <div class="content">
-                                    <div class="header">1,35k&nbsp;Posts</div>
+                                    <div class="header">{{ f.postsNumber }}&nbsp;Posts</div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="content">
+                                    <div class="header">{{ f.followersNumber }}&nbsp;Abonnés</div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="content">
+                                    <div class="header">{{ f.followingsNumber }}&nbsp;Abonnement</div>
                                 </div>
                             </div>
                         </div>
@@ -43,6 +53,20 @@
                     </div>
                 </div>
             </div>
+        {% else %}
+            <div class="section center-align col l8 offset-l2 s12 m12">
+                <h2 class="icon icon-user-times red-txt center-align"></h2>
+                <h2 class="ui header divided center"> Aucun abonné </h2>
+                <p>
+                    vous n'avez actuellement aucun abonné, partager vos photos pour rendre votre
+                    profile intéressant.
+                </p>
+            </div>
         {% endfor %}
+    </div>
+    <div class="fixed-action-btn {{ activeUser ? 'second' : '' }}">
+        <a href="/community" class="btn-floating btn-large blue dark-2 waves-effect shadow-4">
+            <i class="icon icon-users"></i>
+        </a>
     </div>
 {% endblock %}
