@@ -1,0 +1,50 @@
+{% extends "layout/posts/default.twig" %}
+{% import 'includes/form.twig' as form %}
+
+{% block content %}
+
+    <div id="comments" class="section container row">
+    <span class="row section col l12 s12 m12" style="margin-top: 20px;">
+        <h2 class="ui header">{{ commentsNumber > 2 ? commentsNumber ~ " Commentaires" : commentsNumber ~ " Commentaire"}} </h2>
+    </span>
+    <div class="col l9 m12 s12 card grey dark-4">
+        <form method="POST" action="{{ article.commentUrl }}">
+            {{ form.textarea('comment','Votre commentaire...', errors.get('comment'), post.get('comment')) }}
+            <button type="submit" class="btn btn-flat"> Envoyer</button>
+        </form>
+
+        <div class="section" id="commentContainer">
+           {% if comments %}
+            <ul class="collection">
+                {% for c in comments %}
+                    <li class="collection-item avatar">
+                        <a href="{{ user.find(c.users_id).accountUrl }}">
+                            <img src="{{ user.find(c.users_id).avatarUrl }}" alt="{{ user.find(c.users_id).name }}" class="circle">
+                            <span class="title">{{ user.find(c.users_id).name }}</span>
+                        </a>
+                        <p>{{ c.comment | escape | nl2br }}</p>
+                        <br>
+                        <time class="time" data-time="{{ c.date_created | date("U") }}">{{ c.time }}</time>
+                        {% if c.users_id == activeUser.id %}
+                            <a href="{{ c.deleteUrl }}" class="secondary-content"><i class="icon icon-cancel"></i></a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+           {% else %}
+                <div class="section center-align col l8 offset-l2 s12 m12">
+                    <h2 class="icon icon-comment-empty red-txt center-align"></h2>
+                    <h2 class="ui header divided center"> Aucun commentaire </h2>
+                    <p>
+                        le site ne présente actuellement aucun commentaire pour cette publication, soyez la première
+                        personne à partager votre commentaire.
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="hide-on-small-and-down">
+        {% include "includes/menu-aside.twig" %}
+    </div>
+</div>
+{% endblock %}

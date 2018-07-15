@@ -1,53 +1,54 @@
 {% import 'includes/form.twig' as form %}
 
 <div id="comments" class="section container row">
-    {% include "includes/right-aside.twig" %}
-    <div class="col l6 m12 s12">
-        <form method="POST" action="{{ article.commentUrl }}">
-            {{ form.textarea('comment','Commentaire', errors.get('comment'), post.get('comment')) }}
-            <button type="submit" class="btn btn-flat"> Envoyer</button>
-        </form>
-
-        <ul class="section" id="commentContainer">
-           {% if comments %}
-                <div class="ui comments">
-                    {% for c in comments %}
-                        <div class="comment">
-                            <a class="avatar">
-                                <img src="{{ user.find(c.users_id).avatarUrl }}">
-                            </a>
-                            <div class="content">
-                                <a class="author">{{ user.find(c.users_id).name }}</a>
-                                <div class="metadata">
-                                    <time class="date" data-time="{{ c.date_created | date("U") }}">{{ c.time }}</time>
-                                </div>
-                                <div class="text">
-                                    {{ c.comment }}
-                                </div>
-                                <div class="actions">
-                                    <a href="/watchout/comments/{{ c.id }}">Signaler</a>
-                                    {% if c.users_id == activeUser.id %}
-                                        <a href="#cmtDelete-{{ c.id }}" class="">Supprimer</a>
-                                        <a href="#cmtEdit-{{ c.id }}" class="">Editer</a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
+    <span class="row col l12 s12 m12">
+        <h2 class="ui header">{{ commentsNumber > 2 ? commentsNumber ~ " Commentaires" : commentsNumber ~ " Commentaire"}} </h2>
+    </span>
+    <div class="col nexted l9 m12 s12">
+       <div class="col l12 m12 s12 card grey dark-4">
+            <form method="POST" action="{{ article.commentUrl }}">
+                {{ form.textarea('comment','Votre commentaire...', errors.get('comment'), post.get('comment')) }}
+                <div class="input-field col s12" style="margin-top: 0px;">
+                    <button type="submit" class="btn btn-flat"> Envoyer</button>
                 </div>
+            </form>
+
+        <div class="section col s12" id="commentContainer">
+           {% if comments %}
+            <ul class="collection">
+                {% for c in comments %}
+                    <li class="collection-item avatar">
+                        <a href="{{ user.find(c.users_id).accountUrl }}">
+                            <img src="{{ user.find(c.users_id).avatarUrl }}" alt="{{ user.find(c.users_id).name }}" class="circle">
+                            <span class="title" style="color: #ccc">{{ user.find(c.users_id).name }}</span>
+                        </a>
+                        <p>{{ c.comment | escape | nl2br }}</p>
+                         {% if c.users_id == activeUser.id %}
+                            <a href="{{ c.deleteUrl }}" class="secondary-content"><i class="icon icon-cancel"></i></a>
+                        {% endif %}
+                        <time class="time" data-time="{{ c.date_created | date("U") }}">{{ c.time }}</time>
+                    </li>
+                {% endfor %}
+                {% if commentsNumber > 4 %}
+                    <li class="collection-item">
+                        <p><a href="{{ article.commentUrl }}">Afficher les {{ commentsNumber }} commentaires</a></p>
+                    </li>
+                {% endif %}
+            </ul>
            {% else %}
-                <div class="section center-align">
+                <div class="section center-align col l8 offset-l2 s12 m12">
                     <h2 class="icon icon-comment-empty red-txt center-align"></h2>
-                    <h2 class="ui header divided center"> Aucun commentaire pour l'instant</h2>
+                    <h2 class="ui header divided center"> Aucun commentaire </h2>
                     <p>
                         le site ne présente actuellement aucun commentaire pour cette publication, soyez la première
                         personne à partager votre commentaire.
                     </p>
                 </div>
             {% endif %}
-        </ul>
+        </div>
+       </div>
     </div>
-    <div class="hide-on-small-and-down">
+    <div class="hide-on-med-and-down">
         {% include "includes/menu-aside.twig" %}
     </div>
 </div>

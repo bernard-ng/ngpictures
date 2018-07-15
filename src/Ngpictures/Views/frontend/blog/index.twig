@@ -3,7 +3,7 @@
 {% block content %}
     <section class="section container row">
         {% include 'includes/right-aside.twig' %}
-        <section class="section col nexted l6 m12 s12 animated fast slideInLeft">
+        <section class="section col nexted l6 m6 s12 animated fast slideInLeft">
             <div id="dataContainer">
                 {% if posts %}
                     {% for a in posts %}
@@ -50,7 +50,7 @@
                                 {% endif %}
                             </header>
                             <div class="card-image news-card-image">
-                                <a href="{{ a.url }}" class="waves-effect">
+                                <a href="{{ a.url }}" class="waves-effect" style="background-color: {{ a.color }}; width: 100%; min-height: 100px;">
                                     <img src="{{ a.thumbUrl }}" alt="{{ a.title }}" title="{{ a.title }}">
                                 </a>
                             </div>
@@ -144,18 +144,16 @@
                             </div>
                         </article>
                     {% endfor %}
-                    <div id="statusBar" class="mtb ng-progress-indeterminate disabled" data-ajax="blog">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                    <div class="ng-progress-container">
+                        <div id="statusBar" class="mtb ng-progress-indeterminate disabled" data-ajax="blog">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
                     </div>
                     <br>
                 {% else %}
                     <div class="section center-align">
                         <h2 class="icon icon-inbox red-txt center-align"></h2>
-                        <h2 class="ui header divided center"> Aucune publication pour l'instant</h2>
+                        <h2 class="ui header divided center"> Aucune publication </h2>
                         <p>
                             le site ne présente actuellement aucune publication disponible, les publications sont peut être en évaluation,
                             ceci pourrait prendre du temps, veuillez revenir plus tard

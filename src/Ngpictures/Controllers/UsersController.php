@@ -30,7 +30,7 @@ class UsersController extends Controller
      * @param $users_id
      * @param string $token
      */
-    public function confirm(int $users_id, string $token)
+    public function confirm($users_id, $token)
     {
         $this->authService->confirm($users_id, $token);
     }
@@ -228,15 +228,17 @@ class UsersController extends Controller
      * @param string $username
      * @param int $id
      */
-    public function account(string $username, $id)
+    public function account($username, $id)
     {
         if (!empty($username)) {
             $user = $this->users->find(intval($id));
-
             if ($user) {
-                $this->loadModel('saves');
-                $posts      =     $this->loadModel('posts')->findWith('users_id', $user->id, false);
-                $collection =     $this->callController('saves')->show($user->id);
+                $posts = $this->loadModel('posts')->findWithUser($user->id);
+                $recent = null;
+
+                if (count($posts) > 6) {
+                    $recent = $this->loadModel('posts')->get($user->id, 6);
+                }
 
                 $this->turbolinksLocation($user->accountUrl);
                 $this->pageManager::setTitle("Profile de " . $user->name);
@@ -252,11 +254,50 @@ class UsersController extends Controller
     }
 
 
+    public function collection($token)
+    {
+        if ($this->authService->getToken() == $token) {
+            $user = $this->authService->isLogged();
+            $collection = $this->callController('saves')->show($user->id);
+
+            $this->turbolinksLocation("/my-collection/{$token}");
+            $this->pageManager::setTitle("Collection de " . $user->name);
+            $this->view('frontend/users/account/collection', compact("user", "collection"));
+        } else {
+            $this->flash->set('danger', $this->flash->msg['collection_not_allowed'], false);
+            $this->redirect(true, false);
+        }
+    }
+
+
+    /**
+     * les notification d'un user
+     *
+     * @param string $token
+     * @return void
+     */
+    public function notification($token)
+    {
+        if ($this->authService->getToken() == $token) {
+            $user = $this->authService->isLogged();
+            $notifications = $this->callController('notifications')->show($user->id, $token);
+
+            $this->turbolinksLocation("/my-notifications/{$token}");
+            $this->pageManager::setTitle("Notifications");
+            $this->pageManager::setDescription("Voici les notifications de ngpictures pour : {$user->name}");
+            $this->view('frontend/users/account/notifications', compact("user", "notifications"));
+        } else {
+            $this->flash('danger', $this->flash->msg['undefined_error'], false);
+            $this->redirect(true, false);
+        }
+    }
+
+
     /**
      * permet de generer la page d'edition d'un utilisateur
      * @param string $token
      */
-    public function edit(string $token)
+    public function edit($token)
     {
         $this->authService->restrict();
         if ($token === $this->authService->getToken()) {

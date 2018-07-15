@@ -15,19 +15,20 @@ $router->any("/edit-post/:id/:token", "posts#edit", "posts.edit-article");
 $router->any("/submit-photo", "posts#add", "posts.add");
 $router->get("/confirm/:id/:token", "users#confirm", "users.confirmation");
 $router->get("/logout", "users#logout", "users.logout");
-$router->get("/:user-:id", "users#account", "users.account");
 $router->get("/my-posts/:token", "posts#showPosts", "posts.show-post");
 $router->any("/my-posts/edit/:id/:token", "posts#edit", "posts.edit");
 $router->any("/my-posts/delete/:id/:token", "posts#delete", "posts.delete");
 $router->get("/my-followers/:token", "following#showFollowers", "users.show-followers");
 $router->get("/my-following/:token", "following#showFollowing", "users.show-following");
-$router->get('/my-saves/:token', 'saves#add', 'saves.index');
-$router->post("/delete-post/:token", "posts#delete", "posts.delete");
-$router->post("/notifications/:id/:token", "nofications#delete", "notification.index");
+$router->get('/my-collection/:token', 'users#collection', 'saves.index');
+$router->get('/my-notifications/:token', "users#notification", 'notification.index');
+$router->get("/my-notifications/delete/:token", "notifications#delete", "notification.delete");
+$router->get("/my-notifications/clear/:token", "notifications#clear", "notification.clear");
 
 
 //community pages
 $router->get("/community", "community", "community.index");
+$router->get("/community/search", "community#search", "community.search");
 
 //posts and blog pages
 $router->get("/blog","blog", "blog.index");
@@ -44,7 +45,8 @@ $router->get("/categories/:name-:id", "categories#show", "categories.show");
 $router->get("/gallery","gallery","gallery.index");
 $router->get("/gallery/slider", "gallery#slider", "gallery.slider");
 $router->get("/gallery/albums", "gallery#albums", "gallery.albums");
-$router->get("/gallery/:id","gallery#show","gallery.show");
+$router->get("/gallery/albums/:slug-:id", "gallery#album_show", "gallery.album_show");
+$router->get("/gallery/:slug-:id","gallery#show","gallery.show");
 
 
 //likes
@@ -59,7 +61,8 @@ $router->get("/download/:type/:name", "download", "download");
 $router->get("/download/show/:type/:name", "download#show", "download");
 
 //comments
-$router->post("/comments/:type/:slug-:id","comments","comments.show");
+$router->get("/comments/:type/:slug-:id", "comments#show", "comments.show");
+$router->post("/comments/:type/:slug-:id","comments#index","comments.add");
 $router->post("/comments/edit/:id/:token", "comments#edit", "comments.edit");
 $router->get("/comments/delete/:id/:token", "comments#delete", "comments.delete");
 
@@ -78,7 +81,7 @@ $router->any("/report/:type/:slug-:id", 'reports', 'report.index');
 $router->get("/about", "static#about", "static.about");
 $router->get("/privacy", "static#privacy", "static.privacy");
 $router->any("/app.offline", "static#offline", 'static.offline');
-$router->get("/booking", 'booking', 'reservation');
+$router->any("/booking", 'booking', 'reservation');
 $router->get('/saves/:type/:slug-:id', 'saves#add', 'saves.add');
 $router->get("/maps", 'maps#show', 'maps.show');
 $router->get("/htag/:tag", 'htag', 'htag.index');
@@ -99,3 +102,6 @@ $router->get("/verses", "verses", "ajax.verses");
 $router->get("/error/not-found","error#e404","app.found");
 $router->get("/error/internal","error#e500","app.internal-server-error");
 $router->get("/error/forbidden","error#e403","app.forbidden");
+
+
+$router->get("/:user-:id", "users#account", "users.account");

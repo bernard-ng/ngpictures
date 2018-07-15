@@ -16,19 +16,18 @@
                             <div class="bg"></div>
                         {% endif %}
                     </li>
-                    {% set lastId = p.id %}
                 {% endfor %}
                 <div class="fixed-action-btn">
-                    <a href="/gallery/slider?last_id={{ lastId }}" class="btn-floating btn-large blue-grey dark-2 waves-effect shadow-4">
+                    <a href="/gallery/slider?last_id={{ last_id }}" class="btn-floating btn-large blue-grey dark-2 waves-effect shadow-4">
                         <i class="icon icon-right-open"></i>
                     </a>
                 </div>
             {% else %}
                 <li id="reset">
-                    <img src="/imgs/outils.jpeg">
+                    <img src="{{ cacheBusting('/imgs/slider.jpg') }}">
                     <div class="caption center-align">
                         <h2 class="">Deep Shooting</h2>
-                        <h6 class="light grey-text text-lighten-3">Aucune photo disponible pour l'instant</h6>
+                        <h6 class="light grey-text text-lighten-3">Aucune photo disponible </h6>
                     </div>
                     <div class="bg"></div>
                 </li>

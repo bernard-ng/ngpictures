@@ -68,8 +68,8 @@ class FollowingController extends Controller
      */
     public function showFollowers(string $token)
     {
-        if ($this->session->read(TOKEN_KEY) == $token) {
-            $user = $this->session->read(AUTH_KEY);
+        if ($this->authService->getToken() == $token) {
+            $user = $this->authService->isLogged();
             if ($user) {
                 $followers = $this->following->findWith('followed_id', $user->id, false);
                 $followers_list = [];
@@ -107,10 +107,10 @@ class FollowingController extends Controller
      * @param string $token
      * @return void
      */
-    public function showFollowing(string $token)
+    public function showFollowing($token)
     {
-        if ($this->session->read(TOKEN_KEY) == $token) {
-            $user =  $this->session->read(AUTH_KEY);
+        if ($this->authService->getToken() == $token) {
+            $user =  $this->authService->isLogged();
             if ($user) {
                 $followings         =   $this->following->findWith('follower_id', $user->id, false);
                 $followings_list    =   [];

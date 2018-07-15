@@ -33,7 +33,7 @@
                     <li id="Blog" class="waves-effect"><a href="/blog"> Blog</a></li>
                     <li id="Galerie" class="waves-effect"><a href="/gallery"> Galerie</a></li>
                     {% if activeUser %}
-                        <li id="Posts" class="waves-effect">
+                        <li id="Fil d'actualité" class="waves-effect">
                             <a href="/posts"> Actualités</a>
                         </li>
                     {% endif %}
@@ -73,7 +73,7 @@
             <li>
                 <a href="{{ activeUser.notificationsUrl }}">
                     Notifications <i class="icon icon-bell"></i>
-                    <span class="right">[nb]&nbsp;</span>
+                    <span class="right">{{ notificationsNumber }}&nbsp;</span>
                 </a>
             </li>
             <li><a href="/logout">Déconnexion <i class="icon icon-off"></i></a></li>
@@ -98,6 +98,5 @@
         <li><a href="/photographers">Compte photographe <i class="icon icon-camera"></i></a></li>
         <li><a href="/contact">Nous contacter <i class="icon icon-mail"></i></a></li>
         <li><a href="/booking">Réservations <i class="icon icon-calendar"></i></a></a></li>
-        <li><a href="/publicities">Publicités <i class="icon icon-megaphone"></i></a></li>
     </ul>
 </header>

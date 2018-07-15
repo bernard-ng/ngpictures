@@ -1,8 +1,18 @@
 {% extends 'layout/posts/default.twig' %}
 
 {% block content %}
-    <section class="section container row">
-        <div class="col nexted l12 m12 s12">
+    <div class="row col s12">
+        <ul class="tabs transparent shadow-3">
+            <div class="container">
+                <li class="tab col s4"><a href="#albums" >Albums</a></li>
+                <li class="tab col s4"><a href="/gallery" target="_self" >Photos</a></li>
+                <li class="tab col s4"><a href="/gallery/slider" target="_self">Diaporama</a></li>
+            </div>
+        </ul>
+    </div>
+    <section class="section container row" id="albums">
+       {% if albums %}
+            <div class="col nexted l12 m12 s12">
             {% for a in albums %}
             <div class="row nexted col s12 m3 l3">
                     <article class="card post-titled grey dark-4">
@@ -23,5 +33,15 @@
                 </div>
             {% endfor %}
         </div>
+       {% else %}
+         <div class="section center-align col l8 offset-l2 m12 s12">
+            <h2 class="icon icon-picture red-txt center-align"></h2>
+            <h2 class="ui header divided center"> Aucun album </h2>
+            <p>
+                le site ne présente actuellement aucune publication disponible, les publications sont peut être en évaluation,
+                ceci pourrait prendre du temps, veuillez revenir plus tard
+            </p>
+        </div>
+       {% endif %}
     </section>
 {% endblock %}

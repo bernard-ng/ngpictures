@@ -191,7 +191,7 @@ trait PostEntityTrait
     public function getCommentsNumber(): string
     {
         $comments = Ngpictures::getDic()->get($this->model('comments'));
-        $comments = $comments->getNumber($this->id, $this->action_type);
+        $comments = $comments->count($this->id, $this->action_url . "_id")->num;
         return $comments;
     }
 

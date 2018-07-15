@@ -2,181 +2,364 @@
         AUTHOR         :    Bernard-ng
         PROJECT        :    NG-PICTURES
         LINK           :    https://larytech.com
-        BUILT AT       :    05-Jul-2018  22:36:50
+        BUILT AT       :    13-Jul-2018  23:25:03
 **************************************************************
 [NG-PICTURES MESSAGES LOGS] 
 
-* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
-		=> 05-Jul 22:36 : cURL error 6: Could not resolve host: api.pexels.com  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:25 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de 'WHERE follower_id = '1'' à la ligne 1  
 
-* Ng\Core\Managers\Mailer\Mailer
-		=> 06-Jul 10:00 : Message could not be sent. Mailer Error: Could not instantiate mail function.  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:25 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de 'WHERE follower_id = '2'' à la ligne 1  
 
-* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
-		=> 06-Jul 10:30 : cURL error 6: Could not resolve host: api.pexels.com  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:35 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de 'OR users.name LIKE '%bjkbkb%' ) AND users.confirmed_at IS NOT NULL' à la ligne 2  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 10:45 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:35 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de 'OR users.name LIKE '%nnnd%' ) AND users.confirmed_at IS NOT NULL' à la ligne 2  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 10:45 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:35 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND users.confirmed_at IS NOT NULL' à la ligne 2  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 10:45 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:35 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND users.confirmed_at IS NOT NULL' à la ligne 2  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 12:28 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:37 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND users.confirmed_at IS NOT NULL' à la ligne 2  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 12:28 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:37 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND users.confirmed_at IS NOT NULL' à la ligne 2  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 12:28 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:41 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND users.confirmed_at IS NOT NULL' à la ligne 2  
 
-* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
-		=> 06-Jul 13:56 : cURL error 6: Could not resolve host: api.pexels.com  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:41 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND users.confirmed_at IS NOT NULL' à la ligne 2  
 
-* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
-		=> 06-Jul 13:57 : cURL error 6: Could not resolve host: api.pexels.com  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:46 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND users.confirmed_at IS NOT NULL' à la ligne 2  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 14:00 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:46 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de 'OR users.name LIKE '%dnnn%'  OR users.name LIKE '%dkd%' ) AND users.confirmed_at' à la ligne 2  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 14:00 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:49 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND users.confirmed_at IS NOT NULL' à la ligne 2  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 14:00 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:49 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND users.confirmed_at IS NOT NULL' à la ligne 2  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 14:08 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:50 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de 'OR users.name LIKE '%dnnn%'  OR users.name LIKE '%dkd%' ) AND users.confirmed_at' à la ligne 2  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 19:36 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:56 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de 'OR users.name LIKE '%dnnn%'  OR users.name LIKE '%dkd%'  OR users.name LIKE '%nn' à la ligne 2  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 19:36 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:58 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de 'OR users.name LIKE '%dkd%'  OR users.name LIKE '%dnnn%'  OR users.name LIKE '%nn' à la ligne 2  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 19:36 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:58 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de 'OR users.name LIKE '%dkd%'  OR users.name LIKE '%dnnn%'  OR users.name LIKE '%nn' à la ligne 2  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 21:46 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 13-Jul 23:59 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de 'OR users.name LIKE '%dnnn%'  OR users.name LIKE '%dkd%'  OR users.name LIKE '%nn' à la ligne 2  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 21:49 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:00 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND users.confirmed_at IS NOT NULL' à la ligne 2  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	52
-		=> 06-Jul 22:04 : SQLSTATE[HY000] [1045] Accès refusé pour l'utilisateur: 'larytech_ngandu'@'@localhost' (mot de passe: OUI)  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:00 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND users.confirmed_at IS NOT NULL' à la ligne 2  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	52
-		=> 06-Jul 22:04 : SQLSTATE[HY000] [1045] Accès refusé pour l'utilisateur: 'larytech_ngandu'@'@localhost' (mot de passe: OUI)  
-
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	52
-		=> 06-Jul 22:06 : SQLSTATE[HY000] [1045] Accès refusé pour l'utilisateur: 'larytech_ngandu'@'@localhost' (mot de passe: OUI)  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:00 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND users.confirmed_at IS NOT NULL' à la ligne 2  
 
 * D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
-		=> 06-Jul 22:38 : cURL error 6: Could not resolve host: api.pexels.com  
+		=> 14-Jul 00:06 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:13 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:13 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:13 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:13 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:13 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:13 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
 
 * D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
-		=> 06-Jul 22:38 : cURL error 6: Could not resolve host: api.pexels.com  
+		=> 14-Jul 00:13 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:13 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:13 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:13 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
 
 * D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
-		=> 06-Jul 22:38 : cURL error 6: Could not resolve host: api.pexels.com  
+		=> 14-Jul 00:13 : cURL error 6: Could not resolve host: api.pexels.com  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 22:54 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:13 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 22:54 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:13 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 22:54 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:13 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 22:55 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:13 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 22:55 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:13 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 06-Jul 22:55 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
-
-* D:\sites\ng-pictures\vendor\phpmailer\phpmailer\src\PHPMailer.php	1671
-		=> 06-Jul 23:48 : Could not instantiate mail function.  
-
-* D:\sites\ng-pictures\vendor\phpmailer\phpmailer\src\PHPMailer.php	1671
-		=> 06-Jul 23:53 : Could not instantiate mail function.  
-
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 07-Jul 00:06 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
-
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 07-Jul 00:06 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
-
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 07-Jul 00:06 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:13 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
 
 * D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
-		=> 07-Jul 12:59 : cURL error 6: Could not resolve host: api.pexels.com  
+		=> 14-Jul 00:13 : cURL error 6: Could not resolve host: api.pexels.com  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 08-Jul 12:37 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:15 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 08-Jul 12:37 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:15 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 08-Jul 12:37 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
-
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	111
-		=> 08-Jul 13:44 : SQLSTATE[42S02]: Base table or view not found: 1146 La table 'ngbdd.reports' n'existe pas  
-
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 08-Jul 14:44 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
-
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 08-Jul 14:44 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
-
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 08-Jul 14:44 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:15 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
 
 * D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
-		=> 08-Jul 15:29 : cURL error 6: Could not resolve host: api.pexels.com  
+		=> 14-Jul 00:15 : cURL error 6: Could not resolve host: api.pexels.com  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 08-Jul 15:33 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:15 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 08-Jul 15:33 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:15 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 08-Jul 15:33 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:15 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 08-Jul 15:34 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:16 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 08-Jul 15:34 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:16 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 08-Jul 18:43 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:16 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 08-Jul 18:43 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:16 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 08-Jul 20:29 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:16 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 08-Jul 20:29 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:16 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 08-Jul 20:31 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:16 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 08-Jul 20:31 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:16 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
 
-* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	78
-		=> 08-Jul 20:34 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ')' à la ligne 1  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:16 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:16 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:16 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:16 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:17 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:17 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:17 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:17 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:17 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:17 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:17 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:17 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:17 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:19 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:19 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:19 : SQLSTATE[42000]: Syntax error or access violation: 1064 Erreur de syntaxe près de ') AND online = 1' à la ligne 3  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:19 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:19 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:19 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 00:19 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:19 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:19 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:19 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 00:19 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:19 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:19 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:19 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 00:19 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:20 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:20 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:20 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 00:20 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:20 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:20 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:20 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 00:20 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:21 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:21 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:21 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 00:21 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:21 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:21 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:21 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 00:21 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:23 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:23 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 00:23 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:24 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 14-Jul 00:24 : SQLSTATE[42S22]: Column not found: 1054 Champ 'category' inconnu dans where clause  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 00:24 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 00:24 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 00:25 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 00:25 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 00:25 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 00:26 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 00:26 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 00:28 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 00:31 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 02:01 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 02:01 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 02:01 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 02:01 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* D:\sites\ng-pictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 14-Jul 02:02 : cURL error 6: Could not resolve host: api.pexels.com  
 

@@ -1,5 +1,4 @@
 RewriteEngine On
-RewriteBase /
 
 #cache busting
 RewriteRule ^imgs/(.*)_([a-z0-9]+)\.(jpg|jpeg|png|gif)/?$ imgs/$1.$3 [QSA,L]

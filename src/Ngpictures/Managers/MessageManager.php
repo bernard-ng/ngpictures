@@ -22,13 +22,14 @@ class MessageManager implements ArrayAccess
         "undefined_error"       => "Ooups, une erreur s'est produite, veuillez réessayer",
         "edit_not_allowed"      => "Vous n'avez pas le droit d'édition",
         "delete_not_allowed"    => "Vous n'avez pas le droit de suppression",
+        "collection_not_allowed"  => "Vous n'avez pas le droit d'acces à cette collection photo",
 
 
         //PUBLICATIONS
         //****************************************************************************************/
         'post_saved'            => "Publication ajoutée aux enregistrements",
         'post_not_found'        => "Ooups, cette publication n'existe pas ou plus",
-        'post_private'          => "Désolé cette publication n'est pas accecible pour l'instant",
+        'post_private'          => "Désolé cette publication n'est pas accecible ",
         'post_not_paid'         => "Veuillez débourser la somme exiger, pour obtenir vos photos",
         'post_not_liked'        => "Aucune mention j'aime pour cette publication",
         "post_htag_empty"       => "Aucune publication pour ce Htag",
@@ -59,6 +60,7 @@ class MessageManager implements ArrayAccess
         'form_contact_submitted'        => 'Nous avons bien reçu votre message et comptons vous répondre dans le plus bref délais',
         "form_registration_submitted"   => "Un email de confirmation de compte vous a été envoyé, veuillez le confirmer pour continuer",
         "form_report_submitted"         => "Merci d'avoir signaler cette publication",
+        "form_booking_submitted"        => "Votre réservation a bien été effectuée, nous avons contacter votre photographe",
         "form_invalid_username"         => "Votre pseudo n'est pas valide",
         "form_invalid_username_num"     => "Votre pseudo doit contenir au moins une lettre",
         "form_invalid_email"            => "Cet adresse mail n'est pas valide",

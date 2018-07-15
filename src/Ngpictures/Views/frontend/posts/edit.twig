@@ -14,6 +14,14 @@
                                 </div>
                             </div>
                             {{ form.input('title','Titre', 'text', errors.get('title'), post.get('title') ?? publication.title ) }}
+                            <div class="col l12 m12 s12">
+                                <select name="category">
+                                    <option disabled="disabled" value="{{ publication.categories_id }}" selected="selected">{{ publication.category }}</option>
+                                    {% for c in categories %}
+                                        <option value="{{ c.id }}"><span class="grey-txt dark-4">{{ c.title }}</span></option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                             {{ form.textarea('content','Description', errors.get('content'), post.get('content') ?? publication.content ) }}
                             <div class="submit-button col s12">
                                 <button type="submit" class="btn btn-flat waves-effect">Editer</button>

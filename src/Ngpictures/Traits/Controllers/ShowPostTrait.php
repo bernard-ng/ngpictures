@@ -16,7 +16,12 @@ trait ShowPostTrait
         if (!empty($slug) && !empty($id)) {
             $user       =   $this->loadModel('users');
             $article    =   $this->loadModel($this->table)->find(intval($id));
-            $comments   =   $this->loadModel('comments')->findWith($this->table."_id", $id, false);
+
+            $comments           =   $this->loadModel('comments');
+            $commentsNumber     = $comments->count($id, $this->table."_id")->num;
+            $comments           = $comments->get($id, $this->table."_id", 0, 4);
+
+
             $categories =   $this->loadModel('categories')->orderBy('title', 'ASC', 0, 5);
 
             if ($article && $article->slug === $slug) {
@@ -29,7 +34,7 @@ trait ShowPostTrait
                     $this->turbolinksLocation("/{$this->table}/{$slug}-{$id}");
                     $this->view(
                         "frontend/{$this->table}/show",
-                        compact("article", "comments", "user", "categories", "author", "similars")
+                        compact("article", "comments", "commentsNumber", "user", "categories", "author", "similars")
                     );
                 } else {
                     $this->flash->set("warning", $this->flash->msg['post_private'], false);
@@ -37,7 +42,8 @@ trait ShowPostTrait
                 }
             } else {
                 $this->flash->set("danger", $this->flash->msg['post_not_found'], false);
-                $this->redirect("/error/not-found", 404);
+                http_response_code(404);
+                $this->redirect(true);
             }
         } else {
             $this->flash->set("danger", $this->flash->msg['undefined_error'], false);

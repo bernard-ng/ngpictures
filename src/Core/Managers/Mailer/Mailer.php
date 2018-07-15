@@ -26,7 +26,7 @@ class Mailer
         $confirmation_link = $link;
 
         ob_start();
-            require CORE."/Managers/Mailer/templates/confirmation-mail-template.php";
+        require CORE . "/Managers/Mailer/templates/confirmation-mail-template.php";
         $message = ob_get_clean();
 
         try {
@@ -36,7 +36,7 @@ class Mailer
             $mail->addReplyTo('ngpictures@larytech.com', 'Information');
             $mail->isHTML(true);
             $mail->Subject = 'Bienvenue Sur Ngpictures';
-            $mail->Body    =  $message;
+            $mail->Body = $message;
             $mail->AltBody = "Cliquez pour confirmer votre compte: {$link}";
             $mail->send();
         } catch (Exception $e) {
@@ -62,7 +62,7 @@ class Mailer
 
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             ob_start();
-                require CORE."/Managers/Mailer/templates/reset-mail-template.php";
+            require CORE . "/Managers/Mailer/templates/reset-mail-template.php";
             $message = ob_get_clean();
 
             try {
@@ -73,12 +73,12 @@ class Mailer
 
                 $mail->isHTML(true);
                 $mail->Subject = 'Instruction de récuperation de mot de passe';
-                $mail->Body    =  $message;
+                $mail->Body = $message;
                 $mail->AltBody = "Cliquez pour récupérer votre mot de passe: {$link}";
 
                 $mail->send();
             } catch (Exception $e) {
-                LogMessageManager::register(__CLASS__, 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo);
+                LogMessageManager::register(__class__, 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo);
                 return false;
             }
         } else {
@@ -107,13 +107,13 @@ class Mailer
 
                 $mail->isHTML(true);
                 $mail->Subject = 'Ngpictures System Logs';
-                $mail->Body    =  "Voici le fichier log de ngpictures du ". date("d m Y");
-                $mail->AltBody  =   "Voici le fichier log de ngpictures du ". date("d m Y");
+                $mail->Body = "Voici le fichier log de ngpictures du " . date("d m Y");
+                $mail->AltBody = "Voici le fichier log de ngpictures du " . date("d m Y");
 
-                $mail->addAttachment(ROOT."/system.log");
+                $mail->addAttachment(ROOT . "/system.log");
                 $mail->send();
             } catch (Exception $e) {
-                LogMessageManager::register(__CLASS__, $e);
+                LogMessageManager::register(__class__, $e);
                 return false;
             }
         } else {
@@ -143,15 +143,50 @@ class Mailer
                 $mail->addReplyTo($email, $name);
                 $mail->isHTML(false);
                 $mail->Subject = 'Contact';
-                $mail->Body    =  $message;
-                $mail->AltBody =  $message;
+                $mail->Body = $message;
+                $mail->AltBody = $message;
                 $mail->send();
             } catch (Exception $e) {
-                LogMessageManager::register(__CLASS__, 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo);
+                LogMessageManager::register(__class__, 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo);
                 return false;
             }
         } else {
             throw new InvalidArgumentException("email invalide");
+        }
+    }
+
+
+    /**
+     * notification de reservation
+     *
+     * @param string $photographer_email
+     * @param string $name
+     * @param string $email
+     * @param string $date
+     * @param string $time
+     * @param string $description
+     * @return void
+     */
+    public function booking(string $photographer_email, string $name, string $email, string $date, string $time, string $description)
+    {
+        $mail = new PHPMailer(true);
+        ob_start();
+        require CORE . "/Managers/Mailer/templates/booking-mail-template.php";
+        $message = ob_get_clean();
+
+        try {
+            $mail->smtpConnect();
+            $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
+            $mail->addAddress($email);
+            $mail->addReplyTo($email, $name);
+            $mail->isHTML(true);
+            $mail->Subject = 'Réservation shooting';
+            $mail->Body = $message;
+            $mail->AltBody = "Monsieur/Madame : {$name}, réserve un shoot pour le {$date} à {$time} \n Motif: {$description}";
+            $mail->send();
+        } catch (Exception $e) {
+            LogMessageManager::register(__class__, $e);
+            return false;
         }
     }
 }
