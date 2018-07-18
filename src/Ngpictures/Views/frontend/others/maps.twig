@@ -1,77 +1,106 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Localisation | Ngpictures</title>
-        <meta name="viewport" content="initial-scale=1.0">
-        <meta charset="utf-8">
-        {% include "includes/default-style.twig" %}
-        <style>
+<!DOCTYPE html >
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Using MySQL and PHP with Google Maps</title>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+
         #map {
-            width: 100%;
-            height: 100vh;
+            height: 100%;
         }
 
-        html, body {
+        /* Optional: Makes the sample page fill the window. */
+
+        html,
+        body {
             height: 100%;
             margin: 0;
             padding: 0;
         }
     </style>
-    </head>
-    <body>
-        <map id="map"></map>
-        <div class="fixed-action-btn">
-            <a href="/maps" class="btn-floating btn-large waves-effect shadow-4">
-                <i class="icon icon-location"></i>
-            </a>
-        </div>
-        <script>
-            let map;
-            let position = {lat: -11.6876026, lng: 27.5026174};
+</head>
 
-            function initMap() {
-                map = new google.maps.Map(document.getElementById('map'), {
-                    center: position,
-                    zoom: 18
+<body>
+    <div id="map"></div>
+
+    <script>
+        var customLabel = {
+            restaurant: {
+                label: 'R'
+            },
+            bar: {
+                label: 'B'
+            }
+        };
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: new google.maps.LatLng(-33.863276, 151.207977),
+                zoom: 12
+            });
+            var infoWindow = new google.maps.InfoWindow;
+
+            // Change this depending on the name of your PHP or XML file
+            downloadUrl('https://storage.googleapis.com/mapsdevsite/json/mapmarkers2.xml', function (data) {
+                var xml = data.responseXML;
+                var markers = xml.documentElement.getElementsByTagName('marker');
+                Array.prototype.forEach.call(markers, function (markerElem) {
+                    var id = markerElem.getAttribute('id');
+                    var name = markerElem.getAttribute('name');
+                    var address = markerElem.getAttribute('address');
+                    var type = markerElem.getAttribute('type');
+                    var point = new google.maps.LatLng(
+                        parseFloat(markerElem.getAttribute('lat')),
+                        parseFloat(markerElem.getAttribute('lng')));
+
+                    var infowincontent = document.createElement('div');
+                    var strong = document.createElement('strong');
+                    strong.textContent = name
+                    infowincontent.appendChild(strong);
+                    infowincontent.appendChild(document.createElement('br'));
+
+                    var text = document.createElement('text');
+                    text.textContent = address
+                    infowincontent.appendChild(text);
+                    var icon = customLabel[type] || {};
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: point,
+                        label: icon.label
+                    });
+                    marker.addListener('click', function () {
+                        infoWindow.setContent(infowincontent);
+                        infoWindow.open(map, marker);
+                    });
                 });
+            });
+        }
 
-                (new google.maps.Marker({position: position, map: map}));
-            }
 
-            /*if (navigator.geolocation) {
-                let options = {
-                    enableHighAccuracy: true,
-                    timeout: 5000,
-                    maximumAge: 0
-                };
 
-                function success(pos) {
-                    let position = {
-                        lat: pos.cords.latitude,
-                        lng: pos.coords.longitude
-                    };
+        function downloadUrl(url, callback) {
+            var request = window.ActiveXObject ?
+                new ActiveXObject('Microsoft.XMLHTTP') :
+                new XMLHttpRequest;
 
-                    infoWindow.setPosition(position);
-                    infoWindow.setContent('Location found.');
-                    map.setCenter(position);
-                };
+            request.onreadystatechange = function () {
+                if (request.readyState == 4) {
+                    request.onreadystatechange = doNothing;
+                    callback(request, request.status);
+                }
+            };
 
-                function error(err) {
-                    handleLocationError(true, infoWindow, map.getCenter());
-                };
+            request.open('GET', url, true);
+            request.send(null);
+        }
 
-                navigator.geolocation.getCurrentPosition(success, error, options);
-            } else {
-                handleLocationError(false, infoWindow, map.getCenter());
-            }
+        function doNothing() { }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ constant('MAPS_API_KEY') }}&callback=initMap">
+    </script>
+</body>
 
-            function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-                infoWindow.setPosition(pos);
-                infoWindow.setContent(browserHasGeolocation ?
-                    'Error: The Geolocation service failed.' :
-                    'Error: Your browser doesn\'t support geolocation.');
-            }*/
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=<?= MAPS_API_KEY ?>&callback=initMap" async defer></script>
-    </body>
 </html>

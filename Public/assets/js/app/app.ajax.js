@@ -18,87 +18,82 @@ function formFeedComments(element) {
     let postContainer = document.querySelector(element);
     let activeUser = document.querySelector("meta[active-user]");
     if (postContainer) {
-        let posts = postContainer.getElementsByTagName("article");
-        for (let i = 0; i < posts.length; i++) {
-            let submitBtn = posts[i].querySelector("button[type='submit']");
-            submitBtn.addEventListener('click', function () {
-                setLoader(this);
-            });
+        try {
+            let posts = postContainer.getElementsByTagName("article");
+            for (let i = 0; i < posts.length; i++) {
+                let submitBtn = posts[i].querySelector("button[type='submit']");
+                submitBtn.addEventListener('click', function () {
+                    setLoader(this);
+                });
 
-            posts[i].querySelector("form").addEventListener('submit', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
+                posts[i].querySelector("form").addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
 
-                let comment = this.querySelector('textarea').value;
-                let closeBtn = this.querySelector("[type='reset']");
-                let showComment = posts[i].querySelector("[data-action='showComment']");
-                let icon = showComment.querySelector("i.icon");
+                    let comment = this.querySelector('textarea').value;
+                    let closeBtn = this.querySelector("[type='reset']");
+                    let showComment = posts[i].querySelector("[data-action='showComment']");
+                    let icon = showComment.querySelector("i.icon");
 
-                if (activeUser) {
-                    if (comment.length > 0 && comment !== ' ') {
-                        if (getXhr()) {
-                            let xhr = getXhr();
-                            xhr.open('POST', this.getAttribute('action'), true);
-                            xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-                            xhr.onreadystatechange = function () {
-                                if (xhr.readyState === 4) {
-                                    if (xhr.status === 200) {
-                                        let number = parseInt(xhr.responseText, 10);
-                                        icon.classList.remove('icon-comment');
-                                        icon.classList.remove('icon-comment-empty');
+                    if (activeUser) {
+                        if (comment.length > 0 && comment !== ' ') {
+                            if (getXhr()) {
+                                let xhr = getXhr();
+                                xhr.open('POST', this.getAttribute('action'), true);
+                                xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+                                xhr.onreadystatechange = function () {
+                                    if (xhr.readyState === 4) {
+                                        if (xhr.status === 200) {
+                                            let number = parseInt(xhr.responseText, 10);
+                                            icon.classList.remove('icon-comment');
+                                            icon.classList.remove('icon-comment-empty');
 
-                                        if (number >= 1) {
-                                            icon.classList.add('icon-comment');
-                                            showComment.querySelector('span').innerText = number.toString();
+                                            if (number >= 1) {
+                                                icon.classList.add('icon-comment');
+                                                showComment.querySelector('span').innerText = number.toString();
 
-                                            removeLoader(submitBtn, "Envoyer");
-                                            setEventTrigger(closeBtn, 'click');
-                                            setFlash('success', msg.formCommentSubmitted);
+                                                removeLoader(submitBtn, "Envoyer");
+                                                setEventTrigger(closeBtn, 'click');
+                                                setFlash('success', msg.formCommentSubmitted);
+                                            } else {
+                                                icon.classList.add('icon-comment-empty');
+                                                showComment.querySelector('span').innerText = number.toString();
+
+                                                removeLoader(submitBtn, "Envoyer");
+                                                setEventTrigger(closeBtn, 'click');
+                                                setFlash('success', msg.formCommentSubmitted);
+                                            }
                                         } else {
-                                            icon.classList.add('icon-comment-empty');
-                                            showComment.querySelector('span').innerText = number.toString();
-
-                                            removeLoader(submitBtn, "Envoyer");
+                                            removeLoader(submitBtn, 'Envoyer');
                                             setEventTrigger(closeBtn, 'click');
-                                            setFlash('success', msg.formCommentSubmitted);
+                                            setFlash(
+                                                'danger',
+                                                xhr.responseText ? xhr.responseText : msg.undefinedError
+                                            );
                                         }
-                                    } else {
-                                        removeLoader(submitBtn, 'Envoyer');
-                                        setEventTrigger(closeBtn, 'click');
-                                        setFlash(
-                                            'danger',
-                                            xhr.responseText ? xhr.responseText : msg.undefinedError
-                                        );
                                     }
                                 }
+                                closeBtn.addEventListener('click', function () {
+                                    xhr.abort();
+                                });
+                                xhr.send(new FormData(this));
                             }
-                            closeBtn.addEventListener('click', function () {
-                                xhr.abort();
-                            });
-                            xhr.send(new FormData(this));
+                        } else {
+                            removeLoader(submitBtn, 'Envoyer');
+                            setEventTrigger(closeBtn, 'click');
+                            setFlash('danger', msg.formFieldRequired);
                         }
                     } else {
                         removeLoader(submitBtn, 'Envoyer');
                         setEventTrigger(closeBtn, 'click');
-                        setFlash('danger', msg.formFieldRequired);
+                        setFlash('danger', msg.usersNotLogged);
                     }
-                } else {
-                    removeLoader(submitBtn, 'Envoyer');
-                    setEventTrigger(closeBtn, 'click');
-                    setFlash('danger', msg.usersNotLogged);
-                }
-            });
+                });
+            }
+        } catch(e) {
+            return false;
         }
     }
-}
-
-
-/**
- * envyoer est afficher
- * @param element
- */
-function formShowComments(element) {
-
 }
 
 
@@ -112,50 +107,54 @@ function likes(element) {
     if (postContainer) {
         let posts = postContainer.getElementsByTagName("article");
         for (let i = 0; i < posts.length; i++) {
-            let likeBtn = posts[i].querySelector("a[data-action='like']");
-            likeBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
+            try {
+                let likeBtn = posts[i].querySelector("a[data-action='like']");
+                likeBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
 
-                if (activeUser) {
-                    this.classList.toggle('active');
-                    let icon = this.querySelector('i.icon');
-                    let showLikes = this.parentElement.parentElement.querySelector("[data-action='showLikes']");
+                    if (activeUser) {
+                        this.classList.toggle('active');
+                        let icon = this.querySelector('i.icon');
+                        let showLikes = this.parentElement.parentElement.querySelector("[data-action='showLikes']");
 
-                    if (this.classList.contains('active')) {
-                        icon.classList.remove('icon-heart-empty');
-                        icon.classList.add('icon-heart', 'red-txt');
-                    } else {
-                        icon.classList.remove('icon-heart', 'red-txt');
-                        icon.classList.add('icon-heart-empty');
-                    }
+                        if (this.classList.contains('active')) {
+                            icon.classList.remove('icon-heart-empty');
+                            icon.classList.add('icon-heart', 'red-txt');
+                        } else {
+                            icon.classList.remove('icon-heart', 'red-txt');
+                            icon.classList.add('icon-heart-empty');
+                        }
 
-                    if (getXhr()) {
-                        let xhr = getXhr();
-                        xhr.open('GET', this.getAttribute('href'), true);
-                        xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-                        xhr.onreadystatechange = function () {
-                            if (xhr.readyState === 4) {
-                                if (xhr.status === 200) {
-                                    showLikes.innerHTML = xhr.responseText;
-                                } else {
-                                    setFlash(
-                                        'danger',
-                                        xhr.responseText ? xhr.responseText : msg.undefinedError
-                                    );
+                        if (getXhr()) {
+                            let xhr = getXhr();
+                            xhr.open('GET', this.getAttribute('href'), true);
+                            xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
+                            xhr.onreadystatechange = function () {
+                                if (xhr.readyState === 4) {
+                                    if (xhr.status === 200) {
+                                        showLikes.innerHTML = xhr.responseText;
+                                    } else {
+                                        setFlash(
+                                            'danger',
+                                            xhr.responseText ? xhr.responseText : msg.undefinedError
+                                        );
+                                    }
                                 }
-                            }
-                        };
-                        xhr.send();
-                        xhr.timeout = 10000;
-                        xhr.addEventListener('abort', function () {
-                            setFlash('warning', msg.undefinedError);
-                        });
+                            };
+                            xhr.send();
+                            xhr.timeout = 10000;
+                            xhr.addEventListener('abort', function () {
+                                setFlash('warning', msg.undefinedError);
+                            });
+                        }
+                    } else {
+                        setFlash('danger', msg.usersNotLogged);
                     }
-                } else {
-                    setFlash('danger', msg.usersNotLogged);
-                }
-            });
+                });
+            } catch(e) {
+                return false;
+            }
         }
     } else {
         return false;
@@ -208,139 +207,6 @@ function loadVerses(element) {
             return false;
         }
     }, 10000);
-}
-
-
-/**
- * inifinty scroll, ajour du contenu avec ajax
- */
-function loadPosts(element) {
-    let action = "inactive";
-    let statusBar = document.querySelector('#statusBar');
-    let postContainer = document.querySelector(element);
-
-    function getData(lastId) {
-        if (postContainer && statusBar) {
-            let xhr = getXhr();
-            if (xhr) {
-                xhr.open('POST', "/ajax/" + statusBar.getAttribute('data-ajax'));
-                xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-                xhr.send((new FormData()).append("lastId", lastId));
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4) {
-                        if (xhr.status === 200) {
-                            if (xhr.responseText = '') {
-                                action = "inactive";
-                                statusBar.innerHTML = "Aucun contenu à charger";
-                            } else {
-                                action = "active";
-                                statusBar.innerHTML = "Chargement...";
-                            }
-                            postContainer.append(xhr.responseText);
-                        } else {
-                            statusBar.innerHTML = "Impossible de charger la suite";
-                        }
-                    }
-                }
-            }
-        } else {
-            return false;
-        }
-    }
-
-    window.addEventListener('scroll', function () {
-        let windowHeight = window.getBoundingClientRect().height;
-        let containerHeight = window.getBoundingClientRect().height;
-        if (window.scrollTop() + windowHeight > containerHeight && action === "inactive") {
-            action = "active";
-
-            window.setTimeout(function () {
-                getData(postContainer.lastElementChild.getAttribute("id"));
-            }, 2000);
-        }
-    })
-}
-
-
-/**
- * charge les information d'une image  en ajax
- */
-function loadPictureInfo(element) {
-    let gallery = document.querySelector(element);
-    if (gallery) {
-        let activeContent = null;
-        let activeItem = null;
-
-        let slideDown = function (element) {
-            let height = element.offsetHeight;
-            element.style.height = "0px";
-            element.style.transitionDuration = '.5s';
-            element.offsetHeight; // force du repaint
-            element.style.height = height + "px";
-
-            window.setTimeout(function () {
-                element.style.height = null
-            }, 500);
-        };
-
-        let slideUp = function (element) {
-            let height = element.offsetHeight;
-            element.style.height = height + "px";
-            element.offsetHeight; // force du repaint
-            element.style.height = "0px";
-
-            window.setTimeout(function () {
-                element.parentNode.removeChild(element);
-            }, 500);
-        };
-
-        let scrollTo = function (target, offset = 0) {
-            window.scrollTo({
-                behavior: "smooth",
-                left: 0,
-                top: target.offsetTop - offset
-            });
-        };
-
-        let show = function (item) {
-            let offset = 0;
-            if (activeContent !== null) {
-                slideUp(activeContent);
-                if (activeContent.offsetTop < item.offsetTop) {
-                    offset = activeContent.offsetHeight;
-                }
-            }
-
-            if (activeItem === item) {
-                activeItem = null;
-                activeContent = null;
-            } else {
-                let body = item.querySelector("[data-action='gallery-item-body']").cloneNode(true);
-                body.classList.add('active');
-                item.after(body);
-                slideDown(body);
-                scrollTo(item, offset);
-                activeContent = body;
-                activeItem = item;
-            }
-        };
-
-        if (typeof gallery !== 'undefined') {
-            let items = [].slice.call(gallery.querySelectorAll("[data-action='gallery-item']"));
-            items.forEach((item) => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    show(item);
-                })
-            });
-        } else {
-            return false;
-        }
-    } else {
-        return false;
-    }
 }
 
 
@@ -641,12 +507,17 @@ function downloadFile(element) {
 }
 
 //------------------------------------------------------------------------------------
-follow("[data-action='following']");
-savePost("[data-action='save']");
-downloadFile("[data-action='download']");
-formLogin("form[data-action='login']");
-formSign("form[data-action='sign']");
-formGenericSubmit("form[data-action='ideas']");
-formGenericSubmit("form[data-action='bugs']");
-formFeedComments('#dataContainer');
-likes("#dataContainer");
+function loadAjax ()
+{
+    follow("[data-action='following']");
+    savePost("[data-action='save']");
+    downloadFile("[data-action='download']");
+    formLogin("form[data-action='login']");
+    formSign("form[data-action='sign']");
+    formGenericSubmit("form[data-action='ideas']");
+    formGenericSubmit("form[data-action='bugs']");
+    formFeedComments('#dataContainer');
+    likes("#dataContainer");
+}
+
+loadAjax();

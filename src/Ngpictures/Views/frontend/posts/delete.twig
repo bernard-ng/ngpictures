@@ -8,7 +8,7 @@
                 Voulez-vous vraiment supprimer cette publication ?
             </p>
             <div class="row">
-                <img src="{{ post.thumbUrl }}" class="responsive" alt="{{ post.title ?: post.name }}" title="{{ post.title ?: post.name }}"
+                <img data-src="{{ post.thumbUrl }}" class="responsive" alt="{{ post.title ?: post.name }}" title="{{ post.title ?: post.name }}"
                     width="100%" height="auto">
             </div>
             <form method="POST" action="{{ post.deleteUrl }}" data-action="delete">

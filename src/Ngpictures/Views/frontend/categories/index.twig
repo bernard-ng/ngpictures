@@ -3,15 +3,21 @@
 {% block content %}
     <section class="section container row">
         {% if categories %}
-            <div class="animated slideInRight">
+            <div class="animated slideInRight" id="dataContainer" data-ajax="categories">
                 {% for c in categories %}
-                <div class="row nexted col s12 m3 l3">
+                <div class="row nexted col s12 m3 l3" id="{{ c.id }}">
                     <article class="card post-titled grey dark-4">
                         <div class="card-image waves-effect">
                             <a href="{{ c.url }}">
                                 {% for key, thumb in thumbs %}
                                     {% if c.id == key %}
-                                        <img src="{{ thumb }}" alt="{{ c.title }}" title="{{ c.title }}" class="responsive-img">
+                                        <img
+                                            src="{{ cacheBusting('/imgs/sblank.png') }}"
+                                            data-src="{{ thumb }}"
+                                            alt="{{ c.title }}"
+                                            title="{{ c.title }}"
+                                            class="responsive-img"
+                                        >
                                     {% endif %}
                                 {% endfor %}
                             </a>
@@ -24,30 +30,15 @@
                 </div>
                 {% endfor %}
             </div>
-            <section class="section col l12 m12 s12" style="margin-top: 30px;">
-                <div class="container row">
-                    <ul class="pagination center">
-                        <li class="">
-                            <a href="">
-                                <i class="icon icon-left-open"></i>
-                            </a>
-                        </li>
-                        <li class="active">
-                            <a href="">1</a>
-                        </li>
-                        {% for i in 1..5 %}
-                        <li>
-                            <a href="">{{ i }}</a>
-                        </li>
-                        {% endfor %}
-                        <li class="">
-                            <a href="">
-                                <i class="icon icon-right-open"></i>
-                            </a>
-                        </li>
-                    </ul>
+            {% if categories %}
+                <div class="row col s12">
+                    <div class="ng-progress-container">
+                        <div id="statusBar" class="mtb ng-progress-indeterminate disabled" data-ajax="categories">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
                 </div>
-            </section>
+            {% endif %}
         {% else %}
             <div class="col offset-l2 l8 m12 s12 animated slideInRight">
                 <div class="section center-align">

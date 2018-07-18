@@ -17,8 +17,8 @@
 							<tr><td height="30" style="font-size: 30px; line-height: 30px;"> &nbsp;</td></tr>
 							<tr>
 								<td align="center" style="text-align: center;">
-									<a href="http://ngpictures.dev/home">
-										<img src="http://ngpictures.dev/imgs/ngpic-2.png" width="100" border="0" alt="logo ngpictures">
+									<a href="https://larytech.com/">
+										<img src="https://larytech.com/imgs/logo.png" width="100" border="0" alt="logo ngpictures">
 									</a>
 								</td>
 							</tr>
@@ -42,7 +42,7 @@
 							<tr>
 								<td align="center" style="text-align: center; color: #808a8f; mso-line-height: exactly; line-height: 25px; font-family: robot-title, sans-serif;">
 									Salut, vous venez tout juste de nous signaler que vous avez oublier votre mot de passe,
-									cliquez sur le button si dessous pour avoir un nouveau mot de passe, si vous n\'êtes 
+									cliquez sur le button si dessous pour avoir un nouveau mot de passe, si vous n\'êtes
 									pas à l\'origine de ce signale, Veuillez simplement ignorer ce mail
 								</td>
 							</tr>

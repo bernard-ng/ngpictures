@@ -10,7 +10,7 @@ trait StoryPostTrait
      */
     public function index()
     {
-        $posts      =   $this->loadModel($this->table)->lastOnline();
+        $posts      =   $this->loadModel($this->table)->latest(0, 5);
         $categories =   $this->loadModel('categories')->all();
         $title      =   ucfirst($this->table);
         $name       =   ($this->table == 'posts') ? "Fil d'actualité" : ucfirst($this->table);
@@ -21,7 +21,6 @@ trait StoryPostTrait
             Découvez les photos et les articles des passionnés de la photographie, partager vos photos avec la
             communauté.
         ");
-        $this->pageManager::setMeta(['property' => 'og:url', 'content' => '//larytech.com/'.$this->table]);
         $this->view("frontend/{$title}/index", compact("posts", "categories"));
     }
 }

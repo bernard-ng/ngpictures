@@ -33,9 +33,16 @@ class TwigRenderer implements RendererInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function render(string $view, array $variables = [])
+    public function render(string $view, array $variables = [], $toString = false)
     {
-        echo $this->twig->render("$view.twig", $variables);
+        if ($toString) {
+            ob_start();
+                echo $this->twig->render("$view.twig", $variables);
+                $content = ob_get_clean();
+            return html_entity_decode($content);
+        } else {
+            echo $this->twig->render("$view.twig", $variables);
+        }
     }
 
 

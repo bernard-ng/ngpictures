@@ -54,6 +54,26 @@ COMMENT = 'la table qui contient et gère les photographes';
 
 
 -- -----------------------------------------------------
+-- Table `locations`
+-- -----------------------------------------------------
+CREATE TABLE `locations` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR( 60 ) NOT NULL,
+  `address` VARCHAR( 80 ) NOT NULL,
+  `lat` FLOAT( 10, 6 ) NOT NULL,
+  `lng` FLOAT( 10, 6 ) NOT NULL,
+  `type` VARCHAR( 30 ) NOT NULL DEFAULT 'Photographes',
+  `photographers_id` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY(`id`),
+  CONSTRAINT `fk_locations_photographers1` FOREIGN KEY (`photographers_id`) REFERENCES `photographers` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+COMMENT = 'la table qui localise les photographes';
+
+CREATE INDEX `fk_photographers_photographers1_idx` ON `locations` (`photographers_id` ASC);
+
+-- -----------------------------------------------------
 -- Table `verses`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `verses` ;

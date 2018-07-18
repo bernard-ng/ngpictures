@@ -58,53 +58,58 @@ class PostsController extends Controller
      */
     public function add()
     {
-        $post           =   new Collection($_POST);
-        $file           =   new Collection($_FILES);
-        $errors         =   new Collection();
-        $notifier       =   $this->container->get(NotificationService::class);
-        $categories     =   $this->categories->orderBy('title', 'ASC');
+        $post = new Collection($_POST);
+        $file = new Collection($_FILES);
+        $errors = new Collection();
+        $notifier = $this->container->get(NotificationService::class);
+        $categories = $this->categories->orderBy('title', 'ASC');
 
         if (isset($_POST) && !empty($_POST)) {
-            $title          =   $this->str->escape($post->get('title'));
-            $content        =   $this->str->escape($post->get('content'));
-            $slug           =   $this->str->slugify(empty($title)? "publication" : $title);
-            $categories_id  =   (intval($post->get('category')) == 0) ? 1 : intval($post->get('category'));
-            $users_id       =   $this->authService->isLogged()->id;
+            $title = $this->str->escape($post->get('title'));
+            $content = $this->str->escape($post->get('content'));
+            $slug = $this->str->slugify(empty($title) ? "publication" : $title);
+            $categories_id = (intval($post->get('category')) == 0) ? 1 : intval($post->get('category'));
+            $users_id = $this->authService->isLogged()->id;
 
             if (isset($_FILES) && !empty($_FILES)) {
                 if (!empty($file->get('thumb.name'))) {
                     if ($this->validator->isValid()) {
                         $this->posts->create(compact('users_id', 'title', 'content', 'slug', 'categories_id'));
 
-                        $last_id    =   $this->posts->lastInsertId();
-                        $isUploaded =   $this
-                            ->container
-                            ->get(ImageManager::class)
-                            ->upload($file, 'posts', "ngpictures-{$slug}-{$last_id}", 'article');
-
-                        if ($isUploaded) {
-                            $this
+                        $last_id = $this->posts->lastInsertId();
+                        if ($last_id) {
+                            $isUploaded = $this
                                 ->container
                                 ->get(ImageManager::class)
-                                ->upload($file, 'posts-thumbs', "ngpictures-{$slug}-{$last_id}", 'medium');
+                                ->upload($file, 'posts', "ngpictures-{$slug}-{$last_id}", 'article');
 
-                            $exif  = $this->container->get(ImageManager::class)->getExif($file);
-                            $color = $this->container->get(ImageManager::class)->getColor($file);
-                            $this->posts->update(
-                                $last_id,
-                                [
-                                    'thumb' => "ngpictures-{$slug}-{$last_id}.jpg",
-                                    'exif' => $exif,
-                                    'color' => $color,
-                                ]
-                            );
+                            if ($isUploaded) {
+                                $this
+                                    ->container
+                                    ->get(ImageManager::class)
+                                    ->upload($file, 'posts-thumbs', "ngpictures-{$slug}-{$last_id}", 'medium');
 
-                            $notifier->notify(1, [$this->posts->find($last_id)]);
-                            $this->flash->set('success', $this->flash->msg['form_post_submitted'], false);
-                            $this->redirect("/posts", true);
+                                $exif = $this->container->get(ImageManager::class)->getExif($file);
+                                $color = $this->container->get(ImageManager::class)->getColor($file);
+                                $this->posts->update(
+                                    $last_id,
+                                    [
+                                        'thumb' => "ngpictures-{$slug}-{$last_id}.jpg",
+                                        'exif' => $exif,
+                                        'color' => $color,
+                                    ]
+                                );
+
+                                $notifier->notify(1, [$this->posts->find($last_id)]);
+                                $this->flash->set('success', $this->flash->msg['form_post_submitted'], false);
+                                $this->redirect("/posts", true);
+                            } else {
+                                $this->posts->delete($last_id);
+                                $this->flash->set('danger', $this->flash->msg['files_not_uploaded'], false);
+                            }
                         } else {
-                            $this->posts->delete($last_id);
-                            $this->flash->set('danger', $this->flash->msg['files_not_uploaded']);
+                            $this->flash('danger', $this->flash->msg['undefined_error'], false);
+                            $this->redirect(true, false);
                         }
                     } else {
                         $this->sendFormError();
@@ -137,13 +142,13 @@ class PostsController extends Controller
         if ($token == $this->authService->getToken()) {
             $publication = $this->posts->find(intval($id));
             if ($publication) {
-                $post       =   new Collection($data ?? $_POST);
+                $post = new Collection($data ?? $_POST);
 
                 if (isset($_POST) && !empty($_POST)) {
-                    $title          =   $this->str->escape($post->get('title'));
-                    $content        =   $this->str->escape($post->get('content'));
-                    $slug           =   $this->str->slugify($title ?? 'publication');
-                    $categories_id  =   intval($post->get('category')) ?? 1;
+                    $title = $this->str->escape($post->get('title'));
+                    $content = $this->str->escape($post->get('content'));
+                    $slug = $this->str->slugify($title ?? 'publication');
+                    $categories_id = (intval($post->get('category')) == 0) ? 1 : intval($post->get('category'));;
 
                     $this->posts->update($id, compact('title', 'content', 'slug', 'categories_id'));
                     $this->flash->set("success", $this->flash->msg['post_edit_success'], false);
@@ -167,8 +172,8 @@ class PostsController extends Controller
      */
     public function delete($id, $token)
     {
-        $data   =   new Collection($_POST);
-        $post   =   $this->posts->find(intval($id));
+        $data = new Collection($_POST);
+        $post = $this->posts->find(intval($id));
 
         if ($this->authService->getToken() == $token) {
             if ($post && ($post->users_id == $this->authService->isLogged()->id)) {

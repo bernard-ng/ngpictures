@@ -29,6 +29,7 @@ $router->get("/my-notifications/clear/:token", "notifications#clear", "notificat
 //community pages
 $router->get("/community", "community", "community.index");
 $router->get("/community/search", "community#search", "community.search");
+$router->get("/community/photographers", "community#photographers", "community.photographers");
 
 //posts and blog pages
 $router->get("/blog","blog", "blog.index");
@@ -84,6 +85,7 @@ $router->any("/app.offline", "static#offline", 'static.offline');
 $router->any("/booking", 'booking', 'reservation');
 $router->get('/saves/:type/:slug-:id', 'saves#add', 'saves.add');
 $router->get("/maps", 'maps#show', 'maps.show');
+$router->get("/maps/photographers", 'maps#photographers', 'maps.photographers');
 $router->get("/htag/:tag", 'htag', 'htag.index');
 
 //facebook routes
@@ -92,8 +94,13 @@ $router->get("/facebook/connect", "facebook#connect", "facebook.connect");
 
 // AJAX ROUTES
 /*****************************************************************************/
-$router->post("/ajax/posts", "ajax#posts", "ajax.posts");
-$router->post("/ajax/blog", "ajax#blog", "ajax.blog");
+$router->get("/ajax/posts", "ajax#posts", "ajax.posts");
+$router->get("/ajax/blog", "ajax#blog", "ajax.blog");
+$router->get("/ajax/gallery", "ajax#gallery", "ajax.gallery");
+$router->get("/ajax/albums", "ajax#albums", "ajax.albums");
+$router->get("/ajax/categories", "ajax#categories", "ajax.categories");
+$router->get("/ajax/community", "ajax#community", "ajax.community");
+
 $router->get("/verses", "verses", "ajax.verses");
 
 

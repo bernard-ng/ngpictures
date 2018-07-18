@@ -17,11 +17,6 @@
                         {% endif %}
                     </li>
                 {% endfor %}
-                <div class="fixed-action-btn">
-                    <a href="/gallery/slider?last_id={{ last_id }}" class="btn-floating btn-large blue-grey dark-2 waves-effect shadow-4">
-                        <i class="icon icon-right-open"></i>
-                    </a>
-                </div>
             {% else %}
                 <li id="reset">
                     <img src="{{ cacheBusting('/imgs/slider.jpg') }}">
@@ -39,6 +34,13 @@
             {% endif %}
         </ul>
     </div>
+    {% if photos %}
+        <div class="fixed-action-btn">
+            <a href="/gallery/slider?last_id={{ last_id }}" class="btn-floating btn-large blue-grey dark-2 waves-effect shadow-4">
+                <i class="icon icon-right-open"></i>
+            </a>
+        </div>
+    {% endif %}
     <div class="fixed-action-btn second">
         <a href="/gallery" class="btn-floating btn-large blue dark-2 waves-effect shadow-4">
             <i class="icon icon-th"></i>

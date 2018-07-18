@@ -121,34 +121,39 @@ class BlogController extends AdminController
                         $this->blog->create(compact('title', 'content', 'slug', 'categories_id'));
 
                         $last_id        =   $this->blog->lastInsertId();
-                        $isUploaded     =   $this
-                            ->container
-                            ->get(ImageManager::class)
-                            ->upload($file, 'blog', "ngpictures-{$slug}-{$last_id}", 'article');
-
-                        if ($isUploaded) {
-                            $this
+                        if ($last_id) {
+                            $isUploaded = $this
                                 ->container
                                 ->get(ImageManager::class)
-                                ->upload($file, 'blog-thumbs', "ngpictures-{$slug}-{$last_id}", 'small');
+                                ->upload($file, 'blog', "ngpictures-{$slug}-{$last_id}", 'article');
 
-                            $exif = $this->container->get(ImageManager::class)->getExif($file);
-                            $color = $this->container->get(ImageManager::class)->getColor($file);
+                            if ($isUploaded) {
+                                $this
+                                    ->container
+                                    ->get(ImageManager::class)
+                                    ->upload($file, 'blog-thumbs', "ngpictures-{$slug}-{$last_id}", 'small');
 
-                            $this->blog->update(
-                                $last_id,
-                                [
-                                    'thumb' => "ngpictures-{$slug}-{$last_id}.jpg",
-                                    'exif' => $exif,
-                                    'color' => $color,
-                                ]
-                            );
+                                $exif = $this->container->get(ImageManager::class)->getExif($file);
+                                $color = $this->container->get(ImageManager::class)->getColor($file);
 
-                            $this->flash->set('success', $this->flash->msg['form_post_submitted']);
-                            $this->redirect(ADMIN . "/blog");
+                                $this->blog->update(
+                                    $last_id,
+                                    [
+                                        'thumb' => "ngpictures-{$slug}-{$last_id}.jpg",
+                                        'exif' => $exif,
+                                        'color' => $color,
+                                    ]
+                                );
+
+                                $this->flash->set('success', $this->flash->msg['form_post_submitted'], false);
+                                $this->redirect(ADMIN . "/blog");
+                            } else {
+                                $this->blog->delete($last_id);
+                                $this->flash->set('danger', $this->flash->msg['files_not_uploaded'], false);
+                            }
                         } else {
-                            $this->blog->delete($last_id);
-                            $this->flash->set('danger', $this->flash->msg['files_not_uploaded']);
+                            $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
+                            $this->redirect(true, false);
                         }
                     } else {
                         $this->sendFormError();

@@ -4,191 +4,197 @@
     <section class="section row container">
         {% include "/includes/right-aside.twig" %}
         <section class="col l6 m6 s12 nexted  animated fast slideInLeft">
-            <div id="dataContainer">
+            <div id="dataContainer" data-ajax="posts">
                 {% if posts %}
-                {% for a in posts %}
-                <article class="card" id="{{ a.id }}" style="background: #100F0F">
-                    <header class="news-card-header">
-                                <span class="news-card-image-profil">
-                                    <img src="{{ a.userAvatarUrl }}" class="materialboxed" alt="photo de profile" title="{{ a.username }}">
-                                </span>
-                        <p class="news-card-header-title">
-                            <a href="{{ a.userAccountUrl }}">{{ a.Username }} </a>
-                        </p>
+                    {% for a in posts %}
+                    <article class="card" id="{{ a.id }}" style="background: #100F0F">
+                        <header class="news-card-header">
+                            <span class="news-card-image-profil">
+                                <img data-src="{{ a.userAvatarUrl }}" alt="{{ a.username }}" title="{{ a.username }}">
+                            </span>
+                            <p class="news-card-header-title">
+                                <a href="{{ a.userAccountUrl }}">{{ a.Username }} </a>
+                            </p>
 
+                            {% if a.thumb %}
+                                <a data-action="download" href="{{ a.downloadUrl }}" class="news-card-header-icon">
+                                    <span>{{ a.downloads }}</span>&nbsp<i class="icon icon-download"></i>
+                                </a>
+                                <a data-action="save" href="{{ a.saveUrl }}" class="news-card-header-icon" data-tooltip="Enregister">
+                                    {% if a.isSaved %}
+                                        <i class="icon icon-bookmark blue-txt"></i>
+                                    {% else %}
+                                        <i class="icon icon-bookmark-empty"></i>
+                                    {% endif %}
+                                </a>
+                                <a href="#" class="dropdown-button news-card-header-icon" data-activates="options-list-{{ a.id }}">
+                                    <i class="icon icon-down-open"></i>
+                                </a>
+                                <ul id="options-list-{{ a.id }}" class="dropdown-content grey dark-4">
+                                    <li>
+                                        <a href="{{ a.categoryUrl }}">
+                                            <i class="icon icon-tag"></i>
+                                            Catégories
+                                        </a>
+                                    </li>
+                                    {% if a.location %}
+                                        <li>
+                                            <a data-action="location" href="{{ a.locationUrl }}" class="news-card-header-icon">
+                                                <i class="icon icon-location"></i>
+                                                Localisation
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    <li>
+                                        <a data-action="report" class="news-card-header-icon" href="{{ a.reportUrl }}">
+                                            <i class="icon icon-attention"></i>
+                                            Signaler
+                                        </a>
+                                    </li>
+                                    {% if a.users_id == activeUser.id %}
+                                        <li>
+                                            <a data-action="edit" class="news-card-header-icon modal-trigger" href="{{ a.editUrl }}">
+                                                <i class="icon icon-plus-circled"></i>
+                                                Editer
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-action="delete" class="news-card-header-icon modal-trigger" href="{{ a.deleteUrl }}">
+                                                <i class="icon icon-cancel"></i>
+                                                Supprimer
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            {% endif %}
+                        </header>
                         {% if a.thumb %}
-                            <a data-action="download" href="{{ a.downloadUrl }}" class="news-card-header-icon">
-                                <span>{{ a.downloads }}</span>&nbsp<i class="icon icon-download"></i>
-                            </a>
-                            <a data-action="save" href="{{ a.saveUrl }}" class="news-card-header-icon" data-tooltip="Enregister">
-                                {% if a.isSaved %}
-                                    <i class="icon icon-bookmark blue-txt"></i>
-                                {% else %}
-                                    <i class="icon icon-bookmark-empty"></i>
-                                {% endif %}
-                            </a>
-                            <a href="#" class="dropdown-button news-card-header-icon" data-activates="options-list-{{ a.id }}">
-                                <i class="icon icon-down-open"></i>
-                            </a>
-                            <ul id="options-list-{{ a.id }}" class="dropdown-content grey dark-4">
-                                <li>
-                                    <a href="{{ a.categoryUrl }}">
-                                        <i class="icon icon-tag"></i>
-                                        Catégories
-                                    </a>
-                                </li>
-                                {% if a.location %}
-                                    <li>
-                                        <a data-action="location" href="{{ a.locationUrl }}" class="news-card-header-icon">
-                                            <i class="icon icon-location"></i>
-                                            Localisation
-                                        </a>
-                                    </li>
-                                {% endif %}
-                                <li>
-                                    <a data-action="report" class="news-card-header-icon" href="{{ a.reportUrl }}">
-                                        <i class="icon icon-attention"></i>
-                                        Signaler
-                                    </a>
-                                </li>
-                                {% if a.users_id == activeUser.id %}
-                                    <li>
-                                        <a data-action="edit" class="news-card-header-icon modal-trigger" href="{{ a.editUrl }}">
-                                            <i class="icon icon-plus-circled"></i>
-                                            Editer
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-action="delete" class="news-card-header-icon modal-trigger" href="{{ a.deleteUrl }}">
-                                            <i class="icon icon-cancel"></i>
-                                            Supprimer
-                                        </a>
-                                    </li>
-                                {% endif %}
-                            </ul>
+                        <div class="card-image">
+                            <span class="news-card-image-article">
+                                <a href="{{ a.url }}" class="waves-effect" style="background-color: {{ a.color }}; width: 100%; min-height: 100px;">
+                                    <img
+                                        src="{{ cacheBusting('/imgs/blank.png') }}"
+                                        data-src="{{ a.thumbUrl }}"
+                                        alt="{{ a.title }}"
+                                        title="{{ a.title }}">
+                                </a>
+                            </span>
+                        </div>
                         {% endif %}
-                    </header>
-                    {% if a.thumb %}
-                    <div class="card-image">
-                        <span class="news-card-image-article">
-                            <a href="{{ a.url }}" class="waves-effect" style="background-color: {{ a.color }}; width: 100%; min-height: 100px;">
-                                <img src="{{ a.thumbUrl }}" alt="Image de l'article" title="{{ a.title }}">
-                            </a>
-                        </span>
-                    </div>
-                    {% endif %}
-                    <main class="news-card-content">
-                        {% if a.title %}
-                        <section class="news-card-title">
-                            <h2>{{ a.title }}&nbsp<small>{{ a.category }}</small></h2>
-                        </section>
-                        {% endif %}
-                        {% if a.content %}
-                        <section>
-                            <p>{{ a.snipet | snipet }}</p>
-                            <a href="{{ a.url }}" class="news-card-seemore right">Voir plus</a>
-                        </section>
-                        {% endif %}
+                        <main class="news-card-content">
+                            {% if a.title %}
+                            <section class="news-card-title">
+                                <h2>{{ a.title }}&nbsp<small>{{ a.category }}</small></h2>
+                            </section>
+                            {% endif %}
+                            {% if a.content %}
+                            <section>
+                                <p>{{ a.snipet | snipet }}</p>
+                                <a href="{{ a.url }}" class="news-card-seemore right">Voir plus</a>
+                            </section>
+                            {% endif %}
 
-                        <section id="articleInfo">
-                            <div class="news-card-stat">
-                                <i class="icon icon-calendar"></i>
-                                <time data-time="{{ a.date_created | date('U') }}">{{ a.time }}</time>
-                            </div>
-                            <div class="news-card-stat">
-                                <i class="icon icon-thumbs-up"></i>
-                                <small>
-                                    <a data-action="showLikes" href="{{ a.LikersUrl }}">{{ a.likes }}</a>
-                                </small>
-                            </div>
-                        </section>
-                    </main>
-                    <footer class="news-card-footer" id="articleOptions">
-                        <a data-action="like" class="news-card-footer-item {{ a.isLike }}" href="{{ a.likeUrl }}">
-                            {% if a.isLike == 'active' %}
-                            <i class="icon icon-heart red-txt"></i>&nbsp
-                            {% else %}
-                                <i class="icon icon-heart-empty"></i>&nbsp
-                            {% endif %}
-                        </a>
-                        <a class="news-card-footer-item modal-trigger" href="#cmtAdd-{{ a.id }}" data-action="showComment">
-                            {% if a.commentsNumber > 0 %}
-                            <i class="icon icon-comment" ></i>&nbsp
-                            {% else %}
-                                <i class="icon icon-comment-empty" ></i>&nbsp
-                            {% endif %}
-                            <span>{{ a.commentsNumber }}</span>
-                        </a>
-                        <a data-action="share" class="news-card-footer-item modal-trigger" href="#share-{{ a.id }}">
-                            <i class="icon icon-share"></i>
-                        </a>
-                    </footer>
-                    <div id="cmtAdd-{{ a.id }}" class="modal grey dark-4 bottom-sheet">
-                        <div class="modal-content">
-                            <form action="{{ a.commentUrl }}" method="POST" data-action="comment">
-                                <div class="input-field">
-                                    <label for="comment">Commentaire</label>
-                                    <textarea class="materialize-textarea" name="comment" id="comment" data-length="255"></textarea>
+                            <section id="articleInfo">
+                                <div class="news-card-stat">
+                                    <i class="icon icon-calendar"></i>
+                                    <time data-time="{{ a.date_created | date('U') }}">{{ a.time }}</time>
                                 </div>
-                                <div class="modal-footer transparent comment">
-                                    <button type="submit" class="modal-action btn waves-effect">Envoyer</button>
-                                    <button id="cmtAdd-{{ a.id }}" type="reset" class="btn btn-small transparent waves-effect modal-action modal-close">
-                                        Annuler
-                                    </button>
+                                <div class="news-card-stat">
+                                    <i class="icon icon-thumbs-up"></i>
+                                    <small>
+                                        <a data-action="showLikes" href="{{ a.LikersUrl }}">{{ a.likes }}</a>
+                                    </small>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div id="share-{{ a.id }}" class="modal grey dark-4 bottom-sheet">
-                        <div class="modal-content">
-                            <div class="col l12 m12 s12">
-                                <div class="col l3 m3 s3">
-                                    <button class="btn btn-flat waves-effect hoverable" style="background: #4c67a1" data-action="share-facebook" data-url="{{ a.url }}">
-                                        <i class="icon icon-facebook"></i>
-                                    </button>
-                                </div>
-                                <div class="col l3 m3 s3">
-                                    <button class="btn btn-flat waves-effect hoverable" style="background: #55acee" data-action="share-twitter" data-url="{{ a.url }}">
-                                        <i class="icon icon-twitter"></i>
-                                    </button>
-                                </div>
-                                <div class="col l3 m3 s3">
-                                    <button class="btn btn-flat waves-effect hoverable" style="background: #d23f31" data-action="share-google-plus" data-url="{{ a.url }}">
-                                        <i class="icon icon-googleplus-rect"></i>
-                                    </button>
-                                </div>
-                                <div class="col l3 m3 s3">
-                                    <button class="btn btn-flat waves-effect hoverable" style="background: #11a84d" data-action="share-whatsapp" data-url="{{ a.url }}">
-                                        <i class="icon icon-whatsapp"></i>
-                                    </button>
-                                </div>
-                                <div class="modal-footer col s12 grey dark-4" style="margin-top: 10px">
-                                    <button class="btn transparent shadow-0 modal-action modal-close">
-                                        Annuler
-                                    </button>
-                                </div>
+                            </section>
+                        </main>
+                        <footer class="news-card-footer" id="articleOptions">
+                            <a data-action="like" class="news-card-footer-item {{ a.isLike }}" href="{{ a.likeUrl }}">
+                                {% if a.isLike == 'active' %}
+                                <i class="icon icon-heart red-txt"></i>&nbsp
+                                {% else %}
+                                    <i class="icon icon-heart-empty"></i>&nbsp
+                                {% endif %}
+                            </a>
+                            <a class="news-card-footer-item modal-trigger" href="#cmtAdd-{{ a.id }}" data-action="showComment">
+                                {% if a.commentsNumber > 0 %}
+                                <i class="icon icon-comment" ></i>&nbsp
+                                {% else %}
+                                    <i class="icon icon-comment-empty" ></i>&nbsp
+                                {% endif %}
+                                <span>{{ a.commentsNumber }}</span>
+                            </a>
+                            <a data-action="share" class="news-card-footer-item modal-trigger" href="#share-{{ a.id }}">
+                                <i class="icon icon-share"></i>
+                            </a>
+                        </footer>
+                        <div id="cmtAdd-{{ a.id }}" class="modal grey dark-4 bottom-sheet">
+                            <div class="modal-content">
+                                <form action="{{ a.commentUrl }}" method="POST" data-action="comment">
+                                    <div class="input-field">
+                                        <label for="comment">Commentaire</label>
+                                        <textarea class="materialize-textarea" name="comment" id="comment" data-length="255"></textarea>
+                                    </div>
+                                    <div class="modal-footer transparent comment">
+                                        <button type="submit" class="modal-action btn waves-effect">Envoyer</button>
+                                        <button id="cmtAdd-{{ a.id }}" type="reset" class="btn btn-small transparent waves-effect modal-action modal-close">
+                                            Annuler
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </div>
-                </article>
-                {% endfor %}
-                    <div class="ng-progress-container">
-                        <div id="statusBar" class="mtb ng-progress-indeterminate disabled" data-ajax="posts">
-                            <span></span><span></span><span></span><span></span><span></span>
+                        <div id="share-{{ a.id }}" class="modal grey dark-4 bottom-sheet">
+                            <div class="modal-content">
+                                <div class="col l12 m12 s12">
+                                    <div class="col l3 m3 s3">
+                                        <button class="btn btn-flat waves-effect hoverable" style="background: #4c67a1" data-action="share-facebook" data-url="{{ a.url }}">
+                                            <i class="icon icon-facebook"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col l3 m3 s3">
+                                        <button class="btn btn-flat waves-effect hoverable" style="background: #55acee" data-action="share-twitter" data-url="{{ a.url }}">
+                                            <i class="icon icon-twitter"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col l3 m3 s3">
+                                        <button class="btn btn-flat waves-effect hoverable" style="background: #d23f31" data-action="share-google-plus" data-url="{{ a.url }}">
+                                            <i class="icon icon-googleplus-rect"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col l3 m3 s3">
+                                        <button class="btn btn-flat waves-effect hoverable" style="background: #11a84d" data-action="share-whatsapp" data-url="{{ a.url }}">
+                                            <i class="icon icon-whatsapp"></i>
+                                        </button>
+                                    </div>
+                                    <div class="modal-footer col s12 grey dark-4" style="margin-top: 10px">
+                                        <button class="btn transparent shadow-0 modal-action modal-close">
+                                            Annuler
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </article>
+                    {% endfor %}
                     </div>
-                    <br>
-                {% else %}
-                <div class="section center-align">
-                    <h2 class="icon icon-inbox red-txt center-align"></h2>
-                    <h2 class="ui header divided center"> Aucune publication </h2>
-                    <p>
-                        le site ne présente actuellement aucune publication disponible, les publications sont peut être en évaluation,
-                        ceci pourrait prendre du temps, veuillez revenir plus tard
-                    </p>
-                </div>
-                {% endif %}
-            </div>
+                    {% if posts %}
+                        <div class="ng-progress-container">
+                            <div id="statusBar" class="mtb ng-progress-indeterminate disabled" data-ajax="posts">
+                                <span></span><span></span><span></span><span></span><span></span>
+                            </div>
+                        </div>
+                        <br>
+                    {% endif %}
+                    {% else %}
+                        <div class="section center-align">
+                            <h2 class="icon icon-inbox red-txt center-align"></h2>
+                            <h2 class="ui header divided center"> Aucune publication </h2>
+                            <p>
+                                le site ne présente actuellement aucune publication disponible, les publications sont peut être en évaluation,
+                                ceci pourrait prendre du temps, veuillez revenir plus tard
+                            </p>
+                        </div>
+                    {% endif %}
         </section>
         {% include "includes/menu-aside.twig" %}
     </section>

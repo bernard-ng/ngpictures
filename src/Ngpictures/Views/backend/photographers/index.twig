@@ -1,0 +1,83 @@
+{% extends 'layout/admin/default.twig' %}
+
+{% block content %}
+    <nav class="nav col l12">
+        <div class="container">
+            <div class="nav-wrapper">
+                <ul>
+                    <li><a href="{{ constant('ADMIN') ~ "/file-browser/posts" }}">Photos membres</a></li>
+                    <li><a href="{{ constant('ADMIN') ~ "/files-browser/avatars" }}">Avatars membres</a></li>
+                    <li class="right"><a href="{{ constant('ADMIN') ~ '/users/bugs' }}">Bugs</a></li>
+                    <li class="right"><a href="{{ constant('ADMIN') ~ '/users/ideas' }}">Ideas</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="row container">
+        <section class="col l12 m12 s12">
+            <div class="card-panel grey dark-4 col l12" style="padding: 20px">
+                <div class="section">
+                    <span class="btn">Page : {{ currentPage }}/{{ totalPage }}</span>
+                    <span class="btn">Total : {{ total }}</span>
+                    <a href="{{ constant('ADMIN') ~ "/photographers?page=" ~ prevPage }}" class="btn">
+                        <i class="icon icon-left-open"></i>
+                    </a>
+                    <a href="{{ constant('ADMIN') ~ "/photographers?page=" ~ nextPage }}" class="btn">
+                        <i class="icon icon-right-open"></i>
+                    </a>
+                </div>
+                <table class="card bordered grey dark-4">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>label</th>
+                            <th>location</th>
+                            <th>phone</th>
+                            <th>email</th>
+                            <th>users_id</th>
+                            <th>action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in photographers %}
+                            <tr>
+                                <td><b>{{ p.id }}</b></td>
+                                <td>{{ p.label }}</td>
+                                <td>{{ p.location }}</td>
+                                <td>{{ p.phone }}</td>
+                                <td>{{ p.email }}</td>
+                                <td>{{ p.users_id }}</td>
+                                <td>
+                                    <form method="POST" action="{{ constant('ADMIN') ~ "/delete" }}" style="display: inline-block !important;">
+                                        <input type="hidden" name="id" value="{{ p.id }}">
+                                        <input type="hidden" name="type" value="12">
+                                        <button type="submit" class="btn btn-small waves-effect waves-light red" id="delete">
+                                            <i class="icon icon-cancel" style="font-size: smaller !important;"></i>
+                                        </button>
+                                    </form>
+                                    <a href="{{ constant('ADMIN') ~ "/locations/edit/" ~ p.id }}" >
+                                        <button class="btn btn-small blue-2 waves-effect waves-light">
+                                            <i class="icon icon-plus-circled" style="font-size: smaller !important;"></i>
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>
+                                    <b>0</b>
+                                </td>
+                                <td>Aucun article</td>
+                                <td>
+                                    <button type="submit" class="btn btn-small waves-effect waves-light disabled">
+                                        <i class="icon icon-remove" style="font-size: smaller !important;"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </section>
+{% endblock %}

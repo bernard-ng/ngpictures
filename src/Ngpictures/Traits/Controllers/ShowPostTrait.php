@@ -30,7 +30,8 @@ trait ShowPostTrait
                     $author = $this->loadModel('users')->find($article->users_id);
                     $altName = $this->table . " - publication - " . $article->id;
                     $this->pageManager::setTitle($article->title ?? $altName);
-
+                    $this->pageManager::setDescription($article->snipet);
+                    $this->pageManager::setImage($article->smallThumbUrl);
                     $this->turbolinksLocation("/{$this->table}/{$slug}-{$id}");
                     $this->view(
                         "frontend/{$this->table}/show",

@@ -13,7 +13,7 @@
     }
 </style>
 <script type="text/javascript" src="{{ cacheBusting('/assets/js/lib/turbolinks.js') }}"></script>
-<script type="text/javascript" src="sw.js"></script>
+<script type="text/javascript" src="/sw.js"></script>
 {% if constant('ENV') == 'production' %}
     <script>
         UpUp.start({
@@ -27,6 +27,7 @@
                 '/assets/js/app/app.init.js',
                 '/assets/js/app/app.ajax.js',
                 '/assets/js/app/app.js',
+                '/assets/js/app/app.data.js'
             ]
         })
     </script>

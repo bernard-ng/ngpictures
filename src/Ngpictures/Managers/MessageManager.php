@@ -16,13 +16,15 @@ class MessageManager implements ArrayAccess
 
         //GENERAL
         //***************************************************************************************/
-        "success"               => "Action effectuée",
-        "failed"                => "Action non effectuée",
-        "rss_empty"             => "Notre flux RSS est actuellement vide",
-        "undefined_error"       => "Ooups, une erreur s'est produite, veuillez réessayer",
-        "edit_not_allowed"      => "Vous n'avez pas le droit d'édition",
-        "delete_not_allowed"    => "Vous n'avez pas le droit de suppression",
-        "collection_not_allowed"  => "Vous n'avez pas le droit d'acces à cette collection photo",
+        "success"                   => "Action effectuée",
+        "failed"                    => "Action non effectuée",
+        "rss_empty"                 => "Notre flux RSS est actuellement vide",
+        "undefined_error"           => "Ooups, une erreur s'est produite, veuillez réessayer",
+        "edit_not_allowed"          => "Vous n'avez pas le droit d'édition",
+        "delete_not_allowed"        => "Vous n'avez pas le droit de suppression",
+        "collection_not_allowed"    => "Vous n'avez pas le droit d'acces à cette collection photo",
+        "nothing_to_load"           => "aucun contenu à charger...",
+        "not_ready"                 => "Oups, cette fonctionnalité n'est pas disponible pour l'instant",
 
 
         //PUBLICATIONS
@@ -39,6 +41,8 @@ class MessageManager implements ArrayAccess
         'post_delete_failed'    => 'Ooups, une erreur est survenue lors de la suppression',
         'post_delete_success'   => 'Votre publication a bien été supprimée',
         'post_online_success'   => "Votre publication est désormais publique",
+        'post_like_add'         => "Vous aimez cette publication",
+        'post_like_remove'      => "Vous n'aimez plus cette publication",
         'post_already_online'   => "Votre publication est déjà publique",
         'post_offline_success'  => "Votre publication est désormais privée",
         'post_requires_picture' => "Ajouter une photo de couverture pour votre publication",

@@ -26,6 +26,24 @@ class CommunityController extends Controller
     }
 
 
+    public function photographers()
+    {
+        $this->authService->restrict();
+        $this->loadModel("users");
+        $photographers = $this->loadModel('photographers')->all();
+        $photographers = (new Collection($photographers))->asList(', ', "users_id");
+        $users = $this->users->findList($photographers);
+
+        $this->turbolinksLocation('/community/photographers');
+        $this->pageManager::setTitle("Photographers");
+        $this->pageManager::setDescription(
+            "Rétrouvez la communauté de ngpictures, vos amis, les artistes et les passionnés
+            de la photographie"
+        );
+        $this->view("frontend/community/photographers", compact('users'));
+    }
+
+
     public function search()
     {
         if (isset($_GET['q']) && !empty($_GET['q'])) {

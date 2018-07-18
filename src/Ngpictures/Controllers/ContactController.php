@@ -22,7 +22,8 @@ class ContactController extends Controller
                 $message    = $this->str->escape($post->get('message'));
 
                 $this->container->get(Mailer::class)->contact($name, $email, $message);
-                $this->flash->set('success', $this->flash->msg['form_contact_submitted']);
+                $this->flash->set('success', $this->flash->msg['form_contact_submitted'], false);
+                $this->redirect("/");
             } else {
                 $this->sendFormError();
             }

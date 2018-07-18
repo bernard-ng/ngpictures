@@ -9,6 +9,7 @@
             <div class="jumbotron-user-name center">
                 <h1 class="ui header">{{ user.name }}</h1>
             </div>
+            </div>
         </div>
     </div>
 
@@ -60,9 +61,9 @@
             </span>
             <p class="col l12 s12 m12">
                 {{ user.name }} est membre de ngpictures depuis le {{ user.confirmed_at | date('d  M Y') }},
-                a publié [user.posts] photos
-                , suivi par [user.followers] personnes. <br>
-                abonné à [user.followings] personnes, a aimé [user.likedPostNumber], posté [user.commentsPostNumber] commentaires.
+                a publié {{ user.postsNumber }} photos
+                , suivi par {{ user.followersNumber }} personnes. <br>
+                abonné à {{ user.followingsNumber }} personnes
             </p>
         </div>
     </section>
@@ -116,4 +117,15 @@
             </div>
         {% endif %}
     </div>
+    {% if user.id != activeUser.id %}
+        <div class="fixed-action-btn {{ activeUser ? 'second' : '' }}">
+            <a href="{{ user.followingUrl }}" class="btn-floating btn-large blue-grey dark-4 shadow-4">
+                {% if user.isFollowed %}
+                    <i class="icon icon-user-times blue"></i>
+                {% else %}
+                    <i class="icon icon-user-plus blue"></i>
+                {% endif %}
+            </a>
+        </div>
+    {% endif %}
 {% endblock %}

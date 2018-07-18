@@ -33,13 +33,13 @@ class PageManager
      * og url
      * @var string
      */
-    private static $url = "https://www.larytech.com";
+    private static $url = "https://larytech.com";
 
     /**
      * og image
      * @var string
      */
-    private static $image = "https://www.larytech.com/imgs/logo.png";
+    private static $image = "https://larytech.com/imgs/icon.png";
 
 
     /**
@@ -152,7 +152,7 @@ class PageManager
     */
     public static function setUrl(string $url)
     {
-        self::$url = $url;
+        self::$url =  self::$url . $url;
     }
 
 
