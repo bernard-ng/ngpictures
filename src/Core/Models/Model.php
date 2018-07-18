@@ -302,7 +302,7 @@ class Model
     public function findList(string $list)
     {
         return $this->query(
-            "SELECT * FROM {$this->table} WHERE id IN ({$list}) "
+            "SELECT * FROM {$this->table} WHERE id IN ({$list}) ORDER BY id DESC "
         );
     }
 

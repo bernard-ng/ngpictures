@@ -19,7 +19,7 @@ class AlbumsModel extends Model
     {
         return $this->query(
             "SELECT * FROM {$this->table}
-            WHERE online = 1 AND {$this->table}.id < ? ORDER BY id DESC LIMIT 0, 4",
+            WHERE online = 1 AND {$this->table}.id < ? ORDER BY id DESC LIMIT 0, 8",
             [$post_id]
         );
     }

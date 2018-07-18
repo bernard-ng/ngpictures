@@ -13,7 +13,30 @@ class AjaxController extends Controller
             $lastId = $_GET['lastId'] ?? 0;
             $users = $this->loadModel('users')->findLess($lastId);
             if ($users) {
-                echo $this->view('/ajax/users/cards', compact("users"), true);
+                echo $this->view('/ajax/users/community', compact("users"), true);
+                exit();
+            } else {
+                $this->flash->set('danger', $this->flash->msg['nothing_to_load']);
+            }
+        } else {
+            $this->flash->set("warning", $this->flash->msg['undefined_error']);
+            $this->redirect(true);
+        }
+    }
+
+
+    public function photographers()
+    {
+        if ($this->isAjax()) {
+            $lastId = $_GET['lastId'] ?? 0;
+            $this->loadModel(['users', 'photographers']);
+
+            $photographers = $this->photographers->findLess($lastId);
+            $photographers = (new Collection($photographers))->asList(', ', "users_id");
+            $users = $this->users->findList($photographers);
+
+            if ($users) {
+                echo $this->view('/ajax/users/community', compact("users"), true);
                 exit();
             } else {
                 $this->flash->set('danger', $this->flash->msg['nothing_to_load']);

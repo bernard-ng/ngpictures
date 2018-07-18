@@ -18,7 +18,7 @@ class CategoriesModel extends Model
     {
         return $this->query(
             "SELECT * FROM {$this->table}
-            WHERE {$this->table}.id < ? ORDER BY id DESC LIMIT 0, 4",
+            WHERE {$this->table}.id < ? ORDER BY id DESC LIMIT 0, 8",
             [$post_id]
         );
     }

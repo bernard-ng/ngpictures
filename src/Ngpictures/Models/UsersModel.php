@@ -164,6 +164,14 @@ class UsersModel extends Model
     }
 
 
+    public function get($limit)
+    {
+        return $this->query(
+            "SELECT * FROM {$this->table} WHERE confirmed_at IS NOT NULL ORDER BY id DESC LIMIT {$limit}"
+        );
+    }
+
+
     /**
      * @return mixed
      */
@@ -177,6 +185,15 @@ class UsersModel extends Model
         );
     }
 
+
+    public function findLess($post_id)
+    {
+        return $this->query(
+            "SELECT * FROM {$this->table}
+            WHERE confirmed_at IS NOT NULL AND {$this->table}.id < ? ORDER BY id DESC LIMIT 0, 8",
+            [$post_id]
+        );
+    }
 
     /**
      * @return mixed

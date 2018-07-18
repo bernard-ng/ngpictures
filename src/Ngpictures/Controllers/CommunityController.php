@@ -14,7 +14,7 @@ class CommunityController extends Controller
     {
         $this->authService->restrict();
         $this->loadModel("users");
-        $users = $this->users->lastConfirmed();
+        $users = $this->users->get(10);
 
         $this->turbolinksLocation('/community');
         $this->pageManager::setTitle("Communauté");
@@ -30,7 +30,7 @@ class CommunityController extends Controller
     {
         $this->authService->restrict();
         $this->loadModel("users");
-        $photographers = $this->loadModel('photographers')->all();
+        $photographers = $this->loadModel('photographers')->get(8);
         $photographers = (new Collection($photographers))->asList(', ', "users_id");
         $users = $this->users->findList($photographers);
 

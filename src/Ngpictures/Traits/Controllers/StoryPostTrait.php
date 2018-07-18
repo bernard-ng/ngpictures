@@ -10,7 +10,7 @@ trait StoryPostTrait
      */
     public function index()
     {
-        $posts      =   $this->loadModel($this->table)->latest(0, 5);
+        $posts      =   $this->loadModel($this->table)->latest(0, 8);
         $categories =   $this->loadModel('categories')->all();
         $title      =   ucfirst($this->table);
         $name       =   ($this->table == 'posts') ? "Fil d'actualité" : ucfirst($this->table);
