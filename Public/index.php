@@ -11,10 +11,8 @@ require(dirname(__DIR__)."/config/ini.php");
 require(ROOT."/vendor/autoload.php");
 
 $container = new ContainerBuilder();
-if (ENV === 'production') {
-    $container->enableCompilation(ROOT."/cache/phpdi");
-}
 
+$container->enableCompilation(ROOT."/cache/phpdi");
 $container->addDefinitions(ROOT."/config/config.php");
 $container = $container->build();
 

@@ -44,7 +44,8 @@ class PostsModel extends Model
     }
 
 
-    public function userFindLess($user_id, $post_id) {
+    public function userFindLess($user_id, $post_id)
+    {
         return $this->query(
             "SELECT {$this->table}.* , categories.title as category
             FROM {$this->table}

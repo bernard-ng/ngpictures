@@ -3,7 +3,6 @@ namespace Ngpictures\Controllers;
 
 use Ng\Core\Managers\Collection;
 
-
 class MapsController extends Controller
 {
 
@@ -32,7 +31,7 @@ class MapsController extends Controller
 
     public function show()
     {
-       $this->flash->set('info', $this->flash->msg['not_ready']);
-       $this->redirect(true);
+        $this->flash->set('info', $this->flash->msg['not_ready']);
+        $this->redirect(true);
     }
 }
