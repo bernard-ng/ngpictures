@@ -49,7 +49,7 @@ class GalleryController extends AdminController
         $categories = $this->categories->all();
         $albums = $this->albums->findWith(
             "photographers_id",
-            $this->loadModel('photographers')->find($this->authService->isLogged()->id)->id,
+            $this->photographers->findWith('users_id', $this->authService->isLogged()->id)->id,
             false
         );
 
@@ -58,33 +58,38 @@ class GalleryController extends AdminController
             $tags = $this->str->escape($post->get('tags')) ?? null;
             $description = $this->str->escape($post->get('description')) ?? null;
             $categories_id = ($post->get('category') == 0) ? 1 : intval($post->get('category'));
-            $albums_id = ($post->get('album') == 0) ? 1 : intval($post->get('category'));
+            $albums_id = ($post->get('album') == 0) ? 1 : intval($post->get('album'));
             $slug =  empty($name)? 'ngpictures-photo' : "ngpictures-" . $this->str->slugify($name);
 
             if (!empty($file->get('thumb'))) {
-                $this->gallery->create(compact('name', 'slug', 'description', 'tags', 'categories_id'));
+                $this->gallery->create(compact('name', 'slug', 'description', 'tags', 'categories_id', 'albums_id'));
                 $last_id = $this->gallery->lastInsertId();
-                $isUploaded = $this->container->get(ImageManager::class)->upload($file, 'gallery', "{$slug}-{$last_id}", 'ratio');
+                if ($last_id) {
+                    $isUploaded = $this->container->get(ImageManager::class)->upload($file, 'gallery', "{$slug}-{$last_id}", 'ratio');
 
-                if ($isUploaded) {
-                    $this->container->get(ImageManager::class)->upload($file, 'gallery-thumbs', "{$slug}-{$last_id}", 'small');
-                    $exif = $this->container->get(ImageManager::class)->getExif($file);
-                    $color = $this->container->get(ImageManager::class)->getColor($file);
+                    if ($isUploaded) {
+                        $this->container->get(ImageManager::class)->upload($file, 'gallery-thumbs', "{$slug}-{$last_id}", 'small');
+                        $exif = $this->container->get(ImageManager::class)->getExif($file);
+                        $color = $this->container->get(ImageManager::class)->getColor($file);
 
-                    $this->gallery->update(
-                        $last_id,
-                        [
-                            "thumb" => "{$slug}-{$last_id}.jpg",
-                            'exif' => $exif,
-                            'color' => $color,
-                        ]
-                    );
+                        $this->gallery->update(
+                            $last_id,
+                            [
+                                "thumb" => "{$slug}-{$last_id}.jpg",
+                                'exif' => $exif,
+                                'color' => $color,
+                            ]
+                        );
 
-                    $this->flash->set('success', $this->flash->msg['form_post_submitted'], false);
-                    $this->redirect(ADMIN . "/gallery", false);
+                        $this->flash->set('success', $this->flash->msg['form_post_submitted'], false);
+                        $this->redirect(ADMIN . "/gallery", false);
+                    } else {
+                        $this->flash->set('danger', $this->flash->msg['files_not_uploaded'], false);
+                        $this->gallery->delete($last_id, false);
+                    }
                 } else {
-                    $this->flash->set('danger', $this->flash->msg['files_not_uploaded'], false);
-                    $this->gallery->delete($last_id, false);
+                    $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
+                    $this->redirect(true, false);
                 }
             } else {
                 $this->flash->set('danger', $this->flash->msg['post_requires_picture'], false);
@@ -115,8 +120,8 @@ class GalleryController extends AdminController
                 $name = $this->str->escape($post->get('name')) ?? $photo->name;
                 $tags = $this->str->escape($post->get('tags')) ?? $photo->tags;
                 $description = $this->str->escape($post->get('description')) ?? $photo->description;
-                $categories_id = intval($post->get('category')) ?? 1;
-                $albums_id = ($posts->get('album') == 0) ? null : inval($this->get('album'));
+                $categories_id = intval($post->get('category')) ?? $photo->categories_id ?? 1;
+                $albums_id = intval($post->get('album')) ?? $photo->albums_id ?? 1;
 
                 $this->gallery->update($id, compact('name', 'tags', 'description', 'categories_id', 'albums_id'));
                 $this->flash->set("success", $this->flash->msg['post_edit_success'], false);

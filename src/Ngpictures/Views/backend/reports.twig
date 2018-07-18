@@ -5,13 +5,13 @@
         <div class="nav-wrapper container">
             <ul>
                 <li>
-                    <a href="{{ constant('ADMIN') ~ " /file-browser/blog" }}">Photo blog</a>
+                    <a href="{{ constant('ADMIN') ~ "/file-browser/blog" }}" data-turbolinks="false">Photo blog</a>
                 </li>
                 <li class="right">
-                    <a href="{{ constant('ADMIN') ~ " /blog/categories/"  }}">Catégories</a>
+                    <a href="{{ constant('ADMIN') ~ "/blog/categories/"  }}" data-turbolinks="false">Catégories</a>
                 </li>
                 <li class="right">
-                    <a href="{{ constant('ADMIN') ~ " /blog/categories/add" }}">Ajouter une Catégorie</a>
+                    <a href="{{ constant('ADMIN') ~ "/blog/categories/add" }}" data-turbolinks="false">Ajouter une Catégorie</a>
                 </li>
             </ul>
         </div>
@@ -24,10 +24,10 @@
                     <span class="btn">Page : {{ currentPage }}/{{ totalPage }}</span>
                     <span class="btn">Total :  {{ total }}</span>
 
-                    <a href="{{ constant('ADMIN') ~ "/reports?page=" ~ prevPage }}" class="btn">
+                    <a href="{{ constant('ADMIN') ~ "/reports?page=" ~ prevPage }}" class="btn" data-turbolinks="false">
                         <i class="icon icon-left-open"></i>
                     </a>
-                    <a href="{{ constant('ADMIN') ~ "/reports?page=" ~ nextPage }}" class="btn">
+                    <a href="{{ constant('ADMIN') ~ "/reports?page=" ~ nextPage }}" class="btn" data-turbolinks="false">
                         <i class="icon icon-right-open"></i>
                     </a>
                 </div>

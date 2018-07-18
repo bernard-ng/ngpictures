@@ -6,19 +6,19 @@
         <div class="nav-wrapper">
             <ul>
                 <li>
-                    <a href="{{ constant('ADMIN')~" /blog/add "  }}">Article</a>
+                    <a href="{{ constant('ADMIN')~"/blog/add "  }}" data-turbolinks="false">Article</a>
                 </li>
                 <li>
-                    <a href="{{ constant('ADMIN')~" /gallery/add " }}">Photo</a>
+                    <a href="{{ constant('ADMIN')~"/gallery/add " }}" data-turbolinks="false">Photo</a>
                 </li>
                 <li>
-                    <a href="{{ constant('ADMIN')~" /gallery/albums/add " }}">Albums</a>
+                    <a href="{{ constant('ADMIN')~"/gallery/albums/add " }}" data-turbolinks="false">Albums</a>
                 </li>
                 <li>
-                    <a href="{{ constant('ADMIN')~" /blog/categories/add " }}">Catégorie</a>
+                    <a href="{{ constant('ADMIN')~"/blog/categories/add " }}" data-turbolinks="false">Catégorie</a>
                 </li>
                 <li class="right">
-                    <a href="{{ constant('ADMIN') ~ '/users/ideas' }}">Ideas</a>
+                    <a href="{{ constant('ADMIN') ~ '/users/ideas' }}" data-turbolinks="false">Ideas</a>
                 </li>
             </ul>
         </div>
@@ -31,10 +31,10 @@
                 <span class="btn">Page : {{ currentPage }}/{{ totalPage }}</span>
                 <span class="btn">Total : {{ total }}</span>
 
-                <a href="{{ constant('ADMIN') ~ "/users/bugs?page=" ~ prevPage }}" class="btn">
+                <a href="{{ constant('ADMIN') ~ "/users/bugs?page=" ~ prevPage }}" class="btn" data-turbolinks="false">
                     <i class="icon icon-left-open"></i>
                 </a>
-                <a href="{{ constant('ADMIN') ~ "/users/bugs?page=" ~ nextPage }}" class="btn">
+                <a href="{{ constant('ADMIN') ~ "/users/bugs?page=" ~ nextPage }}" class="btn" data-turbolinks="false">
                     <i class="icon icon-right-open"></i>
                 </a>
             </div>

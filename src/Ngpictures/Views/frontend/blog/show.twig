@@ -2,10 +2,20 @@
 <section class="section jumbotron dark" style="border-bottom: 5px solid {{ article.color }}; margin-bottom: 20px;">
     <div class="container row">
         <div class="col l9 m12 s12 pb10">
-            <img src="{{ article.thumbUrl }}" alt="{{ article.title }}" title="{{ article.title }}" class="responsive-img materialboxed">
+            <img
+                src="{{ cacheBusting('/imgs/blank.png') }}"
+                data-src="{{ article.thumbUrl }}"
+                alt="{{ article.title }}"
+                title="{{ article.title }}"
+                class="responsive-img materialboxed"
+            >
             <h1 class="ui header">{{ article.title }}</h1>
             {{ article.fullText | snipet }}
             <br><br>
+            {% if article.users_id == activeUser.id %}
+                <a href="{{ article.editUrl }}" class="btn">Editer</a>
+                <a href="{{ article.deleteUrl }}" class="btn">Supprimer</a>
+            {% endif %}
         </div>
         <div class="section nexted col l3 m12 s12 ">
             <ul class="collection grey dark-4">
@@ -29,6 +39,31 @@
                     <span class="right">{{ article.exifData.ExposureTime ?? 'Indéfini' }}</span>
                 </li>
             </ul>
+            <span class="row col l12 s12 m12">
+                <h2 class="ui header">Partager </h2>
+            </span>
+            <div>
+                <div class="col l3 m3 s3">
+                    <button class="btn btn-flat waves-effect hoverable" style="background: #4c67a1" data-action="share-facebook" data-url="{{ article.url }}">
+                        <i class="icon icon-facebook"></i>
+                    </button>
+                </div>
+                <div class="col l3 m3 s3">
+                    <button class="btn btn-flat waves-effect hoverable" style="background: #55acee" data-action="share-twitter" data-url="{{ article.url }}">
+                        <i class="icon icon-twitter"></i>
+                    </button>
+                </div>
+                <div class="col l3 m3 s3">
+                    <button class="btn btn-flat waves-effect hoverable" style="background: #d23f31" data-action="share-google-plus" data-url="{{ article.url }}">
+                        <i class="icon icon-googleplus-rect"></i>
+                    </button>
+                </div>
+                <div class="col l3 m3 s3">
+                    <button class="btn btn-flat waves-effect hoverable" style="background: #11a84d" data-action="share-whatsapp" data-url="{{ article.url }}">
+                        <i class="icon icon-whatsapp"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -65,8 +100,13 @@
         </span>
         <div class="carousel small">
             {% for p in similars %}
-            <a href="{{ p.url }}" class="carousel-item">
-                <img src="{{ p.smallThumbUrl }}" title="{{ p.title }}" alt="{{ p.title }}">
+            <a href="{{ p.url }}" class="carousel-item" style="background: {{ p.color }}">
+                <img
+                    src="{{ cacheBusting('/imgs/sblank.png') }}"
+                    data-src="{{ p.smallThumbUrl }}"
+                    title="{{ p.title }}"
+                    alt="{{ p.title }}"
+                >
             </a>
             {% endfor %}
         </div>
@@ -75,8 +115,40 @@
 {% endif %}
 
 <div class="fixed-action-btn {{ activeUser ? 'second' : '' }}">
-    <a class="btn-floating btn-large blue shadow-4" href="{{ article.downloadUrl }}">
-        <i class="icon icon-download"></i>
+    <a class="btn-floating btn-large blue-grey dark-4 shadow-4">
+        <i class="icon icon-up-open blue"></i>
     </a>
+    <ul>
+        <li class="btn-floating waves-effect">
+            <a href="{{ article.likeUrl }}">
+                {% if article.isLike == 'active' %}
+                <i class="icon icon-heart"></i>
+                {% else %}
+                <i class="icon icon-heart-empty"></i>
+                {% endif %}
+            </a>
+        </li>
+        <li class="btn-floating waves-effect">
+            <a href="{{ article.commentUrl }}">
+                {% if a.commentsNumber > 0 %}
+                <i class="icon icon-comment"></i>&nbsp {% else %}
+                <i class="icon icon-comment-empty"></i>&nbsp {% endif %}
+            </a>
+        </li>
+        <li class="btn-floating waves-effect">
+            <a href="{{ article.downloadUrl }}">
+                <i class="icon icon-download"></i>
+            </a>
+        </li>
+        <li class="btn-floating waves-effect">
+            <a href="{{ article.saveUrl }}">
+                {% if a.isSaved %}
+                <i class="icon icon-bookmark"></i>
+                {% else %}
+                <i class="icon icon-bookmark-empty"></i>
+                {% endif %}
+            </a>
+        </li>
+    </ul>
 </div>
 {% endblock %}

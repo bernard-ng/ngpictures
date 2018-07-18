@@ -27,24 +27,26 @@ function transparizeMenu()
     let menu = document.querySelector("[data-action='menu']");
     let slider = document.querySelector("[data-action-requires='menu-transparent']")
 
-    if (slider === null) {
-        menu.classList.remove('transparent');
-    } else if (window.scrollY > 10 && menu.classList.contains('transparent'))  {
-        menu.classList.remove('transparent');
-    }
+    if (menu !== null) {
+        if (slider === null) {
+            menu.classList.remove('transparent');
+        } else if (window.scrollY > 10 && menu.classList.contains('transparent')) {
+            menu.classList.remove('transparent');
+        }
 
-    if (slider !== null) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 10) {
-                if (menu.classList.contains('transparent')) {
-                    menu.classList.remove('transparent');
+        if (slider !== null) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    if (menu.classList.contains('transparent')) {
+                        menu.classList.remove('transparent');
+                    }
+                } else {
+                    if (!menu.classList.contains('transparent')) {
+                        menu.classList.add('transparent');
+                    }
                 }
-            } else {
-                if (!menu.classList.contains('transparent')) {
-                    menu.classList.add('transparent');
-                }
-            }
-        });
+            });
+        }
     }
 }
 
@@ -133,79 +135,6 @@ function relativeTimer(element){
 }
 
 /**
- * rend un element sticky
- * @param selector
- */
-function makeSticky(selector) {
-    /**
-     * return le nombre de scroll en Y
-     * @returns {number}
-     */
-    let scrollY = function () {
-        let supportPageOffset   = window.pageXOffset !== undefined;
-        let isCSS1Compat        = ((document.compatMode || "") === "CSS1Compat");
-        return supportPageOffset ? window.pageYOffset :
-            isCSS1Compat? document.documentElement.scrollTop : document.body.scrollTop;
-    };
-
-    let elements = document.querySelectorAll(selector);
-    for (let i = 0; i < elements.length; i++) {
-        (function(element){
-            let boundingRect = element.getBoundingClientRect();
-            let top          = boundingRect.top + scrollY();
-            let offset       = parseInt(element.getAttribute('data-sticky-offset') || 0, 10);
-            let constraint      = element.getAttribute('data-sticky-constraint')?
-                document.querySelector(element.getAttribute('data-sticky-constraint')) : document.body;
-            let constraintRect = constraint.getBoundingClientRect();
-            let constraintBottom = constraintRect.top + scrollY() + constraintRect.height - offset - boundingRect.height;
-
-            let fakeElement             =   document.createElement('div');
-            fakeElement.style.width     =   boundingRect.width + "px";
-            fakeElement.style.height    =   boundingRect.height + "px";
-
-            let onScrollSticky = function () {
-                if (scrollY() > constraintBottom && element.style.position !== 'absolute') {
-                    element.style.position  = 'absolute';
-                    element.style.bottom    = '0';
-                    element.style.top       = 'auto';
-                } else if (scrollY() > top - offset && scrollY() < constraintBottom && element.style.position !== 'fixed') {
-                    element.style.position = 'fixed';
-                    element.style.top   = offset + "px";
-                    element.style.bottom       = 'auto';
-                    element.style.width = boundingRect.width + "px";
-                    element.parentNode.insertBefore(fakeElement, element);
-                } else if (scrollY() < top - offset && element.style.position !== 'static') {
-                    element.style.position = "static";
-                    if(element.parentNode.contains(fakeElement))  {
-                        element.parentNode.removeChild(fakeElement);
-                    }
-                }
-            };
-
-            let onResizeSticky = function () {
-                element.style.width = "auto";
-                element.style.position = "static";
-                fakeElement.style.display = 'none';
-                boundingRect = element.getBoundingClientRect();
-                top          = boundingRect.top + scrollY();
-
-                constraintRect = constraint.getBoundingClientRect();
-                constraintBottom = constraintRect.top + scrollY() + constraintRect.height - offset - boundingRect.height;
-
-                fakeElement.style.width     =   boundingRect.width + "px";
-                fakeElement.style.height    =   boundingRect.height + "px";
-                fakeElement.style.display   =   "block";
-                onScrollSticky();
-            };
-
-            window.addEventListener('scroll', onScrollSticky);
-            window.addEventListener('resize', onResizeSticky);
-        })(elements[i]);
-    }
-}
-
-
-/**
  * les bouttons de partages sur les social network
  */
 function share() {
@@ -233,7 +162,7 @@ function share() {
         twitter.addEventListener('click', function (e){
             e.preventDefault();
             e.stopPropagation();
-            let url = encodeURIComponent(this.getAttribute('data-url'));
+            let url = encodeURIComponent("https://larytech.com" + this.getAttribute('data-url'));
             let text = "Du nouveau sur Ngpictures !!!";
             let share =
                 "https://twitter.com/intent/tweet?text=" + text +
@@ -249,7 +178,7 @@ function share() {
         facebook.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            let url = encodeURIComponent(this.getAttribute('data-url'));
+            let url = encodeURIComponent("https://larytech.com" + this.getAttribute('data-url'));
             let share = "https://www.facebook.com/sharer.php?u="+url;
             sharePopup(share, "Partager Sur Facebook");
         });
@@ -260,7 +189,7 @@ function share() {
         googlePlus.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            let url = encodeURIComponent(this.getAttribute('data-url'));
+            let url = encodeURIComponent("https://larytech.com" + this.getAttribute('data-url'));
             let share = "https://plus.google.com/share?url="+url;
             sharePopup(share, "Partager Sur Google+");
         });
@@ -311,10 +240,13 @@ function showImageBeforeUpload(element) {
 
 //CALL
 //----------------------------------------------------------------------
-transparizeMenu();
-toggleMenuItem();
-toggleMobileMenuItem();
-relativeTimer('time[data-time]');
-makeSticky('[data-sticky]');
-share();
-showImageBeforeUpload("[data-action='upload']");
+function loadApp() {
+    transparizeMenu();
+    toggleMenuItem();
+    toggleMobileMenuItem();
+    relativeTimer('time[data-time]');
+    share();
+    showImageBeforeUpload("[data-action='upload']");
+}
+
+loadApp();

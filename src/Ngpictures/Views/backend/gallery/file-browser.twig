@@ -6,19 +6,19 @@
         <div class="nav-wrapper">
             <ul>
                 <li class="right">
-                    <a href="{{ constant('ADMIN') ~ "/file-browser/blog" }}">Photo blog</a>
+                    <a href="{{ constant('ADMIN') ~ "/file-browser/blog" }}" data-turbolinks="false">Photo blog</a>
                 </li>
                 <li class="right">
-                    <a href="{{ constant('ADMIN') ~ "/file-browser/gallery" }}">Photo site</a>
+                    <a href="{{ constant('ADMIN') ~ "/file-browser/gallery" }}" data-turbolinks="false">Photo site</a>
                 </li>
                 <li class="right">
-                    <a href="{{ constant('ADMIN') ~ "/file-browser/avatars" }}">Avatar membres</a>
+                    <a href="{{ constant('ADMIN') ~ "/file-browser/avatars" }}" data-turbolinks="false">Avatar membres</a>
                 </li>
                 <li class="right">
-                    <a href="{{ constant('ADMIN') ~ "/file-browser/posts"}}">Photo posts</a>
+                    <a href="{{ constant('ADMIN') ~ "/file-browser/posts"}}" data-turbolinks="false">Photo posts</a>
                 </li>
                 <li>
-                    <a href="{{ constant('ADMIN') }}">Back-end</a>
+                    <a href="{{ constant('ADMIN') }}" data-turbolinks="false">Back-end</a>
                 </li>
                 <li>
                     <a href="/">front-end</a>
@@ -50,7 +50,7 @@
                                 {% if file.getFilename == 'thumbs' %}
                                     <i class="icon icon-doc"></i>
                                 {% else %}
-                                    <img src="{{ relative_dos ~ '/' ~ file.getBasename }}" class="materialboxed" width="80">
+                                    <img data-src="{{ relative_dos ~ '/' ~ file.getBasename }}" class="materialboxed" width="80">
                                 {% endif %}
                             </td>
                             <td>{{ file.getFilename }}</td>

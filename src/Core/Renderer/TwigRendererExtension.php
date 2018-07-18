@@ -10,6 +10,7 @@ class TwigRendererExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFunction('cacheBusting', [$this, 'cacheBusting']),
+            new \Twig_SimpleFunction('html', [$this, 'html'], ['is_safe' => ['html']])
         ];
     }
 
@@ -33,6 +34,11 @@ class TwigRendererExtension extends \Twig_Extension
         return CacheBustingManager::get($filename);
     }
 
+
+    public function html($code)
+    {
+        return $code;
+    }
 
     /**
      * permet de ne pas echaper l'html

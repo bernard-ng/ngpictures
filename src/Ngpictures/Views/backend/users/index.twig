@@ -5,10 +5,12 @@
         <div class="container">
             <div class="nav-wrapper">
                 <ul>
-                    <li><a href="{{ constant('ADMIN') ~ "/file-browser/posts" }}">Photos membres</a></li>
-                    <li><a href="{{ constant('ADMIN') ~ "/files-browser/avatars" }}">Avatars membres</a></li>
-                    <li class="right"><a href="{{ constant('ADMIN') ~ '/users/bugs' }}">Bugs</a></li>
-                    <li class="right"><a href="{{ constant('ADMIN') ~ '/users/ideas' }}">Ideas</a></li>
+                    <li><a href="{{ constant('ADMIN') ~ "/photographers" }}"  data-turbolinks="false">Photographers</a></li>
+                    <li><a href="{{ constant('ADMIN') ~ "/locations" }}"  data-turbolinks="false">Locations</a></li>
+                    <li><a href="{{ constant('ADMIN') ~ "/file-browser/posts" }}" data-turbolinks="false">Photos membres</a></li>
+                    <li><a href="{{ constant('ADMIN') ~ "/files-browser/avatars" }}" data-turbolinks="false">Avatars membres</a></li>
+                    <li class="right"><a href="{{ constant('ADMIN') ~ '/users/bugs' }}" data-turbolinks="false">Bugs</a></li>
+                    <li class="right"><a href="{{ constant('ADMIN') ~ '/users/ideas' }}" data-turbolinks="false">Ideas</a></li>
                 </ul>
             </div>
         </div>
@@ -19,10 +21,10 @@
                 <div class="section">
                     <span class="btn">Page : {{ currentPage }}/{{ totalPage }}</span>
                     <span class="btn">Total : {{ total }}</span>
-                    <a href="{{ constant('ADMIN') ~ "/users?page=" ~ prevPage }}" class="btn">
+                    <a href="{{ constant('ADMIN') ~ "/users?page=" ~ prevPage }}" class="btn" data-turbolinks="false" data-turbolinks="false">
                         <i class="icon icon-left-open"></i>
                     </a>
-                    <a href="{{ constant('ADMIN') ~ "/users?page=" ~ nextPage }}" class="btn">
+                    <a href="{{ constant('ADMIN') ~ "/users?page=" ~ nextPage }}" class="btn" data-turbolinks="false" data-turbolinks="false">
                         <i class="icon icon-right-open"></i>
                     </a>
                 </div>
@@ -56,20 +58,20 @@
                                         </button>
                                     </form>
                                     {% if u.confirmed_at == null %}
-                                        <a href="{{ constant('ADMIN') ~ "/confirm/5/" ~ u.id }}" title="confirmer" id="confirm">
+                                        <a href="{{ constant('ADMIN') ~ "/confirm/5/" ~ u.id }}" title="confirmer" id="confirm" data-turbolinks="false">
                                             <button class="btn btn-small blue-2 waves-effect waves-light">
                                                 <i class="icon icon-upload" style="font-size: smaller !important;"></i>
                                             </button>
                                         </a>
                                     {% endif %}
                                     {% if u.rank == "admin" %}
-                                        <a href="{{ constant('ADMIN') ~ "/users/permissions/" ~ u.id }}" title="make simple user">
+                                        <a href="{{ constant('ADMIN') ~ "/users/permissions/" ~ u.id }}" title="make simple user" data-turbolinks="false">
                                             <button class="btn btn-small blue-2 waves-effect waves-light">
                                                 <i class="icon icon-circle" style="font-size: smaller !important;"></i>
                                             </button>
                                         </a>
                                     {% else %}
-                                        <a href="{{ constant('ADMIN') ~ "/users/permissions/" ~ u.id }}" title="make admin">
+                                        <a href="{{ constant('ADMIN') ~ "/users/permissions/" ~ u.id }}" title="make admin" data-turbolinks="false">
                                             <button class="btn btn-small blue-2 waves-effect waves-light">
                                                 <i class="icon icon-circle-empty" style="font-size: smaller !important;"></i>
                                             </button>

@@ -25,7 +25,7 @@ class GalleryController extends Controller
     public function index()
     {
         $photo = $this->gallery->random(4);
-        $photos = $this->gallery->lastOnline();
+        $photos = $this->gallery->latest(0, 8);
 
         $this->turbolinksLocation("/gallery");
         $this->pageManager::setTitle('Galerie');
@@ -92,7 +92,7 @@ class GalleryController extends Controller
      */
     public function albums()
     {
-        $albums = $this->loadModel('albums')->all();
+        $albums = $this->loadModel('albums')->get(10);
         $thumbs = [];
         $nb     = [];
 

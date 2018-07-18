@@ -80,23 +80,20 @@
         {% endif %}
     </ul>
     <ul class="side-nav" id="services-actions">
-        <li>
-            <div class="user-view">
-                <div class="background">
-                    <img src="{{ cacheBusting('/imgs/bgjumbo.jpg') }}" alt="bg">
-                </div>
-                <h2 class="ui header mechanic">Deep Shooting</h2>
-                <span class="white-txt name">Notre adresse mail</span>
-                <span class="email">ngpictures@larytech.com</span>
-            </div>
-        </li>
-        <li><a href="/categories">Catégories des photos <i class="icon icon-tags"></i></a></li>
+        <li><a href="" class="subheader grey-txt">Services</a></li>
+        <li><a href="/maps/photographers">Trouver des photographes <i class="icon icon-location"></i></a></li>
+        <li><a href="/photographers/sign">Compte photographe <i class="icon icon-camera"></i></a></li>
+        <li><a href="/booking">Réservations <i class="icon icon-calendar"></i></a></a></li>
+
+        <li><div class="divider grey"></div></li>
+        <li><a href="" class="subheader grey-txt">Autres</a></li>
+        <li><a href="/categories">Catégories<i class="icon icon-tags"></i></a></li>
         {% if activeUser %}
             <li><a href="/community">La Communauté <i class="icon icon-users"></i></a></li>
         {% endif %}
-        <li><a href="/maps/photographers">Trouver des photographes <i class="icon icon-location"></i></a></li>
-        <li><a href="/photographers">Compte photographe <i class="icon icon-camera"></i></a></li>
         <li><a href="/contact">Nous contacter <i class="icon icon-mail"></i></a></li>
-        <li><a href="/booking">Réservations <i class="icon icon-calendar"></i></a></a></li>
+        <li><a href="/bugs">Signaler un problème<i class="icon icon-tags"></i></a></li>
+        <li><a href="/ideas">Donner un avis<i class="icon icon-location"></i></a></li>
+        <li><a href="/privacy">Politique d'utilisation <i class="icon icon-camera"></i></a></li>
     </ul>
 </header>

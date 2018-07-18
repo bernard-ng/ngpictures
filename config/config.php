@@ -40,7 +40,7 @@ return [
     'database.name' =>  (ENV === 'production')? 'larytech_ngbd' : 'ngpictures',
     'database.host' =>  (ENV === 'production')? 'larytech.com' : '127.0.0.1',
     'database.user' =>  (ENV === 'production')? 'larytech_ngandu' : 'root',
-    'database.pass' =>  (ENV === 'production')? '/&sF^2`Wjhquq2Hm~k`,' : '',
+    'database.pass' =>  (ENV === 'production')? 'E[~}oyE%Ao([' : '',
 
     DatabaseInterface::class => object(MysqlDatabase::class)->constructor(
         get('database.name'),

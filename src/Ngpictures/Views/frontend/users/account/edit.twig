@@ -3,32 +3,41 @@
 
 {% block content %}
     <section class="section container row">
-        {% include "includes/right-aside.twig" %}
-        <section class="col l6 m12 s12">
-            <div class="card grey dark-4 col l12 m12 s12">
-                <form action="" method="POST" enctype="multipart/form-data">
-                    <fieldset>
-                        <legend>Photo de profile</legend>
-                        {{ form.inputFile('Modifier le profile') }}
-                    </fieldset>
+        <div class="hide-on-med-and-down">
+            {% include "includes/right-aside.twig" %}
+        </div>
+        <section class="col nexted l6 m12 s12">
+            <div class="card grey dark-4 col l12 m12 s12" style="padding-top: 20px;">
+                <form action="" method="POST" enctype="multipart/form-data" data-action="upload">
+                    {{ form.inputFile('Modifier le profile') }}
+                    <div class="row col s12">
+                        <button type="submit" class="btn btn-flat waves-effect">confirmer</button>
+                    </div>
                 </form>
-                <br>
-                <form action="" method="POST">
-                    <fieldset>
-                        <legend>Informations</legend>
-                        {{ form.input('name','Pseudo','text', errors.get('name'), user.name) }}
-                        {{ form.input('phone','Mobile','tel', errors.get('phone'), user.phone) }}
-                        {{ form.input('email', 'Email', 'email', errors.get('email'), user.email) }}
-                        {{ form.textarea('bio', 'Bio', errors.get('bio'), user.bio) }}
+            </div>
 
-                        <div class="row col s12">
-                            <button type="submit" class="btn btn-flat waves-effect">confirmer</button>
-                        </div>
-                    </fieldset>
+            <div class="card grey dark-4 col l12 m12 s12" style="padding-top: 20px;">
+                <form action="" method="POST">
+                    {{ form.input('name','Pseudo','text', errors.get('name'), user.name) }}
+                    {{ form.input('phone','Mobile','tel', errors.get('phone'), user.phone) }}
+                    {{ form.input('email', 'Email', 'email', errors.get('email'), user.email) }}
+                    {{ form.textarea('bio', 'Bio', errors.get('bio'), user.bio) }}
+
+                    <div class="row col s12">
+                        <button type="submit" class="btn btn-flat waves-effect">confirmer</button>
+                    </div>
                 </form>
-                <br>
+            </div>
+            <div class="card grey dark-4 col l12 m12 s12" style="padding-top: 20px;">
+                <div class="row col s12">
+                    <p>Veuillez renseigner l'adresse mail avec laquelle vous vous étiez inscrit,
+                    afin d'obtenir les instruction de rappelle de mot de passe.</p>
+                    <a href="/forgot" class="btn btn-flat">Changer de mot de passe</a>
+                </div>
             </div>
         </section>
-        {% include "includes/menu-aside.twig" %}
+       <div class="hide-on-med-and-down">
+            {% include "includes/menu-aside.twig" %}
+       </div>
     </section>
 {% endblock %}

@@ -39,6 +39,7 @@ trait RequestTrait
      */
     public function turbolinksLocation(string $name)
     {
+        $this->pageManager::setUrl($name);
         header("Turbolinks-Location: {$name}");
     }
 

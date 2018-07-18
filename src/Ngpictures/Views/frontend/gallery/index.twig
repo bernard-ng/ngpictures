@@ -14,8 +14,13 @@
         <div class="container animated slideInRight">
             <div class="carousel small">
                 {% for p in photo %}
-                    <a href="{{ p.url }}" class="carousel-item">
-                        <img src="{{ p.smallThumbUrl }}" alt="{{ p.name }}" title="{{ p.name }}">
+                    <a href="{{ p.url }}" class="carousel-item" style="background: {{ p.color }}">
+                        <img
+                            src="{{ cacheBusting('/imgs/sblank.png') }}"
+                            data-src="{{ p.smallThumbUrl }}"
+                            alt="{{ p.name }}"
+                            title="{{ p.name }}"
+                        >
                     </a>
                 {% endfor %}
             </div>
@@ -23,11 +28,16 @@
     </section>
     <section class="section container animated slideInRight">
         {% if photos %}
-            <div class="gallery gallery-container" data-action="dataContainer">
+            <div class="gallery gallery-container" id="dataContainer" data-ajax="gallery">
                 {% for p in photos %}
-                    <article class="gallery-item" data-action="gallery-item" id="{{ p.id }}">
+                    <article class="gallery-item" data-action="gallery-item" id="{{ p.id }}"  style="background: {{ p.color }}">
                        <a href="{{ p.url }}">
-                            <img src="{{ p.smallThumbUrl }}" class="responsive-img" title="{{ p.name }}" alt="{{ p.name }}">
+                            <img
+                                src="{{ cacheBusting('/imgs/sblank.png') }}"
+                                data-src="{{ p.smallThumbUrl }}"
+                                title="{{ p.name }}"
+                                alt="{{ p.name }}"
+                            >
                        </a>
                     </article>
                 {% endfor %}

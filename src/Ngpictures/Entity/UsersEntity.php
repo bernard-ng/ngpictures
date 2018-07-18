@@ -54,6 +54,32 @@ class UsersEntity extends Entity
         return $this->followingsNumber;
     }
 
+
+    /**
+     * compte les likes
+     *
+     * @return int
+     */
+    public function getLikesNumber()
+    {
+        $likes = Ngpictures::getDic()->get($this->model('likes'));
+        $this->likesNumber = $likes->count($this->id)->num;
+        return $this->likesNumber;
+    }
+
+
+    /**
+     * compte les commentaires
+     *
+     * @return int
+     */
+    public function getCommentsNumber()
+    {
+        $comments = Ngpictures::getDic()->get($this->model('comments'));
+        $this->commentsNumber = $comments->countComments($this->id)->num;
+        return $this->commentsNumber;
+    }
+
     /**
      * le lien vers le compte d'un user
      * @return mixed|string
