@@ -20,7 +20,13 @@
                         <a href="{{ a.url }}">
                             {% for key, thumb in thumbs %}
                                 {% if a.id == key %}
-                                    <img src="{{ thumb }}" alt="{{ a.title }}" title="{{ a.title }}" class="responsive-img">
+                                    <img
+                                        src="{{ cacheBusting('/imgs/sblank.png') }}"
+                                        data-src="{{ thumb }}"
+                                        alt="{{ a.title }}"
+                                        title="{{ a.title }}"
+                                        class="responsive-img"
+                                    >
                                 {% endif %}
                             {% endfor %}
                         </a>

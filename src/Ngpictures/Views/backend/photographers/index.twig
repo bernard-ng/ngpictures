@@ -5,10 +5,10 @@
         <div class="container">
             <div class="nav-wrapper">
                 <ul>
-                    <li><a href="{{ constant('ADMIN') ~ "/file-browser/posts" }}">Photos membres</a></li>
-                    <li><a href="{{ constant('ADMIN') ~ "/files-browser/avatars" }}">Avatars membres</a></li>
-                    <li class="right"><a href="{{ constant('ADMIN') ~ '/users/bugs' }}">Bugs</a></li>
-                    <li class="right"><a href="{{ constant('ADMIN') ~ '/users/ideas' }}">Ideas</a></li>
+                    <li><a href="{{ constant('ADMIN') ~ "/file-browser/posts" }}"  data-turbolinks="false">Photos membres</a></li>
+                    <li><a href="{{ constant('ADMIN') ~ "/files-browser/avatars" }}" data-turbolinks="false">Avatars membres</a></li>
+                    <li class="right"><a href="{{ constant('ADMIN') ~ '/users/bugs' }}" data-turbolinks="false">Bugs</a></li>
+                    <li class="right"><a href="{{ constant('ADMIN') ~ '/users/ideas' }}" data-turbolinks="false">Ideas</a></li>
                 </ul>
             </div>
         </div>
@@ -19,10 +19,10 @@
                 <div class="section">
                     <span class="btn">Page : {{ currentPage }}/{{ totalPage }}</span>
                     <span class="btn">Total : {{ total }}</span>
-                    <a href="{{ constant('ADMIN') ~ "/photographers?page=" ~ prevPage }}" class="btn">
+                    <a href="{{ constant('ADMIN') ~ "/photographers?page=" ~ prevPage }}" class="btn" data-turbolinks="false">
                         <i class="icon icon-left-open"></i>
                     </a>
-                    <a href="{{ constant('ADMIN') ~ "/photographers?page=" ~ nextPage }}" class="btn">
+                    <a href="{{ constant('ADMIN') ~ "/photographers?page=" ~ nextPage }}" class="btn" data-turbolinks="false">
                         <i class="icon icon-right-open"></i>
                     </a>
                 </div>
@@ -55,7 +55,7 @@
                                             <i class="icon icon-cancel" style="font-size: smaller !important;"></i>
                                         </button>
                                     </form>
-                                    <a href="{{ constant('ADMIN') ~ "/locations/edit/" ~ p.id }}" >
+                                    <a href="{{ constant('ADMIN') ~ "/locations/edit/" ~ p.id }}" data-turbolinks="false">
                                         <button class="btn btn-small blue-2 waves-effect waves-light">
                                             <i class="icon icon-plus-circled" style="font-size: smaller !important;"></i>
                                         </button>

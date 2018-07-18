@@ -122,6 +122,7 @@ class MessageManager implements ArrayAccess
         "users_already_connected"   => "Ola, vous êtes déjà connecté",
         "users_following_success"   => "Vous suivez cet utilisateur",
         "users_confirmation_failed" => "Aîe, une erreur est survenue lors de la confirmation de votre compte, veuillez réessayer plus tard",
+        "users_confirmation_success" => "Cool, la confirmation de votre compte s'est bien effectuée, enjoy ngpictures 2.0",
         "users_unfollowing_success" => "Vous ne suivez plus cet utilisateur",
     ];
 

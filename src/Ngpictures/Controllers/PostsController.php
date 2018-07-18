@@ -147,7 +147,7 @@ class PostsController extends Controller
                 if (isset($_POST) && !empty($_POST)) {
                     $title = $this->str->escape($post->get('title'));
                     $content = $this->str->escape($post->get('content'));
-                    $slug = $this->str->slugify($title ?? 'publication');
+                    $slug =  empty($post->get('title'))? 'publication' : $this->str->slugify($title);
                     $categories_id = (intval($post->get('category')) == 0) ? 1 : intval($post->get('category'));;
 
                     $this->posts->update($id, compact('title', 'content', 'slug', 'categories_id'));

@@ -90,20 +90,7 @@
                     </div>
                     {% endfor %}
                 {% endif %}
-
             {% endif %}
         </section>
-        {% if posts or blog or gallery or pexels %}
-            <section class="section row">
-            <div class="container">
-                    <div class="ng-progress-container">
-                        <div id="statusBar" class="mtb ng-progress-indeterminate disabled" data-ajax="search" data-param="{{ query }}">
-                            <span></span><span></span><span></span><span></span><span></span>
-                        </div>
-                    </div>
-                    <br>
-                </div>
-            </section>
-        {% endif %}
     {% endif %}
 {% endblock %}

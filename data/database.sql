@@ -449,8 +449,6 @@ CREATE TABLE IF NOT EXISTS `booking` (
 ENGINE = InnoDB
 COMMENT = 'la table de reservation de shooting';
 
-CREATE INDEX `fk_booking_photographers1_idx` ON `booking` (`photographers_id` ASC);
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

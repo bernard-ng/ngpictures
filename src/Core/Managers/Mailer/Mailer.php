@@ -46,6 +46,31 @@ class Mailer
     }
 
 
+    public function photographerConfirmation(string $email)
+    {
+        $mail = new PHPMailer(true);
+
+        ob_start();
+        require CORE . "/Managers/Mailer/templates/photographer-mail-template.php";
+        $message = ob_get_clean();
+
+        try {
+            $mail->smtpConnect();
+            $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
+            $mail->addAddress($email);
+            $mail->addReplyTo('ngpictures@larytech.com', 'Information');
+            $mail->isHTML(true);
+            $mail->Subject = 'Félicitation Cher Photographe';
+            $mail->Body = $message;
+            $mail->AltBody = "Félicitation vous venez tout juste de créer un compte photographe sur Ngpictures.";
+            $mail->send();
+        } catch (Exception $e) {
+            LogMessageManager::register(__class__, $e);
+            return false;
+        }
+    }
+
+
     /**
      * envoi un mail de mot de passe oublié a un utilisateur
      * variable reset_link est echo dans le fichier template.

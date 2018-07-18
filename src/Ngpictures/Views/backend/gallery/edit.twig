@@ -19,7 +19,7 @@
                 <div class="col l6 m6 s12">
                     <div class="input-field">
                         <select name="category">
-                            <option disabled="disabled" selected="selected">choisissez un album</option>
+                            <option disabled="disabled" selected="selected" value="{{ photo.albums_id }}">{{ photo.album }}</option>
                             {% for a in albums %}
                                 <option value="{{ a.id }}">{{ a.title }}</option>
                             {% endfor %}

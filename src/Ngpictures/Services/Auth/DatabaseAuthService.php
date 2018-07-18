@@ -69,8 +69,8 @@ class DatabaseAuthService
 
         if ($user && $user->confirmation_token === $token) {
             $this->users->unsetConfirmationToken($user->id);
+            $this->flash->set('danger', $this->flash->msg['users_confirmation_success'], false);
             $this->connect($user);
-            $this->redirect("/login");
         } else {
             $this->flash->set('danger', $this->flash->msg['users_confirmation_failed'], false);
             $this->redirect("/login");

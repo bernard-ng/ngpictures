@@ -1,0 +1,39 @@
+{% extends "layout/posts/default.twig" %}
+
+{% block content %}
+<section id="bookings" class="section container row">
+    <div class="row col s12">
+        <a href="/my-bookings/delete/{{ securityToken }}" class="btn btn-flat">Supprimer</a>
+    </div>
+    <div class="col nexted l9 m12 s12">
+        <div class="card grey dark-4 section" id="commentContainer">
+            {% if bookings %}
+                <ul class="collection">
+                    {% for b in bookings %}
+                        <li class="collection-item avatar">
+                           <img src="/imgs/default.jpeg" alt="default" class="circle">
+                            <div class="title" style="color: #ccc"><strong>{{ b.title }}</strong></div>
+                            <p>
+                                Monsieur/Madame {{ b.name }} ({{ b.email }}), résèrve un shooting pour le
+                                {{ b.date }} à {{ b.time }} : </br>
+                                {{ b.description }}
+                            </p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="section center-align col l8 offset-l2 s12 m12">
+                    <h2 class="icon icon-comment-empty red-txt center-align"></h2>
+                    <h2 class="ui header divided center"> Aucune Réservation</h2>
+                    <p>
+                        vous n'avez aucune Réservations , veuillez revenir plus tard.
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="hide-on-small-and-down">
+        {% include "includes/menu-aside.twig" %}
+    </div>
+</section>
+{% endblock %}

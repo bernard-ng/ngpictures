@@ -6,10 +6,10 @@
         <div class="container">
             <div class="nav-wrapper">
                 <ul>
-                    <li><a href="{{ constant('ADMIN')~"/blog/add"  }}">Article</a></li>
-                    <li><a href="{{ constant('ADMIN')~"/gallery/add" }}">Photo</a> </li>
-                    <li><a href="{{ constant('ADMIN')~"/gallery/albums/add" }}">Albums</a></li>
-                    <li><a href="{{ constant('ADMIN')~"/blog/categories/add" }}">Catégorie</a></li>
+                    <li><a href="{{ constant('ADMIN')~"/blog/add"  }}" data-turbolinks="false">Article</a></li>
+                    <li><a href="{{ constant('ADMIN')~"/gallery/add" }}" data-turbolinks="false">Photo</a> </li>
+                    <li><a href="{{ constant('ADMIN')~"/gallery/albums/add" }}" data-turbolinks="false">Albums</a></li>
+                    <li><a href="{{ constant('ADMIN')~"/blog/categories/add" }}" data-turbolinks="false">Catégorie</a></li>
                 </ul>
             </div>
         </div>
@@ -58,7 +58,7 @@
                                     <i class="icon icon-cancel" style="font-size: smaller !important;"></i>
                                 </button>
                                 </form>
-                                <a href="{{ constant('ADMIN')~"/confirm/1/"~a.id }}" title="retirer" id="confirm">
+                                <a href="{{ constant('ADMIN')~"/confirm/1/"~a.id }}" title="retirer" id="confirm" data-turbolinks="false">
                                 <button class="btn btn-small blue-2 waves-effect waves-light">
                                     {% if a.online %}
                                         <i class="icon icon-download" style="font-size: smaller !important;"></i>
@@ -107,12 +107,12 @@
                                 </button>
                                 </form>
 
-                                <a href="{{ constant('ADMIN')~"/blog/edit/" ~ b.id }}" title="editer">
+                                <a href="{{ constant('ADMIN')~"/blog/edit/" ~ b.id }}" title="editer" data-turbolinks="false">
                                 <button class="btn btn-small waves-effect waves-light">
                                     <i class="icon icon-plus-circled" style="font-size: smaller !important;"></i>
                                 </button>
                                 </a>
-                                <a href="{{ constant('ADMIN')~"/confirm/3/" ~ b.id }}" title="retirer" id="confirm">
+                                <a href="{{ constant('ADMIN')~"/confirm/3/" ~ b.id }}" title="retirer" id="confirm" data-turbolinks="false">
                                 <button class="btn btn-small blue-2 waves-effect waves-light">
                                     {% if a.online %}
                                         <i class="icon icon-download" style="font-size: smaller !important;"></i>

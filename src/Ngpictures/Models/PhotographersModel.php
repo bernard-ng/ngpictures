@@ -23,6 +23,20 @@ class PhotographersModel extends Model
     }
 
 
+    public function find(int $id)
+    {
+        return $this->query(
+            "SELECT {$this->table}.*, users.name as name
+            FROM {$this->table}
+            LEFT JOIN users ON {$this->table}.users_id = users.id
+            WHERE {$this->table}.id = ?",
+            [$id],
+            true,
+            true
+        );
+    }
+
+
 
     public function findLess($post_id)
     {

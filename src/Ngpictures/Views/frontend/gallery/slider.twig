@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="slider fullscreen">
-        <ul class="slides">
+        <ul class="slides" style="background: {{ photos[0].color }}">
             {% if photos %}
                 {% for p in photos %}
                     <li id="{{ p.id }}">

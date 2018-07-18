@@ -102,8 +102,20 @@ $router->get("/ajax/categories", "ajax#categories", "ajax.categories");
 $router->get("/ajax/community", "ajax#community", "ajax.community");
 $router->get("/ajax/photographers", "ajax#photographers", "ajax.photographers");
 $router->get("/ajax/community_search", "ajax#community_search", "ajax.community_search");
-
 $router->get("/verses", "verses", "ajax.verses");
+
+
+// PHOTOGRAPHER ROUTES
+/***********************************************************************************/
+$router->any('/photographers/sign', "photographers#sign", "photographers.sign");
+$router->get('/photographers/profile/:name-:id', "photographers#profile", "photographers.profile");
+$router->any("/photographers/add/albums/:token", "photographers#albums_add", "photographers.albums_add");
+$router->any("/photographers/edit/albums/:id/:token", "photographers#albums_edit", "photographers.albums_edit");
+$router->any("/photographers/add/pictures/:token", "photographers#add", "photographers.add");
+$router->any("/photographers/edit/pictures/:id/:token", "photograpers#edit", "photographes.edit");
+$router->get("/photographers/bookings/:token", "photographers#bookings", "photographers.bookings");
+$router->any("/photographers/edit/profile/:name-:id/:token", "photographers#edit_profile", "photographers.edit_profile");
+$router->post("/photographers/detele/:token", "photographers#delete", "photographers.delete");
 
 
 //ERROR ROUTES

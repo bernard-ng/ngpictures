@@ -3,7 +3,8 @@
     <div class="container row">
         <div class="col l9 m12 s12 pb10">
             <img
-                src="{{ article.thumbUrl }}"
+                src="{{ cacheBusting('/imgs/blank.png') }}"
+                data-src="{{ article.thumbUrl }}"
                 alt="{{ article.name }}"
                 title="{{ article.name }}"
                 class="responsive-img materialboxed"

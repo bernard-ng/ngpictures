@@ -125,31 +125,36 @@ class UsersController extends Controller
         $post       =   new Collection($_POST);
         $errors     =   new Collection();
 
-        if (isset($_POST) && !empty($_POST)) {
-            $this->validator->setRule("email", 'valid_email', 'required');
-            $this->validator->setRule("name", ['required', "alpha_dash", "min_length[3]"]);
-            $this->validator->setRule("password", ["matches[password_confirm]" ,'required', "min_length[6]"]);
-            $this->validator->setRule('password_confirm', ["matches[password]" ,'required', "min_length[6]"]);
-
-            if ($this->validator->isValid()) {
-                $this->validator->unique("name", $this->users, $this->flash->msg['users_username_token']);
-                $this->validator->unique("email", $this->users, $this->flash->msg['users_mail_token']);
+        if ($this->authService->isLogged()) {
+            $this->flash->set('warning', $this->flash->msg['users_already_connected'], false);
+            $this->redirect($this->authService->isLogged()->accountUrl, false);
+        } else {
+            if (isset($_POST) && !empty($_POST)) {
+                $this->validator->setRule("email", 'valid_email', 'required');
+                $this->validator->setRule("name", ['required', "alpha_dash", "min_length[3]"]);
+                $this->validator->setRule("password", ["matches[password_confirm]", 'required', "min_length[6]"]);
+                $this->validator->setRule('password_confirm', ["matches[password]", 'required', "min_length[6]"]);
 
                 if ($this->validator->isValid()) {
-                    $this->authService->register($post->get('name'), $post->get('email'), $post->get('password'));
-                    $this->flash->set('success', $this->flash->msg['form_registration_submitted'], false);
-                    $this->redirect("/login");
+                    $this->validator->unique("name", $this->users, $this->flash->msg['users_username_token']);
+                    $this->validator->unique("email", $this->users, $this->flash->msg['users_mail_token']);
+
+                    if ($this->validator->isValid()) {
+                        $this->authService->register($post->get('name'), $post->get('email'), $post->get('password'));
+                        $this->flash->set('success', $this->flash->msg['form_registration_submitted'], false);
+                        $this->redirect("/login", true);
+                    } else {
+                        $this->sendFormError();
+                    }
                 } else {
                     $this->sendFormError();
                 }
-            } else {
-                $this->sendFormError();
             }
-        }
 
-        $this->turbolinksLocation("/sign");
-        $this->pageManager::setTitle("Inscription");
-        $this->view('frontend/users/sign', compact('post', 'errors'));
+            $this->turbolinksLocation("/sign");
+            $this->pageManager::setTitle("Inscription");
+            $this->view('frontend/users/sign', compact('post', 'errors'));
+        }
     }
 
 

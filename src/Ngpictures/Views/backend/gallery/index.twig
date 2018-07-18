@@ -7,14 +7,14 @@
             <div class="nav-wrapper">
                 <ul>
                     <li>
-                        <a href="{{ constant('ADMIN') ~ "/file-browser/gallery" }}">Photo site</a>
+                        <a href="{{ constant('ADMIN') ~ "/file-browser/gallery" }}" data-turbolinks="false">Photo site</a>
                     </li>
-                    <li class="right"><a href="{{ constant('ADMIN') ~ "/reports" }}">Reports</a></li>
+                    <li class="right"><a href="{{ constant('ADMIN') ~ "/reports" }}" data-turbolinks="false">Reports</a></li>
                     <li class="right">
-                        <a href="{{ constant('ADMIN') ~ "/gallery/albums"  }}">Albums</a>
+                        <a href="{{ constant('ADMIN') ~ "/gallery/albums"  }}" data-turbolinks="false">Albums</a>
                     </li>
                     <li class="right">
-                        <a href="{{ constant('ADMIN') ~ "/gallery/albums/add" }}">Ajouter un Album</a>
+                        <a href="{{ constant('ADMIN') ~ "/gallery/albums/add" }}" data-turbolinks="false">Ajouter un Album</a>
                     </li>
                 </ul>
             </div>
@@ -47,17 +47,17 @@
             <div class="col l12 m12 s12">
                 <div class="card-panel grey dark-4 col l12" style="padding: 20px">
                     <div class="section">
-                        <a href="{{ constant('ADMIN') ~ "/gallery/add" }}" class="btn right">
+                        <a href="{{ constant('ADMIN') ~ "/gallery/add" }}" class="btn right"  data-turbolinks="false">
                             <i class="icon icon-plus" style="font-size: smaller !important;"></i>
                         </a>
 
                         <span class="btn">Page : {{ currentPage }}/{{ totalPage }}</span>
                         <span class="btn">Total : {{ total }}</span>
 
-                        <a href="{{ constant('ADMIN') ~ "/gallery?page=" ~ prevPage }}" class="btn">
+                        <a href="{{ constant('ADMIN') ~ "/gallery?page=" ~ prevPage }}" class="btn" data-turbolinks="false">
                             <i class="icon icon-left-open"></i>
                         </a>
-                        <a href="{{ constant('ADMIN') ~ "/gallery?page=" ~ nextPage }}" class="btn">
+                        <a href="{{ constant('ADMIN') ~ "/gallery?page=" ~ nextPage }}" class="btn" data-turbolinks="false">
                             <i class="icon icon-right-open"></i>
                         </a>
                     </div>
@@ -85,12 +85,12 @@
                                             </button>
                                         </form>
 
-                                        <a href="{{ constant('ADMIN') ~ "/gallery/edit/" ~ p.id }}">
+                                        <a href="{{ constant('ADMIN') ~ "/gallery/edit/" ~ p.id }}" data-turbolinks="false">
                                             <button class="btn waves-effect waves-light">
                                                 <i class="icon icon-plus-circled" style="font-size: smaller !important;"></i>
                                             </button>
                                         </a>
-                                        <a href="{{ constant('ADMIN') ~ "/confirm/4/" ~ p.id }}" id="confirm">
+                                        <a href="{{ constant('ADMIN') ~ "/confirm/4/" ~ p.id }}" id="confirm" data-turbolinks="false">
                                             <button class="btn btn-small blue-2 waves-effect waves-light">
                                                 {% if p.online %}
                                                     <i class="icon icon-download" style="font-size: smaller !important;"></i>
@@ -99,7 +99,7 @@
                                                 {% endif %}
                                             </button>
                                         </a>
-                                        <a href="{{ constant('ADMIN') ~ p.watermarkUrl }}">
+                                        <a href="{{ constant('ADMIN') ~ p.watermarkUrl }}" data-turbolinks="false">
                                             <button class="btn btn-small blue wavs">
                                                 <i class="icon icon-tag" style="font-size: smaller !important;"></i>
                                             </button>

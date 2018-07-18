@@ -82,7 +82,11 @@
         <article class="card post-titled grey dark-4">
             <div class="card-image waves-effect">
                 <a href="{{ a.url }}">
-                    <img src="/imgs/outils.jpeg" alt="outils" title="outils">
+                    <img
+                        data-src="{{ cacheBusting('/imgs/outils.jpeg') }}"
+                        alt="outils"
+                        title="outils"
+                    >
                 </a>
             </div>
             <span class="post-description">
