@@ -7,10 +7,17 @@ class AjaxController extends Controller
 {
 
 
+    public function users_posts()
+    {
+        $ids = explode("@", $_GET['lastId']);
+        $users_id = intval($ids[0]) ?? 0;
+        $lastId     = intval($ids[1]) ?? 0;
+    }
+
     public function community()
     {
         if ($this->isAjax()) {
-            $lastId = $_GET['lastId'] ?? 0;
+            $lastId = intval($_GET['lastId']) ?? 0;
             $users = $this->loadModel('users')->findLess($lastId);
             if ($users) {
                 echo $this->view('/ajax/users/community', compact("users"), true);
@@ -28,7 +35,7 @@ class AjaxController extends Controller
     public function photographers()
     {
         if ($this->isAjax()) {
-            $lastId = $_GET['lastId'] ?? 0;
+            $lastId = intval($_GET['lastId']) ?? 0;
             $this->loadModel(['users', 'photographers']);
 
             $photographers = $this->photographers->findLess($lastId);
@@ -51,7 +58,7 @@ class AjaxController extends Controller
     public function posts()
     {
         if ($this->isAjax()) {
-            $lastId = $_GET['lastId'] ?? 0;
+            $lastId = intval($_GET['lastId']) ?? 0;
             $posts = $this->loadModel('posts')->findLess($lastId);
             if ($posts) {
                 echo $this->view('/ajax/posts/cards', compact("posts"), true);
@@ -69,7 +76,7 @@ class AjaxController extends Controller
     public function categories()
     {
         if ($this->isAjax()) {
-            $lastId = $_GET['lastId'] ?? 0;
+            $lastId = intval($_GET['lastId']) ?? 0;
             $categories = $this->loadModel('categories')->findLess($lastId);
 
             if ($categories) {
@@ -106,7 +113,7 @@ class AjaxController extends Controller
     public function albums()
     {
         if ($this->isAjax()) {
-            $lastId = $_GET['lastId'] ?? 0;
+            $lastId = intval($_GET['lastId']) ?? 0;
             $albums = $this->loadModel('albums')->findLess($lastId);
             if ($albums) {
 
@@ -140,7 +147,7 @@ class AjaxController extends Controller
     public function gallery()
     {
         if ($this->isAjax()) {
-            $lastId = $_GET['lastId'] ?? 0;
+            $lastId = intval($_GET['lastId']) ?? 0;
             $photos = $this->loadModel('gallery')->findLess($lastId);
             if ($photos) {
                 echo $this->view('/ajax/gallery/cards', compact("photos"), true);
@@ -158,7 +165,7 @@ class AjaxController extends Controller
     public function blog()
     {
         if ($this->isAjax()) {
-            $lastId = $_GET['lastId'] ?? 0;
+            $lastId = intval($_GET['lastId']) ?? 0;
             $posts = $this->loadModel('blog')->findLess($lastId);
             if ($posts) {
                 echo $this->view('/ajax/blog/cards', compact("posts"), true);

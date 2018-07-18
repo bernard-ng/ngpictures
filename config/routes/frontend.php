@@ -101,7 +101,7 @@ $router->get("/ajax/albums", "ajax#albums", "ajax.albums");
 $router->get("/ajax/categories", "ajax#categories", "ajax.categories");
 $router->get("/ajax/community", "ajax#community", "ajax.community");
 $router->get("/ajax/photographers", "ajax#photographers", "ajax.photographers");
-$router->get("/ajax/community_search", "ajax#community_search", "ajax.community_search");
+$router->get("/ajax/users_posts", "ajax#users_posts", "ajax.users_posts");
 $router->get("/verses", "verses", "ajax.verses");
 
 

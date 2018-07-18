@@ -238,6 +238,7 @@ class UsersController extends Controller
         if (!empty($username)) {
             $user = $this->users->find(intval($id));
             if ($user) {
+                $photographer = $this->loadModel('photographers')->findWith('users_id', $user->id);
                 $posts = $this->loadModel('posts')->findWithUser($user->id);
                 $recent = null;
 
@@ -247,7 +248,7 @@ class UsersController extends Controller
 
                 $this->turbolinksLocation($user->accountUrl);
                 $this->pageManager::setTitle("Profile de " . $user->name);
-                $this->view('frontend/users/account/account', compact("user", "posts", "collection"));
+                $this->view('frontend/users/account/account', compact("user", "posts", "collection", "photographer"));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
                 $this->redirect(true, false);

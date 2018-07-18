@@ -10,7 +10,12 @@
                 <article class="card post-titled" style="background-color: {{ a.color }};">
                     <div class="card-image waves-effect">
                         <a href="{{ a.url }}" >
-                            <img src="{{ cacheBusting('/imgs/sblank.png') }}"  data-src="{{ a.smallThumbUrl }}"  alt="{{ a.name }}" title="{{ a.name }}">
+                            <img
+                                src="{{ cacheBusting('/imgs/sblank.png') }}"
+                                data-src="{{ a.smallThumbUrl }}"
+                                alt="{{ a.name }}"
+                                title="{{ a.name }}"
+                            >
                         </a>
                     </div>
                     {% if a.title or a.name %}

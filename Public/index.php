@@ -10,9 +10,6 @@ require(dirname(__DIR__)."/config/constant.php");
 require(dirname(__DIR__)."/config/ini.php");
 require(ROOT."/vendor/autoload.php");
 
-include_once WEBROOT ."/befree/config.php";
-include_once WEBROOT ."/befree/project-security.php";
-
 $container = new ContainerBuilder();
 $container->addDefinitions(ROOT."/config/config.php");
 $container = $container->build();
