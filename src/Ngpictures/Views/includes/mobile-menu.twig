@@ -29,11 +29,12 @@
             </li>
         </div>
     {% endif %}
+    <li><a href="" class="subheader grey-txt">Activités</a></li>
     {% if activeUser %}
         <li>
             <ul class="collapsible collapsible-accordion">
                 <li>
-                    <a class="collapsible-header waves-effect">Mon compte</a>
+                    <a class="collapsible-header waves-effect">Mon compte<i class="icon icon-angle-down"></i></a>
                     <div class="collapsible-body">
                         <ul>
                             <li><a href="{{ activeUser.accountUrl }}">Profile <i class="icon icon-user"></i></a></li>
@@ -57,19 +58,35 @@
                 <a class="collapsible-header waves-effect">Services<i class="icon icon-angle-down"></i></a>
                 <div class="collapsible-body">
                     <ul>
-                        <li><a href="/categories">Catégories des photos <i class="icon icon-tags"></i></a></li>
-                        {% if activeUser %}
-                            <li><a href="/community">La Communauté <i class="icon icon-users"></i></a></li>
-                        {% endif %}
                         <li><a href="/maps/photographers">Trouver des photographes <i class="icon icon-location"></i></a></li>
-                        <li><a href="/photographers">Compte photographe <i class="icon icon-camera"></i></a></li>
-                        <li><a href="/contact">Nous contacter <i class="icon icon-mail"></i></a></li>
+                        <li><a href="/photographers/sign">Compte photographe <i class="icon icon-camera"></i></a></li>
                         <li><a href="/booking">Réservations <i class="icon icon-calendar"></i></a></li>
                     </ul>
                 </div>
             </li>
         </ul>
     </li>
+    <li>
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a class="collapsible-header waves-effect">Autres<i class="icon icon-angle-down"></i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="/categories">Catégories<i class="icon icon-tags"></i></a></li>
+                        {% if activeUser %}
+                            <li><a href="/community">La Communauté <i class="icon icon-users"></i></a></li>
+                        {% endif %}
+                        <li><a href="/contact">Nous contacter <i class="icon icon-mail"></i></a></li>
+                        <li><a href="/bugs">Signaler un problème<i class="icon icon- icon-attention"></i></a></li>
+                        <li><a href="/ideas">Donner un avis<i class="icon icon-attention"></i></a></li>
+                        <li><a href="/privacy">Politique d'utilisation <i class="icon icon-book"></i></a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
+    <li><div class="divider grey"></div></li>
+    <li><a href="" class="subheader grey-txt">Menu</a></li>
 
     {% if activeUser.rank == 'admin' %}
         <li><a href="{{ ADMIN }}">Administration <i class="icon icon-code right"></i></a></li>
@@ -81,18 +98,4 @@
     {% if activeUser %}
         <li id="Fil d'actualité"><a href="/posts">Actualités <i class="icon icon-globe"></i></a></li>
     {% endif %}
-    <li>
-        <ul class="collapsible collapsible-accordion">
-            <li>
-                <a class="collapsible-header waves-effect">Autres<i class="icon icon-angle-down"></i></a>
-                <div class="collapsible-body">
-                    <ul>
-                        <li><a href="/bugs">Signaler un problème<i class="icon icon-tags"></i></a></li>
-                        <li><a href="/ideas">Donner un avis<i class="icon icon-location"></i></a></li>
-                        <li><a href="/privacy">Politique d'utilisation <i class="icon icon-camera"></i></a></li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    </li>
 </ul>

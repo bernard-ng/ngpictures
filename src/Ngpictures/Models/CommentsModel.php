@@ -48,4 +48,14 @@ class CommentsModel extends Model
             true
         );
     }
+
+    public function countComments($user_id)
+    {
+        return $this->query(
+            "SELECT COUNT('id') as num FROM {$this->table} WHERE users_id = ?",
+            [$user_id],
+            true,
+            true
+        );
+    }
 }

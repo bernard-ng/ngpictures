@@ -1,0 +1,23 @@
+{% extends 'layout/users/default.twig' %}
+{% import 'includes/form.twig' as form %}
+
+{% block content %}
+    <div class="row col l4 m4 s12">
+        <div class="card-panel hoverable" id="loginBox">
+            <h2 class="ui header">Albums Privé</h2>
+            <p>
+                {{ album.description }}
+            </p>
+            <form method="POST" action="" data-action="login">
+                <div class="row">
+                    {{ form.input('code', "Code d'accès", 'text', errors.get('code'), post.get('code')) }}
+                </div>
+                <div class="row">
+                    <div class="col s12" id="connectOptions">
+                        <button type="submit" class="btn btn-flat waves-effect" id="connect">Connexion</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

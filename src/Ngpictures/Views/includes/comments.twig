@@ -19,7 +19,7 @@
                 {% for c in comments %}
                     <li class="collection-item avatar">
                         <a href="{{ user.find(c.users_id).accountUrl }}">
-                            <img src="{{ user.find(c.users_id).avatarUrl }}" alt="{{ user.find(c.users_id).name }}" class="circle">
+                            <img data-src="{{ user.find(c.users_id).avatarUrl }}" alt="{{ user.find(c.users_id).name }}" class="circle">
                             <span class="title" style="color: #ccc">{{ user.find(c.users_id).name }}</span>
                         </a>
                         <p>{{ c.comment | escape | nl2br }}</p>
@@ -31,7 +31,7 @@
                 {% endfor %}
                 {% if commentsNumber > 4 %}
                     <li class="collection-item">
-                        <p><a href="{{ article.commentUrl }}">Afficher les {{ commentsNumber }} commentaires</a></p>
+                        <p><a href="{{ article.commentUrl }}" class="btn">Afficher les {{ commentsNumber }} commentaires</a></p>
                     </li>
                 {% endif %}
             </ul>

@@ -4,11 +4,11 @@ document.addEventListener('DOMContentLoaded', function () {
      * suppression du contenu
      */
     function formDelete(element){
-        let forms = document.querySelectorAll(element);
-        if (typeof forms !== 'undefined') {
-            for (let i = 0; i < forms.length; i++) {
-                let deleteForm = forms[i];
-                deleteForm.querySelector('#delete').addEventListener('click', function(e){
+        let btns = document.querySelectorAll(element);
+        if (typeof btns !== 'undefined') {
+            for (let i = 0; i < btns.length; i++) {
+                let deleteForm = btns[i];
+                deleteForm.addEventListener('click', function(e){
                     e.preventDefault();
                     e.stopPropagation();
 
@@ -101,6 +101,6 @@ document.addEventListener('DOMContentLoaded', function () {
         return false;
     }
 
-    formDelete("form[data-action='delete-ajax']");
+    formDelete("button[type='submit']#delete");
     confirmPost("a#confirm");
 });

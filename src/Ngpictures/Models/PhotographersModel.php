@@ -12,16 +12,50 @@ class PhotographersModel extends Model
     protected $table = "photographers";
 
 
+    public function get($limit)
+    {
+        return $this->query(
+            "SELECT {$this->table}.*, users.name as name
+            FROM {$this->table}
+            LEFT JOIN users ON {$this->table}.users_id = users.id
+            ORDER BY {$this->table}.users_id DESC LIMIT {$limit}"
+        );
+    }
+
+
+    public function find(int $id)
+    {
+        return $this->query(
+            "SELECT {$this->table}.*, users.name as name
+            FROM {$this->table}
+            LEFT JOIN users ON {$this->table}.users_id = users.id
+            WHERE {$this->table}.id = ?",
+            [$id],
+            true,
+            true
+        );
+    }
+
+
+
+    public function findLess($post_id)
+    {
+        return $this->query(
+            "SELECT {$this->table}.*, users.name as name
+            FROM {$this->table}
+            LEFT JOIN users ON {$this->table}.users_id = users.id
+            WHERE {$this->table}.users_id < ? ORDER BY {$this->table}.id DESC LIMIT 8",
+            [$post_id]
+        );
+    }
+
     public function all()
     {
         return $this->query(
             "SELECT {$this->table}.*, users.name as name
             FROM {$this->table}
             LEFT JOIN users ON {$this->table}.users_id = users.id
-            ORDER BY {$this->table}.id DESC ",
-            null,
-            true,
-            false
+            ORDER BY {$this->table}.id DESC "
         );
     }
 }

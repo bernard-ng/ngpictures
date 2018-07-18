@@ -20,6 +20,7 @@ define("TOKEN_KEY", "token");
 define("CAPTCHA_KEY", "captcha");
 define("COOKIE_REMEMBER_KEY", "NGPICTURES-REMEMBER");
 define('ENV', 'developpement');
+define('CACHE_BUSTING', true);
 
 //APPLICATION API KEYS
 //***************************************************************

@@ -43,7 +43,7 @@ class LikesModel extends Model
     {
         return $this->query(
             "INSERT INTO {$this->table}(users_id,{$this->getType($type)},date_created) VALUES(?,?,NOW())",
-            [$users_id,$id]
+            [$users_id, $id]
         );
     }
 
@@ -59,7 +59,7 @@ class LikesModel extends Model
     {
         return $this->query(
             "DELETE FROM {$this->table} WHERE {$this->getType($type)} = ? AND users_id = ? ",
-            [$id,$users_id],
+            [$id, $users_id],
             true,
             true
         );
@@ -73,7 +73,7 @@ class LikesModel extends Model
      * @param integer $type
      * @return integer
      */
-    public function getLikes(int $id, int $type): int
+    public function getLikes(int $id, int $type) : int
     {
         return $this->query(
             "SELECT users_id FROM {$this->table} WHERE {$this->getType($type)} = {$id}",
@@ -112,16 +112,16 @@ class LikesModel extends Model
      * @param int|null $users_id
      * @return boolean
      */
-    public function isLiked(int $id, int $t, $users_id = null): bool
+    public function isLiked(int $id, int $t, $users_id = null) : bool
     {
         $req = $this->query(
 
             "SELECT * FROM {$this->table} WHERE {$this->getType($t)} = ? AND users_id = ? ",
-            [$id,$users_id],
+            [$id, $users_id],
             true,
             true
         );
-        return ($req)? true : false;
+        return ($req) ? true : false;
     }
 
 
@@ -132,12 +132,12 @@ class LikesModel extends Model
      * @param integer $type
      * @return string
      */
-    public function getLikeSentence(int $id, int $type): string
+    public function getLikeSentence(int $id, int $type) : string
     {
         $isLiked = $this->isLiked($id, $type, $this->session->getValue(AUTH_KEY, 'id'));
-        $likes =  $this->getLikes($id, $type);
-        $liked = $likes - 1 ;
-        return ($isLiked && $likes == 1)? "Vous aimez ça" : "{$likes} j'aime";
+        $likes = $this->getLikes($id, $type);
+        $liked = $likes - 1;
+        return ($isLiked && $likes == 1) ? "Vous aimez ça" : "{$likes} j'aime";
     }
 
 
@@ -149,12 +149,23 @@ class LikesModel extends Model
      * @param integer $type
      * @return string
      */
-    public function isMentionnedLike(int $id, int $type): string
+    public function isMentionnedLike(int $id, int $type) : string
     {
         if ($this->isLiked($id, $type, $this->session->getValue(AUTH_KEY, 'id'))) {
             return 'active';
         } else {
             return '';
         }
+    }
+
+
+    public function count($user_id)
+    {
+        return $this->query(
+            "SELECT COUNT('id') as num FROM {$this->table} WHERE users_id = ?",
+            [$user_id],
+            true,
+            true
+        );
     }
 }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" >
+{% include "includes/ngpictures-watermark.txt" %}
+    <head>
+        <title>{{ pageManager.getTitle }}</title>
+        {% include "includes/default-meta.twig" %}
+        {% include "includes/favicon.twig" %}
+        {% include "includes/default-style.twig" %}
+    </head>
+    <body>
+        {% include "includes/menu.twig" %}
+        {% include "includes/mobile-menu.twig" %}
+
+        <div class="slider" style="margin-top: -64px" data-action-requires="menu-transparent">
+            <ul class="slides">
+                {% for l in last %}
+                    <li>
+                        <img src="{{ l.thumbUrl }}">
+                        <div class="caption center-align">
+                            <h2 class="title">{{ photographer.label }}</h2>
+                            <h6 class="light grey-text text-lighten-3">
+                                Découvre le photographe : {{ user.name }}
+                            </h6>
+                        </div>
+                        <div class="bg"></div>
+                    </li>
+                {% else %}
+                    <li>
+                        <img src="{{ cacheBusting('/imgs/slider.jpg') }}">
+                        <div class="caption center-align">
+                            <h2 class="title">{{ photographer.label }}</h2>
+                            <h6 class="light grey-text text-lighten-3">
+                                Découvre le photographe : {{ user.name }}
+                            </h6>
+                        </div>
+                        <div class="bg"></div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <main class="page-content" id="pageContent" role="main">
+            {% block content %}{% endblock %}
+        </main>
+
+        {% include "includes/footer.twig" %}
+        {% include "includes/default-script.twig" %}
+        {% include "includes/flash.twig" %}
+    </body>
+</html>
