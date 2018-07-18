@@ -65,6 +65,7 @@ class MessageManager implements ArrayAccess
         "form_registration_submitted"   => "Un email de confirmation de compte vous a été envoyé, veuillez le confirmer pour continuer",
         "form_report_submitted"         => "Merci d'avoir signaler cette publication",
         "form_booking_submitted"        => "Votre réservation a bien été effectuée, nous avons contacter votre photographe",
+        "form_photographers_submitted"  =>  "Bravo, vous faites partie de la grande famille des photographes, un mail vous a été envoyer...",
         "form_invalid_username"         => "Votre pseudo n'est pas valide",
         "form_invalid_username_num"     => "Votre pseudo doit contenir au moins une lettre",
         "form_invalid_email"            => "Cet adresse mail n'est pas valide",
@@ -100,6 +101,10 @@ class MessageManager implements ArrayAccess
 
 
         'category_not_found'        => "Cette catégorie n'éxiste pas ou plus",
+
+        "photographers_userlabel_token" => "Oups ce nom de label existe déjà !!!",
+        "photographers_mail_token" => "Ola, cette adresse mail est déjà prise par un autre photographe",
+
 
         //USERS
         //******************************************************************************************* */

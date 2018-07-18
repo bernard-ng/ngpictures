@@ -24,7 +24,7 @@
                             <tr><td height="30" style="font-size: 30px; line-height: 30px;"> &nbsp;</td></tr>
                             <tr>
                                 <td align="center" style="text-align: center; font-size: 35px; color: #ffffff; mso-line-height: exactly; line-height: 32px; font-family: robot-title, sans-serif;">
-                                    Félication Cher Photographe
+                                    Félication
                                 </td>
                             </tr>
                             <tr><td height="15" style="font-size: 15px; line-height: 15px;"> &nbsp;</td></tr>
@@ -42,6 +42,9 @@
                                 <td align="center" style="text-align: center; padding: 20px; color: #808a8f; mso-line-height: exactly; line-height: 25px; font-family: robot-title, sans-serif;">
                                     Félicitation vous venez tout juste de créer un compte photographe sur Ngpictures.
                                     si vous n'est pas responsable de la création de ce compte, Veuillez nous contacter.
+                                    <br>
+                                    La creation de ce compte, donne la posibilité à tout le monde de vous contacter, de faire une réservation de shooting
+                                    chez vous. et tout cela gratuitement...
                                 </td>
                             </tr>
                             <tr><td height="30" style="font-size: 30px; line-height: 30px;"> &nbsp;</td></tr>

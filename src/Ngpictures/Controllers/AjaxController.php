@@ -5,13 +5,29 @@ use Ng\Core\Managers\Collection;
 
 class AjaxController extends Controller
 {
-
-
     public function users_posts()
     {
-        $ids = explode("@", $_GET['lastId']);
-        $users_id = intval($ids[0]) ?? 0;
-        $lastId     = intval($ids[1]) ?? 0;
+        if ($this->isAjax()) {
+            $ids = explode("@", $_GET['lastId']);
+            $lastId = intval($ids[1]) ?? 0;
+
+
+            $user = $this->loadModel('users')->find(intval($ids[0]) ?? 0);
+            if ($user) {
+                $posts = $this->loadModel('posts')->userFindLess($user->id, $lastId);
+                if ($posts) {
+                    echo $this->view('/ajax/users/posts', compact("posts"), true);
+                    exit();
+                } else {
+                    $this->flash->set('danger', $this->flash->msg['nothing_to_load']);
+                }
+            } else {
+                $this->flash->set('danger', $this->flash->msg['undefined_error']);
+            }
+        } else {
+            $this->flash->set("warning", $this->flash->msg['undefined_error']);
+            $this->redirect(true);
+        }
     }
 
     public function community()

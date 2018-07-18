@@ -44,6 +44,17 @@ class PostsModel extends Model
     }
 
 
+    public function userFindLess($user_id, $post_id) {
+        return $this->query(
+            "SELECT {$this->table}.* , categories.title as category
+            FROM {$this->table}
+            LEFT JOIN categories ON categories_id = categories.id
+            WHERE (online = 1 AND {$this->table}.users_id = ?) AND {$this->table}.id < ? ORDER BY id DESC LIMIT 0, 8",
+            [$user_id, $post_id]
+        );
+    }
+
+
     public function get($user_id, $limit)
     {
         return $this->query(
@@ -76,10 +87,8 @@ class PostsModel extends Model
             "SELECT {$this->table}.*, categories.title as category
             FROM {$this->table}
             LEFT JOIN categories ON categories_id = categories.id
-            WHERE {$this->table}.users_id = ? ORDER BY date_created DESC LIMIT 0,5",
-            [$id],
-            true,
-            false
+            WHERE {$this->table}.users_id = ? ORDER BY id DESC LIMIT 8",
+            [$id]
         );
     }
 }

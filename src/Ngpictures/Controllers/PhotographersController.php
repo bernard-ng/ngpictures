@@ -17,6 +17,8 @@ class PhotographersController extends Controller
 
     public function sign()
     {
+        $post = new Collection($_POST);
+        $errors = new Collection();
         $exist = $this->photographers->findWith('users_id', $this->authService->isLogged()->id);
         if (!$exist) {
             if (isset($_POST) && !empty($_POST)) {
@@ -58,6 +60,55 @@ class PhotographersController extends Controller
     }
 
 
+    public function edit_profile($label, $id, $token)
+    {
+       if ($this->authService->getToken() == $token) {
+            $post = new Collection($_POST);
+            $errors = new Collection();
+            $exist = $this->photographers->find(intval($id));
+            if (!$exist) {
+                if (isset($_POST) && !empty($_POST)) {
+                    $this->validator->setRule("label", ['required', "alpha_dash", "min_length[3]"]);
+                    $this->validator->setRule("email", 'valid_email', 'required');
+                    $this->validator->setRule("location", ['required', "min_length[6]"]);
+                    $this->validator->setRule('phone', ['required', "min_length[6]"]);
+
+                    if ($this->validator->isValid()) {
+                        $this->validator->unique("label", $this->photographers, $this->flash->msg['photographers_userlabel_token']);
+                        $this->validator->unique("email", $this->photographers, $this->flash->msg['photographers_mail_token']);
+
+                        if ($this->validator->isValid()) {
+                            $label = $this->str->escape($post->get('label'));
+                            $email = $this->str->escape($post->get('email'));
+                            $location = $this->str->escape($post->get('location'));
+                            $phone = $this->str->escape($post->get('phone'));
+                            $users_id = $this->authService->isLogged()->id;
+
+                            $this->photographers->create(compact("label", "email", "location", "phone", "users_id"), false);
+                            $this->container->get(Mailer::class)->photographerConfirmation($email);
+
+                            $this->flash->set('success', $this->flash->msg['form_photographers_submitted'], false);
+                            $this->redirect("/login");
+                        } else {
+                            $this->sendFormError();
+                        }
+                    } else {
+                        $this->sendFormError();
+                    }
+                }
+
+                $this->turbolinksLocation("/photographers/sign");
+                $this->pageManager::setTitle("Création compte photographe");
+                $this->view('frontend/photographers/sign', compact('post', 'errors'));
+            } else {
+                $this->redirect("/photographers/profile/{$exist->label}-{$exist->id}");
+            }
+       } else {
+            $this->flash('danger', $this->flash->msg['undefined_error']);
+            $this->redirect(true);
+       }
+    }
+
 
     public function profile($label, $id)
     {
@@ -71,9 +122,14 @@ class PhotographersController extends Controller
                 false
             );
 
-            $this->turbolinksLocation("/photographers/{$label}-{$id}");
+            $this->turbolinksLocation("/photographers/profile/{$label}-{$id}");
             $this->pageManager::setTitle('Photographe : ' .$photographer->label);
+            $this->pageManager::setImage($user->avatarUrl);
+            $this->pageManager::setDescription($user->bio);
             $this->view('frontend/photographers/profil', compact('user', 'photographer', 'last', 'albums'));
+        } else {
+            $this->flash('danger', $this->flash->msg['undefined_error']);
+            $this->redirect(true);
         }
     }
 
@@ -236,7 +292,18 @@ class PhotographersController extends Controller
 
     public function bookings($token)
     {
+        if ($this->authService->getToken() == $token) {
+            $user = $this->loadModel('users')->find($this->authService->isLogged()->id);
+            $photographer = $this->loadModel('photographers')->findWith('users_id', $user->id);
+            $bookings = $this->loadModel('booking')->findWith('photographers_id', $photographer->id, false);
 
+            $this->turbolinksLocation("/photographers/bookings/{$token}");
+            $this->pageManager::setTitle('Mes Réservations');
+            $this->view('frontend/photographers/bookings', compact('bookings', 'photographer', 'user'));
+        } else {
+            $this->flash->set('danger', $this->flash->msg['undefined_error']);
+            $this->redirect(true);
+        }
     }
 
 

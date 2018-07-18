@@ -27,9 +27,9 @@
             </div>
         {% endfor %}
     </section>
-    <section class="section col l12 m12 s12">
+    <section class="section jumbotron dark col l12 m12 s12">
         <div class="row container">
-            <div class="ui divided items col l6 m6 s12">
+            <div class="ui divided items col l9 m12 s12">
                 <div class="item">
                     <div class="image">
                         <img src="{{ user.avatarUrl }}">
@@ -51,30 +51,8 @@
                     </div>
                 </div>
             </div>
-            <div class="ui divided list col l6 m6 s12">
-                <ul class="collection transparent col s12">
-                    {% for a in albums %}
-                        <li class="collection-item waves-effect col s12">
-                            <a href="{{ a.url }}">
-                                <div style="margin: 10px">
-                                    <div class="collection-item-title">
-                                        {{ a.title }}
-                                        <span class="secondary-content"><i class="icon icon-right-open"></i></span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    {% endfor %}
-                    <li class="collection-item waves-effect">
-                        <a href="/categories">Tous les Albums</a>
-                    </li>
-                </ul>
-                {% if activeUser.id == user.id %}
-                    <div class="col s12">
-                        <a href="/photographers/add/albums/{{ securityToken }}" class="btn">ajouter un album</a>
-                        <a href="/photographers/add/pictures/{{ securityToken }}" class="btn rigth">Publier des photos</a>
-                    </div>
-                {% endif %}
+            <div class="col l3 s12 m12">
+                <a href="/photographers/bookings/{{ securityToken }}" class="btn btn-flat">Mes Réservations</a>
             </div>
         </div>
     </section>
@@ -87,7 +65,7 @@
                     <br>
                     {{ photographer.email }}
                 </address>
-                <p><a href="mailto:{{ photographer.email }}" class="center btn btn-flat">Nous Contacter</a></p>
+                <p><a href="mailto:{{ photographer.email }}" class="center btn btn-flat">Contacter</a></p>
             </div>
             <div class="col l8 m12 s12 goole-maps">
                 <iframe class="hoverable" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3907.669869208731!2d27.46662171426114!3d-11.646857137759644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1

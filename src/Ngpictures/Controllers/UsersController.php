@@ -247,6 +247,8 @@ class UsersController extends Controller
                 }
 
                 $this->turbolinksLocation($user->accountUrl);
+                $this->pageManager::setDescription($user->bio);
+                $this->pageManager::setImage($user->avatarUrl);
                 $this->pageManager::setTitle("Profile de " . $user->name);
                 $this->view('frontend/users/account/account', compact("user", "posts", "collection", "photographer"));
             } else {
