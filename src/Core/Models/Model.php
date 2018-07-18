@@ -302,8 +302,7 @@ class Model
     public function findList(string $list)
     {
         return $this->query(
-            "SELECT * FROM {$this->table} WHERE id IN ({$list}) ",
-            null
+            "SELECT * FROM {$this->table} WHERE id IN ({$list}) ORDER BY id DESC "
         );
     }
 
@@ -356,6 +355,8 @@ class Model
     }
 
 
+
+
     /**
      * renvoi le dernier enregistrement
      * @return mixed
@@ -385,13 +386,13 @@ class Model
      * tout les enregistrements en ligne
      * @return mixed
      */
-    public function lastOnline()
+    public function lastOnline($limit = 5)
     {
         return $this->query(
             "SELECT {$this->table}.*, categories.title as category
             FROM {$this->table}
             LEFT JOIN categories ON categories_id = categories.id
-            WHERE online = 1 ORDER BY id DESC ",
+            WHERE online = 1 ORDER BY id DESC LIMIT {$limit} ",
             null,
             true,
             false
@@ -399,13 +400,13 @@ class Model
     }
 
 
-    public function lastOffline()
+    public function lastOffline($limit = 5)
     {
         return $this->query(
             "SELECT {$this->table}.*, categories.title as category
             FROM {$this->table}
             LEFT JOIN categories ON categories_id = categories.id
-            WHERE online = 0 ORDER BY id DESC ",
+            WHERE online = 0 ORDER BY id DESC LIMIT {$limit} ",
             null,
             true,
             false

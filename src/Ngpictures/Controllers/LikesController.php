@@ -43,6 +43,7 @@ class LikesController extends Controller
                     echo $post->likes;
                     exit();
                 } else {
+                    $this->flash->set('success', $this->flash->msg['post_like_remove']);
                     $this->redirect(true, false);
                 }
             } else {
@@ -53,6 +54,7 @@ class LikesController extends Controller
                     echo $post->likes;
                     exit();
                 } else {
+                    $this->flash->set('success', $this->flash->msg['post_like_add']);
                     $this->redirect(true, false);
                 }
             }

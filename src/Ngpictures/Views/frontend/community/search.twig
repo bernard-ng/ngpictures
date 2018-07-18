@@ -20,59 +20,52 @@
             </span>
         {% endif %}
 
-        {% for u in users %}
-            <div class="row nexted col l3 m6 s12">
-                <div class="card-user card transparent hovercard hoverable">
-                    <div class="cardheader" style="background: url('{{ u.avatarUrl }}')"></div>
-                    <div class="avatar">
-                        <a href="{{ u.accountUrl }}">
-                            <img alt="{{ u.name }}" title="{{ u.name }}" src="{{ u.avatarUrl }}">
-                        </a>
-                    </div>
-                    <div class="info">
-                        <div class="title">
-                            <a href="{{ u.accountUrl }}">{{ u.name }}</a>
-                        </div>
-                        <div class="desc truncate">{{ u.bio }}</div>
-                        <div class="ui tiny horizontal divided list">
-                            <div class="item">
-                                <div class="content">
-                                    <div class="header">{{ u.postsNumber }}&nbsp;Posts</div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="content">
-                                    <div class="header">{{ u.followersNumber }}&nbsp;Abonnés</div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="content">
-                                    <div class="header">{{ u.followingsNumber }}&nbsp;Abonnement</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {% if u.id != activeUser.id %}
-                            <a href="{{ u.followingUrl }}" class="btn btn-flat" data-action="following">
-                                {{ u.isFollowed ? "Se désabonner" : "S'abonner" }}
+        <div id="dataContainer">
+            {% for u in users %}
+                <div class="row nexted col l3 m6 s12" id="{{ u.id }}">
+                    <div class="card-user card transparent hovercard hoverable">
+                        <div class="cardheader" style="background: url('{{ u.avatarUrl }}')"></div>
+                        <div class="avatar">
+                            <a href="{{ u.accountUrl }}">
+                                <img alt="{{ u.name }}" title="{{ u.name }}" data-src="{{ u.avatarUrl }}">
                             </a>
-                        {% else %}
-                            <button class="btn btn-flat disabled">
-                                Se désabonner
-                            </button>
-                        {% endif %}
+                        </div>
+                        <div class="info">
+                            <div class="title">
+                                <a href="{{ u.accountUrl }}">{{ u.name }}</a>
+                            </div>
+                            <div class="desc truncate">{{ u.bio }}</div>
+                            <div class="ui tiny horizontal divided list">
+                                <div class="item">
+                                    <div class="content">
+                                        <div class="header">{{ u.postsNumber }}&nbsp;Posts</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="content">
+                                        <div class="header">{{ u.followersNumber }}&nbsp;Abonnés</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="content">
+                                        <div class="header">{{ u.followingsNumber }}&nbsp;Abonnement</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% if u.id != activeUser.id %}
+                                <a href="{{ u.followingUrl }}" class="btn btn-flat" data-action="following">
+                                    {{ u.isFollowed ? "Se désabonner" : "S'abonner" }}
+                                </a>
+                            {% else %}
+                                <button class="btn btn-flat disabled">
+                                    Se désabonner
+                                </button>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-        {% if users %}
-            <div class="ng-progress-container">
-                <div id="statusBar" class="mtb ng-progress-indeterminate disabled" data-ajax="community-search">
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
-            </div>
-            <br>
-        {% endif %}
-
+            {% endfor %}
+        </div>
     </section>
 {% endblock %}

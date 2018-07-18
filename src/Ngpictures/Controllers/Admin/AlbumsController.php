@@ -48,7 +48,7 @@ class AlbumsController extends AdminController
             $this->validator->setRule('description', 'required');
 
             if ($this->validator->isValid()) {
-                $photographers_id = $this->loadModel('photographers')->find($this->authService->isLogged()->id)->id;
+                $photographers_id = $this->photographers->findWith('users_id', $this->authService->isLogged()->id)->id;
                 $title          =   $this->str->escape($post->get('title'));
                 $slug           =   $this->str->slugify($title);
                 $description    =   $post->get('description');

@@ -18,17 +18,13 @@ sales.
  les differents user avec un compte photographe.
 
 
-***     map localisation a finir.
 ****    profile user page et page photographes
-***     deinition de la pagintation pour le frontend
-***     osibiliter d'aimer une ou save une publicaiton dans la page show.
 ***     fakeAJAX pour le reset de formulaire.
-***     administration ajout de la gestion photographes, reservation et des albums
 
 2.1
 ------------------------------------------------------------------------------------------------------------------------
 ## posibiliter d'editer un commentaire
 ## mentionner quelqu'un partout sur le site
-## posibiliter d'aimer une ou save une publicaiton dans la page show.
 ## vider les erreurs de validation lorsque on saisie
 ## godfirst loading verse dynamique
+## slider, slides bugs

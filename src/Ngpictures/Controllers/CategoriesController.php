@@ -23,7 +23,7 @@ class CategoriesController extends Controller
     {
         $nb         = [];
         $thumbs     = [];
-        $categories = $this->categories->orderBy('title', 'ASC');
+        $categories = $this->categories->orderBy('id', 'DESC', 0, 4);
 
         foreach ($categories as $category) {
             $thumbs[$category->id] =

@@ -1,0 +1,27 @@
+{% extends 'layout/users/default.twig' %}
+{% import 'includes/form.twig' as form %}
+
+{% block content %}
+    <div class="row col l4 m4 s12">
+        <div class="card-panel hoverable" id="signUpBox">
+            <form method="POST" action="" data-action="photographer_sign">
+                <div class="row">
+                    {{ form.input('label',"Nom de votre Entreprise",'text', errors.get('label'),post.get('label'))}}
+                    {{ form.input('location','Votre Adresse de service','text', errors.get('location'), post.get('location'))}}
+                    {{ form.input('phone', 'Numéro de Téléphone', 'text', errors.get('phone'), post.get('phone')) }}
+                    {{ form.input('email', 'Addresse Mail', 'email', errors.get('email'), post.get('email')) }}
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <p> En créant votre compte photographes vous affirmez avoir lu et accepter nos
+                            <a href="/privacy">Conditions d'utilisation</a>
+                        </p>
+                    </div>
+                    <div class="input-field col s12">
+                        <button type="submit" class="btn btn-flat" id="sign" >Créer</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

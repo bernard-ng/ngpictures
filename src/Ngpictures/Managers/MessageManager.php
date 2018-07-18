@@ -16,13 +16,15 @@ class MessageManager implements ArrayAccess
 
         //GENERAL
         //***************************************************************************************/
-        "success"               => "Action effectuée",
-        "failed"                => "Action non effectuée",
-        "rss_empty"             => "Notre flux RSS est actuellement vide",
-        "undefined_error"       => "Ooups, une erreur s'est produite, veuillez réessayer",
-        "edit_not_allowed"      => "Vous n'avez pas le droit d'édition",
-        "delete_not_allowed"    => "Vous n'avez pas le droit de suppression",
-        "collection_not_allowed"  => "Vous n'avez pas le droit d'acces à cette collection photo",
+        "success"                   => "Action effectuée",
+        "failed"                    => "Action non effectuée",
+        "rss_empty"                 => "Notre flux RSS est actuellement vide",
+        "undefined_error"           => "Ooups, une erreur s'est produite, veuillez réessayer",
+        "edit_not_allowed"          => "Vous n'avez pas le droit d'édition",
+        "delete_not_allowed"        => "Vous n'avez pas le droit de suppression",
+        "collection_not_allowed"    => "Vous n'avez pas le droit d'acces à cette collection photo",
+        "nothing_to_load"           => "aucun contenu à charger...",
+        "not_ready"                 => "Oups, cette fonctionnalité n'est pas disponible pour l'instant",
 
 
         //PUBLICATIONS
@@ -39,6 +41,8 @@ class MessageManager implements ArrayAccess
         'post_delete_failed'    => 'Ooups, une erreur est survenue lors de la suppression',
         'post_delete_success'   => 'Votre publication a bien été supprimée',
         'post_online_success'   => "Votre publication est désormais publique",
+        'post_like_add'         => "Vous aimez cette publication",
+        'post_like_remove'      => "Vous n'aimez plus cette publication",
         'post_already_online'   => "Votre publication est déjà publique",
         'post_offline_success'  => "Votre publication est désormais privée",
         'post_requires_picture' => "Ajouter une photo de couverture pour votre publication",
@@ -61,6 +65,7 @@ class MessageManager implements ArrayAccess
         "form_registration_submitted"   => "Un email de confirmation de compte vous a été envoyé, veuillez le confirmer pour continuer",
         "form_report_submitted"         => "Merci d'avoir signaler cette publication",
         "form_booking_submitted"        => "Votre réservation a bien été effectuée, nous avons contacter votre photographe",
+        "form_photographers_submitted"  =>  "Bravo, vous faites partie de la grande famille des photographes, un mail vous a été envoyer...",
         "form_invalid_username"         => "Votre pseudo n'est pas valide",
         "form_invalid_username_num"     => "Votre pseudo doit contenir au moins une lettre",
         "form_invalid_email"            => "Cet adresse mail n'est pas valide",
@@ -97,6 +102,10 @@ class MessageManager implements ArrayAccess
 
         'category_not_found'        => "Cette catégorie n'éxiste pas ou plus",
 
+        "photographers_userlabel_token" => "Oups ce nom de label existe déjà !!!",
+        "photographers_mail_token" => "Ola, cette adresse mail est déjà prise par un autre photographe",
+
+
         //USERS
         //******************************************************************************************* */
         'users_forbidden'           => "Ooups, vous n'avez pas le droit d'access à cette page",
@@ -118,6 +127,7 @@ class MessageManager implements ArrayAccess
         "users_already_connected"   => "Ola, vous êtes déjà connecté",
         "users_following_success"   => "Vous suivez cet utilisateur",
         "users_confirmation_failed" => "Aîe, une erreur est survenue lors de la confirmation de votre compte, veuillez réessayer plus tard",
+        "users_confirmation_success" => "Cool, la confirmation de votre compte s'est bien effectuée, enjoy ngpictures 2.0",
         "users_unfollowing_success" => "Vous ne suivez plus cet utilisateur",
     ];
 

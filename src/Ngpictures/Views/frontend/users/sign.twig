@@ -13,10 +13,6 @@
                         'password_confirm', "Mot de passe (confirmer)",
                         'password', errors.get('password_confirm'), post.get('password_confirm'))
                     }}
-
-                    <div class="input-field col s12">
-                        <div class="g-recaptcha" data-theme="dark" data-sitekey=" {{ constant('RECAPTCHA_SITE_KEY') }} "></div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">

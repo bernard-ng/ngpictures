@@ -25,9 +25,9 @@ class SavesController extends controller
      * @param int $id
      * @return void
      */
-    public function add(int $type, string $slug, int $id)
+    public function add($type, $slug, $id)
     {
-        $user = $this->session->read(AUTH_KEY);
+        $user = $this->authService->isLogged();
         $type = intval($type);
         $id   = intval($id);
         $slug = $this->str->escape($slug);
@@ -52,8 +52,10 @@ class SavesController extends controller
                     exit();
                 }
 
-                $this->flash->set('success', $this->flash->msg['post_saved']);
-                $this->redirect(true);
+                ($this->isAjax())?
+                    $this->flash->set('success', $this->flash->msg['post_saved']) :
+                    $this->flash->set('success', $this->flash->msg['post_saved'], false);
+                    $this->redirect(true);
             }
         } else {
             ($this->isAjax())?

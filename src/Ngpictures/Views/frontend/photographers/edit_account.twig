@@ -1,0 +1,22 @@
+{% extends 'layout/users/default.twig' %}
+{% import 'includes/form.twig' as form %}
+
+{% block content %}
+    <div class="row col l4 m4 s12">
+        <div class="card-panel hoverable" id="signUpBox">
+            <form method="POST" action="" data-action="photographer_edit">
+                <div class="row">
+                    {{ form.input('label',"Nom de votre Entreprise",'text', errors.get('label'), post.get('label') ?? photographer.label ) }}
+                    {{ form.input('location','Votre Adresse de service','text', errors.get('location'), post.get('location')  ?? photographer.location ) }}
+                    {{ form.input('phone', 'Numéro de Téléphone', 'phone', errors.get('phone'), post.get('phone')  ?? photographer.phone ) }}
+                    {{ form.input('email', 'Addresse Mail', 'email', errors.get('email'), post.get('email')  ?? photographer.email ) }}
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <button type="submit" class="btn btn-flat" id="sign" >Editer</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

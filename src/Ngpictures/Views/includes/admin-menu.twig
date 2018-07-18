@@ -11,23 +11,15 @@
                 <ul class="right hide-on-med-and-down links">
                     <span id="menu-item-active" data-isActive="{{ pageManager.getActivePage }}"></span>
 
-                    <li class="search">
-                        <div class="search">
-                            <form action="/search" method="get" class="ui icon input">
-                                <input name="q" type="text" placeholder="Recherches...">
-                                <i class="icon icon-search"></i>
-                                <input type="submit" value="send">
-                            </form>
-                        </div>
-                    </li>
 
-                    <li id="Accueil"><a href="/home"> <i class="icon icon-home"></i></a></li>
-                    <li id="pages"><a href="{{constant('ADMIN')~"/pages" }}">Pages</a></li>
-                    <li id="logs"><a href="{{constant('ADMIN')~"/logs" }}">Logs</a></li>
-                    <li id="blog"><a href="{{constant('ADMIN')~"/blog" }}">Blog</a></li>
-                    <li id="users"><a href="{{constant('ADMIN')~"/users" }}">Users</a></li>
-                    <li id="actualites"><a href="{{constant('ADMIN')~"/posts" }}">Users Posts</a></li>
-                    <li id="gallerie"><a href="{{constant('ADMIN')~"/gallery" }}">Gallery</a></li>
+                    <li id="Accueil"><a href="/home"  data-turbolinks="false"> <i class="icon icon-home"></i></a></li>
+                    <li id="befree"><a href="{{ constant('SITE_NAME') ~ "/befree" }}" data-turbolinks="false">befree</a></li>
+                    <li id="pages"><a href="{{constant('ADMIN')~"/pages" }}" data-turbolinks="false">Pages</a></li>
+                    <li id="logs"><a href="{{constant('ADMIN')~"/logs" }}" data-turbolinks="false">Logs</a></li>
+                    <li id="blog"><a href="{{constant('ADMIN')~"/blog" }}" data-turbolinks="false">Blog</a></li>
+                    <li id="users"><a href="{{constant('ADMIN')~"/users" }}" data-turbolinks="false">Users</a></li>
+                    <li id="actualites"><a href="{{constant('ADMIN')~"/posts" }}" data-turbolinks="false">Users Posts</a></li>
+                    <li id="gallerie"><a href="{{constant('ADMIN')~"/gallery" }}" data-turbolinks="false">Gallery</a></li>
                 </ul>
             </div>
         </nav>

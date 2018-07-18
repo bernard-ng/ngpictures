@@ -7,10 +7,15 @@
         </span>
         {% for a in last %}
             <div class="row nexted col s12 m3 l3">
-                <article class="card post-titled grey dark-4">
+                <article class="card post-titled" style="background-color: {{ a.color }};">
                     <div class="card-image waves-effect">
-                        <a href="{{ a.url }}">
-                            <img src="{{ a.smallThumbUrl }}" alt="{{ a.name }}" title="{{ a.name }}">
+                        <a href="{{ a.url }}" >
+                            <img
+                                src="{{ cacheBusting('/imgs/sblank.png') }}"
+                                data-src="{{ a.smallThumbUrl }}"
+                                alt="{{ a.name }}"
+                                title="{{ a.name }}"
+                            >
                         </a>
                     </div>
                     {% if a.title or a.name %}
@@ -34,8 +39,8 @@
                 </div>
                 {% if article %}
                     <div class="post-hoverable">
-                        <a href="{{ article.url }}" class="waves-effect">
-                            <img src="{{ article.thumbUrl }}" alt="{{ article.title }}">
+                        <a href="{{ article.url }}" class="waves-effect" style="background-color: {{ article.color }};">
+                            <img src="{{ cacheBusting('/imgs/blank.png') }}" data-src="{{ article.thumbUrl }}"  alt="{{ article.title }}">
                         </a>
                         <span class="post-description">
                             {{ article.title }}

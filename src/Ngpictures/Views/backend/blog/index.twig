@@ -4,10 +4,10 @@
     <nav class="nav">
         <div class="nav-wrapper container">
             <ul>
-                <li><a href="{{ constant('ADMIN') ~ "/file-browser/blog" }}">Photo blog</a></li>
-                <li class="right"><a href="{{ constant('ADMIN') ~ "/reports" }}">Reports</a></li>
-                <li class="right"><a href="{{ constant('ADMIN') ~ "/blog/categories"  }}">Catégories</a></li>
-                <li class="right"><a href="{{ constant('ADMIN') ~ "/blog/categories/add" }}">Ajouter une Catégorie</a></li>
+                <li><a href="{{ constant('ADMIN') ~ "/file-browser/blog" }}" data-turbolinks="false">Photo blog</a></li>
+                <li class="right"><a href="{{ constant('ADMIN') ~ "/reports" }}" data-turbolinks="false">Reports</a></li>
+                <li class="right"><a href="{{ constant('ADMIN') ~ "/blog/categories"  }}" data-turbolinks="false">Catégories</a></li>
+                <li class="right"><a href="{{ constant('ADMIN') ~ "/blog/categories/add" }}" data-turbolinks="false">Ajouter une Catégorie</a></li>
             </ul>
         </div>
     </nav>
@@ -16,17 +16,17 @@
         <section class="col l12 m12 s12">
             <div class="card-panel grey dark-4" style="padding: 20px">
                 <div class="section">
-                    <a href="{{ constant('ADMIN') ~ "/blog/add" }}" class="btn right">
+                    <a href="{{ constant('ADMIN') ~ "/blog/add" }}" class="btn right" data-turbolinks="false">
                         <i class="icon icon-plus" style="font-size: smaller !important;"></i>
                     </a>
 
                     <span class="btn">Page :  {{ currentPage }}/{{ totalPage }}</span>
                     <span class="btn">Total :  {{ total }}</span>
 
-                    <a href="{{ constant('ADMIN') ~ "/blog?page=" ~ prevPage }}" class="btn">
+                    <a href="{{ constant('ADMIN') ~ "/blog?page=" ~ prevPage }}" class="btn" data-turbolinks="false">
                         <i class="icon icon-left-open"></i>
                     </a>
-                    <a href="{{ constant('ADMIN') ~ "/blog?page=" ~ nextPage }}" class="btn">
+                    <a href="{{ constant('ADMIN') ~ "/blog?page=" ~ nextPage }}" class="btn" data-turbolinks="false">
                         <i class="icon icon-right-open"></i>
                     </a>
                 </div>
@@ -57,12 +57,12 @@
                                     </button>
                                 </form>
 
-                                <a href="{{ constant('ADMIN') ~ '/blog/edit/' ~ a.id }}">
+                                <a href="{{ constant('ADMIN') ~ '/blog/edit/' ~ a.id }}" data-turbolinks="false">
                                     <button class="btn waves-effect waves-light">
                                         <i class="icon icon-plus-circled" style="font-size: smaller !important;"></i>
                                     </button>
                                 </a>
-                                <a href="{{ constant('ADMIN') ~ '/confirm/3/' ~ a.id }}" id="confirm">
+                                <a href="{{ constant('ADMIN') ~ '/confirm/3/' ~ a.id }}" id="confirm" data-turbolinks="false">
                                     <button class="btn btn-small blue-2 waves-effect waves-light">
                                         {% if a.online %}
                                             <i class="icon icon-download" style="font-size: smaller !important;"></i>
@@ -71,7 +71,7 @@
                                         {% endif %}
                                     </button>
                                 </a>
-                                <a href="{{ constant('ADMIN') ~ a.watermarkUrl }}">
+                                <a href="{{ constant('ADMIN') ~ a.watermarkUrl }}" data-turbolinks="false">
                                     <button class="btn blue waves-effect waves-light">
                                         <i class="icon icon-tag" style="font-size: smaller !important;"></i>
                                     </button>

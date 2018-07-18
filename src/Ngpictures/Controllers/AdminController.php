@@ -21,7 +21,9 @@ class AdminController extends Controller
         'verses',
         'categories',
         'albums',
-        'reports'
+        'reports',
+        'photographers',
+        'locations'
     ];
 
 
@@ -51,7 +53,23 @@ class AdminController extends Controller
         $this->authService->isAdmin();
 
         $this->pageManager::setMeta(['name' => 'robots', 'content' => 'noindex']);
-        $this->loadModel(['users', 'posts', 'blog', 'gallery', 'ideas', 'bugs', 'categories', 'verses', 'albums', 'online', 'reports']);
+        $this->loadModel(
+            [
+                'users',
+                'posts',
+                'blog',
+                'gallery',
+                'ideas',
+                'bugs',
+                'categories',
+                'verses',
+                'albums',
+                'online',
+                'reports',
+                "photographers",
+                "locations"
+            ]
+        );
     }
 
 
@@ -60,21 +78,21 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $blog               =  $this->blog->latest();
-        $posts              =  $this->posts->latest();
-        $photo              =  $this->gallery->latest();
-        $users              = [count($this->users->lastConfirmed()), count($this->users->lastNotConfirmed())];
-        $site_bugs          = $this->bugs->countAll()->num;
-        $site_ideas         = $this->ideas->countAll()->num;
-        $site_posts         = [$this->blog->countOnline()->num, $this->blog->countOffline()->num];
-        $users_posts        = [$this->posts->countOnline()->num, $this->posts->countOffline()->num];
-        $site_photos        = [$this->gallery->countOnline()->num, $this->gallery->countOffline()->num];
-        $users_online       = $this->online->countAll()->num;
-        $site_categories    = $this->categories->countAll()->num;
+        $blog = $this->blog->latest();
+        $posts = $this->posts->latest();
+        $photo = $this->gallery->latest();
+        $users = [count($this->users->lastConfirmed()), count($this->users->lastNotConfirmed())];
+        $site_bugs = $this->bugs->countAll()->num;
+        $site_ideas = $this->ideas->countAll()->num;
+        $site_posts = [$this->blog->countOnline()->num, $this->blog->countOffline()->num];
+        $users_posts = [$this->posts->countOnline()->num, $this->posts->countOffline()->num];
+        $site_photos = [$this->gallery->countOnline()->num, $this->gallery->countOffline()->num];
+        $users_online = $this->online->countAll()->num;
+        $site_categories = $this->categories->countAll()->num;
 
-        $disk_space    = disk_free_space(CORE) * 100 / disk_total_space(CORE);
-        $used_space    = 100 - ceil($disk_space);
-        $total_space   = ceil($disk_space);
+        $disk_space = disk_free_space(CORE) * 100 / disk_total_space(CORE);
+        $used_space = 100 - ceil($disk_space);
+        $total_space = ceil($disk_space);
 
         $this->pageManager::setTitle('admin');
         $this->view(
@@ -109,8 +127,8 @@ class AdminController extends Controller
         $post = new Collection($data ?? $_POST);
 
         if ($post->get('id') && $post->get('type')) {
-            $model      =    $this->loadModel($this->getType($post->get('type')));
-            $result     =    $model->find(intval($post->get('id')));
+            $model = $this->loadModel($this->getType($post->get('type')));
+            $result = $model->find(intval($post->get('id')));
 
             if ($result) {
                 $model->delete($post->get('id'));
@@ -135,12 +153,12 @@ class AdminController extends Controller
         if (isset($_POST) && !empty($_POST)) {
             $post = new Collection($_POST);
             if (!empty($post->get('name')) && !empty($post->get('dir'))) {
-                $dir    = str_replace('/uploads/', UPLOAD.'/', $post->get('dir'));
-                $tdir   = str_replace('/uploads/thumbs/', UPLOAD.'/', $post->get('dir'));
+                $dir = str_replace('/uploads/', UPLOAD . '/', $post->get('dir'));
+                $tdir = str_replace('/uploads/thumbs/', UPLOAD . '/', $post->get('dir'));
 
                 if (is_dir($dir)) {
-                    $file   =   $dir.'/'.$post->get('name');
-                    $thumb  =   $tdir.'/'.$post->get('name');
+                    $file = $dir . '/' . $post->get('name');
+                    $thumb = $tdir . '/' . $post->get('name');
 
                     if (is_file($file) || is_file($thumb)) {
                         unlink($file);
@@ -175,8 +193,8 @@ class AdminController extends Controller
      */
     public function confirm($t, $id)
     {
-        $model      =   $this->loadModel($this->getType($t));
-        $result     =   $model->find(intval($id));
+        $model = $this->loadModel($this->getType($t));
+        $result = $model->find(intval($id));
 
         if (intval($t) === 5) {
             if ($result->confirmed_at === null) {

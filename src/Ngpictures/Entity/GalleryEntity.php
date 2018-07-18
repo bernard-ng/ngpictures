@@ -13,6 +13,19 @@ class GalleryEntity extends Entity
 
     use PostEntityTrait;
 
+
+    /**
+     * url d'enregistrement
+     *
+     * @return string
+     */
+    public function getSaveUrl() : string
+    {
+        $this->saveUrl = "/saves/{$this->action_type}";
+        $this->saveUrl .= "/{$this->SI}";
+        return $this->saveUrl;
+    }
+
     public function getUrl()
     {
         $this->url = "/gallery/{$this->slug}-{$this->id}";
