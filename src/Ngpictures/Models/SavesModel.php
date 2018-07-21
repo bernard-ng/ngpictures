@@ -6,6 +6,7 @@ use Ngpictures\Ngpictures;
 use Ng\Core\Database\DatabaseInterface;
 use Ng\Core\Interfaces\SessionInterface;
 use Ngpictures\Traits\Util\TypesActionTrait;
+use Ngpictures\Services\Auth\DatabaseAuthService;
 
 class SavesModel extends Model
 {
@@ -19,7 +20,7 @@ class SavesModel extends Model
     public function __construct(DatabaseInterface $database)
     {
         parent::__construct($database);
-        $this->session = Ngpictures::getDic()->get(SessionInterface::class);
+        $this->authService = Ngpictures::getDic()->get(DatabaseAuthService::class);
     }
 
 
@@ -43,7 +44,7 @@ class SavesModel extends Model
         $req = $this->query(
 
             "SELECT * FROM {$this->table} WHERE {$this->getType($type)} = ? AND users_id = ? ",
-            [$id, $this->session->getValue(AUTH_KEY, 'id')],
+            [$id, $this->authService->isLogged()->id ],
             true,
             true
         );

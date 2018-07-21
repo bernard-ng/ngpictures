@@ -157,42 +157,61 @@ function share() {
         return true;
     };
 
-    let twitter = document.querySelector("[data-action='share-twitter']");
+    let twitter = document.querySelectorAll("[data-action='share-twitter']");
     if (twitter) {
-        twitter.addEventListener('click', function (e){
-            e.preventDefault();
-            e.stopPropagation();
-            let url = encodeURIComponent("https://larytech.com" + this.getAttribute('data-url'));
-            let text = "Du nouveau sur Ngpictures !!!";
-            let share =
-                "https://twitter.com/intent/tweet?text=" + text +
-                "&via=Ngpictures"
-                + "&url=" + url;
+       for(let i = 0; i < twitter.length; i++)
+       {
+           twitter[i].addEventListener('click', function (e) {
+               e.preventDefault();
+               e.stopPropagation();
+               let url = encodeURIComponent("https://larytech.com" + this.getAttribute('data-url'));
+               let text = "Du nouveau sur Ngpictures !!!";
+               let share =
+                   "https://twitter.com/intent/tweet?text=" + text +
+                   "&via=Ngpictures"
+                   + "&url=" + url;
 
-            sharePopup(share, "Partager Sur Twitter");
-        });
+               sharePopup(share, "Partager Sur Twitter");
+           });
+       }
     }
 
-    let facebook = document.querySelector("[data-action='share-facebook']");
+    let facebook = document.querySelectorAll("[data-action='share-facebook']");
     if (facebook) {
-        facebook.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            let url = encodeURIComponent("https://larytech.com" + this.getAttribute('data-url'));
-            let share = "https://www.facebook.com/sharer.php?u="+url;
-            sharePopup(share, "Partager Sur Facebook");
-        });
+        for(let i = 0; i < facebook.length; i++) {
+            facebook[i].addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                let url = encodeURIComponent("https://larytech.com" + this.getAttribute('data-url'));
+                let share = "https://www.facebook.com/sharer.php?u=" + url;
+                sharePopup(share, "Partager Sur Facebook");
+            });
+        }
     }
 
-    let googlePlus = document.querySelector("[data-action='share-google-plus']");
+    let googlePlus = document.querySelectorAll("[data-action='share-google-plus']");
     if (googlePlus) {
-        googlePlus.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            let url = encodeURIComponent("https://larytech.com" + this.getAttribute('data-url'));
-            let share = "https://plus.google.com/share?url="+url;
-            sharePopup(share, "Partager Sur Google+");
-        });
+       for(let i = 0; i < googlePlus.length; i++) {
+           googlePlus[i].addEventListener('click', function (e) {
+               e.preventDefault();
+               e.stopPropagation();
+               let url = encodeURIComponent("https://larytech.com" + this.getAttribute('data-url'));
+               let share = "https://plus.google.com/share?url=" + url;
+               sharePopup(share, "Partager Sur Google+");
+           });
+       }
+    }
+
+    let whatsapp = document.querySelector("[data-action='share-whatsapp']");
+    if (whatsapp) {
+       for(let i = 0; i < whatsapp.length; i++) {
+           whatsapp[i].addEventListener('click', function (e) {
+               e.preventDefault();
+               e.stopPropagation();
+               let url = encodeURIComponent("https://larytech.com" + this.getAttribute('data-url'));
+               window.location = "https://wa.me/?text=" + url;
+           });
+       }
     }
 }
 
@@ -226,7 +245,7 @@ function showImageBeforeUpload(element) {
             let type = file.type;
 
             if (admitExt.includes(ext, 0) && adminTypes.includes(type, 0)) {
-                if (file.size <= 6291456) {
+                if (file.size <= 15728640) {
                     getFile(file);
                 } else {
                     setFlash('danger',msg.filesGreaterThanLimit)

@@ -2,13 +2,13 @@
         AUTHOR         :    Bernard-ng
         PROJECT        :    NG-PICTURES
         LINK           :    https://larytech.com
-        BUILT AT       :    18-Jul-2018  22:23:47
+        BUILT AT       :    21-Jul-2018  21:24:09
 **************************************************************
 [NG-PICTURES MESSAGES LOGS] 
 
-* D:\sites\ng-pictures\vendor\phpmailer\phpmailer\src\PHPMailer.php	1671
-		=> 18-Jul 22:23 : Could not instantiate mail function.  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 21-Jul 21:24 : SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`ngpictures`.`following`, CONSTRAINT `fk_followed_id` FOREIGN KEY (`followed_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)  
 
-* D:\sites\ng-pictures\vendor\phpmailer\phpmailer\src\PHPMailer.php	1671
-		=> 18-Jul 22:26 : Could not instantiate mail function.  
+* D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
+		=> 21-Jul 21:24 : SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`ngpictures`.`photographers`, CONSTRAINT `fk_photographers_users` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)  
 

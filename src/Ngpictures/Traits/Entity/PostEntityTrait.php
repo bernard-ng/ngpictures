@@ -30,7 +30,7 @@ trait PostEntityTrait
      */
     public function getSaveUrl(): string
     {
-        $this->saveUrl = "saves/{$this->action_type}";
+        $this->saveUrl = "/saves/{$this->action_type}";
         $this->saveUrl .= "/{$this->SI}";
         return $this->saveUrl;
     }

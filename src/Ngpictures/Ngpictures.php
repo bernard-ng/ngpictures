@@ -3,6 +3,7 @@ namespace Ngpictures;
 
 use Ng\Core\Router\Router;
 use Psr\Container\ContainerInterface;
+use Ng\Core\Managers\LogMessageManager;
 use Ngpictures\Traits\Util\RequestTrait;
 use Ng\Core\Managers\FlashMessageManager;
 

@@ -250,7 +250,7 @@ class UsersController extends Controller
                 $this->pageManager::setDescription($user->bio);
                 $this->pageManager::setImage($user->avatarUrl);
                 $this->pageManager::setTitle("Profile de " . $user->name);
-                $this->view('frontend/users/account/account', compact("user", "posts", "collection", "photographer"));
+                $this->view('frontend/users/account/account', compact("user", "posts", "collection", "photographer", "recent"));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
                 $this->redirect(true, false);

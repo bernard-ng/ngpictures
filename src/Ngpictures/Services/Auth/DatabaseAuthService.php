@@ -100,8 +100,8 @@ class DatabaseAuthService
     public function connect(UsersEntity $user, string $msg = null)
     {
         if (!$this->isLogged()) {
-            $this->session->write(AUTH_KEY, $user);
             $this->session->write(TOKEN_KEY, $this->str->setToken(10));
+            $this->session->write(AUTH_KEY, $user);
             $this->flash->set('success', $msg ?? $this->flash->msg['users_login_success'], false);
         }
     }
@@ -151,8 +151,8 @@ class DatabaseAuthService
      */
     public function reConnect(UsersEntity $user, string $msg = null)
     {
-        $this->session->write(AUTH_KEY, $user);
         $this->session->write(TOKEN_KEY, $this->str->setToken(10));
+        $this->session->write(AUTH_KEY, $user);
         $this->flash->set('success', $msg ?? $this->flash->msg['users_edit_success']);
     }
 

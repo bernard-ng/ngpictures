@@ -37,10 +37,10 @@ return [
     'ftp.user'      => 'bernard@larytech.com',
     'ftp.pass'      => 'm^7#IEv665kV',
 
-    'database.name' =>  (ENV === 'production')? 'larytech_ngbd' : 'ngpictures',
-    'database.host' =>  (ENV === 'production')? 'larytech.com' : '127.0.0.1',
-    'database.user' =>  (ENV === 'production')? 'larytech_ngandu' : 'root',
-    'database.pass' =>  (ENV === 'production')? 'E[~}oyE%Ao([' : '',
+    'database.name' =>  (ENV === 'production')? "ngpictures" : 'larytech_ngbd' ,
+    'database.host' =>  (ENV === 'production')? "127.0.0.1" : 'larytech.com',
+    'database.user' =>  (ENV === 'production')?  "root" : 'larytech_ngandu',
+    'database.pass' =>  (ENV === 'production')?  "" : 'E[~}oyE%Ao([' ,
 
     DatabaseInterface::class => object(MysqlDatabase::class)->constructor(
         get('database.name'),

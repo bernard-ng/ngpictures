@@ -39,7 +39,7 @@ class PageManager
      * og image
      * @var string
      */
-    private static $image = "https://larytech.com/imgs/icon.png";
+    private static $image = "/imgs/icon.png";
 
 
     /**

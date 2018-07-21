@@ -3,6 +3,7 @@ namespace Ngpictures\Traits\Util;
 
 use Ngpictures\Ngpictures;
 use Ng\Core\Interfaces\SessionInterface;
+use Ngpictures\Services\Auth\DatabaseAuthService;
 
 trait AuthTrait
 {
@@ -12,7 +13,7 @@ trait AuthTrait
 
     public function __construct()
     {
-        self::$token = Ngpictures::getDic()->get(SessionInterface::class)->read(TOKEN_KEY);
+        self::$token = Ngpictures::getDic()->make(DatabaseAuthService::class)->getToken();
         self::$activeUser = Ngpictures::getDic()->get(SessionInterface::class)->read(AUTH_KEY);
     }
 }

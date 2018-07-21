@@ -41,6 +41,7 @@ class GalleryController extends Controller
      */
     public function show($slug, $id)
     {
+        $id = intval($id);
         $article = $this->gallery->find(intval($id));
 
         if (!empty($id)) {
@@ -64,8 +65,10 @@ class GalleryController extends Controller
                     $altName = " gallery - publication - " . $article->id;
 
 
-                    $this->pageManager::setTitle($article->name ?? $altName);
                     $this->turbolinksLocation("/gallery/{$article->slug}-{$id}");
+                    $this->pageManager::setTitle($article->name ?? $altName);
+                    $this->pageManager::setImage($article->smallThumbUrl);
+
                     $this->view(
                         "frontend/gallery/show",
                         compact("article", "comments", "commentsNumber", "user", "categories", "author", "similars")
