@@ -12,3 +12,243 @@
 * D:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	110
 		=> 21-Jul 21:24 : SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`ngpictures`.`photographers`, CONSTRAINT `fk_photographers_users` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)  
 
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 16-Aug 21:24 : could not find driver  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 16-Aug 21:24 : Call to a member function query() on null  
+
