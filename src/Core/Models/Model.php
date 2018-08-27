@@ -195,7 +195,7 @@ class Model
                 $data[] = "%{$word}%";
                 $sql .= ($key === 0) ?
                     "CONCAT({$this->table}.name, {$this->table}.description, categories.title) LIKE ? " :
-                    " OR CONCAT({$this->table}.name, {$this->table}.description, categories.title) LIKE ?";
+                    " OR CONCAT({$this->table}.name, {$this->table}.description, {$this->table}.tags, categories.title) LIKE ?";
             }
 
             return $this->query(

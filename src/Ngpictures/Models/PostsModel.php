@@ -36,7 +36,7 @@ class PostsModel extends Model
     public function findWith(string $field, $value, $one = true)
     {
         return $this->query(
-            "SELECT * FROM {$this->table} WHERE {$field} = ? and online = 1 ORDER BY date_created DESC",
+            "SELECT * FROM {$this->table} WHERE {$field} = ? and online = 1 ORDER BY id DESC",
             [$value],
             true,
             $one
@@ -44,7 +44,8 @@ class PostsModel extends Model
     }
 
 
-    public function userFindLess($user_id, $post_id) {
+    public function userFindLess($user_id, $post_id)
+    {
         return $this->query(
             "SELECT {$this->table}.* , categories.title as category
             FROM {$this->table}

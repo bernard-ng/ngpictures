@@ -11,6 +11,28 @@ use Ng\Core\Managers\LogMessageManager;
 class Mailer
 {
 
+
+    /**
+     * initialisation du mailer, et du server smtp
+     *
+     * @return void
+     */
+    private function init()
+    {
+        if (ENV === 'production') {
+            $mail->isSMTP();
+            $mail->Host = 'mail.larytech.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'ngpictures@larytech.com';
+            $mail->Password = ']3dneN!%2@y,';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+        } else {
+            $mail->smtpConnect();
+        }
+    }
+
+
     /**
      * envoi un mail de confirmation a un utilisateur
      * la variable confirmation_link est echo dans le fichier
@@ -30,7 +52,9 @@ class Mailer
         $message = ob_get_clean();
 
         try {
-            $mail->smtpConnect();
+
+            $this->init();
+
             $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
             $mail->addAddress($email);
             $mail->addReplyTo('ngpictures@larytech.com', 'Information');
@@ -55,7 +79,9 @@ class Mailer
         $message = ob_get_clean();
 
         try {
-            $mail->smtpConnect();
+
+            $this->init();
+
             $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
             $mail->addAddress($email);
             $mail->addReplyTo('ngpictures@larytech.com', 'Information');
@@ -91,7 +117,8 @@ class Mailer
             $message = ob_get_clean();
 
             try {
-                $mail->smtpConnect();
+                $this->init();
+
                 $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
                 $mail->addAddress($email);
                 $mail->addReplyTo('ngpictures@larytech.com', 'Information');
@@ -126,6 +153,10 @@ class Mailer
 
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             try {
+
+
+                $this->init();
+
                 $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
                 $mail->addAddress($email);
                 $mail->addReplyTo('ngpictures@larytech.com', 'Information');
@@ -163,6 +194,9 @@ class Mailer
             $mail = new PHPMailer(true);
 
             try {
+
+                $this->init();
+
                 $mail->setFrom($email, $name);
                 $mail->addAddress($email);
                 $mail->addReplyTo($email, $name);
@@ -200,7 +234,9 @@ class Mailer
         $message = ob_get_clean();
 
         try {
-            $mail->smtpConnect();
+
+            $this->init();
+
             $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
             $mail->addAddress($email);
             $mail->addReplyTo($email, $name);

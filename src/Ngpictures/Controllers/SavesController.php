@@ -5,7 +5,7 @@ use Ng\Core\Managers\Collection;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Util\TypesActionTrait;
 
-class SavesController extends controller
+class SavesController extends Controller
 {
 
     public function __construct(ContainerInterface $container)

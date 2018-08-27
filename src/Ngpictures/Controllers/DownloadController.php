@@ -95,7 +95,7 @@ class DownloadController extends Controller
         header('Expires : 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header("Last-Modified: ".gmdate('D, d M Y H:i:s', filemtime($file)));
-        header("Cache-Control: private", false);
+        header("Cache-Control: public");
         header('Content-Type: '.$mine);
         header('Content-Disposition: attachement; filename="'.basename($file).'"');
         header('Content-Transfer-Encoding: Binary');

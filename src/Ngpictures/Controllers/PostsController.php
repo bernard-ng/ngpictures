@@ -148,7 +148,8 @@ class PostsController extends Controller
                     $title = $this->str->escape($post->get('title'));
                     $content = $this->str->escape($post->get('content'));
                     $slug =  empty($post->get('title'))? 'publication' : $this->str->slugify($title);
-                    $categories_id = (intval($post->get('category')) == 0) ? 1 : intval($post->get('category'));;
+                    $categories_id = (intval($post->get('category')) == 0) ? 1 : intval($post->get('category'));
+                    ;
 
                     $this->posts->update($id, compact('title', 'content', 'slug', 'categories_id'));
                     $this->flash->set("success", $this->flash->msg['post_edit_success'], false);

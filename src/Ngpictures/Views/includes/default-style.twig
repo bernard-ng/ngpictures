@@ -20,7 +20,7 @@
             'service-worker-url': 'sw.offline.js',
             'content-url': 'app.offline',
             'assets': [
-                '/assets/css/style.css',
+                "{{ cacheBusting('/assets/css/style.css') }}",
                 '/assets/js/turbolinks.js',
                 '/assets/js/jquery.min.js',
                 '/assets/js/app/materialize.js',

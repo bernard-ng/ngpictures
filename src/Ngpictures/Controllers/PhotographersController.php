@@ -62,7 +62,7 @@ class PhotographersController extends Controller
 
     public function edit_profile($label, $id, $token)
     {
-       if ($this->authService->getToken() == $token) {
+        if ($this->authService->getToken() == $token) {
             $post = new Collection($_POST);
             $errors = new Collection();
             $exist = $this->photographers->find(intval($id));
@@ -103,10 +103,10 @@ class PhotographersController extends Controller
             } else {
                 $this->redirect("/photographers/profile/{$exist->label}-{$exist->id}");
             }
-       } else {
+        } else {
             $this->flash('danger', $this->flash->msg['undefined_error']);
             $this->redirect(true);
-       }
+        }
     }
 
 
@@ -309,7 +309,5 @@ class PhotographersController extends Controller
 
     public function delete($token)
     {
-
     }
-
 }

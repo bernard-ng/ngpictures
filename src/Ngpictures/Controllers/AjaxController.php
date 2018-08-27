@@ -112,7 +112,8 @@ class AjaxController extends Controller
                     $nb[$category->id] =
                         count($this->blog->findWith('categories_id', $category->id, false)) +
                         count($this->gallery->findWith('categories_id', $category->id, false)) +
-                        count($this->posts->findWith('categories_id', $category->id, false));;
+                        count($this->posts->findWith('categories_id', $category->id, false));
+                    ;
                 }
                 echo $this->view('/ajax/blog/categories_cards', compact("categories", "nb", "thumbs"), true);
                 exit();
@@ -132,7 +133,6 @@ class AjaxController extends Controller
             $lastId = intval($_GET['lastId']) ?? 0;
             $albums = $this->loadModel('albums')->findLess($lastId);
             if ($albums) {
-
                 $this->loadModel('gallery');
                 $thumbs = [];
                 $nb = [];
