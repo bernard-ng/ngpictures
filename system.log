@@ -252,3 +252,735 @@
 * /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
 		=> 16-Aug 21:24 : Call to a member function query() on null  
 
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:57 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	78
+		=> 08-Sep 14:57 : Call to a member function query() on null  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 14:58 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 15:00 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 15:00 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* /home/bernard-ng/dev/sites/ng-pictures/src/Core/Database/MysqlDatabase.php	52
+		=> 08-Sep 15:00 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
