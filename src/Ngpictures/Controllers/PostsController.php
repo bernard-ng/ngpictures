@@ -108,7 +108,7 @@ class PostsController extends Controller
                                 $this->flash->set('danger', $this->flash->msg['files_not_uploaded'], false);
                             }
                         } else {
-                            $this->flash('danger', $this->flash->msg['undefined_error'], false);
+                            $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
                             $this->redirect(true, false);
                         }
                     } else {
@@ -148,7 +148,7 @@ class PostsController extends Controller
                     $title = $this->str->escape($post->get('title'));
                     $content = $this->str->escape($post->get('content'));
                     $slug =  empty($post->get('title'))? 'publication' : $this->str->slugify($title);
-                    $categories_id = (intval($post->get('category')) == 0) ? 1 : intval($post->get('category'));;
+                    $categories_id = (intval($post->get('category')) == 0) ? 1 : intval($post->get('category'));
 
                     $this->posts->update($id, compact('title', 'content', 'slug', 'categories_id'));
                     $this->flash->set("success", $this->flash->msg['post_edit_success'], false);

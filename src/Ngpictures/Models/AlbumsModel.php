@@ -3,7 +3,6 @@ namespace Ngpictures\Models;
 
 use Ng\Core\Models\Model;
 
-
 class AlbumsModel extends Model
 {
 
@@ -31,5 +30,4 @@ class AlbumsModel extends Model
             "SELECT * FROM {$this->table} WHERE online = 1 ORDER BY id DESC LIMIT $limit"
         );
     }
-
 }

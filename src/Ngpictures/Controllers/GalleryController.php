@@ -41,6 +41,7 @@ class GalleryController extends Controller
      */
     public function show($slug, $id)
     {
+        $id = intval($id);
         $article = $this->gallery->find(intval($id));
 
         if (!empty($id)) {
@@ -64,8 +65,10 @@ class GalleryController extends Controller
                     $altName = " gallery - publication - " . $article->id;
 
 
-                    $this->pageManager::setTitle($article->name ?? $altName);
+
                     $this->turbolinksLocation("/gallery/{$article->slug}-{$id}");
+                    $this->pageManager::setTitle($article->name ?? $altName);
+                    $this->pageManager::setImage($article->smallThumbUrl);
                     $this->view(
                         "frontend/gallery/show",
                         compact("article", "comments", "commentsNumber", "user", "categories", "author", "similars")
@@ -115,15 +118,16 @@ class GalleryController extends Controller
 
     public function album_show($slug, $id)
     {
+        $id = intval($id);
         $album = $this->loadModel('albums')->find(intval($id));
         if ($album && $album->slug == $slug) {
             $author = $this->loadModel('users')->find($album->photographers_id);
             $gallery = $this->loadModel('gallery')->findWith('albums_id', $album->id, false);
             $posts  = $this->loadModel('posts')->findWith('albums_id', $album->id, false);
 
+            $this->turbolinksLocation("/gallery/albums/{$slug}-{$id}");
             $this->pageManager::setTitle("{$album->title}");
             $this->pageManager::setDescription("Toutes les photos de l'album : {$album->title}, {$album->description}");
-            $this->turbolinksLocation("/gallery/albums/{$slug}-{$id}");
             $this->view("frontend/gallery/album_show", compact("album", "author", "gallery", "posts"));
         } else {
             $this->flash->set('danger', "Cet album n'existe pas ou plus");
@@ -140,7 +144,7 @@ class GalleryController extends Controller
     public function slider()
     {
         if (isset($_GET['last_id']) && !empty($_GET['last_id'])) {
-            $lastId = $this->str->escape($_GET['last_id']);
+            $lastId = intval($_GET['last_id']);
 
             if ($this->gallery->find(intval($lastId))) {
                 $photos = $this->gallery->findGreater($lastId, 4);

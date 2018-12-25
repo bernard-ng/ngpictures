@@ -30,7 +30,14 @@ class Mailer
         $message = ob_get_clean();
 
         try {
-            $mail->smtpConnect();
+            $mail->isSMTP();                                     
+            $mail->Host = 'mail.larytech.com';  
+            $mail->SMTPAuth = true;                               
+            $mail->Username = 'ngpictures@larytech.com';                 
+            $mail->Password = ']3dneN!%2@y,';                          
+            $mail->SMTPSecure = 'tls';                           
+            $mail->Port = 587;
+
             $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
             $mail->addAddress($email);
             $mail->addReplyTo('ngpictures@larytech.com', 'Information');
@@ -55,12 +62,19 @@ class Mailer
         $message = ob_get_clean();
 
         try {
-            $mail->smtpConnect();
+            $mail->isSMTP();                                     
+            $mail->Host = 'mail.larytech.com';  
+            $mail->SMTPAuth = true;                               
+            $mail->Username = 'ngpictures@larytech.com';                 
+            $mail->Password = ']3dneN!%2@y,';                          
+            $mail->SMTPSecure = 'tls';                           
+            $mail->Port = 587;
+
             $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
             $mail->addAddress($email);
             $mail->addReplyTo('ngpictures@larytech.com', 'Information');
             $mail->isHTML(true);
-            $mail->Subject = 'Félicitation Cher Photographe';
+            $mail->Subject = 'Welcome Photographer';
             $mail->Body = $message;
             $mail->AltBody = "Félicitation vous venez tout juste de créer un compte photographe sur Ngpictures.";
             $mail->send();
@@ -91,13 +105,20 @@ class Mailer
             $message = ob_get_clean();
 
             try {
-                $mail->smtpConnect();
+                $mail->isSMTP();                                     
+                $mail->Host = 'mail.larytech.com';  
+                $mail->SMTPAuth = true;                               
+                $mail->Username = 'ngpictures@larytech.com';                 
+                $mail->Password = ']3dneN!%2@y,';                          
+                $mail->SMTPSecure = 'tls';                           
+                $mail->Port = 587;
+
                 $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
                 $mail->addAddress($email);
                 $mail->addReplyTo('ngpictures@larytech.com', 'Information');
 
                 $mail->isHTML(true);
-                $mail->Subject = 'Instruction de récuperation de mot de passe';
+                $mail->Subject = 'Instruction pour mot de passe';
                 $mail->Body = $message;
                 $mail->AltBody = "Cliquez pour récupérer votre mot de passe: {$link}";
 
@@ -126,6 +147,15 @@ class Mailer
 
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             try {
+
+                $mail->isSMTP();                                     
+                $mail->Host = 'mail.larytech.com';  
+                $mail->SMTPAuth = true;                               
+                $mail->Username = 'ngpictures@larytech.com';                 
+                $mail->Password = ']3dneN!%2@y,';                          
+                $mail->SMTPSecure = 'tls';                           
+                $mail->Port = 587;
+
                 $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
                 $mail->addAddress($email);
                 $mail->addReplyTo('ngpictures@larytech.com', 'Information');
@@ -163,7 +193,16 @@ class Mailer
             $mail = new PHPMailer(true);
 
             try {
-                $mail->setFrom($email, $name);
+
+                $mail->isSMTP();                                     
+                $mail->Host = 'mail.larytech.com';  
+                $mail->SMTPAuth = true;                               
+                $mail->Username = 'ngpictures@larytech.com';                 
+                $mail->Password = ']3dneN!%2@y,';                          
+                $mail->SMTPSecure = 'tls';                           
+                $mail->Port = 587;
+
+                $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
                 $mail->addAddress($email);
                 $mail->addReplyTo($email, $name);
                 $mail->isHTML(false);
@@ -200,12 +239,19 @@ class Mailer
         $message = ob_get_clean();
 
         try {
-            $mail->smtpConnect();
+            $mail->isSMTP();                                     
+            $mail->Host = 'mail.larytech.com';  
+            $mail->SMTPAuth = true;                               
+            $mail->Username = 'ngpictures@larytech.com';                 
+            $mail->Password = ']3dneN!%2@y,';                          
+            $mail->SMTPSecure = 'tls';                           
+            $mail->Port = 587;
+
             $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
             $mail->addAddress($email);
             $mail->addReplyTo($email, $name);
             $mail->isHTML(true);
-            $mail->Subject = 'Réservation shooting';
+            $mail->Subject = 'Booking shooting';
             $mail->Body = $message;
             $mail->AltBody = "Monsieur/Madame : {$name}, réserve un shoot pour le {$date} à {$time} \n Motif: {$description}";
             $mail->send();

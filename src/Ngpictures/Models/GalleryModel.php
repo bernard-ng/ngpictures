@@ -26,7 +26,7 @@ class GalleryModel extends Model
     public function findWith(string $field, $value, $one = true)
     {
         return $this->query(
-            "SELECT * FROM {$this->table} WHERE {$field} = ? and online = 1",
+            "SELECT * FROM {$this->table} WHERE {$field} = ? AND online = 1 ORDER BY id DESC",
             [$value],
             true,
             $one
@@ -43,7 +43,7 @@ class GalleryModel extends Model
     public function findWithTag(string $tag)
     {
         return $this->query(
-            "SELECT * FROM {$this->table} WHERE CONCAT(description, tags) LIKE ? AND online = 1",
+            "SELECT * FROM {$this->table} WHERE CONCAT(description, tags) LIKE ? AND online = 1 ORDER BY id DESC",
             ["%{$tag}%"]
         );
     }

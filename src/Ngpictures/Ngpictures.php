@@ -4,6 +4,7 @@ namespace Ngpictures;
 use Ng\Core\Router\Router;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Util\RequestTrait;
+use Ng\Core\Managers\LogMessageManager;
 use Ng\Core\Managers\FlashMessageManager;
 
 class Ngpictures

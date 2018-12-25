@@ -72,7 +72,7 @@ class ImageManager
      * taille maximal du fichier
      * @var int
      */
-    private $size_max = 5242880; // 5mb
+    private $size_max = 15728640; // 5mb
 
 
     /**
@@ -103,21 +103,15 @@ class ImageManager
      */
     public function getExif(Collection $file) : string
     {
-        try {
-            $image = (new InterventionImage())->make($file->get('thumb.tmp_name'));
-            return json_encode([
-                'ISOSpeedRatings' => $image->exif('ISOSpeedRatings') ?? null,
-                'Flash' => $image->exif('Flash') ?? null,
-                'Model' => $image->exif('Model') ?? null,
-                'ExposureTime' => $image->exif('ExposureTime') ?? null,
-                'FocalLength' => $image->exif('FocalLength') ?? null,
-                'ResolutionUnit' => $image->exif('ResolutionUnit') ?? null,
-                'COMPUTED' => $image->exif('COMPUTED') ?? null
-            ]);
-        } catch (NotReadableException $e) {
-            LogMessageManager::register(__class__, $e);
-            return null;
-        }
+        return json_encode([
+            'ISOSpeedRatings' => 'inconnu',
+            'Flash' => 'inconnu',
+            'Model' => 'inconnu',
+            'ExposureTime' => 'inconnu',
+            'FocalLength' => 'inconnu',
+            'ResolutionUnit' => 'inconnu',
+            'COMPUTED' => 'inconnu'
+        ]);
     }
 
 
@@ -134,7 +128,7 @@ class ImageManager
             $extractor = new ColorExtractor($palette);
             return empty($extractor->extract(1)) ? "#444" : Color::fromIntToHex($extractor->extract(1)[0]);
         } catch (\Exception $e) {
-            LogMessageManager::register(__CLASS__, $e);
+            LogMessageManager::register(__class__, $e);
             return "#444";
         }
     }
@@ -163,22 +157,22 @@ class ImageManager
 
                         switch ($format) :
                             case 'ratio':
-                                $image->resize($this->format[$format], null, function ($c) {
-                                    $c->aspectRatio();
-                                });
-                                break;
-                            case 'article':
-                                $image->resize(1400, null, function ($c) {
-                                    $c->aspectRatio();
-                                });
-                                break;
-                            case 'small':
-                                $image->fit($this->format[$format], $this->format[$format], function ($c) {
-                                    $c->upsize();
-                                });
-                                break;
-                            case 'medium ' || 'large':
-                                $image->fit($this->format[$format], $this->format[$format]);
+                            $image->resize($this->format[$format], null, function ($c) {
+                                $c->aspectRatio();
+                            });
+                            break;
+                        case 'article':
+                            $image->resize(1400, null, function ($c) {
+                                $c->aspectRatio();
+                            });
+                            break;
+                        case 'small':
+                            $image->fit($this->format[$format], $this->format[$format], function ($c) {
+                                $c->upsize();
+                            });
+                            break;
+                        case 'medium ' || 'large':
+                            $image->fit($this->format[$format], $this->format[$format]);
                         endswitch;
 
                         $image
@@ -198,7 +192,7 @@ class ImageManager
                         return false;
                     }
                 } else {
-                    $this->flash->set('danger', $this->flash->msg['files_too_big']);
+                    $this->flash->set('danger', "votre image est trop grande: 15Mo maximum");
                     return false;
                 }
             } else {

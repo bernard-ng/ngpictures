@@ -5,7 +5,7 @@ use Ng\Core\Managers\Collection;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Util\TypesActionTrait;
 
-class SavesController extends controller
+class SavesController extends Controller
 {
 
     public function __construct(ContainerInterface $container)
@@ -78,9 +78,9 @@ class SavesController extends controller
         $posts_list = (new Collection($this->saves->get('posts_id', $user_id)))->asList(', ', 'posts_id');
         $gallery_list = (new Collection($this->saves->get('gallery_id', $user_id)))->asList(', ', 'gallery_id');
 
-        $blog = $this->loadModel('blog')->findList($blog_list);
-        $gallery = $this->loadModel('gallery')->findList($gallery_list);
-        $posts = $this->loadModel('posts')->findList($posts_list);
+        $blog = ($blog_list)? $this->loadModel('blog')->findList($blog_list) : null;
+        $gallery = ($gallery_list)? $this->loadModel('gallery')->findList($gallery_list) : null;
+        $posts = ($posts_list)? $this->loadModel('posts')->findList($posts_list) : null;
 
         return compact('blog', 'gallery', 'posts');
     }

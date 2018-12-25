@@ -36,9 +36,9 @@ class Controller extends SuperController
         $this->pageManager      =   $this->container->get(PageManager::class);
         $this->authService      =   $this->container->get(DatabaseAuthService::class);
 
-        if (!$this->authService->isLogged()) {
-            $this->authService->cookieConnect();
-        }
+        // if (!$this->authService->isLogged()) {
+        //     $this->authService->cookieConnect();
+        // }
     }
 
 

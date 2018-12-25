@@ -5,6 +5,7 @@ use Ng\Core\Models\Model;
 use Ngpictures\Ngpictures;
 use Ng\Core\Database\DatabaseInterface;
 use Ng\Core\Interfaces\SessionInterface;
+use Ngpictures\Services\Auth\DatabaseAuthService;
 use Ngpictures\Traits\Util\TypesActionTrait;
 
 class SavesModel extends Model
@@ -19,7 +20,7 @@ class SavesModel extends Model
     public function __construct(DatabaseInterface $database)
     {
         parent::__construct($database);
-        $this->session = Ngpictures::getDic()->get(SessionInterface::class);
+        $this->auth = Ngpictures::getDic()->get(DatabaseAuthService::class);
     }
 
 
@@ -40,14 +41,19 @@ class SavesModel extends Model
      */
     public function isSaved(int $id, int $type): bool
     {
-        $req = $this->query(
-
-            "SELECT * FROM {$this->table} WHERE {$this->getType($type)} = ? AND users_id = ? ",
-            [$id, $this->session->getValue(AUTH_KEY, 'id')],
-            true,
-            true
-        );
-        return ($req)? true : false;
+        $user = $this->auth->isLogged();
+        
+        if ($user) {
+            $req = $this->query(
+                "SELECT * FROM {$this->table} WHERE {$this->getType($type)} = ? AND users_id = ? ",
+                [$id, $user->id ],
+                true,
+                true
+            );
+            return ($req)? true : false;
+        } else {
+            return false;
+        }
     }
 
 

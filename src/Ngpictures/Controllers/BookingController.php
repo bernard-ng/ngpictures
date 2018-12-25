@@ -11,7 +11,6 @@ class BookingController extends Controller
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $this->authService->restrict();
         $this->loadModel('booking');
     }
 

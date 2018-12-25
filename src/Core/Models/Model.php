@@ -194,8 +194,8 @@ class Model
             foreach ($words as $key => $word) {
                 $data[] = "%{$word}%";
                 $sql .= ($key === 0) ?
-                    "CONCAT({$this->table}.name, {$this->table}.description, categories.title) LIKE ? " :
-                    " OR CONCAT({$this->table}.name, {$this->table}.description, categories.title) LIKE ?";
+                    "CONCAT({$this->table}.name, {$this->table}.description, {$this->table}.tags, categories.title) LIKE ? " :
+                    " OR CONCAT({$this->table}.name, {$this->table}.description, {$this->table}.tags, categories.title) LIKE ?";
             }
 
             return $this->query(

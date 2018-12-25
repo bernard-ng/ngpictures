@@ -12,7 +12,7 @@ class NotificationsEntity extends Entity
     public function getUrl()
     {
         $model = Ngpictures::getDic()->get(BlogModel::class);
-        $this->url = $model->find($this->publication_id)->url;
+        $this->url = ''; //$model->find($this->publication_id)->url;
         return $this->url;
     }
 

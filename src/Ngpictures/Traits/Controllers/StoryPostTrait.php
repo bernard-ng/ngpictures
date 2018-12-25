@@ -21,6 +21,7 @@ trait StoryPostTrait
             Découvez les photos et les articles des passionnés de la photographie, partager vos photos avec la
             communauté.
         ");
+        $title = strtolower($title);
         $this->view("frontend/{$title}/index", compact("posts", "categories"));
     }
 }

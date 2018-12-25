@@ -17,7 +17,7 @@
                             <tr>
                                 <td align="center" style="text-align: center;">
                                     <a href="https://larytech.com">
-                                        <img src="https://larytech.com/imgs/logo-white.png" width="500" border="0" alt="logo ngpictures">
+                                        <img src="<?= SITE_NAME ?>/imgs/icon.png" width="500" border="0" alt="logo ngpictures">
                                     </a>
                                 </td>
                             </tr>

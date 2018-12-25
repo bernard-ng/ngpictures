@@ -121,7 +121,7 @@ class GalleryController extends AdminController
                 $tags = $this->str->escape($post->get('tags')) ?? $photo->tags;
                 $description = $this->str->escape($post->get('description')) ?? $photo->description;
                 $categories_id = intval($post->get('category')) ?? $photo->categories_id ?? 1;
-                $albums_id = intval($post->get('album')) ?? $photo->albums_id ?? 1;
+                $albums_id = ($post->get('album') == 0) ? $photo->albums_id : intval($post->get('album'));
 
                 $this->gallery->update($id, compact('name', 'tags', 'description', 'categories_id', 'albums_id'));
                 $this->flash->set("success", $this->flash->msg['post_edit_success'], false);

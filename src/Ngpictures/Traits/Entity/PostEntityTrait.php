@@ -30,7 +30,7 @@ trait PostEntityTrait
      */
     public function getSaveUrl(): string
     {
-        $this->saveUrl = "saves/{$this->action_type}";
+        $this->saveUrl = "/saves/{$this->action_type}";
         $this->saveUrl .= "/{$this->SI}";
         return $this->saveUrl;
     }
@@ -42,7 +42,7 @@ trait PostEntityTrait
      */
     public function getReportUrl(): string
     {
-        $this->reportUrl = "report/{$this->action_type}";
+        $this->reportUrl = "/report/{$this->action_type}";
         $this->reportUrl .= "/{$this->SI}";
         return $this->reportUrl;
     }

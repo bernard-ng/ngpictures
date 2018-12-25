@@ -1,4 +1,3 @@
-<?php echo '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhmtl1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
@@ -18,7 +17,7 @@
 							<tr>
 								<td align="center" style="text-align: center;">
 									<a href="https://larytech.com/">
-										<img src="https://larytech.com/imgs/logo.png" width="100" border="0" alt="logo ngpictures">
+										<img src="<?= SITE_NAME ?>/imgs/icon.png" width="100" border="0" alt="logo ngpictures">
 									</a>
 								</td>
 							</tr>
@@ -42,8 +41,8 @@
 							<tr>
 								<td align="center" style="text-align: center; color: #808a8f; mso-line-height: exactly; line-height: 25px; font-family: robot-title, sans-serif;">
 									Salut, vous venez tout juste de nous signaler que vous avez oublier votre mot de passe,
-									cliquez sur le button si dessous pour avoir un nouveau mot de passe, si vous n\'êtes
-									pas à l\'origine de ce signale, Veuillez simplement ignorer ce mail
+									cliquez sur le button si dessous pour avoir un nouveau mot de passe, si vous n'êtes
+									pas à l'origine de ce signale, Veuillez simplement ignorer ce mail
 								</td>
 							</tr>
 							<tr><td height="30" style="font-size: 30px; line-height: 30px;"> &nbsp;</td></tr>
@@ -54,7 +53,7 @@
 										<tbody>
 											<tr>
 												<td align="center" height="60" valign="middle" bgcolor="#263238" style="font-size: 18px; font-family: robot-title,sans-serif; color: #fff; text-align: center; border-radius: 3px;">
-													<a href="'.$reset_link.'" style="font-size: 18px; font-family: robot-title,sans-serif; color: #fff; text-align: center; text-decoration: none; line-height: 60px; display: block; height: 60;">
+													<a href="<?= $reset_link ?>" style="font-size: 18px; font-family: robot-title,sans-serif; color: #fff; text-align: center; text-decoration: none; line-height: 60px; display: block; height: 60;">
 														Changer le mot de passe
 													</a>
 												</td>
@@ -83,5 +82,3 @@
 	</table>
 </body>
 </html>
-
-';

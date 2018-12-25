@@ -12,3 +12,12 @@
 * D:\sites\ng-pictures\vendor\phpmailer\phpmailer\src\PHPMailer.php	1671
 		=> 18-Jul 22:26 : Could not instantiate mail function.  
 
+* G:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	52
+		=> 25-Dec 00:45 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* G:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	52
+		=> 25-Dec 00:45 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+
+* G:\sites\ng-pictures\src\Core\Database\MysqlDatabase.php	52
+		=> 25-Dec 00:45 : SQLSTATE[HY000] [1049] Unknown database 'ngpictures'  
+

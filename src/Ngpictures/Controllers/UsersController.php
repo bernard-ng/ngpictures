@@ -164,7 +164,7 @@ class UsersController extends Controller
      */
     public function login()
     {
-        $this->authService->cookieConnect();
+        //$this->authService->cookieConnect();
         $post       =   new Collection($_POST);
         $errors     =   new Collection();
 

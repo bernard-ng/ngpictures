@@ -1,34 +1,77 @@
 <link rel="stylesheet" type="text/css" href="{{ cacheBusting('/assets/css/style.css') }}">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110487894-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-110487894-1');
+</script>
+
 <style type="text/css">
+
     .turbolinks-progress-bar {
+
         position: fixed;
+
         display: block;
+
         top: 0;
+
         left: 0;
+
         height: 4px;
+
         background: #0076ff;
+
         z-index: 9999;
+
         transition: width 300ms ease-out, opacity 150ms 150ms ease-in;
+
         transform: translate3d(0, 0, 0);
+
     }
+
 </style>
+
 <script type="text/javascript" src="{{ cacheBusting('/assets/js/lib/turbolinks.js') }}"></script>
+
 <script type="text/javascript" src="/sw.js"></script>
+
 {% if constant('ENV') == 'production' %}
+
     <script>
+
         UpUp.start({
+
             'service-worker-url': 'sw.offline.js',
+
             'content-url': 'app.offline',
+
             'assets': [
-                '/assets/css/style.css',
-                '/assets/js/turbolinks.js',
-                '/assets/js/jquery.min.js',
-                '/assets/js/app/materialize.js',
-                '/assets/js/app/app.init.js',
-                '/assets/js/app/app.ajax.js',
-                '/assets/js/app/app.js',
-                '/assets/js/app/app.data.js'
+
+                "{{ cacheBusting('/assets/css/style.css') }}",
+
+                "{{ cacheBusting('/assets/js/turbolinks.js') }}",
+
+                "{{ cacheBusting('/assets/js/jquery.min.js') }}",
+
+                "{{ cacheBusting('/assets/js/app/materialize.js') }}",
+
+                "{{ cacheBusting('/assets/js/app/app.init.js') }}",
+
+                "{{ cacheBusting('/assets/js/app/app.ajax.js') }}",
+
+                "{{ cacheBusting('/assets/js/app/app.js') }}",
+
+                "{{ cacheBusting('/assets/js/app/app.data.js') }}"
+
             ]
+
         })
+
     </script>
+
 {% endif %}
+
