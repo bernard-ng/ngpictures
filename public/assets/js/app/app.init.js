@@ -2,43 +2,43 @@
      * le message d'erreur ou de success.
      */
     msg = {
-        success: "Action effectuÃ©e",
-        browserNotUpdate: "Erreur, veuillez mettre Ã  jour votre navigateur",
+        success: "Action effectuée",
+        browserNotUpdate: "Erreur, veuillez mettre à jour votre navigateur",
         undefinedError: "Aucune Connexion Internet",
         deleteNotAllowed: "Vous n'avez pas le droit de suppression",
-        editNotAllowed: "Vous n'avez pas le droit d'Ã©dition",
+        editNotAllowed: "Vous n'avez pas le droit d'édition",
 
-        formAllRequired: "Tous les champs doivent Ãªtre complÃ©ter",
-        formMultiErrors: "Le formulaire a Ã©tÃ© mal rempli",
-        formFieldRequired: "Le champ doit Ãªtre complÃ©tÃ©",
-        formBadSlug: 'Le slug ne doit contenir que des chiffres, des lettres et des tirÃ©s',
-        formIdeaSubmitted: "Ola, nous avons bien reÃ§u votre idÃ©e",
-        formCommentSubmitted: "Votre commentaire a bien Ã©tÃ© postÃ©",
-        formPostSubmitted: "Votre publication a bien Ã©tÃ© effectuÃ©e",
-        formBugSubmitted: "Nous avons bien reÃ§u votre message et comptons rÃ©gler le bug dans le plus bref dÃ©lais",
-        formResetSubmitted: "Les instructions de rappel de mot de passe vous ont Ã©tÃ© envoyÃ©es par mail",
-        formRegistrationSubmitted: "Un email de confirmation de compte vous a Ã©tÃ© envoyÃ©, veuillez le confirmer pour continuer",
-        formContactSubmitted: 'Nous avons bien reÃ§u votre message et comptons vous rÃ©pondre dans le plus bref dÃ©lais',
+        formAllRequired: "Tous les champs doivent être compléter",
+        formMultiErrors: "Le formulaire a été mal rempli",
+        formFieldRequired: "Le champ doit être complété",
+        formBadSlug: 'Le slug ne doit contenir que des chiffres, des lettres et des tirés',
+        formIdeaSubmitted: "Ola, nous avons bien reçu votre idée",
+        formCommentSubmitted: "Votre commentaire a bien été posté",
+        formPostSubmitted: "Votre publication a bien été effectuée",
+        formBugSubmitted: "Nous avons bien reçu votre message et comptons régler le bug dans le plus bref délais",
+        formResetSubmitted: "Les instructions de rappel de mot de passe vous ont été envoyées par mail",
+        formRegistrationSubmitted: "Un email de confirmation de compte vous a été envoyé, veuillez le confirmer pour continuer",
+        formContactSubmitted: 'Nous avons bien reçu votre message et comptons vous répondre dans le plus bref délais',
 
-        filesNotImage: "Le fichier Ã  tÃ©lÃ©charger doit Ãªtre une image (jpg, jpeg, png, gif)",
-        filesNotUploaded: "Ooups, votre image n'a pas pu Ãªtre tÃ©lÃ©charger",
-        filesNotDirectory: "Impossibe d'ouvrir le dossier demandÃ©, veuillez rÃ©essayer",
-        filesDownloadFailed: "Ooups, une Erreur s'est produite lors du tÃ©lÃ©chargement",
-        filesNotFound: "La photo que vous dÃ©sirer tÃ©lÃ©charger n'est plus disponible",
-        filesGreaterThanLimit: "L'image est trop grande, 6Mo maximum",
+        filesNotImage: "Le fichier à télécharger doit être une image (jpg, jpeg, png, gif)",
+        filesNotUploaded: "Ooups, votre image n'a pas pu être télécharger",
+        filesNotDirectory: "Impossibe d'ouvrir le dossier demandé, veuillez réessayer",
+        filesDownloadFailed: "Ooups, une Erreur s'est produite lors du téléchargement",
+        filesNotFound: "La photo que vous désirer télécharger n'est plus disponible",
+        filesGreaterThanLimit: "L'image est trop grande, 15Mo maximum",
 
-        commentNotFound: "Ce commentaire n'Ã©xiste pas ou plus",
-        commentDeleteSuccess: "Votre commentaire a bien Ã©tÃ© supprimÃ©",
-        commentEditSuccess: "Votre commentaire a bien Ã©tÃ© Ã©ditÃ©",
+        commentNotFound: "Ce commentaire n'éxiste pas ou plus",
+        commentDeleteSuccess: "Votre commentaire a bien été supprimé",
+        commentEditSuccess: "Votre commentaire a bien été édité",
 
-        usersNotfound: "Cet utilisateur n'a pas Ã©tÃ© trouvÃ©",
-        usersLoginSuccess: "Vous Ãªtes maintenant connectÃ©",
+        usersNotfound: "Cet utilisateur n'a pas été trouvé",
+        usersLoginSuccess: "Vous êtes maintenant connecté",
         usersNotLogged: "Connectez-vous pour continuer",
         usersUnfollowingSuccess: "Vous ne suivez plus cet utilisateur",
         usersFollowingSuccess: "Vous suivez cet utilisateur",
 
-        postSaved: "Publication ajoutÃ©e aux enregistrements",
-        postRemoveSave: "Publication RÃ©tirÃ©e des enregistrerments"
+        postSaved: "Publication ajoutée aux enregistrements",
+        postRemoveSave: "Publication Rétirée des enregistrerments"
     };
 
     /**
@@ -362,43 +362,43 @@
          * le message d'erreur ou de success.
          */
         msg = {
-            success: "Action effectuÃ©e",
-            browserNotUpdate: "Erreur, veuillez mettre Ã  jour votre navigateur",
+            success: "Action effectuée",
+            browserNotUpdate: "Erreur, veuillez mettre à jour votre navigateur",
             undefinedError: "Aucune Connexion Internet",
             deleteNotAllowed: "Vous n'avez pas le droit de suppression",
-            editNotAllowed: "Vous n'avez pas le droit d'Ã©dition",
+            editNotAllowed: "Vous n'avez pas le droit d'édition",
 
-            formAllRequired: "Tous les champs doivent Ãªtre complÃ©ter",
-            formMultiErrors: "Le formulaire a Ã©tÃ© mal rempli",
-            formFieldRequired: "Le champ doit Ãªtre complÃ©tÃ©",
-            formBadSlug: 'Le slug ne doit contenir que des chiffres, des lettres et des tirÃ©s',
-            formIdeaSubmitted: "Ola, nous avons bien reÃ§u votre idÃ©e",
-            formCommentSubmitted: "Votre commentaire a bien Ã©tÃ© postÃ©",
-            formPostSubmitted: "Votre publication a bien Ã©tÃ© effectuÃ©e",
-            formBugSubmitted: "Nous avons bien reÃ§u votre message et comptons rÃ©gler le bug dans le plus bref dÃ©lais",
-            formResetSubmitted: "Les instructions de rappel de mot de passe vous ont Ã©tÃ© envoyÃ©es par mail",
-            formRegistrationSubmitted: "Un email de confirmation de compte vous a Ã©tÃ© envoyÃ©, veuillez le confirmer pour continuer",
-            formContactSubmitted: 'Nous avons bien reÃ§u votre message et comptons vous rÃ©pondre dans le plus bref dÃ©lais',
+            formAllRequired: "Tous les champs doivent être compléter",
+            formMultiErrors: "Le formulaire a été mal rempli",
+            formFieldRequired: "Le champ doit être complété",
+            formBadSlug: 'Le slug ne doit contenir que des chiffres, des lettres et des tirés',
+            formIdeaSubmitted: "Ola, nous avons bien reçu votre idée",
+            formCommentSubmitted: "Votre commentaire a bien été posté",
+            formPostSubmitted: "Votre publication a bien été effectuée",
+            formBugSubmitted: "Nous avons bien reçu votre message et comptons régler le bug dans le plus bref délais",
+            formResetSubmitted: "Les instructions de rappel de mot de passe vous ont été envoyées par mail",
+            formRegistrationSubmitted: "Un email de confirmation de compte vous a été envoyé, veuillez le confirmer pour continuer",
+            formContactSubmitted: 'Nous avons bien reçu votre message et comptons vous répondre dans le plus bref délais',
 
-            filesNotImage: "Le fichier Ã  tÃ©lÃ©charger doit Ãªtre une image (jpg, jpeg, png, gif)",
-            filesNotUploaded: "Ooups, votre image n'a pas pu Ãªtre tÃ©lÃ©charger",
-            filesNotDirectory: "Impossibe d'ouvrir le dossier demandÃ©, veuillez rÃ©essayer",
-            filesDownloadFailed: "Ooups, une Erreur s'est produite lors du tÃ©lÃ©chargement",
-            filesNotFound: "La photo que vous dÃ©sirer tÃ©lÃ©charger n'est plus disponible",
+            filesNotImage: "Le fichier à télécharger doit être une image (jpg, jpeg, png, gif)",
+            filesNotUploaded: "Ooups, votre image n'a pas pu être télécharger",
+            filesNotDirectory: "Impossibe d'ouvrir le dossier demandé, veuillez réessayer",
+            filesDownloadFailed: "Ooups, une Erreur s'est produite lors du téléchargement",
+            filesNotFound: "La photo que vous désirer télécharger n'est plus disponible",
             filesGreaterThanLimit: "L'image est trop grande, 6Mo maximum",
 
-            commentNotFound: "Ce commentaire n'Ã©xiste pas ou plus",
-            commentDeleteSuccess: "Votre commentaire a bien Ã©tÃ© supprimÃ©",
-            commentEditSuccess: "Votre commentaire a bien Ã©tÃ© Ã©ditÃ©",
+            commentNotFound: "Ce commentaire n'éxiste pas ou plus",
+            commentDeleteSuccess: "Votre commentaire a bien été supprimé",
+            commentEditSuccess: "Votre commentaire a bien été édité",
 
-            usersNotfound: "Cet utilisateur n'a pas Ã©tÃ© trouvÃ©",
-            usersLoginSuccess: "Vous Ãªtes maintenant connectÃ©",
+            usersNotfound: "Cet utilisateur n'a pas été trouvé",
+            usersLoginSuccess: "Vous êtes maintenant connecté",
             usersNotLogged: "Connectez-vous pour continuer",
             usersUnfollowingSuccess: "Vous ne suivez plus cet utilisateur",
             usersFollowingSuccess: "Vous suivez cet utilisateur",
 
-            postSaved: "Publication ajoutÃ©e aux enregistrements",
-            postRemoveSave: "Publication RÃ©tirÃ©e des enregistrerments"
+            postSaved: "Publication ajoutée aux enregistrements",
+            postRemoveSave: "Publication Rétirée des enregistrerments"
         };
 
         /**

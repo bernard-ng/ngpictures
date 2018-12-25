@@ -1,6 +1,7 @@
 <?php
 use DI\ContainerBuilder;
 use Ngpictures\Ngpictures;
+use Doctrine\Common\Cache\FilesystemCache;
 
 /**
  * inclusion de configuration
@@ -11,10 +12,11 @@ require(dirname(__DIR__)."/config/ini.php");
 require(ROOT."/vendor/autoload.php");
 
 $container = new ContainerBuilder();
-if (ENV === 'production') {
-    $container->enableCompilation(ROOT."/cache/phpdi");
-}
 
+if (ENV === 'production') {
+    $container->setDefinitionCache(new FilesystemCache(ROOT."/cache/phpdi"));
+    $container->writeProxiesToFile(true, ROOT."/cache/proxies");
+}
 $container->addDefinitions(ROOT."/config/config.php");
 $container = $container->build();
 

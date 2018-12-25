@@ -1,4 +1,5 @@
 User-agent: *
 Disallow: /admin/*
+Disallow: /backoffice/*
 
-Sitemap: http://127.1.1.1/sitemap.xml
+Sitemap: https://larytech.com/sitemap.xml
