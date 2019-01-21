@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- generator="SimpleSitemapGenerator/1.2.0" -->
-<!-- sitemap-generator-url="http://www.antczak.org"
-                          sitemap-generator-version="1.2.0" -->
-<!-- generated-on="2018-02-10T07:19:33+00:00" -->
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9                                 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-                         <url><loc>http://127.1.1.1/</loc><lastmod>2018-02-10T07:19:33+00:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url><loc>http://127.1.1.1//community</loc><lastmod>2018-02-10T07:19:33+00:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url><loc>http://127.1.1.1//gallery</loc><lastmod>2018-02-10T07:19:33+00:00</lastmod><changefreq>daily</changefreq></url><url><loc>http://127.1.1.1//blog</loc><lastmod>2018-02-10T07:19:33+00:00</lastmod></url></urlset>
