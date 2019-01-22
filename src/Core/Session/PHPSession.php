@@ -1,7 +1,10 @@
 <?php
 namespace Core\Session;
 
-
+/**
+ * Class PHPSession
+ * @package Core\Session
+ */
 class PHPSession implements SessionInterface
 {
 
