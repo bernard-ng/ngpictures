@@ -18,7 +18,7 @@ class PHPSession implements SessionInterface
 
     /**
      * @param string $key
-     * @param null $default
+     * @param mixed $default
      * @return mixed
      */
     public function get(string $key, $default = null)
@@ -27,7 +27,7 @@ class PHPSession implements SessionInterface
         if (array_key_exists($key, $_SESSION)) {
             return $_SESSION[$key];
         }
-        return null;
+        return $default;
     }
 
     /**
