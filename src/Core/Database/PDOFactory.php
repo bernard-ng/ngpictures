@@ -1,5 +1,10 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Core\Database;
+
+use Psr\Container\ContainerInterface;
 
 /**
  * Class PDOFactory
@@ -15,15 +20,21 @@ class PDOFactory
 
 
     /**
-     * @param string $host
-     * @param string $dbname
-     * @param string $username
-     * @param string $password
+     * @param ContainerInterface $container
      * @return \PDO
+     * @internal param string $host
+     * @internal param string $dbname
+     * @internal param string $username
+     * @internal param string $password
      */
-    public function __invoke(string $host, string $dbname, string $username, string $password): \PDO
+    public function __invoke(ContainerInterface $container): \PDO
     {
         if (is_null($this->PDO)) {
+            $host = $container->get('config')['database.host'];
+            $dbname = $container->get('config')['database.name'];
+            $username = $container->get('config')['database.username'];
+            $password = $container->get('config')['database.password'];
+
             try {
                 $attribute = [
                     \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
