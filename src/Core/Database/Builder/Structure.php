@@ -63,5 +63,4 @@ class Structure
 
         return sprintf($key, $table);
     }
-
 }

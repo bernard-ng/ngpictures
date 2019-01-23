@@ -8,7 +8,6 @@ use App\Entities\PostEntity;
 use App\Repositories\PostsRepository;
 use Core\Database\Builder\Query;
 
-
 /**
  * Class Repository
  * @package Core\Database

@@ -2,7 +2,8 @@
 
 namespace Core\Database\Builder\Queries;
 
-use Core\Database\Builder\{Exception, Query};
+use Core\Database\Builder\Exception;
+use Core\Database\Builder\Query;
 
 /**
  * DELETE query builder
@@ -108,5 +109,4 @@ class Delete extends Common
     {
         return 'DELETE' . ($this->ignore ? " IGNORE" : '') . ' FROM ' . $this->statements['DELETE FROM'];
     }
-
 }

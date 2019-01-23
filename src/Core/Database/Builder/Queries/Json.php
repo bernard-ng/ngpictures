@@ -1,7 +1,8 @@
 <?php
 namespace Core\Database\Builder\Queries;
 
-use Core\Database\{Query, Utilities};
+use Core\Database\Query;
+use Core\Database\Utilities;
 
 /**
  * Class Json
@@ -52,5 +53,4 @@ class Json extends Common
             $this->convertTypes = true;
         }
     }
-
 }

@@ -3,7 +3,12 @@
 namespace Core\Database\Builder\Queries;
 
 use App\Entities\PostEntity;
-use Core\Database\Builder\{Exception, Literal, Query, Regex, Structure, Utilities};
+use Core\Database\Builder\Exception;
+use Core\Database\Builder\Literal;
+use Core\Database\Builder\Query;
+use Core\Database\Builder\Regex;
+use Core\Database\Builder\Structure;
+use Core\Database\Builder\Utilities;
 use Core\Database\QueryResult;
 
 /**
@@ -604,5 +609,4 @@ abstract class Base implements \IteratorAggregate
 
         return $this;
     }
-
 }

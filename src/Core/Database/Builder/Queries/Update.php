@@ -2,7 +2,9 @@
 
 namespace Core\Database\Builder\Queries;
 
-use Core\Database\Builder\{Exception, Literal, Query};
+use Core\Database\Builder\Exception;
+use Core\Database\Builder\Literal;
+use Core\Database\Builder\Query;
 
 /**
  * UPDATE query builder
@@ -119,8 +121,7 @@ class Update extends Common
                 $key = key($value);
                 $setArray[] = $field . ' = ' . $key;
                 $this->parameters['SET'][$key] = $value[$key];
-            }
-            elseif ($value instanceof Literal) {
+            } elseif ($value instanceof Literal) {
                 $setArray[] = $field . ' = ' . $value;
             } else {
                 $setArray[] = $field . ' = ?';
@@ -130,5 +131,4 @@ class Update extends Common
 
         return ' SET ' . implode(', ', $setArray);
     }
-
 }

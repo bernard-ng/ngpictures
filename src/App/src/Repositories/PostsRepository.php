@@ -1,7 +1,6 @@
 <?php
 namespace App\Repositories;
 
-
 use App\Entities\PostEntity;
 use Core\Database\Repository;
 

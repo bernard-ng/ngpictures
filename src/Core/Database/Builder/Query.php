@@ -2,9 +2,10 @@
 
 namespace Core\Database\Builder;
 
-use Core\Database\Builder\Queries\{
-    Delete, Insert, Select, Update
-};
+use Core\Database\Builder\Queries\Delete;
+use Core\Database\Builder\Queries\Insert;
+use Core\Database\Builder\Queries\Select;
+use Core\Database\Builder\Queries\Update;
 use Core\Database\QueryResult;
 
 /**
@@ -321,5 +322,4 @@ class Query
     {
         return $this->entity;
     }
-
 }

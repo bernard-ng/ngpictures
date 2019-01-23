@@ -2,7 +2,9 @@
 
 namespace Core\Database\Builder\Queries;
 
-use Core\Database\Builder\{Exception, Literal, Query};
+use Core\Database\Builder\Exception;
+use Core\Database\Builder\Literal;
+use Core\Database\Builder\Query;
 
 /** INSERT query builder
  */
@@ -103,7 +105,8 @@ class Insert extends Base
     public function onDuplicateKeyUpdate($values)
     {
         $this->statements['ON DUPLICATE KEY UPDATE'] = array_merge(
-            $this->statements['ON DUPLICATE KEY UPDATE'], $values
+            $this->statements['ON DUPLICATE KEY UPDATE'],
+            $values
         );
 
         return $this;
@@ -259,5 +262,4 @@ class Insert extends Base
         }
         $this->statements['VALUES'][] = $oneValue;
     }
-
 }

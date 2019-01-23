@@ -15,7 +15,7 @@ class QueryResult implements \ArrayAccess, \Iterator
     /**
      * @var int
      */
-    private  $index = 0;
+    private $index = 0;
 
     /**
      * @var null|string

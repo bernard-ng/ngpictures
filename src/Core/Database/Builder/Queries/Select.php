@@ -2,9 +2,9 @@
 
 namespace Core\Database\Builder\Queries;
 
-use Core\Database\Builder\{
-    Exception, Query, Utilities
-};
+use Core\Database\Builder\Exception;
+use Core\Database\Builder\Query;
+use Core\Database\Builder\Utilities;
 
 /**
  * SELECT query builder
@@ -248,5 +248,4 @@ class Select extends Common implements \Countable
 
         return $data;
     }
-
 }
