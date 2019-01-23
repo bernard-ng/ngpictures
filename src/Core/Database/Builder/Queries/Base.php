@@ -2,7 +2,9 @@
 
 namespace Core\Database\Builder\Queries;
 
+use App\Entities\PostEntity;
 use Core\Database\Builder\{Exception, Literal, Query, Regex, Structure, Utilities};
+use Core\Database\QueryResult;
 
 /**
  * Base query builder
@@ -40,6 +42,11 @@ abstract class Base implements \IteratorAggregate
 
     /** @var @var int */
     protected $currentFetchMode;
+
+    /**
+     * @var array
+     */
+    private $records;
 
     /**
      * BaseQuery constructor.
@@ -552,6 +559,16 @@ abstract class Base implements \IteratorAggregate
             $this->result = false;
         }
     }
+
+
+    /**
+     * @return QueryResult
+     */
+    public function all(): QueryResult
+    {
+        return new QueryResult($this->execute()->fetchAll(\PDO::FETCH_ASSOC), $this->fluent->getEntity());
+    }
+
 
     /**
      * @param \PDOStatement $result

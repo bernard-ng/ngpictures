@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Core\Database;
 
+use App\Entities\PostEntity;
 use App\Repositories\PostsRepository;
+use Core\Database\Builder\Query;
 
 
 /**
@@ -14,9 +16,14 @@ use App\Repositories\PostsRepository;
 class Repository
 {
     /**
-     * @var Query
+     * @var string
      */
-    protected $query;
+    protected $table;
+
+    /**
+     * @var string
+     */
+    protected $entity;
 
     /**
      * @var \PDO
@@ -27,18 +34,32 @@ class Repository
      * Repository constructor.
      * @param \PDO $pdo
      */
-    public function __construct(?\PDO $pdo)
+    public function __construct(\PDO $pdo)
     {
         $this->pdo = $pdo;
     }
 
 
-    public function all()
+    /**
+     * simplify instanciation of the queryBuilder
+     * @return Query
+     */
+    protected function makeQuery()
     {
-        return (new Query($this->pdo))
-            ->into(PostsRepository::class)
-            ->from('posts')
+        return new Query($this->pdo);
+    }
+
+
+    /**
+     * @return QueryResult
+     */
+    public function all(): QueryResult
+    {
+        return $this->makeQuery()
+            ->into($this->entity)
+            ->from($this->table)
             ->select('id')
-            ->getQuery(false);
+            ->where("{$this->table}.users_id = ?", ['id' => 1])
+            ->all();
     }
 }

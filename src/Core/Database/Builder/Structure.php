@@ -10,6 +10,7 @@ class Structure
 
     /** @var string */
     private $primaryKey;
+
     /** @var string */
     private $foreignKey;
 

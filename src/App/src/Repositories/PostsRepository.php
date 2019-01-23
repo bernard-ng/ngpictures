@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 
+use App\Entities\PostEntity;
 use Core\Database\Repository;
 
 /**
@@ -11,4 +12,13 @@ use Core\Database\Repository;
 class PostsRepository extends Repository
 {
 
+    /**
+     * @var string
+     */
+    protected $table = "posts";
+
+    /**
+     * @var PostEntity
+     */
+    protected $entity = PostEntity::class;
 }

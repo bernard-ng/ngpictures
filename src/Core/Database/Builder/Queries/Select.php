@@ -2,7 +2,9 @@
 
 namespace Core\Database\Builder\Queries;
 
-use Core\Database\Builder\{Exception, Query, Utilities};
+use Core\Database\Builder\{
+    Exception, Query, Utilities
+};
 
 /**
  * SELECT query builder
@@ -18,22 +20,22 @@ class Select extends Common implements \Countable
     /**
      * SelectQuery constructor.
      *
-     * @param Query     $fluent
+     * @param Query $fluent
      * @param           $from
      */
     function __construct(Query $fluent, $from)
     {
         $clauses = [
-            'SELECT'   => ', ',
-            'FROM'     => null,
-            'JOIN'     => [$this, 'getClauseJoin'],
-            'WHERE'    => [$this, 'getClauseWhere'],
+            'SELECT' => ', ',
+            'FROM' => null,
+            'JOIN' => [$this, 'getClauseJoin'],
+            'WHERE' => [$this, 'getClauseWhere'],
             'GROUP BY' => ',',
-            'HAVING'   => ' AND ',
+            'HAVING' => ' AND ',
             'ORDER BY' => ', ',
-            'LIMIT'    => null,
-            'OFFSET'   => null,
-            "\n--"     => "\n--"
+            'LIMIT' => null,
+            'OFFSET' => null,
+            "\n--" => "\n--"
         ];
         parent::__construct($fluent, $clauses);
 
@@ -45,25 +47,6 @@ class Select extends Common implements \Countable
         $this->statements['FROM'] = $from;
         $this->statements['SELECT'][] = $this->fromAlias . '.*';
         $this->joins[] = $this->fromAlias;
-    }
-
-    /**
-     * @param mixed $columns
-     * @param bool  $overrideDefault
-     *
-     * @return $this
-     */
-    public function select($columns, bool $overrideDefault = false)
-    {
-        if ($overrideDefault === true) {
-            $this->resetClause('SELECT');
-        } elseif ($columns === null) {
-            return $this->resetClause('SELECT');
-        }
-
-        $this->addStatement('SELECT', $columns, []);
-
-        return $this;
     }
 
     /**
@@ -83,28 +66,10 @@ class Select extends Common implements \Countable
     }
 
     /**
-     * Returns a single column
-     *
-     * @param int $columnNumber
-     *
-     * @throws Exception
-     *
-     * @return string
-     */
-    public function fetchColumn(int $columnNumber = 0)
-    {
-        if (($s = $this->execute()) !== false) {
-            return $s->fetchColumn($columnNumber);
-        }
-
-        return $s;
-    }
-
-    /**
      * Fetch first row or column
      *
      * @param string $column - column name or empty string for the whole row
-     * @param int    $cursorOrientation
+     * @param int $cursorOrientation
      *
      * @throws Exception
      *
@@ -157,9 +122,73 @@ class Select extends Common implements \Countable
         return $s;
     }
 
+    /**
+     * @param mixed $columns
+     * @param bool $overrideDefault
+     *
+     * @return $this
+     */
+    public function select($columns, bool $overrideDefault = false)
+    {
+        if ($overrideDefault === true) {
+            $this->resetClause('SELECT');
+        } elseif ($columns === null) {
+            return $this->resetClause('SELECT');
+        }
+
+        $this->addStatement('SELECT', $columns, []);
+
+        return $this;
+    }
+
+    /**
+     * \Countable interface doesn't break current select query
+     *
+     * @throws Exception
+     *
+     * @return int
+     */
+    public function count()
+    {
+        $fluent = clone $this;
+        return (int)$fluent->select('COUNT(id)', true)->fetchColumn();
+    }
+
+    /**
+     * Returns a single column
+     *
+     * @param int $columnNumber
+     *
+     * @throws Exception
+     *
+     * @return string
+     */
+    public function fetchColumn(int $columnNumber = 0)
+    {
+        if (($s = $this->execute()) !== false) {
+            return $s->fetchColumn($columnNumber);
+        }
+
+        return $s;
+    }
+
+    /**
+     * @throws Exception
+     *
+     * @return \ArrayIterator|\PDOStatement
+     */
+    public function getIterator()
+    {
+        if ($this->fluent->convertRead === true) {
+            return new \ArrayIterator($this->fetchAll());
+        } else {
+            return $this->execute();
+        }
+    }
+
     /** Fetch all row
      *
-     * @param string $index      - specify index column. Allows for data organization by field using 'field[]'
+     * @param string $index - specify index column. Allows for data organization by field using 'field[]'
      * @param string $selectOnly - select columns which could be fetched
      *
      * @throws Exception
@@ -190,34 +219,6 @@ class Select extends Common implements \Countable
             }
 
             return false;
-        }
-    }
-
-    /**
-     * \Countable interface doesn't break current select query
-     *
-     * @throws Exception
-     *
-     * @return int
-     */
-    public function count()
-    {
-        $fluent = clone $this;
-
-        return (int)$fluent->select('COUNT(*)', true)->fetchColumn();
-    }
-
-    /**
-     * @throws Exception
-     *
-     * @return \ArrayIterator|\PDOStatement
-     */
-    public function getIterator()
-    {
-        if ($this->fluent->convertRead === true) {
-            return new \ArrayIterator($this->fetchAll());
-        } else {
-            return $this->execute();
         }
     }
 
