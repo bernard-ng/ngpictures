@@ -65,7 +65,7 @@ class QueryResult implements \ArrayAccess, \Iterator
      */
     public function current()
     {
-
+        return $this->records[$this->index];
     }
 
     /**
@@ -74,9 +74,9 @@ class QueryResult implements \ArrayAccess, \Iterator
      * @return void Any returned value is ignored.
      * @since 5.0.0
      */
-    public function next()
+    public function next(): void
     {
-        // TODO: Implement next() method.
+        $this->index++;
     }
 
     /**
@@ -87,7 +87,7 @@ class QueryResult implements \ArrayAccess, \Iterator
      */
     public function key()
     {
-        // TODO: Implement key() method.
+        return $this->index;
     }
 
     /**
@@ -99,7 +99,7 @@ class QueryResult implements \ArrayAccess, \Iterator
      */
     public function valid()
     {
-        // TODO: Implement valid() method.
+        return isset($this->records[$this->index]);
     }
 
     /**
@@ -110,7 +110,7 @@ class QueryResult implements \ArrayAccess, \Iterator
      */
     public function rewind()
     {
-        // TODO: Implement rewind() method.
+        $this->index = 0;
     }
 
     /**
@@ -127,7 +127,7 @@ class QueryResult implements \ArrayAccess, \Iterator
      */
     public function offsetExists($offset)
     {
-        // TODO: Implement offsetExists() method.
+        return isset($this->records[$offset]);
     }
 
     /**
@@ -141,7 +141,7 @@ class QueryResult implements \ArrayAccess, \Iterator
      */
     public function offsetGet($offset)
     {
-        // TODO: Implement offsetGet() method.
+        return $this->get($offset);
     }
 
     /**
@@ -155,10 +155,11 @@ class QueryResult implements \ArrayAccess, \Iterator
      * </p>
      * @return void
      * @since 5.0.0
+     * @throws \LogicException
      */
     public function offsetSet($offset, $value)
     {
-        // TODO: Implement offsetSet() method.
+        throw new \LogicException("Can't alter records");
     }
 
     /**
@@ -169,9 +170,10 @@ class QueryResult implements \ArrayAccess, \Iterator
      * </p>
      * @return void
      * @since 5.0.0
+     * @throws \LogicException
      */
     public function offsetUnset($offset)
     {
-        // TODO: Implement offsetUnset() method.
+        throw new \LogicException("Can't alter records");
     }
 }
