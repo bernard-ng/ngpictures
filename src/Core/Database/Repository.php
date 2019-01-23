@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Core\Database;
 
-use Envms\FluentPDO\Query;
+use App\Repositories\PostsRepository;
+
 
 /**
  * Class Repository
@@ -29,12 +30,15 @@ class Repository
     public function __construct(?\PDO $pdo)
     {
         $this->pdo = $pdo;
-        $this->query = new Query($this->pdo);
     }
 
 
     public function all()
     {
-        return $this->query->from('posts')->select('id')->execute()->fetchAll();
+        return (new Query($this->pdo))
+            ->into(PostsRepository::class)
+            ->from('posts')
+            ->select('id')
+            ->getQuery(false);
     }
 }

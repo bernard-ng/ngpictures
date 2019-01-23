@@ -1,15 +1,14 @@
 <?php
 namespace Core\Database;
 
-
-use Envms\FluentPDO\Query as EnvmsQuery;
+use Core\Database\Builder\Query as QueryBuilder;
 
 
 /**
  * Class Query
  * @package Core\Database
  */
-class Query extends EnvmsQuery
+class Query extends QueryBuilder
 {
 
     /**
@@ -26,5 +25,14 @@ class Query extends EnvmsQuery
     {
         $this->entity = $entity;
         return $this;
+    }
+
+    /**
+     * counts records
+     * @return int|null
+     */
+    public function count(): ?int
+    {
+        $count = $this->from('posts')->count();
     }
 }
