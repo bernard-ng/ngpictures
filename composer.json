@@ -32,6 +32,7 @@
         "envms/fluentpdo": "^2.1",
         "intervention/image": "^2.4",
         "league/flysystem": "^1.0",
+        "robmorgan/phinx": "^0.10.6",
         "zendframework/zend-component-installer": "^2.1.1",
         "zendframework/zend-config-aggregator": "^1.0",
         "zendframework/zend-diactoros": "^1.7.1 || ^2.0",
@@ -42,18 +43,19 @@
         "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {
+        "filp/whoops": "^2.1.12",
         "phpunit/phpunit": "^7.0.1",
         "roave/security-advisories": "dev-master",
         "squizlabs/php_codesniffer": "^2.9.1",
-        "zendframework/zend-expressive-tooling": "^1.0",
-        "zfcampus/zf-development-mode": "^3.1",
-        "filp/whoops": "^2.1.12"
+        "zendframework/zend-expressive-tooling": "^1.1",
+        "zfcampus/zf-development-mode": "^3.1"
     },
     "autoload": {
         "psr-4": {
             "App\\": "src/App/src/",
             "Api\\": "src/Api/src/",
-            "Core\\": "src/Core/"
+            "Core\\": "src/Core/",
+            "blog\\": "src/blog/src/"
         }
     },
     "autoload-dev": {
@@ -75,7 +77,7 @@
             "@test"
         ],
         "clear-config-cache": "php bin/clear-config-cache.php",
-        "cs-check": "phpcs",
+        "cs-check": "phpcs -s",
         "cs-fix": "phpcbf",
         "serve": "php -S 0.0.0.0:8080 -t public/",
         "test": "phpunit --colors=always",

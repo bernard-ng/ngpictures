@@ -23,7 +23,7 @@ class Select extends Common implements \Countable
      * @param Query $fluent
      * @param           $from
      */
-    function __construct(Query $fluent, $from)
+    public function __construct(Query $fluent, $from)
     {
         $clauses = [
             'SELECT' => ', ',

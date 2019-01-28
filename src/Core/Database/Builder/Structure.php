@@ -20,7 +20,7 @@ class Structure
      * @param string $primaryKey
      * @param string $foreignKey
      */
-    function __construct($primaryKey = 'id', $foreignKey = '%s_id')
+    public function __construct($primaryKey = 'id', $foreignKey = '%s_id')
     {
         if ($foreignKey === null) {
             $foreignKey = $primaryKey;

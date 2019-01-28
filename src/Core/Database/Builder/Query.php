@@ -59,7 +59,7 @@ class Query
      * @param \PDO $pdo
      * @param Structure|null $structure
      */
-    function __construct(\PDO $pdo, Structure $structure = null)
+    public function __construct(\PDO $pdo, Structure $structure = null)
     {
         $this->pdo = $pdo;
 

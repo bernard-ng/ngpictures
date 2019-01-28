@@ -25,8 +25,8 @@ class Insert extends Base
     /**
      * InsertQuery constructor.
      *
-     * @param Query     $fluent
-     * @param string    $table
+     * @param Query $fluent
+     * @param string $table
      * @param           $values
      *
      * @throws Exception
@@ -34,37 +34,14 @@ class Insert extends Base
     public function __construct(Query $fluent, $table, $values)
     {
         $clauses = [
-            'INSERT INTO'             => [$this, 'getClauseInsertInto'],
-            'VALUES'                  => [$this, 'getClauseValues'],
+            'INSERT INTO' => [$this, 'getClauseInsertInto'],
+            'VALUES' => [$this, 'getClauseValues'],
             'ON DUPLICATE KEY UPDATE' => [$this, 'getClauseOnDuplicateKeyUpdate'],
         ];
         parent::__construct($fluent, $clauses);
 
         $this->statements['INSERT INTO'] = $table;
         $this->values($values);
-    }
-
-    /**
-     * Force insert operation to fail silently
-     *
-     * @return Insert
-     */
-    public function ignore()
-    {
-        $this->ignore = true;
-
-        return $this;
-    }
-
-    /** Force insert operation delay support
-     *
-     * @return Insert
-     */
-    public function delayed()
-    {
-        $this->delayed = true;
-
-        return $this;
     }
 
     /**
@@ -91,6 +68,54 @@ class Insert extends Base
                 $this->addOneValue($oneValue);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @param array $oneValue
+     *
+     * @throws Exception
+     */
+    private function addOneValue($oneValue)
+    {
+        // check if all $keys are strings
+        foreach ($oneValue as $key => $value) {
+            if (!is_string($key)) {
+                throw new Exception('INSERT query: All keys of value array have to be strings.');
+            }
+        }
+        if (!$this->firstValue) {
+            $this->firstValue = $oneValue;
+        }
+        if (!$this->columns) {
+            $this->columns = array_keys($oneValue);
+        }
+        if ($this->columns != array_keys($oneValue)) {
+            throw new Exception('INSERT query: All VALUES have to same keys (columns).');
+        }
+        $this->statements['VALUES'][] = $oneValue;
+    }
+
+    /**
+     * Force insert operation to fail silently
+     *
+     * @return Insert
+     */
+    public function ignore()
+    {
+        $this->ignore = true;
+
+        return $this;
+    }
+
+    /** Force insert operation delay support
+     *
+     * @return Insert
+     */
+    public function delayed()
+    {
+        $this->delayed = true;
 
         return $this;
     }
@@ -178,7 +203,6 @@ class Insert extends Base
         return " ($columns) VALUES $values";
     }
 
-
     /**
      * @return string
      */
@@ -203,6 +227,19 @@ class Insert extends Base
     }
 
     /**
+     * @return array
+     */
+    protected function buildParameters(): array
+    {
+        $this->parameters = array_merge(
+            $this->filterLiterals($this->statements['VALUES']),
+            $this->filterLiterals($this->statements['ON DUPLICATE KEY UPDATE'])
+        );
+
+        return parent::buildParameters();
+    }
+
+    /**
      * Removes all Literal instances from the argument
      * since they are not to be used as PDO parameters but rather injected directly into the query
      *
@@ -223,43 +260,5 @@ class Insert extends Base
 
             return $item;
         }, array_filter($statements, $f));
-    }
-
-    /**
-     * @return array
-     */
-    protected function buildParameters(): array
-    {
-        $this->parameters = array_merge(
-            $this->filterLiterals($this->statements['VALUES']),
-            $this->filterLiterals($this->statements['ON DUPLICATE KEY UPDATE'])
-        );
-
-        return parent::buildParameters();
-    }
-
-    /**
-     * @param array $oneValue
-     *
-     * @throws Exception
-     */
-    private function addOneValue($oneValue)
-    {
-        // check if all $keys are strings
-        foreach ($oneValue as $key => $value) {
-            if (!is_string($key)) {
-                throw new Exception('INSERT query: All keys of value array have to be strings.');
-            }
-        }
-        if (!$this->firstValue) {
-            $this->firstValue = $oneValue;
-        }
-        if (!$this->columns) {
-            $this->columns = array_keys($oneValue);
-        }
-        if ($this->columns != array_keys($oneValue)) {
-            throw new Exception('INSERT query: All VALUES have to same keys (columns).');
-        }
-        $this->statements['VALUES'][] = $oneValue;
     }
 }
