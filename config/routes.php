@@ -31,6 +31,9 @@ use Zend\Expressive\MiddlewareFactory;
  *     Zend\Expressive\Router\Route::HTTP_METHOD_ANY,
  *     'contact'
  * );
+ * @param Application $app
+ * @param MiddlewareFactory $factory
+ * @param ContainerInterface $container
  */
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
     $app->get('/', App\Handler\HomePageHandler::class, 'home');
