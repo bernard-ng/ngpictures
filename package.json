@@ -1,0 +1,10 @@
+{
+  "name": "ng-pictures",
+  "version": "3.0.0-alpha",
+  "description": "photography website",
+  "main": "index.js",
+  "repository": "https://github.com/bernard-ng/ngpictures",
+  "author": "bernard-ng <ngandubernard@gmail.com>",
+  "license": "MIT",
+  "private": true
+}

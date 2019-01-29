@@ -5,3 +5,5 @@ coveralls-upload.json
 phpunit.xml
 vendor/
 composer.json
+node_modules/
+yarn.lock
