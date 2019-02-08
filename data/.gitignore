@@ -1,6 +1,2 @@
-*
-!cache
+cache/*
 !cache/.gitkeep
-!.gitignore
-!migrations
-!seeds
