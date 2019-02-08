@@ -66,10 +66,11 @@
     "post-create-project-cmd": [
       "@development-enable"
     ],
-    "development-disable": "zf-development-mode disable",
-    "development-enable": "zf-development-mode enable",
-    "development-status": "zf-development-mode status",
+    "dev-disable": "zf-development-mode disable",
+    "dev-enable": "zf-development-mode enable",
+    "dev-status": "zf-development-mode status",
     "expressive": "expressive --ansi",
+    "migrate": "phinx migrate",
     "check": [
       "@cs-check",
       "@test"
