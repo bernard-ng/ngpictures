@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Core\Database;
 
-use App\Entities\PostEntity;
-use App\Repositories\PostsRepository;
 use Core\Database\Builder\Query;
 
 /**

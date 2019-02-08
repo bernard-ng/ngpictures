@@ -1,7 +1,7 @@
 <?php
 namespace App\Repositories;
 
-use App\Entities\PostEntity;
+use App\Entities\PostsEntity;
 use Core\Database\Repository;
 
 /**
@@ -19,5 +19,5 @@ class PostsRepository extends Repository
     /**
      * @var PostEntity
      */
-    protected $entity = PostEntity::class;
+    protected $entity = PostsEntity::class;
 }

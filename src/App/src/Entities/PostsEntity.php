@@ -5,7 +5,7 @@ namespace App\Entities;
  * Class PostEntity
  * @package App\Entities
  */
-class PostEntity
+class PostsEntity
 {
     /**
      * the id of a post
