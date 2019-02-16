@@ -18,3 +18,9 @@ system.log
 /todos-vue
 /cgi-bin
 /.well-known
+/yarn.lock
+/node_modules
+/config/autoload/*
+/config/development.config.php
+/public/assets/js/app.js
+resources/*
