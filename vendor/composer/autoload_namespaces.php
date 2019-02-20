@@ -6,7 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'YUI' => array($vendorDir . '/jalle19/php-yui-compressor/lib'),
+    'Twig_Extensions_' => array($vendorDir . '/twig/extensions/lib'),
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Suin\\RSSWriter' => array($vendorDir . '/suin/php-rss-writer/src'),
-    'BaconQrCode' => array($vendorDir . '/bacon/bacon-qr-code/src'),
+    'JShrink' => array($vendorDir . '/tedivm/jshrink/src'),
 );
