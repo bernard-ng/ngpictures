@@ -32,16 +32,15 @@ class Router
 
 
     /**
-     * construction
+     * Router constructor.
      */
     public function __construct()
     {
         $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
         $this->url = $_GET['url'] ?? $uri ?? '/';
-        if (strlen($this->url) > 1 && substr($this->url, -1) === '/') {
+        if (strlen($this->url) > 1 && $this->url[-1] === '/') {
             $url = substr($this->url, 0, -1);
-            http_response_code(301);
-            header("Location: /{$url}");
+            header("Location: /{$url}", true, 301);
         }
     }
 

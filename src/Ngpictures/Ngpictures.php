@@ -1,6 +1,8 @@
 <?php
 namespace Ngpictures;
 
+use Ng\Core\Exception\RouterException;
+use Ng\Core\Router\Route;
 use Ng\Core\Router\Router;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Util\RequestTrait;
@@ -50,12 +52,13 @@ class Ngpictures
             require(ROOT . "/config/routes/frontend.php");
             require(ROOT . "/config/routes/backend.php");
 
+            /** @var Route $route */
             $route = $router->run();
             if ($route) {
-                if (is_string($route->getController())) {
-                    $action = explode("#", $route->getController());
-                    $method = $action[1] ?? 'index';
-                    $controller = $this->container->get($this->getAction($action[0]));
+                if (is_array($route->getController())) {
+                    $action = $route->getController()[0];
+                    $method = $route->getController()[1] ?? 'index';
+                    $controller = $this->container->get($action);
 
                     return call_user_func_array([$controller, $method], $route->getMatches());
                 }
