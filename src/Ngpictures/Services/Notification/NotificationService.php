@@ -1,11 +1,11 @@
 <?php
-namespace Application\Services\Notification;
+namespace Ngpictures\Services\Notification;
 
-use Application\Models\UsersModel;
-use Framework\Managers\StringManager;
+use Ngpictures\Models\UsersModel;
+use Ng\Core\Managers\StringManager;
 use Psr\Container\ContainerInterface;
-use Application\Models\NotificationsModel;
-use Application\Models\FollowingModel;
+use Ngpictures\Models\NotificationsModel;
+use Ngpictures\Models\FollowingModel;
 
 class NotificationService
 {

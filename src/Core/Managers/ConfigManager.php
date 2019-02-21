@@ -1,7 +1,7 @@
 <?php
-namespace Framework\Managers;
+namespace Ng\Core\Managers;
 
-use Framework\Exception\ConfigManagerException;
+use Ng\Core\Exception\ConfigManagerException;
 
 class ConfigManager
 {

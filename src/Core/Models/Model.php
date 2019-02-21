@@ -1,7 +1,7 @@
 <?php
-namespace Framework\Models;
+namespace Ng\Core\Models;
 
-use Framework\Database\DatabaseInterface;
+use Ng\Core\Database\DatabaseInterface;
 
 class Model
 {

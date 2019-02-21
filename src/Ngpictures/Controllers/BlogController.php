@@ -1,8 +1,8 @@
 <?php
-namespace Application\Controllers;
+namespace Ngpictures\Controllers;
 
-use Application\Traits\Controllers\ShowPostTrait;
-use Application\Traits\Controllers\StoryPostTrait;
+use Ngpictures\Traits\Controllers\ShowPostTrait;
+use Ngpictures\Traits\Controllers\StoryPostTrait;
 
 class BlogController extends Controller
 {

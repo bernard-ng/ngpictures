@@ -1,5 +1,5 @@
 <?php
-namespace Framework\Database;
+namespace Ng\Core\Database;
 
 interface DatabaseInterface
 {

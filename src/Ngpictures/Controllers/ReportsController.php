@@ -1,8 +1,8 @@
 <?php
-namespace Application\Controllers;
+namespace Ngpictures\Controllers;
 
-use Framework\Managers\Collection;
-use Application\Traits\Util\TypesActionTrait;
+use Ng\Core\Managers\Collection;
+use Ngpictures\Traits\Util\TypesActionTrait;
 
 class ReportsController extends Controller
 {

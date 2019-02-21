@@ -1,5 +1,5 @@
 <?php
-namespace Application\Controllers;
+namespace Ngpictures\Controllers;
 
 use Psr\Container\ContainerInterface;
 

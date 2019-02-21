@@ -1,10 +1,10 @@
 <?php
-namespace Application\Controllers;
+namespace Ngpictures\Controllers;
 
-use Framework\Managers\Collection;
+use Ng\Core\Managers\Collection;
 use Psr\Container\ContainerInterface;
-use Application\Traits\Util\TypesActionTrait;
-use Application\Services\Notification\NotificationService;
+use Ngpictures\Traits\Util\TypesActionTrait;
+use Ngpictures\Services\Notification\NotificationService;
 
 class CommentsController extends Controller
 {

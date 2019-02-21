@@ -1,9 +1,9 @@
 <?php
-namespace Application\Models;
+namespace Ngpictures\Models;
 
-use Framework\Models\Model;
-use Framework\Managers\Collection;
-use Application\Traits\Util\TypesActionTrait;
+use Ng\Core\Models\Model;
+use Ng\Core\Managers\Collection;
+use Ngpictures\Traits\Util\TypesActionTrait;
 
 class CommentsModel extends Model
 {

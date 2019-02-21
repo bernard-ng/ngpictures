@@ -1,10 +1,10 @@
 <?php
-namespace Application\Controllers\Admin;
+namespace Ngpictures\Controllers\Admin;
 
-use Framework\Managers\ConfigManager;
-use Framework\Managers\LogMessageManager;
-use Framework\Managers\Mailer\Mailer;
-use Application\Controllers\AdminController;
+use Ng\Core\Managers\ConfigManager;
+use Ng\Core\Managers\LogMessageManager;
+use Ng\Core\Managers\Mailer\Mailer;
+use Ngpictures\Controllers\AdminController;
 use RuntimeException;
 
 class LogsController extends AdminController

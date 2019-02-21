@@ -1,12 +1,12 @@
 <?php
-namespace Application\Controllers;
+namespace Ngpictures\Controllers;
 
-use Framework\Managers\Collection;
-use Framework\Managers\ImageManager;
+use Ng\Core\Managers\Collection;
+use Ng\Core\Managers\ImageManager;
 use Psr\Container\ContainerInterface;
-use Application\Traits\Controllers\ShowPostTrait;
-use Application\Traits\Controllers\StoryPostTrait;
-use Application\Services\Notification\NotificationService;
+use Ngpictures\Traits\Controllers\ShowPostTrait;
+use Ngpictures\Traits\Controllers\StoryPostTrait;
+use Ngpictures\Services\Notification\NotificationService;
 
 class PostsController extends Controller
 {

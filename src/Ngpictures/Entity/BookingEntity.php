@@ -1,7 +1,7 @@
 <?php
-namespace Application\Entity;
+namespace Ngpictures\Entity;
 
-use Framework\Entity\Entity;
+use Ng\Core\Entity\Entity;
 
 class BlogEntity extends Entity
 {

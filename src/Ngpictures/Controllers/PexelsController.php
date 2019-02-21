@@ -1,9 +1,9 @@
 <?php
-namespace Application\Controllers;
+namespace Ngpictures\Controllers;
 
 use Glooby\Pexels\Client;
 use Psr\Container\ContainerInterface;
-use Framework\Managers\LogMessageManager;
+use Ng\Core\Managers\LogMessageManager;
 
 class PexelsController extends Controller
 {

@@ -1,7 +1,7 @@
 <?php
-namespace Framework\Managers;
+namespace Ng\Core\Managers;
 
-use Application\Models\UsersModel;
+use Ngpictures\Models\UsersModel;
 
 class StringManager
 {

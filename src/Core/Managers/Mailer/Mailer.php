@@ -1,12 +1,12 @@
 <?php
-namespace Framework\Managers\Mailer;
+namespace Ng\Core\Managers\Mailer;
 
-use Application\Ngpictures;
+use Ngpictures\Ngpictures;
 use \InvalidArgumentException;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
-use Framework\Managers\ConfigManager;
-use Framework\Managers\LogMessageManager;
+use Ng\Core\Managers\ConfigManager;
+use Ng\Core\Managers\LogMessageManager;
 
 class Mailer
 {

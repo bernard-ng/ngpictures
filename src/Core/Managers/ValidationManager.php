@@ -1,8 +1,8 @@
 <?php
-namespace Framework\Managers;
+namespace Ng\Core\Managers;
 
 use \RuntimeException;
-use Application\Managers\MessageManager;
+use Ngpictures\Managers\MessageManager;
 
 class ValidationManager
 {

@@ -1,11 +1,11 @@
 <?php
 namespace Ngpictures;
 
-use Framework\Router\Router;
+use Ng\Core\Router\Router;
 use Psr\Container\ContainerInterface;
-use Application\Traits\Util\RequestTrait;
-use Framework\Managers\LogMessageManager;
-use Framework\Managers\FlashMessageManager;
+use Ngpictures\Traits\Util\RequestTrait;
+use Ng\Core\Managers\LogMessageManager;
+use Ng\Core\Managers\FlashMessageManager;
 
 class Ngpictures
 {

@@ -1,8 +1,8 @@
 <?php
-namespace Application\Models;
+namespace Ngpictures\Models;
 
-use Framework\Models\Model;
-use Application\Traits\Models\FindQueryTrait;
+use Ng\Core\Models\Model;
+use Ngpictures\Traits\Models\FindQueryTrait;
 
 class BlogModel extends Model
 {

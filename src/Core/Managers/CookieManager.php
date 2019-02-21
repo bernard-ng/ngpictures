@@ -1,9 +1,9 @@
 <?php
-namespace Framework\Managers;
+namespace Ng\Core\Managers;
 
 use DateTime;
-use Framework\Interfaces\CookieInterface;
-use Framework\Traits\SingletonTrait;
+use Ng\Core\Interfaces\CookieInterface;
+use Ng\Core\Traits\SingletonTrait;
 
 class CookieManager implements CookieInterface
 {

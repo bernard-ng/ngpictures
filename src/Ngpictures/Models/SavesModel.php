@@ -1,12 +1,12 @@
 <?php
-namespace Application\Models;
+namespace Ngpictures\Models;
 
-use Framework\Models\Model;
-use Application\Ngpictures;
-use Framework\Database\DatabaseInterface;
-use Framework\Interfaces\SessionInterface;
-use Application\Services\Auth\DatabaseAuthService;
-use Application\Traits\Util\TypesActionTrait;
+use Ng\Core\Models\Model;
+use Ngpictures\Ngpictures;
+use Ng\Core\Database\DatabaseInterface;
+use Ng\Core\Interfaces\SessionInterface;
+use Ngpictures\Services\Auth\DatabaseAuthService;
+use Ngpictures\Traits\Util\TypesActionTrait;
 
 class SavesModel extends Model
 {

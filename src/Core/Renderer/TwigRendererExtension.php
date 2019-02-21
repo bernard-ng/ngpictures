@@ -1,7 +1,7 @@
 <?php
-namespace Framework\Renderer;
+namespace Ng\Core\Renderer;
 
-use Framework\Managers\CacheBustingManager;
+use Ng\Core\Managers\CacheBustingManager;
 
 class TwigRendererExtension extends \Twig_Extension
 {

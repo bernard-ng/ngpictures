@@ -1,5 +1,5 @@
 <?php
-namespace Application\Traits\Models;
+namespace Ngpictures\Traits\Models;
 
 trait FindQueryTrait
 {

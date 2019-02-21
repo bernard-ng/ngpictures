@@ -5,17 +5,17 @@ use function \DI\object;
 use function \DI\factory;
 
 use ReCaptcha\ReCaptcha;
-use Application\Models\UsersModel;
-use Framework\Renderer\TwigRenderer;
-use Framework\Database\MysqlDatabase;
-use Framework\Managers\CookieManager;
-use Framework\Managers\SessionManager;
-use Application\Managers\MessageManager;
-use Framework\Database\DatabaseInterface;
-use Framework\Interfaces\CookieInterface;
-use Framework\Renderer\RendererInterface;
-use Framework\Interfaces\SessionInterface;
-use Framework\Managers\FlashMessageManager;
+use Ngpictures\Models\UsersModel;
+use Ng\Core\Renderer\TwigRenderer;
+use Ng\Core\Database\MysqlDatabase;
+use Ng\Core\Managers\CookieManager;
+use Ng\Core\Managers\SessionManager;
+use Ngpictures\Managers\MessageManager;
+use Ng\Core\Database\DatabaseInterface;
+use Ng\Core\Interfaces\CookieInterface;
+use Ng\Core\Renderer\RendererInterface;
+use Ng\Core\Interfaces\SessionInterface;
+use Ng\Core\Managers\FlashMessageManager;
 
 
 return [

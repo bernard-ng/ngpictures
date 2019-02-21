@@ -1,10 +1,10 @@
 <?php
-namespace Application\Models;
+namespace Ngpictures\Models;
 
-use Framework\Models\Model;
-use Application\Ngpictures;
-use Framework\Database\DatabaseInterface;
-use Framework\Interfaces\SessionInterface;
+use Ng\Core\Models\Model;
+use Ngpictures\Ngpictures;
+use Ng\Core\Database\DatabaseInterface;
+use Ng\Core\Interfaces\SessionInterface;
 
 class FollowingModel extends Model
 {

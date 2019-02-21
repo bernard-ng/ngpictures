@@ -1,7 +1,7 @@
 <?php
-namespace Application\Controllers;
+namespace Ngpictures\Controllers;
 
-use Framework\Managers\Collection;
+use Ng\Core\Managers\Collection;
 use Psr\Container\ContainerInterface;
 
 class CommunityController extends Controller

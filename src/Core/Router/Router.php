@@ -1,9 +1,9 @@
 <?php
 
-namespace Framework\Router;
+namespace Ng\Core\Router;
 
-use Framework\Exception\RouterException;
-use Application\Ngpictures;
+use Ng\Core\Exception\RouterException;
+use Ngpictures\Ngpictures;
 
 class Router
 {

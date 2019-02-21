@@ -1,5 +1,5 @@
 <?php
-namespace Application\Managers;
+namespace Ngpictures\Managers;
 
 use \ArrayAccess;
 

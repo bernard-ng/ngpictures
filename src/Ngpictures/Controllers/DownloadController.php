@@ -1,7 +1,7 @@
 <?php
-namespace Application\Controllers;
+namespace Ngpictures\Controllers;
 
-use Application\Traits\Util\TypesActionTrait;
+use Ngpictures\Traits\Util\TypesActionTrait;
 
 class DownloadController extends Controller
 {

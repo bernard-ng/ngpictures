@@ -1,10 +1,10 @@
 <?php
-namespace Application\Traits\Entity;
+namespace Ngpictures\Traits\Entity;
 
-use Framework\Managers\CacheBustingManager;
-use Framework\Managers\StringManager;
-use Application\Ngpictures;
-use Application\Traits\Util\ResolverTrait;
+use Ng\Core\Managers\CacheBustingManager;
+use Ng\Core\Managers\StringManager;
+use Ngpictures\Ngpictures;
+use Ngpictures\Traits\Util\ResolverTrait;
 
 trait PostEntityTrait
 {

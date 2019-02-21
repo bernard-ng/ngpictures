@@ -1,10 +1,10 @@
 <?php
-namespace Application\Controllers\Admin;
+namespace Ngpictures\Controllers\Admin;
 
-use Framework\Managers\Collection;
+use Ng\Core\Managers\Collection;
 use Psr\Container\ContainerInterface;
-use Application\Controllers\AdminController;
-use Application\Traits\Controllers\PaginationTrait;
+use Ngpictures\Controllers\AdminController;
+use Ngpictures\Traits\Controllers\PaginationTrait;
 
 class AlbumsController extends AdminController
 {

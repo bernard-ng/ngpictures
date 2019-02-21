@@ -1,8 +1,8 @@
 <?php
-namespace Framework\Managers;
+namespace Ng\Core\Managers;
 
-use Framework\Interfaces\SessionInterface;
-use Framework\Traits\SingletonTrait;
+use Ng\Core\Interfaces\SessionInterface;
+use Ng\Core\Traits\SingletonTrait;
 
 class SessionManager implements SessionInterface
 {

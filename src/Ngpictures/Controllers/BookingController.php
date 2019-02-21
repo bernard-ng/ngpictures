@@ -1,9 +1,9 @@
 <?php
-namespace Application\Controllers;
+namespace Ngpictures\Controllers;
 
-use Framework\Managers\Collection;
-use Framework\Managers\Mailer\Mailer;
-use Framework\Managers\CalendarManager;
+use Ng\Core\Managers\Collection;
+use Ng\Core\Managers\Mailer\Mailer;
+use Ng\Core\Managers\CalendarManager;
 use Psr\Container\ContainerInterface;
 
 class BookingController extends Controller

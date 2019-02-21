@@ -1,14 +1,14 @@
 <?php
-namespace Application\Entity;
+namespace Ngpictures\Entity;
 
-use Framework\Entity\Entity;
-use Application\Ngpictures;
-use Framework\Managers\StringManager;
-use Framework\Managers\SessionManager;
-use Framework\Interfaces\SessionInterface;
-use Framework\Managers\CacheBustingManager;
-use Application\Traits\Util\ResolverTrait;
-use Application\Traits\Util\AuthTrait;
+use Ng\Core\Entity\Entity;
+use Ngpictures\Ngpictures;
+use Ng\Core\Managers\StringManager;
+use Ng\Core\Managers\SessionManager;
+use Ng\Core\Interfaces\SessionInterface;
+use Ng\Core\Managers\CacheBustingManager;
+use Ngpictures\Traits\Util\ResolverTrait;
+use Ngpictures\Traits\Util\AuthTrait;
 
 class UsersEntity extends Entity
 {

@@ -1,7 +1,7 @@
 <?php
-namespace Application\Models;
+namespace Ngpictures\Models;
 
-use Framework\Models\Model;
+use Ng\Core\Models\Model;
 
 class AlbumsModel extends Model
 {

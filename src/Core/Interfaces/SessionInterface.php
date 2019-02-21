@@ -1,5 +1,5 @@
 <?php
-namespace Framework\Interfaces;
+namespace Ng\Core\Interfaces;
 
 /**
  * permet de gerer la session

@@ -1,7 +1,7 @@
 <?php
-namespace Application\Traits\Util;
+namespace Ngpictures\Traits\Util;
 
-use Framework\Managers\Collection;
+use Ng\Core\Managers\Collection;
 
 trait TypesActionTrait
 {

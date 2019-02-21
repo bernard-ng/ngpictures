@@ -1,5 +1,5 @@
 <?php
-namespace Framework\Exception;
+namespace Ng\Core\Exception;
 
 use \Exception;
 

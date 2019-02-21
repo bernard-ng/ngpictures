@@ -1,9 +1,9 @@
 <?php
-namespace Application\Models;
+namespace Ngpictures\Models;
 
-use Framework\Models\Model;
-use Application\Traits\Models\FindQueryTrait;
-use Application\Traits\Models\LastQueryTrait;
+use Ng\Core\Models\Model;
+use Ngpictures\Traits\Models\FindQueryTrait;
+use Ngpictures\Traits\Models\LastQueryTrait;
 
 class GalleryModel extends Model
 {

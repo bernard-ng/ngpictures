@@ -1,8 +1,8 @@
 <?php
-namespace Application\Entity;
+namespace Ngpictures\Entity;
 
-use Application\Ngpictures;
-use Framework\Entity\Entity;
+use Ngpictures\Ngpictures;
+use Ng\Core\Entity\Entity;
 
 class VersesEntity extends Entity
 {
