@@ -1,5 +1,5 @@
 <?php
-namespace Ngpictures\Traits\Models;
+namespace Application\Traits\Models;
 
 trait LastQueryTrait
 {

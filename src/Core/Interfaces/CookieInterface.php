@@ -1,5 +1,5 @@
 <?php
-namespace Ng\Core\Interfaces;
+namespace Framework\Interfaces;
 
 interface CookieInterface
 {

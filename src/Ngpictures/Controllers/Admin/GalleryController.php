@@ -1,13 +1,13 @@
 <?php
-namespace Ngpictures\Controllers\Admin;
+namespace Application\Controllers\Admin;
 
 use Exception;
 use DirectoryIterator;
-use Ng\Core\Managers\Collection;
-use Ng\Core\Managers\ImageManager;
+use Framework\Managers\Collection;
+use Framework\Managers\ImageManager;
 use Psr\Container\ContainerInterface;
-use Ngpictures\Controllers\AdminController;
-use Ngpictures\Traits\Controllers\PaginationTrait;
+use Application\Controllers\AdminController;
+use Application\Traits\Controllers\PaginationTrait;
 
 class GalleryController extends AdminController
 {

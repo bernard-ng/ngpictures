@@ -1,9 +1,9 @@
 <?php
-namespace Ngpictures\Entity;
+namespace Application\Entity;
 
-use Ng\Core\Entity\Entity;
-use Ng\Core\Managers\CacheBustingManager;
-use Ngpictures\Traits\Entity\PostEntityTrait;
+use Framework\Entity\Entity;
+use Framework\Managers\CacheBustingManager;
+use Application\Traits\Entity\PostEntityTrait;
 
 class GalleryEntity extends Entity
 {

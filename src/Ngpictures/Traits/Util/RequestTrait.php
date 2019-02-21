@@ -1,5 +1,5 @@
 <?php
-namespace Ngpictures\Traits\Util;
+namespace Application\Traits\Util;
 
 trait RequestTrait
 {

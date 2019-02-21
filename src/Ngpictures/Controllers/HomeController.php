@@ -1,8 +1,8 @@
 <?php
-namespace Ngpictures\Controllers;
+namespace Application\Controllers;
 
 use Psr\Container\ContainerInterface;
-use Ngpictures\Traits\Util\ResolverTrait;
+use Application\Traits\Util\ResolverTrait;
 
 class HomeController extends Controller
 {

@@ -1,9 +1,9 @@
 <?php
-namespace Ngpictures\Controllers;
+namespace Application\Controllers;
 
-use Ng\Core\Managers\Collection;
+use Framework\Managers\Collection;
 use Psr\Container\ContainerInterface;
-use Ngpictures\Traits\Util\TypesActionTrait;
+use Application\Traits\Util\TypesActionTrait;
 
 class SavesController extends Controller
 {

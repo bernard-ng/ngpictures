@@ -1,6 +1,6 @@
 <?php
 use DI\ContainerBuilder;
-use Ngpictures\Ngpictures;
+use Application\Ngpictures;
 use Doctrine\Common\Cache\FilesystemCache;
 
 /**

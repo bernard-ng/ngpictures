@@ -1,26 +1,26 @@
 <?php
-namespace Ngpictures\Traits\Util;
+namespace Application\Traits\Util;
 
 trait ResolverTrait
 {
 
     function model($name)
     {
-        $namespace = "\\Ngpictures\\Models\\";
+        $namespace = "\\Application\\Models\\";
         $class      = ucfirst($name) . "Model";
         return $namespace . $class;
     }
 
     function controller($name)
     {
-        $namespace = "\\Ngpictures\\Controllers\\";
+        $namespace = "\\Application\\Controllers\\";
         $class = ucfirst($name) . "Controller";
         return $namespace . $class;
     }
 
     function entity($name)
     {
-        $namespace = "\\Ngpictures\\Entities\\";
+        $namespace = "\\Application\\Entities\\";
         $class = ucfirst($name) . "Entity";
         return $namespace . $class;
     }

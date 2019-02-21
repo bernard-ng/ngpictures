@@ -1,12 +1,12 @@
 <?php
-namespace Ngpictures\Controllers;
+namespace Application\Controllers;
 
 use ReCaptcha\ReCaptcha;
-use Ng\Core\Managers\Collection;
-use Ng\Core\Managers\ImageManager;
-use Ng\Core\Managers\Mailer\Mailer;
+use Framework\Managers\Collection;
+use Framework\Managers\ImageManager;
+use Framework\Managers\Mailer\Mailer;
 use Psr\Container\ContainerInterface;
-use Ng\Core\Interfaces\CookieInterface;
+use Framework\Interfaces\CookieInterface;
 
 class UsersController extends Controller
 {

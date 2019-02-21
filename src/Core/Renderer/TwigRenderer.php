@@ -1,5 +1,5 @@
 <?php
-namespace Ng\Core\Renderer;
+namespace Framework\Renderer;
 
 class TwigRenderer implements RendererInterface
 {

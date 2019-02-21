@@ -1,10 +1,10 @@
 <?php
-namespace Ngpictures\Controllers\Admin;
+namespace Application\Controllers\Admin;
 
-use Ng\Core\Managers\Collection;
-use Ngpictures\Controllers\AdminController;
-use Ngpictures\Traits\Util\TypesActionTrait;
-use Ngpictures\Traits\Controllers\PaginationTrait;
+use Framework\Managers\Collection;
+use Application\Controllers\AdminController;
+use Application\Traits\Util\TypesActionTrait;
+use Application\Traits\Controllers\PaginationTrait;
 
 class ReportsController extends AdminController
 {

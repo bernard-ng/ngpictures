@@ -1,15 +1,15 @@
 <?php
-namespace Ngpictures\Controllers;
+namespace Application\Controllers;
 
-use Ngpictures\Ngpictures;
-use Ng\Core\Managers\StringManager;
-use Ngpictures\Managers\PageManager;
+use Application\Ngpictures;
+use Framework\Managers\StringManager;
+use Application\Managers\PageManager;
 use Psr\Container\ContainerInterface;
-use Ng\Core\Managers\ValidationManager;
-use Ng\Core\Interfaces\SessionInterface;
-use Ng\Core\Managers\FlashMessageManager;
-use Ngpictures\Services\Auth\DatabaseAuthService;
-use Ng\Core\Controllers\Controller as SuperController;
+use Framework\Managers\ValidationManager;
+use Framework\Interfaces\SessionInterface;
+use Framework\Managers\FlashMessageManager;
+use Application\Services\Auth\DatabaseAuthService;
+use Framework\Controllers\Controller as SuperController;
 
 class Controller extends SuperController
 {

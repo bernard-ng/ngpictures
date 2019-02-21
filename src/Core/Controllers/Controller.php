@@ -1,11 +1,11 @@
 <?php
-namespace Ng\Core\Controllers;
+namespace Framework\Controllers;
 
 use Psr\Container\ContainerInterface;
-use Ng\Core\Renderer\RendererInterface;
-use Ngpictures\Traits\Util\RequestTrait;
-use Ngpictures\Traits\Util\ResolverTrait;
-use Ngpictures\Traits\Util\ValidationErrorTrait;
+use Framework\Renderer\RendererInterface;
+use Application\Traits\Util\RequestTrait;
+use Application\Traits\Util\ResolverTrait;
+use Application\Traits\Util\ValidationErrorTrait;
 
 class Controller
 {

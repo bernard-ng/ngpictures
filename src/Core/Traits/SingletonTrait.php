@@ -1,5 +1,5 @@
 <?php
-namespace Ng\Core\Traits;
+namespace Framework\Traits;
 
 trait SingletonTrait
 {

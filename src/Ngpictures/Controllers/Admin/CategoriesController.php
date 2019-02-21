@@ -1,10 +1,10 @@
 <?php
-namespace Ngpictures\Controllers\Admin;
+namespace Application\Controllers\Admin;
 
-use Ng\Core\Managers\Collection;
+use Framework\Managers\Collection;
 use Psr\Container\ContainerInterface;
-use Ngpictures\Controllers\AdminController;
-use Ngpictures\Traits\Controllers\PaginationTrait;
+use Application\Controllers\AdminController;
+use Application\Traits\Controllers\PaginationTrait;
 
 class CategoriesController extends AdminController
 {

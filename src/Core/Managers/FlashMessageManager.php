@@ -1,10 +1,10 @@
 <?php
-namespace Ng\Core\Managers;
+namespace Framework\Managers;
 
-use Ng\Core\Interfaces\SessionInterface;
-use Ng\Core\Traits\SingletonTrait;
-use Ngpictures\Managers\MessageManager;
-use Ngpictures\Traits\Util\RequestTrait;
+use Framework\Interfaces\SessionInterface;
+use Framework\Traits\SingletonTrait;
+use Application\Managers\MessageManager;
+use Application\Traits\Util\RequestTrait;
 
 class FlashMessageManager
 {

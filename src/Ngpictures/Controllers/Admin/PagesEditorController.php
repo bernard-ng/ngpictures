@@ -1,11 +1,11 @@
 <?php
-namespace Ngpictures\Controllers\Admin;
+namespace Application\Controllers\Admin;
 
 use Exception;
 use DirectoryIterator;
-use Ng\Core\Managers\Collection;
-use Ng\Core\Managers\ImageManager;
-use Ngpictures\Controllers\AdminController;
+use Framework\Managers\Collection;
+use Framework\Managers\ImageManager;
+use Application\Controllers\AdminController;
 
 class PagesEditorController extends AdminController
 {

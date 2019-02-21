@@ -1,7 +1,7 @@
 <?php
-namespace Ngpictures\Traits\Util;
+namespace Application\Traits\Util;
 
-use Ng\Core\Managers\Collection;
+use Framework\Managers\Collection;
 
 trait ValidationErrorTrait
 {

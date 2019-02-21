@@ -1,5 +1,5 @@
 <?php
-namespace Ngpictures\Controllers;
+namespace Application\Controllers;
 
 class ErrorController extends Controller
 {

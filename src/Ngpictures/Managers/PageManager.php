@@ -1,9 +1,9 @@
 <?php
-namespace Ngpictures\Managers;
+namespace Application\Managers;
 
-use Ngpictures\Ngpictures;
-use Ng\Core\Managers\ConfigManager;
-use Ng\Core\Exception\ConfigManagerException;
+use Application\Ngpictures;
+use Framework\Managers\ConfigManager;
+use Framework\Exception\ConfigManagerException;
 
 class PageManager
 {

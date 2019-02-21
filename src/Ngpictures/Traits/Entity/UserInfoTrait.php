@@ -1,7 +1,7 @@
 <?php
-namespace Ngpictures\Traits\Entity;
+namespace Application\Traits\Entity;
 
-use Ngpictures\Ngpictures;
+use Application\Ngpictures;
 
 trait UserInfoTrait
 {

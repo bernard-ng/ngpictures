@@ -1,8 +1,8 @@
 <?php
 
-namespace Ngpictures\Controllers;
+namespace Application\Controllers;
 
-use Ng\Core\Managers\Collection;
+use Framework\Managers\Collection;
 use Psr\Container\ContainerInterface;
 
 class IdeasController extends Controller

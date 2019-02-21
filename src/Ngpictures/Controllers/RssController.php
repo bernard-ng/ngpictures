@@ -1,5 +1,5 @@
 <?php
-namespace Ngpictures\Controllers;
+namespace Application\Controllers;
 
 use Suin\RSSWriter\Feed;
 use Suin\RSSWriter\Item;

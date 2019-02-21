@@ -1,8 +1,8 @@
 <?php
-namespace Ngpictures\Traits\Util;
+namespace Application\Traits\Util;
 
-use Ngpictures\Ngpictures;
-use Ng\Core\Interfaces\SessionInterface;
+use Application\Ngpictures;
+use Framework\Interfaces\SessionInterface;
 
 trait AuthTrait
 {

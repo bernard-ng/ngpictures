@@ -1,7 +1,7 @@
 <?php
-namespace Ngpictures\Controllers;
+namespace Application\Controllers;
 
-use Ng\Core\Managers\Collection;
+use Framework\Managers\Collection;
 
 class MapsController extends Controller
 {

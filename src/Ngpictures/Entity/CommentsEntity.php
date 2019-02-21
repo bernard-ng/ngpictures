@@ -1,10 +1,10 @@
 <?php
-namespace Ngpictures\Entity;
+namespace Application\Entity;
 
-use Ng\Core\Entity\Entity;
-use Ngpictures\Ngpictures;
-use Ngpictures\Traits\Util\AuthTrait;
-use Ng\Core\Interfaces\SessionInterface;
+use Framework\Entity\Entity;
+use Application\Ngpictures;
+use Application\Traits\Util\AuthTrait;
+use Framework\Interfaces\SessionInterface;
 
 class CommentsEntity extends Entity
 {

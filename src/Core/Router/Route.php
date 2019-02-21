@@ -1,5 +1,5 @@
 <?php
-namespace Ng\Core\Router;
+namespace Framework\Router;
 
 class Route
 {

@@ -1,7 +1,7 @@
 <?php
-namespace Ngpictures\Models;
+namespace Application\Models;
 
-use Ng\Core\Models\Model;
+use Framework\Models\Model;
 
 class OnlineModel extends Model
 {

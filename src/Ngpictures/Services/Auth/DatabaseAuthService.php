@@ -1,15 +1,15 @@
 <?php
-namespace Ngpictures\Services\Auth;
+namespace Application\Services\Auth;
 
-use Ngpictures\Models\UsersModel;
-use Ngpictures\Entity\UsersEntity;
-use Ng\Core\Managers\CookieManager;
-use Ng\Core\Managers\Mailer\Mailer;
-use Ng\Core\Managers\StringManager;
-use Ng\Core\Managers\SessionManager;
+use Application\Models\UsersModel;
+use Application\Entity\UsersEntity;
+use Framework\Managers\CookieManager;
+use Framework\Managers\Mailer\Mailer;
+use Framework\Managers\StringManager;
+use Framework\Managers\SessionManager;
 use Psr\Container\ContainerInterface;
-use Ngpictures\Traits\Util\RequestTrait;
-use Ng\Core\Managers\FlashMessageManager;
+use Application\Traits\Util\RequestTrait;
+use Framework\Managers\FlashMessageManager;
 
 class DatabaseAuthService
 {

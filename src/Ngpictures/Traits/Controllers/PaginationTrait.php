@@ -1,5 +1,5 @@
 <?php
-namespace Ngpictures\Traits\Controllers;
+namespace Application\Traits\Controllers;
 
 trait PaginationTrait
 {

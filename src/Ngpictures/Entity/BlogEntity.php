@@ -1,8 +1,8 @@
 <?php
-namespace Ngpictures\Entity;
+namespace Application\Entity;
 
-use Ng\Core\Entity\Entity;
-use Ngpictures\Traits\Entity\PostEntityTrait;
+use Framework\Entity\Entity;
+use Application\Traits\Entity\PostEntityTrait;
 
 class BlogEntity extends Entity
 {

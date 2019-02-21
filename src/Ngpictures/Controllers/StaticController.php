@@ -1,5 +1,5 @@
 <?php
-namespace Ngpictures\Controllers;
+namespace Application\Controllers;
 
 class StaticController extends Controller
 {

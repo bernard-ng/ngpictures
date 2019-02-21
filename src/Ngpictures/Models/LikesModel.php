@@ -1,14 +1,14 @@
 <?php
-namespace Ngpictures\Models;
+namespace Application\Models;
 
-use Ng\Core\Models\Model;
-use Ngpictures\Ngpictures;
-use Ng\Core\Database\DatabaseInterface;
-use Ng\Core\Interfaces\SessionInterface;
-use Ngpictures\Traits\Util\TypesActionTrait;
+use Framework\Models\Model;
+use Application\Ngpictures;
+use Framework\Database\DatabaseInterface;
+use Framework\Interfaces\SessionInterface;
+use Application\Traits\Util\TypesActionTrait;
 
 /**
- * @property \Ng\Core\Managers\SessionManager session
+ * @property \Framework\Managers\SessionManager session
  */
 class LikesModel extends Model
 {

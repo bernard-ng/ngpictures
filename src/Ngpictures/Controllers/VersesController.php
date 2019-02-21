@@ -1,5 +1,5 @@
 <?php
-namespace Ngpictures\Controllers;
+namespace Application\Controllers;
 
 class VersesController extends Controller
 {

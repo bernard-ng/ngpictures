@@ -1,10 +1,10 @@
 <?php
-namespace Ng\Core\Managers;
+namespace Framework\Managers;
 
 use \Throwable;
 use League\ColorExtractor\Color;
 use League\ColorExtractor\Palette;
-use Ng\Core\Interfaces\SessionInterface;
+use Framework\Interfaces\SessionInterface;
 use League\ColorExtractor\ColorExtractor;
 use Intervention\Image\Exception\NotReadableException;
 use Intervention\Image\ImageManager as InterventionImage;

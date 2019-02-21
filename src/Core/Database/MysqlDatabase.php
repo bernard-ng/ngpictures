@@ -1,11 +1,11 @@
 <?php
-namespace Ng\Core\Database;
+namespace Framework\Database;
 
 use \PDO;
 use \Exception;
 use \PDOException;
-use Ngpictures\Ngpictures;
-use Ng\Core\Managers\LogMessageManager;
+use Application\Ngpictures;
+use Framework\Managers\LogMessageManager;
 
 class MysqlDatabase implements DatabaseInterface
 {

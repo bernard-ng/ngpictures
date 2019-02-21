@@ -1,5 +1,5 @@
 <?php
-namespace Ng\Core\Managers;
+namespace Framework\Managers;
 
 use \SimpleXMLElement;
 use \InvalidArgumentException;

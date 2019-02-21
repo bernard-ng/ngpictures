@@ -1,9 +1,9 @@
 <?php
-namespace Ngpictures\Controllers\Admin;
+namespace Application\Controllers\Admin;
 
 use Psr\Container\ContainerInterface;
-use Ngpictures\Controllers\AdminController;
-use Ngpictures\Traits\Controllers\PaginationTrait;
+use Application\Controllers\AdminController;
+use Application\Traits\Controllers\PaginationTrait;
 
 class PostsController extends AdminController
 {

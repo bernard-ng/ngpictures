@@ -1,5 +1,5 @@
 <?php
-namespace Ng\Core\Entity;
+namespace Framework\Entity;
 
 class Entity
 {

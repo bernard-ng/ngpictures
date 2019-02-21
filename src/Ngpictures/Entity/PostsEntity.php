@@ -1,10 +1,10 @@
 <?php
-namespace Ngpictures\Entity;
+namespace Application\Entity;
 
-use Ng\Core\Entity\Entity;
-use Ngpictures\Traits\Entity\PostEntityTrait;
-use Ngpictures\Traits\Entity\UserInfoTrait;
-use Ngpictures\Traits\Util\AuthTrait;
+use Framework\Entity\Entity;
+use Application\Traits\Entity\PostEntityTrait;
+use Application\Traits\Entity\UserInfoTrait;
+use Application\Traits\Util\AuthTrait;
 
 class PostsEntity extends Entity
 {

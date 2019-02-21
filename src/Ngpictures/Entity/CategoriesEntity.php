@@ -1,7 +1,7 @@
 <?php
-namespace Ngpictures\Entity;
+namespace Application\Entity;
 
-use Ng\Core\Entity\Entity;
+use Framework\Entity\Entity;
 
 class CategoriesEntity extends Entity
 {

@@ -1,8 +1,8 @@
 <?php
-namespace Ngpictures\Models;
+namespace Application\Models;
 
-use Ng\Core\Models\Model;
-use Ngpictures\Traits\Models\FindQueryTrait;
+use Framework\Models\Model;
+use Application\Traits\Models\FindQueryTrait;
 
 class PostsModel extends Model
 {

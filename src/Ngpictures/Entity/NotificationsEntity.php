@@ -1,10 +1,10 @@
 <?php
-namespace Ngpictures\Entity;
+namespace Application\Entity;
 
-use Ng\Core\Entity\Entity;
-use Ngpictures\Ngpictures;
-use Ngpictures\Models\BlogModel;
-use Ngpictures\Models\PostsModel;
+use Framework\Entity\Entity;
+use Application\Ngpictures;
+use Application\Models\BlogModel;
+use Application\Models\PostsModel;
 
 class NotificationsEntity extends Entity
 {
