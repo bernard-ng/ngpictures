@@ -7,6 +7,10 @@ use Ngpictures\Traits\Util\RequestTrait;
 use Ng\Core\Managers\LogMessageManager;
 use Ng\Core\Managers\FlashMessageManager;
 
+/**
+ * Class Ngpictures
+ * @package Ngpictures
+ */
 class Ngpictures
 {
 

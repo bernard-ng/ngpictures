@@ -5,6 +5,10 @@ namespace Ng\Core\Router;
 use Ng\Core\Exception\RouterException;
 use Ngpictures\Ngpictures;
 
+/**
+ * Class Router
+ * @package Ng\Core\Router
+ */
 class Router
 {
 
@@ -32,7 +36,8 @@ class Router
      */
     public function __construct()
     {
-        $this->url = $_GET['url'] ?? $_SERVER['REQUEST_URI'] ?? '/';
+        $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
+        $this->url = $_GET['url'] ?? $uri ?? '/';
         if (strlen($this->url) > 1 && substr($this->url, -1) === '/') {
             $url = substr($this->url, 0, -1);
             http_response_code(301);
