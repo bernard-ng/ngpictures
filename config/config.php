@@ -4,8 +4,6 @@ use function \DI\get;
 use function \DI\object;
 use function \DI\factory;
 
-use ReCaptcha\ReCaptcha;
-use Ngpictures\Models\UsersModel;
 use Ng\Core\Renderer\TwigRenderer;
 use Ng\Core\Database\MysqlDatabase;
 use Ng\Core\Managers\CookieManager;
@@ -19,7 +17,6 @@ use Ng\Core\Managers\FlashMessageManager;
 
 
 return [
-
     'site.name'         =>  'Ngpictures',
     'site.owner'        =>  'Bernard Ngandu',
     'site.email'        =>  'ngandubernard@gmail.com',
@@ -50,7 +47,6 @@ return [
     ),
     \PDO::class => factory([MysqlDatabase::class, 'getPDO']),
 
-    ReCaptcha::class => object()->constructor(RECAPTCH_API_KEY),
     Glooby\Pexels\Client::class => object()->constructor(PEXELS_API_KEY),
     FlashMessageManager::class => object()->constructor(
         get(SessionInterface::class),

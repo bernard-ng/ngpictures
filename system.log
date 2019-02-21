@@ -1,0 +1,14 @@
+#*************************************************************
+        AUTHOR         :    Bernard-ng
+        PROJECT        :    NG-PICTURES
+        LINK           :    https://larytech.com
+        BUILT AT       :    21-Feb-2019  19:08:00
+**************************************************************
+[NG-PICTURES MESSAGES LOGS] 
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 21-Feb 19:08 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 21-Feb 19:08 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
