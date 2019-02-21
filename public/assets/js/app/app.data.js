@@ -41,7 +41,6 @@ function loadGeneric(element) {
                                 let data = parserHtml(xhr.responseText);
                                 container.append(data);
                                 loadInit();
-                                loadLazy();
                                 loadAjax();
                                 loadApp();
                                 getDataWithoutScroll();

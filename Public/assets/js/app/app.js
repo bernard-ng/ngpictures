@@ -1,15 +1,8 @@
-//Main Scripts
-//---------------------------------------------------------------------
-
-/**
- * premet de rendre un itme du menu active
- * @returns {boolean}
- */
 function toggleMenuItem() {
     let active = document.querySelector("#menu-item-active");
     if (active) {
         try {
-            let link = document.querySelector("ul.links").querySelector("li#"+ active.getAttribute('data-active'));
+            let link = document.querySelector("ul.links").querySelector("li#" + active.getAttribute('data-active'));
             if (link) {
                 link.classList.add('active');
             }
@@ -21,9 +14,7 @@ function toggleMenuItem() {
     }
 }
 
-
-function transparizeMenu()
-{
+function transparizeMenu() {
     let menu = document.querySelector("[data-action='menu']");
     let slider = document.querySelector("[data-action-requires='menu-transparent']")
 
@@ -50,18 +41,13 @@ function transparizeMenu()
     }
 }
 
-
-/**
- * premet de rendre un item du menu mobile active
- * @returns {boolean}
- */
 function toggleMobileMenuItem() {
     let active = document.querySelector("#menu-mobile-item-active");
     if (active) {
         try {
             let link = document
-                    .querySelector("ul.mobile-links")
-                    .querySelector("li#"+ active.getAttribute('data-active'));
+                .querySelector("ul.mobile-links")
+                .querySelector("li#" + active.getAttribute('data-active'));
             if (link) {
                 link.classList.add('active');
             }
@@ -74,12 +60,8 @@ function toggleMobileMenuItem() {
     }
 }
 
-
-/**
- * cree un timer relatif pour les dates
- */
-function relativeTimer(element){
-    if (document.querySelectorAll(element) ) {
+function relativeTimer(element) {
+    if (document.querySelectorAll(element)) {
         if (NodeList.prototype.forEach === undefined) {
             NodeList.prototype.forEach = function (callback) {
                 [].forEach.call(this, callback);
@@ -91,52 +73,53 @@ function relativeTimer(element){
             {time: 45, divide: 1, text: "moins d'une minute"},
             {time: 90, divide: 60, text: "environ une minute"},
             {time: 45 * 60, divide: 60, text: "%d minutes"},
-            {time: 90 * 60, divide: 60 * 60 , text: "environ une heure"},
-            {time: 24 * 60 * 60 , divide: 60 * 60 , text: "%d heures"},
-            {time: 42 * 60 * 60 , divide: 24 * 60 * 60 , text: "environ un jour"},
-            {time: 30 * 24 * 60 * 60, divide: 24 * 60 * 60 , text: "%d jours"},
-            {time: 42 * 24 * 60 * 60 , divide: 24 * 60 * 60 * 30, text: "environ un mois"},
+            {time: 90 * 60, divide: 60 * 60, text: "environ une heure"},
+            {time: 24 * 60 * 60, divide: 60 * 60, text: "%d heures"},
+            {time: 42 * 60 * 60, divide: 24 * 60 * 60, text: "environ un jour"},
+            {time: 30 * 24 * 60 * 60, divide: 24 * 60 * 60, text: "%d jours"},
+            {time: 42 * 24 * 60 * 60, divide: 24 * 60 * 60 * 30, text: "environ un mois"},
             {time: 365 * 24 * 60 * 60, divide: 24 * 60 * 60 * 30, text: "%d mois"},
-            {time: 365 * 1.5 * 24 * 60 * 60 , divide: 24 * 60 * 60 * 365, text: "environ un an"},
-            {time: Infinity, divide: 24 * 60 * 60 * 365 , text: "%d ans"}
+            {time: 365 * 1.5 * 24 * 60 * 60, divide: 24 * 60 * 60 * 365, text: "environ un an"},
+            {time: Infinity, divide: 24 * 60 * 60 * 365, text: "%d ans"}
         ];
 
-        document.querySelectorAll('time[data-time]').forEach(function(node) {
-            function setText(){
-                let seconds = Math.floor((new Date()).getTime()/1000 - parseInt(node.getAttribute('data-time'), 10));
-                let prefix = seconds > 0 ? 'Il y a ' : 'Dans ' ;
-                let term;
-                seconds = Math.abs(seconds);
+        function setText(node) {
+            let seconds = Math.floor((new Date()).getTime() / 1000 - parseInt(node.getAttribute('data-time'), 10));
+            let prefix = seconds > 0 ? 'Il y a ' : 'Dans ';
+            let term;
+            seconds = Math.abs(seconds);
 
-                for (term of terms) {
-                    if (seconds < term.time) {
-                        break;
-                    }
+            for (term of terms) {
+                if (seconds < term.time) {
+                    break;
                 }
-
-                node.innerHTML = prefix + term.text.replace('%d', Math.round(seconds/term.divide));
-
-                let nextTick = seconds % term.divide;
-                if (nextTick === 0) {
-                    nextTick = term.divide;
-                }
-
-                window.setTimeout(function(){
-                    if (node.parentNode){
-                        window.requestAnimationFrame ? window.requestAnimationFrame(setText) : setText();
-                    }
-                },  nextTick);
             }
-            setText();
+
+            node.innerHTML = prefix + term.text.replace('%d', Math.round(seconds / term.divide));
+
+            let nextTick = seconds % term.divide;
+            if (nextTick === 0) {
+                nextTick = term.divide;
+            }
+
+            window.setTimeout(function () {
+                if (node.parentNode) {
+                    window.requestAnimationFrame ? window.requestAnimationFrame(setText) : setText();
+                }
+            }, nextTick);
+        }
+
+        document.querySelectorAll('time[data-time]').forEach(function (node) {
+            if (!node.hasAttribute('data-time-initialized', 'true')) {
+                node.setAttribute('data-time-initialized', 'true');
+                setText(node);
+            }
         });
     } else {
         return false;
     }
 }
 
-/**
- * les bouttons de partages sur les social network
- */
 function share() {
     let sharePopup = function (url, title) {
         let windowTop = window.screenTop || window.screenY;
@@ -152,33 +135,32 @@ function share() {
             url,
             title,
             "scrollbars=yes, " +
-            "width="+popupWidth+",height="+popupHeight+",top="+popupTop+",left="+popupLeft
+            "width=" + popupWidth + ",height=" + popupHeight + ",top=" + popupTop + ",left=" + popupLeft
         ).focus();
         return true;
     };
 
     let twitter = document.querySelectorAll("[data-action='share-twitter']");
     if (twitter) {
-       for(let i = 0; i < twitter.length; i++)
-       {
-           twitter[i].addEventListener('click', function (e) {
-               e.preventDefault();
-               e.stopPropagation();
-               let url = encodeURIComponent("https://larytech.com" + this.getAttribute('data-url'));
-               let text = "Du nouveau sur Ngpictures !!!";
-               let share =
-                   "https://twitter.com/intent/tweet?text=" + text +
-                   "&via=Ngpictures"
-                   + "&url=" + url;
+        for (let i = 0; i < twitter.length; i++) {
+            twitter[i].addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                let url = encodeURIComponent("https://larytech.com" + this.getAttribute('data-url'));
+                let text = "Du nouveau sur Ngpictures !!!";
+                let share =
+                    "https://twitter.com/intent/tweet?text=" + text +
+                    "&via=Ngpictures"
+                    + "&url=" + url;
 
-               sharePopup(share, "Partager Sur Twitter");
-           });
-       }
+                sharePopup(share, "Partager Sur Twitter");
+            });
+        }
     }
 
     let facebook = document.querySelectorAll("[data-action='share-facebook']");
     if (facebook) {
-        for(let i = 0; i < facebook.length; i++) {
+        for (let i = 0; i < facebook.length; i++) {
             facebook[i].addEventListener('click', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -191,34 +173,30 @@ function share() {
 
     let googlePlus = document.querySelectorAll("[data-action='share-google-plus']");
     if (googlePlus) {
-       for(let i = 0; i < googlePlus.length; i++) {
-           googlePlus[i].addEventListener('click', function (e) {
-               e.preventDefault();
-               e.stopPropagation();
-               let url = encodeURIComponent("https://larytech.com" + this.getAttribute('data-url'));
-               let share = "https://plus.google.com/share?url=" + url;
-               sharePopup(share, "Partager Sur Google+");
-           });
-       }
+        for (let i = 0; i < googlePlus.length; i++) {
+            googlePlus[i].addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                let url = encodeURIComponent("https://larytech.com" + this.getAttribute('data-url'));
+                let share = "https://plus.google.com/share?url=" + url;
+                sharePopup(share, "Partager Sur Google+");
+            });
+        }
     }
 
     let whatsapp = document.querySelector("[data-action='share-whatsapp']");
     if (whatsapp) {
-       for(let i = 0; i < whatsapp.length; i++) {
-           whatsapp[i].addEventListener('click', function (e) {
-               e.preventDefault();
-               e.stopPropagation();
-               let url = encodeURIComponent("https://larytech.com" + this.getAttribute('data-url'));
-               window.location = "https://wa.me/?text=" + url;
-           });
-       }
+        for (let i = 0; i < whatsapp.length; i++) {
+            whatsapp[i].addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                let url = encodeURIComponent("https://larytech.com" + this.getAttribute('data-url'));
+                window.location = "https://wa.me/?text=" + url;
+            });
+        }
     }
 }
 
-
-/**
- * affiche l'image a uploader avant l'upload
- */
 function showImageBeforeUpload(element) {
     let form = document.querySelector(element);
     if (form) {
@@ -227,10 +205,10 @@ function showImageBeforeUpload(element) {
         let admitExt = ['jpg', 'jpeg', 'png', 'gif'];
         let adminTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 
-        let getFile = function(files) {
+        let getFile = function (files) {
             let reader = new FileReader();
             reader.readAsDataURL(files);
-            reader.addEventListener('load', function() {
+            reader.addEventListener('load', function () {
                 let tag = document.createElement('img');
                 tag.classList.add('responsive-img');
                 tag.src = this.result;
@@ -239,7 +217,7 @@ function showImageBeforeUpload(element) {
             });
         };
 
-        input.addEventListener('change', function() {
+        input.addEventListener('change', function () {
             let file = this.files[0];
             let ext = file.name.substr(file.name.lastIndexOf('.') + 1).toLowerCase();
             let type = file.type;
@@ -248,7 +226,7 @@ function showImageBeforeUpload(element) {
                 if (file.size <= 15728640) {
                     getFile(file);
                 } else {
-                    setFlash('danger',msg.filesGreaterThanLimit)
+                    setFlash('danger', msg.filesGreaterThanLimit)
                 }
             } else {
                 setFlash("danger", msg.filesNotImage);
@@ -257,8 +235,6 @@ function showImageBeforeUpload(element) {
     }
 }
 
-//CALL
-//----------------------------------------------------------------------
 function loadApp() {
     transparizeMenu();
     toggleMenuItem();
