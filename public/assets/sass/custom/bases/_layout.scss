@@ -42,19 +42,33 @@
 
     & .jumbotron-content {
         display: block;
+        position: relative;
         word-wrap: break-word;
         margin-bottom: 20px;
         color: #fff;
     }
 
     & .title h3{
-        font-family: Mechanic, sans-serif !important;
+        position: relative;
+        font-family: "Raleway", Roboto, sans-serif !important;
         color: #fff;
         padding-left: 10px;
         margin-top: 20px;
         margin-bottom: 10px;
         font-weight: 500 !important;
         text-transform: capitalize !important;
+    }
+
+    & .bg {
+        background-color: rgba(0,0,0,0.5);
+        margin: 0;
+        width: 100%;
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
     }
 }
 

@@ -4,7 +4,7 @@
   border: none;
   border-radius: 2px;
   color: #fff !important;
-  font-weight: 300 !important;
+  font-weight: 500 !important;
   display: inline-block;
   height: 36px;
   line-height: 36px;
@@ -96,6 +96,7 @@
   color: #fff;
   background-color: $btn-color;
   text-align: center;
+  text-transform: capitalize !important;
   letter-spacing: .5px;
   -webkit-transition: .2s ease-out;
   -o-transition: .2s ease-out;

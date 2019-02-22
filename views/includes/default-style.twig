@@ -10,29 +10,27 @@
 </script>
 
 <style type="text/css">
-
     .turbolinks-progress-bar {
-
         position: fixed;
-
         display: block;
-
         top: 0;
-
         left: 0;
-
-        height: 4px;
-
+        height: 5px;
         background: #0076ff;
-
         z-index: 9999;
-
         transition: width 300ms ease-out, opacity 150ms 150ms ease-in;
-
         transform: translate3d(0, 0, 0);
-
+        animation: change-color linear 3s infinite;
     }
 
+    @keyframes change-color {
+        from {
+            filter: hue-rotate(0deg);
+        }
+        to {
+            filter: hue-rotate(359deg);
+        }
+    }
 </style>
 
 <script type="text/javascript" src="{{ cacheBusting('/assets/js/lib/turbolinks.js') }}"></script>

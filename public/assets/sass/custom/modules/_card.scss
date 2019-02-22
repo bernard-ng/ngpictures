@@ -137,7 +137,7 @@
 .card-user.people .card-info .desc {
     display: block;
     margin: 8px 14px 0 14px;
-    color: #ccc;
+    color: #fff;
     overflow: hidden;
     -o-text-overflow: ellipsis;
        text-overflow: ellipsis;
@@ -224,8 +224,8 @@
 
     box-shadow: 0 2px 5px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
     -webkit-box-shadow: 0 2px 5px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
-
-    color: #ccc;
+    background: #100F0F;
+    color: #fff;
     max-width: 100%;
     height: auto;
     overflow: hidden;
@@ -276,7 +276,7 @@
 
         & h1{
             text-transform: capitalize;
-            font-family: robot-title, openSans, sans-serif ;
+            font-family: "Raleway", "Roboto", openSans, sans-serif ;
             font-weight: 300 !important;
             font-size: 1.5em;
             margin-bottom: 24px;
@@ -286,7 +286,7 @@
 
         & h2{
             text-transform: capitalize;
-            font-family: robot-title, openSans, sans-serif ;
+            font-family: "Raleway", "Roboto", openSans, sans-serif ;
             font-weight: 600 !important;
             font-size: 1.5em;
             margin-bottom: 10px;
@@ -294,7 +294,7 @@
         }
 
         & i {
-            border: 2px solid #ccc;
+            border: 2px solid #fff;
             border-radius: 100%;
             padding: 10px;
             text-align: center;
@@ -321,7 +321,7 @@
         padding: 0.35rem;
         -webkit-text-decoration-line: none !important;
         text-decoration-line: none !important;
-        color: #ccc;
+        color: #fff;
     }
 
     &-image{
@@ -451,43 +451,8 @@
 
 #articleInfo {
     padding: 10px 0 10px 0;
-    border-top: 1px solid #383737;
-    margin-top: 5px;
-    font-family: openSans, sans-serif  ;
-
+    font-family: "Roboto", sans-serif  ;
     & .icon{
         color: #919191 !important;
-    }
-}
-
-.ng-article{
-    padding: 20px 0 0 0;
-
-    &-img{
-        padding: 0;
-        margin: 0;
-        overflow: hidden;
-
-        & img{
-            -webkit-transition: all .3s linear ;
-            -o-transition: all .3s linear ;
-            transition: all .3s linear ;
-            width: 100%;
-            height: auto;
-        }
-    }
-
-    &-category{
-        width: 60px;
-        height: 60px;
-        border-radius: 100%;
-        text-align: center;
-        line-height: 60px;
-        border: 2px solid #fff;
-        position: absolute;
-        top: 20px; right: 20px;
-        background: #919191;
-        color: #fff;
-        z-index: 10;
     }
 }

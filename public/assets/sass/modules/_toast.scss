@@ -1,3 +1,4 @@
+@import "../custom/bases/variables";
 
 #toast-container {
   display: block;
@@ -39,7 +40,7 @@
   min-height: 48px;
   line-height: 1.5em;
   word-break: break-all;
-  background-color: #1c1b1b;
+  background-color: $bg-color;
   padding: 10px 25px;
   font-size: 1rem;
   font-weight: 300;

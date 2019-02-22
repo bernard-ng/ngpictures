@@ -1,13 +1,11 @@
-$bg-color   :   #1c1b1b;
+$bg-color   :   #202124;
 
-
-$txt-color  :   #dddddd;
-$txt-light-color: #acacac;
-
+$txt-color  :   #fff;
+$txt-light-color: #d2d2d2;
 $border-color : #383737;
 
-$nav-color  :   #263238;
-$btn-color  :   #607d8b;
-$btn-focus-color: #546e7a;
-$active-color : #039BE5;
-$active-hover-color: #0368a9;
+$nav-color  :   $bg-color;
+$btn-color  :   #0083d0;
+$btn-focus-color: #005ca6;
+$active-color : #1da1f2;
+$active-hover-color: #005ca6;

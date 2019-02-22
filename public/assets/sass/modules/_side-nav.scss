@@ -17,7 +17,7 @@
   will-change: transform;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
-  background-color: $nav-color;
+  background-color: #3c4043;
 }
 
 .side-nav.right-aligned {
@@ -40,18 +40,17 @@
 
 .side-nav li.active {
   background-color: rgba(255, 255, 255, 0.09);
-  border-right: #ccc solid 2px;
+  border-right: $txt-light-color solid 2px;
 }
 
 .side-nav li > a {
-  color: rgba(0, 0, 0, 0.87);
   display: block;
   font-size: 14px;
   font-weight: 500;
   height: 48px;
   line-height: 48px;
   padding: 0 32px;
-  color: #ccc;
+  color: $txt-light-color;
 }
 
 .side-nav li > a:hover {
@@ -67,15 +66,7 @@
 }
 
 .side-nav li > a.btn-flat {
-  color: #ccc;
-}
-
-.side-nav li > a.btn:hover, .side-nav li > a.btn-large:hover, .side-nav li > a.btn-large:hover {
-  background-color: #2bbbad;
-}
-
-.side-nav li > a.btn-floating:hover {
-  background-color: #26a69a;
+  color: $txt-light-color;
 }
 
 .side-nav li > a > i,
@@ -97,7 +88,6 @@
 .side-nav .subheader {
   cursor: initial;
   pointer-events: none;
-  color: rgba(0, 0, 0, 0.54);
   font-size: 14px;
   font-weight: 500;
   line-height: 48px;
@@ -118,7 +108,7 @@
   position: relative;
   padding: 10px;
   margin-bottom: 8px;
-  background: #1c1b1b;
+  background: $bg-color;
 }
 
 .side-nav .user-view > a,
@@ -231,7 +221,7 @@
 .side-nav .collapsible-body > ul:not(.collapsible) > li.active,
 .side-nav.fixed .collapsible-body > ul:not(.collapsible) > li.active {
   background-color: rgba(255, 255, 255, 0.09);
-  border-right: #ccc double 2px;
+  border-right: $txt-light-color double 2px;
 }
 
 .side-nav .collapsible-body > ul:not(.collapsible) > li.active a,
@@ -241,7 +231,7 @@
 
 .side-nav .collapsible-body {
   padding: 0;
-  background: #1c1b1b;
+  background: $bg-color;
 }
 
 #sidenav-overlay {
