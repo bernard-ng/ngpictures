@@ -1,6 +1,7 @@
 <?php
 namespace Ngpictures\Controllers;
 
+use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 
 class CategoriesController extends Controller
@@ -42,8 +43,8 @@ class CategoriesController extends Controller
         }
 
         $this->turbolinksLocation('/categories');
-        $this->pageManager::setTitle('Les catégories');
-        $this->pageManager::setDescription(
+        PageManager::setTitle('Les catégories');
+        PageManager::setDescription(
             "Rétrouvez facilement une photo en cliquant sur une catégorie"
         );
         $this->view("frontend/categories/index", compact('categories', 'thumbs', 'nb'));
@@ -65,7 +66,7 @@ class CategoriesController extends Controller
             $gallery    = $this->gallery->findWith('categories_id', $category->id, false);
 
             $this->turbolinksLocation("/categories/{$name}-{$id}");
-            $this->pageManager::setTitle("{$category->title}");
+            PageManager::setTitle("{$category->title}");
             $this->view('frontend/categories/show', compact('category', 'blog', 'posts', 'gallery'));
         } else {
             $this->flash->set('danger', $this->flash->msg['category_not_found']);

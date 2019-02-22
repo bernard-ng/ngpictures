@@ -3,6 +3,7 @@ namespace Ngpictures\Controllers;
 
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\Mailer\Mailer;
+use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 
 class PhotographersController extends Controller
@@ -52,7 +53,7 @@ class PhotographersController extends Controller
             }
 
             $this->turbolinksLocation("/photographers/sign");
-            $this->pageManager::setTitle("Création compte photographe");
+            PageManager::setTitle("Création compte photographe");
             $this->view('frontend/photographers/sign', compact('post', 'errors'));
         } else {
             $this->redirect("/photographers/profile/{$exist->label}-{$exist->id}");
@@ -98,7 +99,7 @@ class PhotographersController extends Controller
                 }
 
                 $this->turbolinksLocation("/photographers/sign");
-                $this->pageManager::setTitle("Création compte photographe");
+                PageManager::setTitle("Création compte photographe");
                 $this->view('frontend/photographers/sign', compact('post', 'errors'));
             } else {
                 $this->redirect("/photographers/profile/{$exist->label}-{$exist->id}");
@@ -123,9 +124,9 @@ class PhotographersController extends Controller
             );
 
             $this->turbolinksLocation("/photographers/profile/{$label}-{$id}");
-            $this->pageManager::setTitle('Photographe : ' .$photographer->label);
-            $this->pageManager::setImage($user->avatarUrl);
-            $this->pageManager::setDescription($user->bio);
+            PageManager::setTitle('Photographe : ' .$photographer->label);
+            PageManager::setImage($user->avatarUrl);
+            PageManager::setDescription($user->bio);
             $this->view('frontend/photographers/profil', compact('user', 'photographer', 'last', 'albums'));
         } else {
             $this->flash('danger', $this->flash->msg['undefined_error']);
@@ -191,7 +192,7 @@ class PhotographersController extends Controller
             }
         }
 
-        $this->pageManager::setTitle('Ajouter une photo');
+        PageManager::setTitle('Ajouter une photo');
         $this->view("frontend/photographers/add", compact('post', 'categories', 'albums'));
     }
 
@@ -217,7 +218,7 @@ class PhotographersController extends Controller
                 $this->redirect(ADMIN . "/gallery", false);
             }
 
-            $this->pageManager::setTitle('Adm - gallery.edit');
+            PageManager::setTitle('Adm - gallery.edit');
             $this->view("backend/gallery/edit", compact('photo', 'categories', 'albums'));
         } else {
             $this->flash->set('danger', $this->flash->msg['post_not_found'], false);
@@ -251,8 +252,8 @@ class PhotographersController extends Controller
         }
 
         $this->turbolinksLocation("/photographers/add/albums/{$token}");
-        $this->pageManager::setTitle('Créer un album');
-        $this->pageManager::setDescription("Les albums public sont visible pour tout le monde");
+        PageManager::setTitle('Créer un album');
+        PageManager::setDescription("Les albums public sont visible pour tout le monde");
         $this->view('frontend/photographers/albums.add', compact('post', 'errors'));
     }
 
@@ -281,7 +282,7 @@ class PhotographersController extends Controller
                 }
             }
 
-            $this->pageManager::setTitle('admin album.edit');
+            PageManager::setTitle('admin album.edit');
             $this->view('frontend/photographers/albums.edit', compact('post', 'album', 'errors'));
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
@@ -298,7 +299,7 @@ class PhotographersController extends Controller
             $bookings = $this->loadModel('booking')->findWith('photographers_id', $photographer->id, false);
 
             $this->turbolinksLocation("/photographers/bookings/{$token}");
-            $this->pageManager::setTitle('Mes Réservations');
+            PageManager::setTitle('Mes Réservations');
             $this->view('frontend/photographers/bookings', compact('bookings', 'photographer', 'user'));
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error']);

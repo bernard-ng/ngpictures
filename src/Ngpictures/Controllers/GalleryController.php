@@ -1,6 +1,7 @@
 <?php
 namespace Ngpictures\Controllers;
 
+use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 
 class GalleryController extends Controller
@@ -28,7 +29,7 @@ class GalleryController extends Controller
         $photos = $this->gallery->latest(0, 8);
 
         $this->turbolinksLocation("/gallery");
-        $this->pageManager::setTitle('Galerie');
+        PageManager::setTitle('Galerie');
         $this->view('frontend/gallery/index', compact('photo', 'photos'));
     }
 
@@ -67,8 +68,8 @@ class GalleryController extends Controller
 
 
                     $this->turbolinksLocation("/gallery/{$article->slug}-{$id}");
-                    $this->pageManager::setTitle($article->name ?? $altName);
-                    $this->pageManager::setImage($article->smallThumbUrl);
+                    PageManager::setTitle($article->name ?? $altName);
+                    PageManager::setImage($article->smallThumbUrl);
                     $this->view(
                         "frontend/gallery/show",
                         compact("article", "comments", "commentsNumber", "user", "categories", "author", "similars")
@@ -111,7 +112,7 @@ class GalleryController extends Controller
         }
 
         $this->turbolinksLocation("/gallery/albums");
-        $this->pageManager::setTitle('albums');
+        PageManager::setTitle('albums');
         $this->view('frontend/gallery/albums', compact("albums", "thumbs", "nb"));
     }
 
@@ -126,8 +127,8 @@ class GalleryController extends Controller
             $posts  = $this->loadModel('posts')->findWith('albums_id', $album->id, false);
 
             $this->turbolinksLocation("/gallery/albums/{$slug}-{$id}");
-            $this->pageManager::setTitle("{$album->title}");
-            $this->pageManager::setDescription("Toutes les photos de l'album : {$album->title}, {$album->description}");
+            PageManager::setTitle("{$album->title}");
+            PageManager::setDescription("Toutes les photos de l'album : {$album->title}, {$album->description}");
             $this->view("frontend/gallery/album_show", compact("album", "author", "gallery", "posts"));
         } else {
             $this->flash->set('danger', "Cet album n'existe pas ou plus");
@@ -150,8 +151,8 @@ class GalleryController extends Controller
                 $photos = $this->gallery->findGreater($lastId, 4);
                 $last_id = $photos == null ? 1 : end($photos)->id;
 
-                $this->pageManager::setTitle('Diaporama');
-                $this->pageManager::setDescription("Voir les photos de la galerie, en diaporama");
+                PageManager::setTitle('Diaporama');
+                PageManager::setDescription("Voir les photos de la galerie, en diaporama");
                 $this->view('frontend/gallery/slider', compact('photos', 'last_id'));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error']);
@@ -160,8 +161,8 @@ class GalleryController extends Controller
         } else {
             $photos = $this->gallery->latest();
             $last_id =  $photos == null ? 1 : end($photos)->id;
-            $this->pageManager::setTitle('Diaporama');
-            $this->pageManager::setDescription("Voir les photos de la galerie, en diaporama");
+            PageManager::setTitle('Diaporama');
+            PageManager::setDescription("Voir les photos de la galerie, en diaporama");
             $this->view('frontend/gallery/slider', compact('photos', 'last_id'));
         }
     }

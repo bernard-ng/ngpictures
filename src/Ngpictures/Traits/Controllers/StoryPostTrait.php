@@ -1,6 +1,8 @@
 <?php
 namespace Ngpictures\Traits\Controllers;
 
+use Ngpictures\Managers\PageManager;
+
 trait StoryPostTrait
 {
     /**
@@ -16,8 +18,8 @@ trait StoryPostTrait
         $name       =   ($this->table == 'posts') ? "Fil d'actualité" : ucfirst($this->table);
 
         $this->turbolinksLocation("/".$this->table);
-        $this->pageManager::setTitle($name);
-        $this->pageManager::setDescription("
+        PageManager::setTitle($name);
+        PageManager::setDescription("
             Découvez les photos et les articles des passionnés de la photographie, partager vos photos avec la
             communauté.
         ");

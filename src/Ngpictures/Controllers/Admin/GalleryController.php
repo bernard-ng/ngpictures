@@ -5,6 +5,7 @@ use Exception;
 use DirectoryIterator;
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\ImageManager;
+use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Controllers\AdminController;
 use Ngpictures\Traits\Controllers\PaginationTrait;
@@ -31,7 +32,7 @@ class GalleryController extends AdminController
         $photos = $pagination['result'] ?? $photos;
 
 
-        $this->pageManager::setTitle('Adm - gallery');
+        PageManager::setTitle('Adm - gallery');
         $this->view(
             "backend/gallery/index",
             compact('photos', 'photo', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
@@ -97,7 +98,7 @@ class GalleryController extends AdminController
             }
         }
 
-        $this->pageManager::setTitle('Adm - gallery.add');
+        PageManager::setTitle('Adm - gallery.add');
         $this->view("backend/gallery/add", compact('post', 'categories', 'albums'));
     }
 
@@ -128,7 +129,7 @@ class GalleryController extends AdminController
                 $this->redirect(ADMIN . "/gallery", false);
             }
 
-            $this->pageManager::setTitle('Adm - gallery.edit');
+            PageManager::setTitle('Adm - gallery.edit');
             $this->view("backend/gallery/edit", compact('photo', 'categories', 'albums'));
         } else {
             $this->flash->set('danger', $this->flash->msg['post_not_found'], false);
@@ -145,7 +146,7 @@ class GalleryController extends AdminController
     public function mediaBrowser()
     {
         $images = $this->gallery->all();
-        $this->pageManager::setTitle('admin media-browser');
+        PageManager::setTitle('admin media-browser');
         $this->view('backend/gallery/media-browser', compact('images'));
     }
 
@@ -168,7 +169,7 @@ class GalleryController extends AdminController
             $this->redirect(true, true);
         }
 
-        $this->pageManager::setTitle('admin file-browser');
+        PageManager::setTitle('admin file-browser');
         $this->view('backend/gallery/file-browser', compact('files', 'relative_dos'));
     }
 
@@ -204,7 +205,7 @@ class GalleryController extends AdminController
                 }
             }
 
-            $this->pageManager::setTitle('adm - watermarker');
+            PageManager::setTitle('adm - watermarker');
             $this->view("backend/gallery/watermark", ['image' => "/uploads/$path[$type]/{$filename}"]);
         } else {
             $this->flash->set('danger', $this->flash->msg['files_not_image'], false);

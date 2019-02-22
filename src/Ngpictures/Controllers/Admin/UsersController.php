@@ -1,6 +1,7 @@
 <?php
 namespace Ngpictures\Controllers\Admin;
 
+use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Controllers\AdminController;
 use Ngpictures\Traits\Controllers\PaginationTrait;
@@ -26,7 +27,7 @@ class UsersController extends AdminController
         $users          = $pagination['result'] ?? $users;
 
         $this->turbolinksLocation(ADMIN."/users");
-        $this->pageManager::setTitle("Adm - users");
+        PageManager::setTitle("Adm - users");
         $this->view(
             "backend/users/index",
             compact('users', 'bugs', 'ideas', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
@@ -74,7 +75,7 @@ class UsersController extends AdminController
         $bugs           = $pagination['result'] ?? $bugs;
 
         $this->turbolinksLocation(ADMIN.'/bugs');
-        $this->pageManager::setTitle('Adm - bugs');
+        PageManager::setTitle('Adm - bugs');
         $this->view(
             'backend/users/bugs',
             compact('bugs', 'total', "totalPage", "currentPage", "prevPage", "nextPage")
@@ -98,7 +99,7 @@ class UsersController extends AdminController
         $ideas          = $pagination['result'] ?? $ideas;
 
         $this->turbolinksLocation(ADMIN.'/ideas');
-        $this->pageManager::setTitle('Adm - ideas');
+        PageManager::setTitle('Adm - ideas');
         $this->view(
             'backend/users/ideas',
             compact('ideas', 'total', "totalPage", "currentPage", "prevPage", "nextPage")

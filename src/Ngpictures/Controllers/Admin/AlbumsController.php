@@ -2,6 +2,7 @@
 namespace Ngpictures\Controllers\Admin;
 
 use Ng\Core\Managers\Collection;
+use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Controllers\AdminController;
 use Ngpictures\Traits\Controllers\PaginationTrait;
@@ -26,7 +27,7 @@ class AlbumsController extends AdminController
         $nextPage       = $pagination['nextPage'];
         $albums         = $pagination['result'] ?? $albums;
 
-        $this->pageManager::setTitle('admin gallery.album');
+        PageManager::setTitle('admin gallery.album');
         $this->view(
             'backend/gallery/albums',
             compact('albums', "currentPage", 'totalPage', 'prevPage', 'nextPage', 'total')
@@ -62,7 +63,7 @@ class AlbumsController extends AdminController
             }
         }
 
-        $this->pageManager::setTitle('admin album.add');
+        PageManager::setTitle('admin album.add');
         $this->view('backend/gallery/albums.add', compact('post', 'errors'));
     }
 
@@ -96,7 +97,7 @@ class AlbumsController extends AdminController
                 }
             }
 
-            $this->pageManager::setTitle('admin album.edit');
+            PageManager::setTitle('admin album.edit');
             $this->view('backend/gallery/albums.edit', compact('post', 'album', 'errors'));
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error'], false);

@@ -19,6 +19,11 @@ class Controller
      */
     protected $renderer;
 
+    /**
+     * @var ContainerInterface
+     */
+    protected $container;
+
 
     public function __construct(ContainerInterface $container)
     {

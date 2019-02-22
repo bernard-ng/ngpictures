@@ -2,6 +2,7 @@
 namespace Ngpictures\Controllers;
 
 use Ng\Core\Managers\Collection;
+use Ngpictures\Managers\PageManager;
 use Ngpictures\Traits\Util\TypesActionTrait;
 
 class ReportsController extends Controller
@@ -32,8 +33,8 @@ class ReportsController extends Controller
                 }
             }
 
-            $this->pageManager::setTitle('Signaler une publication');
-            $this->pageManager::setDescription("Veuillez nous dire ce qui ne va pas avec cette publication");
+            PageManager::setTitle('Signaler une publication');
+            PageManager::setDescription("Veuillez nous dire ce qui ne va pas avec cette publication");
             $this->turbolinksLocation("/report/{$type}/{$slug}-{$id}");
             $this->view('frontend/others/report', compact('post'));
         } else {

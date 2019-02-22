@@ -2,6 +2,7 @@
 namespace Ngpictures\Controllers;
 
 use Ng\Core\Managers\Collection;
+use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 
 class CommunityController extends Controller
@@ -17,8 +18,8 @@ class CommunityController extends Controller
         $users = $this->users->get(10);
 
         $this->turbolinksLocation('/community');
-        $this->pageManager::setTitle("Communauté");
-        $this->pageManager::setDescription(
+        PageManager::setTitle("Communauté");
+        PageManager::setDescription(
             "Rétrouvez la communauté de ngpictures, vos amis, les artistes et les passionnés
             de la photographie"
         );
@@ -35,8 +36,8 @@ class CommunityController extends Controller
         $users = $this->users->findList($photographers);
 
         $this->turbolinksLocation('/community/photographers');
-        $this->pageManager::setTitle("Photographers");
-        $this->pageManager::setDescription(
+        PageManager::setTitle("Photographers");
+        PageManager::setDescription(
             "Rétrouvez la communauté de ngpictures, vos amis, les artistes et les passionnés
             de la photographie"
         );
@@ -51,11 +52,11 @@ class CommunityController extends Controller
 
             $users = $this->loadModel('users')->search($query);
             $this->turbolinksLocation("/community/search?q={$query}");
-            $this->pageManager::setTitle("Recherches");
+            PageManager::setTitle("Recherches");
             $this->view("frontend/community/search", compact("query", "users"));
         } else {
             $this->turbolinksLocation("/community/search");
-            $this->pageManager::setTitle("Recherches");
+            PageManager::setTitle("Recherches");
             $this->view("frontend/community/search");
         }
     }

@@ -28,6 +28,26 @@ class DatabaseAuthService
      */
     private $container;
 
+    /**
+     * @var mixed|FlashMessageManager
+     */
+    private $flash;
+
+    /**
+     * @var mixed|SessionManager
+     */
+    private $session;
+
+    /**
+     * @var mixed|CookieManager
+     */
+    private $cookie;
+
+    /**
+     * @var mixed|StringManager
+     */
+    private $str;
+
 
     /**
      * DatabaseAuthService constructor.

@@ -3,6 +3,7 @@ namespace Ngpictures\Controllers\Admin;
 
 use Ng\Core\Managers\Collection;
 use Ngpictures\Controllers\AdminController;
+use Ngpictures\Managers\PageManager;
 use Ngpictures\Traits\Util\TypesActionTrait;
 use Ngpictures\Traits\Controllers\PaginationTrait;
 
@@ -26,7 +27,7 @@ class ReportsController extends AdminController
         $nextPage = $pagination['nextPage'];
         $reports = $pagination['result'] ?? $reports;
 
-        $this->pageManager::setTitle('admin gallery.album');
+        PageManager::setTitle('admin gallery.album');
         $this->view(
             'backend/reports',
             compact('reports', "currentPage", 'totalPage', 'prevPage', 'nextPage', 'total')

@@ -19,6 +19,7 @@ class Controller extends SuperController
     protected $pageManager;
     protected $authService;
     protected $validator;
+    protected $str;
 
 
     /**
@@ -33,12 +34,11 @@ class Controller extends SuperController
         $this->flash            =   $this->container->get(FlashMessageManager::class);
         $this->session          =   $this->container->get(SessionInterface::class);
         $this->validator        =   $this->container->get(ValidationManager::class);
-        $this->pageManager      =   $this->container->get(PageManager::class);
         $this->authService      =   $this->container->get(DatabaseAuthService::class);
 
-        // if (!$this->authService->isLogged()) {
-        //     $this->authService->cookieConnect();
-        // }
+        /*if (!$this->authService->isLogged()) {
+             $this->authService->cookieConnect();
+        }*/
     }
 
 
@@ -52,7 +52,7 @@ class Controller extends SuperController
      */
     public function view(string $view, array $variables = [], bool $layout = true)
     {
-        $this->renderer->addGlobal('pageManager', $this->pageManager);
+        $this->renderer->addGlobal('pageManager', new PageManager());
         $this->renderer->addGlobal('sessionManager', $this->session);
         $this->renderer->addGlobal('flashMessageManager', $this->flash);
         $this->renderer->addGlobal('verse', $this->callController('verses')->index());
@@ -65,8 +65,8 @@ class Controller extends SuperController
                 $this->loadModel('notifications')->count($this->authService->isLogged()->id)->num
             );
 
-            $this->pageManager::setMeta(['active-user' => $this->session->getValue(AUTH_KEY, 'id')]);
-            $this->pageManager::setMeta(['active-token' => $this->session->read(TOKEN_KEY)]);
+            PageManager::setMeta(['active-user' => $this->session->getValue(AUTH_KEY, 'id')]);
+            PageManager::setMeta(['active-token' => $this->session->read(TOKEN_KEY)]);
         } else {
             $this->renderer->addGlobal('activeUder', false);
             $this->renderer->addGlobal('securityToken', false);

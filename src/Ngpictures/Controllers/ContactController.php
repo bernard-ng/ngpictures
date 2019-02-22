@@ -3,6 +3,7 @@ namespace Ngpictures\Controllers;
 
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\Mailer\Mailer;
+use Ngpictures\Managers\PageManager;
 
 class ContactController extends Controller
 {
@@ -30,7 +31,7 @@ class ContactController extends Controller
         }
 
         $this->turbolinksLocation("/contact");
-        $this->pageManager::setTitle("Contact");
+        PageManager::setTitle("Contact");
         $this->view("frontend/others/contact", compact("post", "errors"));
     }
 }

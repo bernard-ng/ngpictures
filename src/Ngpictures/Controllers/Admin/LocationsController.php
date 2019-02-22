@@ -2,6 +2,7 @@
 namespace Ngpictures\Controllers\Admin;
 
 use Ng\Core\Managers\Collection;
+use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Controllers\AdminController;
 use Ngpictures\Traits\Controllers\PaginationTrait;
@@ -26,7 +27,7 @@ class LocationsController extends AdminController
         $nextPage = $pagination['nextPage'];
         $locations = $pagination['result'] ?? $locations;
 
-        $this->pageManager::setTitle('admin location');
+        PageManager::setTitle('admin location');
         $this->view(
             'backend/photographers/location',
             compact('locations', "currentPage", 'totalPage', 'prevPage', 'nextPage', 'total')
@@ -69,7 +70,7 @@ class LocationsController extends AdminController
             }
         }
 
-        $this->pageManager::setTitle("admin location.add");
+        PageManager::setTitle("admin location.add");
         $this->view(
             "backend/photographers/location.add",
             compact('post', 'errors', 'photographers')
@@ -108,7 +109,7 @@ class LocationsController extends AdminController
                 }
             }
 
-            $this->pageManager::setTitle("admin location.edit");
+            PageManager::setTitle("admin location.edit");
             $this->view(
                 "backend/photographers/location.edit",
                 compact('post', 'errors', 'location', 'photographers')

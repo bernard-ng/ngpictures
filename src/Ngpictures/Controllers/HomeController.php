@@ -1,6 +1,7 @@
 <?php
 namespace Ngpictures\Controllers;
 
+use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Util\ResolverTrait;
 
@@ -25,7 +26,7 @@ class HomeController extends Controller
         ];
 
         $this->turbolinksLocation("/");
-        $this->pageManager::setTitle('Ngpictures');
+        PageManager::setTitle('Ngpictures');
         $this->view(
             "frontend/index",
             compact('last', 'article', 'categories', 'sliderTitle', 'sliderDesc')

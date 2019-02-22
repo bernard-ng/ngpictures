@@ -2,6 +2,7 @@
 namespace Ngpictures\Controllers\Admin;
 
 use Ng\Core\Managers\Collection;
+use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Controllers\AdminController;
 use Ngpictures\Traits\Controllers\PaginationTrait;
@@ -26,7 +27,7 @@ class PhotographersController extends AdminController
         $nextPage = $pagination['nextPage'];
         $photographers = $pagination['result'] ?? $photographers;
 
-        $this->pageManager::setTitle('admin gallery.album');
+        PageManager::setTitle('admin gallery.album');
         $this->view(
             'backend/photographers/index',
             compact('photographers', "currentPage", 'totalPage', 'prevPage', 'nextPage', 'total')

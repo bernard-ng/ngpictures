@@ -3,6 +3,7 @@ namespace Ngpictures\Controllers;
 
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\ImageManager;
+use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Controllers\ShowPostTrait;
 use Ngpictures\Traits\Controllers\StoryPostTrait;
@@ -38,7 +39,7 @@ class PostsController extends Controller
                 $posts = $this->posts->findWithUser($user->id);
 
                 $this->turbolinksLocation("/my-posts");
-                $this->pageManager::setTitle("Mes publications");
+                PageManager::setTitle("Mes publications");
                 $this->view("frontend/posts/users", compact('posts', 'user'));
             } else {
                 $this->flash->set("danger", $this->flash->msg['users_not_found'], false);
@@ -123,7 +124,7 @@ class PostsController extends Controller
         }
 
         $this->turbolinksLocation('/submit-photo');
-        $this->pageManager::setTitle("Publication");
+        PageManager::setTitle("Publication");
         $this->view("frontend/posts/add", compact('post', 'categories', 'errors'));
     }
 
@@ -155,8 +156,8 @@ class PostsController extends Controller
                     $this->redirect("/posts", true);
                 }
 
-                $this->pageManager::setTitle("Edition");
-                $this->pageManager::setDescription("Editer vos publications, rajouter du contenu ou faites une mise à jour");
+                PageManager::setTitle("Edition");
+                PageManager::setDescription("Editer vos publications, rajouter du contenu ou faites une mise à jour");
                 $this->turbolinksLocation("/my-posts/edit/{$id}/{$token}");
                 $this->view("frontend/posts/edit", compact('publication', 'categories', 'post'));
             } else {
@@ -183,8 +184,8 @@ class PostsController extends Controller
                     $this->redirect("/posts");
                 }
 
-                $this->pageManager::setTitle("Supprimer une publication");
-                $this->pageManager::setDescription("suppresion d'une publication");
+                PageManager::setTitle("Supprimer une publication");
+                PageManager::setDescription("suppresion d'une publication");
                 $this->turbolinksLocation("/my-posts/delete/{$id}/{$token}");
                 $this->view("frontend/posts/delete", compact('post'));
             } else {

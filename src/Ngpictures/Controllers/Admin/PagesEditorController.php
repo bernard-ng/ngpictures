@@ -5,7 +5,9 @@ use Exception;
 use DirectoryIterator;
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\ImageManager;
+use Ng\Core\Managers\LogMessageManager;
 use Ngpictures\Controllers\AdminController;
+use Ngpictures\Managers\PageManager;
 
 class PagesEditorController extends AdminController
 {
@@ -47,7 +49,7 @@ class PagesEditorController extends AdminController
         }
 
         $this->turbolinksLocation(ADMIN . "/pages");
-        $this->pageManager::setTitle("Adm - Les Pages");
+        PageManager::setTitle("Adm - Les Pages");
         $this->view("backend/pages/pages", compact('files'));
     }
 
@@ -74,7 +76,7 @@ class PagesEditorController extends AdminController
                 fclose($file);
             }
 
-            $this->pageManager::setTitle("Adm - Modifier une page");
+            PageManager::setTitle("Adm - Modifier une page");
             $this->view("backend/pages/edit", compact('file_content', 'file_name', 'post'));
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error'], false);

@@ -5,6 +5,7 @@ use Ng\Core\Managers\ConfigManager;
 use Ng\Core\Managers\LogMessageManager;
 use Ng\Core\Managers\Mailer\Mailer;
 use Ngpictures\Controllers\AdminController;
+use Ngpictures\Managers\PageManager;
 use RuntimeException;
 
 class LogsController extends AdminController
@@ -17,7 +18,7 @@ class LogsController extends AdminController
     {
         $logs = (is_file(ROOT."/system.log")) ? file_get_contents(ROOT."/system.log") : "file: system-log not found";
         $this->turbolinksLocation(ADMIN.'/logs');
-        $this->pageManager::setTitle('Adm - Logs');
+        PageManager::setTitle('Adm - Logs');
         $this->view('backend/logs', compact('logs'));
     }
 

@@ -2,6 +2,7 @@
 namespace Ngpictures\Controllers;
 
 use Ng\Core\Managers\Collection;
+use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Util\TypesActionTrait;
 use Ngpictures\Services\Notification\NotificationService;
@@ -152,13 +153,13 @@ class CommentsController extends Controller
             $comments       = $this->loadModel('comments')->findWith($this->getAction($type) . "_id", $id, false);
             $commentsNumber = $this->loadModel("comments")->count($id, $this->getAction($type) . "_id")->num;
 
-            $this->pageManager::setTitle("Commentaires");
-            $this->pageManager::setDescription("Tous les commentaires, poster pour la publication : " . $publication->title);
+            PageManager::setTitle("Commentaires");
+            PageManager::setDescription("Tous les commentaires, poster pour la publication : " . $publication->title);
             $this->turbolinksLocation("/comments/{$type}/{$slug}-{$id}");
             $this->view("frontend/posts/comments", compact("publication", "comments", "commentsNumber", "user"));
         } else {
             $this->flash->set("danger", $this->flash->msg['post_not_found']);
-            redirect(true);
+            $this->redirect(true);
         }
     }
 }

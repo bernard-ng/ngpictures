@@ -1,6 +1,8 @@
 <?php
 namespace Ngpictures\Controllers;
 
+use Ngpictures\Managers\PageManager;
+
 class ErrorController extends Controller
 {
 
@@ -11,7 +13,7 @@ class ErrorController extends Controller
     {
         http_response_code(404);
         $this->turbolinksLocation('/error/not-found');
-        $this->pageManager::setTitle("404 Page Introuvable");
+        PageManager::setTitle("404 Page Introuvable");
         $this->view("frontend/error/404");
     }
 
@@ -22,7 +24,7 @@ class ErrorController extends Controller
     public function e500()
     {
         $this->turbolinksLocation('/error/internal');
-        $this->pageManager::setTitle("500 Erreur interne");
+        PageManager::setTitle("500 Erreur interne");
         $this->view("frontend/error/500");
     }
 }

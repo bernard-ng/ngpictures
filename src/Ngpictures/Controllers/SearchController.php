@@ -1,6 +1,7 @@
 <?php
 namespace Ngpictures\Controllers;
 
+use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 
 class SearchController extends Controller
@@ -29,11 +30,11 @@ class SearchController extends Controller
 
 
             $this->turbolinksLocation("/search?q=". str_replace(' ', '+', $query));
-            $this->pageManager::setTitle("Recherches");
+            PageManager::setTitle("Recherches");
             $this->view("frontend/others/search", compact("query", "posts", "blog", "gallery", "pexels"));
         } else {
             $this->turbolinksLocation("/search");
-            $this->pageManager::setTitle("Recherches");
+            PageManager::setTitle("Recherches");
             $this->view("frontend/others/search");
         }
     }

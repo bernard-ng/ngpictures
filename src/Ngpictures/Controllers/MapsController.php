@@ -2,6 +2,7 @@
 namespace Ngpictures\Controllers;
 
 use Ng\Core\Managers\Collection;
+use Ngpictures\Managers\PageManager;
 
 class MapsController extends Controller
 {
@@ -24,8 +25,8 @@ class MapsController extends Controller
         }
 
         $this->turbolinksLocation("/maps/photographers");
-        $this->pageManager::setTitle('Localisation des photographes');
-        $this->pageManager::setDescription("Rétrouver les photographes locaux qui sont proche de vous");
+        PageManager::setTitle('Localisation des photographes');
+        PageManager::setDescription("Rétrouver les photographes locaux qui sont proche de vous");
         $this->view("frontend/maps/photographers", compact('markers'));
     }
 

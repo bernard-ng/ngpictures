@@ -1,6 +1,7 @@
 <?php
 namespace Ngpictures\Controllers;
 
+use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 
 class FollowingController extends Controller
@@ -86,7 +87,7 @@ class FollowingController extends Controller
                 }
 
                 $this->turbolinksLocation("/my-followers/{$token}");
-                $this->pageManager::setTitle("Mes Abonnés");
+                PageManager::setTitle("Mes Abonnés");
                 $this->view("frontend/users/account/followers", compact("followers"));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error']);
@@ -123,7 +124,7 @@ class FollowingController extends Controller
                 $followings         =   empty($followings_list)? null : $this->users->findList($followings_list);
 
                 $this->turbolinksLocation("/my-following/{$token}");
-                $this->pageManager::setTitle("Mes Abonnements");
+                PageManager::setTitle("Mes Abonnements");
                 $this->view("frontend/users/account/following", compact("followings"));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error']);

@@ -1,6 +1,8 @@
 <?php
 namespace Ngpictures\Controllers;
 
+use Ngpictures\Managers\PageManager;
+
 class StaticController extends Controller
 {
     /**
@@ -9,7 +11,7 @@ class StaticController extends Controller
     public function about()
     {
         $this->turbolinksLocation("/about");
-        $this->pageManager::setTitle("A Propos de nous");
+        PageManager::setTitle("A Propos de nous");
         $this->view('frontend/others/about');
     }
 
@@ -23,7 +25,7 @@ class StaticController extends Controller
     public function offline()
     {
         $this->turbolinksLocation("/app.offline");
-        $this->pageManager::setTitle("Aucune Connexion Internet");
+        PageManager::setTitle("Aucune Connexion Internet");
         $this->view('frontend/others/offline');
     }
 
@@ -35,8 +37,8 @@ class StaticController extends Controller
     {
         $this->turbolinksLocation("/privacy");
         $categories = $this->loadModel('categories')->orderBy('title', 'ASC', 0, 5);
-        $this->pageManager::setTitle("Politique d'utilisation");
-        $this->pageManager::setDescription(
+        PageManager::setTitle("Politique d'utilisation");
+        PageManager::setDescription(
             'La présente clause a pour objet de définir les différents termes essentiels du contrat'
         );
         $this->view("frontend/others/privacy", compact('categories'));

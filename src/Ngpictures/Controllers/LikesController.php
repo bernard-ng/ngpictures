@@ -2,6 +2,7 @@
 namespace Ngpictures\Controllers;
 
 use Ng\Core\Managers\Collection;
+use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Traits\Util\TypesActionTrait;
 use Ngpictures\Services\Notification\NotificationService;
@@ -85,7 +86,7 @@ class LikesController extends Controller
                 $likers = $this->loadModel('users')->findList($likers);
 
                 $this->turbolinksLocation("/likes/show/{$type}/{$slug}-{$id}");
-                $this->pageManager::setTitle("Mentions j'aime");
+                PageManager::setTitle("Mentions j'aime");
                 $this->view("frontend/posts/likers", compact("likers"));
             } else {
                 $this->flash->set('info', $this->flash->msg['post_not_liked']);

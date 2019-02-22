@@ -4,6 +4,7 @@ namespace Ngpictures\Controllers;
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\Mailer\Mailer;
 use Ng\Core\Managers\CalendarManager;
+use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 
 class BookingController extends Controller
@@ -55,8 +56,8 @@ class BookingController extends Controller
         }
 
         $this->turbolinksLocation('/booking');
-        $this->pageManager::setDescription("Envie de faire un shooting avec nous, pour vous ? faites vos réservations facilement");
-        $this->pageManager::setTitle('Réservation');
+        PageManager::setDescription("Envie de faire un shooting avec nous, pour vous ? faites vos réservations facilement");
+        PageManager::setTitle('Réservation');
         $this->view('frontend/others/booking', compact('current_month', 'post', 'errors', 'photographers'));
     }
 }

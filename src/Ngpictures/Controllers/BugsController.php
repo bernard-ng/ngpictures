@@ -2,6 +2,7 @@
 namespace Ngpictures\Controllers;
 
 use Ng\Core\Managers\Collection;
+use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 
 class BugsController extends Controller
@@ -45,7 +46,7 @@ class BugsController extends Controller
         }
 
         $this->turbolinksLocation("/bugs");
-        $this->pageManager::setTitle("Signaler un Bug");
+        PageManager::setTitle("Signaler un Bug");
         $this->view('frontend/others/bugs', compact('post', "errors"));
     }
 }

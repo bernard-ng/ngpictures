@@ -1,21 +1,28 @@
 <?php
 namespace Ngpictures\Controllers;
 
-use ReCaptcha\ReCaptcha;
+use Ngpictures\Managers\PageManager;
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\ImageManager;
 use Ng\Core\Managers\Mailer\Mailer;
 use Psr\Container\ContainerInterface;
 use Ng\Core\Interfaces\CookieInterface;
 
+/**
+ * Class UsersController
+ * @package Ngpictures\Controllers
+ */
 class UsersController extends Controller
 {
+    /**
+     * @var mixed|CookieInterface
+     */
+    private $cookie;
 
     /**
      * charge le model d'utilisateur
      * UsersController constructor.
-     * @param Ngpictures $app
-     * @param PageManager $pageManager
+     * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
     {
@@ -67,7 +74,7 @@ class UsersController extends Controller
                 }
             }
 
-            $this->pageManager::setTitle("Rénitialisation du mot de passe");
+            PageManager::setTitle("Rénitialisation du mot de passe");
             $this->view('frontend/users/account/reset', compact('post', 'errors'));
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error']);
@@ -111,7 +118,7 @@ class UsersController extends Controller
         }
 
         $this->turbolinksLocation("/forgot");
-        $this->pageManager::setTitle('Mot de passe oublié');
+        PageManager::setTitle('Mot de passe oublié');
         $this->view('frontend/users/account/forgot', compact('post', 'errors'));
     }
 
@@ -152,7 +159,7 @@ class UsersController extends Controller
             }
 
             $this->turbolinksLocation("/sign");
-            $this->pageManager::setTitle("Inscription");
+            PageManager::setTitle("Inscription");
             $this->view('frontend/users/sign', compact('post', 'errors'));
         }
     }
@@ -203,7 +210,7 @@ class UsersController extends Controller
             }
 
             $this->turbolinksLocation("/login");
-            $this->pageManager::setTitle('Connexion');
+            PageManager::setTitle('Connexion');
             $this->view('frontend/users/login', compact('post', 'errors'));
         }
     }
@@ -247,9 +254,9 @@ class UsersController extends Controller
                 }
 
                 $this->turbolinksLocation($user->accountUrl);
-                $this->pageManager::setDescription($user->bio);
-                $this->pageManager::setImage($user->avatarUrl);
-                $this->pageManager::setTitle("Profile de " . $user->name);
+                PageManager::setDescription($user->bio);
+                PageManager::setImage($user->avatarUrl);
+                PageManager::setTitle("Profile de " . $user->name);
                 $this->view('frontend/users/account/account', compact("user", "posts", "collection", "photographer"));
             } else {
                 $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
@@ -269,7 +276,7 @@ class UsersController extends Controller
             $collection = $this->callController('saves')->show($user->id);
 
             $this->turbolinksLocation("/my-collection/{$token}");
-            $this->pageManager::setTitle("Collection de " . $user->name);
+            PageManager::setTitle("Collection de " . $user->name);
             $this->view('frontend/users/account/collection', compact("user", "collection"));
         } else {
             $this->flash->set('danger', $this->flash->msg['collection_not_allowed'], false);
@@ -291,8 +298,8 @@ class UsersController extends Controller
             $notifications = $this->callController('notifications')->show($user->id, $token);
 
             $this->turbolinksLocation("/my-notifications/{$token}");
-            $this->pageManager::setTitle("Notifications");
-            $this->pageManager::setDescription("Voici les notifications de ngpictures pour : {$user->name}");
+            PageManager::setTitle("Notifications");
+            PageManager::setDescription("Voici les notifications de ngpictures pour : {$user->name}");
             $this->view('frontend/users/account/notifications', compact("user", "notifications"));
         } else {
             $this->flash('danger', $this->flash->msg['undefined_error'], false);
@@ -357,7 +364,7 @@ class UsersController extends Controller
             }
 
             $this->turbolinksLocation("/settings/{$token}");
-            $this->pageManager::setTitle('Paramètres');
+            PageManager::setTitle('Paramètres');
             $this->view('frontend/users/account/edit', compact('user', 'errors'));
         } else {
             $this->flash->set('danger', $this->flash->msg['undefined_error']);

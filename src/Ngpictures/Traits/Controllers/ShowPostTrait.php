@@ -1,6 +1,8 @@
 <?php
 namespace Ngpictures\Traits\Controllers;
 
+use Ngpictures\Managers\PageManager;
+
 trait ShowPostTrait
 {
 
@@ -32,9 +34,9 @@ trait ShowPostTrait
                     $altName = $this->table . " - publication - " . $article->id;
 
                     $this->turbolinksLocation("/{$this->table}/{$slug}-{$id}");
-                    $this->pageManager::setTitle($article->title ?? $altName);
-                    $this->pageManager::setDescription($article->snipet);
-                    $this->pageManager::setImage($article->smallThumbUrl);
+                    PageManager::setTitle($article->title ?? $altName);
+                    PageManager::setDescription($article->snipet);
+                    PageManager::setImage($article->smallThumbUrl);
                     
                     $this->view(
                         "frontend/{$this->table}/show",

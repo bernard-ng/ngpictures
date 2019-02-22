@@ -1,6 +1,8 @@
 <?php
 namespace Ngpictures\Traits\Util;
 
+use Ngpictures\Managers\PageManager;
+
 trait RequestTrait
 {
     /**
@@ -39,7 +41,7 @@ trait RequestTrait
      */
     public function turbolinksLocation(string $name)
     {
-        $this->pageManager::setUrl($name);
+        PageManager::setUrl($name);
         header("Turbolinks-Location: {$name}");
     }
 

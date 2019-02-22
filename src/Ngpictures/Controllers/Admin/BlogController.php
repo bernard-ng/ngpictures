@@ -3,6 +3,7 @@ namespace Ngpictures\Controllers\Admin;
 
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\ImageManager;
+use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 use Ngpictures\Controllers\AdminController;
 use Ngpictures\Traits\Controllers\PaginationTrait;
@@ -27,7 +28,7 @@ class BlogController extends AdminController
         $posts          = $pagination['result'] ?? $posts;
 
         $this->turbolinksLocation(ADMIN . '/blog');
-        $this->pageManager::setTitle('Adm - blog');
+        PageManager::setTitle('Adm - blog');
         $this->view(
             "backend/blog/index",
             compact("posts", 'total', "totalPage", "currentPage", "prevPage", "nextPage")
@@ -58,7 +59,7 @@ class BlogController extends AdminController
                     if ($this->validator->isValid()) {
                         $title = $this->str->escape($post->get('title'));
                         $content = $post->get('content');
-                        $slug = $this->str->escape($post->get('slug')) ?? $this->str::suglify($post->get('title'));
+                        $slug = $this->str->escape($post->get('slug')) ?? $this->str->suglify($post->get('title'));
                         $categories_id = (int) $post->get('category') ?? 1;
 
                         $this->blog->update($id, compact('title', 'content', 'slug', 'categories_id'));
@@ -73,7 +74,7 @@ class BlogController extends AdminController
             }
 
             $this->turbolinksLocation(ADMIN . '/blog/edit/' . $id);
-            $this->pageManager::setTitle('Adm - blog.edit');
+            PageManager::setTitle('Adm - blog.edit');
             $this->view('backend/blog/edit', compact('article', 'categories', 'post', 'errors'));
         } else {
             $this->flash->set('danger', $this->flash->msg['post_not_found']);
@@ -165,7 +166,7 @@ class BlogController extends AdminController
         }
 
         $this->turbolinksLocation(ADMIN . "/blog/add");
-        $this->pageManager::setTitle('Adm - blog.add');
+        PageManager::setTitle('Adm - blog.add');
         $this->view('backend/blog/add', compact('post', 'categories', 'errors'));
     }
 }
