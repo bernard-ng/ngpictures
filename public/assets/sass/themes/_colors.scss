@@ -1,3 +1,5 @@
+@import "../custom/bases/variables";
+
 .red {
   background-color: #F44336 !important;
 
@@ -97,4 +99,8 @@
 
 .transparent-txt {
   color: transparent !important;
+}
+
+.dark-card {
+  background-color: $dark-card-color !important;
 }

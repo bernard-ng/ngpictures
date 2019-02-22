@@ -1,12 +1,40 @@
 {% if activeUser %}
     <div class="fixed-action-btn toolbar">
-        <a class="btn-floating btn-large blue-grey dark-4 shadow-4">
-            <i class="icon icon-menu"></i>
+        <a class="btn-floating pulse btn-large shadow-5">
+            <i class="icon icon-plus"></i>
         </a>
-        <ul>
-            <li class="waves-effect"><a href="/submit-photo"><i class="icon icon-plus"></i></a></li>
-            <li class="waves-effect"><a href="{{ activeUser.editUrl }}"><i class="icon icon-cog"></i></a></li>
-            <li class="waves-effect"><a href="{{ activeUser.followersUrl }}"><i class="icon icon-users"></i></a></li>
+        <ul class="grey dark-3">
+            <li class="waves-effect">
+                <a href="/posts">
+                    <i class="icon icon-globe"></i>
+                    <br>
+                    <span class="desc">Posts</span>
+                </a>
+            </li>
+
+            <li class="waves-effect">
+                <a href="/submit-photo">
+                    <i class="icon icon-plus"></i>
+                    <br>
+                    <span class="desc">Publier</span>
+                </a>
+            </li>
+
+            <li class="waves-effect">
+                <a href="{{ activeUser.followersUrl }}">
+                    <i class="icon icon-users"></i>
+                    <br>
+                   <span class="desc">Abonnés</span>
+                </a>
+            </li>
+
+            <li class="waves-effect">
+                <a href="{{ activeUser.editUrl }}">
+                    <i class="icon icon-user"></i>
+                    <br>
+                    <span class="desc">Profile</span>
+                </a>
+            </li>
         </ul>
     </div>
 {% endif %}
