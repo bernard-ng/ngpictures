@@ -45,8 +45,7 @@ class AdminController extends Controller
      * n'index pas la page au resultat de recherche
      * et charge tout les models dont a besion
      * AdminController constructor.
-     * @param Ngpictures $app
-     * @param PageManager $pageManager
+     * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
     {

@@ -3,13 +3,28 @@ namespace Ngpictures\Controllers\Admin;
 
 use Ng\Core\Managers\Collection;
 use Ngpictures\Managers\PageManager;
-use Psr\Container\ContainerInterface;
+use Ngpictures\Models\AlbumsModel;
 use Ngpictures\Controllers\AdminController;
+use Ngpictures\Models\PhotographersModel;
 use Ngpictures\Traits\Controllers\PaginationTrait;
 
+/**
+ * Class AlbumsController
+ * @package Ngpictures\Controllers\Admin
+ */
 class AlbumsController extends AdminController
 {
     use PaginationTrait;
+
+    /**
+     * @var AlbumsModel
+     */
+    protected $albums;
+
+    /**
+     * @var PhotographersModel
+     */
+    protected $photographers;
 
     /**
      * list les differents albums
