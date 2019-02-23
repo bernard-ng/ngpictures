@@ -2,28 +2,34 @@
         AUTHOR         :    Bernard-ng
         PROJECT        :    NG-PICTURES
         LINK           :    https://larytech.com
-        BUILT AT       :    21-Feb-2019  19:08:00
+        BUILT AT       :    23-Feb-2019  14:39:59
 **************************************************************
 [NG-PICTURES MESSAGES LOGS] 
 
-* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
-		=> 21-Feb 19:08 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+* F:\projects\ngpictures\src\Ngpictures\Controllers\Admin\PagesEditorController.php	25
+		=> 23-Feb 14:39 : DirectoryIterator::__construct(F:\projects\ngpictures/src/Ngpictures/Views/frontend/static/,F:\projects\ngpictures/src/Ngpictures/Views/frontend/static/): The system cannot find the path specified. (code: 3)  
 
 * F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
-		=> 21-Feb 19:08 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+		=> 23-Feb 16:08 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ') AND online = 1' at line 3  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 23-Feb 16:08 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ') AND online = 1' at line 3  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 23-Feb 16:08 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ') AND online = 1' at line 3  
 
 * F:\projects\ngpictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
-		=> 22-Feb 00:39 : cURL error 6: Could not resolve host: api.pexels.com  
+		=> 23-Feb 16:08 : cURL error 6: Could not resolve host: api.pexels.com  
 
 * F:\projects\ngpictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
-		=> 22-Feb 00:39 : cURL error 6: Could not resolve host: api.pexels.com  
+		=> 23-Feb 16:08 : cURL error 6: Could not resolve host: api.pexels.com  
 
-* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
-		=> 22-Feb 01:24 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'albums_id' in 'where clause'  
+* F:\projects\ngpictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 23-Feb 16:20 : cURL error 6: Could not resolve host: api.pexels.com  
+
+* F:\projects\ngpictures\vendor\guzzlehttp\guzzle\src\Exception\RequestException.php	49
+		=> 23-Feb 18:25 : cURL error 6: Could not resolve host: api.pexels.com  
 
 * F:\projects\ngpictures\src\Ngpictures\Controllers\Admin\PagesEditorController.php	25
-		=> 22-Feb 02:13 : DirectoryIterator::__construct(F:\projects\ngpictures/src/Ngpictures/Views/frontend/static/,F:\projects\ngpictures/src/Ngpictures/Views/frontend/static/): The system cannot find the path specified. (code: 3)  
-
-* F:\projects\ngpictures\src\Ngpictures\Controllers\Admin\PagesEditorController.php	25
-		=> 22-Feb 02:13 : DirectoryIterator::__construct(F:\projects\ngpictures/src/Ngpictures/Views/frontend/static/,F:\projects\ngpictures/src/Ngpictures/Views/frontend/static/): The system cannot find the path specified. (code: 3)  
+		=> 23-Feb 18:27 : DirectoryIterator::__construct(F:\projects\ngpictures/src/Ngpictures/Views/frontend/static/,F:\projects\ngpictures/src/Ngpictures/Views/frontend/static/): The system cannot find the path specified. (code: 3)  
 

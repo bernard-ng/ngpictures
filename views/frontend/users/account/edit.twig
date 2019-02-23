@@ -3,10 +3,7 @@
 
 {% block content %}
     <section class="section container row">
-        <div class="hide-on-med-and-down">
-            {% include "includes/right-aside.twig" %}
-        </div>
-        <section class="col nexted l6 m12 s12">
+        <section class="col nexted offset-l2 l8 offset-m2 m8 s12">
             <div class="card grey dark-4 col l12 m12 s12" style="padding-top: 20px;">
                 <form action="" method="POST" enctype="multipart/form-data" data-action="upload">
                     {{ form.inputFile('Modifier le profile') }}
@@ -36,8 +33,5 @@
                 </div>
             </div>
         </section>
-       <div class="hide-on-med-and-down">
-            {% include "includes/menu-aside.twig" %}
-       </div>
     </section>
 {% endblock %}

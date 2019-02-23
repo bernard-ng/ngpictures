@@ -23,8 +23,12 @@
 }
 
 @font-face {
-  font-family: "Roboto";
-  src: local(Roboto Bold), url("../fonts/roboto/Roboto-Bold.woff2") format("woff2"), url("../fonts/roboto/Roboto-Bold.woff") format("woff");
-  font-weight: 700;
+  font-family: "Raleway";
+  src: local(Raleway Bold), url('../fonts/raleway/Raleway-Bold.ttf');
 }
 
+@font-face {
+  font-family: "Raleway";
+  src: local(Raleway Black), url('../fonts/raleway/Raleway-Black.ttf');
+  font-weight: 700;
+}

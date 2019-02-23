@@ -1,11 +1,15 @@
+@import "../bases/variables";
+
 .ui.header {
     border: none;
     padding: 0em 0em;
-    font-weight: 700;
     line-height: 1.28571429em;
     text-transform: none;
-    font-family: Raleway, Roboto, Sans-serif;
-    color: #ccc;
+    font-family: Raleway, Roboto, Sans-serif, serif;
+    color: $txt-color;
+    &.bold {
+      font-weight: 700;
+    }
   }
   .ui.header:first-child {
     margin-top: -0.14285714em;

@@ -180,6 +180,15 @@ $(document).ready(function () {
             })
         }
     });
+    $('.dropdown-button.topbar').each(function (i, d) {
+        if (!d.hasAttribute('data-ng-dropdown-initialized', 'true')) {
+            d.setAttribute('data-ng-dropdown-initialized', 'true');
+            $(d).dropdown({
+                hover: true,
+                belowOrigin: false,
+            })
+        }
+    });
     $('.parallax').parallax();
     $('.modal').each(function (i, m) {
         if (!m.hasAttribute('data-ng-modal-initialized', 'true')) {

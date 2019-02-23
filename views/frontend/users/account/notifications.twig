@@ -6,7 +6,7 @@
         <a href="/my-notifications/delete/{{ securityToken }}" class="btn">Supprimer</a>
         <a href="/my-notifications/clear/{{ securityToken }}" class="btn">Marquer comme lue</a>
     </div>
-    <div class="col nexted l9 m12 s12">
+    <div class="col nexted l12 m12 s12">
         <div class="card grey dark-4 section" id="commentContainer">
             {% if notifications %}
                 <ul class="collection">
@@ -36,9 +36,6 @@
                 </div>
             {% endif %}
         </div>
-    </div>
-    <div class="hide-on-small-and-down">
-        {% include "includes/menu-aside.twig" %}
     </div>
 </section>
 {% endblock %}
