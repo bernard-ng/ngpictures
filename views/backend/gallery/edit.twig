@@ -5,10 +5,14 @@
     <section class="section container row">
         {% include 'includes/right-aside.twig' %}
         <section class="section col l9 m12 s12">
-            <h2 class="ui header">Editer Publier une Photo</h2>
+            <h2 class="ui header">Editer une Photo</h2>
             <form action="" method="POST" class="card-panel grey dark-4" enctype="multipart/form-data" data-action="upload">
 
-                {{ form.inputFile("Photo de couverture") }}
+                <div class="col l12 m12 s12 center-align">
+                    <img src="{{ photo.thumbUrl }}" class="responsive-img" width="70%" height="auto" alt="">
+                    <br><br><br>
+                </div>
+
                 {{ form.input('name', 'Name', 'text', errors.get('name'), post.get('name') ?? photo.name) }}
                 <div class="col l12 m12 s12">
                     <div class="input-field">
@@ -18,10 +22,9 @@
                 </div>
                 <div class="col l6 m6 s12">
                     <div class="input-field">
-                        <select name="category">
-                            <option disabled="disabled" selected="selected" value="{{ photo.albums_id }}">{{ photo.album }}</option>
+                        <select name="album">
                             {% for a in albums %}
-                                <option value="{{ a.id }}">{{ a.title }}</option>
+                                <option value="{{ a.id }}" {{ a.id == photo.albums_id ? 'selected' : '' }}>{{ a.title }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -31,7 +34,7 @@
                         <select name="category">
                             <option disabled="disabled" selected="selected">choisissez une catégorie</option>
                             {% for c in categories %}
-                                <option value="{{ c.id }}">{{ c.title }}</option>
+                                <option value="{{ c.id }}" {{ c.id == photo.categories_id ? 'selected' : '' }}>{{ c.title }}</option>
                             {% endfor %}
                         </select>
                     </div>

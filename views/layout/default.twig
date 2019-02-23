@@ -11,21 +11,17 @@
 {% include "includes/menu.twig" %}
 {% include "includes/mobile-menu.twig" %}
 
-<div class="jumbotron-hero">
+<div class="jumbotron-hero" data-action-requires="menu-transparent" style="background: url('/imgs/slider.jpg');">
     <div class="center container row">
         <div class="bg"></div>
-        <span class="jumbotron-content col offset-l3 l6 m12 s12">
-            <span class="ui header col l12 m12 s12">
-                <h3 style="text-align: left">La Galerie de photographie <br> africaine</h3>
-                <p style="text-align: left">les meilleurs photos des photographes africains</p>
+        <span class="jumbotron-content">
+            <span class="ui header">
+                <h3 class="title">L'expression de la photographie <br> africaine</h3>
             </span>
-
-            <div class="search">
-                <form action="/search" method="get" role="search">
-                    <input autocapitalize="none" autofocus="" id="search" name="q" placeholder="Rechercher des photos ex: flowers, girls" required="required" type="search" class="shadow-1">
-                </form>
+            <div class="col l6 offset-l3 m12 s12">
+                <p>Les meilleurs photos partagées par des photographes talentueux</p>
+                <p><button class="btn">Explorer</button></p>
             </div>
-
         </span>
     </div>
 </div>
