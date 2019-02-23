@@ -30,42 +30,26 @@
 }
 
 .jumbotron-hero {
+  margin-top: -64px;
   display: block;
   width: 100%;
   min-height: 65vh;
+  margin-bottom: 20px;
   position: relative;
-  padding: 60px 0.75em 0.75em;
-  background: url("/imgs/slider.jpg") no-repeat fixed center !important;
+  padding: 120px 0.75em 60px 0.75em;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
   background-size: cover !important;
   border-bottom: 5px solid rgba(255, 255, 255, 0.2);
 
   & .jumbotron-content {
     display: block;
     position: relative;
-    max-width: 650px;
-    width: 100%;
     z-index: 2;
   }
 
-  & .search {
-    input[type=search] {
-      margin-top: 20px;
-      height: 4em;
-      border-radius: 3px;
-      background: $txt-color;
-      color: rgba(37, 37, 37, 0.81);
-      padding-left: 10px;
-      font-weight: 400;
-      box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset;
-    }
-
-    ::placeholder {
-      color: rgb(130, 130, 130);
-      opacity: 1;
-    }
-  }
-
-  & h3 {
+  & .title {
     position: relative;
     font-family: "Raleway", Roboto, sans-serif !important;
     color: #fff;
@@ -81,7 +65,7 @@
   }
 
   & .bg {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     margin: 0;
     width: 100%;
     position: absolute;
