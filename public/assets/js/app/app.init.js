@@ -130,18 +130,38 @@ $(document).ready(function () {
             });
         }
     });
-    $('.user-actions-sideNav').sideNav({
-        edge: 'right',
-        closeOnClick: true,
-        draggable: false,
+    $('.user-actions-sideNav').each(function (i, uas) {
+       if (!uas.hasAttribute('data-ng-userActionsSidenav-initialized', 'true')) {
+           uas.setAttribute('data-ng-userActionsSidenav-initialized', 'true');
+           $(uas).sideNav({
+               edge: 'right',
+               closeOnClick: true,
+               draggable: false,
+           });
+       }
     });
-    $('.services-slideNav').sideNav({
-        edge: 'right',
-        closeOnClick: true,
-        draggable: false,
+    $('.services-slideNav').each(function (i, ss) {
+       if(!ss.hasAttribute('data-ng-services-slide-initialized', 'true')) {
+           ss.setAttribute('data-ng-services-slide-initialized', 'true');
+           $(ss).sideNav({
+               edge: 'right',
+               closeOnClick: true,
+               draggable: false,
+           });
+       }
     });
-    $("img.boxed").materialbox();
-    $('.collapsible').collapsible();
+    $("img.boxed").each(function (i, ib) {
+        if (!ib.hasAttribute('data-ng-imageBoxed-initialized', 'true')) {
+            ib.setAttribute('data-ng-imageBoxed-initialized', 'true');
+            $(ib).materialbox();
+        }
+    });
+    $('.collapsible').each(function (i, c) {
+        if(!c.hasAttribute('data-ng-collapsible-initialized', 'true')) {
+            c.setAttribute('data-ng-collaspsible-initalized', 'true');
+            $(c).collapsible();
+        }
+    });
     $('.carousel').each(function (i, c) {
         if (!c.hasAttribute('data-ng-carousel-initialized', 'true')) {
             c.setAttribute('data-ng-carousel-initialized', 'true');
@@ -151,7 +171,7 @@ $(document).ready(function () {
                 noWrap: false
             });
         }
-    })
+    });
     $('.slider').each(function (i, s) {
         if (!s.hasAttribute('data-ng-slider-initialized', 'true')) {
             s.setAttribute('data-ng-slider-initialized', 'true');
@@ -189,7 +209,12 @@ $(document).ready(function () {
             })
         }
     });
-    $('.parallax').parallax();
+    $('.parallax').each(function (i, p) {
+        if(!p.hasAttribute('data-ng-parallax-initialized', 'true')) {
+            p.setAttribute('data-ng-parallax-initialized', 'true');
+            $(p).parallax();
+        }
+    });
     $('.modal').each(function (i, m) {
         if (!m.hasAttribute('data-ng-modal-initialized', 'true')) {
             m.setAttribute('data-ng-modal-initialized', 'true');
@@ -201,28 +226,48 @@ $(document).ready(function () {
                 preventScrolling: false
             });
         }
-    })
-    $('.tabs').tabs();
-    $('select').material_select();
-    $('.datepicker').pickadate({
-        selectMonths: false,
-        selectYears: false,
-        today: "Aujourd'hui",
-        clear: "Effacer",
-        close: "ok",
-        container: 'body',
-        closeOnSelect: false,
     });
-    $('.timepicker').pickatime({
-        default: 'now',
-        fromnow: 0,
-        twelvehour: true,
-        donetext: 'Ok',
-        cleartext: 'Effacer',
-        canceltext: 'Annuler',
-        container: 'body',
-        autoclose: false,
-        ampmclickable: true,
+    $('.tabs').each(function (i, t) {
+        if(!t.hasAttribute('data-ng-tabs-initialized', 'true')) {
+            t.setAttribute('data-ng-tabs-initialized', 'true');
+            $(t).tabs();
+        }
+    });
+    $('select').each(function (i, s) {
+        if (!s.hasAttribute('data-ng-select-initialized', 'true')) {
+            s.setAttribute('data-ng-select-initalized', 'true');
+            $(s).material_select();
+        }
+    });
+    $('.datepicker').each(function (i, d) {
+        if (!d.hasAttribute('data-ng-datepicker-initialized', 'true')) {
+            d.setAttribute('data-ng-datepicker-initialized', 'true');
+            $(d).pickadate({
+                selectMonths: false,
+                selectYears: false,
+                today: "Aujourd'hui",
+                clear: "Effacer",
+                close: "ok",
+                container: 'body',
+                closeOnSelect: false,
+            });
+        }
+    });
+    $('.timepicker').each(function (i, t) {
+        if (!t.hasAttribute('data-ng-timepicker-initialized', 'true')) {
+            t.setAttribute('data-ng-timepicker-initialized', 'true');
+            $(t).pickatime({
+                default: 'now',
+                fromnow: 0,
+                twelvehour: true,
+                donetext: 'Ok',
+                cleartext: 'Effacer',
+                canceltext: 'Annuler',
+                container: 'body',
+                autoclose: false,
+                ampmclickable: true,
+            });
+        }
     });
 
     if (typeof particlesJS !== "undefined") {
@@ -476,18 +521,38 @@ function loadInit() {
                 });
             }
         });
-        $('.user-actions-sideNav').sideNav({
-            edge: 'right',
-            closeOnClick: true,
-            draggable: false,
+        $('.user-actions-sideNav').each(function (i, uas) {
+            if (!uas.hasAttribute('data-ng-userActionsSidenav-initialized', 'true')) {
+                uas.setAttribute('data-ng-userActionsSidenav-initialized', 'true');
+                $(uas).sideNav({
+                    edge: 'right',
+                    closeOnClick: true,
+                    draggable: false,
+                });
+            }
         });
-        $('.services-slideNav').sideNav({
-            edge: 'right',
-            closeOnClick: true,
-            draggable: false,
+        $('.services-slideNav').each(function (i, ss) {
+            if(!ss.hasAttribute('data-ng-services-slide-initialized', 'true')) {
+                ss.setAttribute('data-ng-services-slide-initialized', 'true');
+                $(ss).sideNav({
+                    edge: 'right',
+                    closeOnClick: true,
+                    draggable: false,
+                });
+            }
         });
-        $("img.boxed").materialbox();
-        $('.collapsible').collapsible();
+        $("img.boxed").each(function (i, ib) {
+            if (!ib.hasAttribute('data-ng-imageBoxed-initialized', 'true')) {
+                ib.setAttribute('data-ng-imageBoxed-initialized', 'true');
+                $(ib).materialbox();
+            }
+        });
+        $('.collapsible').each(function (i, c) {
+            if(!c.hasAttribute('data-ng-collapsible-initialized', 'true')) {
+                c.setAttribute('data-ng-collaspsible-initalized', 'true');
+                $(c).collapsible();
+            }
+        });
         $('.carousel').each(function (i, c) {
             if (!c.hasAttribute('data-ng-carousel-initialized', 'true')) {
                 c.setAttribute('data-ng-carousel-initialized', 'true');
@@ -497,7 +562,7 @@ function loadInit() {
                     noWrap: false
                 });
             }
-        })
+        });
         $('.slider').each(function (i, s) {
             if (!s.hasAttribute('data-ng-slider-initialized', 'true')) {
                 s.setAttribute('data-ng-slider-initialized', 'true');
@@ -526,7 +591,21 @@ function loadInit() {
                 })
             }
         });
-        $('.parallax').parallax();
+        $('.dropdown-button.topbar').each(function (i, d) {
+            if (!d.hasAttribute('data-ng-dropdown-initialized', 'true')) {
+                d.setAttribute('data-ng-dropdown-initialized', 'true');
+                $(d).dropdown({
+                    hover: true,
+                    belowOrigin: false,
+                })
+            }
+        });
+        $('.parallax').each(function (i, p) {
+            if(!p.hasAttribute('data-ng-parallax-initialized', 'true')) {
+                p.setAttribute('data-ng-parallax-initialized', 'true');
+                $(p).parallax();
+            }
+        });
         $('.modal').each(function (i, m) {
             if (!m.hasAttribute('data-ng-modal-initialized', 'true')) {
                 m.setAttribute('data-ng-modal-initialized', 'true');
@@ -538,28 +617,48 @@ function loadInit() {
                     preventScrolling: false
                 });
             }
-        })
-        $('.tabs').tabs();
-        $('select').material_select();
-        $('.datepicker').pickadate({
-            selectMonths: false,
-            selectYears: false,
-            today: "Aujourd'hui",
-            clear: "Effacer",
-            close: "ok",
-            container: 'body',
-            closeOnSelect: false,
         });
-        $('.timepicker').pickatime({
-            default: 'now',
-            fromnow: 0,
-            twelvehour: true,
-            donetext: 'Ok',
-            cleartext: 'Effacer',
-            canceltext: 'Annuler',
-            container: 'body',
-            autoclose: false,
-            ampmclickable: true,
+        $('.tabs').each(function (i, t) {
+            if(!t.hasAttribute('data-ng-tabs-initialized', 'true')) {
+                t.setAttribute('data-ng-tabs-initialized', 'true');
+                $(t).tabs();
+            }
+        });
+        $('select').each(function (i, s) {
+            if (!s.hasAttribute('data-ng-select-initialized', 'true')) {
+                s.setAttribute('data-ng-select-initalized', 'true');
+                $(s).material_select();
+            }
+        });
+        $('.datepicker').each(function (i, d) {
+            if (!d.hasAttribute('data-ng-datepicker-initialized', 'true')) {
+                d.setAttribute('data-ng-datepicker-initialized', 'true');
+                $(d).pickadate({
+                    selectMonths: false,
+                    selectYears: false,
+                    today: "Aujourd'hui",
+                    clear: "Effacer",
+                    close: "ok",
+                    container: 'body',
+                    closeOnSelect: false,
+                });
+            }
+        });
+        $('.timepicker').each(function (i, t) {
+            if (!t.hasAttribute('data-ng-timepicker-initialized', 'true')) {
+                t.setAttribute('data-ng-timepicker-initialized', 'true');
+                $(t).pickatime({
+                    default: 'now',
+                    fromnow: 0,
+                    twelvehour: true,
+                    donetext: 'Ok',
+                    cleartext: 'Effacer',
+                    canceltext: 'Annuler',
+                    container: 'body',
+                    autoclose: false,
+                    ampmclickable: true,
+                });
+            }
         });
 
         if (typeof particlesJS !== "undefined") {
