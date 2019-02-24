@@ -1,30 +1,39 @@
 {% extends 'layout/users/account.twig' %}
 
 {% block content %}
-    <div class="jumbotron-user">
+    <div class="jumbotron-user" data-action-requires="menu-transparent">
         <div class="jumbotron-user-profil align-center">
             <div class="jumbotron-user-avatar hoverable">
-                <img src="{{ user.avatarUrl}}" alt="{{ user.name }}">
+                <img src="{{ user.avatarUrl }}" alt="{{ user.name }}">
             </div>
-            <div class="jumbotron-user-name center">
+            <div class="jumbotron-user-name row center">
                 <h1 class="ui header">{{ user.name }}</h1>
+                <span class="bio">
+                    <p class="col l8 offset-l2 s12 m12">
+                        {{ user.name }} ne présente actuellement aucune publication disponible, les publications sont peut être en évaluation ou privées,
+                        ceci pourrait prendre du temps, veuillez revenir plus tard
+                    </p>
+                </span>
             </div>
-            </div>
+            <p class="center"><a href="" class="btn">Follow</a></p>
         </div>
     </div>
 
     <div class>
         <div class="row col s12">
             <ul class="tabs transparent shadow-3">
-              <div class="container">
-                   {% if activeUser.id == user.id %}
+                <div class="container">
+                    {% if activeUser.id == user.id %}
                         {% if photographer %}
-                            <li class="tab col s4"><a href="{{ photographer.url }}" target="_self">Compte photographe</a></li>
+                            <li class="tab col s4"><a href="{{ photographer.url }}" target="_self">Compte
+                                    photographe</a></li>
                             <li class="tab col s4"><a href="#photos" class="active">Photos</a></li>
-                            <li class="tab col s4"><a href="{{ activeUser.collectionUrl }}" target="_self">Collections</a></li>
+                            <li class="tab col s4"><a href="{{ activeUser.collectionUrl }}"
+                                                      target="_self">Collections</a></li>
                         {% else %}
                             <li class="tab col s6"><a href="#photos" class="active">Photos</a></li>
-                            <li class="tab col s6"><a href="{{ activeUser.collectionUrl }}" target="_self">Collections</a></li>
+                            <li class="tab col s6"><a href="{{ activeUser.collectionUrl }}"
+                                                      target="_self">Collections</a></li>
                         {% endif %}
 
                     {% else %}
@@ -33,7 +42,7 @@
                         {% endif %}
                         <li class="tab col s6"><a href="#photos" class="active">Photos</a></li>
                     {% endif %}
-              </div>
+                </div>
             </ul>
         </div>
     </div>
@@ -48,10 +57,10 @@
                         {% for p in recent %}
                             <a href="{{ p.url }}" class="carousel-item">
                                 <img
-                                    src="{{ cacheBusting('/imgs/sblank.png') }}"
-                                    data-src="{{ p.smallThumbUrl }}"
-                                    title="{{ p.name }}"
-                                    alt="{{ p.name }}"
+                                        src="{{ cacheBusting('/imgs/sblank.png') }}"
+                                        data-src="{{ p.smallThumbUrl }}"
+                                        title="{{ p.name }}"
+                                        alt="{{ p.name }}"
                                 >
                             </a>
                         {% endfor %}
@@ -72,11 +81,11 @@
                             <article class="gallery-item" id="{{ user.id }}@{{ p.id }}">
                                 <a href="{{ p.url }}" style="background: {{ p.color }}">
                                     <img
-                                        src="{{ cacheBusting('imgs/sblank.png') }}"
-                                        data-src="{{ p.smallThumbUrl }}"
-                                        class="responsive-img"
-                                        title="{{ p.name }}"
-                                        alt="{{ p.name }}"
+                                            src="{{ cacheBusting('imgs/sblank.png') }}"
+                                            data-src="{{ p.smallThumbUrl }}"
+                                            class="responsive-img"
+                                            title="{{ p.name }}"
+                                            alt="{{ p.name }}"
                                     >
                                 </a>
                             </article>
@@ -99,7 +108,8 @@
                     <h2 class="ui header divided center"> Aucune publication </h2>
                 </span>
                 <p class="col l8 offset-l2 s12 m12">
-                    {{ user.name }} ne présente actuellement aucune publication disponible, les publications sont peut être en évaluation ou privées,
+                    {{ user.name }} ne présente actuellement aucune publication disponible, les publications sont peut
+                    être en évaluation ou privées,
                     ceci pourrait prendre du temps, veuillez revenir plus tard
                 </p>
             </div>

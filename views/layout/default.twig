@@ -11,7 +11,7 @@
 {% include "includes/menu.twig" %}
 {% include "includes/mobile-menu.twig" %}
 
-<div class="jumbotron-hero" data-action-requires="menu-transparent" style="background: url('/imgs/slider.jpg');">
+<div class="jumbotron-hero" data-action-requires="menu-transparent" style="background: url('https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&h=650&w=940');">
     <div class="center container row">
         <div class="bg"></div>
         <span class="jumbotron-content">
@@ -19,8 +19,15 @@
                 <h3 class="title">L'expression de la photographie <br> africaine</h3>
             </span>
             <div class="col l6 offset-l3 m12 s12">
-                <p>Les meilleurs photos partagées par des photographes talentueux</p>
-                <p><button class="btn">Explorer</button></p>
+                <p>Les meilleures photos partagées par des photographes talentueux</p>
+                {% if activeUser %}
+                    <p><a href="/submit-photo" class="btn">Ajouter vos photos <span class="icon icon-upload-cloud"></span></a></p>
+                {% else %}
+                    <p>
+                        <a href="/sing" class="btn">Inscription <span class="icon icon-user-plus"></span></a>
+                        <a href="/login" class="btn">Connexion <span class="icon icon-login"></span></a>
+                    </p>
+                {% endif %}
             </div>
         </span>
     </div>

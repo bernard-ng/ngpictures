@@ -19,7 +19,7 @@
         <div class="container">
             <br>
             <div class="col s12 center">
-                <p><a href="/posts" class="btn">Explorer</a></p>
+                <p><a href="/posts" class="btn">Afficher Plus <span class="icon icon-eye"></span></a></p>
             </div>
         </div>
     </section>
@@ -32,23 +32,15 @@
                 <h2 class="ui header">Dernier article</h2>
                 <div class="justify-align">
                     <p>{{ article.snipet | snipet }}</p>
+                    <p><a href="{{ article.url }}" class="btn">Lire <span class="icon icon-eye"></span></a></p>
                 </div>
-                {% if article %}
-                    <div class="post-hoverable">
-                        <a href="{{ article.url }}" class="waves-effect" style="background-color: {{ article.color }};">
-                            <img src="{{ cacheBusting('/imgs/blank.png') }}" data-src="{{ article.thumbUrl }}"  alt="{{ article.title }}">
-                        </a>
-                        <span class="post-description">
-                            {{ article.title }}
-                        </span>
-                    </div>
-                {% else %}
-                    <img src="/imgs/shooting.jpeg" class="responsive-img" alt="ngpictures shooting banner">
-                {% endif %}
             </div>
             {% include "includes/menu-aside.twig" %}
         </div>
     </section>
+
+    {% include 'includes/community.twig' %}
+
     {% include 'includes/services.twig' %}
     <section class="section col l12 m12 s12">
         <div class="row container">

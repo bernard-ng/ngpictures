@@ -1,8 +1,7 @@
 <aside class="row col nexted l3 m3 s12 animated slideInRight ">
-    <div class="card grey dark-4">
+    <div class="card light-card">
         {% if verse %}
             <div class="verse-panel transparent" data-action="verses" data-ajax="/verses">
-                <h2 class="ui header">God First</h2>
                 <div class="txt" data-content="txt">
                     {{ verse.text }}
                 </div>
@@ -25,8 +24,12 @@
                         </a>
                     </li>
                 {% endfor %}
-                <li class="collection-item waves-effect center">
-                    <a href="/categories" class="btn btn-flat">Toutes les Catégories</a>
+                <li class="collection-item waves-effect center-align">
+                    <a href="/categories" class="btn btn-flat">
+                        <div class="collection-item-title">
+                            Toutes les Catégories
+                        </div>
+                    </a>
                 </li>
             </ul>
         </div>

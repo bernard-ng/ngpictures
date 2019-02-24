@@ -34,11 +34,9 @@
 
                     <li id="Galerie" class="waves-effect"><a href="/gallery"> Galerie</a></li>
                     <li id="Blog" class="waves-effect"><a href="/blog"> Blog</a></li>
-                    {% if activeUser %}
-                        <li id="Fil d'actualité" class="waves-effect">
-                            <a href="/posts"> Actualités</a>
-                        </li>
-                    {% endif %}
+                    <li id="Fil d'actualité" class="waves-effect">
+                        <a href="/posts"> Actualités</a>
+                    </li>
 
                     <li id="service" class="waves-effect">
                         <a href="#" class="services-slideNav" data-activates="services-actions">
@@ -53,8 +51,16 @@
                             </a>
                         </li>
                     {% else %}
-                        <li class="action" class="waves-effect"><a href="/sign" class="btn waves-effect">Inscription</a></li>
-                        <li class="action" class="waves-effect"><a href="/login" class="btn waves-effect">Connexion</a></li>
+                        <li class="action" class="waves-effect">
+                            <a href="/sign" class="btn waves-effect">
+                                Inscription <span class="icon icon-user-plus"></span>
+                            </a>
+                        </li>
+                        <li class="action" class="waves-effect">
+                            <a href="/login" class="btn waves-effect">
+                                Connexion <span class="icon icon-login"></span>
+                            </a>
+                        </li>
                     {% endif %}
                 </ul>
             </div>
@@ -87,14 +93,12 @@
         <li><a href="" class="subheader grey-txt">Services</a></li>
         <li><a href="/maps/photographers">Trouver des photographes <i class="icon icon-location"></i></a></li>
         <li><a href="/photographers/sign">Compte photographe <i class="icon icon-camera"></i></a></li>
-        <li><a href="/booking">Réservations <i class="icon icon-calendar"></i></a></a></li>
+        <li><a href="/booking">Réservations <i class="icon icon-calendar"></i></a></li>
 
         <li><div class="divider grey"></div></li>
         <li><a href="" class="subheader grey-txt">Autres</a></li>
         <li><a href="/categories">Catégories<i class="icon icon-tags"></i></a></li>
-        {% if activeUser %}
-            <li><a href="/community">La Communauté <i class="icon icon-users"></i></a></li>
-        {% endif %}
+        <li><a href="/community">La Communauté <i class="icon icon-users"></i></a></li>
         <li><a href="/contact">Nous contacter <i class="icon icon-mail"></i></a></li>
         <li><a href="/bugs">Signaler un problème<i class="icon icon-tags"></i></a></li>
         <li><a href="/ideas">Donner un avis<i class="icon icon-location"></i></a></li>

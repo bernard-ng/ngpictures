@@ -11,13 +11,7 @@
                             <a href="{{ c.url }}">
                                 {% for key, thumb in thumbs %}
                                     {% if c.id == key %}
-                                        <img
-                                            src="{{ cacheBusting('/imgs/sblank.png') }}"
-                                            data-src="{{ thumb }}"
-                                            alt="{{ c.title }}"
-                                            title="{{ c.title }}"
-                                            class="responsive-img"
-                                        >
+                                        <img src="" data-src="{{ thumb }}" alt="{{ c.title }}" title="{{ c.title }}" class="responsive-img">
                                     {% endif %}
                                 {% endfor %}
                             </a>
