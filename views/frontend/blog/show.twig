@@ -2,13 +2,7 @@
 <section class="section jumbotron dark" style="border-bottom: 5px solid {{ article.color }}; margin-bottom: 20px;">
     <div class="container row">
         <div class="col l9 m12 s12 pb10">
-            <img
-                src="{{ cacheBusting('/imgs/blank.png') }}"
-                data-src="{{ article.thumbUrl }}"
-                alt="{{ article.title }}"
-                title="{{ article.title }}"
-                class="responsive-img materialboxed"
-            >
+            <img src="" data-src="{{ article.thumbUrl }}" alt="{{ article.title }}" title="{{ article.title }}" class="responsive-img materialboxed">
             <h1 class="ui header">{{ article.title }}</h1>
             {{ article.fullText | snipet }}
             <br><br>
@@ -132,12 +126,7 @@
         <div class="carousel small">
             {% for p in similars %}
             <a href="{{ p.url }}" class="carousel-item" style="background: {{ p.color }}">
-                <img
-                    src="{{ cacheBusting('/imgs/sblank.png') }}"
-                    data-src="{{ p.smallThumbUrl }}"
-                    title="{{ p.title }}"
-                    alt="{{ p.title }}"
-                >
+                <img src="" data-src="{{ p.smallThumbUrl }}" title="{{ p.title }}" alt="{{ p.title }}">
             </a>
             {% endfor %}
         </div>

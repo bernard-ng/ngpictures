@@ -57,7 +57,7 @@
                         {% for p in recent %}
                             <a href="{{ p.url }}" class="carousel-item">
                                 <img
-                                        src="{{ cacheBusting('/imgs/sblank.png') }}"
+                                        src=""
                                         data-src="{{ p.smallThumbUrl }}"
                                         title="{{ p.name }}"
                                         alt="{{ p.name }}"
@@ -81,7 +81,7 @@
                             <article class="gallery-item" id="{{ user.id }}@{{ p.id }}">
                                 <a href="{{ p.url }}" style="background: {{ p.color }}">
                                     <img
-                                            src="{{ cacheBusting('imgs/sblank.png') }}"
+                                            src=""
                                             data-src="{{ p.smallThumbUrl }}"
                                             class="responsive-img"
                                             title="{{ p.name }}"

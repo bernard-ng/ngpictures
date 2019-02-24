@@ -2,13 +2,7 @@
     {% for p in posts %}
         <article class="gallery-item animated slideInUp" id="{{ user.id }}@{{ p.id }}">
             <a href="{{ p.url }}" style="background: {{ p.color }}">
-                <img
-                    src="{{ cacheBusting('imgs/sblank.png') }}"
-                    data-src="{{ p.smallThumbUrl }}"
-                    class="responsive-img"
-                    title="{{ p.name }}"
-                    alt="{{ p.name }}"
-                >
+                <img src="" data-src="{{ p.smallThumbUrl }}" class="responsive-img" title="{{ p.name }}" alt="{{ p.name }}">
             </a>
         </article>
     {% endfor %}

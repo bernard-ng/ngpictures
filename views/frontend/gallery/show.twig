@@ -3,7 +3,7 @@
     <div class="container row">
         <div class="col l9 m12 s12 pb10">
             <img
-                src="{{ cacheBusting('/imgs/blank.png') }}"
+                src=""
                 data-src="{{ article.thumbUrl }}"
                 alt="{{ article.name }}"
                 title="{{ article.name }}"
@@ -133,7 +133,7 @@
             {% for p in similars %}
             <a href="{{ p.url }}" class="carousel-item" style="background: {{ p.color }}">
                 <img
-                    src="{{ cacheBusting('/imgs/sblank.png') }}"
+                    src=""
                     data-src="{{ p.smallThumbUrl }}"
                     title="{{ p.name }}"
                     alt="{{ p.name }}"

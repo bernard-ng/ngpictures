@@ -2,12 +2,24 @@
 
 {% block content %}
     <section class="section container row">
-        <div class="gallery gallery-container" id="dataContainer" data-ajax="gallery">
+        <div class="gallery gallery-container">
+            {% for p in posts %}
+                <article class="gallery-item" id="{{ p.id }}"  style="background: {{ p.color }}">
+                    <a href="{{ p.url }}">
+                        <img
+                            src=""
+                            data-src="{{ p.smallThumbUrl }}"
+                            title="{{ p.name }}"
+                            alt="{{ p.name }}"
+                        >
+                    </a>
+                </article>
+            {% endfor %}
             {% for b in blog %}
                 <article class="gallery-item" id="{{ b.id }}"  style="background: {{ b.color }}">
                     <a href="{{ b.url }}">
                         <img
-                            src="{{ cacheBusting('/imgs/sblank.png') }}"
+                            src=""
                             data-src="{{ b.smallThumbUrl }}"
                             title="{{ b.name }}"
                             alt="{{ b.name }}"
@@ -19,22 +31,10 @@
                 <article class="gallery-item" id="{{ g.id }}"  style="background: {{ g.color }}">
                     <a href="{{ g.url }}">
                         <img
-                            src="{{ cacheBusting('/imgs/sblank.png') }}"
+                            src=""
                             data-src="{{ g.smallThumbUrl }}"
                             title="{{ g.name }}"
                             alt="{{ g.name }}"
-                        >
-                    </a>
-                </article>
-            {% endfor %}
-            {% for p in posts %}
-                <article class="gallery-item" id="{{ p.id }}"  style="background: {{ p.color }}">
-                    <a href="{{ p.url }}">
-                        <img
-                            src="{{ cacheBusting('/imgs/sblank.png') }}"
-                            data-src="{{ p.smallThumbUrl }}"
-                            title="{{ p.name }}"
-                            alt="{{ p.name }}"
                         >
                     </a>
                 </article>

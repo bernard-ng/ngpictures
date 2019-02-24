@@ -2,15 +2,15 @@
 {% import 'includes/form.twig' as form %}
 
 {% block content %}
-<div class="row col l4 m4 s12">
-    <div class="card-panel hoverable" id="loginBox">
+<div class="row col light-card offset-l3 l6 m12 s12">
+    <div class="card-panel hoverable">
         <h2 class="ui header">Signaler la publication</h2>
         <p>
             Veuillez nous dire ce qui ne va pas avec cette publication
         </p>
         <div class="row">
             <img
-                src="{{ cacheBusting('/imgs/blank.png') }}"
+                src=""
                 data-src="{{ post.thumbUrl }}"
                 class="responsive"
                 alt="{{ post.title ?: post.name }}"

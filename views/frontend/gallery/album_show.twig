@@ -3,27 +3,27 @@
 {% block content %}
     <div class="section container row animated slideInRight">
         {% if posts or gallery %}
-            <div class="gallery gallery-container" id="dataContainer" data-ajax="gallery">
-                {% for g in gallery %}
-                    <article class="gallery-item" id="{{ g.id }}"  style="background: {{ g.color }}">
-                        <a href="{{ g.url }}">
-                            <img
-                                src="{{ cacheBusting('/imgs/sblank.png') }}"
-                                data-src="{{ g.smallThumbUrl }}"
-                                title="{{ g.name }}"
-                                alt="{{ g.name }}"
-                            >
-                        </a>
-                    </article>
-                {% endfor %}
+            <div class="gallery gallery-container">
                 {% for p in posts %}
                     <article class="gallery-item" id="{{ p.id }}"  style="background: {{ p.color }}">
                         <a href="{{ p.url }}">
                             <img
-                                src="{{ cacheBusting('/imgs/sblank.png') }}"
+                                src=""
                                 data-src="{{ p.smallThumbUrl }}"
                                 title="{{ p.name }}"
                                 alt="{{ p.name }}"
+                            >
+                        </a>
+                    </article>
+                {% endfor %}
+                {% for g in gallery %}
+                    <article class="gallery-item" id="{{ g.id }}"  style="background: {{ g.color }}">
+                        <a href="{{ g.url }}">
+                            <img
+                                src=""
+                                data-src="{{ g.smallThumbUrl }}"
+                                title="{{ g.name }}"
+                                alt="{{ g.name }}"
                             >
                         </a>
                     </article>
