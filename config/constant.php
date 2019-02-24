@@ -17,7 +17,7 @@ define("FLASH_MESSAGE_KEY", "flash");
 define("TOKEN_KEY", "token");
 define("CAPTCHA_KEY", "captcha");
 define("COOKIE_REMEMBER_KEY", "ngpictures_");
-define('ENV', 'development');
+define('ENV', 'production');
 define('CACHE_BUSTING', false);
 
 //APPLICATION API KEYS
