@@ -1,4 +1,6 @@
+
 RewriteEngine on
+
 RewriteOptions inherit
 
 <IfModule mod_headers.c>
@@ -6,13 +8,6 @@ RewriteOptions inherit
     Header set Access-Control-Allow-Origin "*"
   </FilesMatch>
 </IfModule>
-
-# php -- BEGIN cPanel-generated handler, do not edit
-# Set the “ea-php56” package as the default “PHP” programming language.
-<IfModule mime_module>
-  AddType application/x-httpd-ea-php56___lsphp .php .php5 .phtml
-</IfModule>
-# php -- END cPanel-generated handler, do not edit
 RewriteCond %{HTTP_HOST} ^larytech\.com$ [OR]
 RewriteCond %{HTTP_HOST} ^www\.larytech\.com$
 RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
@@ -28,7 +23,11 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ /public/index.php?url=$1 [QSA,L]
 
-RewriteEngine On 
-RewriteCond %{SERVER_PORT} 80 
+RewriteEngine On
+RewriteCond %{SERVER_PORT} 80
 RewriteRule ^(.*)$ https://www.larytech.com/$1 [R,L]
 Options -Indexes
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# This domain inherits the “PHP” package.
+# php -- END cPanel-generated handler, do not edit
