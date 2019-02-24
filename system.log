@@ -33,3 +33,68 @@
 * F:\projects\ngpictures\src\Ngpictures\Controllers\Admin\PagesEditorController.php	25
 		=> 23-Feb 18:27 : DirectoryIterator::__construct(F:\projects\ngpictures/src/Ngpictures/Views/frontend/static/,F:\projects\ngpictures/src/Ngpictures/Views/frontend/static/): The system cannot find the path specified. (code: 3)  
 
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 23-Feb 23:36 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as author
+            FROM posts
+            LEFT JOIN categories ON categories_' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 23-Feb 23:37 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as author
+            FROM posts
+            LEFT JOIN categories ON categories_' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 23-Feb 23:37 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as author
+            FROM posts
+            LEFT JOIN categories ON categories_' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 23-Feb 23:38 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as author
+            FROM posts
+            LEFT JOIN categories ON posts.categ' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 23-Feb 23:38 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as author
+            FROM posts
+            LEFT JOIN categories ON posts.categ' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 23-Feb 23:38 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as author
+            FROM posts
+            LEFT JOIN categories ON posts.categ' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 23-Feb 23:39 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as author
+            FROM posts
+            LEFT JOIN categories ON posts.categ' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 23-Feb 23:39 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as author
+            FROM posts
+            LEFT JOIN users ON posts.users_id =' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 23-Feb 23:39 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as author
+            FROM posts
+            LEFT JOIN users ON posts.users_id =' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 23-Feb 23:45 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.name
+            FROM posts
+            LEFT JOIN users ON users_id = users_id
+' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 23-Feb 23:45 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.name
+            FROM posts
+            LEFT JOIN users ON users_id = users.id
+' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 23-Feb 23:46 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as author
+            FROM posts
+            LEFT JOIN users ON users_id = users' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 23-Feb 23:52 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+

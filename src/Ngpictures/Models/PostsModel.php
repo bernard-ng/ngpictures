@@ -92,4 +92,25 @@ class PostsModel extends Model
             [$id]
         );
     }
+
+
+    /**
+     * renvoi par defaut le 4 dernier enregistrement
+     * @param int $from
+     * @param int $to
+     * @return mixed
+     */
+    public function latest(int $from = 0, int $to = 4)
+    {
+        return $this->query(
+            "SELECT {$this->table}.*, categories.title as category, users.name as username
+            FROM {$this->table}
+            LEFT JOIN users ON users_id = users.id
+            LEFT JOIN categories ON categories_id = categories.id
+            WHERE online = 1 ORDER BY id DESC LIMIT {$from},{$to}",
+            null,
+            true,
+            false
+        );
+    }
 }

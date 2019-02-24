@@ -2,25 +2,26 @@
 
 {% block content %}
     <section class="section row container animated slideInUp">
-        <span class="row col l12 s12 m12">
-            <h2 class="ui header"> Dernières photos</h2>
-        </span>
-        {% for a in last %}
-            <div class="row nexted col s12 m3 l3">
-                <article class="card post-titled" style="background-color: {{ a.color }};">
-                    <div class="card-image waves-effect">
-                        <a href="{{ a.url }}" >
-                            <img src="" data-src="{{ a.smallThumbUrl }}" alt="{{ a.name }}" title="{{ a.name }}">
-                        </a>
-                    </div>
-                    {% if a.title or a.name %}
-                        <span class="post-description truncate">
-                            {{ a.title ?? a.name }}
-                        </span>
-                    {% endif %}
+        <div class="row container">
+            <span class="row col l12 s12 m12">
+                <h2 class="ui header"> Dernières photos</h2>
+            </span>
+        </div>
+        <div class="gallery large gallery-container">
+            {% for p in posts %}
+                <article class="gallery-item hoverable" id="{{ p.id }}"  style="background: {{ p.color }}">
+                    <a href="{{ p.url }}">
+                        <img src="{{ p.smallThumbUrl }}" data-src="{{ p.smallThumbUrl }}" title="{{ p.title }}" alt="{{ p.title }}">
+                    </a>
                 </article>
+            {% endfor %}
+        </div>
+        <div class="container">
+            <br>
+            <div class="col s12 center">
+                <p><a href="/posts" class="btn">Explorer</a></p>
             </div>
-        {% endfor %}
+        </div>
     </section>
     <section class="section jumbotron dark col l12 s12 m12">
         <div class="container row">

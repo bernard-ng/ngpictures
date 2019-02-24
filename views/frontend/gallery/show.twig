@@ -18,10 +18,41 @@
             {% endif %}
         </div>
         <div class="section nexted col l3 m12 s12 ">
+            <a href="{{ article.downloadUrl }}" class="btn btn-large btn-flat">Télécharger <span class="icon icon-download"></span></a>
+
+            <div class="card-user card transparent hovercard">
+                <div class="cardheader" style="background: url('{{ author.avatarUrl }}')"></div>
+                <div class="avatar">
+                    <a href="{{ author.accountUrl }}">
+                        <img alt="{{ author.name }}" title="{{ author.name }}" data-src="{{ author.avatarUrl }}">
+                    </a>
+                </div>
+                <div class="info">
+                    <div class="title">
+                        <a href="{{ author.accountUrl }}">{{ author.name }}</a>
+                    </div>
+                    <div class="desc truncate">{{ author.bio }}</div>
+                    <div class="ui tiny horizontal divided list">
+                        <div class="item">
+                            <div class="content">
+                                <div class="header">{{ author.postsNumber }}&nbsp;Posts</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="content">
+                                <div class="header">{{ author.followersNumber }}&nbsp;Abonnés</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="content">
+                                <div class="header">{{ author.followingsNumber }}&nbsp;Abonnement</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <ul class="collection grey dark-4">
-                 <li class="collection-item">
-                    By {{ author.name }}
-                </li>
                 <li class="collection-item">
                     Camera
                     <span class="right">{{ article.exifData.Model ?? 'Indéfini' }}</span>

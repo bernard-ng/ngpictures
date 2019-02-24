@@ -15,12 +15,7 @@
             <div class="carousel small">
                 {% for p in photo %}
                     <a href="{{ p.url }}" class="carousel-item" style="background: {{ p.color }}">
-                        <img
-                            src="{{ cacheBusting('/imgs/sblank.png') }}"
-                            data-src="{{ p.smallThumbUrl }}"
-                            alt="{{ p.name }}"
-                            title="{{ p.name }}"
-                        >
+                        <img src="" data-src="{{ p.smallThumbUrl }}" alt="{{ p.name }}" title="{{ p.name }}">
                     </a>
                 {% endfor %}
             </div>

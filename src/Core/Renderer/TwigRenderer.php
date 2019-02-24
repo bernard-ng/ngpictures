@@ -15,11 +15,14 @@ class TwigRenderer implements RendererInterface
     {
         $loader = new \Twig_Loader_Filesystem(ROOT."/views");
         $this->twig = new \Twig_Environment($loader, [
-            'debug' => (ENV === 'developpment'),
+            'debug' => (ENV === 'development'),
             'cache' => (ENV === 'production')? ROOT."/cache/render" : false,
         ]);
 
-        $this->twig->addExtension(new \Twig_Extension_Debug());
+        if (ENV === 'development') {
+            $this->twig->addExtension(new \Twig_Extension_Debug());
+        }
+        $this->twig->addExtension(new \Twig_Extensions_Extension_Text());
         $this->twig->addExtension(new TwigRendererExtension());
     }
 

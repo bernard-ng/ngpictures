@@ -2,34 +2,32 @@
 namespace Ngpictures\Controllers;
 
 use Ngpictures\Managers\PageManager;
-use Psr\Container\ContainerInterface;
-use Ngpictures\Traits\Util\ResolverTrait;
+use Ngpictures\Models\BlogModel;
+use Ngpictures\Models\CategoriesModel;
+use Ngpictures\Models\GalleryModel;
+use Ngpictures\Models\PostsModel;
 
+/**
+ * Class HomeController
+ * @package Ngpictures\Controllers
+ */
 class HomeController extends Controller
 {
     /**
-     * homepage
-     *
-     * @return void
+     * home page
      */
     public function index()
     {
-        $last           =   $this->loadModel('gallery')->latest();
-        $article        =   $this->loadModel('blog')->last();
-        $categories     =   $this->loadModel('categories')->orderBy('title', 'DESC', 0, 10);
-        $sliderTitle    =   ["Deep Shooting", "Find it", "Discover More", "Share feelings"];
-        $sliderDesc     =   [
-            "Faites vos réservations shooting, trouvez le photographes idéal pour vous.",
-            "Trouver la photo que vous avez besoin pour vos fond d'écrans, affiche et autres",
-            "Découvrez la version 2.0 de ngpictures et toutes les nouvelles fonctionnalités.",
-            "Partager vos photos avec les passionnés de la photographie et le reste du monde."
-        ];
+        $last           =   $this->container->get(GalleryModel::class)->latest();
+        $posts          =   $this->container->get(PostsModel::class)->latest(0, 6);
+        $article        =   $this->container->get(BlogModel::class)->last();
+        $categories     =   $this->container->get(CategoriesModel::class)->orderBy('title', 'DESC', 0, 10);
 
         $this->turbolinksLocation("/");
         PageManager::setTitle('Ngpictures');
         $this->view(
             "frontend/index",
-            compact('last', 'article', 'categories', 'sliderTitle', 'sliderDesc')
+            compact('last', 'article', 'categories', 'posts')
         );
     }
 }

@@ -20,7 +20,6 @@ class PostsController extends Controller
     {
         parent::__construct($container);
         $this->loadModel(['posts', 'categories']);
-        $this->authService->restrict();
     }
 
 
@@ -32,6 +31,7 @@ class PostsController extends Controller
      */
     public function showPosts(string $token)
     {
+        $this->authService->restrict();
         if ($this->authService->getToken() == $token) {
             $user = $this->authService->isLogged();
 
@@ -59,6 +59,7 @@ class PostsController extends Controller
      */
     public function add()
     {
+        $this->authService->restrict();
         $post = new Collection($_POST);
         $file = new Collection($_FILES);
         $errors = new Collection();
@@ -138,6 +139,7 @@ class PostsController extends Controller
      */
     public function edit($id, $token)
     {
+        $this->authService->restrict();
         $categories = $this->categories->orderBy('title', 'ASC');
 
         if ($token == $this->authService->getToken()) {
@@ -173,6 +175,7 @@ class PostsController extends Controller
      */
     public function delete($id, $token)
     {
+        $this->authService->restrict();
         $data = new Collection($_POST);
         $post = $this->posts->find(intval($id));
 
