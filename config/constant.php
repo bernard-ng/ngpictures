@@ -18,7 +18,7 @@ define("TOKEN_KEY", "token");
 define("CAPTCHA_KEY", "captcha");
 define("COOKIE_REMEMBER_KEY", "ngpictures_");
 define('ENV', 'production');
-define('CACHE_BUSTING', false);
+define('CACHE_BUSTING', true);
 
 //APPLICATION API KEYS
 //***************************************************************
