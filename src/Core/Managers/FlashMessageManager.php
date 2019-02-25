@@ -6,6 +6,10 @@ use Ng\Core\Traits\SingletonTrait;
 use Ngpictures\Managers\MessageManager;
 use Ngpictures\Traits\Util\RequestTrait;
 
+/**
+ * Class FlashMessageManager
+ * @package Ng\Core\Managers
+ */
 class FlashMessageManager
 {
 

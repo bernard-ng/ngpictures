@@ -4,6 +4,10 @@ namespace Ng\Core\Managers;
 use Ng\Core\Interfaces\SessionInterface;
 use Ng\Core\Traits\SingletonTrait;
 
+/**
+ * Class SessionManager
+ * @package Ng\Core\Managers
+ */
 class SessionManager implements SessionInterface
 {
 

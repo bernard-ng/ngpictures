@@ -7,6 +7,10 @@ use Ngpictures\Traits\Util\RequestTrait;
 use Ngpictures\Traits\Util\ResolverTrait;
 use Ngpictures\Traits\Util\ValidationErrorTrait;
 
+/**
+ * Class Controller
+ * @package Ng\Core\Controllers
+ */
 class Controller
 {
     use ValidationErrorTrait;
@@ -25,6 +29,10 @@ class Controller
     protected $container;
 
 
+    /**
+     * Controller constructor.
+     * @param ContainerInterface $container
+     */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
@@ -33,9 +41,8 @@ class Controller
 
 
     /**
-     * le nom du model
-     * @param string|array $model
-     * @return void
+     * @param $name
+     * @return mixed
      */
     public function loadModel($name)
     {
@@ -53,7 +60,7 @@ class Controller
     /**
      * le nom du controlle
      * @param string $name
-     * @return void
+     * @return Object
      */
     public function callController(string $name)
     {

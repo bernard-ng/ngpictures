@@ -5,6 +5,10 @@ use \ArrayAccess;
 use \ArrayIterator;
 use \IteratorAggregate;
 
+/**
+ * Class Collection
+ * @package Ng\Core\Managers
+ */
 class Collection implements IteratorAggregate, ArrayAccess
 {
 

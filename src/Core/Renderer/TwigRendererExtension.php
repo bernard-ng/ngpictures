@@ -3,6 +3,10 @@ namespace Ng\Core\Renderer;
 
 use Ng\Core\Managers\CacheBustingManager;
 
+/**
+ * Class TwigRendererExtension
+ * @package Ng\Core\Renderer
+ */
 class TwigRendererExtension extends \Twig_Extension
 {
 

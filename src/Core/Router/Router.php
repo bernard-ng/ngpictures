@@ -3,7 +3,7 @@
 namespace Ng\Core\Router;
 
 use Ng\Core\Exception\RouterException;
-use Ngpictures\Ngpictures;
+
 
 /**
  * Class Router

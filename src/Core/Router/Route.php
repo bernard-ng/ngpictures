@@ -1,6 +1,10 @@
 <?php
 namespace Ng\Core\Router;
 
+/**
+ * Class Route
+ * @package Ng\Core\Router
+ */
 class Route
 {
 

@@ -9,6 +9,10 @@ use League\ColorExtractor\ColorExtractor;
 use Intervention\Image\Exception\NotReadableException;
 use Intervention\Image\ImageManager as InterventionImage;
 
+/**
+ * Class ImageManager
+ * @package Ng\Core\Managers
+ */
 class ImageManager
 {
 

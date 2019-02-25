@@ -3,6 +3,10 @@ namespace Ng\Core\Managers;
 
 use Ng\Core\Exception\ConfigManagerException;
 
+/**
+ * Class ConfigManager
+ * @package Ng\Core\Managers
+ */
 class ConfigManager
 {
 

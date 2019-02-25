@@ -1,6 +1,10 @@
 <?php
 namespace Ng\Core\Renderer;
 
+/**
+ * Interface RendererInterface
+ * @package Ng\Core\Renderer
+ */
 interface RendererInterface
 {
 

@@ -1,13 +1,16 @@
 <?php
 namespace Ng\Core\Entity;
 
+/**
+ * Class Entity
+ * @package Ng\Core\Entity
+ */
 class Entity
 {
 
     /**
-     * definie un attribut dynamiquement
      * @param $key
-     * @return mixed
+     * @return null
      */
     public function __get($key)
     {
@@ -20,7 +23,6 @@ class Entity
     }
 
     /**
-     * on recupere le temps bien formater
      * @return string
      */
     public function getTime(): string

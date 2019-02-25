@@ -2,32 +2,47 @@
 namespace Ng\Core\Database;
 
 use \PDO;
-use \Exception;
 use \PDOException;
-use Ngpictures\Ngpictures;
 use Ng\Core\Managers\LogMessageManager;
 
+/**
+ * Class MysqlDatabase
+ * @package Ng\Core\Database
+ */
 class MysqlDatabase implements DatabaseInterface
 {
-
     /**
-     * les differents params de connexion a la base de donnee
-     * defini dans le fichier de configuration
      * @var string
      */
-
     private $dbuser;
+
+    /**
+     * @var string
+     */
     private $dbpass;
+
+    /**
+     * @var string
+     */
     private $dbhost;
+
+    /**
+     * @var string
+     */
     private $dbname;
+
+    /**
+     * @var PDO
+     */
     private $PDO;
+
 
     /**
      * MysqlDatabase constructor.
-     * @param $db_name
-     * @param string $db_host
-     * @param string $db_user
-     * @param string $db_pass
+     * @param string $dbname
+     * @param string $dbhost
+     * @param string $dbuser
+     * @param string $dbpass
      */
     public function __construct(string $dbname, string $dbhost, string $dbuser, string $dbpass)
     {
@@ -39,8 +54,7 @@ class MysqlDatabase implements DatabaseInterface
 
 
     /**
-     * connexion avec pdo a la base de donnee
-     * @return PDO
+     * @return null|PDO
      */
     private function getPDO()
     {
@@ -65,12 +79,11 @@ class MysqlDatabase implements DatabaseInterface
 
 
     /**
-     * permet de faire des requets normal
      * @param $statement
-     * @param bool $class_name
+     * @param bool $entity
      * @param bool $one
      * @param bool $rowcount
-     * @return array|int|mixed|\PDOStatement
+     * @return array|int|mixed|null|\PDOStatement
      */
     public function query($statement, $entity = true, $one = false, $rowcount = false)
     {
@@ -95,13 +108,12 @@ class MysqlDatabase implements DatabaseInterface
 
 
     /**
-     * permet de faire des requets preparés
      * @param $statement
      * @param $data
      * @param bool $class_name
      * @param bool $one
      * @param bool $rowcount
-     * @return array|int|mixed|\PDOStatement
+     * @return array|int|mixed|null|\PDOStatement
      */
     public function prepare($statement, $data, $class_name = true, $one = false, $rowcount = false)
     {
@@ -136,7 +148,6 @@ class MysqlDatabase implements DatabaseInterface
 
 
     /**
-     * renvoi le dernier id insert dans la base de donnee
      * @return string
      */
     public function lastInsertId()

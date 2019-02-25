@@ -1,6 +1,10 @@
 <?php
 namespace Ng\Core\Traits;
 
+/**
+ * Class SingletonTrait
+ * @package Ng\Core\Traits
+ */
 trait SingletonTrait
 {
     /**
@@ -11,8 +15,7 @@ trait SingletonTrait
 
 
     /**
-     * patern singleton, renvoi la mm instance d'un class
-     * @return self
+     * @return SingletonTrait
      */
     public static function getInstance(): self
     {

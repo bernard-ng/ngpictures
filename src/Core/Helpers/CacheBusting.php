@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @param string $filename
+ * @return string
+ */
 function CacheBusting(string $filename): string
 {
     if (CACHE_BUSTING) {

@@ -3,6 +3,10 @@ namespace Ng\Core\Managers;
 
 use Ngpictures\Models\UsersModel;
 
+/**
+ * Class StringManager
+ * @package Ng\Core\Managers
+ */
 class StringManager
 {
 

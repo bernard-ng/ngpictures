@@ -4,6 +4,10 @@ namespace Ng\Core\Managers;
 use \RuntimeException;
 use Ngpictures\Managers\MessageManager;
 
+/**
+ * Class ValidationManager
+ * @package Ng\Core\Managers
+ */
 class ValidationManager
 {
 
@@ -28,8 +32,7 @@ class ValidationManager
 
     /**
      * ValidationManager constructor
-     * @param array $data
-     * @return void
+     * @param MessageManager $msg
      */
     public function __construct(MessageManager $msg)
     {

@@ -6,6 +6,10 @@ use \InvalidArgumentException;
 use \BadMethodCallException;
 use \LengthException;
 
+/**
+ * Class SitemapManager
+ * @package Ng\Core\Managers
+ */
 class SitemapManager
 {
     /**

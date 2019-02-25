@@ -4,6 +4,10 @@ namespace Ng\Core\Managers;
 use \DateTime;
 use \InvalidArgumentException;
 
+/**
+ * Class CalendarManager
+ * @package Ng\Core\Managers
+ */
 class CalendarManager
 {
     public $days = [
@@ -19,10 +23,8 @@ class CalendarManager
     private $year;
 
     /**
-     * calendar_event
-     *
-     * @param integer $month le mois entre 1 et 12
-     * @param integer $year
+     * CalendarManager constructor.
+     * @param array|null $param
      */
     public function __construct(array $param = null)
     {
@@ -45,9 +47,7 @@ class CalendarManager
 
 
     /**
-     * retourne le mois en toutes lettres
-     *
-     * @return stirng
+     * @return string
      */
     public function toString() : string
     {
@@ -56,9 +56,7 @@ class CalendarManager
 
 
     /**
-     * renvoi le nombre de semaine du mois
-     *
-     * @return integer
+     * @return int
      */
     public function getWeeks() : int
     {
@@ -75,8 +73,6 @@ class CalendarManager
 
 
     /**
-     * renvoi le premier jour du mois
-     *
      * @return DateTime
      */
     public function getStratingDay() : DateTime
@@ -86,10 +82,8 @@ class CalendarManager
 
 
     /**
-     * renvoi vrai si la date est dans le mois courant
-     *
      * @param DateTime $date
-     * @return boolean
+     * @return bool
      */
     public function withInMonth(DateTime $date) : bool
     {
@@ -97,11 +91,8 @@ class CalendarManager
     }
 
 
-
     /**
-     * renvoi le mois suivant
-     *
-     * @return self
+     * @return CalendarManager
      */
     public function nextMonth() : self
     {
@@ -116,9 +107,7 @@ class CalendarManager
 
 
     /**
-     * renvoi le mois precedent
-     *
-     * @return self
+     * @return CalendarManager
      */
     public function previousMonth() : self
     {

@@ -2,60 +2,51 @@
 namespace Ng\Core\Interfaces;
 
 /**
- * permet de gerer la session
+ * Interface SessionInterface
+ * @package Ng\Core\Interfaces
  */
 interface SessionInterface
 {
+    /**
+     * @return self
+     */
     public static function getInstance();
 
 
     /**
-     * doit commencer une session si ce n'est pas le cas
-     **/
+     * SessionInterface constructor.
+     */
     public function __construct();
 
     /**
-     * recupere une valeur dans la session
-     *
-     * @param string $key la cle dans la quel on veux recupere la valeur
-     * @param string $value la valeur chercher
+     * @param string $key
+     * @param string $value
      * @return mixed
-     **/
+     */
     public function getValue(string $key, string $value);
 
-
     /**
-    * permet d'ecrir dans la session
-    *
-    * @param string
-    * @param string $value
-    **/
+     * @param string $key
+     * @param $value
+     * @return mixed
+     */
     public function write(string $key, $value);
 
-
     /**
-     * permet de supprimer une valeur
-     *
-     * @param string $key la valeur a supprimer
+     * @param string $key
      * @return void
-     **/
+     */
     public function delete(string $key);
 
-
     /**
-     * permet de lire une valeur
-     *
-     * @param string $key la cle a lire
+     * @param string $key
      * @return mixed
-     **/
+     */
     public function read(string $key);
 
-
     /**
-     * permet de savoir si une cle existe
-     *
-     * @param string $key la valeur a verifier
-     * @return bool
-     **/
+     * @param string $key
+     * @return mixed
+     */
     public function hasKey(string $key);
 }

@@ -3,6 +3,10 @@ namespace Ng\Core\Models;
 
 use Ng\Core\Database\DatabaseInterface;
 
+/**
+ * Class Model
+ * @package Ng\Core\Models
+ */
 class Model
 {
 
@@ -15,14 +19,14 @@ class Model
 
     /**
      * connection de la base de donnee
-     * @var Database
+     * @var DatabaseInterface
      */
     protected $database;
 
 
     /**
      * Model constructor.
-     * @param DatabaseInterface
+     * @param DatabaseInterface $database
      */
     public function __construct(DatabaseInterface $database)
     {

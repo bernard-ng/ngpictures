@@ -5,6 +5,10 @@ use DateTime;
 use Ng\Core\Interfaces\CookieInterface;
 use Ng\Core\Traits\SingletonTrait;
 
+/**
+ * Class CookieManager
+ * @package Ng\Core\Managers
+ */
 class CookieManager implements CookieInterface
 {
 
@@ -22,9 +26,9 @@ class CookieManager implements CookieInterface
 
 
     /**
-     * ecrire dans le tableau cookie
      * @param string $name
      * @param string $value
+     * @return mixed|void
      */
     public function write(string $name, string $value)
     {

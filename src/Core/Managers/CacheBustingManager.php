@@ -1,6 +1,10 @@
 <?php
 namespace Ng\Core\Managers;
 
+/**
+ * Class CacheBustingManager
+ * @package Ng\Core\Managers
+ */
 class CacheBustingManager
 {
 

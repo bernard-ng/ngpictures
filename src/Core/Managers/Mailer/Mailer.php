@@ -1,24 +1,22 @@
 <?php
 namespace Ng\Core\Managers\Mailer;
 
-use Ngpictures\Ngpictures;
-use \InvalidArgumentException;
+use InvalidArgumentException;
+use Ng\Core\Managers\LogMessageManager;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
-use Ng\Core\Managers\ConfigManager;
-use Ng\Core\Managers\LogMessageManager;
 
+/**
+ * Class Mailer
+ * @package Ng\Core\Managers\Mailer
+ */
 class Mailer
 {
 
     /**
-     * envoi un mail de confirmation a un utilisateur
-     * la variable confirmation_link est echo dans le fichier
-     * template, ne donc pas la retirer
-     * @param $link
-     * @param $email
-     * @throws Exception if message could be sent
-     * @throws InvalidArgumentException if email is invalid
+     * @param string $link
+     * @param string $email
+     * @return bool
      */
     public function accountConfirmation(string $link, string $email)
     {
@@ -30,14 +28,7 @@ class Mailer
         $message = ob_get_clean();
 
         try {
-            $mail->isSMTP();
-            $mail->Host = 'mail.larytech.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'ngpictures@larytech.com';
-            $mail->Password = ']3dneN!%2@y,';
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
-
+            $this->setUpSMTP($mail);
             $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
             $mail->addAddress($email);
             $mail->addReplyTo('ngpictures@larytech.com', 'Information');
@@ -52,6 +43,19 @@ class Mailer
         }
     }
 
+    /**
+     * @param PHPMailer $mail
+     */
+    private function setUpSMTP(PHPMailer $mail)
+    {
+        $mail->isSMTP();
+        $mail->Host = 'mail.larytech.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'ngpictures@larytech.com';
+        $mail->Password = ']3dneN!%2@y,';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+    }
 
     public function photographerConfirmation(string $email)
     {
@@ -62,13 +66,7 @@ class Mailer
         $message = ob_get_clean();
 
         try {
-            $mail->isSMTP();
-            $mail->Host = 'mail.larytech.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'ngpictures@larytech.com';
-            $mail->Password = ']3dneN!%2@y,';
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
+            $this->setUpSMTP($mail);
 
             $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
             $mail->addAddress($email);
@@ -84,15 +82,10 @@ class Mailer
         }
     }
 
-
     /**
-     * envoi un mail de mot de passe oublié a un utilisateur
-     * variable reset_link est echo dans le fichier template.
-     * ne donc pas la retirer
-     * @param $link
-     * @param $email
-     * @throws Exception if message could be sent
-     * @throws InvalidArgumentException if email is invalid
+     * @param string $link
+     * @param string $email
+     * @return bool
      */
     public function resetPassword(string $link, string $email)
     {
@@ -105,13 +98,7 @@ class Mailer
             $message = ob_get_clean();
 
             try {
-                $mail->isSMTP();
-                $mail->Host = 'mail.larytech.com';
-                $mail->SMTPAuth = true;
-                $mail->Username = 'ngpictures@larytech.com';
-                $mail->Password = ']3dneN!%2@y,';
-                $mail->SMTPSecure = 'tls';
-                $mail->Port = 587;
+                $this->setUpSMTP($mail);
 
                 $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
                 $mail->addAddress($email);
@@ -132,14 +119,9 @@ class Mailer
         }
     }
 
-
     /**
-     * envoyer les logs par mail a l'admin
-     *
      * @param string $email
-     * @throws Exception if message could be sent
-     * @throws InvalidArgumentException if email is invalid
-     * @return void
+     * @return bool
      */
     public function sendLogs(string $email)
     {
@@ -147,13 +129,7 @@ class Mailer
 
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             try {
-                $mail->isSMTP();
-                $mail->Host = 'mail.larytech.com';
-                $mail->SMTPAuth = true;
-                $mail->Username = 'ngpictures@larytech.com';
-                $mail->Password = ']3dneN!%2@y,';
-                $mail->SMTPSecure = 'tls';
-                $mail->Port = 587;
+                $this->setUpSMTP($mail);
 
                 $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
                 $mail->addAddress($email);
@@ -175,16 +151,11 @@ class Mailer
         }
     }
 
-
     /**
-     * formulaire de contact
-     *
      * @param string $name
      * @param string $email
      * @param string $message
-     * @throws Exception if message couldn't be sent
-     * @throws InvalidArgumentException if email is invalid
-     * @return void
+     * @return bool
      */
     public function contact(string $name, string $email, string $message)
     {
@@ -192,13 +163,7 @@ class Mailer
             $mail = new PHPMailer(true);
 
             try {
-                $mail->isSMTP();
-                $mail->Host = 'mail.larytech.com';
-                $mail->SMTPAuth = true;
-                $mail->Username = 'ngpictures@larytech.com';
-                $mail->Password = ']3dneN!%2@y,';
-                $mail->SMTPSecure = 'tls';
-                $mail->Port = 587;
+                $this->setUpSMTP($mail);
 
                 $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
                 $mail->addAddress($email);
@@ -217,17 +182,14 @@ class Mailer
         }
     }
 
-
     /**
-     * notification de reservation
-     *
      * @param string $photographer_email
      * @param string $name
      * @param string $email
      * @param string $date
      * @param string $time
      * @param string $description
-     * @return void
+     * @return bool
      */
     public function booking(string $photographer_email, string $name, string $email, string $date, string $time, string $description)
     {
@@ -237,13 +199,7 @@ class Mailer
         $message = ob_get_clean();
 
         try {
-            $mail->isSMTP();
-            $mail->Host = 'mail.larytech.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'ngpictures@larytech.com';
-            $mail->Password = ']3dneN!%2@y,';
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
+            $this->setUpSMTP($mail);
 
             $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
             $mail->addAddress($email);

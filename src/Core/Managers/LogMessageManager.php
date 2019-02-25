@@ -1,6 +1,10 @@
 <?php
 namespace Ng\Core\Managers;
 
+/**
+ * Class LogMessageManager
+ * @package Ng\Core\Managers
+ */
 final class LogMessageManager
 {
 
