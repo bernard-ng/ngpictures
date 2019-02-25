@@ -4,24 +4,43 @@
 {% block content %}
     <section class="section row">
         <div class="container">
-           <div class="hide-on-med-and-down">
-                {% include 'includes/right-aside.twig' %}
-           </div>
-            <section class="col nexted l6 m12 s12">
-                <div class="grey dark-4 col l12 m12 s12">
+            <section class="col offset-l2 l8 offset-m2 m8 s12 nexted">
+                <div class="light-card card-panel">
                     <form action="" method="POST" enctype="multipart/form-data" data-action="upload">
                         <div class="row">
                             {{ form.inputFile('Ajouter une photo') }}
-                            {{ form.input('title','Titre', 'text', errors.get('title'), post.get('title')) }}
-                            <div class="col l12 m12 s12">
+
+                            <div class="row input-field col s12">
+                                <label for="title">titre (optionel)</label>
+                                <input type="text" name="title" id="title" class="validate {{ error ? 'invalid' : '' }}" value="{{ post.get('title') | escape }}">
+                                <span class="helper-text grey-txt txt-light-4">
+                                    Ajouter un titre à votre photo, la rendra visible dans les recherches, elle sera donc
+                                    facile à retrouver par tout le monde. vous pouvez ajouter des mots clés. exemple: enfants, children, afrique, femme, etc..
+                                </span>
+                            </div>
+
+                            <div class="row input-field col s12">
                                 <select name="category">
-                                    <option disabled="disabled" selected="selected">choisissez une catégorie</option>
+                                    <option disabled="disabled" value="1" selected="selected">Définir la catégorie</option>
                                     {% for c in categories %}
-                                        <option value="{{ c.id }}"><span class="grey-txt dark-4">{{ c.title }}</span></option>
+                                        <option value="{{ c.id }}" {{ post.get('category') == c.id ? 'select' : '' }}><span class="grey-txt dark-4">{{ c.title }}</span></option>
                                     {% endfor %}
                                 </select>
+                                <span class="helper-text grey-txt txt-light-4">
+                                    Votre photo est elle d'une catégories particulière ? définir la catégorie la rendra plus visible,
+                                    par défaut votre photo sera dans la catégorie "autre".
+                                </span>
                             </div>
-                            {{ form.textarea('content','Description', errors.get('content'), post.get('content')) }}
+
+                            <div class="input-field col s12">
+                                <label for="content">Description (optionel)</label>
+                                <textarea name="content" id="content" class="materialize-textarea">{{ post.get('content') }}</textarea>
+                                <span class="helper-text grey-txt txt-light-4">
+                                    La description est un petit article pour votre photo, vous pouvez expliquer ici ce que vous essayer
+                                    de transmettre à travers elle
+                                </span>
+                            </div>
+
                             <div class="submit-button col s12">
                                 <button type="submit" class="btn btn-flat waves-effect">Publier</button>
                             </div>
@@ -29,9 +48,6 @@
                     </form>
                 </div>
             </section>
-            <div class="hide-on-med-and-down">
-                {% include 'includes/menu-aside.twig' %}
-            </div>
         </div>
     </section>
 {% endblock %}

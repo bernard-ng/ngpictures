@@ -30,14 +30,14 @@
 
 {% macro inputFile(placeholder) %}
     <div class="file-field input-field col s12">
-        <span class="btn blue-grey darken-1 waves-effect waves-light col s3 m2 l2" style="display: inline-block;">
-            <span><i class="icon icon-picture"></i></span>
+        <span class="btn blue-grey darken-1 waves-effect waves-light col s12 m12 l12" style="display: inline-block;">
+            <span>Choisir la photo <span class="icon icon-picture"></span></span>
             <input type="file" name="thumb">
         </span>
-        <span class="file-path-wrapper col s9 l10 m10" style="display: inline-block;" >
+        <span class="file-path-wrapper hide" style="display: inline-block;" >
             <input class="file-path" placeholder="{{ placeholder }}" type="text">
         </span>
-        <div data-action="show-uploaded-file"></div>
+        <div data-action="show-uploaded-file" style="margin-top: 50px; margin-bottom: 35px;"></div>
     </div>
 {% endmacro %}
 
