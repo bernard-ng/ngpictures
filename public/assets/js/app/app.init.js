@@ -557,7 +557,7 @@ function loadInit() {
             if (!c.hasAttribute('data-ng-carousel-initialized', 'true')) {
                 c.setAttribute('data-ng-carousel-initialized', 'true');
                 $(c).carousel({
-                    dist: 0,
+                    dist: 4,
                     indicators: true,
                     noWrap: false
                 });

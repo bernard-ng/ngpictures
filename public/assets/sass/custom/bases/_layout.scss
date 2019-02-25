@@ -122,8 +122,9 @@
 .jumbotron-user {
   @extend .jumbotron-small;
   background-attachment: fixed;
-  min-height: 300px;
   height: auto !important;
+  padding-top: 100px !important;
+  margin-top: -64px !important;
 
   .jumbotron-user-avatar {
     width: 10rem;
@@ -131,30 +132,21 @@
     border-radius: 100%;
     overflow: hidden;
     border: 5px solid rgba(255, 255, 255, 0.2);
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%);
+    margin: 0 auto;
   }
 
   .jumbotron-user-name {
-    position: absolute;
-    top: calc(10rem + 40px);
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%);
+    padding-top: 20px;
+
+    .bio {
+      padding-top: -20px;
+      width: 100%;
+      max-width: 500px;
+    }
   }
 
   .jumbotron-user-stats {
-    position: absolute;
-    top: calc(10rem + 80px);
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%);
+
   }
 
   .jumbotron-user-avatar img {

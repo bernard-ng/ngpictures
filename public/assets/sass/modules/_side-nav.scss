@@ -17,7 +17,7 @@
   will-change: transform;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
-  background-color: #3c4043;
+  background-color: $light-card-color;
 }
 
 .side-nav.right-aligned {

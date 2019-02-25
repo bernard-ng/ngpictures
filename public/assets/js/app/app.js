@@ -84,29 +84,33 @@ function relativeTimer(element) {
         ];
 
         function setText(node) {
-            let seconds = Math.floor((new Date()).getTime() / 1000 - parseInt(node.getAttribute('data-time'), 10));
-            let prefix = seconds > 0 ? 'Il y a ' : 'Dans ';
-            let term;
-            seconds = Math.abs(seconds);
+            try {
+                let seconds = Math.floor((new Date()).getTime() / 1000 - parseInt(node.getAttribute('data-time'), 10));
+                let prefix = seconds > 0 ? 'Il y a ' : 'Dans ';
+                let term;
+                seconds = Math.abs(seconds);
 
-            for (term of terms) {
-                if (seconds < term.time) {
-                    break;
+                for (term of terms) {
+                    if (seconds < term.time) {
+                        break;
+                    }
                 }
-            }
 
-            node.innerHTML = prefix + term.text.replace('%d', Math.round(seconds / term.divide));
+                node.innerHTML = prefix + term.text.replace('%d', Math.round(seconds / term.divide));
 
-            let nextTick = seconds % term.divide;
-            if (nextTick === 0) {
-                nextTick = term.divide;
-            }
-
-            window.setTimeout(function () {
-                if (node.parentNode) {
-                    window.requestAnimationFrame ? window.requestAnimationFrame(setText) : setText();
+                let nextTick = seconds % term.divide;
+                if (nextTick === 0) {
+                    nextTick = term.divide;
                 }
-            }, nextTick);
+
+                window.setTimeout(function () {
+                    if (node.parentNode) {
+                        window.requestAnimationFrame ? window.requestAnimationFrame(setText) : setText();
+                    }
+                }, nextTick);
+            } catch(e) {
+                return false;
+            }
         }
 
         document.querySelectorAll('time[data-time]').forEach(function (node) {

@@ -2,7 +2,7 @@
 
 .card-user {
     padding-top: 20px;
-    background: transparent;
+    background: $dark-card-color;
     border: 1px solid $border-color;
     border-top-width: 0;
     border-radius: 3px;
@@ -168,10 +168,10 @@
     background-size: cover !important ;
     background-position: center !important;
     background-attachment: fixed;
-    height: 135px;
-    -webkit-filter: grayscale(100%);
-            filter: grayscale(100%);
-    border-bottom: 5px solid $border-color;
+    height: 70px;
+    -webkit-filter: blur(2px);
+            filter: blur(2px);
+    border-bottom: 2px solid $border-color;
 }
 
 .card-user.hovercard .avatar {
@@ -231,6 +231,7 @@
     overflow: hidden;
     position: relative;
     margin-bottom: 10px !important;
+    border-radius: 3px;
 
     .card-image img {
         width: 100%;
