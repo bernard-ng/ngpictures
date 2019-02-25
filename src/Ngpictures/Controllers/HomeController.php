@@ -6,6 +6,7 @@ use Ngpictures\Models\BlogModel;
 use Ngpictures\Models\CategoriesModel;
 use Ngpictures\Models\GalleryModel;
 use Ngpictures\Models\PostsModel;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class HomeController
@@ -14,20 +15,63 @@ use Ngpictures\Models\PostsModel;
 class HomeController extends Controller
 {
     /**
+     * @var BlogModel
+     */
+    protected $blog;
+
+    /**
+     * @var GalleryModel
+     */
+    protected $gallery;
+
+    /**
+     * @var PostsModel
+     */
+    protected $posts;
+
+    public function __construct(ContainerInterface $container)
+    {
+        parent::__construct($container);
+        $this->gallery = $container->get(GalleryModel::class);
+        $this->posts = $container->get(PostsModel::class);
+        $this->blog = $container->get(BlogModel::class);
+    }
+
+    /**
      * home page
      */
     public function index()
     {
+
+        $nb         = [];
+        $thumbs     = [];
+        $categories = $this->container->get(CategoriesModel::class)->orderBy('id', 'DESC', 0, 10);
+
+        foreach ($categories as $category) {
+            $thumbs[$category->id] =
+                $this->blog->findWith('categories_id', $category->id, true)->smallThumbUrl ??
+                $this->gallery->findWith('categories_id', $category->id, true)->smallThumbUrl ??
+                $this->posts->findWith('categories_id', $category->id, true)->smallThumbUrl ??
+                '/imgs/default.jpeg';
+        }
+
+        foreach ($categories as $category) {
+            $nb[$category->id] =
+                count($this->blog->findWith('categories_id', $category->id, false)) +
+                count($this->gallery->findWith('categories_id', $category->id, false)) +
+                count($this->posts->findWith('categories_id', $category->id, false));
+            ;
+        }
+
         $last           =   $this->container->get(GalleryModel::class)->latest();
-        $posts          =   $this->container->get(PostsModel::class)->latest(0, 6);
+        $posts          =   $this->container->get(PostsModel::class)->latest(0, 12);
         $article        =   $this->container->get(BlogModel::class)->last();
-        $categories     =   $this->container->get(CategoriesModel::class)->orderBy('title', 'DESC', 0, 10);
 
         $this->turbolinksLocation("/");
         PageManager::setTitle('Ngpictures');
         $this->view(
             "frontend/index",
-            compact('last', 'article', 'categories', 'posts')
+            compact('last', 'article', 'categories', 'posts', 'thumbs', 'nb')
         );
     }
 }

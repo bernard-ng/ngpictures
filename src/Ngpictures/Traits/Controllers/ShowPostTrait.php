@@ -13,7 +13,7 @@ trait ShowPostTrait
      * @param integer $id
      * @return void
      */
-    public function show($slug,$id)
+    public function show($slug, $id)
     {
         if (!empty($slug) && !empty($id)) {
             $id         =   intval($id);

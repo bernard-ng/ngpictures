@@ -2,6 +2,7 @@
 namespace Ngpictures\Controllers;
 
 use Ngpictures\Managers\PageManager;
+use Ngpictures\Models\CategoriesModel;
 use Psr\Container\ContainerInterface;
 
 class CategoriesController extends Controller
@@ -24,7 +25,7 @@ class CategoriesController extends Controller
     {
         $nb         = [];
         $thumbs     = [];
-        $categories = $this->categories->orderBy('id', 'DESC', 0, 4);
+        $categories = $this->container->get(CategoriesModel::class)->orderBy('id', 'DESC', 0, 4);
 
         foreach ($categories as $category) {
             $thumbs[$category->id] =

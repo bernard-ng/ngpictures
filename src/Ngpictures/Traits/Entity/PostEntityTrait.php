@@ -227,7 +227,7 @@ trait PostEntityTrait
     {
         $str = Ngpictures::getDic()->get(StringManager::class);
         $users = Ngpictures::getDic()->get($this->model('users'));
-        $content = $str->getSnipet($str->truncate($this->content, 150));
+        $content = $str->getSnipet($str->truncate($this->content, 350));
         $text = $str->userMention($users, strip_tags($content));
         return $str->htag($text);
     }

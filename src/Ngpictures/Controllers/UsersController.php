@@ -225,7 +225,7 @@ class UsersController extends Controller
         $this->session->delete(AUTH_KEY);
         $this->session->delete(TOKEN_KEY);
         $this->flash->set('success', $this->flash->msg['users_logout_success'], false);
-        $this->redirect("/login", false);
+        $this->redirect("/login", false, 301);
     }
 
 

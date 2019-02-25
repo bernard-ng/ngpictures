@@ -30,12 +30,12 @@ class Mailer
         $message = ob_get_clean();
 
         try {
-            $mail->isSMTP();                                     
-            $mail->Host = 'mail.larytech.com';  
-            $mail->SMTPAuth = true;                               
-            $mail->Username = 'ngpictures@larytech.com';                 
-            $mail->Password = ']3dneN!%2@y,';                          
-            $mail->SMTPSecure = 'tls';                           
+            $mail->isSMTP();
+            $mail->Host = 'mail.larytech.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'ngpictures@larytech.com';
+            $mail->Password = ']3dneN!%2@y,';
+            $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
             $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
@@ -62,12 +62,12 @@ class Mailer
         $message = ob_get_clean();
 
         try {
-            $mail->isSMTP();                                     
-            $mail->Host = 'mail.larytech.com';  
-            $mail->SMTPAuth = true;                               
-            $mail->Username = 'ngpictures@larytech.com';                 
-            $mail->Password = ']3dneN!%2@y,';                          
-            $mail->SMTPSecure = 'tls';                           
+            $mail->isSMTP();
+            $mail->Host = 'mail.larytech.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'ngpictures@larytech.com';
+            $mail->Password = ']3dneN!%2@y,';
+            $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
             $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
@@ -105,12 +105,12 @@ class Mailer
             $message = ob_get_clean();
 
             try {
-                $mail->isSMTP();                                     
-                $mail->Host = 'mail.larytech.com';  
-                $mail->SMTPAuth = true;                               
-                $mail->Username = 'ngpictures@larytech.com';                 
-                $mail->Password = ']3dneN!%2@y,';                          
-                $mail->SMTPSecure = 'tls';                           
+                $mail->isSMTP();
+                $mail->Host = 'mail.larytech.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'ngpictures@larytech.com';
+                $mail->Password = ']3dneN!%2@y,';
+                $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
 
                 $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
@@ -147,13 +147,12 @@ class Mailer
 
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             try {
-
-                $mail->isSMTP();                                     
-                $mail->Host = 'mail.larytech.com';  
-                $mail->SMTPAuth = true;                               
-                $mail->Username = 'ngpictures@larytech.com';                 
-                $mail->Password = ']3dneN!%2@y,';                          
-                $mail->SMTPSecure = 'tls';                           
+                $mail->isSMTP();
+                $mail->Host = 'mail.larytech.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'ngpictures@larytech.com';
+                $mail->Password = ']3dneN!%2@y,';
+                $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
 
                 $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
@@ -193,13 +192,12 @@ class Mailer
             $mail = new PHPMailer(true);
 
             try {
-
-                $mail->isSMTP();                                     
-                $mail->Host = 'mail.larytech.com';  
-                $mail->SMTPAuth = true;                               
-                $mail->Username = 'ngpictures@larytech.com';                 
-                $mail->Password = ']3dneN!%2@y,';                          
-                $mail->SMTPSecure = 'tls';                           
+                $mail->isSMTP();
+                $mail->Host = 'mail.larytech.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'ngpictures@larytech.com';
+                $mail->Password = ']3dneN!%2@y,';
+                $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
 
                 $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
@@ -239,12 +237,12 @@ class Mailer
         $message = ob_get_clean();
 
         try {
-            $mail->isSMTP();                                     
-            $mail->Host = 'mail.larytech.com';  
-            $mail->SMTPAuth = true;                               
-            $mail->Username = 'ngpictures@larytech.com';                 
-            $mail->Password = ']3dneN!%2@y,';                          
-            $mail->SMTPSecure = 'tls';                           
+            $mail->isSMTP();
+            $mail->Host = 'mail.larytech.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'ngpictures@larytech.com';
+            $mail->Password = ']3dneN!%2@y,';
+            $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
             $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');

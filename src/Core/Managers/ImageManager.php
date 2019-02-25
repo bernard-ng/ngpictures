@@ -157,22 +157,22 @@ class ImageManager
 
                         switch ($format) :
                             case 'ratio':
-                            $image->resize($this->format[$format], null, function ($c) {
-                                $c->aspectRatio();
-                            });
-                            break;
-                        case 'article':
-                            $image->resize(1400, null, function ($c) {
-                                $c->aspectRatio();
-                            });
-                            break;
-                        case 'small':
-                            $image->fit($this->format[$format], $this->format[$format], function ($c) {
-                                $c->upsize();
-                            });
-                            break;
-                        case 'medium ' || 'large':
-                            $image->fit($this->format[$format], $this->format[$format]);
+                                $image->resize($this->format[$format], null, function ($c) {
+                                    $c->aspectRatio();
+                                });
+                                break;
+                            case 'article':
+                                $image->resize(1400, null, function ($c) {
+                                    $c->aspectRatio();
+                                });
+                                break;
+                            case 'small':
+                                $image->fit($this->format[$format], $this->format[$format], function ($c) {
+                                    $c->upsize();
+                                });
+                                break;
+                            case 'medium ' || 'large':
+                                $image->fit($this->format[$format], $this->format[$format]);
                         endswitch;
 
                         $image

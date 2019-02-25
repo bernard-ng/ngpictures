@@ -3,6 +3,10 @@ namespace Ngpictures\Traits\Util;
 
 use Ngpictures\Managers\PageManager;
 
+/**
+ * Class RequestTrait
+ * @package Ngpictures\Traits\Util
+ */
 trait RequestTrait
 {
     /**
@@ -15,12 +19,10 @@ trait RequestTrait
     {
         if (is_bool($url)) {
             if (!empty($_SERVER['HTTP_REFERER'])) {
-                http_response_code($code);
-                header("location:{$_SERVER['HTTP_REFERER']}");
+                header("location:{$_SERVER['HTTP_REFERER']}", true, 301);
                 exit();
             } else {
-                http_response_code($code);
-                header('location:/');
+                header('location:/', false, 301);
                 exit();
             }
         } else {

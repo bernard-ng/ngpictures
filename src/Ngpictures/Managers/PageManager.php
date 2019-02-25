@@ -2,8 +2,6 @@
 namespace Ngpictures\Managers;
 
 use Ngpictures\Ngpictures;
-use Ng\Core\Managers\ConfigManager;
-use Ng\Core\Exception\ConfigManagerException;
 
 class PageManager
 {
@@ -26,8 +24,9 @@ class PageManager
      * @var string
      */
     private static $description =
-        "Galerie, Entreprise d'art photographique et
-        mini résaux social où vous pouvez voir et partager vos propres photos";
+        "L'expression de la photographie africaine, les meilleures photos partagées par des photographes talentueux. 
+        Ngpictures est une galerie photo pour photographes et passionnés de la photographie,
+        Nous vous proposons de découvrir la photographie africaine autrement.";
 
     /**
      * og url
@@ -41,17 +40,6 @@ class PageManager
      */
     private static $image = "/imgs/icon.png";
 
-
-    /**
-     * retourne le nom de la page courante
-     * @return string
-     */
-    public static function getTitle(): string
-    {
-        return self::$pageTitle;
-    }
-
-
     /**
      * retourne la page active,
      * ce qui nous permet de faire un system de hover.
@@ -62,7 +50,6 @@ class PageManager
     {
         return trim(explode("|", self::$pageTitle)[0]);
     }
-
 
     /**
      * definit le nom de la page courante
@@ -76,18 +63,14 @@ class PageManager
         return self::getTitle();
     }
 
-
     /**
-     * defini des metas pour la page courante
-     *
-     * @param array $data
-     * @return void
+     * retourne le nom de la page courante
+     * @return string
      */
-    public static function setMeta(array $data = [])
+    public static function getTitle(): string
     {
-        self::$meta[] = $data;
+        return self::$pageTitle;
     }
-
 
     /**
      * permet de generer des metas
@@ -108,7 +91,16 @@ class PageManager
         }
     }
 
-
+    /**
+     * defini des metas pour la page courante
+     *
+     * @param array $data
+     * @return void
+     */
+    public static function setMeta(array $data = [])
+    {
+        self::$meta[] = $data;
+    }
 
     /**
      * get description
@@ -132,7 +124,6 @@ class PageManager
     }
 
 
-
     /**
      * Get the value of url
      * @return  string
@@ -143,18 +134,16 @@ class PageManager
     }
 
 
-
-   /**
-    * set url
-    *
-    * @param string $url
-    * @return void
-    */
+    /**
+     * set url
+     *
+     * @param string $url
+     * @return void
+     */
     public static function setUrl(string $url)
     {
-        self::$url =  self::$url . $url;
+        self::$url = self::$url . $url;
     }
-
 
 
     /**

@@ -13,7 +13,6 @@ class CommunityController extends Controller
      */
     public function index()
     {
-        $this->authService->restrict();
         $this->loadModel("users");
         $users = $this->users->get(10);
 
@@ -29,7 +28,6 @@ class CommunityController extends Controller
 
     public function photographers()
     {
-        $this->authService->restrict();
         $this->loadModel("users");
         $photographers = $this->loadModel('photographers')->get(8);
         $photographers = (new Collection($photographers))->asList(', ', "users_id");
