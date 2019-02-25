@@ -60,8 +60,6 @@ community_routes : {
 }
 
 posts_routes : {
-    $router->get("/blog", [BlogController::class], "blog.index");
-    $router->get("/blog/:slug-:id", [BlogController::class, 'show'], "blog.show");
     $router->get("/posts", [PostsController::class, 'index'], "posts.index");
     $router->get("/posts/post", [PostsController::class, 'post'], "posts.add");
     $router->get("/posts/edit/:slug-:id", [PostsController::class, 'edit'], "posts.edit");
@@ -113,7 +111,6 @@ $router->get("/feed", [RssController::class], "rss.index");
 //todo: replace with a strong API
 ajax_routes : {
     $router->get("/ajax/posts", [AjaxController::class, 'posts'], "ajax.posts");
-    $router->get("/ajax/blog", [AjaxController::class, 'blog'], "ajax.blog");
     $router->get("/ajax/gallery", [AjaxController::class, 'gallery'], "ajax.gallery");
     $router->get("/ajax/albums", [AjaxController::class, 'albums'], "ajax.albums");
     $router->get("/ajax/categories", [AjaxController::class, 'categories'], "ajax.categories");
