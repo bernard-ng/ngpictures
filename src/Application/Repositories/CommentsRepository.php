@@ -1,61 +1,54 @@
 <?php
 namespace Application\Repositories;
 
+use Application\Entity\CommentsEntity;
 use Framework\Repositories\Repository;
-use Framework\Managers\Collection;
 use Application\Traits\Util\TypesActionTrait;
 
+/**
+ * Class CommentsRepository
+ * @package Application\Repositories
+ */
 class CommentsRepository extends Repository
 {
     use TypesActionTrait;
 
     /**
-     * nom de la table
      * @var string
      */
     protected $table = "comments";
 
+    /**
+     * @var string
+     */
+    protected $entity = CommentsEntity::class;
+
 
     /**
+     * @param $id
      * @param string $field
-     * @param $value
-     * @return mixed
+     * @param $start
+     * @param $end
+     * @return string
      */
-    public function get($id, string $field, $start, $end)
+    public function get(int $id, string $field, int $start, int $end)
     {
-        return $this->query(
-            "SELECT * FROM {$this->table} WHERE {$field} = ? ORDER BY date_created DESC LIMIT {$start}, {$end}",
-            [$id],
-            true,
-            false
-        );
+        return "SELECT * FROM {$this->table} WHERE {$field} = ? ORDER BY date_created DESC LIMIT {$start}, {$end}";
     }
 
 
     /**
-     * renvoi le nombre de commentaire
-     *
-     * @param integer $id
+     * @param int $id
      * @param string $type
-     * @return void
+     * @return mixed
      */
     public function count(int $id, string $type)
     {
-        return $this->query(
-            "SELECT COUNT('id') AS num FROM {$this->table} WHERE {$type} = {$id}",
-            [$id],
-            true,
-            true
-        );
+        return "SELECT COUNT('id') AS num FROM {$this->table} WHERE {$type} = {$id}";
     }
 
     public function countComments($user_id)
     {
-        return $this->query(
-            "SELECT COUNT('id') as num FROM {$this->table} WHERE users_id = ?",
-            [$user_id],
-            true,
-            true
-        );
+        return "SELECT COUNT('id') as num FROM {$this->table} WHERE users_id = ?";
     }
 }

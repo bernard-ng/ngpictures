@@ -1,13 +1,23 @@
 <?php
 namespace Application\Repositories;
 
+
+use Application\Entity\BookingEntity;
 use Framework\Repositories\Repository;
 
+/**
+ * Class BookingRepository
+ * @package Application\Repositories
+ */
 class BookingRepository extends Repository
 {
     /**
-     * le nom de la table
-     * @var string $table
+     * @var string
      */
     protected $table = 'booking';
+
+    /**
+     * @var string
+     */
+    protected $entity = BookingEntity::class;
 }
