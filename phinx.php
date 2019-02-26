@@ -1,9 +1,7 @@
 <?php
 
-use Framework\Database\DatabaseInterface;
-
 require __DIR__."/public/index.php";
-$connection = $container->get(DatabaseInterface::class)->getPdo();
+$connection = $container->get(PDO::class);
 
 return  [
     'paths' => [
