@@ -1,7 +1,7 @@
 <!--With love By BERNARD NGANDU
 **************     *********
 *             \    |       $
-*              \   |       $http://ngpictures.pe.hu
+*              \   |       $https://benard-ng.github.io
 *               \  |       $**********************
 *       $        \ |       $                     *
 *       $  \               $    ***********      $
