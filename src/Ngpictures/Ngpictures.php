@@ -38,6 +38,11 @@ class Ngpictures
     {
         $this->container = $container;
         self::$dic = $container;
+
+        if (ENV === 'production') {
+            set_exception_handler([$this, "exceptionHandler"]);
+            set_error_handler([$this, "errorHandler"]);
+        }
     }
 
 

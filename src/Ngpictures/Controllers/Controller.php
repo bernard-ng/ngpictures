@@ -55,7 +55,6 @@ class Controller extends SuperController
         $this->renderer->addGlobal('pageManager', new PageManager());
         $this->renderer->addGlobal('sessionManager', $this->session);
         $this->renderer->addGlobal('flashMessageManager', $this->flash);
-        $this->renderer->addGlobal('verse', $this->callController('verses')->index());
 
         if ($this->authService->isLogged()) {
             $this->renderer->addGlobal('activeUser', $this->session->read(AUTH_KEY));
