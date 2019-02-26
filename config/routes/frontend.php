@@ -1,33 +1,33 @@
 <?php
 
-use Ngpictures\Controllers\AjaxController;
-use Ngpictures\Controllers\BlogController;
-use Ngpictures\Controllers\BookingController;
-use Ngpictures\Controllers\BugsController;
-use Ngpictures\Controllers\CategoriesController;
-use Ngpictures\Controllers\CommentsController;
-use Ngpictures\Controllers\CommunityController;
-use Ngpictures\Controllers\ContactController;
-use Ngpictures\Controllers\DownloadController;
-use Ngpictures\Controllers\ErrorController;
-use Ngpictures\Controllers\FollowingController;
-use Ngpictures\Controllers\GalleryController;
-use Ngpictures\Controllers\HomeController;
-use Ngpictures\Controllers\HtagController;
-use Ngpictures\Controllers\IdeasController;
-use Ngpictures\Controllers\LikesController;
-use Ngpictures\Controllers\MapsController;
-use Ngpictures\Controllers\NotificationsController;
-use Ngpictures\Controllers\PhotographersController;
-use Ngpictures\Controllers\PostsController;
-use Ngpictures\Controllers\ReportsController;
-use Ngpictures\Controllers\RssController;
-use Ngpictures\Controllers\SavesController;
-use Ngpictures\Controllers\SearchController;
-use Ngpictures\Controllers\StaticController;
-use Ngpictures\Controllers\UsersController;
+use Application\Controllers\AjaxController;
+use Application\Controllers\BlogController;
+use Application\Controllers\BookingController;
+use Application\Controllers\BugsController;
+use Application\Controllers\CategoriesController;
+use Application\Controllers\CommentsController;
+use Application\Controllers\CommunityController;
+use Application\Controllers\ContactController;
+use Application\Controllers\DownloadController;
+use Application\Controllers\ErrorController;
+use Application\Controllers\FollowingController;
+use Application\Controllers\GalleryController;
+use Application\Controllers\HomeController;
+use Application\Controllers\HtagController;
+use Application\Controllers\IdeasController;
+use Application\Controllers\LikesController;
+use Application\Controllers\MapsController;
+use Application\Controllers\NotificationsController;
+use Application\Controllers\PhotographersController;
+use Application\Controllers\PostsController;
+use Application\Controllers\ReportsController;
+use Application\Controllers\RssController;
+use Application\Controllers\SavesController;
+use Application\Controllers\SearchController;
+use Application\Controllers\StaticController;
+use Application\Controllers\UsersController;
 
-/** @var \Ng\Core\Router\Router $router */
+/** @var \Framework\Router\Router $router */
 $router->get("/", [HomeController::class], "home");
 $router->get("/home", [HomeController::class], "home");
 
@@ -117,7 +117,7 @@ ajax_routes : {
     $router->get("/ajax/community", [AjaxController::class, 'community'], "ajax.community");
     $router->get("/ajax/photographers", [AjaxController::class, 'photographers'], "ajax.photographers");
     $router->get("/ajax/users_posts", [AjaxController::class, 'users_posts'], "ajax.users_posts");
-    $router->get("/verses", [\Ngpictures\Controllers\VersesController::class], "ajax.verses");
+    $router->get("/verses", [\Application\Controllers\VersesController::class], "ajax.verses");
 }
 
 photographers_routes : {

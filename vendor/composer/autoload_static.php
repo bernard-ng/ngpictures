@@ -13,10 +13,10 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
         '52e181473ddd523a649d74860143e341' => __DIR__ . '/..' . '/meenie/javascript-packer/class.JavaScriptPacker.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        '028fdea3165c4ba1ecccc83b7fec69fc' => __DIR__ . '/..' . '/cakephp/collection/functions.php',
+        '948ad5488880985ff1c06721a4e447fe' => __DIR__ . '/..' . '/cakephp/utility/bootstrap.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'a9ed0d27b5a698798a89181429f162c5' => __DIR__ . '/..' . '/khanamiryan/qrcode-detector-decoder/lib/Common/customFunctions.php',
-        '948ad5488880985ff1c06721a4e447fe' => __DIR__ . '/..' . '/cakephp/utility/bootstrap.php',
-        '028fdea3165c4ba1ecccc83b7fec69fc' => __DIR__ . '/..' . '/cakephp/collection/functions.php',
         'bbf73f3db644d3dced353b837903e74c' => __DIR__ . '/..' . '/php-di/php-di/src/DI/functions.php',
     );
 
@@ -67,11 +67,6 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
             'Patchwork\\' => 10,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
-        'N' => 
-        array (
-            'Ngpictures\\' => 11,
-            'Ng\\Core\\' => 8,
-        ),
         'M' => 
         array (
             'MyCLabs\\Enum\\' => 13,
@@ -95,6 +90,10 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\' => 11,
             'Glooby\\Pexels\\' => 14,
+        ),
+        'F' => 
+        array (
+            'Framework\\' => 10,
         ),
         'E' => 
         array (
@@ -124,6 +123,7 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
         'A' => 
         array (
             'Awurth\\SlimValidation\\' => 22,
+            'Application\\' => 12,
         ),
     );
 
@@ -228,14 +228,6 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
-        'Ngpictures\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/Ngpictures',
-        ),
-        'Ng\\Core\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/Core',
-        ),
         'MyCLabs\\Enum\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/php-enum/src',
@@ -283,6 +275,10 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
         'Glooby\\Pexels\\' => 
         array (
             0 => __DIR__ . '/..' . '/glooby/pexels/src',
+        ),
+        'Framework\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Framework',
         ),
         'Endroid\\QrCode\\' => 
         array (
@@ -339,6 +335,10 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
         'Awurth\\SlimValidation\\' => 
         array (
             0 => __DIR__ . '/..' . '/awurth/slim-validation/src',
+        ),
+        'Application\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Application',
         ),
     );
 

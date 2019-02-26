@@ -1,6 +1,6 @@
 <?php
 
-use Ng\Core\Database\DatabaseInterface;
+use Framework\Database\DatabaseInterface;
 
 require __DIR__."/public/index.php";
 $connection = $container->get(DatabaseInterface::class)->getPdo();

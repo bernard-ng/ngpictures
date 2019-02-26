@@ -1,19 +1,19 @@
 <?php
 
-use Ngpictures\Controllers\Admin\AlbumsController;
-use Ngpictures\Controllers\Admin\BlogController;
-use Ngpictures\Controllers\Admin\CategoriesController;
-use Ngpictures\Controllers\Admin\GalleryController;
-use Ngpictures\Controllers\Admin\LocationsController;
-use Ngpictures\Controllers\Admin\LogsController;
-use Ngpictures\Controllers\Admin\PagesEditorController;
-use Ngpictures\Controllers\Admin\PhotographersController;
-use Ngpictures\Controllers\Admin\ReportsController;
-use Ngpictures\Controllers\Admin\UsersController;
-use Ngpictures\Controllers\AdminController;
+use Application\Controllers\Admin\AlbumsController;
+use Application\Controllers\Admin\BlogController;
+use Application\Controllers\Admin\CategoriesController;
+use Application\Controllers\Admin\GalleryController;
+use Application\Controllers\Admin\LocationsController;
+use Application\Controllers\Admin\LogsController;
+use Application\Controllers\Admin\PagesEditorController;
+use Application\Controllers\Admin\PhotographersController;
+use Application\Controllers\Admin\ReportsController;
+use Application\Controllers\Admin\UsersController;
+use Application\Controllers\AdminController;
 
 
-/** @var \Ng\Core\Router\Router $router */
+/** @var \Framework\Router\Router $router */
 $router->get(ADMIN, [AdminController::class], "admin.index");
 $router->any(ADMIN . "/reports", [ReportsController::class], 'admin.reports.index');
 
@@ -36,7 +36,7 @@ posts_routes : {
     $router->get(ADMIN . "/blog", [BlogController::class], "admin.blog");
     $router->get(ADMIN . "/blog/categories", [CategoriesController::class], "admin.categories");
     $router->get(ADMIN . "/confirm/:t/:id", [AdminController::class, 'confirm'], "admin.confirm");
-    $router->get(ADMIN . "/posts", [\Ngpictures\Controllers\Admin\PostsController::class], "admin.posts");
+    $router->get(ADMIN . "/posts", [\Application\Controllers\Admin\PostsController::class], "admin.posts");
     $router->post(ADMIN . "/delete", [AdminController::class, 'delete'], "admin.delete");
 }
 

@@ -31,8 +31,6 @@ return array(
     'Phinx\\' => array($vendorDir . '/robmorgan/phinx/src/Phinx'),
     'Patchwork\\' => array($vendorDir . '/patchwork/jsqueeze/src'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
-    'Ngpictures\\' => array($baseDir . '/src/Ngpictures'),
-    'Ng\\Core\\' => array($baseDir . '/src/Core'),
     'MyCLabs\\Enum\\' => array($vendorDir . '/myclabs/php-enum/src'),
     'MatthiasMullie\\PathConverter\\' => array($vendorDir . '/matthiasmullie/path-converter/src'),
     'MatthiasMullie\\Minify\\' => array($vendorDir . '/matthiasmullie/minify/src'),
@@ -45,6 +43,7 @@ return array(
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
     'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
     'Glooby\\Pexels\\' => array($vendorDir . '/glooby/pexels/src'),
+    'Framework\\' => array($baseDir . '/src/Framework'),
     'Endroid\\QrCode\\' => array($vendorDir . '/endroid/qr-code/src'),
     'Endroid\\Installer\\' => array($vendorDir . '/endroid/installer/src'),
     'Doctrine\\Common\\Cache\\' => array($vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache'),
@@ -59,5 +58,6 @@ return array(
     'Cake\\Cache\\' => array($vendorDir . '/cakephp/cache'),
     'BaconQrCode\\' => array($vendorDir . '/bacon/bacon-qr-code/src'),
     'Awurth\\SlimValidation\\' => array($vendorDir . '/awurth/slim-validation/src'),
+    'Application\\' => array($baseDir . '/src/Application'),
     '' => array($vendorDir . '/league/color-extractor/src'),
 );

@@ -2,7 +2,7 @@
 
 use DI\ContainerBuilder;
 use Doctrine\Common\Cache\FilesystemCache;
-use Ngpictures\Ngpictures;
+use Application\Application;
 
 require(dirname(__DIR__)."/config/constant.php");
 require(dirname(__DIR__)."/config/ini.php");
@@ -17,7 +17,7 @@ if (ENV === 'production') {
 $container->addDefinitions(ROOT."/config/config.php");
 $container = $container->build();
 
-$application = new Ngpictures($container);
+$application = new Application($container);
 if (php_sapi_name() !== 'cli') {
     $application->run();
 }
