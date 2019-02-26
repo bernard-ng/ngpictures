@@ -9,8 +9,6 @@ use Application\Traits\Util\ResolverTrait;
 trait PostEntityTrait
 {
 
-    use ResolverTrait;
-
     /**
      * lien vers la publication
      * @return string

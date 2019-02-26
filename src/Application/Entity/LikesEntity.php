@@ -9,7 +9,13 @@
 namespace Application\Entity;
 
 
-class LikesEntity
+use Framework\Entity\Entity;
+
+/**
+ * Class LikesEntity
+ * @package Application\Entity
+ */
+class LikesEntity extends Entity
 {
 
 }

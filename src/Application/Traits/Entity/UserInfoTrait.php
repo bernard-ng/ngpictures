@@ -11,11 +11,11 @@ trait UserInfoTrait
      * sur les users
      * @var null
      */
-    private $usersModel = null;
+    private $usersRepository = null;
 
-    private function getUsersModel(int $id)
+    private function getUsersRepository(int $id)
     {
-        return $this->usersModel = Application::getDic()->get($this->model("users"))->find($id);
+        return $this->usersRepository = Application::getDic()->get($this->model("users"))->find($id);
     }
 
     /**
@@ -24,7 +24,7 @@ trait UserInfoTrait
      */
     public function getUsername()
     {
-        return $this->getUsersModel($this->users_id)->name;
+        return $this->getUsersRepository($this->users_id)->name;
     }
 
 
@@ -34,7 +34,7 @@ trait UserInfoTrait
      */
     public function getUserAccountUrl()
     {
-        return $this->getUsersModel($this->users_id)->accountUrl;
+        return $this->getUsersRepository($this->users_id)->accountUrl;
     }
 
 
@@ -45,7 +45,7 @@ trait UserInfoTrait
      */
     public function getUserAvatarUrl(): string
     {
-        return $this->getUsersModel($this->users_id)->avatarUrl;
+        return $this->getUsersRepository($this->users_id)->avatarUrl;
     }
 
     /**
@@ -55,6 +55,6 @@ trait UserInfoTrait
      */
     public function getUserBio(): string
     {
-        return $this->getUsersModel($this->users_id)->bio;
+        return $this->getUsersRepository($this->users_id)->bio;
     }
 }

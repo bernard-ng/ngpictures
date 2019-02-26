@@ -3,7 +3,11 @@ namespace Application\Entity;
 
 use Framework\Entity\Entity;
 
-class AlbumsEntity extends Entity
+/**
+ * Class CollectionEntity
+ * @package Application\Entity
+ */
+class CollectionEntity extends Entity
 {
     /**
      * lien vers un album photo precis

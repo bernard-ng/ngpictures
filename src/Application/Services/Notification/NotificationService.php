@@ -1,11 +1,11 @@
 <?php
 namespace Application\Services\Notification;
 
-use Application\Models\UsersModel;
+use Application\Repositories\UsersRepository;
 use Framework\Managers\StringManager;
 use Psr\Container\ContainerInterface;
-use Application\Models\NotificationsModel;
-use Application\Models\FollowingModel;
+use Application\Repositories\NotificationsRepository;
+use Application\Repositories\FollowingRepository;
 
 class NotificationService
 {
@@ -36,8 +36,8 @@ class NotificationService
     public function __construct(ContainerInterface $container)
     {
         $this->container        = $container;
-        $this->users            = $this->container->get(UsersModel::class);
-        $this->notifications    = $this->container->get(NotificationsModel::class);
+        $this->users            = $this->container->get(UsersRepository::class);
+        $this->notifications    = $this->container->get(NotificationsRepository::class);
     }
 
 
@@ -191,7 +191,7 @@ class NotificationService
         $poster_name        = $this->users->find($post->users_id)->name;
         $followers = $this
             ->container
-            ->get(FollowingModel::class)
+            ->get(FollowingRepository::class)
             ->findWith('followed_id', $post->users_id, false);
 
         foreach ($followers as $follower) {

@@ -1,7 +1,7 @@
 <?php
 namespace Application\Services\Auth;
 
-use Application\Models\UsersModel;
+use Application\Repositories\UsersRepository;
 use Application\Entity\UsersEntity;
 use Framework\Managers\CookieManager;
 use Framework\Managers\Mailer\Mailer;
@@ -17,7 +17,7 @@ class DatabaseAuthService
 
     /**
      * le model des users, donc l'access a la base de donnee.
-     * @var UsersModel
+     * @var UsersRepository
      */
     private $users;
 
@@ -56,7 +56,7 @@ class DatabaseAuthService
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        $this->users = $this->container->get(UsersModel::class);
+        $this->users = $this->container->get(UsersRepository::class);
         $this->flash = $this->container->get(FlashMessageManager::class);
         $this->session = $this->container->get(SessionManager::class);
         $this->cookie = $this->container->get(CookieManager::class);

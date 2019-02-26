@@ -6,8 +6,8 @@ trait ResolverTrait
 
     function model($name)
     {
-        $namespace = "\\Application\\Models\\";
-        $class      = ucfirst($name) . "Model";
+        $namespace = "\\Application\\Repositories\\";
+        $class      = ucfirst($name) . "Repository";
         return $namespace . $class;
     }
 

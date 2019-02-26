@@ -3,15 +3,15 @@ namespace Application\Entity;
 
 use Framework\Entity\Entity;
 use Application\Application;
-use Application\Models\BlogModel;
-use Application\Models\PostsModel;
+use Application\Repositories\BlogRepository;
+use Application\Repositories\PostsRepository;
 
 class NotificationsEntity extends Entity
 {
 
     public function getUrl()
     {
-        $model = Application::getDic()->get(BlogModel::class);
+        $model = Application::getDic()->get(BlogRepository::class);
         $this->url = ''; //$model->find($this->publication_id)->url;
         return $this->url;
     }
