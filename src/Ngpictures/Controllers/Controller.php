@@ -1,7 +1,7 @@
 <?php
 namespace Ngpictures\Controllers;
 
-use Ngpictures\Ngpictures;
+use Ngpictures\Managers\MessageManager;
 use Ng\Core\Managers\StringManager;
 use Ngpictures\Managers\PageManager;
 use Psr\Container\ContainerInterface;
@@ -11,20 +11,50 @@ use Ng\Core\Managers\FlashMessageManager;
 use Ngpictures\Services\Auth\DatabaseAuthService;
 use Ng\Core\Controllers\Controller as SuperController;
 
+/**
+ * Class Controller
+ * @package Ngpictures\Controllers
+ */
 class Controller extends SuperController
 {
+    /**
+     * @var MessageManager
+     */
     protected $msg;
+
+    /**
+     * @var mixed|FlashMessageManager
+     */
     protected $flash;
+
+    /**
+     * @var mixed|SessionInterface
+     */
     protected $session;
+
+    /**
+     * @var PageManager
+     */
     protected $pageManager;
+
+    /**
+     * @var mixed|DatabaseAuthService
+     */
     protected $authService;
+
+    /**
+     * @var mixed|ValidationManager
+     */
     protected $validator;
+
+    /**
+     * @var mixed|StringManager
+     */
     protected $str;
 
 
     /**
-     * construction
-     *
+     * Controller constructor.
      * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
@@ -67,10 +97,10 @@ class Controller extends SuperController
             PageManager::setMeta(['active-user' => $this->session->getValue(AUTH_KEY, 'id')]);
             PageManager::setMeta(['active-token' => $this->session->read(TOKEN_KEY)]);
         } else {
-            $this->renderer->addGlobal('activeUder', false);
+            $this->renderer->addGlobal('activeUser', false);
             $this->renderer->addGlobal('securityToken', false);
         }
 
-        parent::view($view, $variables, $layout);
+        parent::view($view, $variables);
     }
 }
