@@ -454,3 +454,279 @@
 		=> 24-Feb 00:57 : exif_read_data(phpEEAKQe): File not supported  
 >>>>>>> a405dbbd8c434e16a78dd78242a3bca9bd2653d2
 
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	122
+		=> 26-Feb 17:05 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 19:58 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'categories.title' in 'field list'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 19:58 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.verses' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 19:58 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 19:59 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'categories.title' in 'field list'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 19:59 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.verses' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 19:59 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 19:59 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.verses' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 19:59 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 19:59 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.verses' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 19:59 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 19:59 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.verses' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 19:59 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 19:59 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.verses' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 19:59 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'categories.title' in 'field list'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.verses' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'categories.title' in 'field list'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.verses' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'categories.title' in 'field list'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'categories.title' in 'field list'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.bugs' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.ideas' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.online' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.verses' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.verses' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.verses' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.verses' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'categories.title' in 'field list'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'categories.title' in 'field list'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.bugs' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.ideas' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.online' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:26 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.verses' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:26 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:27 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'categories.title' in 'field list'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:27 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'categories.title' in 'field list'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.blog' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.verses' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 20:27 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.verses' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 20:27 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 21:43 : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ngpictures2.verses' doesn't exist  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 21:43 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'  
+

@@ -66,7 +66,6 @@ class MysqlDatabase implements DatabaseInterface
                     $this->dbpass
                 );
                 $PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $PDO->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
                 $PDO->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
                 $this->PDO = $PDO;
             } catch (PDOException $e) {
