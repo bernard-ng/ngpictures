@@ -110,7 +110,7 @@ class ImageManager
         return json_encode([
             'ISOSpeedRatings' => 'inconnu',
             'Flash' => 'inconnu',
-            'Model' => 'inconnu',
+            'Repository' => 'inconnu',
             'ExposureTime' => 'inconnu',
             'FocalLength' => 'inconnu',
             'ResolutionUnit' => 'inconnu',

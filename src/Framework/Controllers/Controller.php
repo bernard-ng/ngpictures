@@ -44,7 +44,7 @@ class Controller
      * @param $name
      * @return mixed
      */
-    public function loadModel($name)
+    public function loadRepository($name)
     {
         if (is_array($name)) {
             foreach ($name as $n) {

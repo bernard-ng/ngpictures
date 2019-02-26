@@ -1,7 +1,7 @@
 <?php
 namespace Framework\Managers;
 
-use Application\Models\UsersModel;
+use Application\Repositories\UsersRepository;
 
 /**
  * Class StringManager
@@ -119,11 +119,11 @@ class StringManager
 
     /**
      * mention d'un utilisateur
-     * @param UsersModel $users
+     * @param UsersRepository $users
      * @param $text
      * @return string
      */
-    public function userMention(UsersModel $users, $text)
+    public function userMention(UsersRepository $users, $text)
     {
         return preg_replace_callback(
             "#@([A-Za-z0-9-_]+)#",
