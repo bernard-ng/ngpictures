@@ -98,3 +98,6 @@
 * F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
 		=> 23-Feb 23:52 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
 
+* /home/larytech/public_html/vendor/intervention/image/src/Intervention/Image/Commands/ExifCommand.php
+		=> 24-Feb 00:57 : exif_read_data(phpEEAKQe): File not supported  
+
