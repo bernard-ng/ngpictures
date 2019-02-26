@@ -56,7 +56,7 @@ class NotificationsModel extends Model
     public function count($user_id)
     {
         return $this->query(
-            "SELECT COUNT(id) AS num FROM {$this->table} WHERE status = 0 AND users_id = ?",
+            "SELECT COUNT(id) AS num FROM {$this->table} WHERE seen = 0 AND users_id = ?",
             [$user_id],
             true,
             true

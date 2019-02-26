@@ -1,0 +1,20 @@
+#*************************************************************
+        AUTHOR         :    Bernard-ng
+        PROJECT        :    NG-PICTURES
+        LINK           :    https://larytech.com
+        BUILT AT       :    26-Feb-2019  22:24:27
+**************************************************************
+[NG-PICTURES MESSAGES LOGS] 
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	121
+		=> 26-Feb 22:24 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 22:25 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'categories.title' in 'field list'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 22:25 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'categories.title' in 'field list'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	90
+		=> 26-Feb 22:25 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'categories.title' in 'field list'  
+
