@@ -98,6 +98,7 @@
 * F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
 		=> 23-Feb 23:52 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
 
+<<<<<<< HEAD
 * F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
 		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
 
@@ -448,4 +449,8 @@
 
 * F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	122
 		=> 26-Feb 16:30 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+=======
+* /home/larytech/public_html/vendor/intervention/image/src/Intervention/Image/Commands/ExifCommand.php
+		=> 24-Feb 00:57 : exif_read_data(phpEEAKQe): File not supported  
+>>>>>>> a405dbbd8c434e16a78dd78242a3bca9bd2653d2
 
