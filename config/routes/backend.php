@@ -29,11 +29,8 @@ pages_routes : {
 }
 
 posts_routes : {
-    $router->any(ADMIN . "/blog/edit/:id", [BlogController::class, 'edit'], "admin.blog-edit");
-    $router->any(ADMIN . "/blog/add", [BlogController::class, 'add'], "admin.blog-add");
     $router->any(ADMIN . "/blog/categories/add", [CategoriesController::class, 'add'], "admin.categories-add");
     $router->any(ADMIN . "/blog/categories/edit/:id", [CategoriesController::class, 'edit'], "admin.categories-edit");
-    $router->get(ADMIN . "/blog", [BlogController::class], "admin.blog");
     $router->get(ADMIN . "/blog/categories", [CategoriesController::class], "admin.categories");
     $router->get(ADMIN . "/confirm/:t/:id", [AdminController::class, 'confirm'], "admin.confirm");
     $router->get(ADMIN . "/posts", [\Application\Controllers\Admin\PostsController::class], "admin.posts");
@@ -41,7 +38,6 @@ posts_routes : {
 }
 
 photographers_routes : {
-    $router->get(ADMIN . "/photographers", [PhotographersController::class], "admin.photographers");
     $router->get(ADMIN . "/locations", [LocationsController::class], "admin.location");
     $router->any(ADMIN . "/locations/add", [LocationsController::class, 'add' ], "admin.location");
     $router->any(ADMIN . "/locations/edit/:id", [LocationsController::class, 'edit' ], "admin.location");

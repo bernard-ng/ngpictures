@@ -36,13 +36,8 @@ return [
     'database.user' =>  (ENV === 'production')? 'larytech_ngandu' : 'root',
     'database.pass' =>  (ENV === 'production')? 'E[~}oyE%Ao([' : '',
 
-    DatabaseInterface::class => object(MysqlDatabase::class)->constructor(
-        get('database.name'),
-        get('database.host'),
-        get('database.user'),
-        get('database.pass')
-    ),
-    \PDO::class => factory([MysqlDatabase::class, 'getPDO']),
+
+    \PDO::class => factory(\Framework\Database\PDOFactory::class),
 
     Glooby\Pexels\Client::class => object()->constructor(PEXELS_API_KEY),
     FlashMessageManager::class => object()->constructor(

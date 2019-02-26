@@ -87,8 +87,6 @@ features_routes : {
     $router->post("/comments/edit/:id/:token", [CommentsController::class, 'edit'], "comments.edit");
     $router->get("/comments/delete/:id/:token", [CommentsController::class, 'delete'], "comments.delete");
 
-    $router->any("/ideas", [IdeasController::class], "ideas.index");
-    $router->any("/bugs", [BugsController::class], "bugs.index");
     $router->any("/contact", [ContactController::class], "contact.index");
     $router->any("/report/:type/:slug-:id", [ReportsController::class], 'report.index');
     $router->get("/about", [StaticController::class, 'about'], "static.about");
@@ -98,7 +96,6 @@ features_routes : {
     $router->get('/saves/:type/:slug-:id', [SavesController::class, 'add'], 'saves.add');
     $router->get("/maps", [MapsController::class, 'show'], 'maps.show');
     $router->get("/maps/photographers", [MapsController::class, 'photographers'], 'maps.photographers');
-    $router->get("/htag/:tag", [HtagController::class], 'htag.index');
 }
 
 search_routes : {
@@ -117,19 +114,6 @@ ajax_routes : {
     $router->get("/ajax/community", [AjaxController::class, 'community'], "ajax.community");
     $router->get("/ajax/photographers", [AjaxController::class, 'photographers'], "ajax.photographers");
     $router->get("/ajax/users_posts", [AjaxController::class, 'users_posts'], "ajax.users_posts");
-    $router->get("/verses", [\Application\Controllers\VersesController::class], "ajax.verses");
-}
-
-photographers_routes : {
-    $router->any('/photographers/sign', [PhotographersController::class, 'sign'], "photographers.sign");
-    $router->get('/photographers/profile/:name-:id', [PhotographersController::class, 'profile'], "photographers.profile");
-    //$router->any("/photographers/add/albums/:token", "photographers#albums_add", "photographers.albums_add");
-    //$router->any("/photographers/edit/albums/:id/:token", "photographers#albums_edit", "photographers.albums_edit");
-    //$router->any("/photographers/add/pictures/:token", "photographers#add", "photographers.add");
-    //$router->any("/photographers/edit/pictures/:id/:token", "photograpers#edit", "photographes.edit");
-    $router->get("/photographers/bookings/:token", [PhotographersController::class, 'bookings'], "photographers.bookings");
-    //$router->any("/photographers/edit/profile/:name-:id/:token", "photographers#edit_profile", "photographers.edit_profile");
-    //$router->post("/photographers/detele/:token", "photographers#delete", "photographers.delete");
 }
 
 errors_routes : {
