@@ -4,10 +4,10 @@ namespace Application\Controllers;
 use Framework\Managers\Collection;
 use Framework\Managers\ImageManager;
 use Application\Managers\PageManager;
-use Application\Models\CategoriesModel;
-use Application\Models\CommentsModel;
-use Application\Models\PostsModel;
-use Application\Models\UsersModel;
+use Application\Repositories\CategoriesRepository;
+use Application\Repositories\CommentsRepository;
+use Application\Repositories\PostsRepository;
+use Application\Repositories\UsersRepository;
 use Application\Services\Notification\NotificationService;
 use Psr\Container\ContainerInterface;
 
@@ -21,12 +21,12 @@ class PostsController extends Controller
     public $table = "posts";
 
     /**
-     * @var mixed|CategoriesModel
+     * @var mixed|CategoriesRepository
      */
     protected $categories;
 
     /**
-     * @var mixed|PostsModel
+     * @var mixed|PostsRepository
      */
     protected $posts;
 
@@ -37,26 +37,26 @@ class PostsController extends Controller
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $this->posts = $container->get(PostsModel::class);
-        $this->categories = $container->get(CategoriesModel::class);
+        $this->posts = $container->get(PostsRepository::class);
+        $this->categories = $container->get(CategoriesRepository::class);
     }
 
     public function show(string $slug, $id)
     {
         if (!empty($slug) && !empty($id)) {
             $id = intval($id);
-            $user = $this->container->get(UsersModel::class);
+            $user = $this->container->get(UsersRepository::class);
             $article = $this->posts->find($id);
 
-            $comments = $this->container->get(CommentsModel::class);
+            $comments = $this->container->get(CommentsRepository::class);
             $commentsNumber = $comments->count($id, "posts_id")->num;
             $comments = $comments->get($id, "posts_id", 0, 4);
             $categories = $this->categories->orderBy('title', 'ASC', 0, 5);
 
             if ($article && $article->slug === $slug) {
                 if ($article->online == 1) {
-                    $similars = $this->loadModel($this->table)->findSimilars($article->id);
-                    $author = $this->loadModel('users')->find($article->users_id);
+                    $similars = $this->loadRepository($this->table)->findSimilars($article->id);
+                    $author = $this->loadRepository('users')->find($article->users_id);
                     $altName = "ngpictures-photo ($article->id) ";
 
                     $this->turbolinksLocation("/posts/{$slug}-{$id}");

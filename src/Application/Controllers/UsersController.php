@@ -3,7 +3,7 @@ namespace Application\Controllers;
 
 use Application\Entity\UsersEntity;
 use Application\Managers\PageManager;
-use Application\Models\UsersModel;
+use Application\Repositories\UsersRepository;
 use Framework\Managers\Collection;
 use Framework\Managers\ImageManager;
 use Framework\Managers\Mailer\Mailer;
@@ -18,7 +18,7 @@ class UsersController extends Controller
 {
 
     /**
-     * @var UsersModel
+     * @var UsersRepository
      */
     protected $users;
 
@@ -35,7 +35,7 @@ class UsersController extends Controller
     {
         parent::__construct($container);
         $this->cookie = $this->container->get(CookieInterface::class);
-        $this->users = $container->get(UsersModel::class);
+        $this->users = $container->get(UsersRepository::class);
     }
 
 
@@ -253,12 +253,12 @@ class UsersController extends Controller
         if (!empty($username)) {
             $user = $this->users->find(intval($id));
             if ($user) {
-                $photographer = $this->loadModel('photographers')->findWith('users_id', $user->id);
-                $posts = $this->loadModel('posts')->findWithUser($user->id);
+                $photographer = $this->loadRepository('photographers')->findWith('users_id', $user->id);
+                $posts = $this->loadRepository('posts')->findWithUser($user->id);
                 $recent = null;
 
                 if (count($posts) > 6) {
-                    $recent = $this->loadModel('posts')->get($user->id, 6);
+                    $recent = $this->loadRepository('posts')->get($user->id, 6);
                 }
 
                 $this->turbolinksLocation($user->accountUrl);

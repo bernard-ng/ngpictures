@@ -10,7 +10,7 @@ class SearchController extends Controller
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $this->loadModel(['users', 'posts', 'gallery', 'blog']);
+        $this->loadRepository(['users', 'posts', 'gallery', 'blog']);
     }
 
     /*

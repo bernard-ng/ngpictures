@@ -14,7 +14,7 @@ class GalleryController extends Controller
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $this->loadModel('gallery');
+        $this->loadRepository('gallery');
     }
 
 
@@ -46,17 +46,17 @@ class GalleryController extends Controller
         $article = $this->gallery->find(intval($id));
 
         if (!empty($id)) {
-            $this->loadModel('users');
-            $this->loadModel('gallery');
+            $this->loadRepository('users');
+            $this->loadRepository('gallery');
 
 
             $user = $this->users;
-            $article = $this->loadModel("gallery")->find(intval($id));
+            $article = $this->loadRepository("gallery")->find(intval($id));
 
-            $comments = $this->loadModel('comments');
+            $comments = $this->loadRepository('comments');
             $commentsNumber = $comments->count($id, "gallery_id")->num;
             $comments = $comments->get($id, "gallery_id", 0, 4);
-            $categories = $this->loadModel('categories')->orderBy('title', 'ASC', 0, 5);
+            $categories = $this->loadRepository('categories')->orderBy('title', 'ASC', 0, 5);
 
 
             if ($article) {
@@ -96,7 +96,7 @@ class GalleryController extends Controller
      */
     public function albums()
     {
-        $albums = $this->loadModel('albums')->get(10);
+        $albums = $this->loadRepository('albums')->get(10);
         $thumbs = [];
         $nb     = [];
 
@@ -120,11 +120,11 @@ class GalleryController extends Controller
     public function album_show($slug, $id)
     {
         $id = intval($id);
-        $album = $this->loadModel('albums')->find(intval($id));
+        $album = $this->loadRepository('albums')->find(intval($id));
         if ($album && $album->slug == $slug) {
-            $author = $this->loadModel('users')->find($album->photographers_id);
-            $gallery = $this->loadModel('gallery')->findWith('albums_id', $album->id, false);
-            $posts  = $this->loadModel('posts')->findWith('albums_id', $album->id, false);
+            $author = $this->loadRepository('users')->find($album->photographers_id);
+            $gallery = $this->loadRepository('gallery')->findWith('albums_id', $album->id, false);
+            $posts  = $this->loadRepository('posts')->findWith('albums_id', $album->id, false);
 
             $this->turbolinksLocation("/gallery/albums/{$slug}-{$id}");
             PageManager::setTitle("{$album->title}");

@@ -33,8 +33,8 @@ class LikesController extends Controller
      */
     public function index($type, $slug, $id)
     {
-        $like       = $this->loadModel('likes');
-        $post       = $this->loadModel($this->getAction($type))->find(intval($id));
+        $like       = $this->loadRepository('likes');
+        $post       = $this->loadRepository($this->getAction($type))->find(intval($id));
         $notifier   = $this->container->get(NotificationService::class);
 
         if ($post && $post->slug === $slug) {
@@ -76,14 +76,14 @@ class LikesController extends Controller
      */
     public function show(string $type, string $slug, int $id)
     {
-        $post = $this->loadModel($this->getAction($type))->find(intval($id));
+        $post = $this->loadRepository($this->getAction($type))->find(intval($id));
 
         if ($post && $post->slug === $slug) {
-            $likes      =   $this->loadModel('likes');
+            $likes      =   $this->loadRepository('likes');
             $likers     =  (new Collection($likes->getLikers($id, $type)))->asList();
 
             if (!empty($likers)) {
-                $likers = $this->loadModel('users')->findList($likers);
+                $likers = $this->loadRepository('users')->findList($likers);
 
                 $this->turbolinksLocation("/likes/show/{$type}/{$slug}-{$id}");
                 PageManager::setTitle("Mentions j'aime");

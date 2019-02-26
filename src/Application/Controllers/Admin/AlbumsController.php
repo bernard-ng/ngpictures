@@ -3,9 +3,9 @@ namespace Application\Controllers\Admin;
 
 use Framework\Managers\Collection;
 use Application\Managers\PageManager;
-use Application\Models\AlbumsModel;
+use Application\Repositories\AlbumsRepository;
 use Application\Controllers\AdminController;
-use Application\Models\PhotographersModel;
+use Application\Repositories\PhotographersRepository;
 use Application\Traits\Controllers\PaginationTrait;
 
 /**
@@ -17,12 +17,12 @@ class AlbumsController extends AdminController
     use PaginationTrait;
 
     /**
-     * @var AlbumsModel
+     * @var AlbumsRepository
      */
     protected $albums;
 
     /**
-     * @var PhotographersModel
+     * @var PhotographersRepository
      */
     protected $photographers;
 

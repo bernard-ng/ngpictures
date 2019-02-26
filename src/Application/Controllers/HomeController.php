@@ -2,10 +2,10 @@
 namespace Application\Controllers;
 
 use Application\Managers\PageManager;
-use Application\Models\BlogModel;
-use Application\Models\CategoriesModel;
-use Application\Models\GalleryModel;
-use Application\Models\PostsModel;
+use Application\Repositories\BlogRepository;
+use Application\Repositories\CategoriesRepository;
+use Application\Repositories\GalleryRepository;
+use Application\Repositories\PostsRepository;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -15,26 +15,26 @@ use Psr\Container\ContainerInterface;
 class HomeController extends Controller
 {
     /**
-     * @var BlogModel
+     * @var BlogRepository
      */
     protected $blog;
 
     /**
-     * @var GalleryModel
+     * @var GalleryRepository
      */
     protected $gallery;
 
     /**
-     * @var PostsModel
+     * @var PostsRepository
      */
     protected $posts;
 
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $this->gallery = $container->get(GalleryModel::class);
-        $this->posts = $container->get(PostsModel::class);
-        $this->blog = $container->get(BlogModel::class);
+        $this->gallery = $container->get(GalleryRepository::class);
+        $this->posts = $container->get(PostsRepository::class);
+        $this->blog = $container->get(BlogRepository::class);
     }
 
     /**
@@ -45,7 +45,7 @@ class HomeController extends Controller
 
         $nb         = [];
         $thumbs     = [];
-        $categories = $this->container->get(CategoriesModel::class)->orderBy('id', 'DESC', 0, 10);
+        $categories = $this->container->get(CategoriesRepository::class)->orderBy('id', 'DESC', 0, 10);
 
         foreach ($categories as $category) {
             $thumbs[$category->id] =
@@ -63,9 +63,9 @@ class HomeController extends Controller
             ;
         }
 
-        $last           =   $this->container->get(GalleryModel::class)->latest();
-        $posts          =   $this->container->get(PostsModel::class)->latest(0, 12);
-        $article        =   $this->container->get(BlogModel::class)->last();
+        $last           =   $this->container->get(GalleryRepository::class)->latest();
+        $posts          =   $this->container->get(PostsRepository::class)->latest(0, 12);
+        $article        =   $this->container->get(BlogRepository::class)->last();
 
         $this->turbolinksLocation("/");
         PageManager::setTitle('Ngpictures');

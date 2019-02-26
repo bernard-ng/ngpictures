@@ -14,7 +14,7 @@ class ReportsController extends Controller
     {
         $id = intval($id);
         $type = intval($type);
-        $model = $this->loadModel($this->getAction(intval($type)));
+        $model = $this->loadRepository($this->getAction(intval($type)));
         $post = $model->find(intval($id));
 
         if ($post) {
@@ -25,7 +25,7 @@ class ReportsController extends Controller
                     $content = $this->str->escape($data->get('report'));
                     $publication_id = $id;
 
-                    $this->loadModel('reports')->create(compact('content', 'type', 'publication_id'));
+                    $this->loadRepository('reports')->create(compact('content', 'type', 'publication_id'));
                     $this->flash->set('success', $this->flash->msg['form_report_submitted'], false);
                     $this->redirect("/" . $this->getAction($type));
                 } else {

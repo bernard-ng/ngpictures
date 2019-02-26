@@ -13,7 +13,7 @@ class CommunityController extends Controller
      */
     public function index()
     {
-        $this->loadModel("users");
+        $this->loadRepository("users");
         $users = $this->users->get(10);
 
         $this->turbolinksLocation('/community');
@@ -28,8 +28,8 @@ class CommunityController extends Controller
 
     public function photographers()
     {
-        $this->loadModel("users");
-        $photographers = $this->loadModel('photographers')->get(8);
+        $this->loadRepository("users");
+        $photographers = $this->loadRepository('photographers')->get(8);
         $photographers = (new Collection($photographers))->asList(', ', "users_id");
         $users = $this->users->findList($photographers);
 
@@ -48,7 +48,7 @@ class CommunityController extends Controller
         if (isset($_GET['q']) && !empty($_GET['q'])) {
             $query = trim($this->str->escape($_GET['q']));
 
-            $users = $this->loadModel('users')->search($query);
+            $users = $this->loadRepository('users')->search($query);
             $this->turbolinksLocation("/community/search?q={$query}");
             PageManager::setTitle("Recherches");
             $this->view("frontend/community/search", compact("query", "users"));

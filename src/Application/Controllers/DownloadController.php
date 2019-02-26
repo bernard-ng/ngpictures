@@ -35,7 +35,7 @@ class DownloadController extends Controller
             $file_name  =   $this->str->escape($file_name);
             $file       =   self::$path[$type].$file_name;
 
-            $posts = $this->loadModel($this->getAction($type));
+            $posts = $this->loadRepository($this->getAction($type));
             $post = $posts->findWith('thumb', $file_name);
 
             if ($post) {

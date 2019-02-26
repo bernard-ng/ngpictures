@@ -36,7 +36,7 @@ class StaticController extends Controller
     public function privacy()
     {
         $this->turbolinksLocation("/privacy");
-        $categories = $this->loadModel('categories')->orderBy('title', 'ASC', 0, 5);
+        $categories = $this->loadRepository('categories')->orderBy('title', 'ASC', 0, 5);
         PageManager::setTitle("Politique d'utilisation");
         PageManager::setDescription(
             'La présente clause a pour objet de définir les différents termes essentiels du contrat'

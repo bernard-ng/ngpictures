@@ -53,7 +53,7 @@ class AdminController extends Controller
         $this->authService->isAdmin();
 
         PageManager::setMeta(['name' => 'robots', 'content' => 'noindex']);
-        $this->loadModel(
+        $this->loadRepository(
             [
                 'users',
                 'posts',
@@ -127,7 +127,7 @@ class AdminController extends Controller
         $post = new Collection($data ?? $_POST);
 
         if ($post->get('id') && $post->get('type')) {
-            $model = $this->loadModel($this->getType($post->get('type')));
+            $model = $this->loadRepository($this->getType($post->get('type')));
             $result = $model->find(intval($post->get('id')));
 
             if ($result) {
@@ -193,7 +193,7 @@ class AdminController extends Controller
      */
     public function confirm($t, $id)
     {
-        $model = $this->loadModel($this->getType($t));
+        $model = $this->loadRepository($this->getType($t));
         $result = $model->find(intval($id));
 
         if (intval($t) === 5) {

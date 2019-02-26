@@ -24,7 +24,7 @@ class CommentsController extends Controller
         parent::__construct($container);
         $this->authService->restrict();
         $this->user = $this->authService->isLogged();
-        $this->loadModel('comments');
+        $this->loadRepository('comments');
     }
 
 
@@ -37,8 +37,8 @@ class CommentsController extends Controller
     public function index($type, $slug, $id)
     {
         $post           =   new Collection($_POST);
-        $comments       =   $this->loadModel('comments');
-        $publication    =   $this->loadModel($this->getAction($type))->find(intval($id));
+        $comments       =   $this->loadRepository('comments');
+        $publication    =   $this->loadRepository($this->getAction($type))->find(intval($id));
         $notifier       =   $this->container->get(NotificationService::class);
 
         if ($publication && $publication->slug === $slug) {
@@ -56,7 +56,7 @@ class CommentsController extends Controller
                 $notifier->notify(3, [$publication, $this->user->id, $comment]);
 
                 if ($this->isAjax()) {
-                    echo $this->loadModel($this->getAction($type))->find(intval($id))->getCommentsNumber();
+                    echo $this->loadRepository($this->getAction($type))->find(intval($id))->getCommentsNumber();
                     exit();
                 } else {
                     $this->flash->set('success', $this->flash->msg['form_comment_submitted'], false);
@@ -146,12 +146,12 @@ class CommentsController extends Controller
     {
         $type   = intval($type);
         $id     = intval($id);
-        $user   = $this->loadModel("users");
-        $publication    = $this->loadModel($this->getAction($type))->find($id);
+        $user   = $this->loadRepository("users");
+        $publication    = $this->loadRepository($this->getAction($type))->find($id);
 
         if ($publication) {
-            $comments       = $this->loadModel('comments')->findWith($this->getAction($type) . "_id", $id, false);
-            $commentsNumber = $this->loadModel("comments")->count($id, $this->getAction($type) . "_id")->num;
+            $comments       = $this->loadRepository('comments')->findWith($this->getAction($type) . "_id", $id, false);
+            $commentsNumber = $this->loadRepository("comments")->count($id, $this->getAction($type) . "_id")->num;
 
             PageManager::setTitle("Commentaires");
             PageManager::setDescription("Tous les commentaires, poster pour la publication : " . $publication->title);

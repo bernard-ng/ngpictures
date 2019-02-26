@@ -11,7 +11,7 @@ class NotificationsController extends Controller
     {
         parent::__construct($container);
         $this->authService->restrict();
-        $this->loadModel('notifications');
+        $this->loadRepository('notifications');
     }
 
 

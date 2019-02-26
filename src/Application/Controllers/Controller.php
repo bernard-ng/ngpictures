@@ -2,7 +2,7 @@
 namespace Application\Controllers;
 
 use Application\Managers\MessageManager;
-use Application\Models\NotificationsModel;
+use Application\Repositories\NotificationsRepository;
 use Framework\Managers\StringManager;
 use Application\Managers\PageManager;
 use Psr\Container\ContainerInterface;
@@ -92,7 +92,7 @@ class Controller extends SuperController
             $this->renderer->addGlobal('securityToken', $this->session->read(TOKEN_KEY));
             $this->renderer->addGlobal(
                 'notificationsNumber',
-                $this->container->get(NotificationsModel::class)
+                $this->container->get(NotificationsRepository::class)
                     ->count($this->authService->isLogged()->id)->num
             );
 

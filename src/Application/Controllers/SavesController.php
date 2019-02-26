@@ -12,7 +12,7 @@ class SavesController extends Controller
     {
         parent::__construct($container);
         $this->authService->restrict();
-        $this->loadModel('saves');
+        $this->loadRepository('saves');
     }
 
     use TypesActionTrait;
@@ -32,7 +32,7 @@ class SavesController extends Controller
         $id   = intval($id);
         $slug = $this->str->escape($slug);
 
-        $post = $this->loadModel($this->getAction($type))->find($id);
+        $post = $this->loadRepository($this->getAction($type))->find($id);
         if ($post && $post->slug == $slug) {
             $exists = $this->saves->findWith($this->getType($type), $post->id);
 
@@ -47,7 +47,7 @@ class SavesController extends Controller
                 ]);
 
                 if ($this->isAjax()) {
-                    $post = $this->loadModel($this->getAction($type))->find($post->id);
+                    $post = $this->loadRepository($this->getAction($type))->find($post->id);
                     echo ($post->isSaved)? 'true' : 'false';
                     exit();
                 }
@@ -78,9 +78,9 @@ class SavesController extends Controller
         $posts_list = (new Collection($this->saves->get('posts_id', $user_id)))->asList(', ', 'posts_id');
         $gallery_list = (new Collection($this->saves->get('gallery_id', $user_id)))->asList(', ', 'gallery_id');
 
-        $blog = ($blog_list)? $this->loadModel('blog')->findList($blog_list) : null;
-        $gallery = ($gallery_list)? $this->loadModel('gallery')->findList($gallery_list) : null;
-        $posts = ($posts_list)? $this->loadModel('posts')->findList($posts_list) : null;
+        $blog = ($blog_list)? $this->loadRepository('blog')->findList($blog_list) : null;
+        $gallery = ($gallery_list)? $this->loadRepository('gallery')->findList($gallery_list) : null;
+        $posts = ($posts_list)? $this->loadRepository('posts')->findList($posts_list) : null;
 
         return compact('blog', 'gallery', 'posts');
     }

@@ -20,7 +20,7 @@ class FollowingController extends Controller
         parent::__construct($container);
         $this->authService->restrict();
         $this->user = $this->authService->isLogged();
-        $this->loadModel(['users', 'following']);
+        $this->loadRepository(['users', 'following']);
     }
 
 
@@ -34,7 +34,7 @@ class FollowingController extends Controller
     public function index(string $username, int $id)
     {
         $model = $this->following;
-        $user = $this->loadModel('users')->find(intval($id));
+        $user = $this->loadRepository('users')->find(intval($id));
 
         if ($user) {
             if ($model->isFollowed($user->id, $this->user->id)) {

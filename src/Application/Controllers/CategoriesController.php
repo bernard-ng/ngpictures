@@ -2,7 +2,7 @@
 namespace Application\Controllers;
 
 use Application\Managers\PageManager;
-use Application\Models\CategoriesModel;
+use Application\Repositories\CategoriesRepository;
 use Psr\Container\ContainerInterface;
 
 class CategoriesController extends Controller
@@ -11,10 +11,10 @@ class CategoriesController extends Controller
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $this->blog         = $this->loadModel('blog');
-        $this->posts        = $this->loadModel('posts');
-        $this->gallery      = $this->loadModel('gallery');
-        $this->categories   = $this->loadModel('categories');
+        $this->blog         = $this->loadRepository('blog');
+        $this->posts        = $this->loadRepository('posts');
+        $this->gallery      = $this->loadRepository('gallery');
+        $this->categories   = $this->loadRepository('categories');
     }
 
 
@@ -25,7 +25,7 @@ class CategoriesController extends Controller
     {
         $nb         = [];
         $thumbs     = [];
-        $categories = $this->container->get(CategoriesModel::class)->orderBy('id', 'DESC', 0, 4);
+        $categories = $this->container->get(CategoriesRepository::class)->orderBy('id', 'DESC', 0, 4);
 
         foreach ($categories as $category) {
             $thumbs[$category->id] =

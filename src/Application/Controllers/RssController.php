@@ -11,7 +11,7 @@ class RssController extends Controller
 
     public function index()
     {
-        $this->loadModel('blog');
+        $this->loadRepository('blog');
         if ($this->blog->last()) {
             $posts = $this->blog->latest(0, 10);
             $feed = new Feed();
