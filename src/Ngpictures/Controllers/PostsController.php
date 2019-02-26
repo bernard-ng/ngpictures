@@ -4,24 +4,96 @@ namespace Ngpictures\Controllers;
 use Ng\Core\Managers\Collection;
 use Ng\Core\Managers\ImageManager;
 use Ngpictures\Managers\PageManager;
-use Psr\Container\ContainerInterface;
-use Ngpictures\Traits\Controllers\ShowPostTrait;
-use Ngpictures\Traits\Controllers\StoryPostTrait;
+use Ngpictures\Models\CategoriesModel;
+use Ngpictures\Models\CommentsModel;
+use Ngpictures\Models\PostsModel;
+use Ngpictures\Models\UsersModel;
 use Ngpictures\Services\Notification\NotificationService;
+use Psr\Container\ContainerInterface;
 
+/**
+ * Class PostsController
+ * @package Ngpictures\Controllers
+ */
 class PostsController extends Controller
 {
-    use StoryPostTrait, ShowPostTrait;
 
     public $table = "posts";
 
+    /**
+     * @var mixed|CategoriesModel
+     */
+    protected $categories;
 
+    /**
+     * @var mixed|PostsModel
+     */
+    protected $posts;
+
+    /**
+     * PostsController constructor.
+     * @param ContainerInterface $container
+     */
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $this->loadModel(['posts', 'categories']);
+        $this->posts = $container->get(PostsModel::class);
+        $this->categories = $container->get(CategoriesModel::class);
     }
 
+    public function show(string $slug, $id)
+    {
+        if (!empty($slug) && !empty($id)) {
+            $id = intval($id);
+            $user = $this->container->get(UsersModel::class);
+            $article = $this->posts->find($id);
+
+            $comments = $this->container->get(CommentsModel::class);
+            $commentsNumber = $comments->count($id, "posts_id")->num;
+            $comments = $comments->get($id, "posts_id", 0, 4);
+            $categories = $this->categories->orderBy('title', 'ASC', 0, 5);
+
+            if ($article && $article->slug === $slug) {
+                if ($article->online == 1) {
+                    $similars = $this->loadModel($this->table)->findSimilars($article->id);
+                    $author = $this->loadModel('users')->find($article->users_id);
+                    $altName = "ngpictures-photo ($article->id) ";
+
+                    $this->turbolinksLocation("/posts/{$slug}-{$id}");
+                    PageManager::setTitle($article->title ?? $altName);
+                    PageManager::setDescription($article->snipet);
+                    PageManager::setImage($article->smallThumbUrl);
+
+                    $this->view(
+                        "frontend/posts/show",
+                        compact("article", "comments", "commentsNumber", "user", "categories", "author", "similars")
+                    );
+                } else {
+                    $this->flash->set("warning", $this->flash->msg['post_private'], false);
+                    $this->redirect(true, false);
+                }
+            } else {
+                $this->flash->set("danger", $this->flash->msg['post_not_found'], false);
+                http_response_code(404);
+                $this->redirect(true);
+            }
+        } else {
+            $this->flash->set("danger", $this->flash->msg['undefined_error'], false);
+            $this->index();
+        }
+    }
+
+    public function index()
+    {
+        $posts = $this->posts->latest(0, 8);
+        $this->turbolinksLocation("/posts");
+        PageManager::setTitle("Fil d'actualité");
+        PageManager::setDescription("
+            Découvez les photos et les articles des passionnés de la photographie, partager vos photos avec la
+            communauté.
+        ");
+        $this->view("frontend/posts/index", compact("posts"));
+    }
 
     /**
      * affiches les publication d'un user
@@ -150,7 +222,7 @@ class PostsController extends Controller
                 if (isset($_POST) && !empty($_POST)) {
                     $title = $this->str->escape($post->get('title'));
                     $content = $this->str->escape($post->get('content'));
-                    $slug =  empty($post->get('title'))? 'publication' : $this->str->slugify($title);
+                    $slug = empty($post->get('title')) ? 'publication' : $this->str->slugify($title);
                     $categories_id = (intval($post->get('category')) == 0) ? 1 : intval($post->get('category'));
 
                     $this->posts->update($id, compact('title', 'content', 'slug', 'categories_id'));

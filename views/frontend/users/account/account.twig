@@ -10,12 +10,10 @@
                 <h1 class="ui header">{{ user.name }}</h1>
                 <span class="bio">
                     <p class="col l8 offset-l2 s12 m12">
-                        {{ user.name }} ne présente actuellement aucune publication disponible, les publications sont peut être en évaluation ou privées,
-                        ceci pourrait prendre du temps, veuillez revenir plus tard
+                        {{ user.bio }}
                     </p>
                 </span>
             </div>
-            <p class="center"><a href="" class="btn">Follow</a></p>
         </div>
     </div>
 
@@ -24,23 +22,17 @@
             <ul class="tabs transparent shadow-3">
                 <div class="container">
                     {% if activeUser.id == user.id %}
-                        {% if photographer %}
-                            <li class="tab col s4"><a href="{{ photographer.url }}" target="_self">Compte
-                                    photographe</a></li>
-                            <li class="tab col s4"><a href="#photos" class="active">Photos</a></li>
-                            <li class="tab col s4"><a href="{{ activeUser.collectionUrl }}"
-                                                      target="_self">Collections</a></li>
-                        {% else %}
-                            <li class="tab col s6"><a href="#photos" class="active">Photos</a></li>
-                            <li class="tab col s6"><a href="{{ activeUser.collectionUrl }}"
-                                                      target="_self">Collections</a></li>
-                        {% endif %}
-
+                        <li class="tab col s4">
+                            <a href="{{ activeUser.collectionUrl }}" target="_self">Gestion</a>
+                        </li>
+                        <li class="tab col s4">
+                            <a href="#photos" class="active">Photos</a>
+                        </li>
+                        <li class="tab col s4">
+                            <a href="{{ activeUser.collectionUrl }}" target="_self">Collections</a>
+                        </li>
                     {% else %}
-                        {% if photographer %}
-                            <li class="tab col s6"><a href="{{ photographer.url }}">A propos</a></li>
-                        {% endif %}
-                        <li class="tab col s6"><a href="#photos" class="active">Photos</a></li>
+                        <li class="tab col s12"><a href="#photos" class="active">Photos</a></li>
                     {% endif %}
                 </div>
             </ul>

@@ -98,3 +98,354 @@
 * F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
 		=> 23-Feb 23:52 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
 
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	52
+		=> 24-Feb 02:01 : SQLSTATE[HY000] [1045] Access denied for user 'larytech_ngandu'@'localhost' (using password: YES)  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	78
+		=> 24-Feb 02:01 : Call to a member function query() on null  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 24-Feb 10:59 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 24-Feb 23:41 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 24-Feb 23:43 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 24-Feb 23:44 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 24-Feb 23:45 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 25-Feb 00:44 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 25-Feb 00:44 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 25-Feb 00:45 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 25-Feb 09:18 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'albums_id' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 25-Feb 09:44 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 25-Feb 09:45 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 25-Feb 09:47 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 25-Feb 09:47 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 25-Feb 09:47 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 25-Feb 09:48 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 25-Feb 09:54 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 25-Feb 10:05 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'albums_id' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 25-Feb 10:07 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 25-Feb 10:10 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	110
+		=> 25-Feb 10:12 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	122
+		=> 25-Feb 18:57 : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'albums_id' in 'where clause'  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	122
+		=> 26-Feb 15:26 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	122
+		=> 26-Feb 15:28 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	122
+		=> 26-Feb 15:29 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	122
+		=> 26-Feb 15:29 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	122
+		=> 26-Feb 15:31 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	122
+		=> 26-Feb 15:36 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	122
+		=> 26-Feb 15:36 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	122
+		=> 26-Feb 15:36 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	122
+		=> 26-Feb 15:36 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	122
+		=> 26-Feb 15:36 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	122
+		=> 26-Feb 16:25 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+
+* F:\projects\ngpictures\src\Core\Database\MysqlDatabase.php	122
+		=> 26-Feb 16:30 : SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''6'' at line 1  
+

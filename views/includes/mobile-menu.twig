@@ -19,17 +19,15 @@
                 <img src="/imgs/logo-white.png" alt="" width="100%" height="auto">
             </a>
         </li>
-    {% endif %}
-
-    {% if not activeUser %}
         <div class="user-action">
             <li>
-                <a href="/sign" class="btn waves-effect">Inscription</a>
-                <a href="/login" class="btn waves-effect">Connexion</a>
+                <a href="/sign" class="btn waves-effect">Inscription <span class="icon icon-user-plus"></span></a>
+                <a href="/login" class="btn waves-effect">Connexion <span class="icon icon-login"></span></a>
             </li>
         </div>
     {% endif %}
-    <li><a href="" class="subheader grey-txt">Activités</a></li>
+
+    <li><a href="" class="subheader grey-txt">Menu</a></li>
     {% if activeUser %}
         <li>
             <ul class="collapsible collapsible-accordion">
@@ -51,7 +49,14 @@
                 </li>
             </ul>
         </li>
-   {% endif %}
+    {% endif %}
+
+    <li id="Ngpictures"><a href="/">Accueil <i class="icon icon-home"></i></a></li>
+    <li id="Fil d'actualité"><a href="/posts">Explorer <i class="icon icon-globe"></i></a></li>
+    <li id="Galerie"><a href="/gallery">Galerie <i class="icon icon-picture"></i></a></li>
+
+    <li><div class="divider grey"></div></li>
+    <li><a href="" class="subheader grey-txt">Activités</a></li>
     <li>
         <ul class="collapsible collapsible-accordion">
             <li>
@@ -73,9 +78,7 @@
                 <div class="collapsible-body">
                     <ul>
                         <li><a href="/categories">Catégories<i class="icon icon-tags"></i></a></li>
-                        {% if activeUser %}
-                            <li><a href="/community">La Communauté <i class="icon icon-users"></i></a></li>
-                        {% endif %}
+                        <li><a href="/community">La Communauté <i class="icon icon-users"></i></a></li>
                         <li><a href="/contact">Nous contacter <i class="icon icon-mail"></i></a></li>
                         <li><a href="/bugs">Signaler un problème<i class="icon icon- icon-attention"></i></a></li>
                         <li><a href="/ideas">Donner un avis<i class="icon icon-attention"></i></a></li>
@@ -85,17 +88,4 @@
             </li>
         </ul>
     </li>
-    <li><div class="divider grey"></div></li>
-    <li><a href="" class="subheader grey-txt">Menu</a></li>
-
-    {% if activeUser.rank == 'admin' %}
-        <li><a href="{{ ADMIN }}">Administration <i class="icon icon-code right"></i></a></li>
-    {% endif %}
-
-    <li id="Ngpictures"><a href="/">Accueil <i class="icon icon-home"></i></a></li>
-    <li id="Blog"><a href="/blog">Blog <i class="icon icon-quote-left"></i></a></li>
-    <li id="Galerie"><a href="/gallery">Galerie <i class="icon icon-picture"></i></a></li>
-    {% if activeUser %}
-        <li id="Fil d'actualité"><a href="/posts">Actualités <i class="icon icon-globe"></i></a></li>
-    {% endif %}
 </ul>

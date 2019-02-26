@@ -21,15 +21,12 @@ return [
     'site.owner'        =>  'Bernard Ngandu',
     'site.email'        =>  'ngandubernard@gmail.com',
     'site.contact'      =>  'ngpictures@larytech.com',
-    'site.category'     =>  'Photographie & Blog',
+    'site.category'     =>  'Photographie',
     'site.lang'         =>  'fr_FR',
-    'site.country'      =>  'République Democratique du Congo',
-    'site.copyritght'   =>  '<a href="http://ngpictures.pe.hu">Bernard Ng</a>',
-    'site.description'  =>  "
-        Ngpictures est une galerie d'art photographique et un mini résaux social où
-        vous pouvez voir et partager vos propres photos, lire et écrire vos posts sur les sujets qui vous intéresses,
-        étant chrétiens l'application vous propose une fonctionnalité incroyable,
-        godfirst : partagez et lisez la parole de Dieu avec plus de 500 versets choisis pour vous à l'avance.",
+    'site.description'  =>  " 
+        L'expression de la photographie africaine, les meilleures photos partagées par des photographes talentueux.
+        Ngpictures est une galerie photo pour photographes et passionnés de la photographie,
+        Nous vous proposons de découvrir la photographie africaine autrement. ",
 
     'ftp.user'      => 'bernard@larytech.com',
     'ftp.pass'      => 'm^7#IEv665kV',

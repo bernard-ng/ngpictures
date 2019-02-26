@@ -8,10 +8,13 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
-        'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
+        '72142d7b40a3a0b14e91825290b5ad82' => __DIR__ . '/..' . '/cakephp/core/functions.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
         '52e181473ddd523a649d74860143e341' => __DIR__ . '/..' . '/meenie/javascript-packer/class.JavaScriptPacker.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        '028fdea3165c4ba1ecccc83b7fec69fc' => __DIR__ . '/..' . '/cakephp/collection/functions.php',
+        '948ad5488880985ff1c06721a4e447fe' => __DIR__ . '/..' . '/cakephp/utility/bootstrap.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'a9ed0d27b5a698798a89181429f162c5' => __DIR__ . '/..' . '/khanamiryan/qrcode-detector-decoder/lib/Common/customFunctions.php',
         'bbf73f3db644d3dced353b837903e74c' => __DIR__ . '/..' . '/php-di/php-di/src/DI/functions.php',
@@ -40,9 +43,14 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Symfony\\Contracts\\' => 18,
+            'Symfony\\Component\\Yaml\\' => 23,
             'Symfony\\Component\\PropertyAccess\\' => 33,
             'Symfony\\Component\\OptionsResolver\\' => 34,
             'Symfony\\Component\\Inflector\\' => 28,
+            'Symfony\\Component\\Filesystem\\' => 29,
+            'Symfony\\Component\\Console\\' => 26,
+            'Symfony\\Component\\Config\\' => 25,
         ),
         'R' => 
         array (
@@ -51,9 +59,11 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'PhpDocReader\\' => 13,
+            'Phinx\\' => 6,
             'Patchwork\\' => 10,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
@@ -96,6 +106,16 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
             'Doctrine\\Common\\Cache\\' => 22,
             'DI\\' => 3,
             'DASPRiD\\Enum\\' => 13,
+        ),
+        'C' => 
+        array (
+            'Cake\\Utility\\' => 13,
+            'Cake\\Log\\' => 9,
+            'Cake\\Datasource\\' => 16,
+            'Cake\\Database\\' => 14,
+            'Cake\\Core\\' => 10,
+            'Cake\\Collection\\' => 16,
+            'Cake\\Cache\\' => 11,
         ),
         'B' => 
         array (
@@ -140,6 +160,14 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
+        'Symfony\\Contracts\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/contracts',
+        ),
+        'Symfony\\Component\\Yaml\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/yaml',
+        ),
         'Symfony\\Component\\PropertyAccess\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/property-access',
@@ -152,6 +180,18 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
         array (
             0 => __DIR__ . '/..' . '/symfony/inflector',
         ),
+        'Symfony\\Component\\Filesystem\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/filesystem',
+        ),
+        'Symfony\\Component\\Console\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'Symfony\\Component\\Config\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/config',
+        ),
         'Respect\\Validation\\' => 
         array (
             0 => __DIR__ . '/..' . '/respect/validation/library',
@@ -159,6 +199,10 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
         'React\\Promise\\' => 
         array (
             0 => __DIR__ . '/..' . '/react/promise/src',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
         'Psr\\Http\\Message\\' => 
         array (
@@ -171,6 +215,10 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
         'PhpDocReader\\' => 
         array (
             0 => __DIR__ . '/..' . '/php-di/phpdoc-reader/src/PhpDocReader',
+        ),
+        'Phinx\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/robmorgan/phinx/src/Phinx',
         ),
         'Patchwork\\' => 
         array (
@@ -255,6 +303,34 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
         'DASPRiD\\Enum\\' => 
         array (
             0 => __DIR__ . '/..' . '/dasprid/enum/src',
+        ),
+        'Cake\\Utility\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cakephp/utility',
+        ),
+        'Cake\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cakephp/log',
+        ),
+        'Cake\\Datasource\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cakephp/datasource',
+        ),
+        'Cake\\Database\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cakephp/database',
+        ),
+        'Cake\\Core\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cakephp/core',
+        ),
+        'Cake\\Collection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cakephp/collection',
+        ),
+        'Cake\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cakephp/cache',
         ),
         'BaconQrCode\\' => 
         array (

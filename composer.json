@@ -23,7 +23,8 @@
         "twig/extensions": "^1.5",
         "awurth/slim-validation": "^3.1",
         "league/flysystem": "^1.0",
-        "doctrine/cache": "^1.8"
+        "doctrine/cache": "^1.8",
+        "robmorgan/phinx": "^0.10.6"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.2"

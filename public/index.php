@@ -26,4 +26,6 @@ if (ENV === 'production') {
     set_error_handler([$application, "errorHandler"]);
 }
 
-$application->run();
+if (php_sapi_name() !== 'cli') {
+    $application->run();
+}

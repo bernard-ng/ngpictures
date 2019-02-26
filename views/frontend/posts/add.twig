@@ -13,10 +13,6 @@
                             <div class="row input-field col s12">
                                 <label for="title">titre (optionel)</label>
                                 <input type="text" name="title" id="title" class="validate {{ error ? 'invalid' : '' }}" value="{{ post.get('title') | escape }}">
-                                <span class="helper-text grey-txt txt-light-4">
-                                    Ajouter un titre à votre photo, la rendra visible dans les recherches, elle sera donc
-                                    facile à retrouver par tout le monde. vous pouvez ajouter des mots clés. exemple: enfants, children, afrique, femme, etc..
-                                </span>
                             </div>
 
                             <div class="row input-field col s12">
@@ -26,19 +22,11 @@
                                         <option value="{{ c.id }}" {{ post.get('category') == c.id ? 'select' : '' }}><span class="grey-txt dark-4">{{ c.title }}</span></option>
                                     {% endfor %}
                                 </select>
-                                <span class="helper-text grey-txt txt-light-4">
-                                    Votre photo est elle d'une catégories particulière ? définir la catégorie la rendra plus visible,
-                                    par défaut votre photo sera dans la catégorie "autre".
-                                </span>
                             </div>
 
                             <div class="input-field col s12">
                                 <label for="content">Description (optionel)</label>
                                 <textarea name="content" id="content" class="materialize-textarea">{{ post.get('content') }}</textarea>
-                                <span class="helper-text grey-txt txt-light-4">
-                                    La description est un petit article pour votre photo, vous pouvez expliquer ici ce que vous essayer
-                                    de transmettre à travers elle
-                                </span>
                             </div>
 
                             <div class="submit-button col s12">

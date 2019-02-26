@@ -56,7 +56,7 @@ class MysqlDatabase implements DatabaseInterface
     /**
      * @return null|PDO
      */
-    private function getPDO()
+    public function getPDO()
     {
         if ($this->PDO === null) {
             try {
