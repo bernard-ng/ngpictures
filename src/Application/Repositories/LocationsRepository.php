@@ -1,7 +1,7 @@
 <?php
 namespace Application\Repositories;
 
-use Application\Entity\LocationsEntity;
+use Application\Entities\LocationsEntity;
 use Framework\Repositories\Repository;
 
 class LocationsRepository extends Repository

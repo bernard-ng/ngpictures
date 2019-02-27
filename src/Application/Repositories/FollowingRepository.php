@@ -1,7 +1,7 @@
 <?php
 namespace Application\Repositories;
 
-use Application\Entity\FollowingsEntity;
+use Application\Entities\FollowingsEntity;
 use Framework\Repositories\Repository;
 use Application\Application;
 use Framework\Database\DatabaseInterface;

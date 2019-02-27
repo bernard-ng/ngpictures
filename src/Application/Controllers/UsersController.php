@@ -1,7 +1,7 @@
 <?php
 namespace Application\Controllers;
 
-use Application\Entity\UsersEntity;
+use Application\Entities\UsersEntity;
 use Application\Managers\PageManager;
 use Application\Repositories\UsersRepository;
 use Framework\Managers\Collection;

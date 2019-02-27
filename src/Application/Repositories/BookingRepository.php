@@ -2,7 +2,7 @@
 namespace Application\Repositories;
 
 
-use Application\Entity\BookingEntity;
+use Application\Entities\BookingEntity;
 use Framework\Repositories\Repository;
 
 /**

@@ -1,7 +1,7 @@
 <?php
 namespace Application\Repositories;
 
-use Application\Entity\LikesEntity;
+use Application\Entities\LikesEntity;
 use Framework\Repositories\Repository;
 
 /**

@@ -2,7 +2,7 @@
 namespace Application\Services\Auth;
 
 use Application\Repositories\UsersRepository;
-use Application\Entity\UsersEntity;
+use Application\Entities\UsersEntity;
 use Framework\Managers\CookieManager;
 use Framework\Managers\Mailer\Mailer;
 use Framework\Managers\StringManager;

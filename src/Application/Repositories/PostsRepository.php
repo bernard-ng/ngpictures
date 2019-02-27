@@ -1,7 +1,7 @@
 <?php
 namespace Application\Repositories;
 
-use Application\Entity\PostsEntity;
+use Application\Entities\PostsEntity;
 use Framework\Repositories\Repository;
 
 /**

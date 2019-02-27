@@ -1,7 +1,7 @@
 <?php
 namespace Application\Repositories;
 
-use Application\Entity\NotificationsEntity;
+use Application\Entities\NotificationsEntity;
 use Framework\Repositories\Repository;
 
 class NotificationsRepository extends Repository

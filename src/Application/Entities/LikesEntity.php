@@ -9,7 +9,7 @@
 namespace Application\Entity;
 
 
-use Framework\Entity\Entity;
+use Framework\Entities\Entity;
 
 /**
  * Class LikesEntity

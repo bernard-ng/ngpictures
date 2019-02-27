@@ -1,9 +1,9 @@
 <?php
 namespace Application\Entity;
 
-use Framework\Entity\Entity;
-use Application\Traits\Entity\PostEntityTrait;
-use Application\Traits\Entity\UserInfoTrait;
+use Framework\Entities\Entity;
+use Application\Traits\Entities\PostEntityTrait;
+use Application\Traits\Entities\UserInfoTrait;
 use Application\Traits\Util\AuthTrait;
 
 class PostsEntity extends Entity

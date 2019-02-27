@@ -1,7 +1,7 @@
 <?php
 namespace Application\Repositories;
 
-use Application\Entity\CommentsEntity;
+use Application\Entities\CommentsEntity;
 use Framework\Repositories\Repository;
 use Application\Traits\Util\TypesActionTrait;
 

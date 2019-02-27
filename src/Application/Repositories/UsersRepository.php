@@ -1,7 +1,7 @@
 <?php
 namespace Application\Repositories;
 
-use Application\Entity\UsersEntity;
+use Application\Entities\UsersEntity;
 use Framework\Repositories\Repository;
 
 /**
