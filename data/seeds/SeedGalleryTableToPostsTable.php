@@ -21,7 +21,7 @@ class SeedGalleryTableToPostsTable extends AbstractSeed
 
         foreach($rows as $row) {
             $data[] = [
-                'title' => $row['name'],
+                'name' => $row['name'],
                 'slug' => $row['slug'],
                 'description' => $row['description'],
                 'thumb' => null,
