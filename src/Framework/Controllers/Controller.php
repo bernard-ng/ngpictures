@@ -1,6 +1,7 @@
 <?php
 namespace Framework\Controllers;
 
+use Framework\Http\ServerRequest;
 use Psr\Container\ContainerInterface;
 use Framework\Renderer\RendererInterface;
 use Application\Traits\Util\RequestTrait;
@@ -14,8 +15,6 @@ use Application\Traits\Util\ValidationErrorTrait;
 class Controller
 {
     use ValidationErrorTrait;
-    use ResolverTrait;
-    use RequestTrait;
 
     /**
      * le renderer
@@ -28,6 +27,11 @@ class Controller
      */
     protected $container;
 
+    /**
+     * @var ServerRequest|mixed
+     */
+    protected $request;
+
 
     /**
      * Controller constructor.
@@ -37,45 +41,14 @@ class Controller
     {
         $this->container = $container;
         $this->renderer = $this->container->get(RendererInterface::class);
+        $this->request = $this->container->get(ServerRequest::class);
     }
 
 
     /**
-     * @param $name
-     * @return mixed
-     */
-    public function loadRepository($name)
-    {
-        if (is_array($name)) {
-            foreach ($name as $n) {
-                $this->$n = $this->container->get($this->model($n));
-            }
-        } else {
-            $this->$name = $this->container->get($this->model($name));
-            return $this->$name;
-        }
-    }
-
-
-    /**
-     * le nom du controlle
-     * @param string $name
-     * @return Object
-     */
-    public function callController(string $name)
-    {
-        return $this->container->get($this->controller($name));
-    }
-
-
-    /**
-     * rendu de la vue
      * @param string $view
      * @param array $variables
      * @return mixed
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
     public function view(string $view, array $variables = [])
     {
