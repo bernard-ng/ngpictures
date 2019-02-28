@@ -1,9 +1,9 @@
 <?php
-namespace Framework\Entity;
+namespace Framework\Entities;
 
 /**
  * Class Entity
- * @package Framework\Entity
+ * @package Framework\Entities
  */
 class Entity
 {
