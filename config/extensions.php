@@ -1,7 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Bernard-ng
- * Date: 2/28/2019
- * Time: 7:06 PM
- */
+
+return [
+    \Twig_Extensions_Extension_Text::class,
+    \Framework\Renderer\TwigRendererExtension::class,
+    \Framework\Twig\RouterTwigExtension::class,
+];

@@ -1,9 +1,7 @@
 <?php
 
 use Application\Controllers\AjaxController;
-use Application\Controllers\BlogController;
 use Application\Controllers\BookingController;
-use Application\Controllers\BugsController;
 use Application\Controllers\CategoriesController;
 use Application\Controllers\CommentsController;
 use Application\Controllers\CommunityController;
@@ -13,12 +11,9 @@ use Application\Controllers\ErrorController;
 use Application\Controllers\FollowingController;
 use Application\Controllers\GalleryController;
 use Application\Controllers\HomeController;
-use Application\Controllers\HtagController;
-use Application\Controllers\IdeasController;
 use Application\Controllers\LikesController;
 use Application\Controllers\MapsController;
 use Application\Controllers\NotificationsController;
-use Application\Controllers\PhotographersController;
 use Application\Controllers\PostsController;
 use Application\Controllers\ReportsController;
 use Application\Controllers\RssController;

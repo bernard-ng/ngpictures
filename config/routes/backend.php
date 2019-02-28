@@ -1,13 +1,11 @@
 <?php
 
 use Application\Controllers\Admin\AlbumsController;
-use Application\Controllers\Admin\BlogController;
 use Application\Controllers\Admin\CategoriesController;
 use Application\Controllers\Admin\GalleryController;
 use Application\Controllers\Admin\LocationsController;
 use Application\Controllers\Admin\LogsController;
 use Application\Controllers\Admin\PagesEditorController;
-use Application\Controllers\Admin\PhotographersController;
 use Application\Controllers\Admin\ReportsController;
 use Application\Controllers\Admin\UsersController;
 use Application\Controllers\AdminController;
