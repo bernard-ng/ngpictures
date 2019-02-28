@@ -1,4 +1,10 @@
 <?php
+/**
+ * This file is a part of Ngpictures
+ * (c) Bernard Ngandu <ngandubernard@gmail.com>
+ *
+ */
+
 namespace Framework\Router;
 
 /**
@@ -9,44 +15,39 @@ class Route
 {
 
     /**
-     * l'url ou chemin a l'entree
      * @var string
      */
     private $path;
 
     /**
-     * le callback
-     * @var callable|string
+     * @var array
      */
     private $controller;
 
     /**
-     * les parametres matches
-     * pour les url particulieres
+     * matched params for a route
      * @var array
      */
     private $matches = [];
 
     /**
-     * les params avec la method "with"
+     * match params with "with" method
      * @var array
      */
     private $params = [];
 
     /**
-     * Route constructor
+     * Route constructor.
      * @param string $path
-     * @param callable|string $controller
+     * @param array $controller
      */
-    public function __construct(string $path, $controller)
+    public function __construct(string $path, array $controller)
     {
         $this->path = trim($path, "/");
         $this->controller = $controller;
     }
 
-
     /**
-     * match des param particulier
      * @param string $param
      * @param string $regex
      * @return Route
@@ -57,14 +58,11 @@ class Route
         return $this;
     }
 
-
     /**
-     * verifi si une url correspond a une route
-     *
      * @param string $url
      * @return bool
      */
-    public function match(string $url)
+    public function match(string $url): bool
     {
         $url = trim($url, "/");
         $path = preg_replace_callback("#:([\w]+)#", [$this,'paramMatch'], $this->path);
@@ -79,10 +77,8 @@ class Route
         return true;
     }
 
-
     /**
-     * les param matcher avec la method "with"
-     * @param mixed $match
+     * @param $match
      * @return string
      */
     private function paramMatch($match): string
@@ -93,13 +89,11 @@ class Route
         return '([^/]+)';
     }
 
-
-     /**
-     * genere une url
+    /**
      * @param array $params
      * @return string
      */
-    public function getUrl(array $params): string
+    public function generateUri(array $params): string
     {
         $path = $this->path;
         foreach ($params as $k => $v) {
@@ -109,9 +103,7 @@ class Route
     }
 
     /**
-     * Get pour les url particulieres
-     *
-     * @return  array
+     * @return array
      */
     public function getMatches()
     {
@@ -119,9 +111,7 @@ class Route
     }
 
     /**
-     * Get le callback
-     *
-     * @return  callable|string
+     * @return array
      */
     public function getController()
     {

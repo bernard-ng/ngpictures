@@ -1,4 +1,9 @@
 <?php
+/**
+ * This file is a part of Ngpictures
+ * (c) Bernard Ngandu <ngandubernard@gmail.com>
+ *
+ */
 
 namespace Framework\Router;
 
@@ -12,22 +17,21 @@ class Router
 {
 
     /**
-     * l'url entre par le user
      * @var string
      */
     private $url;
 
     /**
-     * les routes enregister
-     * @var Route[]
+     * registered routes
+     * @var array
      */
     private $routes = [];
 
     /**
-     * les routes nommee enregister
-     * @var array
+     * registered named routes
+     * @var Route[]
      */
-    private $namedRoute = [];
+    private $namedRoutes = [];
 
 
     /**
@@ -35,121 +39,110 @@ class Router
      */
     public function __construct()
     {
-        $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
-        $this->url = $_GET['url'] ?? $uri ?? '/';
+        $this->url = $_GET['url'] ?? parse_url($_SERVER['REQUEST_URI'])['path'] ?? '/';
+
+        // trailing slash
         if (strlen($this->url) > 1 && $this->url[-1] === '/') {
             $url = substr($this->url, 0, -1);
             header("Location: /{$url}", true, 301);
         }
     }
 
-
     /**
-     * permet d'ajouter une url, registrer une route
+     * register a route
      * @param string $path
-     * @param mixed $controller
-     * @param string $name
+     * @param $controller
+     * @param string|null $name
      * @param string $method
      * @return Route
      */
-    private function add(string $path, $controller, string $name = null, string $method): Route
+    private function add(string $path, array $controller, ?string $name = null, string $method): Route
     {
         $route = new Route($path, $controller);
         $this->routes[$method][] = $route;
 
-        if ($name) {
-            $this->namedRoute[$name] = $route;
+        if (!is_null($name)) {
+            $this->namedRoutes[$name] = $route;
         }
         return $route;
     }
 
-
     /**
-     * registration de route en GET et POST
+     * register a route for http method
      * @param string $path
-     * @param callable|string $controller
-     * @param string $name
+     * @param array $controller
+     * @param string|null $name
      * @return Route
      */
-    public function any(string $path, $controller, string $name = null): Route
+    public function any(string $path, array $controller, ?string $name = null): Route
     {
         $route = new Route($path, $controller);
         $this->routes['GET'][] = $route;
         $this->routes['POST'][] = $route;
 
-        if ($name) {
-            $this->namedRoute[$name] = $route;
+        if (!is_null($name)) {
+            $this->namedRoutes[$name] = $route;
         }
         return $route;
     }
 
-
     /**
-     * registration url en GET
+     * register a route for GET http method
      * @param string $path
-     * @param callable|string $controller
-     * @param string $name
+     * @param array $controller
+     * @param string|null $name
      * @return Route
      */
-    public function get(string $path, $controller, string $name = null): Route
+    public function get(string $path, array $controller, ?string $name = null): Route
     {
         return $this->add($path, $controller, $name, "GET");
     }
 
-
     /**
-     * registration en POST
+     * register a route for POST http method
      * @param string $path
-     * @param callable|string $controller
-     * @param string $name
+     * @param array $controller
+     * @param string|null $name
      * @return Route
      */
-    public function post(string $path, $controller, string $name = null): Route
+    public function post(string $path, array $controller, string $name = null): Route
     {
         return $this->add($path, $controller, $name, "POST");
     }
 
-
     /**
-     * lance le router apartir du nom d'une route
      * @param string $name
      * @param array $params
      * @return mixed
-     */
-    private function url(string $name, array $params = [])
-    {
-        if (!isset($this->namedRoute[$name])) {
-            http_response_code(404);
-            throw new RouterException('no routes matched', 404);
-        }
-        return $this->namedRoute[$name]->getUrl($params);
-    }
-
-
-    /**
-     * lancement du routing
-     * le router fait un trailing Slash cad si l'url
-     * termine par un "/", il redirige vers l'url sans "/" a la fin
-     * @return bool
-     * olean
      * @throws RouterException
      */
-    public function run()
+    public function url(string $name, array $params = [])
     {
-        if (isset($_SERVER['REQUEST_METHOD'])) {
+        if (!isset($this->namedRoutes[$name])) {
+            throw new RouterException(sprintf("No matched routes for : %s", $name));
+        }
+        return $this->namedRoutes[$name]->generateUri($params);
+    }
+
+    /**
+     * @return Route|null
+     */
+    public function run(): ?Route
+    {
+        if (isset($_SERVER['REQUEST_METHOD']) && isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
+
+            /** @var Route $route */
             foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
                 if ($route->match($this->url)) {
                     return $route;
                 }
             }
-            http_response_code(404);
+            return null;
         }
     }
-
+    
     /**
-     * Get l'url entre par le user
-     *
-     * @return  string
+     * @return string
      */
     public function getUrl()
     {
