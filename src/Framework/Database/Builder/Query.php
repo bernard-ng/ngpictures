@@ -16,7 +16,6 @@ use Framework\Database\Builder\Queries\Select;
 use Framework\Database\Builder\Queries\Update;
 use Framework\Database\QueryResult;
 
-
 /**
  * Class Query
  * @package Framework\Database\Builder
