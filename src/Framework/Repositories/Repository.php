@@ -141,7 +141,6 @@ class Repository
 
     public function search(string $query)
     {
-
     }
 
     public function findSimilars(int $id)
@@ -156,7 +155,6 @@ WHERE (categories_id = (
 ) AND id <> ? ) AND online = 1
 ORDER BY RAND() LIMIT 5 "
 SQL;
-
     }
 
     public function findList(string $list)
@@ -164,7 +162,6 @@ SQL;
         $sql = <<< SQL
 "SELECT * FROM {$this->table} WHERE id IN ({$list}) ORDER BY id DESC "
 SQL;
-
     }
 
     public function findGreater(int $lastId, string $limit)
@@ -172,7 +169,6 @@ SQL;
         $sql = <<< SQL
 "SELECT * FROM {$this->table} WHERE id < ? AND online = 1 ORDER BY id DESC LIMIT {$limit}"
 SQL;
-
     }
 
 
@@ -181,7 +177,6 @@ SQL;
         $sql = <<< SQL
 "SELECT * FROM {$this->table} WHERE id = ? AND {$field} = ?"
 SQL;
-
     }
 
 
@@ -193,7 +188,6 @@ FROM {$this->table}
 LEFT JOIN categories ON categories_id = categories.id
 WHERE online = 1 ORDER BY id DESC LIMIT {$from},{$to}"
 SQL;
-
     }
 
 
@@ -205,28 +199,25 @@ FROM {$this->table}
 LEFT JOIN categories ON categories_id = categories.id
 WHERE online = 1 ORDER BY id DESC"
 SQL;
-
     }
 
 
     public function random(int $limit)
     {
-       $sql = <<< SQL
+        $sql = <<< SQL
 "SELECT * FROM {$this->table} WHERE online = 1 ORDER BY RAND() LIMIT {$limit}"
 SQL;
-
     }
 
 
     public function lastOnline($limit = 5)
     {
-       $sql = <<< SQL
+        $sql = <<< SQL
 "SELECT {$this->table}.*, categories.title as category
 FROM {$this->table}
 LEFT JOIN categories ON categories_id = categories.id
 WHERE online = 1 ORDER BY id DESC LIMIT {$limit} "
 SQL;
-
     }
 
 
@@ -238,12 +229,10 @@ FROM {$this->table}
 LEFT JOIN categories ON categories_id = categories.id
 WHERE online = 0 ORDER BY id DESC LIMIT {$limit} "
 SQL;
-
     }
 
 
     public function orderBy(string $field, string $order = 'DESC', int $from = null, int $to = null)
     {
-
     }
 }
