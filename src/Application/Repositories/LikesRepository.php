@@ -44,18 +44,16 @@ class LikesRepository extends Repository
 
     public function isLiked(int $id, int $t, $users_id = null) : bool
     {
-       return "SELECT * FROM {$this->table} WHERE {$this->getType($t)} = ? AND users_id = ? ";
+        return "SELECT * FROM {$this->table} WHERE {$this->getType($t)} = ? AND users_id = ? ";
     }
 
 
     public function getLikeSentence(int $id, int $type) : string
     {
-
     }
 
     public function isMentionnedLike(int $id, int $type) : string
     {
-
     }
 
     public function count($user_id)

@@ -31,7 +31,6 @@ class CategoriesRepository extends Repository
 SELECT * FROM {$this->table}
 WHERE {$this->table}.id < ? ORDER BY id DESC LIMIT 0, 8
 SQL;
-
     }
 
 
@@ -46,6 +45,5 @@ SQL;
         $sql = <<< SQL
 SELECT * FROM {$this->table} WHERE {$field} = ? AND online = 1
 SQL;
-
     }
 }

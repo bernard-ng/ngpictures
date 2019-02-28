@@ -1,7 +1,6 @@
 <?php
 namespace Application\Repositories;
 
-
 use Application\Entities\BookingEntity;
 use Framework\Repositories\Repository;
 
