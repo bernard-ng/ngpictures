@@ -2,6 +2,7 @@
 namespace Application;
 
 use Framework\Exception\RouterException;
+use Framework\Http\RequestAwareAction;
 use Framework\Router\Route;
 use Framework\Router\Router;
 use Psr\Container\ContainerInterface;
@@ -16,29 +17,20 @@ use Framework\Managers\FlashMessageManager;
 class Application
 {
 
-    use RequestTrait;
+    use RequestAwareAction;
 
     /**
-     * le container
      * @var ContainerInterface
      */
     public $container;
 
-
     /**
-     * le container, redefini pour permettre autre class
-     * d'avoir access au DIC sans instancie celui-ci et instancie l'application.
-     * @todo ameliorer ceci et trouver une solution.
-     * @var ContainerInterface
+     * Application constructor.
+     * @param ContainerInterface $container
      */
-    public static $dic;
-
-
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        self::$dic = $container;
-
         if (ENV === 'production') {
             set_exception_handler([$this, "exceptionHandler"]);
             set_error_handler([$this, "errorHandler"]);
@@ -73,7 +65,7 @@ class Application
             }
         } catch (RouterException $e) {
             LogMessageManager::register(__class__, $e);
-            self::redirect("/error/internal");
+            $this->redirect("/error/internal");
         }
     }
 
@@ -87,7 +79,7 @@ class Application
         $this->container->get(FlashMessageManager::class)->set('danger', "Oups une erreur est survenue !");
         LogMessageManager::register(__class__, $e);
         http_response_code(500);
-        self::redirect("/error/internal");
+        $this->redirect("/error/internal");
     }
 
     /**
@@ -101,16 +93,6 @@ class Application
         $this->container->get(FlashMessageManager::class)->set('danger', "Oups une erreur est survenue !");
         LogMessageManager::register($errfile, $errstr);
         http_response_code(500);
-        self::redirect("/error/internal");
-    }
-
-    /**
-     * Get le container
-     *
-     * @return  ContainerInterface
-     */
-    public static function getDic()
-    {
-        return self::$dic;
+        $this->redirect("/error/internal");
     }
 }

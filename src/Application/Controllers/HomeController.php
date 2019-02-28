@@ -18,21 +18,11 @@ class HomeController extends Controller
      */
     protected $posts;
 
-    /**
-     * HomeController constructor.
-     * @param ContainerInterface $container
-     */
-    public function __construct(ContainerInterface $container)
-    {
-        parent::__construct($container);
-        $this->posts = $container->get(PostsRepository::class);
-    }
-
 
     public function index()
     {
-        $categories = $this->container->get(CategoriesRepository::class)->orderBy('id', 'DESC', 0, 10);
-        $posts          =   $this->container->get(PostsRepository::class)->latest(0, 12);
+        $categories = $this->container->get(CategoriesRepository::class)->all();
+        $posts = $this->container->get(PostsRepository::class)->all();
 
         $this->turbolinksLocation("/");
         PageManager::setTitle('Ngpictures');
@@ -40,5 +30,18 @@ class HomeController extends Controller
             "frontend/index",
             compact('categories', 'posts')
         );
+    }
+
+    /**
+     * genere une route pour une route donnee et redirige vers celle-ci
+     * @param string $route
+     * @param array $param
+     * @param int $status
+     * @return mixed
+     */
+    public function route(string $route, array $param = [], int $status = 200)
+    {
+        $url = $this->getRouter()->url($route, $param);
+        $this->redirect($url, $status);
     }
 }

@@ -3,17 +3,21 @@ namespace Application\Services\Auth;
 
 use Application\Repositories\UsersRepository;
 use Application\Entities\UsersEntity;
+use Framework\Http\RequestAwareAction;
 use Framework\Managers\CookieManager;
 use Framework\Managers\Mailer\Mailer;
 use Framework\Managers\StringManager;
 use Framework\Managers\SessionManager;
 use Psr\Container\ContainerInterface;
-use Application\Traits\Util\RequestTrait;
 use Framework\Managers\FlashMessageManager;
 
+/**
+ * Class DatabaseAuthService
+ * @package Application\Services\Auth
+ */
 class DatabaseAuthService
 {
-    use RequestTrait;
+    use RequestAwareAction;
 
     /**
      * le model des users, donc l'access a la base de donnee.

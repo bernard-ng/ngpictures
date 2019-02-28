@@ -11,8 +11,7 @@ trait SingletonTrait
 
 
     /**
-     * patern singleton, renvoi la mm instance d'un class
-     * @return self
+     * @return SingletonTrait
      */
     public static function getInstance(): self
     {

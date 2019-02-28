@@ -3,6 +3,7 @@ namespace Application\Controllers;
 
 use Application\Managers\MessageManager;
 use Application\Repositories\NotificationsRepository;
+use Application\Traits\Util\RequestTrait;
 use Framework\Managers\StringManager;
 use Application\Managers\PageManager;
 use Psr\Container\ContainerInterface;
@@ -18,6 +19,9 @@ use Framework\Controllers\Controller as SuperController;
  */
 class Controller extends SuperController
 {
+
+    use RequestTrait;
+
     /**
      * @var MessageManager
      */
@@ -90,11 +94,7 @@ class Controller extends SuperController
         if ($this->authService->isLogged()) {
             $this->renderer->addGlobal('activeUser', $this->session->read(AUTH_KEY));
             $this->renderer->addGlobal('securityToken', $this->session->read(TOKEN_KEY));
-            $this->renderer->addGlobal(
-                'notificationsNumber',
-                $this->container->get(NotificationsRepository::class)
-                    ->count($this->authService->isLogged()->id)->num
-            );
+            $this->renderer->addGlobal('notificationsCount', 10);
 
             PageManager::setMeta(['active-user' => $this->session->getValue(AUTH_KEY, 'id')]);
             PageManager::setMeta(['active-token' => $this->session->read(TOKEN_KEY)]);
