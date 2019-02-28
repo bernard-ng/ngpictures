@@ -6,8 +6,7 @@
  * Time: 12:36 AM
  */
 
-namespace Application\Entity;
-
+namespace Application\Entities;
 
 use Framework\Entities\Entity;
 

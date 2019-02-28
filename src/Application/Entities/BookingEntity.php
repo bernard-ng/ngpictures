@@ -1,5 +1,5 @@
 <?php
-namespace Application\Entity;
+namespace Application\Entities;
 
 use Framework\Entities\Entity;
 

@@ -1,5 +1,5 @@
 <?php
-namespace Application\Entity;
+namespace Application\Entities;
 
 use Framework\Entities\Entity;
 use Application\Traits\Entities\PostEntityTrait;
@@ -8,12 +8,6 @@ use Application\Traits\Util\AuthTrait;
 
 class PostsEntity extends Entity
 {
-    private $file_path = "posts";
-    private $action_type = 1;
-    private $action_url = "posts";
-
-    use PostEntityTrait;
-    use UserInfoTrait;
     use AuthTrait;
 
     public function getEditUrl()
