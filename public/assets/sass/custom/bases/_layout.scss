@@ -24,8 +24,8 @@
   }
 
   &.dark {
-    background: #100f0f !important;
-    color: #ccc;
+    background: $nav-color !important;
+    color: $txt-color;
   }
 }
 
@@ -75,6 +75,19 @@
     right: 0;
     bottom: 0;
   }
+}
+
+.bg {
+  background-color: rgba(0, 0, 0, 0.6);
+  margin: 0;
+  width: 100%;
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
 }
 
 .jumbotron-small {
