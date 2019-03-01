@@ -5,11 +5,9 @@ use function \DI\object;
 use function \DI\factory;
 
 use Framework\Renderer\TwigRenderer;
-use Framework\Database\MysqlDatabase;
 use Framework\Managers\CookieManager;
 use Framework\Managers\SessionManager;
 use Application\Managers\MessageManager;
-use Framework\Database\DatabaseInterface;
 use Framework\Interfaces\CookieInterface;
 use Framework\Renderer\RendererInterface;
 use Framework\Interfaces\SessionInterface;
@@ -21,8 +19,6 @@ return [
     'site.owner'        =>  'Bernard Ngandu',
     'site.email'        =>  'ngandubernard@gmail.com',
     'site.contact'      =>  'ngpictures@larytech.com',
-    'site.category'     =>  'Photographie',
-    'site.lang'         =>  'fr_FR',
     'site.description'  =>  " 
         L'expression de la photographie africaine, les meilleures photos partagées par des photographes talentueux.
         Ngpictures est une galerie photo pour photographes et passionnés de la photographie,
@@ -39,6 +35,7 @@ return [
 
     \PDO::class => factory(\Framework\Database\PDOFactory::class),
 
+    \Awurth\SlimValidation\Validator::class => object()->constructor(false),
     Glooby\Pexels\Client::class => object()->constructor(PEXELS_API_KEY),
     FlashMessageManager::class => object()->constructor(
         get(SessionInterface::class),
