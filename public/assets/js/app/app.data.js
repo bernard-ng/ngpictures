@@ -19,7 +19,7 @@ function loadGeneric(element) {
                 let xhr = getXhr();
                 if (xhr) {
                     if (container.getAttribute('data-ajax')) {
-                        let url = `/ajax/${container.getAttribute('data-ajax')}?lastId=${lastId}`;
+                        let url = `/api/${container.getAttribute('data-ajax')}?lastId=${lastId}`;
                         xhr.open('GET', url, true);
                         xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
                         xhr.send();
