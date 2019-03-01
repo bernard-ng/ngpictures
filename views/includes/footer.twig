@@ -24,7 +24,7 @@
                 <a href="{{ activeUser.followersUrl }}">
                     <i class="icon icon-users"></i>
                     <br>
-                   <span class="desc">Abonnés</span>
+                    <span class="desc">Abonnés</span>
                 </a>
             </li>
 
@@ -42,23 +42,28 @@
 <footer class="page-footer jumbotron dark shadow-2">
     <div class="row container">
         <section class="col l12 m12 s12">
-        <h2 class="ui header">
-            A propos
-        </h2>
-        <p class="grey-txt">
-            L'expression de la photographie africaine, les meilleures photos partagées par des photographes talentueux.
-            <br>
-            Ngpictures est une galerie photo pour photographes et passionnés de la photographie,
-            <br>
-            Nous vous proposons de découvrir la photographie africaine autrement.
-            <a href="/about">En savoir plus</a>
-        </p>
-        <div class="ui horizontal bulleted list">
-            <a class="item" href="/bugs">Un bug ?</a>
-            <a class="item" href="/ideas">Votre avis</a>
-            <a href="/privacy" class="item">CGU</a>
-            <a class="item" href="/contact">Contact</a>
-        </div>
+            <h2 class="ui header">
+                A propos
+            </h2>
+            <p class="grey-txt">
+                L'expression de la photographie africaine, les meilleures photos partagées par des photographes
+                talentueux.
+                <br>
+                Ngpictures est une galerie photo pour photographes et passionnés de la photographie,
+                <br>
+                Nous vous proposons de découvrir la photographie africaine autrement.
+                <a href="/about">En savoir plus</a>
+            </p>
+            <div class="ui horizontal bulleted list">
+                <a class="item" href="{{ path('privacy') }}" title="Conditions Générales d'utilisation">Conditions Générales d'utilisation</a>
+                <a class="item" href="{{ 'contact' }}" title="Contact">Contact</a>
+                <a class="item" href="https://www.Facebook.com/ngpictures23"  target="_blank" title="facebook">
+                    <i class="icon icon-facebook-rect"></i>
+                </a>
+                <a class="item" href="https://www.instagram.com/ngpictures_23"  target="_blank" title="instagram">
+                    <i class="icon icon-instagram"></i>
+                </a>
+            </div>
         </section>
     </div>
     <div class="footer-copyright black">

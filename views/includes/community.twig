@@ -1,15 +1,14 @@
-<section class="section jumbotron spaced parallax-container col l12 s12 m12">
-    <div class="row container">
-        <div class="row container">
-            <span class="ui header row col l12 s12 m12 center">
-                <h4>Réjoingez la communauté de ngpictures, <br> découvrez des nouveaux talents, <br> laissez votre art s'exprimer</h4>
-                <p>
-                    <a href="/community" class="btn">la communauté <span class="icon icon-users"></span></a>
-                </p>
-            </span>
+<section class="section jumbotron spaced parallax-container">
+    <div class="bg"></div>
+    <div class="row container" style="position: relative; z-index: 2;">
+        <div class="ui header m12 center-align">
+            <h4>Réjoingez la communauté de ngpictures, <br> découvrez des nouveaux talents, <br> laissez votre art s'exprimer</h4>
+            <p>
+                <a href="{{ path('community') }}" class="btn">la communauté <span class="icon icon-users"></span></a>
+            </p>
         </div>
     </div>
     <div class="parallax">
-        <img src="" data-src="/imgs/slider.jpg" class="bw">
+        <img src="" data-src="{{ cacheBusting('/imgs/slider.jpg') }}">
     </div>
 </section>

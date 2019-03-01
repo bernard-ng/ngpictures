@@ -3,7 +3,9 @@
         <label for="{{ name }}">{{ label }}</label>
         <input type="{{ type }}"  name="{{ name }}" id="{{ name }}" class="validate {{ error ? 'invalid' : ''}}" value="{{ value | escape }}">
         <span class="helper-text red-txt">
-            {{ error }}
+            {% for e in error %}
+                {{ e }}&nbsp;
+            {% endfor %}
         </span>
     </div>
 {% endmacro %}
@@ -13,7 +15,9 @@
         <label for="{{ name }}">{{ label }}</label>
         <input type="{{ type }}" name="{{ name }}" id="{{ name }}" class="validate {{ error ? 'invalid' : ''}}" value="{{ value | escape }}">
         <span class="helper-text red-txt">
-            {{ error }}
+            {% for e in error %}
+                {{ e }}&nbsp;
+            {% endfor %}
         </span>
     </div>
 {% endmacro %}
@@ -23,7 +27,9 @@
         <label for="{{ name }}">{{ label }}</label>
         <textarea name="{{ name }}" id="{{ name }}" class="materialize-textarea">{{ value }}</textarea>
         <span class="helper-text red-txt">
-            {{ error }}
+            {% for e in error %}
+                {{ e }}&nbsp;
+            {% endfor %}
         </span>
     </div>
 {% endmacro %}

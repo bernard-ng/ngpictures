@@ -1,0 +1,7 @@
+{% for p in posts %}
+    <article class="gallery-item animated slideInUp" id="{{ p.id }}" style="background: {{ p.color }}">
+        <a href="{{ path('posts.show', {id: p.id, slug: p.slug}) }}">
+            <img src="" data-src="{{ p.getSmallThumb() }}" title="{{ p.name }}" alt="{{ p.name }}" style="width: 100%; height: 100%;">
+        </a>
+    </article>
+{% endfor %}

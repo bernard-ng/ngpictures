@@ -33,43 +33,39 @@
     </div>
 </section>
 <section class="section row container">
-    <section class="col l9 m9 s12 animated fast slideInRight">
+    <section class="col offset-l2 offset-m2 nexted l8 m12 s12 animated fast slideInRight">
         <form action="" method="POST" class="card-panel grey dark-4">
 
-            {{ form.smallInput('name','Votre nom', 'text', errors.get('name'), post.get('name') ?? activeUser.name) }}
-            {{ form.smallInput('email', 'Votre email', 'email', errors.get('email'), post.get('email') ?? activeUser.email) }}
+            {{ form.smallInput('name','Votre nom', 'text', errors.name, input.get('name') ?? activeUser.name) }}
+            {{ form.smallInput('email', 'Votre email', 'email', errors.email, input.get('email') ?? activeUser.email) }}
 
             <div class="input-field col l6 m6 s12">
                 <label for="date">Date</label>
-                <input type="text" name="date" id="date" class="datepicker" value="{{ post.get('date') | escape }}">
+                <input type="text" name="date" id="date" class="datepicker validate {{ errors.time ? 'invalid' : ''}}" value="{{ input.get('date') | escape }}">
                 <span class="helper-text red-txt">
-                    {{ errors.get('date') }}
+                    {{ errors.date[0] }}
                 </span>
             </div>
             <div class="input-field col l6 m6 s12">
                 <label for="time">Heure</label>
-                <input type="text" name="time" id="time" class="validate timepicker {{ errors.get('time') ? 'invalid' : ''}}" value="{{ post.get('time') | escape }}">
+                <input type="text" name="time" id="time" class="validate timepicker {{ errors.time ? 'invalid' : ''}}" value="{{ input.get('time') | escape }}">
                 <span class="helper-text red-txt">
-                    {{ errors.get('time') }}
+                    {{ errors.time[0] }}
                 </span>
             </div>
 
-            <div class="col l12 m12 s12">
-                <div class="input-field" style="margin-bottom: -10px;">
-                    <select name="photographer">
-                        <option disabled="disabled" selected="selected">choisissez un photographe</option>
-                        {% for p in photographers %}
-                            <option value="{{ p.id }}">{{ p.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <span class="helper-text" tyle="margin-bottom: 30px;">
+            <div class="input-field col s12">
+                <label for="photographer">photographe</label>
+                <input type="text"  name="photographer" id="photographer" class="validate {{ errors.photographer ? 'invalid' : ''}}" value="{{ value | escape }}">
+                <span class="helper-text grey-txt" style="margin-bottom: 30px;">
                     si vous ne connaissez pas des photographes, nous nous chargerons de vous trouver
                     un photographe.
                 </span>
             </div>
 
-            {{ form.textarea('description', 'Description', errors.get('description'), post.get('description')) }}
+            <div class="row">
+                {{ form.textarea('description', 'Description', errors.description, input.get('description')) }}
+            </div>
 
             <div class="submit-button">
                 <button type="submit" class="btn btn-flat waves-effect">Envoyer
@@ -78,25 +74,6 @@
             </div>
         </form>
     </section>
-    <div class="row col s12 m3 l3">
-        <article class="card post-titled grey dark-4">
-            <div class="card-image waves-effect">
-                <a href="{{ a.url }}">
-                    <img
-                        data-src="{{ cacheBusting('/imgs/outils.jpeg') }}"
-                        alt="outils"
-                        title="outils"
-                    >
-                </a>
-            </div>
-            <span class="post-description">
-                <span class="ui header">Mois de {{ current_month }}</span><br><br>
-                Nous mettons des photographes professionels à votre disposition,
-                ceux-ci sont souvant chargés, il serait préferable de faire votre réservation
-                trois ou quatre jours avant la date du shoot, pour vous rassurez d'avoir un photographe disponible <br><br>
-            </span>
-        </article>
-    </div>
 </section>
 
 {% endblock %}

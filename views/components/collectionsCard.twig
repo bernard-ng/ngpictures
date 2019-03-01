@@ -1,0 +1,19 @@
+{% for c in collections %}
+    <div class="row nexted col s12 m3 l3" id="{{ c.id }}">
+        <article class="card post-titled grey dark-4">
+            <div class="card-image waves-effect">
+                <a href="{{ path('collections.show', {id: c.id, slug: c.slug}) }}">
+                    {% for key, thumb in collectionsThumbs %}
+                        {% if c.id == key %}
+                            <img src="" data-src="{{ thumb }}" alt="{{ c.name }}" title="{{ c.name }}" class="responsive-img">
+                        {% endif %}
+                    {% endfor %}
+                </a>
+            </div>
+            <div class="post-description">
+                <span class="truncate ui header">{{ c.name }}</span>
+                {{ collectionsCount[c.id] }} photo{{ collectionsCount[c.id] > 1 ? 's' : '' }}
+            </div>
+        </article>
+    </div>
+{% endfor %}
