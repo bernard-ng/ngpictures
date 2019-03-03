@@ -5,9 +5,7 @@ use Application\Managers\PageManager;
 
 class StaticController extends Controller
 {
-    /**
-     * la page d'about
-     */
+
     public function about()
     {
         $this->turbolinksLocation("/about");
@@ -15,13 +13,6 @@ class StaticController extends Controller
         $this->view('frontend/others/about');
     }
 
-
-    /**
-     * genere une page pour dire aux user
-     * qu'il est offline.
-     *
-     * @return void
-     */
     public function offline()
     {
         $this->turbolinksLocation("/app.offline");
@@ -29,18 +20,14 @@ class StaticController extends Controller
         $this->view('frontend/others/offline');
     }
 
-
-    /**
-     * privacy terms
-     */
     public function privacy()
     {
-        $this->turbolinksLocation("/privacy");
-        $categories = $this->loadRepository('categories')->orderBy('title', 'ASC', 0, 5);
-        PageManager::setTitle("Politique d'utilisation");
+        $this->turbolinksLocation($this->url('privacy'));
+        PageManager::setTitle("Conditions Générales d'utilisation");
         PageManager::setDescription(
-            'La présente clause a pour objet de définir les différents termes essentiels du contrat'
+            "Les présentes « conditions générales d'utilisation » ont pour objet l'encadrement 
+            juridique des modalités de mise à disposition des services du site Ngpictures"
         );
-        $this->view("frontend/others/privacy", compact('categories'));
+        $this->view("frontend/others/privacy");
     }
 }

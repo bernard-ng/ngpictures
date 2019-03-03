@@ -1,63 +1,72 @@
 <?php
+/**
+ * This file is a part of Ngpictures
+ * (c) Bernard Ngandu <ngandubernard@gmail.com>
+ *
+ */
+
 namespace Application\Controllers;
 
+use Application\Repositories\BookingRepository;
+use Application\Repositories\UsersRepository;
+use Application\Repositories\Validators\BookingValidator;
+use Awurth\SlimValidation\Validator;
 use Framework\Managers\Collection;
 use Framework\Managers\Mailer\Mailer;
-use Framework\Managers\CalendarManager;
 use Application\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 
+/**
+ * Class BookingController
+ * @package Application\Controllers
+ */
 class BookingController extends Controller
 {
+    /**
+     * @var BookingRepository
+     */
+    private $booking;
+
+    /**
+     * BookingController constructor.
+     * @param ContainerInterface $container
+     */
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $this->loadRepository('booking');
+        $this->booking = $container->get(BookingRepository::class);
     }
 
 
     public function index()
     {
-        $this->calendar = $this->container->get(CalendarManager::class);
-        $calendar = $this->calendar;
-        $current_month = $this->calendar->toString();
-        $photographers = $this->loadRepository('photographers')->all();
-
         if (isset($_POST) && !empty($_POST)) {
-            $post = new Collection($_POST);
-            $errors = new Collection();
+            $input = new Collection($_POST);
+            $validator = $this->container->get(Validator::class);
+            $validator->validate($_POST, BookingValidator::getValidationRules());
 
-            $this->validator->setRule('name', 'required');
-            $this->validator->setRule('email', 'valid_email');
-            $this->validator->setRule('date', 'required');
-            $this->validator->setRule('time', 'required');
-            $this->validator->setRule('description', 'required');
+            if ($validator->isValid()) {
+                $name = $input->get('name');
+                $email = $input->get('email');
+                $booking_date = $input->get('date');
+                $booking_time = $input->get('time');
+                $description = $input->get('description');
+                $created_at = (new \DateTime('now'))->format('Y-M-d H:i:s');
 
-            if ($this->validator->isValid()) {
-                $name = $this->str->escape($post->get('name'));
-                $email = $this->str->escape($post->get('email'));
-                $date = $this->str->escape($post->get('date'));
-                $time = $this->str->escape($post->get('time'));
-                $description = $this->str->escape($post->get('description'));
-                $photographers_id = empty($post->get('photographer')) ?  1 : intval($post->get('photographer'));
-
-                $photographer = $this->loadRepository('photographers')->find($photographers_id);
-                if ($photographer) {
-                    $this->booking->create(compact('name', 'email', 'date', 'time', 'description', 'photographers_id'), false);
-                    $this->container->get(Mailer::class)->booking($photographer->id, $name, $email, $date, $time, $description);
-                    $this->flash->set('success', $this->flash->msg['form_booking_submitted'], false);
-                    $this->redirect("/");
-                } else {
-                    $this->flash->set('danger', $this->flash->msg['undefined_error']);
-                }
+                $this->booking->create(
+                    compact('name', 'email', 'created_at', 'booking_date', 'booking_time', 'description')
+                );
+                $this->flash->set('success', 'form_booking_submitted');
+                $this->redirect();
             } else {
-                $this->sendFormError('form_all_required');
+                $errors = $validator->getErrors();
+                $this->flash->set('danger', 'form_multi_errors');
             }
         }
 
-        $this->turbolinksLocation('/booking');
+        $this->turbolinksLocation($this->url('booking'));
         PageManager::setDescription("Envie de faire un shooting avec nous, pour vous ? faites vos réservations facilement");
         PageManager::setTitle('Réservation');
-        $this->view('frontend/others/booking', compact('current_month', 'post', 'errors', 'photographers'));
+        $this->view('frontend/others/booking', compact('errors', 'input'));
     }
 }

@@ -1,77 +1,91 @@
 <?php
+/**
+ * This file is a part of Ngpictures
+ * (c) Bernard Ngandu <ngandubernard@gmail.com>
+ *
+ */
+
 namespace Application\Controllers;
 
+use Application\Entities\PostsEntity;
 use Application\Managers\PageManager;
 use Application\Repositories\CategoriesRepository;
+use Application\Repositories\PostsRepository;
 use Psr\Container\ContainerInterface;
 
+/**
+ * Class CategoriesController
+ * @package Application\Controllers
+ */
 class CategoriesController extends Controller
 {
 
+    /**
+     * @var PostsController|mixed
+     */
+    private $posts;
+
+    /**
+     * @var CategoriesRepository|mixed
+     */
+    private $categories;
+
+    /**
+     * CategoriesController constructor.
+     * @param ContainerInterface $container
+     */
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $this->blog         = $this->loadRepository('blog');
-        $this->posts        = $this->loadRepository('posts');
-        $this->gallery      = $this->loadRepository('gallery');
-        $this->categories   = $this->loadRepository('categories');
+        $this->posts = $container->get(PostsRepository::class);
+        $this->categories = $container->get(CategoriesRepository::class);
     }
 
 
-    /**
-     * liste des differentes categories
-     */
     public function index()
     {
-        $nb         = [];
-        $thumbs     = [];
-        $categories = $this->container->get(CategoriesRepository::class)->orderBy('id', 'DESC', 0, 4);
+        $categories = $this->categories->get(8);
 
         foreach ($categories as $category) {
-            $thumbs[$category->id] =
-                $this->blog->findWith('categories_id', $category->id, true)->smallThumbUrl ??
-                $this->gallery->findWith('categories_id', $category->id, true)->smallThumbUrl ??
-                $this->posts->findWith('categories_id', $category->id, true)->smallThumbUrl ??
-                '/imgs/default.jpeg';
+            /** @var PostsEntity $thumb */
+            $thumb = $this->posts->findWith('categories_id', $category->id)[0];
+            $categoriesThumbs[$category->id] =
+                (is_null($thumb)) ? "/imgs/default.jpeg" : $thumb->getSmallThumb();
         }
 
         foreach ($categories as $category) {
-            $nb[$category->id] =
-                count($this->blog->findWith('categories_id', $category->id, false)) +
-                count($this->gallery->findWith('categories_id', $category->id, false)) +
-                count($this->posts->findWith('categories_id', $category->id, false));
-            ;
+            $categoriesCount[$category->id] = $this->posts->countWith('categories_id', $category->id);
         }
 
-        $this->turbolinksLocation('/categories');
+        $this->turbolinksLocation($this->url('categories'));
         PageManager::setTitle('Les catégories');
         PageManager::setDescription(
             "Rétrouvez facilement une photo en cliquant sur une catégorie"
         );
-        $this->view("frontend/categories/index", compact('categories', 'thumbs', 'nb'));
+        $this->view("frontend/categories/index", compact('categories', 'categoriesCount', 'categoriesThumbs'));
     }
 
-
     /**
-     * affiche toutes les informations concernant une categorie
-     * @param string $name
+     * @param string $slug
      * @param int $id
      */
-    public function show(string $name, int $id)
+    public function show(string $slug, int $id)
     {
         $category = $this->categories->find(intval($id));
 
-        if ($category && $this->str->checkUserUrl($name, $category->title)) {
-            $blog       = $this->blog->findWith('categories_id', $category->id, false);
-            $posts      = $this->posts->findWith('categories_id', $category->id, false);
-            $gallery    = $this->gallery->findWith('categories_id', $category->id, false);
+        if ($category) {
 
-            $this->turbolinksLocation("/categories/{$name}-{$id}");
-            PageManager::setTitle("{$category->title}");
-            $this->view('frontend/categories/show', compact('category', 'blog', 'posts', 'gallery'));
+            /** @var PostsEntity[] $posts */
+            $posts = $this->posts->findWith('categories_id', $category->id);
+
+            $this->turbolinksLocation($this->url('categories.show', compact('id', 'slug')));
+            PageManager::setTitle($category->name);
+            PageManager::setDescription($category->description);
+            PageManager::setImage($posts[0]->getSmallThumb());
+            $this->view('frontend/categories/show', compact('category', 'posts'));
         } else {
-            $this->flash->set('danger', $this->flash->msg['category_not_found']);
-            $this->redirect('/categories');
+            $this->flash->set('danger', 'category_not_found');
+            $this->redirect($this->url('categories'));
         }
     }
 }

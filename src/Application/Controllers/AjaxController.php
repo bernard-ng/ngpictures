@@ -1,204 +1,142 @@
 <?php
+/**
+ * This file is a part of Ngpictures
+ * (c) Bernard Ngandu <ngandubernard@gmail.com>
+ *
+ */
+
 namespace Application\Controllers;
 
-use Framework\Managers\Collection;
+use Application\Entities\PostsEntity;
+use Application\Repositories\CategoriesRepository;
+use Application\Repositories\CollectionsRepository;
+use Application\Repositories\PostsRepository;
+use Application\Repositories\UsersRepository;
 
+/**
+ * Class AjaxController
+ * @package Application\Controllers
+ */
 class AjaxController extends Controller
 {
     public function users_posts()
     {
-        if ($this->isAjax()) {
+        if ($this->request->ajax()) {
             $ids = explode("@", $_GET['lastId']);
             $lastId = intval($ids[1]) ?? 0;
 
 
-            $user = $this->loadRepository('users')->find(intval($ids[0]) ?? 0);
+            $user = $this->container->get(UsersRepository::class)->find(intval($ids[0]) ?? 0);
             if ($user) {
-                $posts = $this->loadRepository('posts')->userFindLess($user->id, $lastId);
+                $posts = $this->container->get(PostsRepository::class)->userFindLess($user->id, $lastId);
                 if ($posts) {
-                    echo $this->view('/ajax/users/posts', compact("posts"), true);
+                    echo $this->view('/components/users/posts', compact("posts"));
                     exit();
                 } else {
-                    $this->flash->set('danger', $this->flash->msg['nothing_to_load']);
+                    $this->flash->set('danger', 'nothing_to_load');
                 }
             } else {
-                $this->flash->set('danger', $this->flash->msg['undefined_error']);
+                $this->flash->set('danger', 'undefined_error');
             }
         } else {
-            $this->flash->set("warning", $this->flash->msg['undefined_error']);
+            $this->flash->set("warning", 'undefined_error');
             $this->redirect(true);
         }
     }
 
     public function community()
     {
-        if ($this->isAjax()) {
+        if ($this->request->ajax()) {
             $lastId = intval($_GET['lastId']) ?? 0;
-            $users = $this->loadRepository('users')->findLess($lastId);
+            $users = $this->container->get(UsersRepository::class)->findLess($lastId);
             if ($users) {
-                echo $this->view('/ajax/users/community', compact("users"), true);
+                echo $this->view('/components/users/community', compact("users"));
                 exit();
             } else {
-                $this->flash->set('danger', $this->flash->msg['nothing_to_load']);
+                $this->flash->set('danger', 'nothing_to_load', true);
             }
         } else {
-            $this->flash->set("warning", $this->flash->msg['undefined_error']);
+            $this->flash->set("warning", 'undefined_error');
             $this->redirect(true);
         }
     }
-
-
-    public function photographers()
-    {
-        if ($this->isAjax()) {
-            $lastId = intval($_GET['lastId']) ?? 0;
-            $this->loadRepository(['users', 'photographers']);
-
-            $photographers = $this->photographers->findLess($lastId);
-            $photographers = (new Collection($photographers))->asList(', ', "users_id");
-            $users = $this->users->findList($photographers);
-
-            if ($users) {
-                echo $this->view('/ajax/users/community', compact("users"), true);
-                exit();
-            } else {
-                $this->flash->set('danger', $this->flash->msg['nothing_to_load']);
-            }
-        } else {
-            $this->flash->set("warning", $this->flash->msg['undefined_error']);
-            $this->redirect(true);
-        }
-    }
-
 
     public function posts()
     {
-        if ($this->isAjax()) {
+        if ($this->request->ajax()) {
             $lastId = intval($_GET['lastId']) ?? 0;
-            $posts = $this->loadRepository('posts')->findLess($lastId);
+            $posts = $this->container->get(PostsRepository::class)->findLess($lastId);
+
             if ($posts) {
-                echo $this->view('/ajax/posts/cards', compact("posts"), true);
+                echo $this->view('/components/imageCard', compact("posts"));
                 exit();
             } else {
-                $this->flash->set('danger', $this->flash->msg['nothing_to_load']);
+                $this->flash->set('danger', 'nothing_to_load', true);
             }
         } else {
-            $this->flash->set("warning", $this->flash->msg['undefined_error']);
+            $this->flash->set("warning", 'undefined_error');
             $this->redirect(true);
         }
     }
-
 
     public function categories()
     {
-        if ($this->isAjax()) {
+        if ($this->request->ajax()) {
             $lastId = intval($_GET['lastId']) ?? 0;
-            $categories = $this->loadRepository('categories')->findLess($lastId);
+            $categories = $this->container->get(CategoriesRepository::class)->findLess($lastId);
 
             if ($categories) {
-                $nb = [];
-                $thumbs = [];
-                $this->loadRepository(['blog', 'gallery', 'posts']);
+                $posts = $this->container->get(PostsRepository::class);
 
                 foreach ($categories as $category) {
-                    $thumbs[$category->id] =
-                        $this->blog->findWith('categories_id', $category->id, true)->smallThumbUrl ??
-                        $this->gallery->findWith('categories_id', $category->id, true)->smallThumbUrl ??
-                        $this->posts->findWith('categories_id', $category->id, true)->smallThumbUrl ??
-                        '/imgs/default.jpeg';
+                    /** @var PostsEntity $thumb */
+                    $thumb = $posts->findWith('categories_id', $category->id)[0];
+                    $categoriesThumbs[$category->id] =
+                        (is_null($thumb)) ? "/imgs/default.jpeg" : $thumb->getSmallThumb();
                 }
 
                 foreach ($categories as $category) {
-                    $nb[$category->id] =
-                        count($this->blog->findWith('categories_id', $category->id, false)) +
-                        count($this->gallery->findWith('categories_id', $category->id, false)) +
-                        count($this->posts->findWith('categories_id', $category->id, false));
-                    ;
-                }
-                echo $this->view('/ajax/blog/categories_cards', compact("categories", "nb", "thumbs"), true);
-                exit();
-            } else {
-                $this->flash->set('danger', $this->flash->msg['nothing_to_load']);
-            }
-        } else {
-            $this->flash->set("warning", $this->flash->msg['undefined_error']);
-            $this->redirect(true);
-        }
-    }
-
-
-    public function albums()
-    {
-        if ($this->isAjax()) {
-            $lastId = intval($_GET['lastId']) ?? 0;
-            $albums = $this->loadRepository('albums')->findLess($lastId);
-            if ($albums) {
-                $this->loadRepository('gallery');
-                $thumbs = [];
-                $nb = [];
-
-                foreach ($albums as $album) {
-                    $thumbs[$album->id] =
-                        $this->gallery->findWith('albums_id', $album->id, true)->smallThumbUrl ??
-                        '/imgs/default.jpeg';
+                    $categoriesCount[$category->id] = $posts->countWith('categories_id', $category->id);
                 }
 
-                foreach ($albums as $album) {
-                    $nb[$album->id] =
-                        count($this->gallery->findWith('albums_id', $album->id, false));
+                echo $this->view('/components/categoriesCard', compact("categories", "categoriesCount", "categoriesThumbs"));
+                exit();
+            } else {
+                $this->flash->set('danger', 'nothing_to_load', true);
+            }
+        } else {
+            $this->flash->set("warning", 'undefined_error');
+            $this->redirect();
+        }
+    }
+
+    public function collections()
+    {
+        if ($this->request->ajax()) {
+            $lastId = intval($_GET['lastId']) ?? 0;
+            $posts = $this->container->get(PostsRepository::class);
+            $collections = $this->container->get(CollectionsRepository::class)->findLess($lastId);
+
+            if ($collections) {
+                foreach ($collections as $c) {
+                    /** @var PostsEntity $thumb */
+                    $thumb = $posts->findWith('collections_id', $c->id)[0];
+                    $collectionsThumbs[$c->id] =
+                        (is_null($thumb)) ? "/imgs/default.jpeg" : $thumb->getSmallThumb();
                 }
 
-                echo $this->view('/ajax/gallery/albums_cards', compact("albums", "thumbs", "nb"), true);
+                foreach ($collections as $c) {
+                    $collectionsCount[$c->id] = $posts->countWith('collections_id', $c->id);
+                }
+
+                echo $this->view('/components/collectionsCard', compact("collections", "collectionsThumbs", "collectionsCount"));
                 exit();
             } else {
-                $this->flash->set('danger', $this->flash->msg['nothing_to_load']);
+                $this->flash->set('danger', 'nothing_to_load', true);
             }
         } else {
-            $this->flash->set("warning", $this->flash->msg['undefined_error']);
-            $this->redirect(true);
+            $this->flash->set("warning", 'undefined_error');
+            $this->redirect();
         }
-    }
-
-
-    public function gallery()
-    {
-        if ($this->isAjax()) {
-            $lastId = intval($_GET['lastId']) ?? 0;
-            $photos = $this->loadRepository('gallery')->findLess($lastId);
-            if ($photos) {
-                echo $this->view('/ajax/gallery/cards', compact("photos"), true);
-                exit();
-            } else {
-                $this->flash->set('danger', $this->flash->msg['nothing_to_load']);
-            }
-        } else {
-            $this->flash->set("warning", $this->flash->msg['undefined_error']);
-            $this->redirect(true);
-        }
-    }
-
-
-    public function blog()
-    {
-        if ($this->isAjax()) {
-            $lastId = intval($_GET['lastId']) ?? 0;
-            $posts = $this->loadRepository('blog')->findLess($lastId);
-            if ($posts) {
-                echo $this->view('/ajax/blog/cards', compact("posts"), true);
-                exit();
-            } else {
-                $this->flash->set('danger', $this->flash->msg['nothing_to_load']);
-            }
-        } else {
-            $this->flash->set("warning", $this->flash->msg['undefined_error']);
-            $this->redirect(true);
-        }
-    }
-
-
-    public function verset()
-    {
-        $verse = $this->callController('verses')->index();
-        require(APP . "/Views/ajax/verset.php");
     }
 }

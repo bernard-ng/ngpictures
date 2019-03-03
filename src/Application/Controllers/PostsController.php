@@ -17,18 +17,15 @@ use Psr\Container\ContainerInterface;
  */
 class PostsController extends Controller
 {
-
-    public $table = "posts";
-
     /**
      * @var mixed|CategoriesRepository
      */
-    protected $categories;
+    private $categories;
 
     /**
      * @var mixed|PostsRepository
      */
-    protected $posts;
+    private $posts;
 
     /**
      * PostsController constructor.
@@ -38,61 +35,78 @@ class PostsController extends Controller
     {
         parent::__construct($container);
         $this->posts = $container->get(PostsRepository::class);
-        $this->categories = $container->get(CategoriesRepository::class);
-    }
-
-    public function show(string $slug, $id)
-    {
-        if (!empty($slug) && !empty($id)) {
-            $id = intval($id);
-            $user = $this->container->get(UsersRepository::class);
-            $article = $this->posts->find($id);
-
-            $comments = $this->container->get(CommentsRepository::class);
-            $commentsNumber = $comments->count($id, "posts_id")->num;
-            $comments = $comments->get($id, "posts_id", 0, 4);
-            $categories = $this->categories->orderBy('title', 'ASC', 0, 5);
-
-            if ($article && $article->slug === $slug) {
-                if ($article->online == 1) {
-                    $similars = $this->loadRepository($this->table)->findSimilars($article->id);
-                    $author = $this->loadRepository('users')->find($article->users_id);
-                    $altName = "ngpictures-photo ($article->id) ";
-
-                    $this->turbolinksLocation("/posts/{$slug}-{$id}");
-                    PageManager::setTitle($article->title ?? $altName);
-                    PageManager::setDescription($article->snipet);
-                    PageManager::setImage($article->smallThumbUrl);
-
-                    $this->view(
-                        "frontend/posts/show",
-                        compact("article", "comments", "commentsNumber", "user", "categories", "author", "similars")
-                    );
-                } else {
-                    $this->flash->set("warning", $this->flash->msg['post_private'], false);
-                    $this->redirect(true, false);
-                }
-            } else {
-                $this->flash->set("danger", $this->flash->msg['post_not_found'], false);
-                http_response_code(404);
-                $this->redirect(true);
-            }
-        } else {
-            $this->flash->set("danger", $this->flash->msg['undefined_error'], false);
-            $this->index();
-        }
     }
 
     public function index()
     {
-        $posts = $this->posts->latest(0, 8);
-        $this->turbolinksLocation("/posts");
-        PageManager::setTitle("Fil d'actualité");
+        $posts = $this->posts->latest(8);
+        $this->turbolinksLocation($this->url('posts'));
+        PageManager::setTitle("Galerie");
         PageManager::setDescription("
-            Découvez les photos et les articles des passionnés de la photographie, partager vos photos avec la
+            Découvez les photos des passionnés de la photographie, partager vos photos avec la
             communauté.
         ");
         $this->view("frontend/posts/index", compact("posts"));
+    }
+
+    public function slider()
+    {
+        if (isset($_GET['last']) && !empty($_GET['last'])) {
+            $lastId = intval($_GET['last']);
+
+            if ($this->posts->find(intval($lastId))) {
+                $posts = $this->posts->findLess($lastId, 8);
+                $last = $posts == null ? 1 : end($posts)->id;
+
+                PageManager::setTitle('Diaporama');
+                PageManager::setDescription("Voir les photos de la galerie, en diaporama");
+                $this->view('frontend/posts/slider', compact('posts', 'last'));
+            } else {
+                $this->flash->set('danger', $this->flash->msg['undefined_error']);
+                $this->redirect($this->url("posts"));
+            }
+        } else {
+            $posts = $this->posts->latest();
+            $last =  $posts == null ? 1 : end($posts)->id;
+            PageManager::setTitle('Diaporama');
+            PageManager::setDescription("Voir les photos de la galerie, en diaporama");
+            $this->view('frontend/posts/slider', compact('posts', 'last'));
+        }
+    }
+
+    /**
+     * @param string $slug
+     * @param $id
+     */
+    public function show(string $slug, $id)
+    {
+        $id = intval($id);
+        $post = $this->posts->find($id);
+        if ($post && $post->slug == $slug) {
+            if ($post->online == 1) {
+
+                $comments = $this->container->get(CommentsRepository::class);
+                $commentsCount = $comments->count($id);
+                $comments = $comments->get($id);
+                $similar = $this->container->get(PostsRepository::class)->findWithSameCategory($post->categoriesId, $post->id);
+                $author = $this->container->get(UsersRepository::class)->find($post->usersId);
+
+                $this->turbolinksLocation($this->url("posts.show", compact('id', 'slug')));
+                PageManager::setTitle($post->name . " Photo #{$post->id}");
+                PageManager::setDescription($post->description);
+                PageManager::setImage($post->getSmallThumb());
+
+                $this->view(
+                    "frontend/posts/show",
+                    compact("post", "comments", "commentsCount", "user", "author", "similar")
+                );
+            } else {
+                $this->flash->set("warning", 'post_private', false);
+                $this->redirect();
+            }
+        } else {
+            $this->notFound();
+        }
     }
 
     /**

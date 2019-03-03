@@ -1,22 +1,28 @@
 <?php
 namespace Application\Controllers;
 
-use Framework\Managers\Collection;
+use Application\Entities\UsersEntity;
 use Application\Managers\PageManager;
-use Psr\Container\ContainerInterface;
-use Application\Traits\Util\TypesActionTrait;
+use Application\Repositories\CommentsRepository;
 use Application\Services\Notification\NotificationService;
+use Awurth\SlimValidation\Validator;
+use Framework\Managers\Collection;
+use Psr\Container\ContainerInterface;
 
 class CommentsController extends Controller
 {
-
-    use TypesActionTrait;
+    /**
+     * @var UsersEntity
+     */
     private $user;
 
     /**
+     * @var CommentsRepository|mixed
+     */
+    private $comments;
+
+    /**
      * CommentsController constructor.
-     * oblige un user a se connecter avant de faire une action
-     * si il est connecter alors on set son id dans l'instance;
      * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
@@ -24,50 +30,41 @@ class CommentsController extends Controller
         parent::__construct($container);
         $this->authService->restrict();
         $this->user = $this->authService->isLogged();
-        $this->loadRepository('comments');
+        $this->comments = $container->get(CommentsRepository::class);
     }
 
-
     /**
-     * permet d'ajouter un commentaire
-     * @param $type
-     * @param $slug
      * @param $id
      */
-    public function index($type, $slug, $id)
+    public function index($id)
     {
-        $post           =   new Collection($_POST);
-        $comments       =   $this->loadRepository('comments');
-        $publication    =   $this->loadRepository($this->getAction($type))->find(intval($id));
-        $notifier       =   $this->container->get(NotificationService::class);
+        $id = intval($id);
+        $validator = $this->container->get(Validator::class);
+        $input = new Collection($_POST);
+        $post = $this->container->get(PostsController::class)->find($id);
+        $notifier = $this->container->get(NotificationService::class);
 
-        if ($publication && $publication->slug === $slug) {
-            $this->validator->setRule('comment', 'required');
+        if ($post) {
+            $validator->setRule('comment', 'required');
 
-            if ($this->validator->isValid()) {
-                $comment = $this->str->escape($post->get('comment'));
-                $comments->create(
-                    [
-                        'users_id' => $this->user->id,
-                        $this->getType($type) => $publication->id,
-                        'comment' => $comment
-                    ]
-                );
-                $notifier->notify(3, [$publication, $this->user->id, $comment]);
+            if ($validator->isValid()) {
+                $comment = $input->get('comment');
+                $this->comments->create(['users_id' => $this->user->id, 'posts_id'=> $post->id, 'comment' => $comment]);
+                $notifier->notify(3, [$post, $this->user->id, $comment]);
 
-                if ($this->isAjax()) {
-                    echo $this->loadRepository($this->getAction($type))->find(intval($id))->getCommentsNumber();
+                if ($this->request->ajax()) {
+                    echo $this->comments->count($id);
                     exit();
                 } else {
-                    $this->flash->set('success', $this->flash->msg['form_comment_submitted'], false);
+                    $this->flash->set('success', 'form_comment_submitted', false);
                     $this->redirect(true, false);
                 }
             } else {
-                $this->flash->set('danger', $this->flash->msg['form_all_required']);
+                $this->flash->set('danger', 'form_all_required');
                 $this->redirect(true, false);
             }
         } else {
-            $this->flash->set('warning', $this->flash->msg['comment_not_found']);
+            $this->flash->set('warning', 'comment_not_found');
             $this->redirect(true, false);
         }
     }
@@ -82,7 +79,7 @@ class CommentsController extends Controller
      */
     public function delete($id, $token)
     {
-        $comment    =   $this->comments->find(intval($id));
+        $comment = $this->comments->find(intval($id));
 
         if ($token == $this->authService->getToken()) {
             if ($comment) {
@@ -113,8 +110,8 @@ class CommentsController extends Controller
     public function edit($id, $token)
     {
         if ($token == $this->session->read(TOKEN_KEY)) {
-            $comment    =   $this->comments->find(intval($id));
-            $post       =   new Collection($_POST);
+            $comment = $this->comments->find(intval($id));
+            $post = new Collection($_POST);
 
             if ($comment) {
                 if ($comment->users_id == $this->user->id) {
@@ -144,17 +141,17 @@ class CommentsController extends Controller
 
     public function show($type, $slug, $id)
     {
-        $type   = intval($type);
-        $id     = intval($id);
-        $user   = $this->loadRepository("users");
-        $publication    = $this->loadRepository($this->getAction($type))->find($id);
+        $type = intval($type);
+        $id = intval($id);
+        $user = $this->loadRepository("users");
+        $post = $this->loadRepository($this->getAction($type))->find($id);
 
-        if ($publication) {
-            $comments       = $this->loadRepository('comments')->findWith($this->getAction($type) . "_id", $id, false);
+        if ($post) {
+            $comments = $this->loadRepository('comments')->findWith($this->getAction($type) . "_id", $id, false);
             $commentsNumber = $this->loadRepository("comments")->count($id, $this->getAction($type) . "_id")->num;
 
             PageManager::setTitle("Commentaires");
-            PageManager::setDescription("Tous les commentaires, poster pour la publication : " . $publication->title);
+            PageManager::setDescription("Tous les commentaires, poster pour la publication : " . $post->title);
             $this->turbolinksLocation("/comments/{$type}/{$slug}-{$id}");
             $this->view("frontend/posts/comments", compact("publication", "comments", "commentsNumber", "user"));
         } else {

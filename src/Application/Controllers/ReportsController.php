@@ -1,20 +1,28 @@
 <?php
+/**
+ * This file is a part of Ngpictures
+ * (c) Bernard Ngandu <ngandubernard@gmail.com>
+ *
+ */
+
 namespace Application\Controllers;
 
+use Application\Repositories\PostsRepository;
 use Framework\Managers\Collection;
 use Application\Managers\PageManager;
-use Application\Traits\Util\TypesActionTrait;
 
+/**
+ * Class ReportsController
+ * @package Application\Controllers
+ */
 class ReportsController extends Controller
 {
 
-    use TypesActionTrait;
 
-    public function index($type, $slug, $id)
+    public function index($id)
     {
         $id = intval($id);
-        $type = intval($type);
-        $model = $this->loadRepository($this->getAction(intval($type)));
+        $model = $this->container->get(PostsRepository::class);
         $post = $model->find(intval($id));
 
         if ($post) {
@@ -27,7 +35,7 @@ class ReportsController extends Controller
 
                     $this->loadRepository('reports')->create(compact('content', 'type', 'publication_id'));
                     $this->flash->set('success', $this->flash->msg['form_report_submitted'], false);
-                    $this->redirect("/" . $this->getAction($type));
+                    $this->redirect();
                 } else {
                     $this->sendFormError();
                 }
@@ -35,7 +43,7 @@ class ReportsController extends Controller
 
             PageManager::setTitle('Signaler une publication');
             PageManager::setDescription("Veuillez nous dire ce qui ne va pas avec cette publication");
-            $this->turbolinksLocation("/report/{$type}/{$slug}-{$id}");
+            $this->turbolinksLocation("/report/{$id}");
             $this->view('frontend/others/report', compact('post'));
         } else {
             $this->flash->set('danger', $this->flash->msg['post_not_found'], false);

@@ -1,62 +1,42 @@
 <?php
+/**
+ * This file is a part of Ngpictures
+ * (c) Bernard Ngandu <ngandubernard@gmail.com>
+ *
+ */
+
 namespace Application\Controllers;
 
 use Application\Managers\MessageManager;
-use Application\Repositories\NotificationsRepository;
-use Application\Traits\Util\RequestTrait;
-use Framework\Managers\StringManager;
 use Application\Managers\PageManager;
-use Psr\Container\ContainerInterface;
-use Framework\Managers\ValidationManager;
+use Application\Services\Auth\DatabaseAuthService;
+use Framework\Controllers\Controller as FrameworkController;
 use Framework\Interfaces\SessionInterface;
 use Framework\Managers\FlashMessageManager;
-use Application\Services\Auth\DatabaseAuthService;
-use Framework\Controllers\Controller as SuperController;
+use Psr\Container\ContainerInterface;
+
 
 /**
  * Class Controller
  * @package Application\Controllers
  */
-class Controller extends SuperController
+class Controller extends FrameworkController
 {
 
-    use RequestTrait;
-
     /**
-     * @var MessageManager
-     */
-    protected $msg;
-
-    /**
-     * @var mixed|FlashMessageManager
-     */
-    protected $flash;
-
-    /**
-     * @var mixed|SessionInterface
+     * @var SessionInterface|mixed
      */
     protected $session;
 
     /**
-     * @var PageManager
+     * @var FlashMessageManager
      */
-    protected $pageManager;
+    protected $flash;
 
     /**
-     * @var mixed|DatabaseAuthService
+     * @var DatabaseAuthService|mixed
      */
     protected $authService;
-
-    /**
-     * @var mixed|ValidationManager
-     */
-    protected $validator;
-
-    /**
-     * @var mixed|StringManager
-     */
-    protected $str;
-
 
     /**
      * Controller constructor.
@@ -65,44 +45,40 @@ class Controller extends SuperController
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $this->str              =   $this->container->get(StringManager::class);
-        $this->flash            =   $this->container->get(FlashMessageManager::class);
-        $this->session          =   $this->container->get(SessionInterface::class);
-        $this->validator        =   $this->container->get(ValidationManager::class);
-        $this->authService      =   $this->container->get(DatabaseAuthService::class);
+        $this->session = $container->get(SessionInterface::class);
+        $this->flash = new FlashMessageManager($this->session, new MessageManager());
+        $this->authService = $container->get(DatabaseAuthService::class);
 
-        /*if (!$this->authService->isLogged()) {
+        if (!$this->authService->isLogged()) {
              $this->authService->cookieConnect();
-        }*/
+        }
     }
 
-
     /**
-     * permet de rendre une vue
-     *
      * @param string $view
      * @param array $variables
-     * @param boolean $layout
-     * @return void
+     * @return mixed|void
      */
-    public function view(string $view, array $variables = [], bool $layout = true)
+    public function view(string $view, array $variables = [])
     {
-        $this->renderer->addGlobal('pageManager', new PageManager());
-        $this->renderer->addGlobal('sessionManager', $this->session);
-        $this->renderer->addGlobal('flashMessageManager', $this->flash);
+        $this->renderer->addGlobal('page', new PageManager());
+        $this->renderer->addGlobal('flash', $this->flash);
 
         if ($this->authService->isLogged()) {
-            $this->renderer->addGlobal('activeUser', $this->session->read(AUTH_KEY));
-            $this->renderer->addGlobal('securityToken', $this->session->read(TOKEN_KEY));
-            $this->renderer->addGlobal('notificationsCount', 10);
+            $this->renderer->addGlobal('currentUser', $this->session->read(AUTH_KEY));
+            $this->renderer->addGlobal('token', $this->session->read(TOKEN_KEY));
 
-            PageManager::setMeta(['active-user' => $this->session->getValue(AUTH_KEY, 'id')]);
-            PageManager::setMeta(['active-token' => $this->session->read(TOKEN_KEY)]);
-        } else {
-            $this->renderer->addGlobal('activeUser', false);
-            $this->renderer->addGlobal('securityToken', false);
+            PageManager::setMeta(['current-user' => $this->session->getValue(AUTH_KEY, 'id')]);
+            PageManager::setMeta(['csrf-token' => $this->session->read(TOKEN_KEY)]);
         }
 
         parent::view($view, $variables);
+    }
+
+
+    protected function notFound()
+    {
+        $error = $this->container->get(ErrorController::class);
+        return $error->e404();
     }
 }

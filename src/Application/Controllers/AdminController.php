@@ -1,49 +1,23 @@
 <?php
+/**
+ * This file is a part of Ngpictures
+ * (c) Bernard Ngandu <ngandubernard@gmail.com>
+ *
+ */
+
 namespace Application\Controllers;
 
 use Framework\Managers\Collection;
 use Application\Managers\PageManager;
 use Psr\Container\ContainerInterface;
 
+/**
+ * Class AdminController
+ * @package Application\Controllers
+ */
 class AdminController extends Controller
 {
     /**
-     * les differentes tables gerer par l'admin
-     * @var array
-     */
-    private $types = [
-        1 => 'posts',
-        'gallery',
-        'blog',
-        'gallery',
-        'users',
-        'ideas',
-        'bugs',
-        'verses',
-        'categories',
-        'albums',
-        'reports',
-        'photographers',
-        'locations'
-    ];
-
-
-    /**
-     * recupere la tables apartir de son index
-     * @param int $id
-     * @return null
-     */
-    private function getType(int $id)
-    {
-        $type = new Collection($this->types);
-        return $type->get($id);
-    }
-
-
-    /**
-     * verifie si le user est connecter
-     * n'index pas la page au resultat de recherche
-     * et charge tout les models dont a besion
      * AdminController constructor.
      * @param ContainerInterface $container
      */
@@ -53,23 +27,6 @@ class AdminController extends Controller
         $this->authService->isAdmin();
 
         PageManager::setMeta(['name' => 'robots', 'content' => 'noindex']);
-        $this->loadRepository(
-            [
-                'users',
-                'posts',
-                'blog',
-                'gallery',
-                'ideas',
-                'bugs',
-                'categories',
-                'verses',
-                'albums',
-                'online',
-                'reports',
-                "photographers",
-                "locations"
-            ]
-        );
     }
 
 
@@ -116,11 +73,9 @@ class AdminController extends Controller
         );
     }
 
-
     /**
-     * permet de supprime un post dans la base de donnée
      * @param array|null $data
-     * @param string $msg
+     * @param string|null $msg
      */
     public function delete(array $data = null, string $msg = null)
     {
