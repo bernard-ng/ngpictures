@@ -8,17 +8,6 @@ namespace Framework\Interfaces;
 interface SessionInterface
 {
     /**
-     * @return self
-     */
-    public static function getInstance();
-
-
-    /**
-     * SessionInterface constructor.
-     */
-    public function __construct();
-
-    /**
      * @param string $key
      * @param string $value
      * @return mixed

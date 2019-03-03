@@ -5,12 +5,8 @@ use Framework\Managers\Collection;
 
 trait ValidationErrorTrait
 {
-    /**
-     * envoyer les erreurs a une vue
-     * @param string|null $msg
-     * @return void
-     */
-    public function sendFormError($msg = null)
+
+    public function sendFormError()
     {
         $errors = new Collection($this->validator->getErrors());
         $this->isAjax() ?

@@ -1,28 +1,27 @@
 <?php
+/**
+ * This file is a part of Ngpictures
+ * (c) Bernard Ngandu <ngandubernard@gmail.com>
+ *
+ */
+
 namespace Application;
 
-use Framework\Exception\RouterException;
-use Framework\Http\RequestAwareAction;
-use Framework\Router\Route;
+use Application\Controllers\ErrorController;
 use Framework\Router\Router;
 use Psr\Container\ContainerInterface;
-use Application\Traits\Util\RequestTrait;
-use Framework\Managers\LogMessageManager;
-use Framework\Managers\FlashMessageManager;
+
 
 /**
- * Class Ngpictures
- * @package Ngpictures
+ * Class Application
+ * @package Application
  */
 class Application
 {
-
-    use RequestAwareAction;
-
     /**
      * @var ContainerInterface
      */
-    public $container;
+    private $container;
 
     /**
      * Application constructor.
@@ -31,47 +30,31 @@ class Application
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        if (ENV === 'production') {
-            set_exception_handler([$this, "exceptionHandler"]);
-            set_error_handler([$this, "errorHandler"]);
-        }
     }
 
-
     /**
-     * initialisation router et application
-     * registration des routes dans la RoutesConfig.php
+     * run the application
+     * @return mixed
      */
     public function run()
     {
-        try {
-            $router = $this->container->get(Router::class);
-            require(ROOT . "/config/routes/frontend.php");
-            require(ROOT . "/config/routes/backend.php");
+        $router = $this->container->get(Router::class);
+        (require ROOT."/config/routes/frontend.php")($router);
+        (require ROOT."/config/routes/backend.php")($router);
 
-            /** @var Route $route */
-            $route = $router->run();
-            if ($route) {
-                if (is_array($route->getController())) {
-                    $action = $route->getController()[0];
-                    $method = $route->getController()[1] ?? 'index';
-                    $controller = $this->container->get($action);
-                    return call_user_func_array([$controller, $method], $route->getMatches());
-                }
-                return call_user_func_array($route->getController(), $route->getMatches());
-            } else {
-                header('location:/error/not-found', true, 404);
-                exit();
-            }
-        } catch (RouterException $e) {
-            LogMessageManager::register(__class__, $e);
-            $this->redirect("/error/internal");
+        $route = $router->run();
+        if (!is_null($route)) {
+            $controller = $this->container->get($route->getController()[0]);
+            $method = $route->getController()[1] ?? 'index';
+            return call_user_func_array([$controller, $method], $route->getMatches());
+        } else {
+            $error = $this->container->get(ErrorController::class);
+            return $error->e404();
         }
     }
 
 
     /**
-     * gestion d'exception
      * @param $e
      */
     public function exceptionHandler($e)
