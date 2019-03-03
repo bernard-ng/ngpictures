@@ -91,7 +91,7 @@ return function (Framework\Router\Router $router) {
     ajax_routes : {
         $router->get("/api/posts", [AjaxController::class, 'posts'], "api.posts");
         $router->get("/api/gallery", [AjaxController::class, 'gallery'], "api.gallery");
-        $router->get("/api/collections", [AjaxController::class, 'albums'], "api.collections");
+        $router->get("/api/collections", [AjaxController::class, 'collections'], "api.collections");
         $router->get("/api/categories", [AjaxController::class, 'categories'], "api.categories");
         $router->get("/api/community", [AjaxController::class, 'community'], "api.community");
         $router->get("/api/users/posts", [AjaxController::class, 'users_posts'], "api.users.posts");
