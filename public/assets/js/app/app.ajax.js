@@ -20,7 +20,7 @@ function addLoaderToBtns() {
 
 function formFeedComments(element) {
     let postContainer = document.querySelector(element);
-    let activeUser = document.querySelector("meta[active-user]");
+    let activeUser = document.querySelector("meta[current-user]");
     if (postContainer) {
         try {
             let posts = postContainer.getElementsByTagName("article");
@@ -105,7 +105,7 @@ function formFeedComments(element) {
 
 function likes(element) {
     let postContainer = document.querySelector(element);
-    let activeUser = document.querySelector("meta[active-user]");
+    let activeUser = document.querySelector("meta[current-user]");
     if (postContainer) {
         let posts = postContainer.getElementsByTagName("article");
         for (let i = 0; i < posts.length; i++) {
@@ -299,7 +299,7 @@ function formGenericSubmit(element) {
 
 function savePost(element) {
     let saveBtn = document.querySelectorAll(element);
-    let activeUser = document.querySelector("meta[active-user]");
+    let activeUser = document.querySelector("meta[current-user]");
     if (typeof saveBtn !== 'undefined') {
         [].slice.call(saveBtn).forEach((saveBtn) => {
             if (!saveBtn.hasAttribute('data-collection-initialized', 'true')) {
@@ -360,7 +360,7 @@ function savePost(element) {
 
 function follow(element) {
     let followBtns = document.querySelectorAll(element);
-    let activeUser = document.querySelector("meta[active-user]");
+    let activeUser = document.querySelector("meta[current-user]");
     if (typeof followBtns !== 'undefined') {
         [].slice.call(followBtns).forEach(function (followBtn) {
             if (!followBtn.hasAttribute('data-following-initialized', 'true')) {
