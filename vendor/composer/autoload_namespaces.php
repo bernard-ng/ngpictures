@@ -11,4 +11,5 @@ return array(
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Suin\\RSSWriter' => array($vendorDir . '/suin/php-rss-writer/src'),
     'JShrink' => array($vendorDir . '/tedivm/jshrink/src'),
+    'Imgix\\' => array($vendorDir . '/imgix/imgix-php/src'),
 );

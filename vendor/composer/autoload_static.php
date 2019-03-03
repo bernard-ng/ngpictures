@@ -17,6 +17,7 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
         '948ad5488880985ff1c06721a4e447fe' => __DIR__ . '/..' . '/cakephp/utility/bootstrap.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'a9ed0d27b5a698798a89181429f162c5' => __DIR__ . '/..' . '/khanamiryan/qrcode-detector-decoder/lib/Common/customFunctions.php',
+        '65fec9ebcfbb3cbb4fd0d519687aea01' => __DIR__ . '/..' . '/danielstjules/stringy/src/Create.php',
         'bbf73f3db644d3dced353b837903e74c' => __DIR__ . '/..' . '/php-di/php-di/src/DI/functions.php',
     );
 
@@ -51,6 +52,7 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
             'Symfony\\Component\\Filesystem\\' => 29,
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Component\\Config\\' => 25,
+            'Stringy\\' => 8,
         ),
         'R' => 
         array (
@@ -191,6 +193,10 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
         'Symfony\\Component\\Config\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/config',
+        ),
+        'Stringy\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/danielstjules/stringy/src',
         ),
         'Respect\\Validation\\' => 
         array (
@@ -377,6 +383,13 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
             'JShrink' => 
             array (
                 0 => __DIR__ . '/..' . '/tedivm/jshrink/src',
+            ),
+        ),
+        'I' => 
+        array (
+            'Imgix\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/imgix/imgix-php/src',
             ),
         ),
     );

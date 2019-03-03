@@ -24,7 +24,9 @@
         "awurth/slim-validation": "^3.1",
         "league/flysystem": "^1.0",
         "doctrine/cache": "^1.8",
-        "robmorgan/phinx": "^0.10.6"
+        "robmorgan/phinx": "^0.10.6",
+        "danielstjules/stringy": "^3.1",
+        "imgix/imgix-php": "^2.1"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.2"
