@@ -1,12 +1,17 @@
 <?php
+/**
+ * This file is a part of Ngpictures
+ * (c) Bernard Ngandu <ngandubernard@gmail.com>
+ *
+ */
+
 namespace Framework\Controllers;
 
+use Framework\Http\RequestAwareAction;
 use Framework\Http\ServerRequest;
+use Framework\Router\RouterAwareAction;
 use Psr\Container\ContainerInterface;
 use Framework\Renderer\RendererInterface;
-use Application\Traits\Util\RequestTrait;
-use Application\Traits\Util\ResolverTrait;
-use Application\Traits\Util\ValidationErrorTrait;
 
 /**
  * Class Controller
@@ -14,7 +19,8 @@ use Application\Traits\Util\ValidationErrorTrait;
  */
 class Controller
 {
-    use ValidationErrorTrait;
+
+    use RouterAwareAction;
 
     /**
      * le renderer
@@ -43,7 +49,6 @@ class Controller
         $this->renderer = $this->container->get(RendererInterface::class);
         $this->request = $this->container->get(ServerRequest::class);
     }
-
 
     /**
      * @param string $view
