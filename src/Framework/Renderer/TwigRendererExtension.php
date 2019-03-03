@@ -14,7 +14,8 @@ class TwigRendererExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFunction('cacheBusting', [$this, 'cacheBusting']),
-            new \Twig_SimpleFunction('html', [$this, 'html'], ['is_safe' => ['html']])
+            new \Twig_SimpleFunction('html', [$this, 'html'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('csrf', [$this, 'csrf', ['is_safe' => ['html']]])
         ];
     }
 
@@ -24,6 +25,18 @@ class TwigRendererExtension extends \Twig_Extension
         return [
             new \Twig_Filter('snipet', [$this, 'snipet'], ['is_safe' => ['html']])
         ];
+    }
+
+
+    /**
+     * @return string
+     */
+    public function csrf()
+    {
+        return <<< INPUT
+<input type="hidden" name="csrf_token" value="dkad;fkajd;fjk">
+INPUT;
+
     }
 
 

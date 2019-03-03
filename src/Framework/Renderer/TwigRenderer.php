@@ -26,8 +26,10 @@ class TwigRenderer implements RendererInterface
         if (ENV === 'development') {
             $this->twig->addExtension(new \Twig_Extension_Debug());
         }
-        $this->twig->addExtension(new \Twig_Extensions_Extension_Text());
-        $this->twig->addExtension(new TwigRendererExtension());
+
+        foreach ((require ROOT . "/config/extensions.php") as $extension) {
+            $this->twig->addExtension(new $extension());
+        }
     }
 
 
@@ -35,10 +37,8 @@ class TwigRenderer implements RendererInterface
      * rendre une vue
      * @param string $view
      * @param array $variables
+     * @param bool $toString
      * @return mixed
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
     public function render(string $view, array $variables = [], $toString = false)
     {
