@@ -130,7 +130,7 @@ class Repository
     /**
      * @return int
      */
-    public function count()
+    public function countAll()
     {
         return $this->makeQuery()
             ->into($this->entity)
@@ -143,20 +143,6 @@ class Repository
     {
     }
 
-    public function findSimilars(int $id)
-    {
-        $sql = <<< SQL
-"SELECT *
-FROM {$this->table}
-WHERE (categories_id = (
-    SELECT categories_id
-    FROM {$this->table}
-    WHERE id = ?
-) AND id <> ? ) AND online = 1
-ORDER BY RAND() LIMIT 5 "
-SQL;
-    }
-
     public function findList(string $list)
     {
         $sql = <<< SQL
@@ -164,11 +150,21 @@ SQL;
 SQL;
     }
 
+    /**
+     * @param int $lastId
+     * @param string $limit
+     */
     public function findGreater(int $lastId, string $limit)
     {
-        $sql = <<< SQL
-"SELECT * FROM {$this->table} WHERE id < ? AND online = 1 ORDER BY id DESC LIMIT {$limit}"
-SQL;
+        $this->makeQuery()
+            ->into($this->entity)
+            ->from($this->table)
+            ->select("{$this->table}.*")
+            ->where("{$this->table}.id < ?", [$lastId])
+            ->where("{$this->table}.oneline = 1")
+            ->orderBy("{$this->table}.id DESC")
+            ->limit($limit)
+            ->all()->get();
     }
 
 
@@ -179,16 +175,6 @@ SQL;
 SQL;
     }
 
-
-    public function latest(int $from = 0, int $to = 4)
-    {
-        $sql = <<< SQL
-"SELECT {$this->table}.*, categories.title as category
-FROM {$this->table}
-LEFT JOIN categories ON categories_id = categories.id
-WHERE online = 1 ORDER BY id DESC LIMIT {$from},{$to}"
-SQL;
-    }
 
 
     public function last()
