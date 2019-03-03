@@ -15,7 +15,7 @@
                             </a>
                             <p>{{ u.bio | escape | nl2br }}</p>
                             <br>
-                            {% if u.id != activeUser.id %}
+                            {% if u.id != currentUser.id %}
                                 <a href="{{ u.followingUrl }}" class="btn" data-action="following">
                                     {{ u.isFollowed ? "Se désabonner" : "S'abonner" }}
                                 </a>

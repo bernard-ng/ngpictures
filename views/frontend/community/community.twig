@@ -1,7 +1,7 @@
 {% extends 'layout/posts/default.twig' %}
 
 {% block content %}
-    {% if activeUser %}
+    {% if currentUser %}
         <div class="row col s12">
             <ul class="tabs transparent shadow-3">
                 <li class="tab col s6" class="active"><a href="#all">Tout</a></li>
@@ -44,8 +44,8 @@
                                 </div>
                             </div>
 
-                            {% if activeUser %}
-                                {% if u.id != activeUser.id %}
+                            {% if currentUser %}
+                                {% if u.id != currentUser.id %}
                                     <a href="{{ u.followingUrl }}" class="btn btn-flat" data-action="following">
                                         {{ u.isFollowed ? "Se désabonner" : "S'abonner" }}
                                     </a>
@@ -82,7 +82,7 @@
         <br>
     {% endif %}
 </section>
-<div class="fixed-action-btn {{ activeUser ? 'second' : '' }}">
+<div class="fixed-action-btn {{ currentUser ? 'second' : '' }}">
     <a href="/community/search" class="btn-floating btn-large blue dark-2 waves-effect shadow-4">
         <i class="icon icon-search"></i>
     </a>

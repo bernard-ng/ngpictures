@@ -4,8 +4,8 @@
     <div class="row col s12">
         <ul class="tabs transparent shadow-3">
             <div class="container">
-                <li class="tab col s6" class="active"><a href="{{ activeUser.followersUrl }}" >Mes abonnés</a></li>
-                <li class="tab col s6"><a href="{{ activeUser.followingsUrl }}" target="_self">Mes abonnements</a></li>
+                <li class="tab col s6" class="active"><a href="{{ currentUser.followersUrl }}" >Mes abonnés</a></li>
+                <li class="tab col s6"><a href="{{ currentUser.followingsUrl }}" target="_self">Mes abonnements</a></li>
             </div>
         </ul>
     </div>
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                         </div>
-                        {% if f.id != activeUser.id %}
+                        {% if f.id != currentUser.id %}
                         <a href="{{ f.followingUrl }}" class="btn btn-flat" data-action="following">
                             {{ f.isFollowed ? "Se désabonner" : "S'abonner" }}
                         </a>
@@ -64,7 +64,7 @@
             </div>
         {% endfor %}
     </div>
-    <div class="fixed-action-btn {{ activeUser ? 'second' : '' }}">
+    <div class="fixed-action-btn {{ currentUser ? 'second' : '' }}">
         <a href="/community" class="btn-floating btn-large blue dark-2 waves-effect shadow-4">
             <i class="icon icon-users"></i>
         </a>

@@ -4,7 +4,8 @@
     <section class="jumbotron dark" style="border-bottom: 5px solid {{ post.color }}; margin-bottom: 20px;">
         <div class="container row">
             <div class="col l9 m12 s12 pb10">
-                <img src="" data-src="{{ post.getThumb }}" alt="{{ post.name }}" title="{{ post.name }}" class="responsive-img materialboxed">
+                <img src="" data-src="{{ post.getThumb() }}" alt="{{ post.name }}" title="{{ post.name }}"
+                     class="responsive-img materialboxed">
                 <h1 class="ui header">{{ post.name }}</h1>
                 {{ post.description | snipet }}
             </div>
@@ -89,21 +90,17 @@
             <img src="" data-src="{{ post.getThumb }}" alt="{{ post.name }}" title="{{ post.name }}" class="bw">
         </div>
     </section>
+
     {% if similars %}
         <section class="section">
             <div class="row container pb10">
-        <span class="col l12 s12 m12">
-            <h2 class="ui header">Voir aussi</h2>
-        </span>
+                <div class="col l12 s12 m12">
+                    <h2 class="ui header">Voir aussi</h2>
+                </div>
                 <div class="carousel small">
                     {% for p in similars %}
                         <a href="{{ p.url }}" class="carousel-item" style="background-color: {{ p.color }}">
-                            <img
-                                    src=""
-                                    data-src="{{ p.smallThumbUrl }}"
-                                    title="{{ p.title }}"
-                                    alt="{{ p.title }}"
-                            >
+                            <img src="" data-src="{{ p.getSmallThumb() }}" title="{{ p.name }}" alt="{{ p.name }}">
                         </a>
                     {% endfor %}
                 </div>
@@ -111,7 +108,7 @@
         </section>
     {% endif %}
 
-    <div class="fixed-action-btn {{ activeUser ? 'second' : '' }} ">
+    <div class="fixed-action-btn {{ currentUser ? 'second' : '' }} ">
         <a class="btn-floating btn-large blue-grey dark-4 shadow-4">
             <i class="icon icon-up-open blue"></i>
         </a>

@@ -25,7 +25,7 @@
                         <p>{{ c.comment | escape | nl2br }}</p>
                         <br>
                         <time class="time" data-time="{{ c.date_created | date("U") }}">{{ c.time }}</time>
-                        {% if c.users_id == activeUser.id %}
+                        {% if c.users_id == currentUser.id %}
                             <a href="{{ c.deleteUrl }}" class="secondary-content"><i class="icon icon-cancel"></i></a>
                         {% endif %}
                     </li>

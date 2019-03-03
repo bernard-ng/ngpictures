@@ -24,7 +24,7 @@
                                     <span class="title" style="color: #ccc">{{ user.find(c.users_id).name }}</span>
                                 </a>
                                 <p>{{ c.comment | escape | nl2br }}</p>
-                                {% if c.users_id == activeUser.id %}
+                                {% if c.users_id == currentUser.id %}
                                     <a href="{{ c.deleteUrl }}" class="secondary-content"><i
                                                 class="icon icon-cancel"></i></a>
                                 {% endif %}

@@ -30,8 +30,8 @@
                     </div>
                 </div>
 
-                {% if activeUser %}
-                    {% if u.id != activeUser.id %}
+                {% if currentUser %}
+                    {% if u.id != currentUser.id %}
                         <a href="{{ u.followingUrl }}" class="btn btn-flat" data-action="following">
                             {{ u.isFollowed ? "Se désabonner" : "S'abonner" }}
                         </a>

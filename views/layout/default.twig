@@ -20,7 +20,7 @@
             </span>
             <div class="col l6 offset-l3 m12 s12">
                 <p>Les meilleures photos partagées par des photographes talentueux</p>
-                {% if activeUser %}
+                {% if currentUser %}
                     <p><a href="/submit-photo" class="btn">Ajouter vos photos <span class="icon icon-upload-cloud"></span></a></p>
                 {% else %}
                     <p>

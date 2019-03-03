@@ -21,15 +21,15 @@
         <div class="row col s12">
             <ul class="tabs transparent shadow-3">
                 <div class="container">
-                    {% if activeUser.id == user.id %}
+                    {% if currentUser.id == user.id %}
                         <li class="tab col s4">
-                            <a href="{{ activeUser.collectionUrl }}" target="_self">Gestion</a>
+                            <a href="{{ currentUser.collectionUrl }}" target="_self">Gestion</a>
                         </li>
                         <li class="tab col s4">
                             <a href="#photos" class="active">Photos</a>
                         </li>
                         <li class="tab col s4">
-                            <a href="{{ activeUser.collectionUrl }}" target="_self">Collections</a>
+                            <a href="{{ currentUser.collectionUrl }}" target="_self">Collections</a>
                         </li>
                     {% else %}
                         <li class="tab col s12"><a href="#photos" class="active">Photos</a></li>
@@ -107,8 +107,8 @@
             </div>
         {% endif %}
     </div>
-    {% if user.id != activeUser.id %}
-        <div class="fixed-action-btn {{ activeUser ? 'second' : '' }}">
+    {% if user.id != currentUser.id %}
+        <div class="fixed-action-btn {{ currentUser ? 'second' : '' }}">
             <a href="{{ user.followingUrl }}" class="btn-floating btn-large blue-grey dark-4 shadow-4">
                 {% if user.isFollowed %}
                     <i class="icon icon-user-times blue"></i>

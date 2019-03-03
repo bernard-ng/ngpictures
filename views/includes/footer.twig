@@ -1,4 +1,4 @@
-{% if activeUser %}
+{% if currentUser %}
     <div class="fixed-action-btn toolbar">
         <a class="btn-floating pulse btn-large shadow-5">
             <i class="icon icon-plus"></i>
@@ -21,7 +21,7 @@
             </li>
 
             <li class="waves-effect">
-                <a href="{{ activeUser.followersUrl }}">
+                <a href="{{ currentUser.followersUrl }}">
                     <i class="icon icon-users"></i>
                     <br>
                     <span class="desc">Abonnés</span>
@@ -29,7 +29,7 @@
             </li>
 
             <li class="waves-effect">
-                <a href="{{ activeUser.editUrl }}">
+                <a href="{{ currentUser.editUrl }}">
                     <i class="icon icon-user"></i>
                     <br>
                     <span class="desc">Profile</span>

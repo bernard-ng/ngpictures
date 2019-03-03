@@ -36,8 +36,8 @@
     <section class="col offset-l2 offset-m2 nexted l8 m12 s12 animated fast slideInRight">
         <form action="" method="POST" class="card-panel grey dark-4">
 
-            {{ form.smallInput('name','Votre nom', 'text', errors.name, input.get('name') ?? activeUser.name) }}
-            {{ form.smallInput('email', 'Votre email', 'email', errors.email, input.get('email') ?? activeUser.email) }}
+            {{ form.smallInput('name','Votre nom', 'text', errors.name, input.get('name') ?? currentUser.name) }}
+            {{ form.smallInput('email', 'Votre email', 'email', errors.email, input.get('email') ?? currentUser.email) }}
 
             <div class="input-field col l6 m6 s12">
                 <label for="date">Date</label>
