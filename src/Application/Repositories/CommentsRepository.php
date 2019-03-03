@@ -3,7 +3,6 @@ namespace Application\Repositories;
 
 use Application\Entities\CommentsEntity;
 use Framework\Repositories\Repository;
-use Application\Traits\Util\TypesActionTrait;
 
 /**
  * Class CommentsRepository
@@ -11,7 +10,6 @@ use Application\Traits\Util\TypesActionTrait;
  */
 class CommentsRepository extends Repository
 {
-    use TypesActionTrait;
 
     /**
      * @var string
@@ -25,30 +23,38 @@ class CommentsRepository extends Repository
 
 
     /**
-     * @param $id
-     * @param string $field
-     * @param $start
-     * @param $end
-     * @return string
+     * @param int $id
+     * @return int
      */
-    public function get(int $id, string $field, int $start, int $end)
+    public function count(int $id)
     {
-        return "SELECT * FROM {$this->table} WHERE {$field} = ? ORDER BY date_created DESC LIMIT {$start}, {$end}";
+        return $this->makeQuery()
+            ->into($this->entity)
+            ->from($this->table)
+            ->select("{$this->table}.id")
+            ->where("posts_id = ?", [$id])
+            ->count();
     }
-
 
     /**
      * @param int $id
-     * @param string $type
+     * @param int $limit
      * @return mixed
      */
-    public function count(int $id, string $type)
+    public function get(int $id, int $limit = 8)
     {
-        return "SELECT COUNT('id') AS num FROM {$this->table} WHERE {$type} = {$id}";
+        return $this->makeQuery()
+            ->into($this->entity)
+            ->from($this->table)
+            ->select("users.name AS users")
+            ->where("{$this->table}.posts_id = ?", [$id])
+            ->limit($limit)
+            ->all()->get();
     }
+
 
     public function countComments($user_id)
     {
-        return "SELECT COUNT('id') as num FROM {$this->table} WHERE users_id = ?";
+
     }
 }

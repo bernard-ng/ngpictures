@@ -1,4 +1,10 @@
 <?php
+/**
+ * This file is a part of Ngpictures
+ * (c) Bernard Ngandu <ngandubernard@gmail.com>
+ *
+ */
+
 namespace Application\Repositories;
 
 use Application\Entities\CategoriesEntity;
@@ -23,27 +29,30 @@ class CategoriesRepository extends Repository
 
 
     /**
-     * @param $post_id
+     * @param int $limit
+     * @return mixed
      */
-    public function findLess($post_id)
+    public function get(int $limit)
     {
-        $sql = <<< SQL
-SELECT * FROM {$this->table}
-WHERE {$this->table}.id < ? ORDER BY id DESC LIMIT 0, 8
-SQL;
+       return $this->makeQuery()
+           ->into($this->entity)
+           ->from($this->table)
+           ->orderBy("{$this->table}.id DESC")
+           ->limit($limit)
+           ->all()->get();
     }
 
-
     /**
-     * @param string $field
-     * @param $value
-     * @param bool $one
-     * @return mixed|void
+     * @param int $id
+     * @return mixed
      */
-    public function findWith(string $field, $value, $one = true)
+    public function findLess(int $id)
     {
-        $sql = <<< SQL
-SELECT * FROM {$this->table} WHERE {$field} = ? AND online = 1
-SQL;
+        return $this->makeQuery()
+            ->into($this->entity)
+            ->from($this->table)
+            ->orderBy("{$this->table}.id DESC")
+            ->where("{$this->table}.id < ?", [$id])
+            ->all()->get();
     }
 }

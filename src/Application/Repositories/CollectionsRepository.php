@@ -1,14 +1,14 @@
 <?php
 namespace Application\Repositories;
 
-use Application\Entities\CollectionEntity;
+use Application\Entities\CollectionsEntity;
 use Framework\Repositories\Repository;
 
 /**
  * Class CollectionRepository
  * @package Application\Repositories
  */
-class CollectionRepository extends Repository
+class CollectionsRepository extends Repository
 {
     /**
      * @var string
@@ -18,18 +18,36 @@ class CollectionRepository extends Repository
     /**
      * @var string
      */
-    protected $entity = CollectionEntity::class;
+    protected $entity = CollectionsEntity::class;
 
 
-    public function findLess($post_id)
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function findLess(int $id)
     {
-        return
-            "SELECT * FROM {$this->table} WHERE online = 1 AND {$this->table}.id < ? ORDER BY id DESC LIMIT 0, 8";
+        return $this->makeQuery()
+            ->into($this->entity)
+            ->from($this->table)
+            ->where("{$this->table}.id < ?  AND {$this->table}.online = 1", [$id])
+            ->orderBy("{$this->table}.id DESC")
+            ->limit(8)
+            ->all()->get();
     }
 
-
-    public function get($limit)
+    /**
+     * @param int $limit
+     * @return mixed
+     */
+    public function get(int $limit)
     {
-        return "SELECT * FROM {$this->table} WHERE online = 1 ORDER BY id DESC LIMIT $limit";
+        return $this->makeQuery()
+            ->into($this->entity)
+            ->from($this->table)
+            ->where("{$this->table}.online = 1")
+            ->orderBy("{$this->table}.id DESC")
+            ->limit($limit)
+            ->all()->get();
     }
 }
