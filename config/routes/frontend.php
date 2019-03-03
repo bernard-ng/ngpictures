@@ -34,7 +34,7 @@ return function (Framework\Router\Router $router) {
     }
 
     users_routes : {
-        $router->any("/:name-:id/settings", [UsersController::class, 'update'], "users.update");
+        $router->any("/:name-:id/settings", [UsersController::class, 'update'], "users.settings");
         $router->get("/:name-:id/posts", [PostsController::class, 'showPosts'], "users.posts");
         $router->get("/:name-:id/posts/update/:id", [PostsController::class, 'update'], "posts.update");
         $router->post("/:name-:id/posts/delete/:id", [PostsController::class, 'delete'], "posts.delete");
@@ -54,7 +54,7 @@ return function (Framework\Router\Router $router) {
         $router->get("/posts", [PostsController::class, 'index'], "posts");
         $router->get("/posts/:slug-:id", [PostsController::class, 'show'], "posts.show");
 
-        $router->get("/slider", [PostsController::class, 'slider'], "posts.slider");
+        $router->get("posts/slider", [PostsController::class, 'slider'], "posts.slider");
         $router->get("/collections", [CollectionsController::class, 'index'], "collections");
         $router->get("/collections/:slug-:id", [CollectionsController::class, 'show'], "collections.show");
 
@@ -65,7 +65,7 @@ return function (Framework\Router\Router $router) {
     features_routes : {
         $router->get("/likes/:id", [LikesController::class, 'create'], "likes.create");
         $router->get('/saves/:id', [SavesController::class, 'create'], 'saves.create');
-        $router->any("/report/:id", [ReportsController::class], 'report.create');
+        $router->any("/reports/:id", [ReportsController::class], 'reports.create');
         $router->get("/following/:id", [FollowingController::class], "following.create");
         $router->post("/comments/:id", [CommentsController::class, 'create'], "comments.create");
         $router->get("/download/:id", [DownloadController::class], "download");
@@ -99,5 +99,5 @@ return function (Framework\Router\Router $router) {
 
 
     $router->any("/upload", [PostsController::class, 'create'], "posts.create");
-    $router->get("/:user-:id", [UsersController::class, 'account'], "users.profile");
+    $router->get("/:name-:id", [UsersController::class, 'account'], "users.profile");
 };
