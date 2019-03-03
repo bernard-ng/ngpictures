@@ -1,91 +1,38 @@
-<span id="menu-mobile-item-active" data-active="{{ pageManager.getActivePage }}"></span>
+<span id="menu-mobile-item-active" data-active="{{ page.getActivePage }}"></span>
 <ul class="side-nav mobile-links" id="mobile-menu">
-    {% if activeUser %}
+    {% if currentUser %}
         <li>
             <div class="user-view">
                 <div class="background">
                     <img src="{{ cacheBusting('/imgs/bgjumbo.jpg') }}" alt="bg">
                 </div>
-                <a href="{{ activeUser.accountUrl }}">
-                    <img src="{{ activeUser.avatarUrl }}" alt="bg2" class="circle">
+                <a href="{{ path('users.profile', {id: currentUser.id, name: currentUser.slug })}}">
+                    <img src="{{ currentUser.getAvatar() }}" alt="profile" class="circle">
                 </a>
-                <span class="white-txt name">{{ activeUser.name }}</span>
-                <span class="email">{{ activeUser.email }}</span>
+                <span class="white-txt name">{{ currentUser.name }}</span>
+                <span class="email">{{ currentUser.email }}</span>
             </div>
         </li>
     {% else %}
         <li class="logo" style="margin: 20px 20px 30px 20px;">
-            <a href="/" class="brand-logo" id="logo-container">
-                <img src="/imgs/logo-white.png" alt="" width="100%" height="auto">
+            <a href="{{ path('home') }}" class="brand-logo" id="logo-container">
+                <img src="{{ cacheBusting("/imgs/logo-white.png") }}" alt="logo" width="100%" height="auto">
             </a>
         </li>
         <div class="user-action">
             <li>
-                <a href="/sign" class="btn waves-effect">Inscription <span class="icon icon-user-plus"></span></a>
-                <a href="/login" class="btn waves-effect">Connexion <span class="icon icon-login"></span></a>
+                <a href="{{ path('auth.sign') }}" class="btn waves-effect">Inscription <span class="icon icon-user-plus"></span></a>
+                <a href="{{ path('auth.login') }}" class="btn waves-effect">Connexion <span class="icon icon-login"></span></a>
             </li>
         </div>
     {% endif %}
 
-    <li><a href="" class="subheader grey-txt">Menu</a></li>
-    {% if activeUser %}
-        <li>
-            <ul class="collapsible collapsible-accordion">
-                <li>
-                    <a class="collapsible-header waves-effect">Mon compte<i class="icon icon-angle-down"></i></a>
-                    <div class="collapsible-body">
-                        <ul>
-                            <li><a href="{{ activeUser.accountUrl }}">Profile <i class="icon icon-user"></i></a></li>
-                            <li><a href="{{ activeUser.editUrl }}">Paramètres <i class="icon icon-cog-alt"></i></a></li>
-                            <li>
-                                <a href="{{ activeUser.notificationsUrl}}">
-                                    Notifications <i class="icon icon-bell"></i>
-                                    <span class="right">{{ notificationsNumber }}&nbsp;</span>
-                                </a>
-                            </li>
-                            <li><a href="/logout">Déconnexion <i class="icon icon-off"></i></a></li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </li>
-    {% endif %}
-
-    <li id="Ngpictures"><a href="/">Accueil <i class="icon icon-home"></i></a></li>
-    <li id="Fil d'actualité"><a href="/posts">Explorer <i class="icon icon-globe"></i></a></li>
-    <li id="Galerie"><a href="/gallery">Galerie <i class="icon icon-picture"></i></a></li>
-
-    <li><div class="divider grey"></div></li>
-    <li><a href="" class="subheader grey-txt">Activités</a></li>
-    <li>
-        <ul class="collapsible collapsible-accordion">
-            <li>
-                <a class="collapsible-header waves-effect">Services<i class="icon icon-angle-down"></i></a>
-                <div class="collapsible-body">
-                    <ul>
-                        <li><a href="/maps/photographers">Trouver des photographes <i class="icon icon-location"></i></a></li>
-                        <li><a href="/photographers/sign">Compte photographe <i class="icon icon-camera"></i></a></li>
-                        <li><a href="/booking">Réservations <i class="icon icon-calendar"></i></a></li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <ul class="collapsible collapsible-accordion">
-            <li>
-                <a class="collapsible-header waves-effect">Autres<i class="icon icon-angle-down"></i></a>
-                <div class="collapsible-body">
-                    <ul>
-                        <li><a href="/categories">Catégories<i class="icon icon-tags"></i></a></li>
-                        <li><a href="/community">La Communauté <i class="icon icon-users"></i></a></li>
-                        <li><a href="/contact">Nous contacter <i class="icon icon-mail"></i></a></li>
-                        <li><a href="/bugs">Signaler un problème<i class="icon icon- icon-attention"></i></a></li>
-                        <li><a href="/ideas">Donner un avis<i class="icon icon-attention"></i></a></li>
-                        <li><a href="/privacy">Politique d'utilisation <i class="icon icon-book"></i></a></li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    </li>
+    <li id="galerie"><a href="{{ path('posts') }}">Galerie <i class="icon icon-picture"></i></a></li>
+    <li><div class="divider"></div></li>
+    <li><a href="{{ path('community') }}">La Communauté <i class="icon icon-users"></i></a></li>
+    <li><a href="{{ path('collections') }}">Collections <i class="icon icon-picture"></i></a></li>
+    <li><a href="{{ path('categories') }}">Catégories<i class="icon icon-tags"></i></a></li>
+    <li class="divider"></li>
+    <li><a href="{{ path('contact') }}">Nous contacter <i class="icon icon-mail"></i></a></li>
+    <li><a href="{{ path('privacy') }}">Politique d'utilisation <i class="icon icon-camera"></i></a></li>
 </ul>

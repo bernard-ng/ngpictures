@@ -1,25 +1,21 @@
 <header>
     <div class="navbar-fixed">
         <nav class="shadow-4 transparent" data-action="menu">
-            <div class="nav-wrapper container " id="menu">
-
-                <a href="/" class="brand-logo">
-                    <img src="/imgs/logo-white.png" alt="logo">
+            <div class="nav-wrapper container" id="menu">
+                <a href="{{ path('home') }}" class="brand-logo">
+                    <img src="{{ cacheBusting('/imgs/logo-white.png') }}" alt="logo">
                 </a>
-
-                <a href="/search"  class="action right">
+                <a href="{{ path('search') }}" class="action right">
                     <i class="icon icon icon-search"></i>
                 </a>
-
                 <a href="#" data-activates="mobile-menu" class="button-collapse left">
                     <i class="icon icon icon-menu"></i>
                 </a>
-
-                <span id="menu-item-active" data-active="{{ pageManager.getActivePage }}"></span>
+                <span id="menu-item-active" data-active="{{ page.getActivePage }}"></span>
                 <ul class="right hide-on-med-and-down links">
                     <li class="search" style="margin-right: 10px">
                         <div class="search">
-                            <form action="/search" method="get" class="ui icon input">
+                            <form action="{{ path('search') }}" method="get" class="ui icon input">
                                 <div class="input-field">
                                     <i class="icon icon-search prefix"></i>
                                     <input name="q" type="text" placeholder="Recherches..." required>
@@ -28,35 +24,34 @@
                         </div>
                     </li>
 
-                    {% if activeUser.rank == 'admin' %}
+                    {% if currentUser.rank == 'admin' %}
                         <li><a href="{{ constant('ADMIN') }}"> <i class="icon icon-code"></i></a></li>
                     {% endif %}
 
-                    <li id="Fil d'actualité" class="waves-effect">
-                        <a href="/posts"> Explorer</a>
+                    <li id="Galerie" class="waves-effect">
+                        <a href="{{ path('posts') }}"> Galerie</a>
                     </li>
-                    <li id="Galerie" class="waves-effect"><a href="/gallery"> Galerie</a></li>
-
-                    <li id="service" class="waves-effect">
+                    <li id="explorer" class="waves-effect">
                         <a href="#" class="services-slideNav" data-activates="services-actions">
-                            <i class="icon icon-menu"></i>
+                            Explorer
                         </a>
                     </li>
 
-                    {% if activeUser %}
+                    {% if currentUser %}
                         <li class="user-actions">
-                            <a href="#" class="user-actions-sideNav show-profile show-on-large" data-activates="user-actions">
-                                <img src="{{ activeUser.avatarUrl }}" class="user" width="50" height="50">
+                            <a href="#" class="user-actions-sideNav show-profile show-on-large"
+                               data-activates="user-actions">
+                                <img src="{{ currentUser.avatarUrl }}" class="user" width="50" height="50">
                             </a>
                         </li>
                     {% else %}
-                        <li class="action" class="waves-effect">
-                            <a href="/sign" class="btn waves-effect">
+                        <li class="action">
+                            <a href="{{ path('auth.sign') }}" class="btn">
                                 Inscription <span class="icon icon-user-plus"></span>
                             </a>
                         </li>
-                        <li class="action" class="waves-effect">
-                            <a href="/login" class="btn waves-effect">
+                        <li class="action">
+                            <a href="{{ path('auth.login') }}" class="btn">
                                 Connexion <span class="icon icon-login"></span>
                             </a>
                         </li>
@@ -66,41 +61,41 @@
         </nav>
     </div>
     <ul class="side-nav" id="user-actions">
-        {% if activeUser %}
+        {% if currentUser %}
             <li>
                 <div class="user-view">
                     <div class="background">
-                        <img src="{{ cacheBusting('/imgs/bgjumbo.jpg') }}" alt="bg">
+                        <img src="{{ cacheBusting('/imgs/bgjumbo.jpg') }}" alt="background">
                     </div>
-                    <a href="{{ activeUser.accountUrl }}"><img src="{{ activeUser.avatarUrl }}" alt="bg2" class="circle"></a>
-                    <span class="white-txt name">{{ activeUser.name }}</span>
-                    <span class="email">{{ activeUser.email }}</span>
+                    <a href="{{ path('users.profile', {id: currentUser.id, slug: currentUser.slug}) }}">
+                        <img src="{{ currentUser.getAvatar() }}" alt="profile picture" class="circle">
+                    </a>
+                    <span class="white-txt name">{{ currentUser.name }}</span>
+                    <span class="email">{{ currentUser.email }}</span>
                 </div>
             </li>
-            <li><a href="{{ activeUser.accountUrl }}">Profile <i class="icon icon-user"></i></a></li>
-            <li><a href="{{ activeUser.editUrl }}">Paramètres <i class="icon icon-cog-alt"></i></a></li>
+            <li><a href="{{ path('users.profile', {id: currentUser.id, name: currentUser.slug}) }}">Profile <i class="icon icon-user"></i></a></li>
+            <li><a href="{{ path('users.settings', {id: currentUser.id, name: currentUser.slug}) }}">Paramètres <i class="icon icon-cog-alt"></i></a></li>
             <li>
-                <a href="{{ activeUser.notificationsUrl }}">
+                <a href="{{ path('users.notifications', {id: currentUser.id, name: currentUser.slug}) }}">
                     Notifications <i class="icon icon-bell"></i>
-                    <span class="right">{{ notificationsNumber }}&nbsp;</span>
+                    <span class="right">{{ notificationsCount }}&nbsp;</span>
                 </a>
             </li>
-            <li><a href="/logout">Déconnexion <i class="icon icon-off"></i></a></li>
+            <li>
+                <form action="{{ path('auth.logout') }}" style="display: inline">
+                    {{ csrf() }}
+                    <button type="submit" class="btn">Déconnexion <i class="icon icon-off"></i></button>
+                </form>
+            </li>
         {% endif %}
     </ul>
     <ul class="side-nav" id="services-actions">
-        <li><a href="" class="subheader grey-txt">Services</a></li>
-        <li><a href="/maps/photographers">Trouver des photographes <i class="icon icon-location"></i></a></li>
-        <li><a href="/photographers/sign">Compte photographe <i class="icon icon-camera"></i></a></li>
-        <li><a href="/booking">Réservations <i class="icon icon-calendar"></i></a></li>
-
-        <li><div class="divider grey"></div></li>
-        <li><a href="" class="subheader grey-txt">Autres</a></li>
-        <li><a href="/categories">Catégories<i class="icon icon-tags"></i></a></li>
-        <li><a href="/community">La Communauté <i class="icon icon-users"></i></a></li>
-        <li><a href="/contact">Nous contacter <i class="icon icon-mail"></i></a></li>
-        <li><a href="/bugs">Signaler un problème<i class="icon icon-tags"></i></a></li>
-        <li><a href="/ideas">Donner un avis<i class="icon icon-location"></i></a></li>
-        <li><a href="/privacy">Politique d'utilisation <i class="icon icon-camera"></i></a></li>
+        <li><a href="{{ path('community') }}">La Communauté <i class="icon icon-users"></i></a></li>
+        <li><a href="{{ path('collections') }}">Collections <i class="icon icon-picture"></i></a></li>
+        <li><a href="{{ path('categories') }}">Catégories<i class="icon icon-tags"></i></a></li>
+        <li class="divider"></li>
+        <li><a href="{{ path('contact') }}">Nous contacter <i class="icon icon-mail"></i></a></li>
+        <li><a href="{{ path('privacy') }}">Politique d'utilisation <i class="icon icon-camera"></i></a></li>
     </ul>
 </header>
