@@ -91,15 +91,15 @@
         </div>
     </section>
 
-    {% if similars %}
-        <section class="section">
+    {% if similar %}
+        <section class="section" style="margin-top: 20px;">
             <div class="row container pb10">
                 <div class="col l12 s12 m12">
-                    <h2 class="ui header">Voir aussi</h2>
+                    <h2 class="ui header">Voir aussi : {{ post.category }}</h2>
                 </div>
                 <div class="carousel small">
-                    {% for p in similars %}
-                        <a href="{{ p.url }}" class="carousel-item" style="background-color: {{ p.color }}">
+                    {% for p in similar %}
+                        <a href="{{ path('posts.show', {id: p.id, slug: p.slug}) }}" class="carousel-item" style="background-color: {{ p.color }}">
                             <img src="" data-src="{{ p.getSmallThumb() }}" title="{{ p.name }}" alt="{{ p.name }}">
                         </a>
                     {% endfor %}
@@ -110,11 +110,11 @@
 
     <div class="fixed-action-btn {{ currentUser ? 'second' : '' }} ">
         <a class="btn-floating btn-large blue-grey dark-4 shadow-4">
-            <i class="icon icon-up-open blue"></i>
+            <i class="icon icon-menu blue"></i>
         </a>
         <ul>
             <li class="btn-floating waves-effect">
-                <a href="{{ post.likeUrl }}">
+                <a href="{{ path('likes.create', {id: post.id})}}">
                     {% if post.isLike == 'active' %}
                         <i class="icon icon-heart"></i>
                     {% else %}
@@ -123,24 +123,18 @@
                 </a>
             </li>
             <li class="btn-floating waves-effect">
-                <a href="{{ post.commentUrl }}">
-                    {% if a.commentsNumber > 0 %}
-                        <i class="icon icon-comment"></i>&nbsp {% else %}
-                        <i class="icon icon-comment-empty"></i>&nbsp {% endif %}
+                <a href="{{ path('comments.show', {id: post.id, slug: post.slug}) }}">
+                    <i class="icon icon-comment"></i>
                 </a>
             </li>
             <li class="btn-floating waves-effect">
-                <a href="{{ post.downloadUrl }}">
+                <a href="{{ path('download', {id: post.id}) }}">
                     <i class="icon icon-download"></i>
                 </a>
             </li>
             <li class="btn-floating waves-effect">
-                <a href="{{ post.saveUrl }}">
-                    {% if a.isSaved %}
-                        <i class="icon icon-bookmark"></i>
-                    {% else %}
-                        <i class="icon icon-bookmark-empty"></i>
-                    {% endif %}
+                <a href="{{ path('saves.create', {id: post.id}) }}">
+                    <i class="icon icon-bookmark"></i>
                 </a>
             </li>
         </ul>

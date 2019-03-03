@@ -3,13 +3,13 @@
 {% block content %}
     <div class="row col s12">
         <ul class="tabs transparent shadow-3">
-            <div class="container">
+            <li class="container">
                 <ul>
-                    <li class="tab col s4 active"><a href="#">Photos</a></li>
+                    <li class="tab col s4"><a href="{{ path('posts') }}" target="_self">Photos</a></li>
                     <li class="tab col s4"><a href="{{ path('categories') }}" target="_self">Categories</a></li>
                     <li class="tab col s4"><a href="{{ path('collections') }}" target="_self">Collections</a></li>
                 </ul>
-            </div>
+            </li>
         </ul>
     </div>
 

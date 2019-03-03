@@ -1,14 +1,26 @@
 {% extends 'layout/posts/default.twig' %}
 
 {% block content %}
+    <div class="row col s12">
+        <ul class="tabs transparent shadow-3">
+            <li class="container">
+                <ul>
+                    <li class="tab col s4"><a href="{{ path('categories') }}" target="_self">Categories</a></li>
+                    <li class="tab col s4"><a href="{{ path('posts') }}" target="_self">Photos</a></li>
+                    <li class="tab col s4"><a href="{{ path('collections') }}" target="_self">Collections</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
     <section class="section container row">
         {% if categories %}
             <div class="animated slideInRight" id="dataContainer" data-ajax="categories">
                 {% for c in categories %}
-                <div class="row nexted col s12 m3 l3" id="{{ c.id }}">
+                <div class="nexted col s12 m3 l3" id="{{ c.id }}">
                     <article class="card post-titled grey dark-4">
                         <div class="card-image waves-effect">
-                            <a href="{{ path('categories.show', {id: c.id, slug: c.slug}) }}">
+                            <a href="{{ path('categories.show', {id: c.id, slug: c.slug}) }}" title="{{ c.name }}">
                                 {% for key, thumb in categoriesThumbs %}
                                     {% if c.id == key %}
                                         <img src="" data-src="{{ thumb }}" alt="{{ c.name }}" title="{{ c.name }}" class="responsive-img">

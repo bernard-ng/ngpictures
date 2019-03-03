@@ -52,11 +52,11 @@
                 Ngpictures est une galerie photo pour photographes et passionnés de la photographie,
                 <br>
                 Nous vous proposons de découvrir la photographie africaine autrement.
-                <a href="/about">En savoir plus</a>
+                <a href="{{ path('about') }}">En savoir plus</a>
             </p>
             <div class="ui horizontal bulleted list">
                 <a class="item" href="{{ path('privacy') }}" title="Conditions Générales d'utilisation">Conditions Générales d'utilisation</a>
-                <a class="item" href="{{ 'contact' }}" title="Contact">Contact</a>
+                <a class="item" href="{{ path('contact') }}" title="Contact">Contact</a>
                 <a class="item" href="https://www.Facebook.com/ngpictures23"  target="_blank" title="facebook">
                     <i class="icon icon-facebook-rect"></i>
                 </a>
@@ -70,7 +70,7 @@
         <div class="container row">
             <span class="right">Copyrights &copy; {{ 'now'|date('Y') }}</span>
             <span>
-                With <i class="icon icon-heart red-txt"></i> by <a href="http://bernard-ng.github.io" target="_blank">Bernard ng</a>
+                With <i class="icon icon-heart red-txt"></i> by <a href="http://bernard-ng.github.io" target="_blank">bernard-ng</a>
             </span>
         </div>
     </div>
