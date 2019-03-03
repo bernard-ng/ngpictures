@@ -2,25 +2,42 @@
 namespace Application\Entities;
 
 use Framework\Entities\Entity;
-use Application\Traits\Entities\PostEntityTrait;
-use Application\Traits\Entities\UserInfoTrait;
-use Application\Traits\Util\AuthTrait;
 
+/**
+ * Class PostsEntity
+ * @package Application\Entities
+ */
 class PostsEntity extends Entity
 {
-    use AuthTrait;
 
-    public function getEditUrl()
+    /**
+     * @var string
+     */
+    public $thumb;
+
+    /**
+     * @var string
+     */
+    public $thumbOld;
+
+    /**
+     * @return string
+     */
+    public function getThumb(): string
     {
-        $this->editUrl = "/my-posts/edit";
-        $this->editUrl .= "/{$this->id}/" . self::$token;
-        return $this->editUrl;
+        return ($this->thumb)?
+            "/uploads/posts/{$this->thumb}" :
+            "/uploads/gallery/{$this->thumbOld}";
     }
 
-    public function getDeleteUrl()
+    /**
+     * @return string
+     */
+    public function getSmallThumb(): string
     {
-        $this->deleteUrl = "/my-posts/delete";
-        $this->deleteUrl .= "/{$this->id}/" . self::$token;
-        return $this->deleteUrl;
+        return ($this->thumb)?
+            "/uploads/posts/thumbs/{$this->thumb}" :
+            "/uploads/gallery/thumbs/{$this->thumbOld}";
     }
+
 }

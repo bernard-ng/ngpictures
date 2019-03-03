@@ -1,4 +1,10 @@
 <?php
+/**
+ * This file is a part of Ngpictures
+ * (c) Bernard Ngandu <ngandubernard@gmail.com>
+ *
+ */
+
 namespace Application\Entities;
 
 use Framework\Entities\Entity;
@@ -7,16 +13,7 @@ use Framework\Entities\Entity;
  * Class CollectionEntity
  * @package Application\Entity
  */
-class CollectionEntity extends Entity
+class CollectionsEntity extends Entity
 {
-    /**
-     * lien vers un album photo precis
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        $this->url = "/gallery/albums";
-        $this->url .= "/{$this->slug}-{$this->id}";
-        return $this->url;
-    }
+
 }

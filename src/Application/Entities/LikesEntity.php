@@ -1,9 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Bernard-ng
- * Date: 2/27/2019
- * Time: 12:36 AM
+ * This file is a part of Ngpictures
+ * (c) Bernard Ngandu <ngandubernard@gmail.com>
+ *
  */
 
 namespace Application\Entities;

@@ -1,4 +1,10 @@
 <?php
+/**
+ * This file is a part of Ngpictures
+ * (c) Bernard Ngandu <ngandubernard@gmail.com>
+ *
+ */
+
 namespace Application\Entities;
 
 use Framework\Entities\Entity;
@@ -6,16 +12,21 @@ use Application\Application;
 use Application\Repositories\BlogRepository;
 use Application\Repositories\PostsRepository;
 
+/**
+ * Class NotificationsEntity
+ * @package Application\Entities
+ */
 class NotificationsEntity extends Entity
 {
 
-    public function getUrl()
-    {
-        $model = Application::getDic()->get(BlogRepository::class);
-        $this->url = ''; //$model->find($this->publication_id)->url;
-        return $this->url;
-    }
+    /**
+     * @var int
+     */
+    public $type;
 
+    /**
+     * @return string
+     */
     public function getTitle()
     {
         switch ($this->type) {
