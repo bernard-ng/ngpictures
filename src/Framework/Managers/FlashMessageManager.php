@@ -1,10 +1,16 @@
 <?php
+/**
+ * This file is a part of Ngpictures
+ * (c) Bernard Ngandu <ngandubernard@gmail.com>
+ *
+ */
+
 namespace Framework\Managers;
 
+use Framework\Http\RequestAwareAction;
 use Framework\Interfaces\SessionInterface;
-use Framework\Traits\SingletonTrait;
 use Application\Managers\MessageManager;
-use Application\Traits\Util\RequestTrait;
+
 
 /**
  * Class FlashMessageManager
@@ -12,8 +18,6 @@ use Application\Traits\Util\RequestTrait;
  */
 class FlashMessageManager
 {
-
-    use RequestTrait;
 
     /**
      * la session
@@ -32,37 +36,26 @@ class FlashMessageManager
      * Flash constructor.
      * @param SessionInterface $session
      */
-    public function __construct(SessionInterface $session, MessageManager $msg)
+    public function __construct(SessionInterface $session)
     {
         $this->session  = $session;
-        $this->msg      = $msg;
+        $this->msg      = new MessageManager();
     }
-
 
     /**
      * @param string $type
      * @param string $message
-     * @param int|null|bool $code
+     * @param bool $ajax
+     * @param int $status
      */
-    public function set(string $type, string $message, $code = null)
+    public function set(string $type, string $message, $ajax = false, $status = 200)
     {
-        if ($this->isAjax() && $code !== false) {
-            if (is_null($code)) {
-                switch ($type) {
-                    case 'danger':
-                        $code = 500;
-                        break;
-                    case 'warning' || 'success' || 'info':
-                        $code = 200;
-                        break;
-                    default:
-                        $code = 200;
-                        break;
-                }
-            }
-            $this->setFlash($message, $code);
+        if ($ajax) {
+            http_response_code($status);
+            echo $this->msg[$message];
+            die();
         } else {
-            $_SESSION[FLASH_MESSAGE_KEY][$type] = $message;
+            $_SESSION[FLASH_MESSAGE_KEY][$type] = $this->msg[$message];
         }
     }
 

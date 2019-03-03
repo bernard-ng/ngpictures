@@ -2,7 +2,6 @@
 namespace Framework\Managers;
 
 use Framework\Interfaces\SessionInterface;
-use Framework\Traits\SingletonTrait;
 
 /**
  * Class SessionManager
@@ -11,15 +10,13 @@ use Framework\Traits\SingletonTrait;
 class SessionManager implements SessionInterface
 {
 
-    use SingletonTrait;
-
     /**
      * Session constructor.
      */
     public function __construct()
     {
         if (session_status() === PHP_SESSION_NONE) {
-            session_name("NGPICTURES-SESSID");
+            session_name("ngpictures_ssid");
             session_start();
         }
     }
