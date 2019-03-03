@@ -47,9 +47,6 @@
   .gallery {
     grid-column-gap: 15px;
     grid-row-gap: 15px;
-
-    &.large {
-      grid-template-columns: repeat(4, 1fr) !important;
-    }
+    grid-template-columns: repeat(4, 1fr) !important;
   }
 }
