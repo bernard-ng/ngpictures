@@ -1,26 +1,34 @@
 <?php
+/**
+ * This file is a part of Ngpictures
+ * (c) Bernard Ngandu <ngandubernard@gmail.com>
+ *
+ */
+
 namespace Application\Managers;
 
-use Application\Application;
 
+/**
+ * Class PageManager
+ * @package Application\Managers
+ */
 class PageManager
 {
+
     /**
-     * les metas qu'on peut ajouter
+     * added meta data
      * @var array
      */
     private static $meta = [];
 
-
     /**
-     * le nom de la page
+     * default page title
      * @var string
      */
     private static $pageTitle = "Ngpictures";
 
-
     /**
-     * description of the page
+     * default page description
      * @var string
      */
     private static $description =
@@ -28,22 +36,20 @@ class PageManager
         Ngpictures est une galerie photo pour photographes et passionnés de la photographie,
         Nous vous proposons de découvrir la photographie africaine autrement.";
 
+
     /**
-     * og url
+     * default page url
      * @var string
      */
     private static $url = "https://larytech.com";
 
     /**
-     * og image
+     * OG image
      * @var string
      */
     private static $image = "/imgs/icon.png";
 
     /**
-     * retourne la page active,
-     * ce qui nous permet de faire un system de hover.
-     *
      * @return string
      */
     public static function getActivePage(): string
@@ -52,19 +58,16 @@ class PageManager
     }
 
     /**
-     * definit le nom de la page courante
-     *
      * @param string $name
      * @return string
      */
     public static function setTitle(string $name): string
     {
-        self::$pageTitle = $name . " | " . Application::getDic()->get('site.name');
+        self::$pageTitle = $name . " | Ngpictures";
         return self::getTitle();
     }
 
     /**
-     * retourne le nom de la page courante
      * @return string
      */
     public static function getTitle(): string
@@ -72,11 +75,7 @@ class PageManager
         return self::$pageTitle;
     }
 
-    /**
-     * permet de generer des metas
-     * dans les views
-     * @return void
-     */
+
     public static function getMeta()
     {
         foreach (self::$meta as $meta) {
@@ -92,10 +91,7 @@ class PageManager
     }
 
     /**
-     * defini des metas pour la page courante
-     *
      * @param array $data
-     * @return void
      */
     public static function setMeta(array $data = [])
     {
@@ -103,8 +99,6 @@ class PageManager
     }
 
     /**
-     * get description
-     *
      * @return string
      */
     public static function getDescription()
@@ -112,43 +106,35 @@ class PageManager
         return self::$description;
     }
 
-
     /**
-     * Set the value of description
-     * @param string $description
-     * @return void
+     * @param string|null $description
      */
-    public static function setDescription(string $description)
+    public static function setDescription(?string $description)
     {
-        self::$description = $description;
+        if(!is_null($description)) {
+            self::$description = $description;
+        }
     }
 
-
     /**
-     * Get the value of url
-     * @return  string
+     * @return string
      */
     public static function getUrl()
     {
         return self::$url;
     }
 
-
     /**
-     * set url
-     *
-     * @param string $url
-     * @return void
+     * @param string|null $url
      */
-    public static function setUrl(string $url)
+    public static function setUrl(?string $url)
     {
-        self::$url = self::$url . $url;
+        if(!is_null($url)) {
+            self::$url = self::$url . $url;
+        }
     }
 
-
     /**
-     * get image
-     *
      * @return string
      */
     public static function getImage()
@@ -156,15 +142,13 @@ class PageManager
         return self::$image;
     }
 
-
     /**
-     * set image
-     *
-     * @param string $image
-     * @return void
+     * @param string|null $image
      */
-    public static function setImage(string $image)
+    public static function setImage(?string $image)
     {
-        self::$image = $image;
+        if(!is_null($image)) {
+            self::$image = $image;
+        }
     }
 }
