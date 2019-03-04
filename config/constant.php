@@ -4,8 +4,8 @@
 /********************************************/
 define("ROOT", dirname(__DIR__));
 define("WEBROOT", ROOT."/public");
-define("CORE", ROOT."/src/Core");
-define("APP", ROOT."/src/Ngpictures");
+define("CORE", ROOT."/src/Framework");
+define("APP", ROOT."/src/Application");
 define("UPLOAD", WEBROOT."/uploads");
 
 //APPLICATION KEYS
