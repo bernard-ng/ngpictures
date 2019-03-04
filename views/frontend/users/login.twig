@@ -2,51 +2,26 @@
 
 {% import 'includes/form.twig' as form %}
 
-
-
 {% block content %}
-
     <div class="row col l4 m4 s12">
-
         <div class="card-panel hoverable" id="loginBox">
-
-            <form method="POST" action="" data-action="login">
-
+            <form method="POST" action="{{ path('auth.login') }}">
                 <div class="row">
-
-                    {{ form.input('name', "Pseudo ou mail", 'text', errors.get('name'), post.get('name')) }}
-
-                    {{ form.input('password', 'Mot de passe', 'password', errors.get('password'), post.get('password')) }}
-
+                    {{ form.input('name', "Pseudo ou mail", 'text', errors.name, input.get('name')) }}
+                    {{ form.input('password', 'Mot de passe', 'password', errors.password, input.get('password')) }}
                 </div>
-
                 <div class="row">
-
                     <div class="col s12" id="connectOptions">
-
                         <button type="submit" class="btn btn-flat waves-effect" id="connect">Connexion</button>
-
                     </div>
-
                 </div>
-
-
-
                 <div class="row">
-
                     <div class="col s12">
-
-                        <a href="/forgot" class="forgot">Mot de passe oublié</a>
-
+                        <a href="{{ path('auth.forgot') }}" class="forgot">Mot de passe oublié</a>
                     </div>
-
                 </div>
-
             </form>
-
         </div>
-
     </div>
-
 {% endblock %}
 

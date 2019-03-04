@@ -11,8 +11,10 @@
             </p>
         </div>
         <div class="row">
-            <form method="POST" action="/forgot" data-action="forgot">
-                {{ form.input('email', 'Adresse mail', 'email', errors.get('email'), post.get('email')) }}
+            <form method="POST" action="{{ path('auth.forgot') }}">
+                <div class="row">
+                    {{ form.input('email', 'Adresse mail', 'email', errors.email, input.get('email')) }}
+                </div>
                 <div class="row col s12">
                     <button type="submit" class="btn btn-flat waves-effect">Envoyer</button>
                 </div>

@@ -41,7 +41,7 @@
                         <li class="user-actions">
                             <a href="#" class="user-actions-sideNav show-profile show-on-large"
                                data-activates="user-actions">
-                                <img src="{{ currentUser.avatarUrl }}" class="user" width="50" height="50">
+                                <img src="{{ currentUser.getAvatar() }}" class="user" width="50" height="50">
                             </a>
                         </li>
                     {% else %}
@@ -83,9 +83,9 @@
                 </a>
             </li>
             <li>
-                <form action="{{ path('auth.logout') }}" style="display: inline">
+                <form action="{{ path('auth.logout') }}" method="post" style="display: inline">
                     {{ csrf() }}
-                    <button type="submit" class="btn">Déconnexion <i class="icon icon-off"></i></button>
+                    <button type="submit" class="btn btn-flat btn-large">Déconnexion <i class="icon icon-off"></i></button>
                 </form>
             </li>
         {% endif %}
