@@ -2,6 +2,8 @@
 namespace Framework\Managers;
 
 use Application\Repositories\UsersRepository;
+use Stringy\StaticStringy;
+use Stringy\Stringy;
 
 /**
  * Class StringManager
@@ -15,7 +17,7 @@ class StringManager
      * @param int $length
      * @return string
      */
-    public function setToken(int $length): string
+    public static function setToken(int $length): string
     {
         $components = "1234567890QERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfhjklzxcvbnm";
         $token = substr(uniqid().str_shuffle(str_repeat($components, $length)), 0, $length);
@@ -27,9 +29,9 @@ class StringManager
      * cree un token pour les cookie
      * @return string
      */
-    public function cookieToken(): string
+    public static function cookieToken(): string
     {
-        return mt_rand(1000, 9999).".".$this->setToken(10);
+        return mt_rand(1000, 9999). "." . self::setToken(10);
     }
 
     /**
@@ -38,7 +40,7 @@ class StringManager
      * @param int $maxChar
      * @return string
      */
-    public function truncate($text, int $maxChar = 155)
+    public static function truncate($text, int $maxChar = 155)
     {
         if (strlen($text) > $maxChar) {
              $text = substr($text, 0, $maxChar);
@@ -56,18 +58,10 @@ class StringManager
      * @param string $text
      * @return string|null
      */
-    public function slugify($text = "n-a")
+    public static function slugify($text = "n-a")
     {
-        $text = preg_replace('#[^\pL\d]+#u', '-', $text);
-        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-        $text = preg_replace('#[^-\w]+#', '', $text);
-        $text = trim($text, '-');
-        $text = preg_replace('#-+#', '-', $text);
-        $text = strtolower($text);
-        if (empty($text)) {
-            return null;
-        }
-        return $text;
+        $str = new Stringy($text);
+        return $str->slugify();
     }
 
 
@@ -76,7 +70,7 @@ class StringManager
      * @param string $password
      * @return string
      */
-    public function hashPassword(string $password): string
+    public static function hashPassword(string $password): string
     {
         return password_hash($password, PASSWORD_BCRYPT);
     }
@@ -87,7 +81,7 @@ class StringManager
      * @param $unescapestring
      * @return string
      */
-    public function escape($unescapestring): string
+    public static function escape($unescapestring): string
     {
         return htmlspecialchars($unescapestring);
     }
@@ -98,7 +92,7 @@ class StringManager
      * @param string $string
      * @return string
      */
-    public function getSnipet($string)
+    public static function getSnipet($string)
     {
         return strip_tags($string, '<a>');
     }
@@ -110,122 +104,9 @@ class StringManager
      * @param string $name
      * @return string
      */
-    public function checkUserUrl(string $url, string $name): string
+    public static function checkUserUrl(string $url, string $name): string
     {
-        $name = $this->slugify($name);
+        $name = self::slugify($name);
         return $name == $url;
-    }
-
-
-    /**
-     * mention d'un utilisateur
-     * @param UsersRepository $users
-     * @param $text
-     * @return string
-     */
-    public function userMention(UsersRepository $users, $text)
-    {
-        return preg_replace_callback(
-            "#@([A-Za-z0-9-_]+)#",
-            function ($matches) use ($users) {
-                $user = $users->findWith('name', $matches[1]);
-                if ($user) {
-                    return "<a href='{$user->accountUrl}' title='Voir le profil'>{$matches[0]}</a>";
-                }
-                return $matches[0];
-            },
-            $text
-        );
-    }
-
-
-    /**
-     * recupere les htags dans une publications
-     *
-     * @param string $text
-     * @return string
-     */
-    public function htag($text)
-    {
-        return preg_replace_callback(
-            "~#([A-Za-z0-9_]+)~",
-            function ($matches) {
-                return "<a href='/htag/{$matches[1]}'>{$matches[0]}</a>";
-            },
-            $text
-        );
-    }
-
-
-    /**
-     * php trimer relatif
-     * @param string $time
-     * @return string
-     */
-    public function relativeTime(string $time): string
-    {
-        setlocale(LC_TIME, 'fr');
-        $time = $this->escape(strtotime($time));
-        $time = time() - $time ;
-
-        switch ($time) {
-            case $time >= 3600 && $time <= 86400:
-                $ago = intval($time / 3600);
-                $relative_time = "il y a {$ago} ". ($ago > 1)? "heures" : "heure";
-                break;
-
-            case $time >= 60 && $time < 3600:
-                $ago = intval(($time % 3600) / 60);
-                $relative_time = "il y a {$ago} ". ($ago > 1)? "minutes" : "minute";
-                break;
-
-            case $time > 86400 &&  $time <= 604800:
-                $ago = intval($time / 86400);
-                $relative_time = "il y a {$ago} ". ($ago > 1)? "jours" : "jour";
-                break;
-
-            case $time > 604800:
-                $days = substr(strftime('%d', $time), 0, 3);
-                $date = (date("Y") == strftime("Y", $time))? ucfirst(strftime('%B', $time)) : ucfirst(strftime('%B', $time));
-                $relative_time = "{$days} {$date}";
-                break;
-
-            default:
-                $ago = intval($time % 60);
-                $relative_time = "il y a {$ago} ". ($ago > 1)? "secondes" : "seconde";
-                break;
-        }
-        return $relative_time;
-    }
-
-
-    /**
-     * format un grand monbre en K ou M
-     * @param int $number
-     * @return string
-     */
-    public function truncateNumber(int $number): string
-    {
-        $number = intval($this->escape($number));
-
-        switch ($number) {
-            case $number >= 0 && $number < 1000:
-                return (string) $number;
-                break;
-
-            case $number >= 1000 && $number < 100000:
-                $number = round(($number / 1000), 1);
-                return "{$number}K";
-                break;
-
-            case $number >= 100000:
-                $number = round(($number / 100000), 1);
-                return "{$number}M";
-                break;
-
-            default:
-                return $number;
-                break;
-        }
     }
 }

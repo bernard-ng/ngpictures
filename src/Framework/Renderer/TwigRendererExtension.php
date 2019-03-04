@@ -33,10 +33,7 @@ class TwigRendererExtension extends \Twig_Extension
      */
     public function csrf()
     {
-        return <<< INPUT
-<input type="hidden" name="csrf_token" value="dkad;fkajd;fjk">
-INPUT;
-
+        echo '<input type="hidden" name="csrf_token" value="dkad;fkajd;fjk">';
     }
 
 

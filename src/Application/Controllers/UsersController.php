@@ -1,14 +1,23 @@
 <?php
+/**
+ * This file is a part of Ngpictures
+ * (c) Bernard Ngandu <ngandubernard@gmail.com>
+ *
+ */
+
 namespace Application\Controllers;
 
 use Application\Entities\UsersEntity;
 use Application\Managers\PageManager;
 use Application\Repositories\UsersRepository;
+use Application\Repositories\Validators\UsersValidator;
+use Awurth\SlimValidation\Validator;
+use Framework\Interfaces\CookieInterface;
 use Framework\Managers\Collection;
 use Framework\Managers\ImageManager;
 use Framework\Managers\Mailer\Mailer;
+use Framework\Managers\StringManager;
 use Psr\Container\ContainerInterface;
-use Framework\Interfaces\CookieInterface;
 
 /**
  * Class UsersController
@@ -20,7 +29,7 @@ class UsersController extends Controller
     /**
      * @var UsersRepository
      */
-    protected $users;
+    private $users;
 
     /**
      * @var mixed|CookieInterface
@@ -40,52 +49,54 @@ class UsersController extends Controller
 
 
     /**
-     * confirmation d'un utilisateur
-     * @param $users_id
+     * @param int $id
      * @param string $token
      */
-    public function confirm($users_id, $token)
+    public function confirm($id, $token): void
     {
-        $this->authService->confirm($users_id, $token);
+        $user = $this->users->findNotConfirmed(intval($id));
+        if ($user && $user->confirmationToken == $token) {
+            $this->users->update($user->id, ['confirmation_token' => null]);
+            $this->flash->set('success', 'users_confirmation_success');
+            $this->authService->connect($user);
+        } else {
+            $this->flash->set('danger', 'users_confirmation_failed');
+            $this->redirect($this->url('auth.login'));
+        }
     }
 
 
     /**
-     * permet de reset un mot de pass pour un utilisateur
-     * @param $users_id
+     * @param int $id
      * @param string $token
-     * @return void
      */
-    public function reset($users_id, string $token)
+    public function reset($id, $token)
     {
-        $user   =   $this->users->find(intval($users_id));
-        $token  =   $this->str->escape($token);
-        $errors =   new Collection();
+        $user = $this->users->find(intval($id));
+        if ($user && $user->resetToken == $token) {
+            if ($this->request->is('post')) {
+                $input = new Collection($_POST);
+                $validator = $this->container->get(Validator::class);
+                $validator->validate($_POST, UsersValidator::getResetValidationRules());
 
-        if ($user && $user->reset_token == $token) {
-            $post = new Collection($_POST);
+                if ($validator->isValid()) {
+                    $password = StringManager::hashPassword($input->get('password'));
+                    $this->users->update($user->id, compact('password'));
 
-            if (isset($_POST) and !empty($_POST)) {
-                $this->validator->setRule('password', ["matches[password_confirm]", "min_length[6]"]);
-                $this->validator->setRule('password_confirm', ["matches[password]", "min_length[6]"]);
-
-                if ($this->validator->isValid()) {
-                    $password = $this->str->hashPassword($post->get('password'));
-                    $this->users->resetPassword($password, $user->id);
-
-                    $this->flash->set('success', $this->flash->msg['users_reset_success'], false);
+                    $this->flash->set('success', 'users_reset_success');
                     $this->authService->reConnect($user);
-                    $this->redirect($user->accountUrl);
+                    $this->redirect($this->url('users.profile', ['id' => $user->id, 'name' => $user->slug]));
                 } else {
-                    $this->sendFormError();
+                    $errors = $validator->getErrors();
+                    $this->flash->set('danger', 'form_multi_errors');
                 }
             }
 
             PageManager::setTitle("Rénitialisation du mot de passe");
-            $this->view('frontend/users/account/reset', compact('post', 'errors'));
+            $this->view('frontend/users/account/reset', compact('input', 'errors'));
         } else {
-            $this->flash->set('danger', $this->flash->msg['undefined_error']);
-            $this->redirect(true);
+            $this->flash->set('danger', 'undefined_error');
+            $this->redirect();
         }
     }
 
@@ -95,38 +106,35 @@ class UsersController extends Controller
      */
     public function forgot()
     {
-        $post = new Collection($_POST);
-        $errors = new Collection();
+        if ($this->request->is('post')) {
+            $input = new Collection($_POST);
+            $validator = $this->container->get(Validator::class);
+            $validator->validate($_POST, UsersValidator::getForgotValidationRules());
 
-        if (isset($_POST) && !empty($_POST)) {
-            $this->validator->setRule('email', ['valid_email']);
+            if ($validator->isValid()) {
+                $email = $input->get('email');
+                $user = $this->users->findWithEmail($email);
 
-            if ($this->validator->isValid()) {
-                $email  =    $this->str->escape($post->get('email'));
-                $user   =    $this->users->findWith('email', $email);
+                if ($user && $user->confirmedAt != null) {
+                        $this->users->update($user->id, ['reset_token' => StringManager::setToken(60)]);
+                        $user = $this->users->find($user->id);
+                        $link = $this->url('auth.reset', ['id' => $user->id, 'token' => $user->resetToken]);
 
-                if ($user && $user->confirmed_at != null) {
-                    $this->users->setResetToken($this->str->setToken(60), $user->id);
-                    $user   =   $this->users->find($user->id);
-                    $link   =   SITE_NAME."/reset/{$user->id}/{$user->reset_token}";
-
-                    $this->container->get(Mailer::class)->resetPassword($link, $email);
-                    $this->flash->set('success', $this->flash->msg['form_reset_submitted'], false);
-                    $this->redirect('/login');
+                        $this->container->get(Mailer::class)->resetPassword($link, $email);
+                        $this->flash->set('success', 'form_reset_submitted');
+                        $this->redirect($this->url('auth.login'));
                 } else {
-                    $this->flash->set('danger', $this->flash->msg['users_email_notFound']);
+                    $this->flash->set('danger', 'users_email_notFound');
                 }
             } else {
-                $errors = new Collection($this->validator->getErrors());
-                $this->isAjax() ?
-                    $this->setFlash($errors->asJson(), 403) :
-                    $this->flash->set('danger', $this->flash->msg['form_multi_errors']);
+                $errors = $validator->getErrors();
+                $this->flash->set('danger', 'form_multi_errors');
             }
         }
 
-        $this->turbolinksLocation("/forgot");
+        $this->turbolinksLocation($this->url('auth.forgot'));
         PageManager::setTitle('Mot de passe oublié');
-        $this->view('frontend/users/account/forgot', compact('post', 'errors'));
+        $this->view('frontend/users/account/forgot', compact('input', 'errors'));
     }
 
 
@@ -136,8 +144,8 @@ class UsersController extends Controller
      */
     public function sign()
     {
-        $post       =   new Collection($_POST);
-        $errors     =   new Collection();
+        $post = new Collection($_POST);
+        $errors = new Collection();
 
         if ($this->authService->isLogged()) {
             $this->flash->set('warning', $this->flash->msg['users_already_connected'], false);
@@ -178,62 +186,69 @@ class UsersController extends Controller
      */
     public function login()
     {
-        //$this->authService->cookieConnect();
-        $post       =   new Collection($_POST);
-        $errors     =   new Collection();
+        $this->authService->cookieConnect();
+        $user = $this->authService->isLogged();
+        $idErros = [
+            'name' => [$this->flash->msg['users_bad_identifier']],
+            'password' =>  [$this->flash->msg['users_bad_identifier']]
+        ];
 
-        if ($this->authService->isLogged()) {
-            $this->flash->set('warning', $this->flash->msg['users_already_connected'], false);
-            $this->redirect($this->authService->isLogged()->accountUrl, false);
+        if ($user) {
+            $this->flash->set('warning', 'users_already_connected');
+            $this->redirect($this->url('users.profile', ['id' => $user->id, 'name' => $user->slug]));
         } else {
-            if (isset($_POST) && !empty($_POST)) {
-                $this->validator->setRule('name', 'required');
-                $this->validator->setRule('password', 'required');
+            if ($this->request->is('post')) {
+                $input = new Collection($_POST);
+                $validator = $this->container->get(Validator::class);
+                $validator->validate($_POST, UsersValidator::getLoginValidationRules());
 
-                if ($this->validator->isValid()) {
-                    $name       =   $this->str->escape($post->get('name'));
-                    $remember   =   intval($post->get('remember'));
-                    $password   =   $post->get('password');
+                if ($validator->isValid()) {
+                    $name = $input->get('name');
+                    $password = $input->get('password');
 
                     /** @var UsersEntity */
-                    $user  = $this->users->findAlternative(['name','email'], $name);
+                    $user = $this->users->findWithEmailOrName($name);
                     if ($user) {
                         if (password_verify($password, $user->password)) {
-                            if ($user->confirmed_at !== null) {
+                            if ($user->confirmedAt !== null) {
                                 $this->authService->connect($user);
-                                $remember ? $this->authService->remember($user->id) : '';
-                                $this->redirect($user->accountUrl, true);
+                                $this->authService->remember($user->id);
+                                $this->redirect($this->url('users.profile', ['id' => $user->id, 'name' => $user->slug]));
                             } else {
-                                $this->flash->set('danger', $this->flash->msg['users_not_confirmed']);
+                                $this->flash->set('danger', 'users_not_confirmed');
                             }
                         } else {
-                            $this->flash->set('danger', $this->flash->msg['users_bad_identifier']);
+                            $errors = $idErros;
+                            $this->flash->set('danger', 'users_bad_identifier');
                         }
                     } else {
-                        $this->flash->set('danger', $this->flash->msg['users_bad_identifier']);
+                        $errors = $idErros;
+                        $this->flash->set('danger', 'users_bad_identifier');
                     }
                 } else {
-                    $this->sendFormError();
+                    $errors = $validator->getErrors();
+                    $this->flash->set('danger', 'form_multi_errors');
                 }
             }
 
-            $this->turbolinksLocation("/login");
+            $this->turbolinksLocation($this->url('auth.login'));
             PageManager::setTitle('Connexion');
-            $this->view('frontend/users/login', compact('post', 'errors'));
+            $this->view('frontend/users/login', compact('input', 'errors'));
         }
     }
 
-
     /**
-     * permet de deconnecter un utilisateur
+     * logout a user
      */
     public function logout()
     {
-        $this->cookie->delete(COOKIE_REMEMBER_KEY);
-        $this->session->delete(AUTH_KEY);
-        $this->session->delete(TOKEN_KEY);
-        $this->flash->set('success', $this->flash->msg['users_logout_success'], false);
-        $this->redirect("/login", false, 301);
+        if ($this->request->is('post')) {
+            $this->cookie->delete(COOKIE_REMEMBER_KEY);
+            $this->session->delete(AUTH_KEY);
+            $this->session->delete(TOKEN_KEY);
+            $this->flash->set('success', 'users_logout_success');
+            $this->redirect($this->url('auth.login'));
+        }
     }
 
 
@@ -324,10 +339,10 @@ class UsersController extends Controller
     {
         $this->authService->restrict();
         if ($token === $this->authService->getToken()) {
-            $user       =   $this->authService->isLogged();
-            $post       =   new Collection($_POST);
-            $file       =   new Collection($_FILES);
-            $errors     =   new Collection();
+            $user = $this->authService->isLogged();
+            $post = new Collection($_POST);
+            $file = new Collection($_FILES);
+            $errors = new Collection();
 
             if (isset($_POST) && !empty($_POST)) {
                 $this->validator->setRule('name', ['required', 'min_length[3]']);
@@ -343,10 +358,10 @@ class UsersController extends Controller
                     }
 
                     if ($this->validator->isValid()) {
-                        $name       =    $this->str->escape($post->get('name'));
-                        $email      =    $this->str->escape($post->get('email'));
-                        $bio        =    $this->str->escape($post->get('bio'))      ??  "Hey suis sur Ngpictures 2.0";
-                        $phone      =    $this->str->escape($post->get('phone'))    ??  null;
+                        $name = $this->str->escape($post->get('name'));
+                        $email = $this->str->escape($post->get('email'));
+                        $bio = $this->str->escape($post->get('bio'))      ??  "Hey suis sur Ngpictures 2.0";
+                        $phone = $this->str->escape($post->get('phone'))    ??  null;
 
                         $this->users->update($user->id, compact('name', 'email', 'phone', 'bio'));
                         $user = $this->users->find($user->id);

@@ -1,15 +1,15 @@
 <?php
 namespace Application\Services\Auth;
 
-use Application\Repositories\UsersRepository;
 use Application\Entities\UsersEntity;
+use Application\Repositories\UsersRepository;
 use Framework\Http\RequestAwareAction;
 use Framework\Managers\CookieManager;
-use Framework\Managers\Mailer\Mailer;
-use Framework\Managers\StringManager;
-use Framework\Managers\SessionManager;
-use Psr\Container\ContainerInterface;
 use Framework\Managers\FlashMessageManager;
+use Framework\Managers\Mailer\Mailer;
+use Framework\Managers\SessionManager;
+use Framework\Managers\StringManager;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class DatabaseAuthService
@@ -67,69 +67,50 @@ class DatabaseAuthService
         $this->str = $this->container->get(StringManager::class);
     }
 
-
     /**
-     * restriction des pages
-     * @param string $msg
+     * connect the user to the current session
+     * @param UsersEntity $user
      */
-    public function restrict($msg = null)
+    public function connect(UsersEntity $user): void
     {
         if (!$this->isLogged()) {
-            $this->flash->set("danger", $msg ?? $this->flash->msg["users_not_logged"], false);
-            $this->redirect(true);
+            $this->session->write(AUTH_KEY, $user);
+            $this->session->write(TOKEN_KEY, StringManager::setToken(60));
+            $this->flash->set('success', 'users_login_success');
         }
     }
 
-
     /**
-     * confirmation de compte, via mail
-     * @param int $users_id
-     * @param string $token
+     * @return bool|UsersEntity
      */
-    public function confirm(int $users_id, string $token)
+    public function isLogged()
     {
-        $token  =   $this->str->escape($token);
-        $user   =   $this->users->isNotConfirmed(intval($users_id));
-
-        if ($user && $user->confirmation_token === $token) {
-            $this->users->unsetConfirmationToken($user->id);
-            $this->flash->set('danger', $this->flash->msg['users_confirmation_success'], false);
-            $this->connect($user);
-        } else {
-            $this->flash->set('danger', $this->flash->msg['users_confirmation_failed'], false);
-            $this->redirect("/login");
+        if ($this->session->hasKey(AUTH_KEY)) {
+            return $this->session->read(AUTH_KEY);
         }
+        return false;
     }
 
 
-    /**
-     * admettre une action seulement pour un admin
-     */
     public function isAdmin()
     {
         $this->restrict();
         if ($this->session->getValue(AUTH_KEY, 'rank') !== 'admin') {
-            $this->flash->set('warning', $this->flash->msg['users_forbidden']);
-            $this->redirect(true);
+            $this->flash->set('warning', 'users_forbidden');
+            $this->redirect();
         }
     }
-
 
     /**
-     * permet de connecter un utilisateur
-     * et de definir son token csrf
-     * @param UsersEntity $user
-     * @param string $msg
+     * restriction des pages
      */
-    public function connect(UsersEntity $user, string $msg = null)
+    public function restrict()
     {
         if (!$this->isLogged()) {
-            $this->session->write(AUTH_KEY, $user);
-            $this->session->write(TOKEN_KEY, $this->str->setToken(10));
-            $this->flash->set('success', $msg ?? $this->flash->msg['users_login_success'], false);
+            $this->flash->set("danger", "users_not_logged");
+            $this->redirect();
         }
     }
-
 
     /**
      * permet de connecter un utilisateur a partir d'un cookie
@@ -154,7 +135,6 @@ class DatabaseAuthService
         }
     }
 
-
     /**
      * definit un remember token
      * @param int $users_id
@@ -165,7 +145,6 @@ class DatabaseAuthService
         $this->users->setRememberToken($remember_token, $users_id);
         $this->cookie->write(COOKIE_REMEMBER_KEY, "NG.23.{$users_id}.{$remember_token}");
     }
-
 
     /**
      * permet de mettre a jour la connexion un utilisateur
@@ -179,20 +158,6 @@ class DatabaseAuthService
         $this->session->write(TOKEN_KEY, $this->str->setToken(10));
         $this->flash->set('success', $msg ?? $this->flash->msg['users_edit_success']);
     }
-
-
-    /**
-     * permet de dire si un utilisateur est online
-     * @return bool|mixed|null
-     */
-    public function isLogged()
-    {
-        if ($this->session->hasKey(AUTH_KEY)) {
-            return $this->session->read(AUTH_KEY);
-        }
-        return false;
-    }
-
 
     /**
      * renvoi le token de la session active
@@ -212,15 +177,15 @@ class DatabaseAuthService
      */
     public function register(string $name, string $email, string $password)
     {
-        $str    = $this->container->get(StringManager::class);
-        $name       =   $str->escape($name);
-        $email      =   $str->escape($email);
-        $token      =   $str->setToken(60);
-        $password   =   $str->hashPassword($password);
+        $str = $this->container->get(StringManager::class);
+        $name = $str->escape($name);
+        $email = $str->escape($email);
+        $token = $str->setToken(60);
+        $password = $str->hashPassword($password);
 
         $this->users->add($name, $email, $password, $token);
         $users_id = $this->users->lastInsertId();
-        $link = SITE_NAME."/confirm/{$users_id}/{$token}";
+        $link = SITE_NAME . "/confirm/{$users_id}/{$token}";
 
         $this->container->get(Mailer::class)->accountConfirmation($link, $email);
     }

@@ -58,14 +58,31 @@ class UsersRepository extends Repository
         return "UPDATE {$this->table} SET remember_token = ? WHERE id = ?";
     }
 
-    public function isNotConfirmed(int $users_id)
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function findNotConfirmed(int $id)
     {
-        return "SELECT * FROM {$this->table} WHERE id = ? AND confirmed_at IS NULL";
+        return $this->makeQuery()
+            ->into($this->entity)
+            ->from($this->table)
+            ->select("{$this->table}.*")
+            ->where("id = ? AND confirmed_at IS NULL", [$id])
+            ->all()->get(0);
     }
 
-    public function findAlternative(array $field, string $value)
+    /**
+     * @param string $name
+     */
+    public function findWithEmailOrName(string $name)
     {
-        return "SELECT * FROM {$this->table} WHERE ({$field[0]} = :{$field[0]} OR {$field[1]} = :{$field[0]})";
+        $this->makeQuery()
+            ->into($this->entity)
+            ->from($this->table)
+            ->select("{$this->table}.*")
+            ->where("email = ? OR name = ?", [$name, $name])
+            ->all()->get(0);
     }
 
     public function last()
@@ -83,9 +100,19 @@ class UsersRepository extends Repository
         return "SELECT * FROM {$this->table} WHERE confirmed_at IS NOT NULL ";
     }
 
-    public function findWith(string $field, $value, $one = true)
+    /**
+     * @param string $email
+     * @return mixed
+     */
+    public function findWithEmail(string $email)
     {
-        return "SELECT * FROM {$this->table} WHERE {$field} = ? AND confirmed_at IS NOT NULL ORDER BY id DESC";
+        return $this->makeQuery()
+            ->into($this->entity)
+            ->from($this->table)
+            ->select("{$this->table}.*")
+            ->where("{$this->table}.email = ? AND confirmed_at IS NOT NULL", [$email])
+            ->orderBy("{$this->table}.id DESC")
+            ->all()->get(0);
     }
 
     public function findLess($post_id)
