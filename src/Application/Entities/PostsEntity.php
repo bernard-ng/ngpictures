@@ -39,5 +39,4 @@ class PostsEntity extends Entity
             "/uploads/posts/thumbs/{$this->thumb}" :
             "/uploads/gallery/thumbs/{$this->thumbOld}";
     }
-
 }

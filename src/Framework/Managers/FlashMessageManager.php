@@ -11,7 +11,6 @@ use Framework\Http\RequestAwareAction;
 use Framework\Interfaces\SessionInterface;
 use Application\Managers\MessageManager;
 
-
 /**
  * Class FlashMessageManager
  * @package Framework\Managers

@@ -11,7 +11,6 @@ use Application\Controllers\ErrorController;
 use Framework\Router\Router;
 use Psr\Container\ContainerInterface;
 
-
 /**
  * Class Application
  * @package Application

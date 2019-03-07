@@ -36,7 +36,7 @@ class BookingValidator implements ValidationInterface
      */
     public static function getValidationRules(): array
     {
-        if(empty(self::$validationRules)) {
+        if (empty(self::$validationRules)) {
             self::$validationRules = [
                 'email' => v::notEmpty()->email()->setName('l\'email'),
                 'name' => v::notEmpty()->setName('votre nom'),

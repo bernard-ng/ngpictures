@@ -9,7 +9,6 @@ namespace Application\Controllers;
 
 use Application\Repositories\PostsRepository;
 
-
 /**
  * Class DownloadController
  * @package Application\Controllers

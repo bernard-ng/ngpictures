@@ -55,6 +55,5 @@ class CommentsRepository extends Repository
 
     public function countComments($user_id)
     {
-
     }
 }

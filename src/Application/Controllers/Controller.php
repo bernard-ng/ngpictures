@@ -15,7 +15,6 @@ use Framework\Interfaces\SessionInterface;
 use Framework\Managers\FlashMessageManager;
 use Psr\Container\ContainerInterface;
 
-
 /**
  * Class Controller
  * @package Application\Controllers

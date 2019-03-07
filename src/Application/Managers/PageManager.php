@@ -7,7 +7,6 @@
 
 namespace Application\Managers;
 
-
 /**
  * Class PageManager
  * @package Application\Managers
@@ -111,7 +110,7 @@ class PageManager
      */
     public static function setDescription(?string $description)
     {
-        if(!is_null($description)) {
+        if (!is_null($description)) {
             self::$description = $description;
         }
     }
@@ -129,7 +128,7 @@ class PageManager
      */
     public static function setUrl(?string $url)
     {
-        if(!is_null($url)) {
+        if (!is_null($url)) {
             self::$url = self::$url . $url;
         }
     }
@@ -147,7 +146,7 @@ class PageManager
      */
     public static function setImage(?string $image)
     {
-        if(!is_null($image)) {
+        if (!is_null($image)) {
             self::$image = $image;
         }
     }

@@ -34,7 +34,7 @@ class CategoriesRepository extends Repository
      */
     public function get(int $limit)
     {
-       return $this->makeQuery()
+        return $this->makeQuery()
            ->into($this->entity)
            ->from($this->table)
            ->orderBy("{$this->table}.id DESC")

@@ -84,7 +84,6 @@ class PostsController extends Controller
         $post = $this->posts->find($id);
         if ($post && $post->slug == $slug) {
             if ($post->online == 1) {
-
                 $comments = $this->container->get(CommentsRepository::class);
                 $commentsCount = $comments->count($id);
                 $comments = $comments->get($id);

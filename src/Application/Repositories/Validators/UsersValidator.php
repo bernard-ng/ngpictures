@@ -8,7 +8,6 @@
 
 namespace Application\Repositories\Validators;
 
-
 use Framework\Repositories\ValidationInterface;
 use Respect\Validation\Validator as v;
 
@@ -76,7 +75,7 @@ class UsersValidator implements ValidationInterface
      */
     public static function getResetValidationRules(): array
     {
-        if(empty(self::$resetValidationRules)) {
+        if (empty(self::$resetValidationRules)) {
             self::$resetValidationRules = [
                 'password' => v::notEmpty()->min(6)->setName("Le password"),
                 'password_confirm' => v::notEmpty()->min(6)->setName("Le password confirm")
@@ -90,7 +89,7 @@ class UsersValidator implements ValidationInterface
      */
     public static function getForgotValidationRules(): array
     {
-        if(empty(self::$forgotValidationRules)) {
+        if (empty(self::$forgotValidationRules)) {
             self::$forgotValidationRules = [
                 'email' => v::notEmpty()->email()->setName("Email"),
             ];
@@ -103,7 +102,7 @@ class UsersValidator implements ValidationInterface
      */
     public static function getLoginValidationRules(): array
     {
-        if(empty(self::$loginValidationRules)) {
+        if (empty(self::$loginValidationRules)) {
             self::$loginValidationRules = [
                 'name' => v::notEmpty()->setName("Pseudo ou email"),
                 'password' => v::notEmpty()->setName("Password")
