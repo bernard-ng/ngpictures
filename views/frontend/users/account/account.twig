@@ -4,7 +4,7 @@
     <div class="jumbotron-user" data-action-requires="menu-transparent">
         <div class="jumbotron-user-profil align-center">
             <div class="jumbotron-user-avatar hoverable">
-                <img src="{{ user.avatarUrl }}" alt="{{ user.name }}">
+                <img src="{{ user.getAvatar() }}" alt="{{ user.name }}">
             </div>
             <div class="jumbotron-user-name row center">
                 <h1 class="ui header">{{ user.name }}</h1>
@@ -47,13 +47,8 @@
                     </span>
                     <div class="carousel small">
                         {% for p in recent %}
-                            <a href="{{ p.url }}" class="carousel-item">
-                                <img
-                                        src=""
-                                        data-src="{{ p.smallThumbUrl }}"
-                                        title="{{ p.name }}"
-                                        alt="{{ p.name }}"
-                                >
+                            <a href="{{ p.url }}" title="{{ p.name }}" class="carousel-item">
+                                <img src="" data-src="{{ p.getSmallThumb() }}" title="{{ p.name }}" alt="{{ p.name }}">
                             </a>
                         {% endfor %}
                     </div>
@@ -71,14 +66,8 @@
                     <div class="gallery gallery-container" id="dataContainer" data-ajax="users_posts">
                         {% for p in posts %}
                             <article class="gallery-item" id="{{ user.id }}@{{ p.id }}">
-                                <a href="{{ p.url }}" style="background: {{ p.color }}">
-                                    <img
-                                            src=""
-                                            data-src="{{ p.smallThumbUrl }}"
-                                            class="responsive-img"
-                                            title="{{ p.name }}"
-                                            alt="{{ p.name }}"
-                                    >
+                                <a href="{{ path('posts.show', {id: p.id, slug: p.slug}) }}" title="{{ p.name }}" style="background: {{ p.color }}">
+                                    <img src="" data-src="{{ p.getSmallThumb() }}" class="responsive-img" title="{{ p.name }}" alt="{{ p.name }}">
                                 </a>
                             </article>
                         {% endfor %}

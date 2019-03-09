@@ -8,7 +8,7 @@
                                         <img src="" data-src="{{ authors[p.id].getAvatar() }}" alt="{{ authors[p.id].name }}" title="{{ authors[p.id].name }}">
                                     </span>
                 <span class="news-card-header-title">
-                                        <a href="{{ path('users.profile', {id: authors[p.id].id, name: authors[p.id].name }) }}" title="{{ authors[p.id].name }}">{{ authors[p.id].name }}</a>
+                                        <a href="{{ path('users.profile', {slug: authors[p.id].slug }) }}" title="{{ authors[p.id].name }}">{{ authors[p.id].name }}</a>
                                     </span>
 
                 <a data-action="download" href="{{ path('download', {id: p.id}) }}" class="news-card-header-icon" title="Télécharger">

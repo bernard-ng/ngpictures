@@ -24,7 +24,7 @@
                         </div>
                     </li>
 
-                    {% if currentUser.rank == 'admin' %}
+                    {% if currentUser.role == 'admin' %}
                         <li><a href="{{ constant('ADMIN') }}"> <i class="icon icon-code"></i></a></li>
                     {% endif %}
 
@@ -46,7 +46,7 @@
                         </li>
                     {% else %}
                         <li class="action">
-                            <a href="{{ path('auth.sign') }}" class="btn">
+                            <a href="{{ path('auth.register') }}" class="btn">
                                 Inscription <span class="icon icon-user-plus"></span>
                             </a>
                         </li>
@@ -67,17 +67,17 @@
                     <div class="background">
                         <img src="{{ cacheBusting('/imgs/bgjumbo.jpg') }}" alt="background">
                     </div>
-                    <a href="{{ path('users.profile', {id: currentUser.id, slug: currentUser.slug}) }}">
+                    <a href="{{ path('users.profile', {slug: currentUser.slug}) }}">
                         <img src="{{ currentUser.getAvatar() }}" alt="profile picture" class="circle">
                     </a>
                     <span class="white-txt name">{{ currentUser.name }}</span>
                     <span class="email">{{ currentUser.email }}</span>
                 </div>
             </li>
-            <li><a href="{{ path('users.profile', {id: currentUser.id, name: currentUser.slug}) }}">Profile <i class="icon icon-user"></i></a></li>
-            <li><a href="{{ path('users.settings', {id: currentUser.id, name: currentUser.slug}) }}">Paramètres <i class="icon icon-cog-alt"></i></a></li>
+            <li><a href="{{ path('users.profile', {slug: currentUser.slug}) }}">Profile <i class="icon icon-user"></i></a></li>
+            <li><a href="{{ path('users.settings', {slug: currentUser.slug}) }}">Paramètres <i class="icon icon-cog-alt"></i></a></li>
             <li>
-                <a href="{{ path('users.notifications', {id: currentUser.id, name: currentUser.slug}) }}">
+                <a href="{{ path('users.notifications', {slug: currentUser.slug}) }}">
                     Notifications <i class="icon icon-bell"></i>
                     <span class="right">{{ notificationsCount }}&nbsp;</span>
                 </a>

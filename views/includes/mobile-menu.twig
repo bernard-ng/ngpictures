@@ -6,7 +6,7 @@
                 <div class="background">
                     <img src="{{ cacheBusting('/imgs/bgjumbo.jpg') }}" alt="bg">
                 </div>
-                <a href="{{ path('users.profile', {id: currentUser.id, name: currentUser.slug })}}">
+                <a href="{{ path('users.profile', {slug: currentUser.slug })}}">
                     <img src="{{ currentUser.getAvatar() }}" alt="profile" class="circle">
                 </a>
                 <span class="white-txt name">{{ currentUser.name }}</span>
@@ -21,7 +21,7 @@
         </li>
         <div class="user-action">
             <li>
-                <a href="{{ path('auth.sign') }}" class="btn waves-effect">Inscription <span class="icon icon-user-plus"></span></a>
+                <a href="{{ path('auth.register') }}" class="btn waves-effect">Inscription <span class="icon icon-user-plus"></span></a>
                 <a href="{{ path('auth.login') }}" class="btn waves-effect">Connexion <span class="icon icon-login"></span></a>
             </li>
         </div>

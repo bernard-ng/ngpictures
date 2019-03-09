@@ -21,11 +21,11 @@
             <div class="col l6 offset-l3 m12 s12">
                 <p>Les meilleures photos partagées par des photographes talentueux</p>
                 {% if currentUser %}
-                    <p><a href="/submit-photo" class="btn">Ajouter vos photos <span class="icon icon-upload-cloud"></span></a></p>
+                    <p><a href="{{ path('posts.create') }}" class="btn">Ajouter vos photos <span class="icon icon-upload-cloud"></span></a></p>
                 {% else %}
                     <p>
-                        <a href="/sing" class="btn">Inscription <span class="icon icon-user-plus"></span></a>
-                        <a href="/login" class="btn">Connexion <span class="icon icon-login"></span></a>
+                        <a href="{{ path('auth.register') }}" class="btn">Inscription <span class="icon icon-user-plus"></span></a>
+                        <a href="{{ path('auth.login') }}" class="btn">Connexion <span class="icon icon-login"></span></a>
                     </p>
                 {% endif %}
             </div>

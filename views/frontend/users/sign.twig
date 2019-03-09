@@ -4,20 +4,16 @@
 {% block content %}
     <div class="row col l4 m4 s12">
         <div class="card-panel hoverable" id="signUpBox">
-            <form method="POST" action="" data-action="sign">
+            <form method="POST" action="{{ path('auth.register') }}">
                 <div class="row">
-                    {{ form.input('name',"pseudo (nom d'utilisateur)",'text', errors.get('name'),post.get('name'))}}
-                    {{ form.input('email','adresse mail','email', errors.get('email'), post.get('email'))}}
-                    {{ form.input('password', 'Mot de passe', 'password', errors.get('password'), post.get('password')) }}
-                    {{ form.input(
-                        'password_confirm', "Mot de passe (confirmer)",
-                        'password', errors.get('password_confirm'), post.get('password_confirm'))
-                    }}
+                    {{ form.input('name',"pseudo (nom d'utilisateur)",'text', errors.name, input.get('name'))}}
+                    {{ form.input('email','adresse mail','email', errors.email, input.get('email'))}}
+                    {{ form.input('password', 'Mot de passe', 'password', errors.password) }}
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
                         <p> En créant votre compte vous affirmez avoir lu et accepter nos
-                            <a href="/privacy">Conditions d'utilisation</a>
+                            <a href="{{ path('privacy') }}">Conditions d'utilisation</a>
                         </p>
                     </div>
                     <div class="input-field col s12">
