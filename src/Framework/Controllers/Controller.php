@@ -10,6 +10,7 @@ namespace Framework\Controllers;
 use Framework\Http\RequestAwareAction;
 use Framework\Http\ServerRequest;
 use Framework\Router\RouterAwareAction;
+use League\Event\EmitterInterface;
 use Psr\Container\ContainerInterface;
 use Framework\Renderer\RendererInterface;
 
@@ -38,6 +39,11 @@ class Controller
      */
     protected $request;
 
+    /**
+     * @var EmitterInterface|mixed
+     */
+    protected $emitter;
+
 
     /**
      * Controller constructor.
@@ -48,6 +54,7 @@ class Controller
         $this->container = $container;
         $this->renderer = $this->container->get(RendererInterface::class);
         $this->request = $this->container->get(ServerRequest::class);
+        $this->emitter = $this->container->get(EmitterInterface::class);
     }
 
     /**
