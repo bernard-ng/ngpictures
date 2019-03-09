@@ -34,12 +34,25 @@ class UsersValidator implements ValidationInterface
     private static $loginValidationRules;
 
     /**
+     * @var array
+     */
+    private static $registerValidationRules;
+
+    /**
      * Retrieve validation rules
      * @return array
      */
     public static function getValidationRules(): array
     {
-        // TODO: Implement getValidationRules() method.
+        if (empty(self::$registerValidationRules)) {
+            self::$registerValidationRules = [
+                'email' => v::notEmpty()->email()->setName("Email"),
+                'name' => v::notEmpty()->notBlank()->alpha()->setName('Name'),
+                'password' => v::notEmpty()->length(6)->setName('Password'),
+            ];
+        }
+        return self::$registerValidationRules;
+
     }
 
     /**
@@ -77,8 +90,8 @@ class UsersValidator implements ValidationInterface
     {
         if (empty(self::$resetValidationRules)) {
             self::$resetValidationRules = [
-                'password' => v::notEmpty()->min(6)->setName("Le password"),
-                'password_confirm' => v::notEmpty()->min(6)->setName("Le password confirm")
+                'password' => v::notEmpty()->length(6)->setName("Le password"),
+                'password_confirm' => v::notEmpty()->length(6)->setName("Le password confirm")
             ];
         }
         return self::$resetValidationRules;

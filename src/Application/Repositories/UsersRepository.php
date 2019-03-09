@@ -72,16 +72,17 @@ class UsersRepository extends Repository
             ->all()->get(0);
     }
 
+
     /**
-     * @param string $name
+     * @param string $value
+     * @return mixed
      */
-    public function findWithEmailOrName(string $name)
+    public function findWithEmailOrName(string $value)
     {
-        $this->makeQuery()
+        return $this->makeQuery()
             ->into($this->entity)
             ->from($this->table)
-            ->select("{$this->table}.*")
-            ->where("email = ? OR name = ?", [$name, $name])
+            ->where("{$this->table}.email =  ? OR {$this->table}.name = ?", [$value, $value])
             ->all()->get(0);
     }
 
@@ -113,6 +114,37 @@ class UsersRepository extends Repository
             ->where("{$this->table}.email = ? AND confirmed_at IS NOT NULL", [$email])
             ->orderBy("{$this->table}.id DESC")
             ->all()->get(0);
+    }
+
+    /**
+     * @param string $field
+     * @param $value
+     * @return mixed
+     */
+    public function findWith(string $field, $value)
+    {
+        return $this->makeQuery()
+            ->into($this->entity)
+            ->from($this->table)
+            ->select("{$this->table}.*")
+            ->where("{$this->table}.{$field} = ?", [$value])
+            ->all()->get(0);
+    }
+
+    /**
+     * @param string $field
+     * @param string $value
+     * @return bool
+     */
+    public function isUniqueWith(string $field, $value): bool
+    {
+        return !boolval($this->makeQuery()
+            ->into($this->entity)
+            ->from($this->table)
+            ->select("{$this->table}.*")
+            ->where("{$this->table}.{$field} = ? AND confirmed_at IS NOT NULL", [$value])
+            ->orderBy("{$this->table}.id DESC")
+            ->all()->get(0));
     }
 
     public function findLess($post_id)
