@@ -1,6 +1,9 @@
 <?php
 namespace Framework\Renderer;
 
+use Psr\Container\ContainerInterface;
+
+
 /**
  * Class TwigRenderer
  * @package Framework\Renderer
@@ -15,21 +18,14 @@ class TwigRenderer implements RendererInterface
      */
     private $twig;
 
-    public function __construct()
+    /**
+     * TwigRenderer constructor.
+     * @param \Twig_Environment $twig
+     */
+    public function __construct(\Twig_Environment $twig)
     {
-        $loader = new \Twig_Loader_Filesystem(ROOT."/views");
-        $this->twig = new \Twig_Environment($loader, [
-            'debug' => (ENV === 'development'),
-            'cache' => (ENV === 'production')? ROOT."/cache/render" : false,
-        ]);
 
-        if (ENV === 'development') {
-            $this->twig->addExtension(new \Twig_Extension_Debug());
-        }
-
-        foreach ((require ROOT . "/config/extensions.php") as $extension) {
-            $this->twig->addExtension(new $extension());
-        }
+        $this->twig = $twig;
     }
 
 
