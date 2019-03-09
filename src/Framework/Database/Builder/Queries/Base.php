@@ -10,7 +10,6 @@
 
 namespace Framework\Database\Builder\Queries;
 
-use App\Entities\PostEntity;
 use Framework\Database\Builder\Exception;
 use Framework\Database\Builder\Literal;
 use Framework\Database\Builder\Query;
