@@ -78,6 +78,7 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
         'L' => 
         array (
             'League\\Flysystem\\' => 17,
+            'League\\Event\\' => 13,
         ),
         'I' => 
         array (
@@ -249,6 +250,10 @@ class ComposerStaticInitef044b28bb3938294b0a7b8cf0b1aa68
         'League\\Flysystem\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
+        ),
+        'League\\Event\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/event/src',
         ),
         'Invoker\\' => 
         array (

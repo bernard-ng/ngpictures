@@ -1,0 +1,107 @@
+#*************************************************************
+        AUTHOR         :    Bernard-ng
+        PROJECT        :    NG-PICTURES
+        LINK           :    https://larytech.com
+        BUILT AT       :    08-Mar-2019  17:16:31
+**************************************************************
+[NG-PICTURES MESSAGES LOGS] 
+
+* Framework\Managers\Mailer\Mailer
+		=> 08-Mar 17:16 : Message could not be sent. Mailer Error: SMTP Error: Could not connect to SMTP host.  
+
+* Framework\Managers\Mailer\Mailer
+		=> 08-Mar 17:16 : Message could not be sent. Mailer Error: SMTP Error: Could not connect to SMTP host.  
+
+* Framework\Managers\Mailer\Mailer
+		=> 08-Mar 17:16 : Message could not be sent. Mailer Error: SMTP Error: Could not connect to SMTP host.  
+
+* Framework\Managers\Mailer\Mailer
+		=> 08-Mar 17:19 : Message could not be sent. Mailer Error: SMTP Error: Could not connect to SMTP host.  
+
+* Framework\Managers\Mailer\Mailer
+		=> 08-Mar 17:19 : Message could not be sent. Mailer Error: SMTP Error: Could not connect to SMTP host.  
+
+* Framework\Managers\Mailer\Mailer
+		=> 08-Mar 17:19 : Message could not be sent. Mailer Error: SMTP Error: Could not connect to SMTP host.  
+
+* Framework\Managers\Mailer\Mailer
+		=> 08-Mar 20:48 : Message could not be sent. Mailer Error: SMTP Error: Could not connect to SMTP host.  
+
+* Framework\Managers\Mailer\Mailer
+		=> 08-Mar 20:48 : Message could not be sent. Mailer Error: SMTP Error: Could not connect to SMTP host.  
+
+* Framework\Managers\Mailer\Mailer
+		=> 08-Mar 20:48 : Message could not be sent. Mailer Error: SMTP Error: Could not connect to SMTP host.  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 08:17 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 08:17 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 08:17 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 08:21 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 08:21 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 08:21 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 08:29 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 08:29 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 08:29 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 08:45 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 08:45 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 08:45 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 08:52 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 08:52 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 08:52 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 10:48 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 10:48 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 10:48 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 11:18 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 11:18 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 11:18 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 13:58 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 13:58 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
+* Framework\Managers\Mailer\Mailer
+		=> 09-Mar 13:58 : Message could not be sent. Mailer Error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting  
+
