@@ -6,10 +6,10 @@ use Stringy\StaticStringy;
 use Stringy\Stringy;
 
 /**
- * Class StringManager
+ * Class StringHelper
  * @package Framework\Managers
  */
-class StringManager
+class StringHelper
 {
 
     /**
