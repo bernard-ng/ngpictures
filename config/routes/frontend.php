@@ -1,6 +1,7 @@
 <?php
 
 use Application\Controllers\AjaxController;
+use Application\Controllers\AuthController;
 use Application\Controllers\BookingController;
 use Application\Controllers\CategoriesController;
 use Application\Controllers\CollectionsController;
@@ -25,25 +26,25 @@ return function (Framework\Router\Router $router) {
     $router->get("/", [HomeController::class], "home");
 
     auth_routes : {
-        $router->any("/login", [UsersController::class, 'login'], "auth.login");
-        $router->any("/forgot", [UsersController::class, 'forgot'], "auth.forgot");
-        $router->any("/sign", [UsersController::class, 'sign'], "auth.sign");
-        $router->post("/logout", [UsersController::class, 'logout'], "auth.logout");
-        $router->any("/reset/:id/:token", [UsersController::class, 'reset'], "auth.reset");
-        $router->get("/confirm/:id/:token", [UsersController::class, 'confirm'], "auth.confirmation");
+        $router->any("/login", [AuthController::class, 'login'], "auth.login");
+        $router->any("/register", [AuthController::class, 'register'], "auth.register");
+        $router->any("/auth/forgot", [AuthController::class, 'forgot'], "auth.forgot");
+        $router->post("/auth/logout", [AuthController::class, 'logout'], "auth.logout");
+        $router->any("/auth/reset/:token", [AuthController::class, 'reset'], "auth.reset");
+        $router->get("/auth/confirm/:token", [AuthController::class, 'confirm'], "auth.confirmation");
     }
 
     users_routes : {
-        $router->any("/:name-:id/settings", [UsersController::class, 'update'], "users.settings");
-        $router->get("/:name-:id/posts", [PostsController::class, 'showPosts'], "users.posts");
-        $router->get("/:name-:id/posts/update/:id", [PostsController::class, 'update'], "posts.update");
-        $router->post("/:name-:id/posts/delete/:id", [PostsController::class, 'delete'], "posts.delete");
-        $router->get("/:name-:id/followers", [FollowingController::class, 'showFollowers'], "users.followers");
-        $router->get("/:name-:id/following", [FollowingController::class, 'showFollowing'], "users.following");
-        $router->get('/:name-:id/collections', [UsersController::class, 'collection'], 'users.collections');
-        $router->get("/:name-:id/notifications", [NotificationsController::class], "users.notifications");
-        $router->post("/:name-:id/notifications/delete", [NotificationsController::class, 'delete'], "users.notifications.delete");
-        $router->post("/:name-:id/notifications/clear", [NotificationsController::class, 'clear'], "users.notifications.clear");
+        $router->any("/@:slug/settings", [UsersController::class, 'update'], "users.settings");
+        $router->get("/@:slug/posts", [PostsController::class, 'showPosts'], "users.posts");
+        $router->get("/@:slug/posts/update/:id", [PostsController::class, 'update'], "posts.update");
+        $router->post("/@:slug/posts/delete/:id", [PostsController::class, 'delete'], "posts.delete");
+        $router->get("/@:slug/followers", [FollowingController::class, 'showFollowers'], "users.followers");
+        $router->get("/@:slug/following", [FollowingController::class, 'showFollowing'], "users.following");
+        $router->get('/@:slug/collections', [UsersController::class, 'collection'], 'users.collections');
+        $router->get("/@:slug/notifications", [NotificationsController::class], "users.notifications");
+        $router->post("/@:slug/notifications/delete", [NotificationsController::class, 'delete'], "users.notifications.delete");
+        $router->post("/@:slug/notifications/clear", [NotificationsController::class, 'clear'], "users.notifications.clear");
     }
 
     community_routes : {
@@ -99,5 +100,5 @@ return function (Framework\Router\Router $router) {
 
 
     $router->any("/upload", [PostsController::class, 'create'], "posts.create");
-    $router->get("/:name-:id", [UsersController::class, 'account'], "users.profile");
+    $router->get("/@:slug", [UsersController::class, 'profile'], "users.profile");
 };
