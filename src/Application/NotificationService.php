@@ -2,7 +2,7 @@
 namespace Application\Services\Notification;
 
 use Application\Repositories\UsersRepository;
-use Framework\Managers\StringManager;
+use Framework\Managers\StringHelper;
 use Psr\Container\ContainerInterface;
 use Application\Repositories\NotificationsRepository;
 use Application\Repositories\FollowingRepository;
@@ -96,7 +96,7 @@ class NotificationService
             $subject . $action . '.';
 
         if ($type === 3) {
-            $data = $this->container->get(StringManager::class)->truncate($data, 50);
+            $data = $this->container->get(StringHelper::class)->truncate($data, 50);
             $nofication = $subject . $action . " : « {$data} »";
             $this->notifications->add($type, $nofication, $post->users_id, $post->id);
             return true;

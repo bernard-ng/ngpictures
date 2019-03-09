@@ -1,30 +1,30 @@
 <?php
-namespace Application\Services\Auth;
+namespace Application\Auth;
 
 use Application\Entities\UsersEntity;
 use Application\Repositories\UsersRepository;
+use Framework\Auth\AuthInterface;
+use Framework\Auth\User;
 use Framework\Http\RequestAwareAction;
 use Framework\Managers\CookieManager;
 use Framework\Managers\FlashMessageManager;
 use Framework\Managers\Mailer\Mailer;
 use Framework\Managers\SessionManager;
-use Framework\Managers\StringManager;
+use Framework\Managers\StringHelper;
 use Psr\Container\ContainerInterface;
 
 /**
  * Class DatabaseAuthService
  * @package Application\Services\Auth
  */
-class DatabaseAuthService
+class DatabaseAuth implements AuthInterface
 {
     use RequestAwareAction;
 
     /**
-     * le model des users, donc l'access a la base de donnee.
-     * @var UsersRepository
+     * @var UsersRepository|mixed
      */
     private $users;
-
 
     /**
      * container
@@ -48,12 +48,6 @@ class DatabaseAuthService
     private $cookie;
 
     /**
-     * @var mixed|StringManager
-     */
-    private $str;
-
-
-    /**
      * DatabaseAuthService constructor.
      * @param ContainerInterface $container
      */
@@ -64,31 +58,31 @@ class DatabaseAuthService
         $this->flash = $this->container->get(FlashMessageManager::class);
         $this->session = $this->container->get(SessionManager::class);
         $this->cookie = $this->container->get(CookieManager::class);
-        $this->str = $this->container->get(StringManager::class);
     }
 
     /**
      * connect the user to the current session
-     * @param UsersEntity $user
+     * @param User $user
      */
-    public function connect(UsersEntity $user): void
+    public function connect(User $user): void
     {
-        if (!$this->isLogged()) {
+        if (!$this->getUser()) {
             $this->session->write(AUTH_KEY, $user);
-            $this->session->write(TOKEN_KEY, StringManager::setToken(60));
-            $this->flash->set('success', 'users_login_success');
+            $this->session->write(TOKEN_KEY, StringHelper::setToken(60));
+            $this->flash->success('users_login_success');
         }
     }
 
+
     /**
-     * @return bool|UsersEntity
+     * @return User|null
      */
-    public function isLogged()
+    public function getUser(): ?User
     {
         if ($this->session->hasKey(AUTH_KEY)) {
             return $this->session->read(AUTH_KEY);
         }
-        return false;
+        return null;
     }
 
 
@@ -106,7 +100,7 @@ class DatabaseAuthService
      */
     public function restrict()
     {
-        if (!$this->isLogged()) {
+        if (!$this->getUser()) {
             $this->flash->set("danger", "users_not_logged");
             $this->redirect();
         }
@@ -117,18 +111,12 @@ class DatabaseAuthService
      */
     public function cookieConnect()
     {
-        if ($this->cookie->hasKey(COOKIE_REMEMBER_KEY) && !$this->isLogged()) {
+        if ($this->cookie->hasKey(COOKIE_REMEMBER_KEY) && !$this->getUser()) {
             $remember_token = $this->cookie->read(COOKIE_REMEMBER_KEY);
-            $user = $this->users->find(explode(".", $remember_token)[2]);  //user id
-
+            $user = $this->users->findWith('remember_token', $remember_token);
             if ($user) {
-                $expected = "NG.23.{$user->id}.{$user->remember_token}";
-                if ($expected === $remember_token) {
-                    $this->connect($user);
-                    $this->cookie->write(COOKIE_REMEMBER_KEY, $remember_token);
-                } else {
-                    $this->cookie->delete(COOKIE_REMEMBER_KEY);
-                }
+                $this->connect($user);
+                $this->cookie->write(COOKIE_REMEMBER_KEY, $remember_token);
             } else {
                 $this->cookie->delete(COOKIE_REMEMBER_KEY);
             }
@@ -141,7 +129,7 @@ class DatabaseAuthService
      */
     public function remember(int $users_id)
     {
-        $remember_token = $this->str->cookieToken();
+        $remember_token = StringHelper::cookieToken();
         $this->users->setRememberToken($remember_token, $users_id);
         $this->cookie->write(COOKIE_REMEMBER_KEY, "NG.23.{$users_id}.{$remember_token}");
     }
@@ -149,14 +137,13 @@ class DatabaseAuthService
     /**
      * permet de mettre a jour la connexion un utilisateur
      * et de definir son token csrf
-     * @param UsersEntity $user
-     * @param string|null $msg
+     * @param User $user
      */
-    public function reConnect(UsersEntity $user, string $msg = null)
+    public function updateConnexion(User $user)
     {
         $this->session->write(AUTH_KEY, $user);
-        $this->session->write(TOKEN_KEY, $this->str->setToken(10));
-        $this->flash->set('success', $msg ?? $this->flash->msg['users_edit_success']);
+        $this->session->write(TOKEN_KEY, StringHelper::setToken(60));
+        $this->flash->success('users_edit_success');
     }
 
     /**
@@ -166,27 +153,5 @@ class DatabaseAuthService
     public function getToken()
     {
         return $this->session->read(TOKEN_KEY);
-    }
-
-
-    /**
-     * cree un nouvel utilisateur
-     * @param string $name
-     * @param string $email
-     * @param string $password
-     */
-    public function register(string $name, string $email, string $password)
-    {
-        $str = $this->container->get(StringManager::class);
-        $name = $str->escape($name);
-        $email = $str->escape($email);
-        $token = $str->setToken(60);
-        $password = $str->hashPassword($password);
-
-        $this->users->add($name, $email, $password, $token);
-        $users_id = $this->users->lastInsertId();
-        $link = SITE_NAME . "/confirm/{$users_id}/{$token}";
-
-        $this->container->get(Mailer::class)->accountConfirmation($link, $email);
     }
 }
