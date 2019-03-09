@@ -40,7 +40,7 @@ class CommentsController extends Controller
     {
         $id = intval($id);
         $validator = $this->container->get(Validator::class);
-        $input = new Collection($_POST);
+        $input = $this->request->input();
         $post = $this->container->get(PostsController::class)->find($id);
         $notifier = $this->container->get(NotificationService::class);
 
@@ -111,7 +111,7 @@ class CommentsController extends Controller
     {
         if ($token == $this->session->read(TOKEN_KEY)) {
             $comment = $this->comments->find(intval($id));
-            $post = new Collection($_POST);
+            $post = $this->request->input();
 
             if ($comment) {
                 if ($comment->users_id == $this->user->id) {

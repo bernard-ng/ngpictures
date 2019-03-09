@@ -32,7 +32,7 @@ class PagesEditorController extends AdminController
         if (isset($_POST) && !empty($_POST)) {
             if (isset($_FILES) && !empty($_FILES)) {
                 $file = new Collection($_FILES);
-                $post = new Collection($_POST);
+                $post = $this->request->input();
 
                 $isUploaded = $this->container->get(ImageManager::class)->updateStatic($file, $post->get('thumb-for'));
                 if ($isUploaded) {
@@ -66,7 +66,7 @@ class PagesEditorController extends AdminController
         $file_name  = $page_name;
 
         if (is_file($file_url)) {
-            $post           = new Collection($_POST);
+            $post           = $this->request->input();
             $file_content   = file_get_contents($file_url);
 
             if (isset($_POST) && !empty($_POST)) {

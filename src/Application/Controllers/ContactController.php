@@ -9,7 +9,7 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $post = new Collection($_POST);
+        $post = $this->request->input();
         $errors = new Collection();
 
         if (!empty($_POST) && isset($_POST)) {

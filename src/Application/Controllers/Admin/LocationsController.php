@@ -42,7 +42,7 @@ class LocationsController extends AdminController
      */
     public function add()
     {
-        $post = new Collection($_POST);
+        $post = $this->request->input();
         $errors = new Collection();
         $photographers = $this->photographers->all();
 
@@ -84,7 +84,7 @@ class LocationsController extends AdminController
         $photographers = $this->photographers->all();
 
         if ($location) {
-            $post = new Collection($_POST);
+            $post = $this->request->input();
             $errors = new Collection();
 
             if (isset($_POST) && !empty($_POST)) {

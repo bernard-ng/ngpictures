@@ -41,7 +41,7 @@ class CategoriesController extends AdminController
      */
     public function add()
     {
-        $post       =   new Collection($_POST);
+        $post       =   $this->request->input();
         $errors     =   new Collection();
 
         if (isset($_POST) && !empty($_POST)) {
@@ -73,7 +73,7 @@ class CategoriesController extends AdminController
      */
     public function edit($id)
     {
-        $post       =   new Collection($_POST);
+        $post       =   $this->request->input();
         $errors     =   new Collection();
         $category   =   $this->categories->find(intval($id));
 

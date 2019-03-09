@@ -106,7 +106,7 @@ class AdminController extends Controller
     public function deleteFile()
     {
         if (isset($_POST) && !empty($_POST)) {
-            $post = new Collection($_POST);
+            $post = $this->request->input();
             if (!empty($post->get('name')) && !empty($post->get('dir'))) {
                 $dir = str_replace('/uploads/', UPLOAD . '/', $post->get('dir'));
                 $tdir = str_replace('/uploads/thumbs/', UPLOAD . '/', $post->get('dir'));

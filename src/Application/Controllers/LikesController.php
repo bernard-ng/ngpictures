@@ -80,7 +80,7 @@ class LikesController extends Controller
 
         if ($post && $post->slug === $slug) {
             $likes      =   $this->loadRepository('likes');
-            $likers     =  (new Collection($likes->getLikers($id, $type)))->asList();
+            $likers     =  (new Collection($likes->getLikers($id, $type)))->toList();
 
             if (!empty($likers)) {
                 $likers = $this->loadRepository('users')->findList($likers);

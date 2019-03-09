@@ -41,7 +41,7 @@ class BookingController extends Controller
     public function index()
     {
         if (isset($_POST) && !empty($_POST)) {
-            $input = new Collection($_POST);
+            $input = $this->request->input();
             $validator = $this->container->get(Validator::class);
             $validator->validate($_POST, BookingValidator::getValidationRules());
 

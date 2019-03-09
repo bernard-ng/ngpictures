@@ -27,7 +27,7 @@ class ReportsController extends Controller
 
         if ($post) {
             if (isset($_POST) && !empty($_POST)) {
-                $data = new Collection($_POST);
+                $data = $this->request->input();
                 $this->validator->setRule('report', 'required');
                 if ($this->validator->isValid()) {
                     $content = $this->str->escape($data->get('report'));

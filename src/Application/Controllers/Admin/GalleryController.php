@@ -45,7 +45,7 @@ class GalleryController extends AdminController
      */
     public function add()
     {
-        $post = new Collection($_POST);
+        $post = $this->request->input();
         $file = new Collection($_FILES);
         $categories = $this->categories->all();
         $albums = $this->albums->findWith(
@@ -113,7 +113,7 @@ class GalleryController extends AdminController
         $photo = $this->gallery->find(intval($id));
 
         if ($photo) {
-            $post = new Collection($_POST);
+            $post = $this->request->input();
             $categories = $this->categories->all();
             $albums = $this->albums->all();
 
@@ -185,7 +185,7 @@ class GalleryController extends AdminController
     {
         $path = [1 => 'posts', 'gallery', 'blog'];
         $image = UPLOAD . "/$path[$type]/{$filename}";
-        $post = new Collection($_POST);
+        $post = $this->request->input();
 
         if (is_file($image)) {
             if (isset($_POST) and !empty($_POST)) {

@@ -15,9 +15,9 @@ class MapsController extends Controller
      */
     public function photographers()
     {
-        $photogaphers = (new Collection($this->loadRepository('photographers')->all()))->asList(', ', "id");
+        $photogaphers = (new Collection($this->loadRepository('photographers')->all()))->toList(', ', "id");
         $markers = $this->loadRepository('locations')->findList($photogaphers);
-        $markers = (new Collection($markers))->asJson();
+        $markers = (new Collection($markers))->toJson();
 
         if ($this->isAjax() && isset($_GET['option']) && !empty($_GET['option'])) {
             echo $markers;

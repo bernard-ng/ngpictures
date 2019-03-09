@@ -145,7 +145,7 @@ class PostsController extends Controller
     public function add()
     {
         $this->authService->restrict();
-        $post = new Collection($_POST);
+        $post = $this->request->input();
         $file = new Collection($_FILES);
         $errors = new Collection();
         $notifier = $this->container->get(NotificationService::class);
@@ -261,7 +261,7 @@ class PostsController extends Controller
     public function delete($id, $token)
     {
         $this->authService->restrict();
-        $data = new Collection($_POST);
+        $data = $this->request->input();
         $post = $this->posts->find(intval($id));
 
         if ($this->authService->getToken() == $token) {

@@ -74,9 +74,9 @@ class SavesController extends Controller
      */
     public function show(int $user_id): array
     {
-        $blog_list = (new Collection($this->saves->get('blog_id', $user_id)))->asList(', ', 'blog_id');
-        $posts_list = (new Collection($this->saves->get('posts_id', $user_id)))->asList(', ', 'posts_id');
-        $gallery_list = (new Collection($this->saves->get('gallery_id', $user_id)))->asList(', ', 'gallery_id');
+        $blog_list = (new Collection($this->saves->get('blog_id', $user_id)))->toList(', ', 'blog_id');
+        $posts_list = (new Collection($this->saves->get('posts_id', $user_id)))->toList(', ', 'posts_id');
+        $gallery_list = (new Collection($this->saves->get('gallery_id', $user_id)))->toList(', ', 'gallery_id');
 
         $blog = ($blog_list)? $this->loadRepository('blog')->findList($blog_list) : null;
         $gallery = ($gallery_list)? $this->loadRepository('gallery')->findList($gallery_list) : null;

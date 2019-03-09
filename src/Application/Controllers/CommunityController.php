@@ -30,7 +30,7 @@ class CommunityController extends Controller
     {
         $this->loadRepository("users");
         $photographers = $this->loadRepository('photographers')->get(8);
-        $photographers = (new Collection($photographers))->asList(', ', "users_id");
+        $photographers = (new Collection($photographers))->toList(', ', "users_id");
         $users = $this->users->findList($photographers);
 
         $this->turbolinksLocation('/community/photographers');

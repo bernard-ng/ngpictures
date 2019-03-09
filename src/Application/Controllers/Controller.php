@@ -9,10 +9,10 @@ namespace Application\Controllers;
 
 use Application\Managers\MessageManager;
 use Application\Managers\PageManager;
-use Application\Services\Auth\DatabaseAuthService;
 use Framework\Controllers\Controller as FrameworkController;
 use Framework\Interfaces\SessionInterface;
 use Framework\Managers\FlashMessageManager;
+
 use Psr\Container\ContainerInterface;
 
 /**
@@ -33,11 +33,6 @@ class Controller extends FrameworkController
     protected $flash;
 
     /**
-     * @var DatabaseAuthService|mixed
-     */
-    protected $authService;
-
-    /**
      * Controller constructor.
      * @param ContainerInterface $container
      */
@@ -45,12 +40,7 @@ class Controller extends FrameworkController
     {
         parent::__construct($container);
         $this->session = $container->get(SessionInterface::class);
-        $this->flash = new FlashMessageManager($this->session, new MessageManager());
-        $this->authService = $container->get(DatabaseAuthService::class);
-
-        if (!$this->authService->isLogged()) {
-             $this->authService->cookieConnect();
-        }
+        $this->flash = $container->get(FlashMessageManager::class);
     }
 
     /**
@@ -62,15 +52,6 @@ class Controller extends FrameworkController
     {
         $this->renderer->addGlobal('page', new PageManager());
         $this->renderer->addGlobal('flash', $this->flash);
-
-        if ($this->authService->isLogged()) {
-            $this->renderer->addGlobal('currentUser', $this->session->read(AUTH_KEY));
-            $this->renderer->addGlobal('token', $this->session->read(TOKEN_KEY));
-
-            PageManager::setMeta(['current-user' => $this->session->getValue(AUTH_KEY, 'id')]);
-            PageManager::setMeta(['csrf-token' => $this->session->read(TOKEN_KEY)]);
-        }
-
         parent::view($view, $variables);
     }
 

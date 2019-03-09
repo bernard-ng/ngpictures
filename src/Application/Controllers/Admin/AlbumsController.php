@@ -56,7 +56,7 @@ class AlbumsController extends AdminController
      */
     public function add()
     {
-        $post   = new Collection($_POST);
+        $post   = $this->request->input();
         $errors = new Collection();
 
         if (isset($_POST) && !empty($_POST)) {
@@ -90,7 +90,7 @@ class AlbumsController extends AdminController
      */
     public function edit($id)
     {
-        $post       = new Collection($_POST);
+        $post       = $this->request->input();
         $album      = $this->albums->find(intval($id));
         $errors     = new Collection();
 
