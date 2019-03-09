@@ -33,7 +33,7 @@ class Collection implements IteratorAggregate, ArrayAccess
      * renvmoi un tableau de base.
      * @return array
      */
-    public function asArray(): array
+    public function toArray(): array
     {
         return $this->items;
     }
@@ -43,7 +43,7 @@ class Collection implements IteratorAggregate, ArrayAccess
      * encode le tableau en json.
      * @return string
      */
-    public function asJson(): string
+    public function toJson(): string
     {
         return json_encode($this->items);
     }
@@ -55,7 +55,7 @@ class Collection implements IteratorAggregate, ArrayAccess
      * @param string $glue
      * @return string
      */
-    public function asList(string $glue = ', ', $rule = null): string
+    public function toList(string $glue = ', ', $rule = null): string
     {
         $list = [];
         foreach ($this->items as $item) {

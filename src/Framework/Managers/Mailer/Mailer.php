@@ -28,7 +28,7 @@ class Mailer
         $message = ob_get_clean();
 
         try {
-            $this->setUpSMTP($mail);
+            $mail = $this->setUpSMTP($mail);
             $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
             $mail->addAddress($email);
             $mail->addReplyTo('ngpictures@larytech.com', 'Information');
@@ -45,6 +45,7 @@ class Mailer
 
     /**
      * @param PHPMailer $mail
+     * @return PHPMailer
      */
     private function setUpSMTP(PHPMailer $mail)
     {
@@ -55,6 +56,7 @@ class Mailer
         $mail->Password = ']3dneN!%2@y,';
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
+        return $mail;
     }
 
     public function photographerConfirmation(string $email)
@@ -66,7 +68,7 @@ class Mailer
         $message = ob_get_clean();
 
         try {
-            $this->setUpSMTP($mail);
+            $mail = $this->setUpSMTP($mail);
 
             $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
             $mail->addAddress($email);
@@ -98,7 +100,7 @@ class Mailer
             $message = ob_get_clean();
 
             try {
-                $this->setUpSMTP($mail);
+                $mail = $this->setUpSMTP($mail);
 
                 $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
                 $mail->addAddress($email);
@@ -129,7 +131,7 @@ class Mailer
 
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             try {
-                $this->setUpSMTP($mail);
+                $mail = $this->setUpSMTP($mail);
 
                 $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
                 $mail->addAddress($email);
@@ -163,7 +165,7 @@ class Mailer
             $mail = new PHPMailer(true);
 
             try {
-                $this->setUpSMTP($mail);
+                $mail = $this->setUpSMTP($mail);
 
                 $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
                 $mail->addAddress($email);
@@ -199,7 +201,7 @@ class Mailer
         $message = ob_get_clean();
 
         try {
-            $this->setUpSMTP($mail);
+            $mail = $this->setUpSMTP($mail);
 
             $mail->setFrom('ngpictures@larytech.com', 'Ngpictures');
             $mail->addAddress($email);

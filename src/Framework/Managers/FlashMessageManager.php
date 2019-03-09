@@ -37,8 +37,8 @@ class FlashMessageManager
      */
     public function __construct(SessionInterface $session)
     {
-        $this->session  = $session;
-        $this->msg      = new MessageManager();
+        $this->session = $session;
+        $this->msg = new MessageManager();
     }
 
     /**
@@ -55,6 +55,36 @@ class FlashMessageManager
             die();
         } else {
             $_SESSION[FLASH_MESSAGE_KEY][$type] = $this->msg[$message];
+        }
+    }
+
+
+    /**
+     * @param string $message
+     * @param bool $ajax
+     */
+    public function success(string $message, $ajax = false)
+    {
+        if ($ajax) {
+            echo $this->msg[$message];
+            die();
+        } else {
+            $_SESSION[FLASH_MESSAGE_KEY]['success'] = $this->msg[$message];
+        }
+    }
+
+
+    /**
+     * @param string $message
+     * @param bool $ajax
+     */
+    public function error(string $message, $ajax = false)
+    {
+        if ($ajax) {
+            echo $this->msg[$message];
+            die();
+        } else {
+            $_SESSION[FLASH_MESSAGE_KEY]['danger'] = $this->msg[$message];
         }
     }
 
