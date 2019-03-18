@@ -1,455 +1,554 @@
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+DROP TABLE IF EXISTS `albums`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `albums` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(500) NOT NULL,
+  `description` text DEFAULT NULL,
+  `slug` varchar(600) NOT NULL,
+  `code` varchar(45) NOT NULL,
+  `status` char(25) DEFAULT 'public',
+  `online` smallint(5) NOT NULL DEFAULT 1,
+  `date_created` datetime NOT NULL,
+  `photographers_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='les differents albums pour la galerie et les posts';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `albums`
+--
 
-DROP DATABASE IF EXISTS `ngpictures` ;
-CREATE DATABASE IF NOT EXISTS `ngpictures` DEFAULT CHARACTER SET utf8 ;
-USE `ngpictures` ;
+LOCK TABLES `albums` WRITE;
+/*!40000 ALTER TABLE `albums` DISABLE KEYS */;
+INSERT INTO `albums` VALUES (1,'Générale','Toutes les photos','generale','5b4d4','public',1,'2018-07-17 03:59:23',1),(2,'Shooting','Toutes les photos shooting for fun','shooting','5b513','public',1,'2018-07-20 01:32:13',1),(3,'Complexe Scolaire Imani','Aujourd’hui, le C.S. IMANI/Mgr  NSOLOTSHY, établissement d’enseignement privé, fonctionne, non sans un certain panache, dans la ville de Lubumbashi, comme l’une des meilleures écoles tant du point de vue de son infrastructure que de la qualité de rendement scolaire et professionnel.','complexe-scolaire-imani','5b514','public',1,'2018-07-20 02:54:00',1),(4,'Complexe Scolaire Labora','institution scolaire évoluant à lubumbashi','complexe-scolaire-labora','5b515','public',1,'2018-07-20 03:55:58',1),(5,'Theresa mariage','les photos publiques du mariage de theresa ngandu','theresa-mariage','5b57c','public',1,'2018-07-25 01:13:08',1),(6,'Precylia Felo','un model en devenir','precylia-felo','5b57d','public',1,'2018-07-25 01:43:20',1),(7,'Itot africa','Les nouvelles technologies et leur vulgarisation partout en Afrique sont au centre du projet d’IT Open Talk Africa, ou ITOT en abrégé. Nous nous réunissons pour informer et partager nos connaissances tous les weekends aux étudiants de différentes universités, aux élèves et au personnes intéressées par les nouvelles technologies. Au-delà de ces rencontres, nous nous sommes engagés à donner de\r\nformation pour initier jeunes et vieux aux nouvelles technologies et aussi à concevoir des solutions numériques pour pallier certains problèmes que nous rencontrons dans notre communauté.\r\n','itot-africa','5b599','public',1,'2018-07-26 09:11:56',1),(8,'Balloy Fane, Birthday 2017','fille incroyable','balloy-fane-birthday-2017','5b713','public',1,'2018-08-13 07:54:04',1),(9,'Gretta Mpunga, shooting 2017','une fille incroyable','gretta-mpunga-shooting-2017','5b717','public',1,'2018-08-13 12:19:00',1),(11,'Gretta Mpunga, birthday 2018','enjoying gretta\'s birthday 2018','gretta-mpunga-birthday-2018','5b718','public',1,'2018-08-13 12:56:49',1),(12,'Bellarmine shoot','shooting avec bellarmine et ses amies en vacs 2018','bellarmine-shoot','5bb48','public',1,'2018-10-03 08:59:34',1);
+/*!40000 ALTER TABLE `albums` ENABLE KEYS */;
+UNLOCK TABLES;
 
--- -----------------------------------------------------
--- Table `users`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `users` ;
+--
+-- Table structure for table `blog`
+--
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `facebook_id` BIGINT UNSIGNED NULL,
-  `name` VARCHAR(45) NOT NULL,
-  `email` VARCHAR(60) NOT NULL,
-  `password` TEXT NOT NULL,
-  `phone` VARCHAR(25) NULL,
-  `bio` VARCHAR(500) NOT NULL DEFAULT 'Hey, suis sur ngpictures 2.0',
-  `avatar` VARCHAR(120) NULL DEFAULT 'default.jpg',
-  `confirmation_token` VARCHAR(75) NULL,
-  `confirmed_at` DATETIME NULL,
-  `reset_token` VARCHAR(75) NULL,
-  `reset_at` DATETIME NULL,
-  `remember_token` VARCHAR(75) NULL,
-  `status` CHAR(25) NOT NULL DEFAULT 'public',
-  `rank` CHAR(25) NOT NULL DEFAULT 'user',
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-COMMENT = 'la table qui soccupe de la gestion dles membres';
+DROP TABLE IF EXISTS `blog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `blog` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `slug` varchar(300) NOT NULL,
+  `content` longtext DEFAULT NULL,
+  `thumb` varchar(500) DEFAULT NULL,
+  `exif` text DEFAULT NULL,
+  `location` text DEFAULT NULL,
+  `color` varchar(10) DEFAULT NULL,
+  `downloads` bigint(20) NOT NULL DEFAULT 0,
+  `online` smallint(5) NOT NULL DEFAULT 0,
+  `date_created` datetime DEFAULT NULL,
+  `users_id` bigint(20) unsigned NOT NULL DEFAULT 1,
+  `categories_id` int(10) unsigned NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='les articles des photographes';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `blog`
+--
 
--- -----------------------------------------------------
--- Table `photographers`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `photographers` ;
+LOCK TABLES `blog` WRITE;
+/*!40000 ALTER TABLE `blog` DISABLE KEYS */;
+INSERT INTO `blog` VALUES (4,'Ngpictures l\'histoire','ngpictures-l-histoire','<p>Avez-vous d&eacute;j&agrave; fait une recherche sur internet &agrave; propos de la RDC dans la section image ? c\'est triste, les r&eacute;sultats d\'images ne reflecte pas la beaut&eacute; de notre pays, voir m&ecirc;me de l\'afrique, vous verrez des photos qui montre une souffrance interminable, la mis&egrave;re, les guerres. alors un jour, entre amis nous avons d&eacute;cid&eacute;s de changer, cette vue, cette id&eacute;e que les autres se font de nous, nous avons d&eacute;cid&eacute;s de valoriser notre image, et le moyen pour le faire &eacute;tait la photographie, nous avions commenc&eacute;s &agrave; prendre des photos et les partager sur les r&eacute;saux sociaux, mais cela ne suffisait pas. Nous avons donc opter pour une nouvelle solution, notre propre r&eacute;sau social. Le 23 Juillet 2017, ngpictures a fait son apparution, notre objectif &eacute;tait atteint les r&eacute;sultats d\'image sur la RDC changaient, et continu de changer avec cette nouvelle version...</p>','ngpictures-ngpictures-l-histoire-4.jpg','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}',NULL,'#000000',7,1,'2018-07-19 23:35:52',1,6),(5,'Je laisserai une histoire','je-laisserai-une-histoire','<p style=\"box-sizing: border-box; margin: 10px 0px 72px; font-family: \'PT Serif\'; font-size: 25px; line-height: 1.4; position: relative; color: #5e6977; letter-spacing: 0.5px;\">Pour ma prog&eacute;niture, pour la femme que j&rsquo;aime, pour ma famille, pour honorer la m&eacute;moire de mon p&egrave;re, pour &ecirc;tre une source d&rsquo;inspiration, pour &ecirc;tre sur la voie des h&eacute;ros et des martyrs, pour honorer la m&eacute;moire de lumumba et de mzee kabila, pour l&rsquo;Afrique de shakazulu et de Mandela&hellip;</p>\r\n<p style=\"box-sizing: border-box; margin: 10px 0px 72px; font-family: \'PT Serif\'; font-size: 25px; line-height: 1.4; position: relative; color: #5e6977; letter-spacing: 0.5px;\">&nbsp;</p>\r\n<p style=\"box-sizing: border-box; margin: 10px 0px 72px; font-family: \'PT Serif\'; font-size: 25px; line-height: 1.4; position: relative; color: #5e6977; letter-spacing: 0.5px;\">Moi, un homme fait de chaire et de sang , je ne laisserai pas la vie me mettre &agrave; genoux &eacute;ternellement, j&rsquo;obligerai la mer &agrave; capituler, sous ce soleil br&ucirc;lant je vivrai comme un scorpion, que le vent m&rsquo;emm&egrave;ne o&ugrave; il veut je m&rsquo;y adapterai, on m&rsquo;a appris &agrave; &eacute;voluer, on m&rsquo;a appris &agrave; chasser le lion.</p>\r\n<p style=\"box-sizing: border-box; margin: 10px 0px 72px; font-family: \'PT Serif\'; font-size: 25px; line-height: 1.4; position: relative; color: #5e6977; letter-spacing: 0.5px;\">&nbsp;</p>\r\n<p style=\"box-sizing: border-box; margin: 10px 0px 72px; font-family: \'PT Serif\'; font-size: 25px; line-height: 1.4; position: relative; color: #5e6977; letter-spacing: 0.5px;\"><br style=\"box-sizing: border-box;\" />Moi, je reconnais l&rsquo;&eacute;ternit&eacute; de mon &acirc;me, je connais les visages de la lumi&egrave;re et des t&eacute;n&egrave;bres, je vis une vie &eacute;crite dans les &eacute;toiles, ce grand univers ne serait pas pareil sans moi, je suis le plan du cr&eacute;ateur, je suis l&rsquo;image de celui &agrave; qui on ne dit jamais &laquo;&nbsp;non&nbsp;&raquo;. Ceux qui viendront apr&egrave;s moi liront mon histoire grav&eacute;e sur de l&rsquo;or, une histoire qui sera grav&eacute;e dans le cosmos. je suis un lion dans cette jungle, je suis un requin dans cette mer, je suis un aigle dans ces airs, je travaille avec honneur et je vis sainement pour que le monde puisse avoir un regard diff&eacute;rent sur les personnes comme moi, je viens de loin, avant m&ecirc;me la formation de mes os dans le ventre de ma m&egrave;re j&rsquo;existais, j&rsquo;ai appris &agrave; voir Dieu dans l&rsquo;homme, dans la feuille, dans la nature.</p>\r\n<p style=\"box-sizing: border-box; margin: 10px 0px 72px; font-family: \'PT Serif\'; font-size: 25px; line-height: 1.4; position: relative; color: #5e6977; letter-spacing: 0.5px;\">&nbsp;</p>\r\n<h2 style=\"box-sizing: border-box; font-family: Montserrat; line-height: 1.1; color: #404040; margin: 15px 0px 25px; font-size: 32px;\"><strong style=\"box-sizing: border-box;\">Je laisserai une histoire pour moi-m&ecirc;me et pour mes fils, et quand je reviendrai je serais ma propre source d&rsquo;inspiration.</strong></h2>\r\n<p>&nbsp;</p>\r\n<h2 style=\"box-sizing: border-box; font-family: Montserrat; line-height: 1.1; color: #404040; margin: 15px 0px 25px; font-size: 32px;\"><strong style=\"box-sizing: border-box;\">Tant que je vivrai , tant que le cr&eacute;ateur me permettra de respirer je serais jeune et extraordinaire.</strong></h2>\r\n<p style=\"box-sizing: border-box; margin: 10px 0px 48px; font-family: \'PT Serif\'; font-size: 16px; line-height: 1.7; position: relative; color: #43484d; letter-spacing: 0.5px;\">-samy mwamba</p>','ngpictures-je-laisserai-une-histoire-5.jpg','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}',NULL,'#1C1E13',3,1,'2018-09-09 13:02:50',1,5);
+/*!40000 ALTER TABLE `blog` ENABLE KEYS */;
+UNLOCK TABLES;
 
-CREATE TABLE IF NOT EXISTS `photographers` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `label` VARCHAR(120) NOT NULL,
-  `location` TEXT NULL,
-  `phone` VARCHAR(25) NOT NULL,
-  `email` VARCHAR(60) NULL,
-  `users_id` BIGINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_photographers_users` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = 'la table qui contient et gère les photographes';
+--
+-- Table structure for table `booking`
+--
 
+DROP TABLE IF EXISTS `booking`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `booking` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(300) NOT NULL,
+  `date` varchar(45) NOT NULL,
+  `time` varchar(45) NOT NULL,
+  `description` text NOT NULL,
+  `photographers_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='la table de reservation de shooting';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- -----------------------------------------------------
--- Table `locations`
--- -----------------------------------------------------
+--
+-- Dumping data for table `booking`
+--
+
+LOCK TABLES `booking` WRITE;
+/*!40000 ALTER TABLE `booking` DISABLE KEYS */;
+INSERT INTO `booking` VALUES (1,'bernard ng','ngandubernard@gmail.com','24 July, 2018','05:22PM','mariage',1),(2,'bernard ng','ngandubernard@gmail.com','23 July, 2018','05:25PM','Birthday',1),(3,'bernard ng','ngandubernard@gmail.com','20 July, 2018','06:59AM','Yuhgt',1),(4,'bernard_ng','ngandubernard@gmail.com','23 July, 2018','06:30PM','Shooting free',1),(5,'bernard ng','ngandubernard@gmail.com','23 July, 2018','06:30AM','Fjgj',1),(6,'Muler','Muler@gmail.com','31 August, 2018','12:02AM','shooting photo pour mariage',2),(7,'bernard ng','ngandubernard@gmail.com','19 September, 2018','12:20PM','Lorem',1);
+/*!40000 ALTER TABLE `booking` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bugs`
+--
+
+DROP TABLE IF EXISTS `bugs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bugs` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `content` text NOT NULL,
+  `status` char(25) NOT NULL DEFAULT 'unresolved',
+  `date_created` datetime DEFAULT NULL,
+  `users_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='bugs rencontrer sur l applicaiton par les users';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bugs`
+--
+
+LOCK TABLES `bugs` WRITE;
+/*!40000 ALTER TABLE `bugs` DISABLE KEYS */;
+INSERT INTO `bugs` VALUES (1,'','unresolved','2018-07-19 22:58:56',1),(2,'','unresolved','2018-07-20 12:39:35',1),(3,'','unresolved','2018-10-02 16:26:59',32);
+/*!40000 ALTER TABLE `bugs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categories` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `slug` varchar(300) NOT NULL,
+  `description` text DEFAULT NULL,
+  `date_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='les categories pour les differents type de publication';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categories`
+--
+
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` VALUES (1,'Autre','autre','les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo','2018-01-01 02:08:43'),(2,'Sport','sport','Activité physique exercée dans le sens du jeu et de l\'effort, et dont la pratique suppose un entraînement méthodique et le respect de règles.','2018-01-01 02:08:43'),(3,'Art','art','L\'art est une activité humaine, le produit de cette activité ou l\'idée que l\'on s\'en fait s\'adressant délibérément aux sens, aux émotions, aux intuitions et à l\'intellect. On peut affirmer que l\'art est le propre de l\'humain, et que cette activité n\'a pas de fonction pratique définie.','2018-01-01 02:08:43'),(4,'Religion','religion','les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo','2018-01-01 02:08:43'),(5,'Culture','culture','les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo','2018-01-01 02:08:43'),(6,'Technologie','technologie','les cates tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo','2018-01-01 02:08:43'),(7,'Events','events','Ce qui arrive et qui a de l\'importance pour l\'homme.','2018-07-20 03:54:56'),(8,'Fond d\'écran','fond-d-cran','Un fond d’écran est une image qui est utilisée comme surface du bureau pour décorer l\'interface graphique d\'un ordinateur, d\'un téléphone portable, ou d\'autres objets électroniques. Selon les systèmes d’exploitation, les termes varient, mais désignent trivialement une image qui est choisie pour décorer le bureau pour un ordinateur, ou l\'écran de verrouillage ou l\'écran d\'accueil sur un téléphone. ','2018-07-22 15:51:16'),(9,'Mariage','mariage','Le mariage est une union conjugale rituelle et contractuelle, à durée illimitée ou indéterminée, reconnue et encadrée par une institution juridique ou religieuse qui en détermine les modalités. Le terme désigne à la fois la cérémonie rituelle, l\'union qui en est issue et l\'institution en définissant les règles. C\'est l\'un des cadres établissant les structures familiales d\'une société.','2018-07-22 17:04:24');
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comments`
+--
+
+DROP TABLE IF EXISTS `comments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comments` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `comment` text NOT NULL,
+  `date_created` datetime DEFAULT NULL,
+  `users_id` bigint(20) unsigned DEFAULT NULL,
+  `blog_id` bigint(20) unsigned DEFAULT NULL,
+  `gallery_id` bigint(20) unsigned DEFAULT NULL,
+  `posts_id` bigint(20) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='les commentaires poster par les users';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comments`
+--
+
+LOCK TABLES `comments` WRITE;
+/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+INSERT INTO `comments` VALUES (5,'Cool','2018-07-20 15:35:59',1,4,NULL,NULL),(7,'C\'est un constat plutôt intéressant, et je crois que ce site peut vite devenir une réponse pour la RDC','2018-08-02 07:35:26',19,4,NULL,NULL),(8,'trop cool','2018-08-02 09:37:39',19,4,NULL,NULL),(9,'intéressant','2018-08-13 13:35:09',19,NULL,294,NULL),(10,'You have a done a nice work ????','2018-08-28 21:51:37',39,NULL,308,NULL),(11,'La belle fleurette','2018-09-04 20:06:03',1,NULL,NULL,9),(12,'ng picture! #samy #serge #doel #manasse #chad ','2018-09-17 07:42:00',32,5,NULL,NULL),(13,'nice','2018-09-17 07:45:24',32,NULL,308,NULL),(14,'ng picture! on fait tout en local','2018-09-17 07:46:48',32,NULL,13,NULL),(15,'pas besoin de facebook ou autres! nous c\'est ng picture (l\'shi)','2018-09-17 07:47:37',32,NULL,13,NULL),(17,'@Elvis, c\'est Ngpictures','2018-09-28 06:26:24',1,5,NULL,NULL),(18,'jolie carte\r\n','2018-10-02 16:30:18',32,NULL,253,NULL);
+/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `following`
+--
+
+DROP TABLE IF EXISTS `following`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `following` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `follower_id` bigint(20) unsigned NOT NULL,
+  `followed_id` bigint(20) unsigned NOT NULL,
+  `date_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COMMENT='module d abonnement pour les users';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `following`
+--
+
+LOCK TABLES `following` WRITE;
+/*!40000 ALTER TABLE `following` DISABLE KEYS */;
+INSERT INTO `following` VALUES (2,1,11,'2018-07-20 22:19:48'),(3,12,11,'2018-07-21 19:22:04'),(4,12,1,'2018-07-21 19:22:07'),(6,1,12,'2018-07-21 22:59:57'),(7,1,13,'2018-07-24 12:11:33'),(8,1,16,'2018-08-02 10:41:19'),(9,1,17,'2018-08-02 10:41:23'),(10,1,18,'2018-08-02 10:41:25'),(11,1,19,'2018-08-02 10:41:29'),(12,1,21,'2018-08-02 10:41:31'),(14,1,39,'2018-08-28 21:51:36'),(15,32,1,'2018-09-08 15:53:02'),(16,32,21,'2018-09-08 15:54:19'),(17,1,29,'2018-09-08 22:08:40'),(18,1,23,'2018-09-09 12:56:02'),(19,1,27,'2018-09-09 12:56:03'),(20,1,26,'2018-09-09 12:56:04'),(21,1,25,'2018-09-09 12:56:05'),(23,1,38,'2018-09-09 12:56:15'),(24,1,32,'2018-09-09 12:56:15'),(26,1,28,'2018-09-28 06:20:30');
+/*!40000 ALTER TABLE `following` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `gallery`
+--
+
+DROP TABLE IF EXISTS `gallery`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `gallery` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `thumb` varchar(500) DEFAULT NULL,
+  `tags` text DEFAULT NULL,
+  `exif` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `slug` varchar(300) DEFAULT NULL,
+  `downloads` bigint(20) NOT NULL DEFAULT 0,
+  `online` smallint(5) NOT NULL DEFAULT 0,
+  `location` text DEFAULT NULL,
+  `color` varchar(10) DEFAULT NULL,
+  `date_created` datetime DEFAULT NULL,
+  `albums_id` bigint(20) unsigned NOT NULL DEFAULT 1,
+  `categories_id` int(10) unsigned NOT NULL DEFAULT 1,
+  `users_id` bigint(20) unsigned NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=321 DEFAULT CHARSET=utf8 COMMENT='la gallery photo';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gallery`
+--
+
+LOCK TABLES `gallery` WRITE;
+/*!40000 ALTER TABLE `gallery` DISABLE KEYS */;
+INSERT INTO `gallery` VALUES (7,'la vie','ngpictures-photo-7.jpg','vie','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','« Notre vie est un voyage constant, de la naissance à la mort, le paysage change, les gens changent, les besoins se transforment, mais le train continue. La vie, c\'est le train, ce n\'est pas la gare. »','ngpictures-photo',1,1,NULL,'#D4B797','2018-07-19 23:41:29',1,3,1),(9,'la pluie de joie','ngpictures-photo-9.jpg','vie','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','La pluie est un phénomène naturel par lequel des gouttes d\'eau tombent des nuages vers le sol. Il s\'agit d\'une des formes les plus communes de précipitations sur Terre. Son rôle est prépondérant dans le cycle de l\'eau.','ngpictures-photo',1,1,NULL,'#2A1615','2018-07-19 23:50:20',1,3,1),(10,'diriger, conduire, être maître de son destin','ngpictures-photo-10.jpg','voiture volant conduire diriger','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Les messages essentiels de l\'existence viennent de nous-mêmes. Ils jaillissent de multiples expériences que nous vivons dans notre corps, notre coeur et notre âme. Ces messages transforment notre compréhension et ouvrent notre conscience aux valeurs de l\'âme. C\'est avec ces valeurs que l\'âme nous guide. Elle nous communique sa puissance de réalisation que nous traduisons dans nos trois oeuvres : familiale, professionnelle et spirituelle.','ngpictures-photo',0,1,NULL,'#100702','2018-07-20 01:09:00',1,3,1),(11,'le regard','ngpictures-photo-11.jpg','regard yeux eyes ','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','La réflexion proposée ici tente de décrire l\'échange des regards entre acteurs sociaux comme un événement spécifique qui joue un rôle déterminant sur la scène sociale. A partir de textes essentiellement littéraires (inscrits dans la culture française), on peut proposer une définition sociologique du &quot; croisement des yeux &quot; dans l\'espace public. Le travail des &quot; coups d\'œil &quot;, recherchés ou évités, tente de renforcer les distances sociales qui sont la règle dans certains lieux publics, dans notre société urbanisée. Croiser les yeux d\'autrui peut être une injure ou une élection selon le contexte; &quot; ne pas être vu &quot; peut donc constituer soit un abandon soit une protection. Mais dans tous les cas de figure, la rencontre des yeux implique un changement de registre dans la communication, comme un appel à l\'investir, au risque de l\'histoire inaugurée alors.\r\n\r\nhttps://journals.openedition.org/terrain/3375','ngpictures-photo',1,1,NULL,'#1D9140','2018-07-20 01:09:56',1,3,1),(12,'noire et blanc, une photographie monochrome','ngpictures-photo-12.jpg','black noire blanc white','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Et si la photographie était essentiellement une affaire de noir et blanc ?\r\nC’est pour ses qualités graphiques et non pour sa capacité à rendre les couleurs que la photographie fut d’abord reconnue comme une pratique artistique à part entière. Jusqu’aux années 1980, le noir et blanc reste en effet le domaine presque exclusif de la photographie d’auteur face à une abondante production en couleur jugée trop commerciale, trop banale et peu digne d’intérêt car trop proche du réel.\r\n\r\nhttp://www.maisondoisneau.agglo-valdebievre.fr/fr/page/tout-en-noir-blanc','ngpictures-photo',2,1,NULL,'#000000','2018-07-20 01:11:03',1,3,1),(13,'noire et blanc, une photographie monochrome ','ngpictures-photo-13.jpg','noire black white blanc','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','La pratique du noir et blanc n’est d’ailleurs pas une opération anodine. L’exercice repose avant tout sur l’observation consciencieuse d’un éclairage et sur l’examen des formes, des contours et des matières qui composent un sujet. L’attitude est volontaire car elle impose de regarder au-delà des apparences afin de prévoir un rendu, afin de saisir un possible dessin photogénique. La 13ème édition du projet Photographie à l’école a plongé 300 élèves de l’agglomération du Val de Bièvre dans l’expérience du noir et blanc pendant l’année scolaire 2013-2014. L’étonnante production et l’exposition qui en résulte soulignent une nouvelle fois que la transposition du réel en une image faite de lignes, de masses et de nuances de gris passe par un méticuleux apprentissage du regard.\r\n\r\nhttp://www.maisondoisneau.agglo-valdebievre.fr/fr/page/tout-en-noir-blanc','ngpictures-photo',0,1,NULL,'#000000','2018-07-20 01:12:10',1,3,1),(14,'noire et blanc, une photographie monochrome','ngpictures-photo-14.jpg','black noire blanc white','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Encadrée par deux photographes professionnels, Yve Flatard et Jean-Jacques Grezet, Photographie à l’école est un cycle de formation intégré au cursus scolaire de 12 classes allant du CE2 au CM2. C’est une expérience globale pour « voir et comprendre » : l’initiation à la technique est associée à la lecture et au décryptage des images au cours d’ateliers et de visites d’expositions. Avec les enseignants, ce travail se poursuit par des activités pédagogiques dans différents domaines comme la lecture, l’écriture, les arts plastiques, ou l’expression orale.\r\n\r\nhttp://www.maisondoisneau.agglo-valdebievre.fr/fr/page/tout-en-noir-blanc','ngpictures-photo',1,1,NULL,'#000000','2018-07-20 01:13:08',1,3,1),(15,'','ngpictures-photo-15.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#511900','2018-07-20 01:15:15',1,1,1),(16,'','ngpictures-photo-16.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#C88E5C','2018-07-20 01:18:39',1,5,1),(17,'','ngpictures-photo-17.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#AC8F57','2018-07-20 01:19:41',1,1,1),(18,'','ngpictures-photo-18.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#24150E','2018-07-20 01:20:51',1,3,1),(19,'','ngpictures-photo-19.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#FFEBC6','2018-07-20 01:21:56',1,1,1),(20,'','ngpictures-photo-20.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#FFF0CF','2018-07-20 01:23:15',1,1,1),(21,'','ngpictures-photo-21.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#8D7C60','2018-07-20 01:26:09',1,1,1),(22,'','ngpictures-photo-22.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#B4A470','2018-07-20 01:28:04',1,1,1),(23,'','ngpictures-photo-23.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#7D5033','2018-07-20 01:28:49',1,5,1),(24,'The river ','ngpictures-the-river-24.jpg','#meta','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-the-river',1,1,NULL,'#000000','2018-07-20 01:33:17',2,3,1),(25,'The river','ngpictures-the-river-25.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-the-river',0,1,NULL,'#000000','2018-07-20 01:34:16',2,3,1),(26,'On the road','ngpictures-on-the-road-26.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-on-the-road',0,1,NULL,'#94955B','2018-07-20 01:35:41',2,3,1),(27,'When sun goes down','ngpictures-when-sun-goes-down-27.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-when-sun-goes-down',0,1,NULL,'#FFE29C','2018-07-20 01:36:43',2,3,1),(28,'When sun goes down','ngpictures-when-sun-goes-down-28.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-when-sun-goes-down',0,1,NULL,'#FFC770','2018-07-20 01:38:04',2,3,1),(29,'When sun goes down','ngpictures-when-sun-goes-down-29.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-when-sun-goes-down',0,1,NULL,'#FFE0A7','2018-07-20 01:39:10',2,3,1),(30,'Lac Moïse Tshombe','ngpictures-lac-mose-tshombe-30.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Fils d\'un homme d\'affaires, Joseph Kapenda Tshombe, aîné de 11 enfants et descendant direct de Mwata Yamvo, roi lunda, Moïse Tshombé est né à Musumba au Congo belge. Il étudia dans une école missionnaire américaine, et étudia ensuite la comptabilité. Dans les années 1950, il développa une chaîne de magasins au Katanga, et s\'impliqua en politique, fondant le parti CONAKAT, prônant un Katanga indépendant.','ngpictures-lac-mose-tshombe',1,1,NULL,'#FFFF8B','2018-07-20 01:42:44',1,5,1),(31,'','ngpictures-photo-31.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#A0595F','2018-07-20 01:48:31',2,1,1),(32,'','ngpictures-photo-32.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#954A47','2018-07-20 01:49:30',2,1,1),(34,'','ngpictures-photo-34.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#2B2C1E','2018-07-20 01:53:19',1,1,1),(35,'','ngpictures-photo-35.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#C09A6B','2018-07-20 01:56:01',2,1,1),(36,'','ngpictures-photo-36.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#000000','2018-07-20 01:57:00',1,3,1),(37,'','ngpictures-photo-37.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#FF812A','2018-07-20 02:00:31',1,3,1),(38,'','ngpictures-photo-38.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#000000','2018-07-20 02:01:19',1,3,1),(39,'L\'amitié','ngpictures-l-amiti-39.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','L\'amitié est l\'un des beaux cadeaux de la vie. Elle nous rend vivants, généreux, nous permet de nous ouvrir à d\'autres façons de penser et de réagir. Des pistes pour l\'entretenir et s\'y épanouir.','ngpictures-l-amiti',1,1,NULL,'#000000','2018-07-20 02:05:48',2,5,1),(40,'L\'amitié','ngpictures-l-amiti-40.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','L\'amitié, comme l\'amour, demande beaucoup d\'efforts, d\'attention, de constance, elle exige surtout de savoir offrir ce que l\'on a de plus cher dans la vie : du temps !','ngpictures-l-amiti',1,1,NULL,'#000000','2018-07-20 02:08:33',1,3,1),(41,'','ngpictures-photo-41.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#9F6900','2018-07-20 02:10:19',1,1,1),(42,'','ngpictures-photo-42.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#FFD684','2018-07-20 02:10:53',1,1,1),(44,'','ngpictures-photo-44.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#C6A56F','2018-07-20 02:11:36',1,1,1),(45,'','ngpictures-photo-45.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#FFFFC7','2018-07-20 02:13:36',1,6,1),(46,'','ngpictures-photo-46.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#000000','2018-07-20 02:14:53',2,3,1),(47,'','ngpictures-photo-47.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#E65A1D','2018-07-20 02:15:48',1,1,1),(48,'','ngpictures-photo-48.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#8E2A06','2018-07-20 02:16:40',1,1,1),(49,'Bob kazadi','ngpictures-bob-kazadi-49.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-bob-kazadi',0,1,NULL,'#000000','2018-07-20 02:18:54',2,1,1),(50,'','ngpictures-photo-50.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#D7E2E6','2018-07-20 02:19:48',1,6,1),(51,'Flowers','ngpictures-flowers-51.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Fleurs arrosées Par les rosées Du mois de mai, Que je vous aime ! Vous que parsème L\'air embaumé !\r\nPar vos guirlandes, Les champs, les landes Sont diaprés : La marguerite Modeste habite Au bord des prés.\r\nLe bluet jette Sa frêle aigrette Dans la moisson ; Et sur les roches Pendent les cloches Du liseron.\r\nLe chèvrefeuille Mêle sa feuille Au blanc jasmin, Et l\'églantine Plie et s\'incline Sur le chemin.\r\nCoupe d\'opale, Sur l\'eau s\'étale Le nénufar ; La nonpareille Offre à l\'abeille Son doux nectar.\r\nSur la verveine Le noir phalène Vient reposer ; La sensitive Se meurt, craintive, Sous un baiser.\r\nDe la pervenche La fleur se penche Sur le cyprès ; L\'onde qui glisse Voit le narcisse Fleurir tout près.\r\nFleurs virginales, A vos rivales, Roses et lis, Je vous préfère, Quand je vais faire Dans les taillis Une couronne Dont j\'environne \r\nMes blonds cheveux, Ou que je donne A la Madone Avec mes vœux.\r\n\r\n#Louise_Colet','ngpictures-flowers',1,1,NULL,'#600001','2018-07-20 02:28:43',1,3,1),(52,'Fleur solitaire','ngpictures-fleur-solitaire-52.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Par un soir ténébreux de l\'arrière-saison. Dans un coup de rafale une graine emportée, Tombant contre les murs d\'une haute prison, Entre de vieux pavés mal joints s\'est arrêtée.\r\nDans ce lit de hasard elle dort tout l\'hiver, Sous des blocs de granit froidement inhumée ; Mais quand au tiède avril le ciel bleu s\'est ouvert, Elle tressaille et germe où le vent l\'a semée.\r\nAlors, comme sortant d\'un funèbre sommeil, Elle émerge à grand\'peine et s\'exhausse de terre, Et d\'un suprême effort aspirant au soleil Elle frémit d\'espoir, la pauvre solitaire.\r\nPuis, grâce à de longs jets flexibles et rampants, S\'attachant par saut brusque ou par lente caresse, Comme la vigne vierge et les rosiers grimpants, Elle escalade enfin la haute forteresse.\r\nQuand elle arrive au bout de son rude chemin, Montant jusqu\'au rebord d\'une étroite fenêtre, Elle étale sa fleur près d\'un visage humain Qu\'elle a vu triste et pâle à la grille apparaître.À plein cœur exhalant son parfum printanier, La fleur s\'épanouit... et meurt dans la soirée ; Mais elle s\'est ouverte aux yeux du prisonnier, Qui seul a pu la voir, qui seul l\'a respirée.\r\n#andre_lemoyne','ngpictures-fleur-solitaire',0,1,NULL,'#720000','2018-07-20 02:34:00',1,3,1),(53,'','ngpictures-photo-53.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#040500','2018-07-20 02:34:49',1,1,1),(54,'','ngpictures-photo-54.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#84150C','2018-07-20 02:35:47',1,1,1),(55,'La joie','ngpictures-la-joie-55.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Oh ces larges beaux jours dont les matins flamboient ! La terre ardente et fière est plus superbe encore Et la vie éveillée est d\'un parfum si fort Que tout l\'être s\'en grise et bondit vers la joie. \r\nSoyez remerciés, mes yeux, D\'être restés si clairs, sous mon front déjà vieux, Pour voir au loin bouger et vibrer la lumière ; \r\nEt vous, mes mains, de tressaillir dans le soleil ; Et vous, mes doigts, de vous dorer aux fruits vermeils Pendus au long du mur, près des roses trémières. \r\nSoyez remercié, mon corps, D\'être ferme, rapide, et frémissant encore Au toucher des vents prompts ou des brises profondes ; Et vous, mon torse droit et mes larges poumons, De respirer, au long des mers ou sur les monts, L\'air radieux et vif qui baigne et mord les mondes, \r\nOh ces matins de fête et de calme beauté ! Roses dont la rosée orne les purs, visages, Oiseaux venus vers nous, comme de blancs présages, Jardins d\'ombre massive ou de frêle clarté ! \r\nA l\'heure où l\'ample été tiédit les avenues, Je vous aime, chemins, par où s\'en est venue Celle qui recélait, entre ses mains, mon sort ; \r\nJe vous aime, lointains marais et bois austères, Et sous mes pieds, jusqu\'au tréfonds, j\'aime la terre Où reposent mes morts. \r\n#emile_verhaeren','ngpictures-la-joie',1,1,NULL,'#9AC0E7','2018-07-20 02:41:05',2,5,1),(56,'','ngpictures-photo-56.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#000000','2018-07-20 02:42:24',1,1,1),(57,'','ngpictures-photo-57.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#000000','2018-07-20 02:43:09',1,1,1),(58,'Lac Moïse Tshombe','ngpictures-lac-mose-tshombe-58.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-lac-mose-tshombe',1,1,NULL,'#000000','2018-07-20 02:44:07',1,5,1),(59,'Arc-en-ciel','ngpictures-arc-en-ciel-59.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Le naturel et le spirituel se marient dans le cours ordinaire de la vie comme les couleurs de l\'arc-en-ciel en fondant dans la limpidité de l\'air. #jacques_ferron','ngpictures-arc-en-ciel',1,1,NULL,'#8D87B7','2018-07-20 02:49:21',1,3,1),(60,'','ngpictures-photo-60.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#000000','2018-07-20 02:51:28',1,1,1),(61,'','ngpictures-photo-61.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#3694C7','2018-07-20 02:55:05',3,1,1),(62,'','ngpictures-photo-62.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#2C8BC1','2018-07-20 02:57:20',3,1,1),(63,'','ngpictures-photo-63.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#552E1D','2018-07-20 03:01:55',3,1,1),(64,'','ngpictures-photo-64.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#482720','2018-07-20 03:04:32',1,1,1),(65,'','ngpictures-photo-65.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#331A15','2018-07-20 03:06:27',3,1,1),(66,'','ngpictures-photo-66.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#D9C195','2018-07-20 03:12:32',3,1,1),(67,'','ngpictures-photo-67.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',2,1,NULL,'#B4090F','2018-07-20 03:13:50',3,1,1),(68,'','ngpictures-photo-68.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#CCB490','2018-07-20 03:14:47',3,1,1),(69,'','ngpictures-photo-69.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#C1AE86','2018-07-20 03:15:54',3,1,1),(70,'','ngpictures-photo-70.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#BF0B16','2018-07-20 03:16:54',3,1,1),(72,'','ngpictures-photo-72.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#F6E3AB','2018-07-20 03:20:53',3,1,1),(73,'','ngpictures-photo-73.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#F9E4AF','2018-07-20 03:22:06',3,1,1),(74,'','ngpictures-photo-74.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#55402F','2018-07-20 03:23:27',1,1,1),(75,'','ngpictures-photo-75.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#F5DCB3','2018-07-20 03:24:37',3,1,1),(76,'','ngpictures-photo-76.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#9A2E00','2018-07-20 03:25:52',3,1,1),(77,'','ngpictures-photo-77.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#FAD9A4','2018-07-20 03:27:04',3,1,1),(78,'','ngpictures-photo-78.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#0C683F','2018-07-20 03:28:08',3,1,1),(79,'','ngpictures-photo-79.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#000000','2018-07-20 03:29:19',2,3,1),(80,'','ngpictures-photo-80.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#000000','2018-07-20 03:32:09',2,3,1),(81,'','ngpictures-photo-81.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#1C2C3B','2018-07-20 03:33:16',1,3,1),(82,'','ngpictures-photo-82.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',2,1,NULL,'#000000','2018-07-20 03:34:07',1,1,1),(84,'','ngpictures-photo-84.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#AD7D66','2018-07-20 03:35:57',1,3,1),(85,'','ngpictures-photo-85.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#B0C8E0','2018-07-20 03:37:13',1,3,1),(86,'','ngpictures-photo-86.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#000000','2018-07-20 03:38:17',1,3,1),(87,'','ngpictures-photo-87.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#000000','2018-07-20 03:39:11',2,3,1),(88,'','ngpictures-photo-88.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#000000','2018-07-20 03:40:26',1,3,1),(89,'','ngpictures-photo-89.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#000000','2018-07-20 03:42:11',1,1,1),(90,'','ngpictures-photo-90.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#000000','2018-07-20 03:42:56',1,6,1),(91,'','ngpictures-photo-91.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#000000','2018-07-20 03:43:58',1,6,1),(92,'','ngpictures-photo-92.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#DE1F17','2018-07-20 03:45:30',2,1,1),(93,'','ngpictures-photo-93.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#060C26','2018-07-20 03:47:26',1,1,1),(94,'','ngpictures-photo-94.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#C97400','2018-07-20 03:48:20',1,1,1),(95,'','ngpictures-photo-95.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#BB8465','2018-07-20 03:50:00',1,1,1),(96,'','ngpictures-photo-96.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#820000','2018-07-20 03:52:30',1,1,1),(97,'','ngpictures-photo-97.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#AB100B','2018-07-20 03:57:07',4,7,1),(98,'','ngpictures-photo-98.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#220000','2018-07-20 03:58:22',1,7,1),(99,'','ngpictures-photo-99.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#310600','2018-07-20 03:59:28',1,7,1),(100,'','ngpictures-photo-100.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#BA774D','2018-07-20 04:00:21',1,7,1),(101,'','ngpictures-photo-101.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#E3FFCC','2018-07-20 04:01:17',1,7,1),(102,'','ngpictures-photo-102.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#006FF5','2018-07-20 04:02:24',4,7,1),(103,'','ngpictures-photo-103.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',4,1,NULL,'#660331','2018-07-20 04:03:49',1,7,1),(104,'','ngpictures-photo-104.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',2,1,NULL,'#0081F9','2018-07-20 04:05:09',4,7,1),(105,'','ngpictures-photo-105.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#00013A','2018-07-20 04:06:25',4,7,1),(106,'','ngpictures-photo-106.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#002077','2018-07-20 04:07:42',4,7,1),(107,'','ngpictures-photo-107.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#001976','2018-07-20 04:09:03',4,7,1),(108,'','ngpictures-photo-108.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#000026','2018-07-20 04:11:04',4,7,1),(109,'','ngpictures-photo-109.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#003CB4','2018-07-20 04:12:16',4,7,1),(110,'','ngpictures-photo-110.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',2,1,NULL,'#01132B','2018-07-20 04:14:17',1,1,1),(111,'','ngpictures-photo-111.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',2,1,NULL,'#7B411B','2018-07-20 04:17:36',1,7,1),(112,'','ngpictures-photo-112.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#491E15','2018-07-20 04:19:53',1,7,1),(113,'','ngpictures-photo-113.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#6F4431','2018-07-20 12:14:56',1,7,1),(114,'','ngpictures-photo-114.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',2,1,NULL,'#462418','2018-07-20 12:18:33',1,7,1),(116,'','ngpictures-photo-116.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#783927','2018-07-20 12:23:29',1,7,1),(117,'','ngpictures-photo-117.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',2,1,NULL,'#522619','2018-07-20 12:29:45',1,7,1),(119,'','ngpictures-photo-119.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',2,1,NULL,'#0E2648','2018-07-20 12:39:38',1,3,1),(120,'','ngpictures-photo-120.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',2,1,NULL,'#000000','2018-07-20 12:42:52',1,3,1),(122,'','ngpictures-photo-122.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',4,1,NULL,'#FF847F','2018-07-20 12:47:12',1,1,1),(123,'','ngpictures-photo-123.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#939DA9','2018-07-20 13:05:07',2,3,1),(124,'','ngpictures-photo-124.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#000000','2018-07-20 13:07:14',1,3,1),(126,'','ngpictures-photo-126.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#FFEBC6','2018-07-20 13:13:22',1,1,1),(127,'benita ndala','ngpictures-photo-127.jpg','benita ndala','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#423F82','2018-07-20 13:15:24',3,3,1),(128,'benita ndala','ngpictures-photo-128.jpg','benita ndala','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#3E3612','2018-07-20 13:18:24',3,3,1),(129,'benita ndala','ngpictures-photo-129.jpg','benita ndala','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',3,1,NULL,'#48468F','2018-07-20 13:20:25',3,3,1),(131,'benita ndala','ngpictures-photo-131.jpg','benita ndala','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#3531A2','2018-07-20 13:29:22',3,3,1),(132,'','ngpictures-photo-132.jpg','benita ndala precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#FFEEB8','2018-07-20 14:09:44',3,3,1),(133,'','ngpictures-photo-133.jpg','benita ndala precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#FFECB4','2018-07-20 14:10:55',3,3,1),(134,'benita ndala','ngpictures-photo-134.jpg','benita ndala','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',7,1,NULL,'#2B2660','2018-07-20 14:12:07',3,3,1),(135,'Audrey mitonga','ngpictures-audrey-mitonga-135.jpg','Audrey mitonga','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-audrey-mitonga',3,1,NULL,'#FAF5B3','2018-07-20 16:03:13',3,1,1),(136,'Audrey mitonga','ngpictures-audrey-mitonga-136.jpg','Audrey mitonga','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-audrey-mitonga',1,1,NULL,'#FFE1A3','2018-07-20 16:10:46',3,1,1),(146,'','ngpictures-photo-146.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',2,1,NULL,'#FBE1A6','2018-07-21 18:39:39',3,1,1),(202,'','ngpictures-photo-202.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#000000','2018-07-25 00:53:01',1,5,1),(203,'','ngpictures-photo-203.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#B5AF73','2018-07-25 00:53:40',2,8,1),(204,'','ngpictures-photo-204.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#C2BAA7','2018-07-25 00:54:22',1,1,1),(205,'','ngpictures-photo-205.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#C3BCAA','2018-07-25 00:54:56',1,1,1),(206,'','ngpictures-photo-206.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#000000','2018-07-25 00:55:33',1,1,1),(207,'','ngpictures-photo-207.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#321A0E','2018-07-25 00:56:35',2,1,1),(208,'','ngpictures-photo-208.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#00A69C','2018-07-25 00:57:14',1,3,1),(209,'','ngpictures-photo-209.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#000000','2018-07-25 00:57:50',2,8,1),(210,'','ngpictures-photo-210.jpg','pieds foot','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#000000','2018-07-25 00:58:53',2,8,1),(211,'','ngpictures-photo-211.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#000000','2018-07-25 01:00:00',2,8,1),(212,'','ngpictures-photo-212.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#000000','2018-07-25 01:01:57',1,8,1),(213,'','ngpictures-photo-213.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#7CC2FE','2018-07-25 01:02:27',1,8,1),(214,'','ngpictures-photo-214.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#695135','2018-07-25 01:03:43',2,7,1),(215,'','ngpictures-photo-215.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#000000','2018-07-25 01:04:07',1,8,1),(216,'','ngpictures-photo-216.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',2,1,NULL,'#FF3145','2018-07-25 01:06:16',1,8,1),(217,'','ngpictures-photo-217.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#8B8956','2018-07-25 01:06:51',2,7,1),(218,'','ngpictures-photo-218.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#797747','2018-07-25 01:07:48',2,7,1),(219,'','ngpictures-photo-219.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#96955F','2018-07-25 01:08:19',2,7,1),(220,'','ngpictures-photo-220.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#030C35','2018-07-25 01:08:49',1,6,1),(221,'','ngpictures-photo-221.jpg','food poulet frite ','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#170922','2018-07-25 01:10:25',1,1,1),(224,'','ngpictures-photo-224.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#EB3767','2018-07-25 01:14:33',5,9,1),(225,'','ngpictures-photo-225.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#FF55AB','2018-07-25 01:16:35',5,9,1),(226,'','ngpictures-photo-226.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#FF4A7D','2018-07-25 01:17:12',5,9,1),(227,'','ngpictures-photo-227.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#FF5BB1','2018-07-25 01:17:48',5,9,1),(228,'','ngpictures-photo-228.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#131A2C','2018-07-25 01:18:27',5,9,1),(229,'','ngpictures-photo-229.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#32436E','2018-07-25 01:18:56',5,9,1),(230,'','ngpictures-photo-230.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#5E0700','2018-07-25 01:19:30',5,9,1),(231,'','ngpictures-photo-231.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#366CC6','2018-07-25 01:23:14',5,9,1),(232,'','ngpictures-photo-232.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#6584B2','2018-07-25 01:24:36',5,9,1),(233,'','ngpictures-photo-233.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#2D3657','2018-07-25 01:26:37',5,9,1),(234,'','ngpictures-photo-234.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#131929','2018-07-25 01:28:01',5,9,1),(235,'','ngpictures-photo-235.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#171C32','2018-07-25 01:29:39',5,9,1),(236,'','ngpictures-photo-236.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#540000','2018-07-25 01:31:47',5,9,1),(237,'','ngpictures-photo-237.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#89141C','2018-07-25 01:34:52',5,9,1),(238,'','ngpictures-photo-238.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#18243A','2018-07-25 01:37:02',5,9,1),(239,'','ngpictures-photo-239.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#9D9181','2018-07-25 01:38:46',5,9,1),(240,'','ngpictures-photo-240.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#57637B','2018-07-25 01:40:55',5,9,1),(241,'','ngpictures-photo-241.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#8F7544','2018-07-25 01:45:50',6,1,1),(242,'','ngpictures-photo-242.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#A59271','2018-07-25 01:48:28',6,1,1),(243,'','ngpictures-photo-243.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#A79476','2018-07-25 01:52:08',6,1,1),(244,'','ngpictures-photo-244.jpg','precylia felo prisca','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#180000','2018-07-25 01:54:08',6,1,1),(245,'','ngpictures-photo-245.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#FF5700','2018-07-25 01:59:25',6,1,1),(246,'','ngpictures-photo-246.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#FF3F00','2018-07-25 02:01:04',6,1,1),(247,'','ngpictures-photo-247.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#FE4600','2018-07-25 02:03:11',6,1,1),(248,'','ngpictures-photo-248.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#FF5700','2018-07-25 02:04:27',6,1,1),(249,'','ngpictures-photo-249.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#FE4600','2018-07-25 02:07:50',6,1,1),(250,'','ngpictures-photo-250.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#FF4900','2018-07-25 02:09:50',6,1,1),(251,'','ngpictures-photo-251.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',2,1,NULL,'#FF5500','2018-07-25 02:11:43',6,1,1),(252,'','ngpictures-photo-252.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#FF3F00','2018-07-25 02:13:39',6,1,1),(253,'','ngpictures-photo-253.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#FE5E00','2018-07-25 02:15:47',6,1,1),(254,'','ngpictures-photo-254.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#BBC4B3','2018-07-25 02:17:32',6,1,1),(255,'','ngpictures-photo-255.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#906835','2018-07-25 02:19:24',6,1,1),(256,'','ngpictures-photo-256.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#000000','2018-07-25 02:21:02',6,3,1),(257,'','ngpictures-photo-257.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#001A67','2018-07-25 02:25:07',6,1,1),(258,'','ngpictures-photo-258.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#89E4FF','2018-07-25 02:27:00',6,1,1),(259,'','ngpictures-photo-259.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#452113','2018-07-25 02:32:13',6,1,1),(260,'','ngpictures-photo-260.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#8CDCFF','2018-07-25 10:51:10',6,1,1),(261,'','ngpictures-photo-261.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#35140D','2018-07-25 10:52:17',6,1,1),(262,'','ngpictures-photo-262.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#85DAFF','2018-07-25 10:53:19',6,1,1),(263,'','ngpictures-photo-263.jpg','precylia felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,0,NULL,'#35140D','2018-07-25 10:55:56',6,1,1),(264,'Novembre numérique 2017','ngpictures-novembre-numrique-2017-264.jpg','samy mwamba','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-novembre-numrique-2017',1,1,NULL,'#3B50A3','2018-07-26 09:13:58',7,6,1),(265,'','ngpictures-photo-265.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#A8CD7D','2018-07-26 09:14:41',7,6,1),(266,'','ngpictures-photo-266.jpg','samy mwamba','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',3,1,NULL,'#262D40','2018-07-26 09:15:29',7,6,1),(267,'','ngpictures-photo-267.jpg','mahid billy pascal','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#7F693A','2018-07-26 09:17:05',7,8,1),(268,'','ngpictures-photo-268.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#C0B3AA','2018-07-27 13:29:44',7,6,1),(269,'','ngpictures-photo-269.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#221215','2018-07-27 13:31:11',7,6,1),(270,'','ngpictures-photo-270.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',0,1,NULL,'#000000','2018-07-27 13:37:14',7,6,1),(272,'','ngpictures-photo-272.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',2,1,NULL,'#818CC4','2018-07-27 13:40:32',7,6,1),(273,'','ngpictures-photo-273.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#FFD475','2018-07-27 13:41:56',7,6,1),(274,'','ngpictures-photo-274.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',3,1,NULL,'#FFBAFF','2018-07-27 13:47:00',7,6,1),(275,'','ngpictures-photo-275.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#B72B34','2018-07-27 13:52:02',7,1,1),(276,'','ngpictures-photo-276.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-photo',1,1,NULL,'#1D1216','2018-07-27 13:55:06',7,6,1),(277,'modelisa walimaji itotafrica','ngpictures-modelisa-walimaji-itotafrica-277.jpg','itotarica itot','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','modelisation de la plateforme walimaji a esis salama','ngpictures-modelisa-walimaji-itotafrica',0,1,NULL,'#626948','2018-08-10 15:44:09',7,6,1),(278,'Gretta Mpunga at Balloy birthday 2018','ngpictures-gretta-mpunga-at-balloy-birthday-2018-278.jpg','balloy fane gretta mpunga','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-gretta-mpunga-at-balloy-birthday-2018',2,1,NULL,'#935E56','2018-08-13 07:56:48',8,7,1),(279,'Balloy Fane, birthday 2018','ngpictures-balloy-fane-birthday-2018-279.jpg','balloy fane naomi','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','enyoging 2018 birthday','ngpictures-balloy-fane-birthday-2018',1,1,NULL,'#8C0000','2018-08-13 08:27:14',8,7,1),(280,'Balloy et Gretta','ngpictures-balloy-et-gretta-280.jpg','balloy fane gretta mpunga','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','enjoying 2018 birthday','ngpictures-balloy-et-gretta',2,1,NULL,'#1B78A4','2018-08-13 08:28:37',8,7,1),(281,'Balloy et Magloire','ngpictures-balloy-et-magloire-281.jpg','meta balloy fane magloire naomie','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','enjoying 2018 birthday','ngpictures-balloy-et-magloire',1,1,NULL,'#31220F','2018-08-13 08:30:02',8,7,1),(282,'young b at balloy birthday 2018','ngpictures-young-b-at-balloy-birthday-2018-282.jpg','bob kazadi young be','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','enjoying balloy birthday 2018','ngpictures-young-b-at-balloy-birthday-2018',1,1,NULL,'#A62D32','2018-08-13 08:42:20',8,7,1),(283,'balloy et aurelie','ngpictures-balloy-et-aurelie-283.jpg','balloy aurelie naomi kiss','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','enjoying balloy birthay 2018','ngpictures-balloy-et-aurelie',1,1,NULL,'#2C2010','2018-08-13 08:44:00',8,7,1),(284,'Prisca felo ','ngpictures-prisca-felo-284.jpg','prisca felo','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','enjoying balloy birthday 2018','ngpictures-prisca-felo',1,1,NULL,'#FF3541','2018-08-13 09:07:44',8,7,1),(285,'Balloy Fane, souffle sa 17eme bougie','ngpictures-balloy-fane-souffle-sa-17eme-bougie-285.jpg','balloy fane naomi','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','enjoying balloy birthday 2018','ngpictures-balloy-fane-souffle-sa-17eme-bougie',0,1,NULL,'#000000','2018-08-13 09:10:21',8,7,1),(286,'Magloire, Rosi at balloy birthday 2018','ngpictures-magloire-rosi-at-balloy-birthday-2018-286.jpg','magloire mata rosi rosanne aurelie','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','enjoying balloy birthday 2018','ngpictures-magloire-rosi-at-balloy-birthday-2018',2,1,NULL,'#8D3108','2018-08-13 09:17:40',8,7,1),(287,'Prisca, Aurelie, Rosi at balloy birthday 2018','ngpictures-prisca-aurelie-rosi-at-balloy-birthday-2018-287.jpg','prisca felo aurelie rosi','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','enjoying balloy birthday 2018','ngpictures-prisca-aurelie-rosi-at-balloy-birthday-2018',1,1,NULL,'#5F3622','2018-08-13 09:20:39',8,7,1),(288,'Enjoying balloy birtday 2018','ngpictures-enjoying-balloy-birtday-2018-288.jpg','prisca felo aurelie rosi balloy naomi kiss','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','enjoying balloy birtday 2018','ngpictures-enjoying-balloy-birtday-2018',1,1,NULL,'#772321','2018-08-13 09:22:36',8,7,1),(289,'Balloy Fane, birthday 2018','ngpictures-balloy-fane-birthday-2018-289.jpg','balloy fane naomi','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','enjoying balloy birthday 2018','ngpictures-balloy-fane-birthday-2018',1,1,NULL,'#3C0B06','2018-08-13 09:24:06',8,7,1),(290,'Balloy Fane, souffle sa 17eme bougie','ngpictures-balloy-fane-souffle-sa-17eme-bougie-290.jpg','balloy fane naomi','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','enjoying balloy birthday 2018\r\n','ngpictures-balloy-fane-souffle-sa-17eme-bougie',2,1,NULL,'#561501','2018-08-13 12:16:40',8,7,1),(291,'Gretta Mpunga','ngpictures-gretta-mpunga-291.jpg','gretta mpunga dogs chien','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-gretta-mpunga',1,1,NULL,'#24ADA5','2018-08-13 12:21:07',9,8,1),(292,'Gretta mpunga','ngpictures-gretta-mpunga-292.jpg','gretta mpunga','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Gretta mpunga shooting 2017','ngpictures-gretta-mpunga',1,1,NULL,'#E1AE8F','2018-08-13 12:23:30',9,7,1),(293,'Gretta mpunga','ngpictures-gretta-mpunga-293.jpg','gretta mpunga','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Gretta mpunga shooting 2017','ngpictures-gretta-mpunga',2,1,NULL,'#29BCB2','2018-08-13 12:25:13',9,7,1),(294,'Gretta mpunga','ngpictures-gretta-mpunga-294.jpg','gretta mpunga','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Gretta mpunga shooting 2017','ngpictures-gretta-mpunga',1,1,NULL,'#B8D88C','2018-08-13 12:26:57',9,7,1),(295,'Gretta mpunga','ngpictures-gretta-mpunga-295.jpg','gretta mpunga femme africaine lushois','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Gretta mpunga shooting 2017','ngpictures-gretta-mpunga',1,1,NULL,'#129B94','2018-08-13 12:31:29',9,5,1),(296,'Gretta mpunga','ngpictures-gretta-mpunga-296.jpg','gretta mpunga femme africaine lushoise','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Gretta mpunga shooting 2017','ngpictures-gretta-mpunga',1,1,NULL,'#9BAF67','2018-08-13 12:33:16',9,7,1),(297,'Gretta mpunga','ngpictures-gretta-mpunga-297.jpg','gretta mpunga femme africaine lushoise','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Gretta mpunga shooting 2017','ngpictures-gretta-mpunga',2,1,NULL,'#CBA693','2018-08-13 12:34:53',9,7,1),(298,'Gretta mpunga','ngpictures-gretta-mpunga-298.jpg','gretta mpunga femme africaine lushoise congo congolaise','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Gretta mpunga shooting 2017','ngpictures-gretta-mpunga',1,1,NULL,'#135352','2018-08-13 12:36:47',9,7,1),(299,'Gretta mpunga','ngpictures-gretta-mpunga-299.jpg','gretta mpunga femme africaine lushoise congo congolaise','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Gretta mpunga shooting 2017','ngpictures-gretta-mpunga',3,1,NULL,'#AE8D7C','2018-08-13 12:38:14',9,7,1),(300,'Gretta mpunga','ngpictures-gretta-mpunga-300.jpg','gretta mpunga femme africaine lushoise congo congolaise','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Gretta mpunga shooting 2017','ngpictures-gretta-mpunga',1,1,NULL,'#825947','2018-08-13 12:40:17',9,7,1),(301,'Gretta mpunga','ngpictures-gretta-mpunga-301.jpg','gretta mpunga femme africaine lushoise congo congolaise dogs chiens','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Gretta mpunga shooting 2017','ngpictures-gretta-mpunga',0,1,NULL,'#CDA999','2018-08-13 12:42:19',9,7,1),(302,'Gretta mpunga','ngpictures-gretta-mpunga-302.jpg','gretta mpunga femme africaine lushoise congo congolaise','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Gretta mpunga shooting 2017','ngpictures-gretta-mpunga',1,1,NULL,'#3EA5A4','2018-08-13 12:44:51',9,7,1),(303,'Gretta mpunga','ngpictures-gretta-mpunga-303.jpg','gretta mpunga femme africaine lushoise congo congolaise dogs chiens','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Gretta mpunga shooting 2017','ngpictures-gretta-mpunga',3,1,NULL,'#227E7D','2018-08-13 12:46:06',9,7,1),(304,'Gretta mpunga','ngpictures-gretta-mpunga-304.jpg','gretta mpunga femme africaine lushoise congo congolaise','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Gretta mpunga shooting 2017','ngpictures-gretta-mpunga',5,1,NULL,'#319E9B','2018-08-13 12:50:44',9,7,1),(305,'Gretta mpunga','ngpictures-gretta-mpunga-305.jpg','gretta mpunga femme africaine lushoise congo congolaise dogs chiens','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Gretta mpunga shooting 2017','ngpictures-gretta-mpunga',5,1,NULL,'#32A2A3','2018-08-13 12:52:03',9,7,1),(308,'Isabelle, parfaite et laurence','ngpictures-isabelle-parfaite-et-laurence-308.jpg','Isabelle parfaite laurence femmes africaines congo congolaise black white noire blanc','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','','ngpictures-isabelle-parfaite-et-laurence',2,1,NULL,'#000000','2018-08-13 13:18:02',3,3,1),(309,'Sephora shoot','ngpictures-sephora-shoot-309.jpg','femme africaine lushoise congo congolaise sephora','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Les vacances sont une période pendant laquelle une personne cesse ses activités habituelles, ansi nous savons passés des vacances en shooting avec sephora , bellarmine et donata','ngpictures-sephora-shoot',0,1,NULL,'#283E00','2018-10-06 21:55:28',12,7,1),(310,'Donata sephora et Bellarmine','ngpictures-donata-sephora-et-bellarmine-310.jpg','donata sephore bellarmine femme africaine lushoise congo congolaise','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Les vacances sont une période pendant laquelle une personne cesse ses activités habituelles, ansi nous savons passés des vacances en shooting avec sephora , bellarmine et donata','ngpictures-donata-sephora-et-bellarmine',0,1,NULL,'#FE0000','2018-10-06 22:02:37',12,7,1),(311,'Donata Bellarmine et Sephora','ngpictures-donata-bellarmine-et-sephora-311.jpg','sephora donata bellarmine femme africaine lushoise congo congolaise','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Les vacances sont une période pendant laquelle une personne cesse ses activités habituelles, ansi nous savons passés des vacances en shooting avec sephora , bellarmine et donata','ngpictures-donata-bellarmine-et-sephora',0,1,NULL,'#FEDC9F','2018-10-06 22:05:39',12,7,1),(312,'Bellarmine et Sephora','ngpictures-bellarmine-et-sephora-312.jpg','bellarmine sephora femme africaine lushoise congo congolaise','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Les vacances sont une période pendant laquelle une personne cesse ses activités habituelles, ansi nous savons passés des vacances en shooting avec sephora , bellarmine et donata','ngpictures-bellarmine-et-sephora',0,1,NULL,'#37601C','2018-10-06 22:10:08',12,7,1),(313,'Donata','ngpictures-donata-313.jpg','donata femme africaine lushoise congo congolaise','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Les vacances sont une période pendant laquelle une personne cesse ses activités habituelles, ansi nous savons passés des vacances en shooting avec sephora , bellarmine et donata','ngpictures-donata',0,1,NULL,'#000000','2018-10-06 22:11:57',12,7,1),(314,'Bellarmine','ngpictures-bellarmine-314.jpg','bellarmine femme africaine lushoise congo congolaise','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Les vacances sont une période pendant laquelle une personne cesse ses activités habituelles, ansi nous savons passés des vacances en shooting avec sephora , bellarmine et donata','ngpictures-bellarmine',0,1,NULL,'#000326','2018-10-06 22:14:50',12,7,1),(315,'Sephora Bellarmine et Donata','ngpictures-sephora-bellarmine-et-donata-315.jpg','sephora bellarmine donata femme africaine lushoise congo congolaise','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Les vacances sont une période pendant laquelle une personne cesse ses activités habituelles, ansi nous savons passés des vacances en shooting avec sephora , bellarmine et donata','ngpictures-sephora-bellarmine-et-donata',0,1,NULL,'#000000','2018-10-06 22:18:32',12,7,1),(316,'Donata Sephora  Bellarmine ','ngpictures-donata-sephora-bellarmine-316.jpg','donata sephora bellarmine femme africaine lushoise congo congolaise','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Les vacances sont une période pendant laquelle une personne cesse ses activités habituelles, ansi nous savons passés des vacances en shooting avec sephora , bellarmine et donata','ngpictures-donata-sephora-bellarmine',0,1,NULL,'#89472D','2018-10-06 22:21:50',12,7,1),(317,'landscape - sephora bellarmine et donata','ngpictures-landscape-sephora-bellarmine-et-donata-317.jpg','femme africaine lushoise congo congolaise','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Les vacances sont une période pendant laquelle une personne cesse ses activités habituelles, ansi nous savons passés des vacances en shooting avec sephora , bellarmine et donata','ngpictures-landscape-sephora-bellarmine-et-donata',0,1,NULL,'#0E1A56','2018-10-06 22:24:20',1,7,1),(318,'landscape - sephora bellarmine et donata','ngpictures-landscape-sephora-bellarmine-et-donata-318.jpg','','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Les vacances sont une période pendant laquelle une personne cesse ses activités habituelles, ansi nous savons passés des vacances en shooting avec sephora , bellarmine et donata','ngpictures-landscape-sephora-bellarmine-et-donata',0,1,NULL,'#15286C','2018-10-06 22:28:27',12,7,1),(319,'Sephora et Bellarmine','ngpictures-sephora-et-bellarmine-319.jpg','bw black white femme africaine lushoise congo congolaise','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Les vacances sont une période pendant laquelle une personne cesse ses activités habituelles, ansi nous savons passés des vacances en shooting avec sephora , bellarmine et donata','ngpictures-sephora-et-bellarmine',0,1,NULL,'#000000','2018-10-06 22:30:00',12,7,1),(320,'Bellarmine','ngpictures-bellarmine-320.jpg','bellarmine femme africaine lushoise congo congolaise','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}','Les vacances sont une période pendant laquelle une personne cesse ses activités habituelles, ansi nous savons passés des vacances en shooting avec sephora , bellarmine et donata','ngpictures-bellarmine',0,0,NULL,'#90715D','2018-10-06 22:33:47',12,7,1);
+/*!40000 ALTER TABLE `gallery` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ideas`
+--
+
+DROP TABLE IF EXISTS `ideas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ideas` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `content` text DEFAULT NULL,
+  `status` char(25) NOT NULL DEFAULT 'unresolved',
+  `date_created` datetime DEFAULT NULL,
+  `users_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='les propositions des users pour les sites';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ideas`
+--
+
+LOCK TABLES `ideas` WRITE;
+/*!40000 ALTER TABLE `ideas` DISABLE KEYS */;
+INSERT INTO `ideas` VALUES (1,'C\'est clean','unresolved','2018-07-19 23:00:08',1),(2,'Clean mais un peu lent','unresolved','2018-07-20 22:25:19',1);
+/*!40000 ALTER TABLE `ideas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `likes`
+--
+
+DROP TABLE IF EXISTS `likes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `likes` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `date_created` datetime DEFAULT NULL,
+  `gallery_id` bigint(20) unsigned DEFAULT NULL,
+  `blog_id` bigint(20) unsigned DEFAULT NULL,
+  `posts_id` bigint(20) unsigned DEFAULT NULL,
+  `users_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8 COMMENT='enregistrement des likes pour les users';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `likes`
+--
+
+LOCK TABLES `likes` WRITE;
+/*!40000 ALTER TABLE `likes` DISABLE KEYS */;
+INSERT INTO `likes` VALUES (3,'2018-07-20 01:58:29',NULL,NULL,3,1),(4,'2018-07-20 02:44:46',55,NULL,NULL,1),(6,'2018-07-20 15:06:41',131,NULL,NULL,1),(7,'2018-07-20 22:28:17',39,NULL,NULL,1),(8,'2018-07-20 22:31:27',NULL,4,NULL,1),(9,'2018-07-22 00:13:59',NULL,NULL,5,1),(10,'2018-08-02 07:34:26',NULL,4,NULL,19),(11,'2018-08-18 07:50:44',NULL,NULL,7,1),(63,'2018-08-24 13:13:02',NULL,NULL,9,28),(64,'2018-08-26 21:31:58',NULL,NULL,9,1),(65,'2018-08-26 21:44:04',9,NULL,NULL,1),(66,'2018-09-04 20:05:12',NULL,NULL,4,1),(67,'2018-09-04 20:05:19',NULL,NULL,6,1),(68,'2018-09-04 20:05:23',NULL,NULL,10,1),(69,'2018-09-04 20:05:26',NULL,NULL,11,1),(70,'2018-09-08 15:56:35',NULL,4,NULL,32),(71,'2018-09-09 13:16:50',NULL,5,NULL,1),(93,'2018-09-13 18:14:11',NULL,NULL,12,1),(94,'2018-09-13 18:53:27',NULL,NULL,11,28),(95,'2018-09-13 18:53:31',NULL,NULL,10,28),(96,'2018-09-13 18:54:47',NULL,NULL,12,28),(97,'2018-09-13 18:54:55',NULL,NULL,7,28),(98,'2018-09-13 18:55:00',NULL,NULL,6,28),(99,'2018-09-13 18:55:14',NULL,NULL,4,28),(100,'2018-09-16 12:53:26',NULL,NULL,13,1),(101,'2018-09-17 07:40:56',NULL,5,NULL,32),(102,'2018-09-21 18:21:57',NULL,NULL,14,1),(104,'2018-10-02 16:15:17',NULL,NULL,15,32),(105,'2018-10-02 16:15:22',NULL,NULL,14,32),(106,'2018-10-02 16:15:27',NULL,NULL,13,32),(107,'2018-10-02 16:15:29',NULL,NULL,12,32),(108,'2018-10-02 16:15:33',NULL,NULL,11,32),(109,'2018-10-02 16:15:35',NULL,NULL,10,32),(110,'2018-10-02 16:15:38',NULL,NULL,9,32),(111,'2018-10-02 16:15:42',NULL,NULL,7,32),(112,'2018-10-02 16:15:50',NULL,NULL,6,32),(113,'2018-10-02 16:29:55',253,NULL,NULL,32);
+/*!40000 ALTER TABLE `likes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `locations`
+--
+
+DROP TABLE IF EXISTS `locations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `locations` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR( 60 ) NOT NULL,
-  `address` VARCHAR( 80 ) NOT NULL,
-  `lat` FLOAT( 10, 6 ) NOT NULL,
-  `lng` FLOAT( 10, 6 ) NOT NULL,
-  `type` VARCHAR( 30 ) NOT NULL DEFAULT 'Photographes',
-  `photographers_id` BIGINT UNSIGNED NOT NULL,
-  PRIMARY KEY(`id`),
-  CONSTRAINT `fk_locations_photographers1` FOREIGN KEY (`photographers_id`) REFERENCES `photographers` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = 'la table qui localise les photographes';
-
-CREATE INDEX `fk_photographers_photographers1_idx` ON `locations` (`photographers_id` ASC);
-
--- -----------------------------------------------------
--- Table `verses`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `verses` ;
-
-CREATE TABLE IF NOT EXISTS `verses` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `text` VARCHAR(1000) NOT NULL,
-  `ref` VARCHAR(25) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = MyISAM
-COMMENT = 'les versets pour le module GODFIRST';
-
-
--- -----------------------------------------------------
--- Table `albums`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `albums` ;
-
-CREATE TABLE IF NOT EXISTS `albums` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(500) NOT NULL,
-  `description` TEXT NULL,
-  `slug` VARCHAR(600) NOT NULL,
-  `code` VARCHAR(45) NOT NULL,
-  `status` CHAR(25) NULL DEFAULT 'public',
-  `online` SMALLINT(5) NOT NULL DEFAULT 1,
-  `date_created` DATETIME NOT NULL,
-  `photographers_id` BIGINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_albums_photographers1` FOREIGN KEY (`photographers_id`) REFERENCES `photographers` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = 'les differents albums pour la galerie et les posts';
-
-CREATE INDEX `fk_albums_photographers1_idx` ON `albums` (`photographers_id` ASC);
-CREATE UNIQUE INDEX `code_UNIQUE` ON `albums` (`code` ASC);
-
-
--- -----------------------------------------------------
--- Table `categories`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `categories` ;
-
-CREATE TABLE IF NOT EXISTS `categories` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(255) NOT NULL,
-  `slug` VARCHAR(300) NOT NULL,
-  `description` TEXT NULL,
-  `date_created` DATETIME NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-COMMENT = 'les categories pour les differents type de publication';
-
-
--- -----------------------------------------------------
--- Table `blog`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `blog` ;
-
-CREATE TABLE IF NOT EXISTS `blog` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(255) NOT NULL,
-  `slug` VARCHAR(300) NOT NULL,
-  `content` LONGTEXT NULL,
-  `thumb` VARCHAR(500) NULL,
-  `exif` TEXT NULL,
-  `location` TEXT NULL,
-  `color` VARCHAR(10) NULL,
-  `downloads` BIGINT NOT NULL DEFAULT 0,
-  `online` SMALLINT(5) NOT NULL DEFAULT 0,
-  `date_created` DATETIME NULL,
-  `users_id` BIGINT UNSIGNED NOT NULL DEFAULT 1,
-  `categories_id` INT UNSIGNED NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_blog_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_blog_categories1` FOREIGN KEY (`categories_id`) REFERENCES `categories` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = 'les articles des photographes';
-
-CREATE INDEX `fk_blog_users1_idx` ON `blog` (`users_id` ASC);
-CREATE INDEX `fk_blog_categories1_idx` ON `blog` (`categories_id` ASC);
-
-
--- -----------------------------------------------------
--- Table `bugs`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bugs` ;
-
-CREATE TABLE IF NOT EXISTS `bugs` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `content` TEXT NOT NULL,
-  `status` CHAR(25) NOT NULL DEFAULT 'unresolved',
-  `date_created` DATETIME NULL,
-  `users_id` BIGINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_bugs_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = 'bugs rencontrer sur l applicaiton par les users';
-
-CREATE INDEX `fk_bugs_users1_idx` ON `bugs` (`users_id` ASC);
-
-
--- -----------------------------------------------------
--- Table `ideas`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `ideas` ;
-
-CREATE TABLE IF NOT EXISTS `ideas` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `content` TEXT NULL,
-  `status` CHAR(25) NOT NULL DEFAULT 'unresolved',
-  `date_created` DATETIME NULL,
-  `users_id` BIGINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_ideas_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = 'les propositions des users pour les sites';
-
-CREATE INDEX `fk_ideas_users1_idx` ON `ideas` (`users_id` ASC);
-
-
--- -----------------------------------------------------
--- Table `gallery`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `gallery` ;
-
-CREATE TABLE IF NOT EXISTS `gallery` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(255) NULL,
-  `thumb` VARCHAR(500) NULL,
-  `tags` TEXT NULL,
-  `exif` TEXT NULL,
-  `description` TEXT NULL,
-  `slug` VARCHAR(300) NULL,
-  `downloads` BIGINT NOT NULL DEFAULT 0,
-  `online` SMALLINT(5) NOT NULL DEFAULT 0,
-  `location` TEXT NULL,
-  `color` VARCHAR(10) NULL,
-  `date_created` DATETIME NULL,
-  `albums_id` BIGINT UNSIGNED NOT NULL DEFAULT 1,
-  `categories_id` INT UNSIGNED NOT NULL DEFAULT 1,
-  `users_id` BIGINT UNSIGNED NOT NULL  DEFAULT 1,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_gallery_albums1` FOREIGN KEY (`albums_id`) REFERENCES `albums` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_gallery_categories1` FOREIGN KEY (`categories_id`) REFERENCES `categories` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_gallery_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = 'la gallery photo';
-
-CREATE INDEX `fk_gallery_albums1_idx` ON `gallery` (`albums_id` ASC);
-
-CREATE INDEX `fk_gallery_categories1_idx` ON `gallery` (`categories_id` ASC);
-
-CREATE INDEX `fk_gallery_users1_idx` ON `gallery` (`users_id` ASC);
-
-
--- -----------------------------------------------------
--- Table `posts`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `posts` ;
-
-CREATE TABLE IF NOT EXISTS `posts` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(255) NULL,
-  `slug` VARCHAR(300) NULL,
-  `content` LONGTEXT NULL,
-  `thumb` VARCHAR(500) NULL,
-  `exif` TEXT NULL,
-  `location` TEXT NULL,
-  `color` VARCHAR(10) NULL,
-  `downloads` BIGINT NOT NULL DEFAULT 0,
-  `online` SMALLINT(5) NOT NULL DEFAULT 1,
-  `date_created` DATETIME NULL,
-  `categories_id` INT UNSIGNED NOT NULL DEFAULT 1,
-  `users_id` BIGINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_posts_categories1` FOREIGN KEY (`categories_id`) REFERENCES `categories` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_posts_users1` FOREIGN KEY (`users_id`)  REFERENCES `users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = 'les publications des membres';
-
-CREATE INDEX `fk_posts_categories1_idx` ON `posts` (`categories_id` ASC);
-
-CREATE INDEX `fk_posts_users1_idx` ON `posts` (`users_id` ASC);
-
-
--- -----------------------------------------------------
--- Table `comments`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `comments` ;
-
-CREATE TABLE IF NOT EXISTS `comments` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `comment` TEXT NOT NULL,
-  `date_created` DATETIME NULL,
-  `users_id` BIGINT UNSIGNED NULL,
-  `blog_id` BIGINT UNSIGNED NULL,
-  `gallery_id` BIGINT UNSIGNED NULL,
-  `posts_id` BIGINT UNSIGNED NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-COMMENT = 'les commentaires poster par les users';
-
-CREATE INDEX `fk_comments_users1_idx` ON `comments` (`users_id` ASC);
-CREATE INDEX `fk_comments_blog1_idx` ON `comments` (`blog_id` ASC);
-CREATE INDEX `fk_comments_gallery1_idx` ON `comments` (`gallery_id` ASC);
-CREATE INDEX `fk_comments_posts1_idx` ON `comments` (`posts_id` ASC);
-
-
--- -----------------------------------------------------
--- Table `following`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `following` ;
-
-CREATE TABLE IF NOT EXISTS `following` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `follower_id` BIGINT UNSIGNED NOT NULL,
-  `followed_id` BIGINT UNSIGNED NOT NULL,
-  `date_created` DATETIME NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_follower_id` FOREIGN KEY (`follower_id`) REFERENCES `users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_followed_id` FOREIGN KEY (`followed_id`) REFERENCES `users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = 'module d abonnement pour les users';
-
-CREATE INDEX `fk_follower_id_idx` ON `following` (`follower_id` ASC);
-CREATE INDEX `fk_followed_id_idx` ON `following` (`followed_id` ASC);
-
-
--- -----------------------------------------------------
--- Table `likes`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `likes` ;
-
-CREATE TABLE IF NOT EXISTS `likes` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `date_created` DATETIME NULL,
-  `gallery_id` BIGINT UNSIGNED NULL,
-  `blog_id` BIGINT UNSIGNED NULL,
-  `posts_id` BIGINT UNSIGNED NULL,
-  `users_id` BIGINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-COMMENT = 'enregistrement des likes pour les users';
-
-CREATE INDEX `fk_likes_gallery1_idx` ON `likes` (`gallery_id` ASC);
-CREATE INDEX `fk_likes_blog1_idx` ON `likes` (`blog_id` ASC);
-CREATE INDEX `fk_likes_posts1_idx` ON `likes` (`posts_id` ASC);
-CREATE INDEX `fk_likes_users1_idx` ON `likes` (`users_id` ASC);
-
-
--- -----------------------------------------------------
--- Table `notifications`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `notifications` ;
-
-CREATE TABLE IF NOT EXISTS `notifications` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `type` SMALLINT(5) UNSIGNED NOT NULL,
-  `notification` TEXT NOT NULL,
-  `status` SMALLINT(5) NOT NULL DEFAULT 0,
-  `publication_id` BIGINT NOT NULL,
-  `date_created` DATETIME NULL,
-  `users_id` BIGINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_notifications_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = 'la table gere le stockage des nofication pendans un certain temps';
-
-CREATE INDEX `fk_notifications_users1_idx` ON `notifications` (`users_id` ASC);
-
-
--- -----------------------------------------------------
--- Table `saves`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `saves` ;
-
-CREATE TABLE IF NOT EXISTS `saves` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `date_created` DATETIME NULL,
-  `gallery_id` BIGINT UNSIGNED NULL,
-  `blog_id` BIGINT UNSIGNED NULL,
-  `posts_id` BIGINT UNSIGNED NULL,
-  `users_id` BIGINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-COMMENT = 'les collections pour les users';
-
-CREATE INDEX `fk_saves_gallery1_idx` ON `saves` (`gallery_id` ASC);
-CREATE INDEX `fk_saves_blog1_idx` ON `saves` (`blog_id` ASC);
-CREATE INDEX `fk_saves_posts1_idx` ON `saves` (`posts_id` ASC);
-CREATE INDEX `fk_saves_users1_idx` ON `saves` (`users_id` ASC);
-
-
--- -----------------------------------------------------
--- Table `online`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `online` ;
-
-CREATE TABLE IF NOT EXISTS `online` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `online_time` TIMESTAMP NOT NULL,
-  `date_created` TIMESTAMP NOT NULL,
-  `users_id` BIGINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_online_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = 'les users connecter';
-
-CREATE INDEX `fk_online_users1_idx` ON `online` (`users_id` ASC);
-
-
--- -----------------------------------------------------
--- Table `reports`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `reports` ;
-
-CREATE TABLE IF NOT EXISTS `reports` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `type` SMALLINT(5) NOT NULL,
-  `content` TEXT NOT NULL,
-  `publication_id` BIGINT UNSIGNED NOT NULL,
-  `date_created` DATETIME NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-COMMENT = 'les publications signaler par les users';
-
-
--- -----------------------------------------------------
--- Table `booking`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `booking` ;
-
-CREATE TABLE IF NOT EXISTS `booking` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(255) NOT NULL,
-  `email` VARCHAR(300) NOT NULL,
-  `date` VARCHAR(45) NOT NULL,
-  `time` VARCHAR(45) NOT NULL,
-  `description` TEXT NOT NULL,
-  `photographers_id` BIGINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_booking_photographers1` FOREIGN KEY (`photographers_id`) REFERENCES `photographers` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = 'la table de reservation de shooting';
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) NOT NULL,
+  `address` varchar(80) NOT NULL,
+  `lat` float(10,6) NOT NULL,
+  `lng` float(10,6) NOT NULL,
+  `type` varchar(30) NOT NULL DEFAULT 'Photographes',
+  `photographers_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='la table qui localise les photographes';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `locations`
+--
+
+LOCK TABLES `locations` WRITE;
+/*!40000 ALTER TABLE `locations` DISABLE KEYS */;
+INSERT INTO `locations` VALUES (1,'Ngpictures','Lubumbashi, RDC lac kipopo 10465',-11.646862,27.468809,'Bureau',1),(2,'Jesse Kamba','Kolwezi sncc',-10.714315,25.480190,'Bureau',3);
+/*!40000 ALTER TABLE `locations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `notifications`
+--
+
+DROP TABLE IF EXISTS `notifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `notifications` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `type` smallint(5) unsigned NOT NULL,
+  `notification` text NOT NULL,
+  `status` smallint(5) NOT NULL DEFAULT 0,
+  `publication_id` bigint(20) NOT NULL,
+  `date_created` datetime DEFAULT NULL,
+  `users_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COMMENT='la table gere le stockage des nofication pendans un certain temps';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notifications`
+--
+
+LOCK TABLES `notifications` WRITE;
+/*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
+INSERT INTO `notifications` VALUES (1,1,'bernard ng a ajouté une nouvelle photo : « Jay kts »',0,5,'2018-07-21 23:55:10',12),(2,1,'bernard ng a ajouté une nouvelle photo.',0,6,'2018-07-30 17:15:08',12),(6,3,'Houdini a commenté votre publication : « intéressant »',0,294,'2018-08-13 13:35:09',1),(7,1,'bernard ng a ajouté une nouvelle photo : « Génération influente »',0,8,'2018-08-18 07:49:49',12),(8,2,'bernard ng a aimé votre publication : « Icon posture »',0,7,'2018-08-18 07:50:44',19),(9,2,'bernard ng a aimé votre publication : « La nature dans sa splendeur  »',0,9,'2018-08-26 21:31:58',28),(10,3,'Tabs  a commenté votre publication : « You have a done a nice work ???? »',0,308,'2018-08-28 21:51:37',1),(11,2,'Tabs  a aimé votre publication : « Isabelle, parfaite et laurence »',0,308,'2018-08-28 21:51:55',1),(12,2,'bernard ng a aimé votre publication : « La pièce  »',0,10,'2018-09-04 20:05:23',28),(13,2,'bernard ng a aimé votre publication.',0,11,'2018-09-04 20:05:26',28),(14,3,'bernard ng a commenté votre publication : « La belle fleurette »',0,9,'2018-09-04 20:06:03',28),(15,2,'Elvis a aimé votre publication : « Ngpictures l\'histoire »',0,4,'2018-09-08 15:56:35',1),(16,1,'Toussaint a ajouté une nouvelle photo.',0,12,'2018-09-13 15:38:33',1),(17,2,'Toussaint a aimé votre publication : « Icon posture »',0,7,'2018-09-13 18:54:55',19),(18,2,'Toussaint a aimé votre publication.',0,6,'2018-09-13 18:55:00',1),(19,2,'Toussaint a aimé votre publication : « Bienvenue sur Ngpictures »',0,4,'2018-09-13 18:55:14',1),(20,1,'Toussaint a ajouté une nouvelle photo.',0,13,'2018-09-15 16:09:26',1),(21,1,'bernard ng a ajouté une nouvelle photo : « Statut de la liberté lushoise »',0,14,'2018-09-16 12:58:21',32),(22,1,'bernard ng a ajouté une nouvelle photo : « Statut de la liberté lushoise »',0,14,'2018-09-16 12:58:21',12),(23,2,'Elvis a aimé votre publication : « Je laisserai une histoire »',0,5,'2018-09-17 07:40:56',1),(24,3,'Elvis a commenté votre publication : « ng picture! #samy #serge #doel #manasse #chad  »',0,5,'2018-09-17 07:42:00',1),(25,3,'Elvis a commenté votre publication : « nice »',0,308,'2018-09-17 07:45:24',1),(26,3,'Elvis a commenté votre publication : « ng picture! on fait tout en local »',0,13,'2018-09-17 07:46:48',1),(27,3,'Elvis a commenté votre publication : « pas besoin de facebook ou autres! nous c\'est ng ... »',0,13,'2018-09-17 07:47:37',1),(28,1,'bernard ng a ajouté une nouvelle photo.',0,15,'2018-10-01 16:58:44',32),(29,1,'bernard ng a ajouté une nouvelle photo.',0,15,'2018-10-01 16:58:44',12),(30,2,'Elvis a aimé votre publication : « l\'IA »',0,15,'2018-10-02 16:15:05',1),(31,2,'Elvis a aimé votre publication : « Statut de la liberté lushoise »',0,14,'2018-10-02 16:15:22',1),(32,2,'Elvis a aimé votre publication.',0,13,'2018-10-02 16:15:27',28),(33,2,'Elvis a aimé votre publication : « La pièce  »',0,10,'2018-10-02 16:15:35',28),(34,2,'Elvis a aimé votre publication : « La nature dans sa splendeur  »',0,9,'2018-10-02 16:15:38',28),(35,2,'Elvis a aimé votre publication : « Icon posture »',0,7,'2018-10-02 16:15:42',19),(36,2,'Elvis a aimé votre publication.',0,6,'2018-10-02 16:15:50',1),(37,3,'Elvis a commenté votre publication : « jolie carte\r\n »',0,253,'2018-10-02 16:30:18',1);
+/*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `online`
+--
+
+DROP TABLE IF EXISTS `online`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `online` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `online_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `date_created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `users_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='les users connecter';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `online`
+--
+
+LOCK TABLES `online` WRITE;
+/*!40000 ALTER TABLE `online` DISABLE KEYS */;
+/*!40000 ALTER TABLE `online` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `photographers`
+--
+
+DROP TABLE IF EXISTS `photographers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `photographers` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `label` varchar(120) NOT NULL,
+  `location` text DEFAULT NULL,
+  `phone` varchar(25) NOT NULL,
+  `email` varchar(60) DEFAULT NULL,
+  `users_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='la table qui contient et gère les photographes';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `photographers`
+--
+
+LOCK TABLES `photographers` WRITE;
+/*!40000 ALTER TABLE `photographers` DISABLE KEYS */;
+INSERT INTO `photographers` VALUES (1,'Ngpictures','lac kipopo','+243892530482','ngpictures@gmail.com',1),(2,'Dimepiece','anastakitungwa1811@gmail.com','+243973285382','anastakitungwa1811@gmail.com',21),(3,'Nestapic','Kolwezi sncc','0991351279','kambajesse@gmail.com',29),(4,'Unique','ndjeke golf malela','+24977756377','elviskankola1@gmail.com',32);
+/*!40000 ALTER TABLE `photographers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `posts`
+--
+
+DROP TABLE IF EXISTS `posts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `posts` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `slug` varchar(300) DEFAULT NULL,
+  `content` longtext DEFAULT NULL,
+  `thumb` varchar(500) DEFAULT NULL,
+  `exif` text DEFAULT NULL,
+  `location` text DEFAULT NULL,
+  `color` varchar(10) DEFAULT NULL,
+  `downloads` bigint(20) NOT NULL DEFAULT 0,
+  `online` smallint(5) NOT NULL DEFAULT 1,
+  `date_created` datetime DEFAULT NULL,
+  `categories_id` int(10) unsigned NOT NULL DEFAULT 1,
+  `users_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='les publications des membres';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `posts`
+--
+
+LOCK TABLES `posts` WRITE;
+/*!40000 ALTER TABLE `posts` DISABLE KEYS */;
+INSERT INTO `posts` VALUES (4,'Bienvenue sur Ngpictures','bienvenue-sur-ngpictures','Ngpictures is a photo gallery and a mini social network for photographer and photography enthusiast, We propose you to discover photography differently, with our different services being Christian the application offers you an incredible feature, godfirst: share and read the word of God with more than 500 verses chosen for you in advance. Learn more ','ngpictures-bienvenue-sur-ngpictures-4.jpg','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}',NULL,'#000000',0,1,'2018-07-20 23:13:01',7,1),(6,'','publication','','ngpictures-publication-6.jpg','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}',NULL,'#000000',0,1,'2018-07-30 17:15:03',1,1),(7,'Icon posture','icon-posture','','ngpictures-icon-posture-7.jpg','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}',NULL,'#FBFBFB',4,1,'2018-08-02 07:43:58',1,19),(9,'La nature dans sa splendeur ','la-nature-dans-sa-splendeur','','ngpictures-la-nature-dans-sa-splendeur-9.jpg','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}',NULL,'#736042',1,1,'2018-08-24 05:18:02',1,28),(10,'La pièce ','la-pice','','ngpictures-la-pice-10.jpg','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}',NULL,'#523D2A',0,1,'2018-08-24 13:11:46',3,28),(11,'','publication','','ngpictures-publication-11.jpg','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}',NULL,'#F2DE87',1,1,'2018-08-26 20:04:27',3,28),(12,'','publication','','ngpictures-publication-12.jpg','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}',NULL,'#AAACBB',0,1,'2018-09-13 15:38:28',3,28),(13,'','publication','','ngpictures-publication-13.jpg','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}',NULL,'#000000',1,1,'2018-09-15 16:09:17',3,28),(14,'Statut de la liberté lushoise','statut-de-la-libert-lushoise','','ngpictures-statut-de-la-libert-lushoise-14.jpg','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}',NULL,'#000000',0,1,'2018-09-16 12:58:12',1,1),(15,'l\'IA','l-ia','Un raspberry pi','ngpictures-publication-15.jpg','{\"ISOSpeedRatings\":\"inconnu\",\"Flash\":\"inconnu\",\"Model\":\"inconnu\",\"ExposureTime\":\"inconnu\",\"FocalLength\":\"inconnu\",\"ResolutionUnit\":\"inconnu\",\"COMPUTED\":\"inconnu\"}',NULL,'#554224',0,1,'2018-10-01 16:58:33',1,1);
+/*!40000 ALTER TABLE `posts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reports`
+--
+
+DROP TABLE IF EXISTS `reports`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `reports` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `type` smallint(5) NOT NULL,
+  `content` text NOT NULL,
+  `publication_id` bigint(20) unsigned NOT NULL,
+  `date_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='les publications signaler par les users';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reports`
+--
+
+LOCK TABLES `reports` WRITE;
+/*!40000 ALTER TABLE `reports` DISABLE KEYS */;
+INSERT INTO `reports` VALUES (1,3,'Love',4,'2018-07-20 16:58:09'),(2,1,'C\'est bizarre',3,'2018-07-20 22:33:00');
+/*!40000 ALTER TABLE `reports` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `saves`
+--
+
+DROP TABLE IF EXISTS `saves`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `saves` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `date_created` datetime DEFAULT NULL,
+  `gallery_id` bigint(20) unsigned DEFAULT NULL,
+  `blog_id` bigint(20) unsigned DEFAULT NULL,
+  `posts_id` bigint(20) unsigned DEFAULT NULL,
+  `users_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='les collections pour les users';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `saves`
+--
+
+LOCK TABLES `saves` WRITE;
+/*!40000 ALTER TABLE `saves` DISABLE KEYS */;
+INSERT INTO `saves` VALUES (1,'2018-07-21 20:19:19',NULL,4,NULL,1),(2,'2018-07-21 22:52:41',39,NULL,NULL,1),(3,'2018-07-21 23:56:24',NULL,NULL,5,1),(4,'2018-07-21 23:56:29',NULL,NULL,4,1),(5,'2018-08-09 18:05:20',NULL,NULL,7,1),(6,'2018-08-18 07:52:54',NULL,NULL,8,1),(7,'2018-08-26 21:31:30',NULL,NULL,11,1);
+/*!40000 ALTER TABLE `saves` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `facebook_id` bigint(20) unsigned DEFAULT NULL,
+  `name` varchar(45) NOT NULL,
+  `email` varchar(60) NOT NULL,
+  `password` text NOT NULL,
+  `phone` varchar(25) DEFAULT NULL,
+  `bio` varchar(500) NOT NULL DEFAULT 'Hey, suis sur ngpictures 2.0',
+  `avatar` varchar(120) DEFAULT 'default.jpg',
+  `confirmation_token` varchar(75) DEFAULT NULL,
+  `confirmed_at` datetime DEFAULT NULL,
+  `reset_token` varchar(75) DEFAULT NULL,
+  `reset_at` datetime DEFAULT NULL,
+  `remember_token` varchar(75) DEFAULT NULL,
+  `status` char(25) NOT NULL DEFAULT 'public',
+  `rank` char(25) NOT NULL DEFAULT 'user',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COMMENT='la table qui soccupe de la gestion dles membres';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,NULL,'bernard ng','ngandubernard@gmail.com','$2y$10$1x9I5X7SpcdiB1noqFk.OuvEBYHIRKZVc3y5vrFuOo8puyN.fqimi','243892530482','J\'ai toujours voulu partager ma passion pour la photographie avec le reste du monde, voilà qu\'aujourd\'hui cela est possible grâce à #ngpictures, je me suis intéressé à la photographie car elle m\'a permis de m\'exprimer sans l\'usage des mots. ansi #ngpictures est notre moyen d\'expression à tous.','ngpictures-avatar-1.jpg',NULL,'2017-12-16 00:09:39','5b90dd613f021FHvc5tjaHjyoEK1eSp9O1HQABHwR9oYsdYoXVipyaYe0Gx2','2018-09-06 07:55:13','7963.5b522b0320','public','admin'),(11,NULL,'Naomi Fane','naomiballoy0041@gmail.com','$2y$10$BwmFMOxzyXwXhTSl9L4VZuHfnq9sbSbeSqal7UMRIUSqU/1q3DeyO',NULL,'Hey, suis sur ngpictures 2.0','default.jpg',NULL,'2018-07-20 20:16:32',NULL,NULL,NULL,'public','user'),(12,NULL,'overcom','sabinkabamba@gmail.com','$2y$10$dOUdQ91j3/STrrGMKo7lweOfF11oh4miJ4/0oKzkYK7Sk6sM8FKtK','0898180406','Hey, je suis overcom ... Et je suis passionné par les photos ','ngpictures-avatar-12.jpg',NULL,'2018-07-21 18:30:49','5b751e373455aQLhkqJ0CPuIG5hTUc1IvsjIQv2YsENZpEqzSMefRKaezmOV','2018-08-16 06:48:23',NULL,'public','user'),(13,NULL,'Gaëlly ','gaellynkulu@gmail.com','$2y$10$qx1D2ELWdw4Z8vxK3IK/FufMef5WwKYvjYuupIVdfV0HRU41RaWT6',NULL,'Hey, suis sur ngpictures 2.0','default.jpg',NULL,'2018-07-24 12:09:33',NULL,NULL,NULL,'public','user'),(15,NULL,'Gaël Buzz','gaelbalo9@gmail.com','$2y$10$4eZRTND7.NwaTYlx430wHeLMQJcP6dNWE/JO402NWE5bVhQX3iIoa',NULL,'Hey, suis sur ngpictures 2.0','default.jpg','5b58dd4bc688aKVAj9j3yX5nErKIuKIyI5cszoBpGuYeOdOelxuBYtPANfLf',NULL,NULL,NULL,NULL,'public','user'),(16,NULL,'Walback','walbackservice@gmail.com','$2y$10$S6Mc5JNd//CrzVvz25yxE.mPquGNIyyKHJ2hwWSzjVH96BulDfyRW',NULL,'Hey, suis sur ngpictures 2.0','default.jpg',NULL,'2018-07-26 12:29:22',NULL,NULL,NULL,'public','user'),(17,NULL,'emmamkb','emmanuelmakabu7@gmail.com','$2y$10$rfNZfINwMkymS4BgspCIperAEVPTlLTLDdZ.KD4XDdvqxllyDKrvW',NULL,'Hey, suis sur ngpictures 2.0','default.jpg',NULL,'2018-07-26 12:38:48',NULL,NULL,NULL,'public','user'),(18,NULL,'ljoboy','jonathanyombo@gmail.com','$2y$10$zTkKEOkPLc3iGafKaXyWbexYECmFjvNLTRDjEnJHwByhsDN38mEbu','0991888702','Developper','default.jpg',NULL,'2018-07-30 09:02:45',NULL,NULL,NULL,'public','user'),(19,NULL,'Houdini','mahid@protonmail.com','$2y$10$EGQPNO26zB1w1xt/B1TgxeCZJ9slltNeOZ11pyl.NmBuk69PQhs4K',NULL,'Hey, suis sur ngpictures 2.0','ngpictures-avatar-19.jpg',NULL,'2018-08-02 06:56:59',NULL,NULL,NULL,'public','user'),(20,NULL,'Billy','billypaulwase@globzik.com','$2y$10$9FTG9/vT4OU3BuZx7A1Qmu/yRUtmXEO.ZBMy0GNLNOqSXTpnUAsg.',NULL,'Hey, suis sur ngpictures 2.0','default.jpg','5b62b108ede09ruK2Zxn0dSKRhd98nJM49aIdyHL86uz7BywrhRc5d2XIFjL',NULL,NULL,NULL,NULL,'public','user'),(21,NULL,'nastii kitungwa','anastakitungwa1811@gmail.com','$2y$10$t76u0myHj4FykUjlqDTpq.TudDX6V5QGjgl3dpuq72CvZdQNqgkzu','+243973285382','my mission is to transform art into beaty and beauty into art','ngpictures-avatar-21.jpg',NULL,'2018-08-02 10:32:18',NULL,NULL,NULL,'public','user'),(23,NULL,'Gradi','gradikaseya@gmail.com','$2y$10$EwWC48KSxT5GRqSB6UfMGu3qPxZKRXpKU1NRHxuvyuiGf6bNi.YAy','+243970668575','Hey, suis sur ngpictures 2.0','ngpictures-avatar-23.jpg',NULL,'2018-08-02 15:22:13',NULL,NULL,NULL,'public','user'),(25,NULL,'Paque','pascalmwamba40@gmail.com','$2y$10$iGes4MVlUgQpc5U6.1r.XeEOAM16XdmPvZxvTlb7xZl.e37Bg.xSe',NULL,'Hey, suis sur ngpictures 2.0','default.jpg',NULL,'2018-08-04 22:52:57',NULL,NULL,NULL,'public','user'),(26,NULL,'emmanuel','tekazayaeliel@gmail.com','$2y$10$Ayy2pODLFmfbFX6I/xmXXeGuJ1fsUf1fpa20NZsSCgu0F.5iZ5OIu',NULL,'Hey, suis sur ngpictures 2.0','default.jpg',NULL,'2018-08-09 20:19:33',NULL,NULL,NULL,'public','user'),(27,NULL,'Nojan','nojan.heydar@gmail.com','$2y$10$eD5YJmLEuRbl3zDkfHpHnekHp.BxF.RXZqqpBMVQGxRKp2sE6dPCC',NULL,'Hey, suis sur ngpictures 2.0','default.jpg',NULL,'2018-08-11 17:47:59',NULL,NULL,NULL,'public','user'),(28,NULL,'Toussaint','toussaintmohindo1@gmail.com','$2y$10$GmJhUGIdFopVCx1POyv0BeS7Zo.uUInl8yjV45f5SgYGQ99q9qEHK','+243976392489','Hey, suis sur ngpictures 2.0','ngpictures-avatar-28.jpg',NULL,'2018-08-23 20:05:06',NULL,NULL,NULL,'public','user'),(29,NULL,'Jessekamba ','kambajesse@gmail.com','$2y$10$atM0SXr22sr8x.Edb8xZzOO12Fn08Ve9ciM4wLQDws/9J9L3xvSWS',NULL,'Hey, suis sur ngpictures 2.0','default.jpg',NULL,'2018-08-27 10:38:00',NULL,NULL,NULL,'public','user'),(32,NULL,'Elvis','elviskankola1@gmail.com','$2y$10$AnXuNPIvcEJNwbJ/xEM./uAtQgEU/itOdMihjchxC0RZ7qAis1dcC',NULL,'Hey, suis sur ngpictures 2.0','default.jpg',NULL,'2018-08-27 13:49:08',NULL,NULL,NULL,'public','user'),(38,NULL,'Zorander ','davidilunga.di@gmail.com','$2y$10$RNp6gmy8yyJRb2W4m0Hur.09y7L6GdaMWwwhmOhgUtDF7Gxr1nuIi',NULL,'Hey, suis sur ngpictures 2.0','default.jpg',NULL,'2018-08-29 04:32:35',NULL,NULL,NULL,'public','user'),(39,NULL,'Tabs ','tabithakalend911@gmail.com','$2y$10$LPED6JXM4NRqxr7gfg4i7O4TOkRfwPCLf5ScFQM.QC03BHBjIhbMy',NULL,'Hey, suis sur ngpictures 2.0','default.jpg',NULL,'2018-08-28 21:47:22',NULL,NULL,NULL,'public','user'),(40,NULL,'Gaël Buzz','gaelbalo9@gmail.com','$2y$10$fQbt3uJol23xnf/nA6UOselT0J7uyv5GhrRL7jpZw7PJdfpGO9k0S',NULL,'Hey, suis sur ngpictures 2.0','default.jpg',NULL,'2018-09-09 13:02:30',NULL,NULL,NULL,'public','user'),(41,NULL,'Djin','djinbest@yahoo.com','$2y$10$1Q/qNJa.WBB29z962nNyauXwa3584KXWi.l7krEy93pwJNiHduF92',NULL,'Hey, suis sur ngpictures 2.0','default.jpg','5b9b6eea56ae0dDaNnQ9UN8qDMTDhEwXkwP4rK6qlwsfIHcX4CTjFOqCerAY',NULL,NULL,NULL,NULL,'public','user'),(42,NULL,'Marc','Djinzagho@yahoo.com','$2y$10$Mcl6wwghxYdgL9wSTgES6ukFquMNtTXQW8I8822YU5u4F0AVYc.vK',NULL,'Hey, suis sur ngpictures 2.0','default.jpg','5b9b6f3f9e32cZoSCBCyxEHkp2TLoPt3pMeqXDxffvVthUnpCY9EMyzBwwYN',NULL,NULL,NULL,NULL,'public','user'),(43,NULL,'Eliel sophie','sophieeliel44@gmail.com','$2y$10$FHzBhz//L85MlzxtApMCIehz837fb0W0MQXnP2ulZqWDb9UxC78y.',NULL,'Hey, suis sur ngpictures 2.0','default.jpg','5bb2548110dd1J6FnzpkVIoIpuHc4AUYeniL9jM4vB0v0XBsIzb21xHxGpdX',NULL,NULL,NULL,NULL,'public','user'),(44,NULL,'Bakali','bemmabakali@gmail.com','$2y$10$P6KYBKXfe0fLiLwaG/kxmO/LytDHAVeXVaCaSs5jJKXRzrLbfUwBi',NULL,'Hey, suis sur ngpictures 2.0','default.jpg',NULL,'2018-10-01 17:32:06',NULL,NULL,NULL,'public','user');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `verses`
+--
+
+DROP TABLE IF EXISTS `verses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `verses` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `text` varchar(1000) NOT NULL,
+  `ref` varchar(25) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=519 DEFAULT CHARSET=utf8 COMMENT='les versets pour le module GODFIRST';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `verses`
+--
+
+LOCK TABLES `verses` WRITE;
+/*!40000 ALTER TABLE `verses` DISABLE KEYS */;
+INSERT INTO `verses` VALUES (1,'Et vous, enfants de Sion, soyez dans l\'allégresse','Joë.2:23'),(2,'Pour moi, m\'approcher de Dieu, c\'est mon bien','Ps.73:28'),(3,'Maintenant donc ces trois choses demeurent: la foi, l\'espérance, la charité ','1Co.13:13'),(4,'Celui qui a construit toutes choses, c\'est Dieu','Hé.3:4'),(5,'Montre-moi ce que je ne vois pas','Job 34:32'),(6,'L\'Éternel a de la bonté pour qui espère en lui','La.3:25'),(7,'Le bonheur est pour ceux qui craignent Dieu','Ec.8:12'),(8,'Grâces soient rendues à Dieu pour son don ineffable!','2Co.9:15'),(9,'Grâces soient rendues à Dieu, qui nous donne la victoire par notre Seigneur Jésus-Christ! ','1Co.15:57'),(10,'Donne aujourd\'hui du succès à ton serviteur','Né.1:11'),(11,'Béni soit le Seigneur chaque jour! Quand on nous accable, Dieu nous délivre','Ps.68:20'),(12,'Je te bénirai, ... et tu seras une source de bénédictions','Ge.12:2'),(13,'Il bénira ceux qui craignent l\'Éternel','Ps.115:13'),(14,'Heureux l\'homme qui supporte patiemment la tentation','Ja.1:12'),(15,'Heureux celui à qui la transgression est remise, à qui le péché est pardonné!','Ps.32:1'),(16,'Heureux vous qui pleurez maintenant, car vous serez dans la joie!','Lu.6:21'),(17,'La parole est près de toi, dans ta bouche et dans ton cœur','Ro.10:8'),(18,'La fin de toutes choses est proche','1Pi.4:7'),(19,'Dieu était en Christ, réconciliant le monde avec lui-même','2Co.5:19'),(20,'Dieu nous a donne la vie éternellement,...et cette vie éternelle est dans son Fils','1Jn.5:11'),(21,'Dieu est amour','1Jn.4:8'),(22,'Dieu est lumière et il n\'y a point en lui de ténèbres','1Jn.1:5'),(23,'Dieu peut vous combler de toutes sortes de grâces ','2Co.9:8'),(24,'Et mon Dieu pourvoira à tous vos besoins ','Ph.4:19'),(25,'Dieu est notre refuge','Ps.62:9'),(26,'Voici, notre Dieu que nous servons peut nous délivrer de la fournaise ardente','Da.3:17'),(27,'Car c\'est Dieu qui produit en vous le vouloir et le faire, selon son bon plaisir','Ph.2:13'),(28,'Moi, l\'Éternel, ton Dieu, je t\'instruis pour ton bien','És.48:17'),(29,'Où est Dieu, mon créateur, qui inspire des chants d\'allégresse pendant la nuit','Job 35:10'),(30,'Que le Dieu de la persévérance.. vous donne d\'avoir les mêmes sentiments...','Ro.15:5'),(31,'Veillez et priez, afin que vous ne tombiez pas dans la tentation','Mt.26:41'),(32,'Veillez, demeurez fermes dans la foi','1Co.16:13'),(33,'Garde ton coeur plus que toute autre chose','Pr.4:23'),(34,'Je rappellerai les oeuvres de l\'Éternel, Car je me souviens de tes merveilles d\'autrefois','Ps.77:12'),(35,'Je prendrai plaisir à leur faire du bien','Jé.32:41'),(36,'Je ferai d\'elle un sujet de bénédiction','Éz.34:26'),(37,'Sois fidèle jusqu\'à la mort, et je te donnerai la couronne de vie','Ap.2:10'),(38,'Soyez pleins d\'affection les uns pour les autres, par honneur, usez de prévenances réciproques','Ro.12:10'),(39,'Ayez un même sentiment, vivez en paix','2Co.13:11'),(40,'Mettez en pratique la parole','Ja.1:22'),(41,'Soyez saints dans toute votre conduite, selon qu\'il est écrit ','1Pi.1:15'),(42,'Vous serez saints, car je suis saint','1Pi.1:16'),(43,'Rappelle-leur d\'être soumis ..., d\'être prêts à toute bonne oeuvre','Ti.3:1'),(44,'Recevez avec douceur la parole qui a été planté en vous, et qui peut sauver vos âmes ','Ja.1:21'),(45,'En lui vous avez été comblés de toutes les richesses ','1Co.1:5'),(46,'Protège-moi, à l\'ombre de tes ailes','Ps.17:8'),(47,'Il y a beaucoup de paix pour ceux qui aiment ta loi, et il ne leur arrive aucun malheur','Ps.119:165'),(48,'Les plus grandes et les plus précieuses promesses','2Pi.1:4'),(49,'La foi sans œuvres est morte','Ja.2:26'),(50,'Ainsi la foi vient de ce qu\'on entend, et ce qu\'on entend vient de la parole de Christ ','Ro.10:17'),(51,'Croyez-vous que je puisse faire cela? ','Mt.9:28'),(52,'Celui qui croit en elle ne sera point confus','1Pi.2:6'),(53,'Leur joie sera éternelle','És.61:7'),(54,'C\'est devant l\'Éternel ton Dieu que tu feras servir à ta joie tous les biens que tu posséderas','De.12:18'),(55,'Cherchez-moi, et vous vivrez!','Am.5:4'),(56,'Les choses visibles sont passagères, et les invisibles sont éternelles','2Co.4:18'),(57,'Entraîne-moi après toi! Nous courrons! ','Ca.1:4'),(58,'Dans toutes leurs détresses ils n\'ont pas été sans secours','És.63:9'),(59,'Qui vous tenez dans la maison de l\'Éternel, dans les parvis de la maison de notre Dieu! ','Ps.134:2'),(60,'Invoque-moi, et je te répondrai','Jé.33:3'),(61,'Je crie au Dieu Très Haut, au Dieu qui agit en ma faveur','Ps.57:3'),(62,'Remets ton sort à l\'Éternel, et il te soutiendra ','Ps.55:23'),(63,'Bien-aimé, nous sommes maintenant enfant de Dieu ','1Jn.3:2'),(64,'Croissez dans la grâce ','2Pi.3:18'),(65,'Béni soit Dieu et notre Seigneur J-C...qui nous a régénérés,...pour un héritage...','1Pi.1:3,4'),(66,'Si quelqu\'un veut venir après moi, qu\'il renonce à lui-même, qu\'il se charge chaque jour de sa croix, et qu\'il me suive','Lu.9:23'),(67,'Je dirai tes oeuvres puissantes, Seigneur Éternel! ','Ps.71:16'),(68,'Que vous discerniez quelle est la volonté de Dieu, ce qui est bon, agréable et parfait','Ro.12:2'),(69,'Il nous a engendrés selon sa volonté, par la parole de vérité','Ja.1:18'),(70,'Voici maintenant le jour du salut','2Co.6:2'),(71,'Tous vous êtes un en Jésus-Christ','Ga.3:28'),(72,'Faites tout pour la gloire de Dieu ','1Co.10:31'),(73,'Déchargez-vous sur lui de tous vos soucis, car lui-même prend soin de vous','1Pi.5:7'),(74,'Tout ce qui est à moi est à toi, et ce qui est à toi est à moi','Jn.17:10'),(75,'Mais dans toutes ces choses nous sommes plus que vainqueurs ','Ro.8:37'),(76,'Que tout ce que vous faites se fasse avec charité! ','1Co.16:14'),(77,'Il fait tout à merveille','Mc.7:37'),(78,'Tous ceux qui sont conduits par l\'Esprit de Dieu sont fils de Dieu','Ro.8:14'),(79,'Tout ce que Dieu fait durera toujours','Ec.3:14'),(80,'Pendant qu\'il faisait encore très sombre, il se leva, et sortit pour aller dans un lieu désert, où il pria','Mc.1:35'),(81,'Car quiconque invoquera le nom du Seigneur sera sauvé','Ro.10:13'),(82,'Toute grâce excellente... descend d\'en haut ','Ja.1:17'),(83,'Vous êtes manifestement une lettre de Christ','2Co.3:3'),(84,'Vous avez goûté que le Seigneur est bon','1Pi.2:3'),(85,'Tout est à vous, et vous êtes à Christ, et Christ est à Dieu ','1Co.3:23'),(86,'Vous avez été rachetés à un grand prix','1Co.6:20'),(87,'Vous obtiendrez la couronne incorruptible de la gloire','1Pi.5:4'),(88,'Or nous, nous n\'avons pas reçu l\'esprit du monde, mais l\'Esprit qui vient de Dieu','1Co.2:12'),(89,'Vous avez été rapprochés par le sang de Christ','Ép.2:13'),(90,'Il fit sortir son peuple dans l\'allégresse, ses élus au milieu des cris de joie','Ps.105:43'),(91,'Là où est l\'Esprit du Seigneur, là est la liberté','2Co.3:17'),(92,'Là où je suis, là aussi sera mon Serviteur','Jn.12:26'),(93,'Ils annonçaient la parole de Dieu avec assurance','Ac.4:31'),(94,'Si quelqu\'un parle, que ce soit comme annonçant les oracles de Dieu','1Pi.4:11'),(95,'Sanctifiez dans vos cœurs Christ le Seigneur','1Pi.3:15'),(96,'Seigneur! tous mes désirs sont devant toi ','Ps.38:10'),(97,'Accomplis ton œuvre dans le cours des années, ô Éternel!','Ha.3:2'),(98,'Tu adoreras le Seigneur, ton Dieu, et tu le serviras lui seul ','Mt.4:10'),(99,'L\'Éternel est ma force et le sujet de mes louanges','És.12:2'),(100,'L\'Éternel bénit son peuple et le rend heureux','Ps.29:11'),(101,'Car l\'Éternel Dieu est un soleil et un bouclier... ','Ps.84:12'),(102,'L\'Éternel est le rocher des siècles','Ps.27:4'),(103,'L\'Éternel sera ta lumière à toujours','És.60:20'),(104,'L\'Éternel est refuge pour son peuple','Joë.3:16'),(105,'Le Seigneur est plein de miséricorde et de compassion','Ja.5:11'),(106,'L\'Éternel a fait retomber sur lui l\'iniquité de nous tous','És.53:6'),(107,'L\'Éternel donne la grâce et la gloire','Ps.84:12b'),(108,'L\'Éternel est bon,... Il connaît ceux qui se confient en lui','Na.1:7'),(109,'L\'Éternel agira en ma faveur','Ps.138:8'),(110,'L\'Éternel, l\'Éternel, Dieu miséricordieux et compatissant','Ex.34:6'),(111,'Je ne me souviendrai plus de leur péché','Jé.31:34'),(112,'Il vient, notre Dieu, il ne reste pas en silence','Ps.50:3'),(113,'Que la volonté du Seigneur se fasse!','Ac.21:14'),(114,'Que ta bonté soit ma consolation, Comme tu l\'as promis à ton serviteur!','Ps.119:76'),(115,'Que ta main me soit en aide! ','Ps.119:173'),(116,'Je voudrais séjourner éternellement dans ta tente','Ps.61:5'),(117,'Que nous portions des fruits pour Dieu ','Ro.7:4'),(118,'Qu\'il demandent avec foi, sans douter','Ja.1:6'),(119,'Qu\'il l\'a demande (la sagesse) à Dieu, qui donne à tous simplement et sans reproche ','Ja.1:5'),(120,'Afin que nous reçussions l\'adoption','Ga.4:5'),(121,'Le don gratuit de Dieu, c\'est la vie éternelle en Jésus-Christ notre Seigneur','Ro.6:23'),(122,'Vous avez reçu gratuitement, donnez gratuitement','Mt.10:8'),(123,'Dieu ne se repent pas de ses dons et de son appel ','Ro.11:29'),(124,'Par les oeuvres la foi fut rendue parfaite ','Ja.2:22'),(125,'L\'œuvre de la justice sera la paix','És.32:17'),(126,'Prends courage, mon enfant, tes péchés te sont pardonnés','Mt.9:2'),(127,'Croyez que la patience de notre Seigneur est votre salut','2Pi.3:15'),(128,'Vous aussi, soyez patients, affermissez vos cœurs','Ja.5:8'),(129,'Le rachat de leur âme est cher, et n\'aura jamais lieu','Ps.49:9'),(130,'Rachetez le temps, car les jours sont mauvais','Ép.5:16'),(131,'Recherchez la charité. Aspirez aussi aux dons spirituels','1Co.14:1'),(132,'L\'agneau qui a été immolé est digne de recevoir la puissance,... et la louange','Ap.5:12'),(133,'Les choses anciennes sont passées, voici, toutes choses sont devenues nouvelles ','2Co.5:17'),(134,'L\'Esprit de gloire, l\'Esprit de Dieu, repose sur vous','1Pi.4:14'),(135,'Soyez fervents d\'esprit. Servez le Seigneur','Ro.12:11'),(136,'Il y a un seul Dieu ... un Seul médiateur entre Dieu et les hommes, Jésus-Christ homme','1Ti.2:5'),(137,'Si Dieu est pour nous, qui sera contre nous?','Ro.8:31'),(138,'Si tu le cherches, il se laissera trouver par toi','1Ch.28:9'),(139,'Encore un peu, ... celui qui doit venir viendra et  il ne tardera pas','Hé.10:37'),(140,'Votre vie est cachée avec Christ en Dieu','Col.3:3'),(141,'Il bénit la demeure des justes','Pr.3:33'),(142,'Il a fait avec moi une alliance éternelle','2S.23:5'),(143,'Vous avez été scellés du Saint-esprit','Ép.1:13'),(144,'Car l\'Éternel connaît la voie des justes, et la voie des pécheurs mène à la ruine','Ps.1:6'),(145,'Votre Père sait de quoi vous avez besoin, avant que vous le lui demandiez','Mt.6:8'),(146,'La connaissance enfle, mais la charité édifie','1Co.8:1'),(147,'Je serai pour vous un père, et vous serez pour moi des fils et des filles','2Co.6:18'),(148,'Et que quiconque crois est justifié par lui de toutes les choses','Ac.13:39'),(149,'Ils célébreront les voies de l\'Éternel','Ps.138:5'),(150,'Je disais: Tu m\'appelleras: Mon père!','Jé.3:19'),(151,'Je vous donnerai un cœur nouveau','Éz.36:26'),(152,'En elle était la vie, et la vie était la lumière des hommes','Jn.1:4'),(153,'Et tous ceux qui le touchaient étaient guéris.','Mc.6:56'),(154,'Et nous, nous avons connu l\'amour que Dieu a pour nous ','1Jn.4:16'),(155,'Gloire à Dieu dans les lieux très hauts, et paix sur la terre parmi les hommes qu\'Il agrée! ','Lu.2:14'),(156,'Et pour attendre des cieux son Fils','1Th.1:10'),(157,'J\'établirai ma demeure au milieu de vous','Lé.26:11'),(158,'Et ma parole et ma prédication ... une démonstration d\'Esprit et de puissance','1Co.2:4'),(159,'Et c\'est ainsi qu\'Abraham, ayant persévéré, obtint l\'effet de la promesse.','Hé.6:15'),(160,'Et le roi leur répondra: ... c\'est à moi que vous les avez faites. ','Mt.25:40'),(161,'Car l\'agneau qui est au milieu du trône les paîtra et les conduira aux sources des eaux de la vie','Ap.7:17'),(162,'Car l\'Éternel prend plaisir à son peuple','Ps.149:4'),(163,'Le jour de l\'Éternel est proche','So.1:7'),(164,'Car sa bonté pour nous est grande, et sa fidélité dure à toujours. ','Ps.117:2'),(165,'Car je vais créer des nouveaux cieux et une nouvelle terre','És.65:17'),(166,'C\'est pourquoi encore l\'Amen par lui est prononcé par nous à sa gloire.','2Co.1:20'),(167,'Car la vie a été manifestée ','1Jn.1:2'),(168,'Car mon joug est doux, et mon fardeau léger. ','Mt.11:30'),(169,'Car celui qui a pitié d\'eux sera leur guide','És.49:10'),(170,'Car nous sommes ouvriers avec Dieu.','1Co.3:9'),(171,'Nous sommes, en effet, pour Dieu la bonne odeur de Christ','2Co.2:15'),(172,'Car le Père lui-même vous aime','Jn.16:27'),(173,'Car la prédication de la croix est... une puissance de Dieu.','1Co.1:18'),(174,'Venez et attachez-vous à l\'Éternel','Jé.50:5'),(175,'La vérité sort de ma bouche et ma parole ne sera point révoquée','És.45:23'),(176,'Jésus ... toujours vivant pour intercéder en leur faveur','é.7:22,25'),(177,'Élie était un homme de la même nature que nous ','Ja.5:17'),(178,'Ayant donc de telles promesses, bien-aimés, purifions-nous ','2Co.7:1'),(179,'Le nom de l\'Éternel est une tour forte','Pr.18:10'),(180,'Il a été tenté comme nous en toutes choses, sans commettre de péché.','Hé.4:15'),(181,'Celui qui fait la volonté de Dieu demeure éternellement. ','1Jn.2:17'),(182,'Car l\'Éternel est bon, sa bonté dure toujours... ','Ps.100:5'),(183,'Éternel! ta bonté atteint jusqu\'aux cieux','s.36:6'),(184,'Et maintenant, petits enfants, demeurez en lui','1Jn.2:28'),(185,'Ceux qui me cherchent me trouvent.','Pr.8:17'),(186,'Mon âme est attachée à toi, ta droite me soutient.','Ps.63:9'),(187,'C\'est vers toi que je crie, ô Éternel','Joë.1:19'),(188,'Chacun recevra sa propre récompense selon son propre travail.','1Co.3:8'),(189,'Que ton nom est magnifique sur toute la terre! ','Ps.8:10'),(190,'Que tes pensées, ô Dieu, me semblent impénétrables! ','Ps.139:17'),(191,'Que ses jugements sont insondables, et ses voies incompréhensibles! ','Ro.11:33'),(192,'Comme un berger, il paîtra son troupeau','És.40:11'),(193,'Qu\'ils sont beaux les pieds de ceux qui annoncent la paix','Ro.10:15'),(194,'Quand je suis dans la crainte, en toi je me confie.','Ps.56:4'),(195,'Celui que tu bénis est béni, et que celui que tu maudis est maudit. ','No.22:6'),(196,'Il nous affermira aussi jusqu\'à la fin','1Co.1:8'),(197,'J-C s\'est donné lui-même pour nos péché','Ga.1:4'),(198,'Le sang de Jésus son fils nous purifie de tout péché.','1Jn.1:7'),(199,'Si quelqu\'un est en Christ, il est une nouvelle créature. ','2Co.5:1'),(200,'Si quelqu\'un entre par moi il sera sauvé','Jn.10:9'),(201,'Si quelqu\'un a soif, qu\'il vienne à moi, et qu\'il boive. ','Jn.7:37'),(202,'Quel est donc le serviteur fidèle et prudent?','Mt.24:45'),(203,'Mais si quelqu\'un aime Dieu, celui-là est connu de lui. ','1Co.8:3'),(204,'Si quelqu\'un me sert, qu\'il me suive','Jn.12:26b'),(205,'Quand on tourne vers lui les regards, on est rayonnant de joie','Ps.34:6'),(206,'Celui qui me suit...aura la lumière de la vie.','Jn.8:12'),(207,'Celui qui sème peu moissonnera peu, et celui qui sème abondamment moissonnera abondamment.','2Co.9:6'),(208,'Les hommes intègres héritent le bonheur','Pr.28:18'),(209,'Celui qui peut faire par la puissance qui agit en nous, ... à lui soit la gloire','Ép.3:20,21'),(210,'Mieux vaut chercher un refuge en l\'Éternel que de se confier à l\'homme','Ps.118:8'),(211,'L\'amour de Dieu est répandu dans nos cœurs par le Saint Esprit qui nous a été donné. ','Ro.5:5'),(212,'L\'Amour de Dieu a été manifesté envers nous','1Jn.4:9'),(213,'Toutes choses concourent au bien de ceux qui aiment Dieu','Ro.8:28'),(214,'L\'homme dont le regard est bienveillant sera béni ','Pr.22:9'),(215,'Mon amour ne s\'éloignera point de toi','És.54:10'),(216,'La miséricorde triomphe du jugement. ','Ja.2:13'),(217,'Ta droite me soutient, Et je deviens grand par ta bonté.','Ps.18:36'),(218,'La prière fervente du juste a une grande efficace. ','Ja.5:16'),(219,'L\'Éternel peut te donner bien plus que cela.','2Ch.25:9'),(220,'La prière de la foi sauvera le malade','Ja.5:15'),(221,'Il écoute la prière des justes.','Pr.15:29'),(222,'Je changerai les devant eux les ténèbres en lumière','És.42:16'),(223,'Nous sommes fous à cause de Christ','1Co.4:10'),(224,'Nous marcherons, nous, au nom de l\'Éternel, notre Dieu, à toujours et à perpétuité.','Mi.4:5'),(225,'Nous qui sommes des jours, soyons sobres','1Th.5:8'),(226,'Nous avons dans le ciel un édifice qui est l\'ouvrage de Dieu','2Co.5:1b'),(227,'Nous, nous prêchons Christ crucifié','1Co.1:23'),(228,'Car nous marchons par la foi et non par la vue','2Co.5:7'),(229,'Sa colère dure un instant, Mais sa grâce toute la vie','Ps.30:6'),(230,'C\'est en l\'Éternel que je cherche un refuge. ','Ps.11:1'),(231,'En lui mon coeur se confie, et je suis secouru','Ps.28:7'),(232,'J\'espère en ton secours, ô Éternel!','Ge.49:18'),(233,'Que ta bénédiction soit sur ton peuple!','Ps.3:9'),(234,'J\'écrirai sur lui le nom de mon Dieu,... et mon nom nouveau.','Ap.3:12'),(235,'Regarde si je suis sur une mauvaise voie, et conduis-moi sur la voie de l\'éternité! ','Ps.139:24'),(236,'On l\'appellera Admirable, Conseiller, Dieu puissant','És.9:5'),(237,'Mon peuple demeurera dans le séjour de la paix','És.32:18'),(238,'Voici, le jour de l\'Éternel arrive','Za.14:1'),(239,'C\'est l\'heure de vous réveiller enfin du sommeil','Ro.13:11'),(240,'Éternel! enseigne-moi ta voie ','Ps.27:11'),(241,'Enseigne-moi à faire ta volonté! Car tu es mon Dieu. ','Ps.143:10'),(242,'Venez, et montons...afin qu\'il nous enseigne ses voies','És.2:3'),(243,'Apprenez à faire le bien','És.1:17'),(244,'Notre communion est avec le Père et avec son Fils Jésus-Christ. ','1Jn.1:3'),(245,'Ne crains rien, je viens à ton secours.','És.41:13'),(246,'Ne craignez pas, et que vos mains se fortifient!','Za.8:13'),(247,'Mais je ne fais pour moi-même aucun cas de ma vie','Ac.20:24'),(248,'Mon âme, bénis l\'Éternel, Et n\'oublie aucun de ses bienfaits! ','Ps.103:2'),(249,'Celui qui n\'a point connu le péché, il l\'a fait devenir péché pour nous','2Co.5:21'),(250,'Le Seigneur ne tarde pas dans l\'accomplissement de la promesse','2Pi.3:9'),(251,'L\'espérance des misérables ne périt pas à toujours.','Ps.9:19'),(252,'N\'attristez pas le Saint-esprit de Dieu ','Ép.4:30'),(253,'La richesse ne sert à rien, mais la justice délivre de la mort. ','Pr.11:4'),(254,'Ne jugez point, afin que vous ne soyez point jugés. ','Mt.7:1'),(255,'L\'homme ne vivra pas de pain seulement, mais de toute parole qui sort de la bouche de Dieu.','Mt.4:4'),(256,'Non! Nous servirons l\'Éternel.','Jos.24:21'),(257,'Ne nous rendras-tu pas à la vie, afin que ton peuple se réjouisse en toi? ','Ps.85:7'),(258,'Poursuivez toujours le bien','1Th.5:15'),(259,'D\'ailleurs, quand vous souffririez pour la justice, vous seriez heureux. ','1Pi.3:14'),(260,'Mais au sein de leur détresse ils sont retournes à l\'Eternel ... ils l\'ont trouvé','2Ch.15:4'),(261,'Mais, par ce que l\'Éternel vous aime ','De.7:8'),(262,'Nous portons ce trésor dans des vases de terre ','2Co.4:7'),(263,'Et toi, Éternel, ne t\'éloigne pas! Toi qui es ma force, viens en hâte à mon secours! ','Ps.22:20'),(264,'Mais maintenant, Christ est ressuscité des morts','1Co.15:20'),(265,'Mais Noé trouva grâce aux yeux de l\'Éternel.','Ge.6:8'),(266,'O profondeur de la richesse, de la sagesse et de la science de Dieu!','Ro.11:33'),(267,'Il se réjouit sans cesse de ton nom, et il se glorifie de ta justice.','Ps.89:17'),(268,'Mais revêtez-vous du Seigneur Jésus-Christ ','Ro.13:14'),(269,'Mais revêtez-vous du Seigneur Jésus-Christ ','Ro.13:14'),(270,'Fortifiez-vous dans le Seigneur et par sa force toute puissante.','Ép.6:10'),(271,'Revêtons les armes de la lumière.','Ro.13:12'),(272,'Reviens à moi, car je t\'ai racheté.','És.44:22'),(273,'Je suis l\'ami de tous ceux qui te craignent','Ps.119:63'),(274,'Il n\'y a aucune différence, en effet, entre le Juif et le Grec, puisqu\'ils ont tous un même Seigneur','Ro.10:12'),(275,'Bien qu\'Il fût fils, l\'obéissance par les choses qu\'il a souffertes','Hé.5:8'),(276,'L\'attente des justes n\'est que joie, mais l\'espérance des méchants périra. ','Pr.10:28'),(277,'Maintenez-vous dans l\'amour de Dieu, en attendant la miséricorde de notre Seigneur Jésus-Christ','Jude.21'),(278,'Lui qui a porté lui-même nos péchés en son corps sur le bois ','1Pi.2:24'),(279,'Il agit de tout son cœur, et il réussit dans tout ce qu\'il entreprit','2Ch.31:21'),(280,'Il est le médiateur d\'une nouvelle alliance','Hé.9:15'),(281,'C\'est lui qui rachètera Israël de toutes ses iniquités.','Ps.130:8'),(282,'Car il délivrera le pauvre qui crie, et le malheureux qui n\'a point d\'aide.','Ps.72:12'),(283,'Il a satisfait l\'âme altérée, Il a comblé de biens l\'âme affamée.','Ps.107:9'),(284,'Il n\'a pas honte de les appeler frères.','Hé.2:11'),(285,'Il me fait reposer dans de verts pâturages, Il me dirige près des eaux paisibles.','Ps.23:2'),(286,'Dans leur bouche il ne s\'est point trouvé de mensonge, car ils sont irrépréhensibles.','Ap.14:5'),(287,'Ils périront, mais tu subsisteras','Ps.102:27'),(288,'Heureux le peuple qui connaît le son de la trompette',' Il marche à la'),(289,'Ils ont lavé leurs robes, et ils les ont blanchies dans le sang de l\'agneau.','Ap.7:14 '),(290,'Étant donc justifiés par la foi, nous avons la paix avec Dieu par notre Seigneur Jésus-Christ ','Ro.5:1'),(291,'C\'est dans la tranquillité et le repos que sera votre salut','És.30:15'),(292,'Pardonne-moi ceux que j\'ignore. ','Ps.19:3'),(293,'Nous sommes pressés de toute manière, mais non réduits à l\'extrémité ','2Co.4:8'),(294,'Nous attestons que le Père a envoyé le Fils comme Sauveur du monde. ','1Jn.4:14'),(295,'La révélation de tes paroles éclaire, elle donne de l\'intelligence aux simples. ','Ps.119:130'),(296,'Les yeux du Seigneur sont sur les justes','1Pi.3:12'),(297,'Christ, notre Pâque été immolé','1Co.5:7'),(298,'Je rassasierai de pain ses indigents','Ps.132:15'),(299,'Souviens-toi de moi selon ta miséricorde, à cause de ta bonté, ô Éternel!','Ps.25:7'),(300,'Celui qui vaincra héritera ces choses, je serai son Dieu, et il sera mon fils.','Ap.21:7'),(301,'J\'ai combattu le bon combat','2Ti.4:7'),(302,'Je suis bien humilié: Éternel, rends-moi la vie selon ta parole!','Ps.119:117'),(303,'Le Seigneur connaît ceux qui lui appartiennent','2Ti.2:19'),(304,'Prosternez-vous devant l\'Éternel avec des ornements sacrés. ','Ps.96:9'),(305,'Soumettez-vous donc à Dieu, résistez au diable, et il fuira loin de vous. ','Ja.4:7'),(306,'La sagesse d\'en haut est ... pleine de miséricorde et de bons fruits','Ja.3:17'),(307,'Il y a d\'abondantes joies devant ta face, des délices éternelles à ta droite. ','Ps.16:11'),(308,'Mettez dans votre cœur et dans votre âme ces paroles que je vous dis.','De.11:18'),(309,'Notre secours est dans le nom de l\'Éternel, qui a fait les cieux et la terre. ','Ps.124:8'),(310,'Souviens-toi favorablement de moi, ô mon Dieu!','Né.13:31'),(311,'Écoute la voix de l\'Éternel dans ce que je te dis','Jé.38:20'),(312,'Celui qui agit selon la vérité vient de à la lumière','Jn.3:21'),(313,'Envoie ta lumière et ta fidélité! ','Ps.43:3'),(314,'Recommande ton sort à l\'Éternel, Mets en lui ta confiance, et il agira. ','Ps.37:5'),(315,'Espère en l\'Éternel, et il te délivrera.','Pr.20:22'),(316,'Que tes bien-aimés jouissent du bonheur!','2Ch.6:41'),(317,'Mais celui qui persévérera jusqu\'à la fin sera sauvé','Mt.24:13'),(318,'Je dis à l\'Éternel: mon refuge et ma forteresse, mon Dieu en qui je me confie! ','Ps.91:2'),(319,'Approchez-vous de Dieu, et il s\'approchera de vous. ','Ja.4:8'),(320,'Je reviendrai, et je vous prendrai avec moi','Jn.14:3'),(321,'Mon Dieu, prête l\'oreille et écoute!','Da.9:18'),(322,'Soyez réconciliés avec Dieu!','2Co.5:20'),(323,'Je vous recevrai comme un parfum d\'une agréable odeur','Éz.20:41'),(324,'Celui qui vient à moi n\'aura jamais faim','Jn.6:35'),(325,'L\'avènement du Seigneur est proche.','Ja.5:8'),(326,'Les eaux jailliront dans le désert','És.35:6'),(327,'Glorifiez donc Dieu dans votre corps et dans votre esprit','1Co.6:20'),(328,'Vos péchés vous sont pardonnés à cause de son nom. ','1Jn.2:12'),(329,'À cause de ton nom tu me conduiras, tu me dirigeras. ','Ps.31:4'),(330,'La joie de l\'Éternel sera votre force.','Né.8:10'),(331,'Soyez dans la joie, perfectionnez-vous, consolez-vous, ayez un même sentiment, vivez en paix','2Co.13:11'),(332,'Ne sachez-vous pas que vous êtes le temple de Dieu?','1Co.3:16'),(333,'Celui qui a l\'esprit calme est un homme intelligent.','Pr.17:27'),(334,'Lui par les meurtrissures duquel vous avez été guéris. ','1Pi.2:24'),(335,'Placez-vous sur les chemins, regardez, et demandez quel sont les anciens sentiers','Jé.6:16'),(336,'Tout ce qui est né de Dieu triomphe du monde','1Jn.5:4'),(337,'Que le Seigneur de la paix vous donne lui-même la paix en tout temps, de toute manière','2Th.3:16'),(338,'Saint, saint, saint est le Seigneur Dieu, le Tout Puisant, qui était, qui est, et qui vient! ','Ap.4:8'),(339,'Saint, saint, saint est l\'Éternel des armées!','És.6:3'),(340,'Voici, ton roi vient à toi, plein de douceur, et monté sur un âne, sur un ânon, le petit d\'une ânesse. ','Mt.21:5'),(341,'Ce Jésus, ... reviendras de la même façon','Ac.1:11'),(342,'Mais lui, ... peut sauver parfaitement...','Hé.7:24-25'),(343,'Ma puissance s\'accomplit dans la faiblesse','2Co.12:9'),(344,'Que votre parole soit toujours accompagnée de grâce','Col.4:6'),(345,'Mais la parole du Seigneur demeure éternellement.','1Pi.1:25'),(346,'Ta parole est une lampe à mes pieds, et une lumière sur mon sentier.','Ps.119:105'),(347,'Dieu résiste aux l\'orgueilleux, Mais il fait grâce aux humbles. ','Ja.4:6'),(348,'Humiliez-vous devant le Seigneur, et il vous élèvera. ','Ja.4:10'),(349,'Voyez quel amour le Père nous a témoigné','1Jn.3:1'),(350,'En achevant notre sanctification dans la crainte de Dieu','2Co.7:1'),(351,'Mais celui qui s\'attache au Seigneur est avec lui un seul esprit. ','1Co.6:17'),(352,'Maintenez-vous dans l\'amour de Dieu','Jude.21'),(353,'Dieu nous a sauvés, et nous a adressé une sainte vocation','2Ti.1:9'),(354,'Notre capacité vient de Dieu','2Co.3:5'),(355,'Recherchez la paix avec tous, et la sanctification, sans laquelle personne ne verra le Seigneur','Hé.12:14'),(356,'Demeurez fermes dans un même esprit','Ph.1:27'),(357,'Il gardera les pas de ses bien-aimés.','1S.2:9'),(358,'Ils étaient étrangers et voyageurs sur la terre','Hé.11:13'),(359,'La crainte de l\'Éternel est une source de vie ','Pr.14:27'),(360,'La crainte du Seigneur, c\'est  la sagesse','Job 28:28'),(361,'Mon fils, retiens mes paroles, et garde avec toi mes préceptes.','Pr.7:1'),(362,'L\'amitié de l\'Éternel est pour ceux qui le craignent','Ps.25:14'),(363,'Courez de manière à remporter','1Co.9:24'),(364,'Que votre lumière luise ainsi devant les hommes','Mt.5:16'),(365,'Comme Christ est ressuscité des morts par la gloire du Père, de même nous aussi nous marchions en nouveauté de vie.','Ro.6:4'),(366,'De même aussi l\'Esprit nous aide dans notre faiblesse ','Ro.8:26'),(367,'Je te couvre de l\'ombre de ma main','És.51:16'),(368,'Craignez seulement le l\'Éternel et servez-le fidèlement','1S.12:24'),(369,'Mais vous craindrez l\'Éternel votre Dieu','2 R.17:39'),(370,'Celui qui est en vous est plus grand que celui qui est dans le monde. ','1Jn.4:4'),(371,'Il ne brisera point le roseau cassé','Mt.12:20'),(372,'Tu seras comme un jardin arrosé','És.58:11'),(373,'Tu as été guéri, ne pèche plus','Jn.5:14'),(374,'Toi qui sondes les cœurs et les reins, Dieu juste!','Ps.7:10'),(375,'Car tu es bon, Seigneur, tu pardonnes, Tu es plein d\'amour pour tous ceux qui t\'invoquent. ','Ps.86:5'),(376,'Les ténèbres se dissipent et la lumière véritable paraît déjà. ','1Jn.2:8'),(377,'Le salut vient de l\'Éternel. ','Jon.2:10'),(378,'Ils retournèrent ... les exhortant à persévérer dans la foi','Ac.14:22'),(379,'Les malheureux le voient et se réjouissent','Ps.69:33'),(380,'Car ils ne pourront plus mourir,... étant fils de la résurrection. ','Lu.20:36'),(381,'Notre consolation abonde par Christ','2Co.1:5'),(382,'Je me confie dans la bonté de Dieu, éternellement et à jamais.','Ps.52:10'),(383,'C\'est en confessant de la bouche qu\'on parvient au salut','Ro.10:10'),(384,'Accomplis envers ton serviteur ta promesse','Ps.119:38'),(385,'Le temple de Dieu est saint, et c\'est ce que vous êtes. ','1Co.3:17'),(386,'La religion pure consiste .. à se préserver des souillures du monde. ','Ja.1:27'),(387,'Car le royaume de Dieu ne consiste pas en paroles, mais en puissance.','1Co.4:20'),(388,'Qu\'il fasse ce qui lui semblera bon!','1S.3:18'),(389,'Car il est mort, et c\'est pour le péché qu\'il est mort une fois pour toutes','Ro.6:10'),(390,'Que voulez-vous que je fasse pour vous?','Mc.10:36'),(391,'Nous ne cessons de prier Dieu ... que vous soyez remplis de la connaissance de sa volonté','Col.1:9'),(392,'Afin que notre joie soit parfaite. ','1Jn.1:4'),(393,'Je cherche ta face, ô Éternel!','Ps.27:8'),(394,'Je regarderai vers l\'Eternel,...mon Dieu m\'exaucera.','Mi.7:7'),(395,'Je vous ai donné un exemple, afin que vous fassiez comme je vous ai fait.','Jn.13:15'),(396,'Je suis le cep. Vous êtes les sarments.','Jn.15:5'),(397,'Et moi, je crie à Dieu, et l\'Éternel me sauvera. ','Ps.55:17'),(398,'Je veux faire ta volonté, mon Dieu! ','Ps.40:9'),(399,'Je suis rempli de force, de l\'esprit de l\'Éternel ','Mi.3:8'),(400,'J\'aime la piété et non les sacrifices','Os.6:6'),(401,'Je n\'ai point honte de l\'Évangile','Ro.1:16'),(402,'Je suis au milieu de vous comme celui qui sert.','Lu.22:27'),(403,'Je ferai passer devant toi toute ma bonté','Ex.33:19'),(404,'Je serai avec toi pour te sauver et te délivrer','Jé.15:20'),(405,'Je ne me souviendrai plus de tes péchés.','És.43:25'),(406,'Je suis la lumière du monde','Jn.9:5'),(407,'Je suis ton bouclier, et ta récompense sera grande','Ge.15:1'),(408,'J\'ai vu la souffrance de mon peuple...','Ex.3:7'),(409,'Je te ferai connaître ce que tu dois faire','1S.16:3'),(410,'Moi, le Dieu d\'Israël, je ne les abandonnerai pas','És.41:17'),(411,'Moi, l\'Éternel, j\'éprouve le cœur','Jé.17:10'),(412,'Or sans la foi il est impossible de lui être (à Dieu) agréable','Heb.11:6'),(413,'Toi, demeure dans les choses que tu as apprises, et reconnues certaines','2Tim.3:14'),(414,'Rendez grâce au père...qui nous a délivrés de la puissance des ténèbres ','Col.1:13'),(415,'C\'est par grâce que vous êtes sauvés','Eph.2:5'),(416,'Heureux celui qui veille, et qui garde ses vêtements','Rv.16:15'),(417,'Heureux celui qui garde les paroles de la prophétie de ce livre! ','Rv.22:7'),(418,'Car Dieu ne nous a pas destinés à la colère, mais à l\'acquisition du salut par notre Seigneur Jésus Christ','1Thes.5:9'),(419,'Dieu a envoyé dans nos cœurs l\'Esprit de son Fils','Gal.4:6'),(420,'Demeurons fermes dans la foi que nous professons.','Heb.4:14'),(421,'Sois fidèle jusqu\'à la mort, et je te donnerai la couronne de vie.','Rv.2:10'),(422,'Soyez reconnaissants.','Col.3:15'),(423,'Persévérez dans la prière, veillez-y avec actions de grâces.','Col.4:2'),(424,'Et, sans contredit, le mystère de la piété est grand: celui qui a été manifesté en chair...','1Tim.3:16'),(425,'Tes œuvres sont grandes et admirables, Seigneur Dieu tout puissant! ','Rv.15:3'),(426,'C\'est, en effet, une grande source de gain que la piété avec le contentement','1Tim.6:6'),(427,'La foi est une ferme assurance des choses qu\'on espère, une démonstration de celles qu\'on ne voit pas. ','Heb.11:1'),(428,'Car, en Jésus Christ, ni la circoncision ni l\'incirconcision n\'a de valeur, mais la foi qui est agissante par la charité.','Gal.5:6'),(429,'Le Seigneur est fidèle, il vous affermira et vous préservera du malin. ','2Thes.3:3'),(430,'Je mettrai mes lois dans leur esprit, Je les écrirai dans leur cœur','Heb.8:10'),(431,'Veille sur toi-même et sur ton enseignement, persévère dans ces choses','1Tim.4:16'),(432,'Donnant un enseignement pur, digne','Ti.2:7'),(433,'Car vous êtes tous fils de Dieu par la foi en Jésus Christ','Gal.3:26'),(434,'Faites tout au nom du Seigneur Jésus','Col.3:17'),(435,'Examinez toutes choses, retenez ce qui est bon','1Thes.5:21'),(436,'Je puis tout par celui qui me fortifie. ','Phil.4:13'),(437,'Je les (toutes choses) regarde comme de la boue, afin de gagner Christ','Phil.3:8'),(438,'Je regarde toutes choses comme de la boue, afin de gagner Christ, ','Phil.3:8'),(439,'Soyez toujours joyeux.','1Thes.5:16'),(440,'Vous n\'avez pas encore résisté jusqu\'au sang, en luttant contre le péché. ','Heb.12:4'),(441,'Le Seigneur est proche. ','Phil.4:5'),(442,'Et que la paix de Christ... règne dans vos cœurs','Col.3:15'),(443,'Approchons-nous donc avec assurance du trône de la grâce ','Heb.4:16'),(444,'Il dit cela, quoique ses œuvres eussent été achevées depuis la création du monde. ','Heb.4:3'),(445,'Ne nous lassons pas de faire le bien','Gal.6:9'),(446,'Retiens ce que tu as, afin que personne ne prenne ta couronne.','Rv.3:11'),(447,'Car Christ est ma vie, et la mort m\'est un gain.','Phil.1:21'),(448,'Et que celui qui a soif vienne, que celui qui veut, prenne de l\'eau de la vie, gratuitement.','Rv.22:17'),(449,'Conduisez-vous d\'une manière digne de l\'Évangile de Christ','Phil.1:27'),(450,'Rendez grâces en toutes choses','1Thes.5:18'),(451,'Jésus, nous le voyons couronné de gloire et d\'honneur à cause de la mort qu\'il a soufferte...','Heb.2:9'),(452,'Vous avez été scellés du Saint-Esprit qui avait été promis','Eph.1:13'),(453,'Vous avez tout pleinement en lui','Col.2:10'),(454,'Ce n\'est plus moi qui vis, c\'est Christ qui vit en moi ','Gal.2:20'),(455,'Ce que Dieu veut, c\'est votre sanctification','1Thes.4:3'),(456,'Vous êtes tous des enfants de la lumière et des enfants du jour. ','1Thes.5:5'),(457,'Ce n\'est pas un esprit de timidité que Dieu nous a donné, mais un esprit de force, d\'amour et de sagesse.','2Tim.1:7'),(458,'Car nous n\'avons point ici-bas de cité permanente, mais nous cherchons celle qui est à venir.','Heb.13:14'),(459,'Car Dieu ne nous a pas appelés à l\'impureté, mais à la sanctification.','1Thes.4:7'),(460,'Car la parole de Dieu est vivante et efficace','Heb.4:12'),(461,'Car Dieu a tant aimé le monde qu\'il a donné son Fils unique, afin que quiconque croit en lui ne périsse point, mais qu\'il ait la vie éternelle.','Jn.3:16'),(462,'Car je sais en qui j\'ai cru...','2Tim.1:12'),(463,'Car la grâce de Dieu, source de salut pour tous les hommes, a été manifestée. ','Ti.2:11'),(464,'Jésus Christ est le même hier, aujourd\'hui, et éternellement. ','Heb.13:8'),(465,'Si donc nous avons la nourriture et le vêtement, cela nous suffira. ','1Tim.6:8'),(466,'Soyez remplis de l\'esprit ','Eph.5:18'),(467,'Quelle est envers nous qui croyons l\'infinie grandeur de sa puissance','Eph.1:19'),(468,'Qu\'il illumine les yeux de votre coeur, pour que vous sachiez ...quelle est la richesse de la gloire de son héritage qu\'il réserve //','aux saints'),(469,'Si vous entendez sa voix, n\'endurcissez pas vos coeurs','Heb.3:7-8'),(470,'Moi, je reprends et je châtie tous ceux que j\'aime. Aie donc du zèle, et repens-toi.','Rv.3:19'),(471,'Rendez-vous, par la charité, serviteurs les uns des autres.','Gal.5:13'),(472,'Faites en tout temps par l\'Esprit toutes sortes de prières et de supplications.','Eph.6:18'),(473,'En lui nous avons la rédemption par son sang, la rémission des péchés','Eph.1:7'),(474,'Nous sommes devenus participants de Christ','Heb.3:14'),(475,'Exhortez-vous les uns les autres chaque jour.','Heb.3:13'),(476,'N\'abandonnons pas notre assemblée','Heb.10:25'),(477,'Ne dormons donc point comme les autres, mais veillons et soyons sobres.','1Thes.5:6'),(478,'Ne vous inquiétez de rien','Phil.4:6'),(479,'Ne néglige pas le don qui est en toi','1Tim.4:14'),(480,'Priez sans cesse.','1Thes.5:17'),(481,'Affectionnez-vous aux choses d\'en haut, et non à celles qui sont sur la terre. ','Col.3:2'),(482,'Il nous a sauvés, non à cause des oeuvres...mais selon sa miséricorde','Ti.3:5'),(483,'Ils l\'ont vaincu à cause du sang de l\'agneau et à cause de la parole de leur témoignage','Rv.12:11'),(484,'Laissant les éléments de la parole de Christ, tendons à ce qui est parfait...','Heb.6:1'),(485,'Il s\'est donne lui-même pour nos péchés...','Gal.1:4'),(486,'Faites connaître vos besoins à Dieu','Phil.4:6'),(487,'Mais le fruit de l\'Esprit, c\'est l\'amour, la joie, la paix, ...','Gal.5:22'),(488,'À celui qui vaincra, je donnerai à manger de l\'arbre de vie, qui est dans le paradis de Dieu. ','Rv.2:7'),(489,'Celui qui vaincra, je le ferai asseoir avec moi sur mon trône','Rv.3:21'),(490,'Combats le bon combat de la foi, saisis la vie éternelle','1Tim.6:12'),(491,'Devenez donc les imitateurs de Dieu, comme des enfants bien-aimés','Eph.5:1'),(492,'Comprenez quelle est la volonté du Seigneur.','Eph.5:17'),(493,'Considérez, en effet, celui qui a supporté contre sa personne une telle opposition de la part des pécheurs','Heb.12:3'),(494,'Marchez selon l\'Esprit','Gal.5:16'),(495,'Marchez comme des enfants de lumière!','Eph.5:8'),(496,'Le juste vivra par la foi. ','Rom.1:17'),(497,'Recherche la justice, la piété, la foi, la charité, la patience, la douceur. ','1Tim.6:11'),(498,'Prêche la parole, insiste en toute occasion, favorable ou non...','2Tim.4:2'),(499,'Réjouissez-vous toujours dans le Seigneur, je le répète, réjouissez-vous. ','Phil.4:4'),(500,'Courons avec persévérance dans la carrière qui nous est ouverte','Heb.12:1'),(501,'Que le juste pratique encore la justice','Rv.22:11'),(502,'Je viens bientôt. ','Rv.3:11'),(503,'Que votre parole soit toujours accompagnée de grâce, assaisonnée de sel','Col.4:6'),(504,'Que la parole de Christ habite parmi vous abondamment','Col.3:16'),(505,'Demeurez donc fermes, et ne vous laissez pas mettre de nouveau sous le joug de la servitude. ','Gal.5:1'),(506,'Ceux qui sont à Jésus Christ ont crucifié la chair...','Gal.5:24'),(507,'Vous avez besoin de persévérance, afin qu\'après avoir accompli la volonté de Dieu, vous obteniez ce qui vous est promis.','Heb.10:36'),(508,'Fortifiez donc vos mains languissantes et vos genoux affaiblis','Heb.12:12'),(509,'Toi donc, mon enfant, fortifie-toi dans la grâce qui est en Jésus Christ. ','2Tim.2:1'),(510,'Fortifiez-vous dans le Seigneur, et par sa force toute-puissante. ','Eph.6:10'),(511,'Nous mettons notre espérance dans le Dieu vivant, qui est le Sauveur de tous les hommes, principalement des croyants.','1Tim.4:10'),(512,'Garde le bon dépôt, par le Saint-Esprit qui habite en nous.','2Tim.1:14'),(513,'Christ en vous, l\'espérance de la gloire','Col.1:27'),(514,'Christ, qui nous a aimés, et qui s\'est livre lui-même...','Eph.5:2'),(515,'Jésus Christ est venu dans le monde pour sauver les pécheurs','1Tim.1:15'),(516,'Je suis l\'alpha et l\'oméga, dit le Seigneur Dieu, celui qui est, qui était, et qui vient, le Tout Puissant.','Rv.1:8'),(517,'J\'ai mis devant toi une porte ouverte, que personne ne peut fermer.','Rv.3:8'),(518,'Je demande une chose au seigneur... habiter la maison du Seigneur tous les jours de ma vie.','Ps.27:4');
+/*!40000 ALTER TABLE `verses` ENABLE KEYS */;
+UNLOCK TABLES;
