@@ -75,7 +75,7 @@ class DatabaseAuth implements AuthInterface
 
 
     /**
-     * @return User|null
+     * @return User|UsersEntity|null
      */
     public function getUser(): ?User
     {
