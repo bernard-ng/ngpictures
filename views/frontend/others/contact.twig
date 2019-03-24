@@ -5,9 +5,9 @@
     <section class="section row container">
         <div class="col offset-l2 l8 s12 m12 nexted">
             <form action="{{ path('contact') }}" method="POST" class="card-panel grey dark-4">
-                {{ form.smallInput('name','Votre nom', 'text', errors.get('name'), post.get('name') ?? currentUser.name) }}
-                {{ form.smallInput('email', 'Votre email', 'email', errors.get('email'), post.get('email') ?? currentUser.email) }}
-                {{ form.textarea('message', 'message', errors.get('message'), post.get('message')) }}
+                {{ form.smallInput('name','Votre nom', 'text', errors.name, input.get('name') ?? currentUser.name) }}
+                {{ form.smallInput('email', 'Votre email', 'email', errors.email, input.get('email') ?? currentUser.email) }}
+                {{ form.textarea('message', 'message', errors.message, input.get('message')) }}
 
                 <div class="submit-button">
                     <button type="submit" class="btn btn-flat waves-effect">Envoyer<i class="icon icon-send"></i>

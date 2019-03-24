@@ -17,7 +17,7 @@
         {% if categories %}
             <div class="animated slideInRight" id="dataContainer" data-ajax="categories">
                 {% for c in categories %}
-                <div class="nexted col s12 m3 l3" id="{{ c.id }}">
+                <div class="nexted col s12 m4 l4" id="{{ c.id }}">
                     <article class="card post-titled grey dark-4">
                         <div class="card-image waves-effect">
                             <a href="{{ path('categories.show', {id: c.id, slug: c.slug}) }}" title="{{ c.name }}">

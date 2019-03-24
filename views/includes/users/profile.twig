@@ -1,0 +1,27 @@
+<div class="jumbotron-user" data-action-requires="menu-transparent">
+    <div class="jumbotron-user-profil align-center">
+        <div class="jumbotron-user-avatar hoverable">
+            <img src="{{ user.getAvatar() }}" alt="{{ user.name }}">
+        </div>
+        <div class="jumbotron-user-name row center">
+            <h1 class="ui header">
+                {{ user.name }}
+                {% if user.verified %}
+                    <small class="chip">
+                        <span class="blue-txt icon icon-ok-circled"></span>
+                    </small>
+                {% endif %}
+            </h1>
+            <span class="bio">
+                <p class="col l8 offset-l2 s12 m12">
+                    {{ user.bio }}
+                    {% if currentUser.id != user.id %}
+                        <br><br>
+                        <button class="btn"><span class="icon icon-user-plus"></span> Suivre</button>
+                        <button class="btn"><span class="icon icon-mail"></span> Contacter</button>
+                    {% endif %}
+                </p>
+            </span>
+        </div>
+    </div>
+</div>

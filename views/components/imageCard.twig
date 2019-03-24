@@ -1,7 +1,101 @@
 {% for p in posts %}
-    <article class="gallery-item animated slideInUp" id="{{ p.id }}" style="background: {{ p.color }}">
-        <a href="{{ path('posts.show', {id: p.id, slug: p.slug}) }}">
-            <img src="" data-src="{{ p.getSmallThumb() }}" title="{{ p.name }}" alt="{{ p.name }}" style="width: 100%; height: 100%;">
-        </a>
+    <article class="gallery-item post-titled animated slideInUp" id="{{ p.id }}">
+        <header class="gallery-item-header">
+            <span class="gallery-item-image-profil">
+                <img src="" data-src="{{ currentUser.getAvatar() }}" alt="{{ currentUser.name }}" title="{{ currentUser.name }}">
+            </span>
+            <span class="gallery-item-header-title">
+                <a href="{{ path('users.profile', {slug: currentUser.slug }) }}" title="{{ currentUser.name }}">{{ currentUser.name }}</a>
+            </span>
+
+            <a data-action="download" href="{{ path('download', {id: p.id}) }}" class="gallery-item-header-icon" title="Télécharger">
+                <i class="icon icon-download"></i>
+            </a>
+            <a data-action="save" href="{{ path('saves.create', {id: p.id} ) }}" class="news-card-header-icon"
+               title="Enregister">
+                {% if p.isSaved %}
+                    <i class="icon icon-bookmark blue-txt"></i>
+                {% else %}
+                    <i class="icon icon-bookmark-empty"></i>
+                {% endif %}
+            </a>
+
+            <a href="#" class="dropdown-button gallery-item-header-icon" data-activates="options-list-{{ p.id }}">
+                <i class="icon icon-down-open"></i>
+            </a>
+            <ul id="options-list-{{ p.id }}" class="dropdown-content grey dark-4">
+                <li>
+                    <a href="{{ p.categoryUrl }}">
+                        <i class="icon icon-tag"></i>
+                        Catégories
+                    </a>
+                </li>
+                {% if p.location %}
+                    <li>
+                        <a data-action="location" href="{{ p.locationUrl }}"
+                           class="gallery-item-header-icon">
+                            <i class="icon icon-location"></i>
+                            Localisation
+                        </a>
+                    </li>
+                {% endif %}
+                <li>
+                    <a data-action="report" class="gallery-item-header-icon"
+                       href="{{ path('reports.create', {id: p.id}) }}" title="Signaler la photo">
+                        <i class="icon icon-attention"></i>
+                        Signaler
+                    </a>
+                </li>
+                {% if currentUser.id and p.usersId == currentUser.id %}
+                    <li>
+                        <a data-action="edit" class="gallery-item-header-icon modal-trigger"
+                           href="{{ path('users.posts.update', {slug: p.usersId}) }}">
+                            <i class="icon icon-plus-circled"></i>
+                            Editer
+                        </a>
+                    </li>
+                    <li>
+                        <a data-action="delete" class="gallery-item-header-icon modal-trigger"
+                           href="{{ p.deleteUrl }}">
+                            <i class="icon icon-cancel"></i>
+                            Supprimer
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </header>
+        <main style="background: {{ p.color }}" class="gallery-item-image">
+            <a href="{{ path('posts.show', {id: p.id, slug: p.slug}) }}">
+                <img src="" data-src="{{ p.getSmallThumb() }}" title="{{ p.name }}" alt="{{ p.name }}" style="width: 100%; height: 100%;">
+            </a>
+            {% if p.name or p.description %}
+                <div class="post-description">
+                    <span class="truncate ui header">{{ p.name }}</span>
+                    <span class="truncate">{{ p.description }}</span>
+                </div>
+            {% endif %}
+        </main>
+        <footer class="gallery-item-footer" id="articleOptions">
+            <a data-action="like" class="news-card-footer-item {{ p.isLike }}" href="{{ p.likeUrl }}">
+                {% if p.isLike == 'active' %}
+                    <i class="icon icon-heart red-txt"></i>&nbsp
+                {% else %}
+                    <i class="icon icon-heart-empty"></i>&nbsp
+                {% endif %}
+            </a>
+
+            <a class="news-card-footer-item modal-trigger" href="#comment-{{ p.id }}" data-action="showComment">
+                {% if p.commentsNumber > 0 %}
+                    <i class="icon icon-comment"></i>&nbsp
+                {% else %}
+                    <i class="icon icon-comment-empty"></i>&nbsp
+                {% endif %}
+                <span>{{ p.commentsCount ?: 0 }}</span>
+            </a>
+
+            <a data-action="share" class="news-card-footer-item modal-trigger" href="#share-{{ p.id }}">
+                <i class="icon icon-share"></i>
+            </a>
+        </footer>
     </article>
 {% endfor %}

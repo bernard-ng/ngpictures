@@ -28,13 +28,7 @@
     <section class="section container animated slideInRight">
         {% if posts %}
             <div class="gallery gallery-container" id="dataContainer" data-ajax="posts">
-                {% for p in posts %}
-                    <article class="gallery-item" data-action="gallery-item" id="{{ p.id }}"  style="background: {{ p.color }}">
-                        <a href="{{ path('posts.show', {id: p.id, slug: p.slug}) }}" title="{{ p.name }}">
-                            <img src="" data-src="{{ p.getSmallThumb() }}" title="{{ p.name }}" alt="{{ p.name }}">
-                        </a>
-                    </article>
-                {% endfor %}
+                {% include 'components/imageCard.twig' %}
             </div>
 
             <div class="ng-progress-container">

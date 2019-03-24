@@ -1,66 +1,53 @@
 {% extends 'layout/users/account.twig' %}
 
 {% block content %}
-    <div class="jumbotron-user" data-action-requires="menu-transparent">
-        <div class="jumbotron-user-profil align-center">
-            <div class="jumbotron-user-avatar hoverable">
-                <img src="{{ user.getAvatar() }}" alt="{{ user.name }}">
+    {% include 'includes/users/profile.twig' %}
+    <div class="row col s12">
+        <ul class="tabs transparent shadow-3">
+            <div class="container">
+                {% if currentUser.id == user.id %}
+                    <li class="tab col s4">
+                        <a href="{{ path('users.posts', {slug: user.slug}) }}" target="_self">Gestion</a>
+                    </li>
+                    <li class="tab col s4">
+                        <a href="#photos" class="active">Photos</a>
+                    </li>
+                    <li class="tab col s4">
+                        <a href="{{ path('users.posts.collections', {slug: user.slug}) }}" target="_self">Collections</a>
+                    </li>
+                {% else %}
+                    <li class="tab col s6"><a href="#photos" class="active">Photos</a></li>
+                    <li class="tab col s6">
+                        <a href="{{ path('users.posts.collections', {slug: user.slug}) }}" target="_self">Collections</a>
+                    </li>
+                {% endif %}
             </div>
-            <div class="jumbotron-user-name row center">
-                <h1 class="ui header">{{ user.name }}</h1>
-                <span class="bio">
-                    <p class="col l8 offset-l2 s12 m12">
-                        {{ user.bio }}
-                    </p>
-                </span>
-            </div>
-        </div>
+        </ul>
     </div>
 
-    <div class>
-        <div class="row col s12">
-            <ul class="tabs transparent shadow-3">
-                <div class="container">
-                    {% if currentUser.id == user.id %}
-                        <li class="tab col s4">
-                            <a href="{{ currentUser.collectionUrl }}" target="_self">Gestion</a>
-                        </li>
-                        <li class="tab col s4">
-                            <a href="#photos" class="active">Photos</a>
-                        </li>
-                        <li class="tab col s4">
-                            <a href="{{ currentUser.collectionUrl }}" target="_self">Collections</a>
-                        </li>
-                    {% else %}
-                        <li class="tab col s12"><a href="#photos" class="active">Photos</a></li>
-                    {% endif %}
-                </div>
-            </ul>
-        </div>
-    </div>
     <div id="photos">
-        {% if recent %}
-            <section class="section jumbotron dark">
-                <div class="row container pb10">
-                    <span class="col l12 s12 m12">
-                        <h2 class="ui header">Photos récentes</h2>
-                    </span>
-                    <div class="carousel small">
-                        {% for p in recent %}
-                            <a href="{{ p.url }}" title="{{ p.name }}" class="carousel-item">
-                                <img src="" data-src="{{ p.getSmallThumb() }}" title="{{ p.name }}" alt="{{ p.name }}">
-                            </a>
-                        {% endfor %}
-                    </div>
-                </div>
-            </section>
-        {% endif %}
         {% if posts %}
+            {% if randomPosts %}
+                <section class="section jumbotron dark">
+                    <div class="row container pb10">
+                    <div class="col l12 s12 m12">
+                        <h2 class="ui header">Photos Aléatoires</h2>
+                    </div>
+                        <div class="carousel small">
+                            {% for p in randomPosts %}
+                                <a href="{{ path('posts.show', {id: p.id, slug: p.slug}) }}" title="{{ p.name }}" class="carousel-item">
+                                    <img src="" data-src="{{ p.getSmallThumb() }}" title="{{ p.name }}" alt="{{ p.name }}">
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
             <section class="section">
                 <div class="row container">
-                    <span class="col l12 s12 m12">
-                        <h2 class="ui header">Toutes les photos</h2>
-                    </span>
+                    <div class="col l12 s12 m12">
+                        <h2 class="ui header">Toutes les photos <span class="badge new">{{ postsCount ?: 0 }}</span></h2>
+                    </div>
                 </div>
                 <div class="row container">
                     <div class="gallery gallery-container" id="dataContainer" data-ajax="users_posts">
@@ -85,9 +72,9 @@
         {% else %}
             <div class="section row center-align">
                 <h2 class="icon icon-inbox red-txt center-align"></h2>
-                <span class="col l12 s12 m12">
+                <div class="col l12 s12 m12">
                     <h2 class="ui header divided center"> Aucune publication </h2>
-                </span>
+                </div>
                 <p class="col l8 offset-l2 s12 m12">
                     {{ user.name }} ne présente actuellement aucune publication disponible, les publications sont peut
                     être en évaluation ou privées,

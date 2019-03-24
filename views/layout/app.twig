@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ page.lang }}" >
+{% include "includes/ngpictures-watermark.txt" %}
+<head>
+    <title>{{ page.getTitle }}</title>
+    {% include "includes/default-meta.twig" %}
+    {% include "includes/favicon.twig" %}
+    {% include "includes/default-style.twig" %}
+</head>
+<body>
+{% include "includes/menu.twig" %}
+{% include "includes/mobile-menu.twig" %}
+<header class="row container" style="padding-top: 20px;">
+    <div class="ui header dividing col s12">
+        <h4 style="padding-left: 5px;">{{ page.getActivePage }}</h4>
+    </div>
+</header>
+
+<main class="page-content" id="pageContent" role="main">
+    {% block content %}{% endblock %}
+</main>
+
+{% include "includes/footer.twig" %}
+{% include "includes/default-script.twig" %}
+{% include "includes/flash.twig" %}
+</body>
+</html>
