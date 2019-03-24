@@ -7,7 +7,6 @@
 
 namespace Framework\Controllers;
 
-use Framework\Http\RequestAwareAction;
 use Framework\Http\ServerRequest;
 use Framework\Router\RouterAwareAction;
 use League\Event\EmitterInterface;

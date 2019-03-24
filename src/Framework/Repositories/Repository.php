@@ -139,15 +139,19 @@ class Repository
             ->count();
     }
 
-    public function search(string $query)
+    /**
+     * @param string $field
+     * @param $value
+     * @return int
+     */
+    public function countWith(string $field, $value): int
     {
-    }
-
-    public function findList(string $list)
-    {
-        $sql = <<< SQL
-"SELECT * FROM {$this->table} WHERE id IN ({$list}) ORDER BY id DESC "
-SQL;
+        return $this->makeQuery()
+            ->into($this->entity)
+            ->from($this->table)
+            ->select("{$this->table}.id")
+            ->where("{$this->table}.{$field} = ?", [$value])
+            ->count();
     }
 
     /**
@@ -161,64 +165,9 @@ SQL;
             ->from($this->table)
             ->select("{$this->table}.*")
             ->where("{$this->table}.id < ?", [$lastId])
-            ->where("{$this->table}.oneline = 1")
+            ->where("{$this->table}.online = 1")
             ->orderBy("{$this->table}.id DESC")
             ->limit($limit)
             ->all()->get();
-    }
-
-
-    public function findWithId(string $field, $value)
-    {
-        $sql = <<< SQL
-"SELECT * FROM {$this->table} WHERE id = ? AND {$field} = ?"
-SQL;
-    }
-
-
-
-    public function last()
-    {
-        $sql = <<< SQL
-"SELECT {$this->table}.*, categories.title as category
-FROM {$this->table}
-LEFT JOIN categories ON categories_id = categories.id
-WHERE online = 1 ORDER BY id DESC"
-SQL;
-    }
-
-
-    public function random(int $limit)
-    {
-        $sql = <<< SQL
-"SELECT * FROM {$this->table} WHERE online = 1 ORDER BY RAND() LIMIT {$limit}"
-SQL;
-    }
-
-
-    public function lastOnline($limit = 5)
-    {
-        $sql = <<< SQL
-"SELECT {$this->table}.*, categories.title as category
-FROM {$this->table}
-LEFT JOIN categories ON categories_id = categories.id
-WHERE online = 1 ORDER BY id DESC LIMIT {$limit} "
-SQL;
-    }
-
-
-    public function lastOffline($limit = 5)
-    {
-        $sql = <<< SQL
-"SELECT {$this->table}.*, categories.title as category
-FROM {$this->table}
-LEFT JOIN categories ON categories_id = categories.id
-WHERE online = 0 ORDER BY id DESC LIMIT {$limit} "
-SQL;
-    }
-
-
-    public function orderBy(string $field, string $order = 'DESC', int $from = null, int $to = null)
-    {
     }
 }
