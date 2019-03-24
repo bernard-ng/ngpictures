@@ -8,6 +8,8 @@
 namespace Application;
 
 use Application\Controllers\ErrorController;
+use Framework\Managers\FlashMessageManager;
+use Framework\Managers\LogMessageManager;
 use Framework\Router\Router;
 use Psr\Container\ContainerInterface;
 
@@ -44,6 +46,7 @@ class Application
         $route = $router->run();
         if (!is_null($route)) {
             $controller = $this->container->get($route->getController()[0]);
+
             $method = $route->getController()[1] ?? 'index';
             return call_user_func_array([$controller, $method], $route->getMatches());
         } else {
@@ -60,8 +63,8 @@ class Application
     {
         $this->container->get(FlashMessageManager::class)->set('danger', "Oups une erreur est survenue !");
         LogMessageManager::register(__class__, $e);
-        http_response_code(500);
-        $this->redirect("/error/internal");
+        $error = $this->container->get(ErrorController::class);
+        return $error->e500();
     }
 
     /**
@@ -74,7 +77,7 @@ class Application
     {
         $this->container->get(FlashMessageManager::class)->set('danger', "Oups une erreur est survenue !");
         LogMessageManager::register($errfile, $errstr);
-        http_response_code(500);
-        $this->redirect("/error/internal");
+        $error = $this->container->get(ErrorController::class);
+        return $error->e500();
     }
 }
