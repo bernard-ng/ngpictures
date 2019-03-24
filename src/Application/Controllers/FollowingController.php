@@ -12,14 +12,13 @@ class FollowingController extends Controller
 
     /**
      * FollowingController constructor.
-     * @param Ngpictures $app
-     * @param PageManager $pageManager
+     * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $this->authService->restrict();
-        $this->user = $this->authService->isLogged();
+        $this->auth->restrict();
+        $this->currentUser = $this->auth->getUser();
         $this->loadRepository(['users', 'following']);
     }
 

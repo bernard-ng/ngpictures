@@ -37,27 +37,16 @@ class DownloadController extends Controller
             $file = self::$path[$post->type] . $thumb;
 
             if (file_exists($file)) {
-                if (isset($_GET['option']) && !empty($_GET['option'])) {
-                    $this->download($file);
-                } else {
-                    $downloads = (int)$post->downloads + 1;
-                    $posts->update($post->id, compact('downloads'));
-
-                    if ($this->request->ajax()) {
-                        $post = $posts->find($post->id);
-                        echo (int)$post->downloads;
-                        exit();
-                    }
-
-                    $this->download($file);
-                    $this->redirect();
-                }
+                $downloads = (int)$post->downloads++;
+                $posts->update($post->id, compact('downloads'));
+                $this->download($file);
+                $this->redirect();
             } else {
-                $this->flash->set('danger', 'files_not_found');
+                $this->flash->error('files_not_found');
                 $this->redirect();
             }
         } else {
-            $this->flash->set('danger', 'files_download_failed');
+            $this->flash->error('files_download_failed');
             $this->redirect();
         }
     }

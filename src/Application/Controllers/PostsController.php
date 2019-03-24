@@ -8,7 +8,6 @@ use Application\Repositories\CategoriesRepository;
 use Application\Repositories\CommentsRepository;
 use Application\Repositories\PostsRepository;
 use Application\Repositories\UsersRepository;
-use Application\Services\Notification\NotificationService;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -39,13 +38,16 @@ class PostsController extends Controller
 
     public function index()
     {
-        $posts = $this->posts->latest(8);
+        /** @var PostsEntity[] $posts */
+        $posts = $this->posts->getLast(8);
         $this->turbolinksLocation($this->url('posts'));
+
         PageManager::setTitle("Galerie");
         PageManager::setDescription("
             Découvez les photos des passionnés de la photographie, partager vos photos avec la
             communauté.
         ");
+        PageManager::setImage($posts[0]->getSmallThumb());
         $this->view("frontend/posts/index", compact("posts"));
     }
 
@@ -66,7 +68,7 @@ class PostsController extends Controller
                 $this->redirect($this->url("posts"));
             }
         } else {
-            $posts = $this->posts->latest();
+            $posts = $this->posts->getLast();
             $last =  $posts == null ? 1 : end($posts)->id;
             PageManager::setTitle('Diaporama');
             PageManager::setDescription("Voir les photos de la galerie, en diaporama");
@@ -83,26 +85,21 @@ class PostsController extends Controller
         $id = intval($id);
         $post = $this->posts->find($id);
         if ($post && $post->slug == $slug) {
-            if ($post->online == 1) {
-                $comments = $this->container->get(CommentsRepository::class);
-                $commentsCount = $comments->count($id);
-                $comments = $comments->get($id);
-                $similar = $this->container->get(PostsRepository::class)->findWithSameCategory($post->categoriesId, $post->id);
-                $author = $this->container->get(UsersRepository::class)->find($post->usersId);
+            $comments = $this->container->get(CommentsRepository::class);
+            $commentsCount = $comments->count($id);
+            $comments = $comments->get($id);
+            $similar = $this->container->get(PostsRepository::class)->findWithSameCategory($post->categoriesId, $post->id);
+            $author = $this->container->get(UsersRepository::class)->find($post->usersId);
 
-                $this->turbolinksLocation($this->url("posts.show", compact('id', 'slug')));
-                PageManager::setTitle($post->name . " Photo #{$post->id}");
-                PageManager::setDescription($post->description);
-                PageManager::setImage($post->getSmallThumb());
+            $this->turbolinksLocation($this->url("posts.show", compact('id', 'slug')));
+            PageManager::setTitle($post->name . " Photo #{$post->id}");
+            PageManager::setDescription($post->description);
+            PageManager::setImage($post->getSmallThumb());
 
-                $this->view(
-                    "frontend/posts/show",
-                    compact("post", "comments", "commentsCount", "user", "author", "similar")
-                );
-            } else {
-                $this->flash->set("warning", 'post_private', false);
-                $this->redirect();
-            }
+            $this->view(
+                "frontend/posts/show",
+                compact("post", "comments", "commentsCount", "user", "author", "similar")
+            );
         } else {
             $this->notFound();
         }
@@ -128,11 +125,11 @@ class PostsController extends Controller
                 $this->view("frontend/posts/users", compact('posts', 'user'));
             } else {
                 $this->flash->set("danger", $this->flash->msg['users_not_found'], false);
-                $this->redirect(true, false);
+                $this->redirect();
             }
         } else {
             $this->flash->set("danger", $this->flash->msg['undefined_error'], false);
-            $this->redirect(true, false);
+            $this->redirect();
         }
     }
 
@@ -142,20 +139,18 @@ class PostsController extends Controller
      *
      * @return void
      */
-    public function add()
+    public function create()
     {
-        $this->authService->restrict();
-        $post = $this->request->input();
+        $input = $this->request->input();
         $file = new Collection($_FILES);
-        $errors = new Collection();
-        $notifier = $this->container->get(NotificationService::class);
-        $categories = $this->categories->orderBy('title', 'ASC');
+        $notifier = null;
+        $categories = null;
 
         if (isset($_POST) && !empty($_POST)) {
-            $title = $this->str->escape($post->get('title'));
-            $content = $this->str->escape($post->get('content'));
+            $title = $this->str->escape($input->get('title'));
+            $content = $this->str->escape($input->get('content'));
             $slug = $this->str->slugify(empty($title) ? "publication" : $title);
-            $categories_id = (intval($post->get('category')) == 0) ? 1 : intval($post->get('category'));
+            $categories_id = (intval($input->get('category')) == 0) ? 1 : intval($input->get('category'));
             $users_id = $this->authService->isLogged()->id;
 
             if (isset($_FILES) && !empty($_FILES)) {
@@ -196,7 +191,7 @@ class PostsController extends Controller
                             }
                         } else {
                             $this->flash->set('danger', $this->flash->msg['undefined_error'], false);
-                            $this->redirect(true, false);
+                            $this->redirect();
                         }
                     } else {
                         $this->sendFormError();
@@ -209,9 +204,9 @@ class PostsController extends Controller
             }
         }
 
-        $this->turbolinksLocation('/submit-photo');
-        PageManager::setTitle("Publication");
-        $this->view("frontend/posts/add", compact('post', 'categories', 'errors'));
+        $this->turbolinksLocation($this->url('posts.create'));
+        PageManager::setTitle("Upload");
+        $this->view("frontend/posts/add", compact('input', 'categories', 'errors'));
     }
 
 
@@ -278,11 +273,11 @@ class PostsController extends Controller
                 $this->view("frontend/posts/delete", compact('post'));
             } else {
                 $this->flash->set('danger', $this->flash->msg['delete_not_allowed'], false);
-                $this->redirect(true, false);
+                $this->redirect();
             }
         } else {
             $this->flash->set('danger', $this->flash->msg['delete_not_allowed'], false);
-            $this->redirect(true, false);
+            $this->redirect();
         }
     }
 }

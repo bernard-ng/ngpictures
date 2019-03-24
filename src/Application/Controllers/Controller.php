@@ -7,6 +7,7 @@
 
 namespace Application\Controllers;
 
+use Application\Auth\DatabaseAuth;
 use Application\Managers\MessageManager;
 use Application\Managers\PageManager;
 use Framework\Controllers\Controller as FrameworkController;
@@ -33,6 +34,11 @@ class Controller extends FrameworkController
     protected $flash;
 
     /**
+     * @var DatabaseAuth|mixed
+     */
+    protected $auth;
+
+    /**
      * Controller constructor.
      * @param ContainerInterface $container
      */
@@ -41,6 +47,7 @@ class Controller extends FrameworkController
         parent::__construct($container);
         $this->session = $container->get(SessionInterface::class);
         $this->flash = $container->get(FlashMessageManager::class);
+        $this->auth = $container->get(DatabaseAuth::class);
     }
 
     /**
@@ -55,6 +62,18 @@ class Controller extends FrameworkController
         parent::view($view, $variables);
     }
 
+
+    /**
+     * check if a user logged
+     */
+    protected function loggedOnly()
+    {
+        $user = $this->auth->getUser();
+        if (is_null($user)) {
+            $this->flash->error('login');
+            $this->route('auth.login');
+        }
+    }
 
     protected function notFound()
     {

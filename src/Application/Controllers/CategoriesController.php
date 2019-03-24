@@ -44,24 +44,24 @@ class CategoriesController extends Controller
 
     public function index()
     {
-        $categories = $this->categories->get(8);
+        $categories = $this->categories->get(9);
 
-        foreach ($categories as $category) {
-            /** @var PostsEntity $thumb */
-            $thumb = $this->posts->findWith('categories_id', $category->id)[0];
-            $categoriesThumbs[$category->id] =
-                (is_null($thumb)) ? "/imgs/default.jpeg" : $thumb->getSmallThumb();
-        }
+        if ($categories) {
+            foreach ($categories as $category) {
+                /** @var PostsEntity $thumb */
+                $thumb = $this->posts->findWith('categories_id', $category->id)[0];
+                $categoriesThumbs[$category->id] =
+                    (is_null($thumb)) ? "/imgs/default.jpeg" : $thumb->getSmallThumb();
+            }
 
-        foreach ($categories as $category) {
-            $categoriesCount[$category->id] = $this->posts->countWith('categories_id', $category->id);
+            foreach ($categories as $category) {
+                $categoriesCount[$category->id] = $this->posts->countWith('categories_id', $category->id);
+            }
         }
 
         $this->turbolinksLocation($this->url('categories'));
         PageManager::setTitle('Les catégories');
-        PageManager::setDescription(
-            "Rétrouvez facilement une photo en cliquant sur une catégorie"
-        );
+        PageManager::setDescription("Rétrouvez facilement une photo en cliquant sur une catégorie");
         $this->view("frontend/categories/index", compact('categories', 'categoriesCount', 'categoriesThumbs'));
     }
 
@@ -74,18 +74,15 @@ class CategoriesController extends Controller
         $category = $this->categories->find(intval($id));
 
         if ($category) {
-
             /** @var PostsEntity[] $posts */
             $posts = $this->posts->findWith('categories_id', $category->id);
-
             $this->turbolinksLocation($this->url('categories.show', compact('id', 'slug')));
             PageManager::setTitle($category->name);
             PageManager::setDescription($category->description);
             PageManager::setImage($posts[0]->getSmallThumb());
             $this->view('frontend/categories/show', compact('category', 'posts'));
         } else {
-            $this->flash->set('danger', 'category_not_found');
-            $this->redirect($this->url('categories'));
+            $this->notFound();
         }
     }
 }

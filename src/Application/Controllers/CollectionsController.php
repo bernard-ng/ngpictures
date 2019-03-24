@@ -45,18 +45,19 @@ class CollectionsController extends Controller
 
     public function index()
     {
-        $collections = $this->collections->get(8);
+        $collections = $this->collections->get(9);
 
-        foreach ($collections as $collection) {
+        if ($collections) {
+            foreach ($collections as $collection) {
+                /** @var PostsEntity $thumb */
+                $thumb = $this->posts->findWith('collections_id', $collection->id)[0];
+                $collectionsThumbs[$collection->id] =
+                    (is_null($thumb)) ? "/imgs/default.jpeg" : $thumb->getSmallThumb();
+            }
 
-            /** @var PostsEntity $thumb */
-            $thumb = $this->posts->findWith('collections_id', $collection->id)[0];
-            $collectionsThumbs[$collection->id] =
-                (is_null($thumb)) ? "/imgs/default.jpeg" : $thumb->getSmallThumb();
-        }
-
-        foreach ($collections as $collection) {
-            $collectionsCount[$collection->id] = $this->posts->countWith('collections_id', $collection->id);
+            foreach ($collections as $collection) {
+                $collectionsCount[$collection->id] = $this->posts->countWith('collections_id', $collection->id);
+            }
         }
 
         $this->turbolinksLocation($this->url('collections'));

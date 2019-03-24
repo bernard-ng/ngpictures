@@ -9,12 +9,12 @@
 namespace Application\Controllers;
 
 use Application\Entities\UsersEntity;
-use Application\Events\UserRegisterEvent;
+use Application\Events\Auth\UserRegisterEvent;
+use Application\Events\Auth\UserForgotEvent;
 use Application\Managers\PageManager;
 use Application\Repositories\UsersRepository;
 use Application\Repositories\Validators\UsersValidator;
 use Awurth\SlimValidation\Validator;
-use Framework\Auth\AuthInterface;
 use Framework\Interfaces\CookieInterface;
 use Framework\Managers\StringHelper;
 use Psr\Container\ContainerInterface;
@@ -32,11 +32,6 @@ class AuthController extends Controller
     private $users;
 
     /**
-     * @var AuthInterface|mixed
-     */
-    private $auth;
-
-    /**
      * @var CookieInterface
      */
     private $cookie;
@@ -49,7 +44,6 @@ class AuthController extends Controller
     {
         parent::__construct($container);
         $this->users = $container->get(UsersRepository::class);
-        $this->auth = $container->get(AuthInterface::class);
         $this->cookie = $container->get(CookieInterface::class);
     }
 
@@ -60,7 +54,7 @@ class AuthController extends Controller
     {
         $user = $this->users->findWith('confirmation_token', $token);
         if ($user) {
-            $this->users->update($user->id, ['confirmation_token' => ""]);
+            $this->users->update($user->id, ['confirmation_token' => "", 'confirmed_at' => date("Y-M-d H:i:s")]);
             $this->flash->success('users_confirmation_success');
             $this->auth->connect($user);
             $this->route('users.profile', ['slug' => $user->slug]);
@@ -128,7 +122,7 @@ class AuthController extends Controller
                     $link = SITE_NAME . $this->url('auth.reset', compact('token'));
                     $email = $user->email;
 
-                    $this->emitter->emit(UserRegisterEvent::class, compact('link', 'email'));
+                    $this->emitter->emit(UserForgotEvent::class, compact('link', 'email'));
                     $this->flash->set('success', 'form_reset_submitted');
                     $this->route('auth.login');
                 } else {
@@ -162,7 +156,7 @@ class AuthController extends Controller
                     $isUniqueEmail = $this->users->isUniqueWith('email', $input->get('email'));
 
                     if ($isUniqueName && $isUniqueEmail) {
-                        $name = $input->get('name');
+                        $name = mb_strtolower($input->get('name'));
                         $slug = StringHelper::slugify($name);
                         $email = $input->get('email');
                         $confirmation_token = StringHelper::setToken(60);
@@ -170,10 +164,7 @@ class AuthController extends Controller
                         $this->users->create(compact('name', 'slug', 'email', 'password', 'confirmation_token'));
 
                         $link = SITE_NAME . $this->url('auth.confirmation', ['token' => $confirmation_token]);
-                        $this->emitter->emit(UserRegisterEvent::class, [
-                            'link' => $link,
-                            'email' => $input->get('email')
-                        ]);
+                        $this->emitter->emit(UserRegisterEvent::class, ['link' => $link, 'email' => $input->get('email')]);
                         $this->flash->success('form_registration_submitted');
                         $this->route('auth.login');
                     } else {

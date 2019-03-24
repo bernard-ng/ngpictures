@@ -1,37 +1,46 @@
 <?php
+/**
+ * This file is a part of Ngpictures
+ * (c) Bernard Ngandu <ngandubernard@gmail.com>
+ *
+ */
+
 namespace Application\Controllers;
 
-use Framework\Managers\Collection;
+use Application\Repositories\Validators\ContactValidator;
+use Awurth\SlimValidation\Validator;
 use Framework\Managers\Mailer\Mailer;
 use Application\Managers\PageManager;
 
+/**
+ * Class ContactController
+ * @package Application\Controllers
+ */
 class ContactController extends Controller
 {
     public function index()
     {
-        $post = $this->request->input();
-        $errors = new Collection();
+        if ($this->request->is('post')) {
+            $input = $this->request->input();
+            $validator = $this->container->get(Validator::class);
+            $validator->validate($input->toArray(), ContactValidator::getValidationRules());
 
-        if (!empty($_POST) && isset($_POST)) {
-            $this->validator->setRule('name', 'required');
-            $this->validator->setRule('email', 'valid_email');
-            $this->validator->setRule('message', 'required');
-
-            if ($this->validator->isValid()) {
-                $name       = $this->str->escape($post->get('name'));
-                $email      = $this->str->escape($post->get('email'));
-                $message    = $this->str->escape($post->get('message'));
+            if ($validator->isValid()) {
+                $name       = $input->get('name');
+                $email      = $input->get('email');
+                $message    = $input->get('message');
 
                 $this->container->get(Mailer::class)->contact($name, $email, $message);
-                $this->flash->set('success', $this->flash->msg['form_contact_submitted'], false);
-                $this->redirect("/");
+                $this->flash->success('form_contact_submitted');
+                $this->redirect($this->url('home'));
             } else {
-                $this->sendFormError();
+                $errors = $validator->getErrors();
+                $this->flash->error('form_multi_errors');
             }
         }
 
-        $this->turbolinksLocation("/contact");
+        $this->turbolinksLocation($this->url('contact'));
         PageManager::setTitle("Contact");
-        $this->view("frontend/others/contact", compact("post", "errors"));
+        $this->view("frontend/others/contact", compact("input", "errors"));
     }
 }

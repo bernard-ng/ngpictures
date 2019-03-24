@@ -7,17 +7,16 @@
 
 namespace Application\Controllers;
 
+use Application\Entities\PostsEntity;
 use Application\Entities\UsersEntity;
 use Application\Managers\PageManager;
+use Application\Repositories\CollectionsRepository;
+use Application\Repositories\NotificationsRepository;
 use Application\Repositories\PostsRepository;
 use Application\Repositories\UsersRepository;
-use Application\Repositories\Validators\UsersValidator;
-use Awurth\SlimValidation\Validator;
 use Framework\Interfaces\CookieInterface;
 use Framework\Managers\Collection;
 use Framework\Managers\ImageManager;
-use Framework\Managers\Mailer\Mailer;
-use Framework\Managers\StringHelper;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -38,51 +37,83 @@ class UsersController extends Controller
     private $cookie;
 
     /**
+     * @var \Framework\Auth\User|UsersEntity|null
+     */
+    private $currentUser;
+
+    /**
      * UsersController constructor.
      * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $this->cookie = $this->container->get(CookieInterface::class);
         $this->users = $container->get(UsersRepository::class);
+        $this->currentUser = $this->auth->getUser();
     }
 
 
     /**
      *  permet de generer le profile d'un utilisateur
      *  page de vue
-     * @param $name
+     * @param $username
      */
-    public function profile($name)
+    public function profile($username)
     {
-        $user = $this->users->findWith('slug', $name);
+        $user = $this->users->findWith('slug', $username);
         if ($user) {
-            $posts = $this->container->get(PostsRepository::class)->findWith('users_id', $user->id);
+            $postsRepository = $this->container->get(PostsRepository::class);
+            $posts = $postsRepository->findWithUser($user->id);
+            $postsCount = count($posts);
+
+            if ($postsCount > 8) {
+                $randomPosts = $postsRepository->getRandomWithUser($user->id);
+            }
 
             $this->turbolinksLocation($this->url('users.profile', ['slug' => $user->slug]));
+            PageManager::setTitle("Profile de " . ucwords($user->name));
             PageManager::setDescription($user->bio);
             PageManager::setImage($user->getAvatar());
-            PageManager::setTitle("Profile de " . $user->name);
-            $this->view('frontend/users/account/account', compact("user", "posts"));
+            $this->view('frontend/users/account/account', compact("user", "posts", "postsCount", "randomPosts"));
         } else {
             $this->notFound();
         }
     }
 
-
-    public function collection($token)
+    /**
+     * @param string $username
+     */
+    public function collections(string $username)
     {
-        if ($this->authService->getToken() == $token) {
-            $user = $this->authService->isLogged();
-            $collection = $this->callController('saves')->show($user->id);
+        $user = $this->users->findWith('slug', $username);
+        if ($user) {
+            $postsRepository = $this->container->get(PostsRepository::class);
+            $collections = $this->container->get(CollectionsRepository::class)->findWith('users_id', $user->id);
+            $collectionsTotalCount = count($collections);
 
-            $this->turbolinksLocation("/my-collection/{$token}");
-            PageManager::setTitle("Collection de " . $user->name);
-            $this->view('frontend/users/account/collection', compact("user", "collection"));
+            if ($collections) {
+                foreach ($collections as $collection) {
+                    /** @var PostsEntity $thumb */
+                    $thumb = $postsRepository->findWith('collections_id', $collection->id)[0];
+                    $collectionsThumbs[$collection->id] =
+                        (is_null($thumb)) ? "/imgs/default.jpeg" : $thumb->getSmallThumb();
+                }
+
+                foreach ($collections as $collection) {
+                    $collectionsCount[$collection->id] = $postsRepository->countWith('collections_id', $collection->id);
+                }
+            }
+
+            $this->turbolinksLocation($this->url('users.posts.collections', ['slug' => $user->slug]));
+            PageManager::setTitle("Les Collections de " . $user->name);
+            PageManager::setDescription($user->bio);
+            PageManager::setImage($user->getAvatar());
+            $this->view(
+                'frontend/users/account/collection',
+                compact("user", "collections", "collectionsCount", "collectionsThumbs", "collectionsTotalCount")
+            );
         } else {
-            $this->flash->set('danger', $this->flash->msg['collection_not_allowed'], false);
-            $this->redirect(true, false);
+            $this->notFound();
         }
     }
 
@@ -90,22 +121,24 @@ class UsersController extends Controller
     /**
      * les notification d'un user
      *
-     * @param string $token
+     * @param string $name
      * @return void
      */
-    public function notification($token)
+    public function notifications(string $name)
     {
-        if ($this->authService->getToken() == $token) {
-            $user = $this->authService->isLogged();
-            $notifications = $this->callController('notifications')->show($user->id, $token);
+        $this->loggedOnly();
+        $user = $this->users->findWith('slug', $name);
+        if ($this->currentUser->id == $user->id) {
+            $notifications = $this->container->get(NotificationsRepository::class)->findWith('users_id', $user->id);
+            $this->turbolinksLocation($this->url('users.notifications', ['slug' => $user->slug]));
 
-            $this->turbolinksLocation("/my-notifications/{$token}");
-            PageManager::setTitle("Notifications");
+            PageManager::setTitle("Mes Notifications");
             PageManager::setDescription("Voici les notifications de ngpictures pour : {$user->name}");
+            PageManager::setImage($user->getAvatar());
             $this->view('frontend/users/account/notifications', compact("user", "notifications"));
         } else {
-            $this->flash('danger', $this->flash->msg['undefined_error'], false);
-            $this->redirect(true, false);
+            $this->flash->error("users_forbidden");
+            $this->redirect();
         }
     }
 

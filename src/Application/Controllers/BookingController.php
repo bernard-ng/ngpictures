@@ -40,10 +40,10 @@ class BookingController extends Controller
 
     public function index()
     {
-        if (isset($_POST) && !empty($_POST)) {
+        if ($this->request->is('post')) {
             $input = $this->request->input();
             $validator = $this->container->get(Validator::class);
-            $validator->validate($_POST, BookingValidator::getValidationRules());
+            $validator->validate($input, BookingValidator::getValidationRules());
 
             if ($validator->isValid()) {
                 $name = $input->get('name');
@@ -51,7 +51,7 @@ class BookingController extends Controller
                 $booking_date = $input->get('date');
                 $booking_time = $input->get('time');
                 $description = $input->get('description');
-                $created_at = (new \DateTime('now'))->format('Y-M-d H:i:s');
+                $created_at = date('Y-M-d H:i:s');
 
                 $this->booking->create(
                     compact('name', 'email', 'created_at', 'booking_date', 'booking_time', 'description')
