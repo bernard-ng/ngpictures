@@ -36,13 +36,15 @@ return function (Framework\Router\Router $router) {
 
     users_routes : {
         $router->any("/@:slug/settings", [UsersController::class, 'update'], "users.settings");
-        $router->get("/@:slug/posts", [PostsController::class, 'showPosts'], "users.posts");
-        $router->get("/@:slug/posts/update/:id", [PostsController::class, 'update'], "posts.update");
-        $router->post("/@:slug/posts/delete/:id", [PostsController::class, 'delete'], "posts.delete");
-        $router->get("/@:slug/followers", [FollowingController::class, 'showFollowers'], "users.followers");
-        $router->get("/@:slug/following", [FollowingController::class, 'showFollowing'], "users.following");
-        $router->get('/@:slug/collections', [UsersController::class, 'collection'], 'users.collections');
-        $router->get("/@:slug/notifications", [NotificationsController::class], "users.notifications");
+        $router->get("/@:slug/posts", [PostsController::class, 'posts'], "users.posts");
+        $router->get("/@:slug/posts/update/:id", [PostsController::class, 'update'], "users.posts.update");
+        $router->post("/@:slug/posts/delete/:id", [PostsController::class, 'delete'], "users.posts.delete");
+        $router->get("/@:slug/posts/saves", [UsersController::class, 'saves'], "users.posts.saves");
+        $router->get("/@:slug/posts/likes", [UsersController::class, 'likes'], "users.posts.likes");
+        $router->get("/@:slug/followers", [FollowingController::class, 'followers'], "users.followers");
+        $router->get("/@:slug/following", [FollowingController::class, 'following'], "users.following");
+        $router->get('/@:slug/collections', [UsersController::class, 'collections'], 'users.posts.collections');
+        $router->get("/@:slug/notifications", [UsersController::class, 'notifications'], "users.notifications");
         $router->post("/@:slug/notifications/delete", [NotificationsController::class, 'delete'], "users.notifications.delete");
         $router->post("/@:slug/notifications/clear", [NotificationsController::class, 'clear'], "users.notifications.clear");
     }

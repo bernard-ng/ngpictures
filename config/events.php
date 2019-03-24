@@ -7,8 +7,13 @@
  */
 
 
-use Application\Events\UserRegisterEvent;
-use Application\Events\UserRegisterListener;
+use Application\Events\Auth\{
+    UserForgotEvent,
+    UserForgotListener,
+    UserRegisterEvent,
+    UserRegisterListener
+};
+
 use League\Event\EmitterInterface;
 use Psr\Container\ContainerInterface;
 
@@ -16,7 +21,5 @@ use Psr\Container\ContainerInterface;
 return function (EmitterInterface $emitter, ContainerInterface $container) {
 
     $emitter->addListener(UserRegisterEvent::class, $container->get(UserRegisterListener::class));
-    $emitter->addListener(UserRegisterEvent::class, $container->get(UserRegisterListener::class));
-    $emitter->addListener(UserRegisterEvent::class, $container->get(UserRegisterListener::class));
-
+    $emitter->addListener(UserForgotEvent::class, $container->get(UserForgotListener::class));
 };
