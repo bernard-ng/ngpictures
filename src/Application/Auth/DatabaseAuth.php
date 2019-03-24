@@ -8,7 +8,6 @@ use Framework\Auth\User;
 use Framework\Http\RequestAwareAction;
 use Framework\Managers\CookieManager;
 use Framework\Managers\FlashMessageManager;
-use Framework\Managers\Mailer\Mailer;
 use Framework\Managers\SessionManager;
 use Framework\Managers\StringHelper;
 use Psr\Container\ContainerInterface;
@@ -90,7 +89,7 @@ class DatabaseAuth implements AuthInterface
     {
         $this->restrict();
         if ($this->session->getValue(AUTH_KEY, 'rank') !== 'admin') {
-            $this->flash->set('warning', 'users_forbidden');
+            $this->flash->error('users_forbidden');
             $this->redirect();
         }
     }
@@ -101,7 +100,7 @@ class DatabaseAuth implements AuthInterface
     public function restrict()
     {
         if (!$this->getUser()) {
-            $this->flash->set("danger", "users_not_logged");
+            $this->flash->error("users_not_logged");
             $this->redirect();
         }
     }

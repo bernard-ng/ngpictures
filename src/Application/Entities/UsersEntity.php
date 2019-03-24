@@ -18,6 +18,11 @@ class UsersEntity extends Entity implements User
 {
 
     /**
+     * @var int
+     */
+    public $id;
+
+    /**
      * @var string
      */
     public $avatar;
