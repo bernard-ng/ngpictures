@@ -5,11 +5,6 @@
     padding: 0;
     height: auto;
 
-    & img {
-        width: 100% !important;
-        height: 100% !important;
-    }
-
     &:hover {
        & .post-description {
             -webkit-transform: translate3d(0, 0, 0);
