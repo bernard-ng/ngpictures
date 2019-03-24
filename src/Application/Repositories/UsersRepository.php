@@ -96,6 +96,21 @@ class UsersRepository extends Repository
         return "SELECT * FROM {$this->table} WHERE confirmed_at IS NOT NULL ORDER BY id DESC LIMIT {$limit}";
     }
 
+
+    /**
+     * @param int $limit
+     * @return mixed
+     */
+    public function getLatestConfirmed(int $limit = 8)
+    {
+        return $this->makeQuery()
+            ->into($this->table)
+            ->from($this->table)
+            ->where("{$this->table}.confirmed_at IS NOT NULL")
+            ->limit($limit)
+            ->all()->get();
+    }
+
     public function lastConfirmed()
     {
         return "SELECT * FROM {$this->table} WHERE confirmed_at IS NOT NULL ";

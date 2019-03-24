@@ -2,6 +2,7 @@
 namespace Application\Repositories;
 
 use Application\Entities\PostsEntity;
+use Framework\Database\Builder\Queries\Select;
 use Framework\Repositories\Repository;
 
 /**
@@ -29,36 +30,44 @@ class PostsRepository extends Repository
         return $this->makeQuery()
             ->into($this->entity)
             ->from($this->table)
-            ->select("{$this->table}.*")
-            ->orderBy("{$this->table}.created_at DESC")
+            ->orderBy("created_at DESC")
             ->all()->get();
     }
 
 
-    public function findWithSameCategory($categories_id, $id)
+    /**
+     * @return Select
+     */
+    private function onlineWithCategory()
     {
         return $this->makeQuery()
             ->into($this->entity)
             ->from($this->table)
-            ->where("categories_id = ? AND id <> ? AND online = 1", [$categories_id, $id])
-            ->orderBy("RAND()")
-            ->limit(8)
-            ->all()->get();
+            ->select("categories.name AS category")
+            ->where("{$this->table}.online = 1");
+    }
+
+    /**
+     * @param int $categories_id
+     * @param int $id
+     * @return mixed
+     */
+    public function findWithSameCategory(int $categories_id, int $id)
+    {
+        return $this->onlineWithCategory()
+            ->where("categories_id = ? AND {$this->table}.id <> ? ", [$categories_id, $id])
+            ->orderBy("RAND()")->limit(8)->all()->get();
     }
 
     /**
      * @param int $limit
      * @return mixed
      */
-    public function getLast(int $limit)
+    public function getLast(int $limit = 8)
     {
-        return $this->makeQuery()
-            ->into($this->entity)
-            ->from($this->table)
-            ->select("{$this->table}.*")
+        return $this->onlineWithCategory()
             ->orderBy("{$this->table}.id DESC")
-            ->limit($limit)
-            ->all()->get();
+            ->limit($limit)->all()->get();
     }
 
     /**
@@ -67,13 +76,22 @@ class PostsRepository extends Repository
      */
     public function find(int $id)
     {
+        return $this->onlineWithCategory()->where("{$this->table}.id = ? ", [$id])->all()->get(0);
+    }
+
+    /**
+     * @param string $field
+     * @param $value
+     * @return int
+     */
+    public function countWith(string $field, $value): int
+    {
         return $this->makeQuery()
             ->into($this->entity)
             ->from($this->table)
-            ->select("{$this->table}.*")
-            ->select("categories.name AS category")
-            ->where("{$this->table}.id = ?", [$id])
-            ->all()->get(0);
+            ->select("{$this->table}.id")
+            ->where("{$this->table}.{$field} = ? AND {$this->table}.online = 1", [$value])
+            ->count();
     }
 
     /**
@@ -82,16 +100,9 @@ class PostsRepository extends Repository
      */
     public function findLess($id)
     {
-        return $this->makeQuery()
-            ->into($this->entity)
-            ->from($this->table)
-            ->select("{$this->table}.*")
-            ->select("categories.name AS category")
-            ->where("{$this->table}.id < ?", [$id])
-            ->where("{$this->table}.online = 1")
-            ->orderBy("{$this->table}.id DESC")
-            ->limit(8)
-            ->all()->get();
+        return $this->onlineWithCategory()
+            ->where("{$this->table}.id < ? ", [$id])
+            ->orderBy("{$this->table}.id DESC")->limit(8)->all()->get();
     }
 
     /**
@@ -104,55 +115,43 @@ class PostsRepository extends Repository
         return $this->makeQuery()
             ->into($this->entity)
             ->from($this->table)
-            ->select("{$this->table}.*")
-            ->orderBy("{$this->table}.id DESC")
             ->where("{$this->table}.{$field} = ?", [$value])
+            ->orderBy("{$this->table}.id DESC")
             ->all()->get();
     }
 
     /**
-     * @param string $field
-     * @param $value
-     * @return int
+     * @param int $id
+     * @return mixed
      */
-    public function countWith(string $field, $value)
+    public function getRandomWithUser(int $id)
     {
-        return $this->makeQuery()
-            ->into($this->entity)
-            ->from($this->table)
-            ->select("{$this->table}.*")
-            ->where("{$this->table}.{$field} = ?", [$value])
-            ->count();
-    }
-
-    public function userFindLess($user_id, $post_id)
-    {
-    }
-
-    public function gets($user_id, $limit)
-    {
-    }
-
-    public function count()
-    {
-    }
-
-    public function findWithUser(int $id)
-    {
+        return $this->onlineWithCategory()
+            ->where("{$this->table}.users_id = ?", [$id])
+            ->orderBy("RAND()")->limit(8)->all()->get();
     }
 
     /**
-     * @param int $limit
-     * @return mixed
+     * @return int
      */
-    public function latest(int $limit = 8)
+    public function count(): int
     {
         return $this->makeQuery()
-            ->into($this->entity)
             ->from($this->table)
-            ->select("categories.name as category")
+            ->select("{$this->table}.id")
+            ->count();
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function findWithUser(int $id)
+    {
+        return $this->onlineWithCategory()
+            ->where("{$this->table}.users_id = ?", [$id])
             ->orderBy("{$this->table}.id DESC")
-            ->limit($limit)
+            ->limit(8)
             ->all()->get();
     }
 }

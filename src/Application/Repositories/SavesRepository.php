@@ -22,18 +22,19 @@ class SavesRepository extends Repository
     protected $entity = SavesEntity::class;
 
 
-    public function isSaved(int $id, int $type): bool
+    /**
+     * @param int $id
+     * @return int|null
+     */
+    public function lastPostsIdWithUser(int $id)
     {
-        return "SELECT * FROM {$this->table} WHERE {$this->getType($type)} = ? AND users_id = ? ";
-    }
-
-    public function getSaves(int $id, int $type): string
-    {
-        return "SELECT users_id FROM {$this->table} WHERE {$this->getType($type)} = {$id}";
-    }
-
-    public function get(string $type, int $user_id)
-    {
-        return "SELECT * FROM {$this->table} WHERE users_id = ? AND {$type} IS NOT NULL";
+        return $this->makeQuery()
+            ->into($this->entity)
+            ->from($this->table)
+            ->select("{$this->table}.id")
+            ->where("{$this->table}.users_id = ?", [$id])
+            ->orderBy("id DESC")
+            ->limit(1)
+            ->all()->get(0)->postsId ?? null;
     }
 }
