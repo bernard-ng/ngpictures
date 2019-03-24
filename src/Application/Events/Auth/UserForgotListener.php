@@ -5,12 +5,6 @@
  *
  */
 
-/**
- * This file is a part of Ngpictures
- * (c) Bernard Ngandu <ngandubernard@gmail.com>
- *
- */
-
 
 namespace Application\Events\Auth;
 
@@ -20,10 +14,10 @@ use League\Event\AbstractListener;
 use League\Event\EventInterface;
 
 /**
- * Class UserRegisterListener
+ * Class UserForgotListener
  * @package Application\Events
  */
-class UserRegisterListener extends AbstractListener
+class UserForgotListener extends AbstractListener
 {
 
     /**
