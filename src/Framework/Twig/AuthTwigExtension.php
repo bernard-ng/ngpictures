@@ -8,7 +8,6 @@
 
 namespace Framework\Twig;
 
-
 use Application\Auth\DatabaseAuth;
 
 /**

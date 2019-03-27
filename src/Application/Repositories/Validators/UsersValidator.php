@@ -52,7 +52,6 @@ class UsersValidator implements ValidationInterface
             ];
         }
         return self::$registerValidationRules;
-
     }
 
     /**

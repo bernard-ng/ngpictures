@@ -3,7 +3,6 @@ namespace Framework\Renderer;
 
 use Psr\Container\ContainerInterface;
 
-
 /**
  * Class TwigRenderer
  * @package Framework\Renderer

@@ -8,7 +8,6 @@ use Application\Repositories\UsersRepository;
 use Framework\Managers\Collection;
 use Psr\Container\ContainerInterface;
 
-
 /**
  * Class LikesController
  * @package Application\Controllers

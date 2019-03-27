@@ -11,7 +11,6 @@ namespace Framework\Events;
 use League\Event\Emitter;
 use Psr\Container\ContainerInterface;
 
-
 /**
  * Class EmiterFactory
  * @package Framework\Events

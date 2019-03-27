@@ -7,7 +7,6 @@
 
 namespace Application\Events\Auth;
 
-
 use League\Event\AbstractEvent;
 
 /**

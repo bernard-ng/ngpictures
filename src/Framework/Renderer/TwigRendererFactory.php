@@ -7,7 +7,6 @@
 
 namespace Framework\Renderer;
 
-
 use Psr\Container\ContainerInterface;
 
 /**

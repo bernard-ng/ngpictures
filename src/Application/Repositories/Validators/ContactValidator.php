@@ -8,7 +8,6 @@
 
 namespace Application\Repositories\Validators;
 
-
 use Framework\Repositories\ValidationInterface;
 use Respect\Validation\Validator as v;
 
@@ -30,7 +29,7 @@ class ContactValidator implements ValidationInterface
      */
     public static function getValidationRules(): array
     {
-        if(!empty(self::$validationRules)) {
+        if (!empty(self::$validationRules)) {
             self::$validationRules = [
                 'name' => v::notEmpty()->alpha()->setName('Le nom'),
                 'email' => v::notEmpty()->email()->setName('L\'Email'),

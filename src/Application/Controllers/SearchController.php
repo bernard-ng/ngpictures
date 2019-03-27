@@ -30,7 +30,8 @@ class SearchController extends Controller
             PageManager::setTitle("Recherches");
             $this->view(
                 "frontend/others/search",
-                compact("query", "users", "posts", "categories", "collections", "pexels"));
+                compact("query", "users", "posts", "categories", "collections", "pexels")
+            );
         } else {
             $this->turbolinksLocation($this->url('search'));
             PageManager::setTitle("Recherches");

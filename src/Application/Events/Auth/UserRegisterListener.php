@@ -7,7 +7,6 @@
 
 namespace Application\Events\Auth;
 
-
 use Framework\Managers\Mailer\Mailer;
 use League\Event\AbstractListener;
 use League\Event\EventInterface;
