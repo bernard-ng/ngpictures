@@ -8,7 +8,6 @@
 namespace Application\Controllers;
 
 use Application\Repositories\PostsRepository;
-use Framework\Managers\Collection;
 use Application\Managers\PageManager;
 
 /**

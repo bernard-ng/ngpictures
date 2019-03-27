@@ -5,7 +5,6 @@
  *
  */
 
-
 namespace Application\Events\Auth;
 
 

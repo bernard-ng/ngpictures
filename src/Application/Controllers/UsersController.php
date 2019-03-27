@@ -32,11 +32,6 @@ class UsersController extends Controller
     private $users;
 
     /**
-     * @var mixed|CookieInterface
-     */
-    private $cookie;
-
-    /**
      * @var \Framework\Auth\User|UsersEntity|null
      */
     private $currentUser;

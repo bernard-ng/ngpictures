@@ -1,87 +1,75 @@
 <?php
 namespace Application\Controllers;
 
+use Application\Repositories\PostsRepository;
+use Application\Repositories\SavesRepository;
 use Framework\Managers\Collection;
 use Psr\Container\ContainerInterface;
-use Application\Traits\Util\TypesActionTrait;
 
+/**
+ * Class SavesController
+ * @package Application\Controllers
+ */
 class SavesController extends Controller
 {
 
+    /**
+     * @var \Application\Entities\UsersEntity|\Framework\Auth\User|null
+     */
+    private $currentUser;
+
+    /**
+     * @var SavesRepository|mixed
+     */
+    private $saves;
+
+    /**
+     * SavesController constructor.
+     * @param ContainerInterface $container
+     */
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $this->authService->restrict();
-        $this->loadRepository('saves');
+        $this->loggedOnly();
+        $this->currentUser = $this->auth->getUser();
+        $this->saves = $container->get(SavesRepository::class);
     }
 
-    use TypesActionTrait;
 
     /**
-     * ajoute une publication dans les saves d'un user.TypesActionTrait
-     *
-     * @param int $type
-     * @param string $slug
-     * @param int $id
-     * @return void
+     * @param $id
      */
-    public function add($type, $slug, $id)
+    public function add($id)
     {
-        $user = $this->authService->isLogged();
-        $type = intval($type);
         $id   = intval($id);
-        $slug = $this->str->escape($slug);
+        $post = $this->container->get(PostsRepository::class)->find($id);
 
-        $post = $this->loadRepository($this->getAction($type))->find($id);
-        if ($post && $post->slug == $slug) {
-            $exists = $this->saves->findWith($this->getType($type), $post->id);
+        if ($post) {
+            $saved = $this->saves->findWith('posts_id', $post->id);
 
-            if ($exists) {
-                $this->saves->delete($exists->id);
-                $this->flash->set('success', $this->flash->msg['post_remove_save']);
-                $this->redirect(true);
+            if ($saved) {
+                $this->saves->delete($saved->id);
+                $this->flash->success('post_remove_save');
+                $this->redirect();
             } else {
-                $this->saves->create([
-                    'users_id' => $user->id,
-                    $this->getType($type) => $post->id
-                ]);
-
-                if ($this->isAjax()) {
-                    $post = $this->loadRepository($this->getAction($type))->find($post->id);
-                    echo ($post->isSaved)? 'true' : 'false';
-                    exit();
-                }
-
-                ($this->isAjax())?
-                    $this->flash->set('success', $this->flash->msg['post_saved']) :
-                    $this->flash->set('success', $this->flash->msg['post_saved'], false);
-                    $this->redirect(true);
+                $this->saves->create(['users_id' => $this->currentUser->id, 'posts_id' => $post->id]);
+                $this->flash->success('post_saved');
+                $this->redirect();
             }
         } else {
-            ($this->isAjax())?
-                $this->setFlash($this->flash->msg['post_not_found']) :
-                $this->flash->set('danger', $this->flash->msg['post_not_found']);
-                $this->redirect(true);
+            $this->flash->success('post_not_found');
+            $this->redirect();
         }
     }
 
-
     /**
-     * affiche les publication saved d'un user
-     *
      * @param int $user_id
-     * @return void
+     * @return array
      */
     public function show(int $user_id): array
     {
-        $blog_list = (new Collection($this->saves->get('blog_id', $user_id)))->toList(', ', 'blog_id');
         $posts_list = (new Collection($this->saves->get('posts_id', $user_id)))->toList(', ', 'posts_id');
-        $gallery_list = (new Collection($this->saves->get('gallery_id', $user_id)))->toList(', ', 'gallery_id');
-
-        $blog = ($blog_list)? $this->loadRepository('blog')->findList($blog_list) : null;
-        $gallery = ($gallery_list)? $this->loadRepository('gallery')->findList($gallery_list) : null;
-        $posts = ($posts_list)? $this->loadRepository('posts')->findList($posts_list) : null;
-
-        return compact('blog', 'gallery', 'posts');
+        $posts = ($posts_list)? $this->container->get(PostsRepository::class)->findList($posts_list) : null;
+        return compact('posts');
     }
 }

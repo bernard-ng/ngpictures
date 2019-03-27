@@ -5,19 +5,6 @@
  *
  */
 
-/**
- * This file is a part of Ngpictures
- * (c) Bernard Ngandu <ngandubernard@gmail.com>
- *
- */
-
-/**
- * Created by PhpStorm.
- * User: Bernard-ng
- * Date: 3/8/2019
- * Time: 4:44 PM
- */
-
 namespace Application\Events\Auth;
 
 

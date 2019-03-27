@@ -6,6 +6,9 @@ use \ArrayAccess;
 class MessageManager implements ArrayAccess
 {
 
+    public $lang = 'fr';
+
+
     /**
      * gestionnaire de message flash par rapport au action
      * de l'application
@@ -133,14 +136,19 @@ class MessageManager implements ArrayAccess
     ];
 
 
+    /**
+     * @inheritdoc
+     * @param mixed $offset
+     * @return bool
+     */
     public function offsetExists($offset)
     {
+        return array_key_exists($this->messages, $offset);
     }
 
 
     /**
-     * renvoi la valeur de la key voulu
-     *
+     * @inheritdoc
      * @param string $offset
      * @return string|null
      */

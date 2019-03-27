@@ -1,96 +1,83 @@
 <?php
 namespace Application\Controllers;
 
-use Framework\Managers\Collection;
 use Application\Managers\PageManager;
+use Application\Repositories\LikesRepository;
+use Application\Repositories\PostsRepository;
+use Application\Repositories\UsersRepository;
+use Framework\Managers\Collection;
 use Psr\Container\ContainerInterface;
-use Application\Traits\Util\TypesActionTrait;
-use Application\Services\Notification\NotificationService;
 
+
+/**
+ * Class LikesController
+ * @package Application\Controllers
+ */
 class LikesController extends Controller
 {
 
-    use TypesActionTrait;
-    private $user;
+    /**
+     * @var \Application\Entities\UsersEntity|\Framework\Auth\User|null
+     */
+    private $currentUser;
 
     /**
      * LikesController constructor.
-     * @param Ngpictures $app
-     * @param PageManager $pageManager
+     * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $this->authService->restrict();
-        $this->user = $this->authService->isLogged();
+        $this->loggedOnly();
+        $this->currentUser = $this->auth->getUser();
     }
 
 
     /**
-     * @param string $type
-     * @param string $slug
      * @param int $id
      */
-    public function index($type, $slug, $id)
+    public function index($id)
     {
-        $like       = $this->loadRepository('likes');
-        $post       = $this->loadRepository($this->getAction($type))->find(intval($id));
-        $notifier   = $this->container->get(NotificationService::class);
+        $post = $this->container->get(PostsRepository::class)->find(intval($id));
 
-        if ($post && $post->slug === $slug) {
-            if ($like->isLiked($post->id, $type, $this->user->id)) {
-                $like->remove($post->id, $type, $this->user->id);
-                if ($this->isAjax()) {
-                    echo $post->likes;
-                    exit();
-                } else {
-                    $this->flash->set('success', $this->flash->msg['post_like_remove']);
-                    $this->redirect(true, false);
-                }
+        if ($post) {
+            $like = $this->container->get(LikesRepository::class);
+
+            if ($like->isLiked($post->id, $this->currentUser->id)) {
+                $like->remove($post->id, $this->currentUser->id);
+                $this->flash->success('post_like_remove');
+                $this->redirect();
             } else {
-                $like->add($post->id, $type, $this->user->id);
-                $notifier->notify(2, [$post, $this->user->id]);
-
-                if ($this->isAjax()) {
-                    echo $post->likes;
-                    exit();
-                } else {
-                    $this->flash->set('success', $this->flash->msg['post_like_add']);
-                    $this->redirect(true, false);
-                }
+                $like->add($post->id, $this->currentUser->id);
+                $this->flash->success('post_like_add');
+                $this->redirect();
             }
         } else {
-            $this->flash->set("danger", $this->flash->msg['post_not_found']);
-            $this->redirect(true, false);
+            $this->flash->error('post_not_found');
+            $this->redirect();
         }
     }
 
-
     /**
-     * show likers
-     *
-     * @param string $type
-     * @param string $slug
-     * @param integer $id
-     * @return void
+     * @param int $id
      */
-    public function show(string $type, string $slug, int $id)
+    public function show($id)
     {
-        $post = $this->loadRepository($this->getAction($type))->find(intval($id));
+        $id = intval($id);
+        $post = $this->container->get(PostsRepository::class)->find($id);
 
-        if ($post && $post->slug === $slug) {
-            $likes      =   $this->loadRepository('likes');
-            $likers     =  (new Collection($likes->getLikers($id, $type)))->toList();
+        if ($post) {
+            $likes = $this->container->get(LikesRepository::class);
+            $likers = (new Collection($likes->getLikers($id)))->toList();
 
             if (!empty($likers)) {
-                $likers = $this->loadRepository('users')->findList($likers);
-
-                $this->turbolinksLocation("/likes/show/{$type}/{$slug}-{$id}");
+                $likers = $this->container->get(UsersRepository::class)->findWithList($likers);
+                $this->turbolinksLocation($this->url('likes.show', compact('id')));
                 PageManager::setTitle("Mentions j'aime");
                 $this->view("frontend/posts/likers", compact("likers"));
             } else {
-                $this->flash->set('info', $this->flash->msg['post_not_liked']);
-                $this->redirect(true);
+                $this->flash->error('post_not_liked');
+                $this->redirect();
             }
         }
     }

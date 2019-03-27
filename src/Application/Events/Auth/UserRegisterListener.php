@@ -5,13 +5,6 @@
  *
  */
 
-/**
- * This file is a part of Ngpictures
- * (c) Bernard Ngandu <ngandubernard@gmail.com>
- *
- */
-
-
 namespace Application\Events\Auth;
 
 

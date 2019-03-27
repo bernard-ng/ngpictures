@@ -1,11 +1,11 @@
 <?php
 namespace Application\Controllers;
 
+use Application\Entities\PostsEntity;
 use Framework\Managers\Collection;
 use Framework\Managers\ImageManager;
 use Application\Managers\PageManager;
 use Application\Repositories\CategoriesRepository;
-use Application\Repositories\CommentsRepository;
 use Application\Repositories\PostsRepository;
 use Application\Repositories\UsersRepository;
 use Psr\Container\ContainerInterface;
@@ -84,10 +84,7 @@ class PostsController extends Controller
     {
         $id = intval($id);
         $post = $this->posts->find($id);
-        if ($post && $post->slug == $slug) {
-            $comments = $this->container->get(CommentsRepository::class);
-            $commentsCount = $comments->count($id);
-            $comments = $comments->get($id);
+        if ($post) {
             $similar = $this->container->get(PostsRepository::class)->findWithSameCategory($post->categoriesId, $post->id);
             $author = $this->container->get(UsersRepository::class)->find($post->usersId);
 
@@ -98,7 +95,7 @@ class PostsController extends Controller
 
             $this->view(
                 "frontend/posts/show",
-                compact("post", "comments", "commentsCount", "user", "author", "similar")
+                compact("post", "user", "author", "similar")
             );
         } else {
             $this->notFound();
