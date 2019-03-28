@@ -13,17 +13,19 @@
         </ul>
     </div>
 
-    <section class="section jumbotron dark">
-        <div class="container animated slideInRight">
-            <div class="carousel small">
-                {% for p in posts %}
-                    <a href="{{ path('posts.show', {id: p.id, slug: p.slug}) }}" class="carousel-item" style="background: {{ p.color }}">
-                        <img src="" data-src="{{ p.getSmallThumb() }}" alt="{{ p.name }}" title="{{ p.name }}">
-                    </a>
-                {% endfor %}
+    {% if posts %}
+        <section class="section jumbotron dark">
+            <div class="container animated slideInRight">
+                <div class="carousel small">
+                    {% for p in posts %}
+                        <a href="{{ path('posts.show', {id: p.id, slug: p.slug}) }}" class="carousel-item" style="background: {{ p.color }}">
+                            <img src="" data-src="{{ p.getSmallThumb() }}" alt="{{ p.name }}" title="{{ p.name }}">
+                        </a>
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    {% endif %}
 
     <section class="section container animated slideInRight">
         {% if posts %}
