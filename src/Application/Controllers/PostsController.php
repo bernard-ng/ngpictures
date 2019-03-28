@@ -47,7 +47,7 @@ class PostsController extends Controller
             Découvez les photos des passionnés de la photographie, partager vos photos avec la
             communauté.
         ");
-        PageManager::setImage($posts[0]->getSmallThumb());
+        if (isset($posts[0])) PageManager::setImage($posts[0]->getSmallThumb());
         $this->view("frontend/posts/index", compact("posts"));
     }
 
