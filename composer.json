@@ -27,7 +27,7 @@
         "robmorgan/phinx": "^0.10.6",
         "danielstjules/stringy": "^3.1",
         "imgix/imgix-php": "^2.1",
-        "league/event": "^2.2"
+        "league/event": "^3.0"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.2"
